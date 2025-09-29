@@ -15,7 +15,6 @@ Item {
     property alias wallpaperBrowser: wallpaperBrowser
     property var parentModal: null
     property var cachedFontFamilies: []
-    property var cachedMonoFamilies: []
     property bool fontsEnumerated: false
     property string selectedMonitorName: {
         var screens = Quickshell.screens
@@ -45,28 +44,6 @@ Item {
             }
         }
         cachedFontFamilies = fonts.concat(rootFamilies.sort())
-        var monoFonts = ["Default"]
-        var monoFamilies = []
-        var seenMonoFamilies = new Set()
-        for (var j = 0; j < availableFonts.length; j++) {
-            var fontName2 = availableFonts[j]
-            if (fontName2.startsWith("."))
-                continue
-
-            if (fontName2 === SettingsData.defaultMonoFontFamily)
-                continue
-
-            var lowerName = fontName2.toLowerCase()
-            if (lowerName.includes("mono") || lowerName.includes("code") || lowerName.includes("console") || lowerName.includes("terminal") || lowerName.includes("courier") || lowerName.includes("dejavu sans mono") || lowerName.includes(
-                        "jetbrains") || lowerName.includes("fira") || lowerName.includes("hack") || lowerName.includes("source code") || lowerName.includes("ubuntu mono") || lowerName.includes("cascadia")) {
-                var rootName2 = fontName2.replace(/ (Thin|Extra Light|Light|Regular|Medium|Semi Bold|Demi Bold|Bold|Extra Bold|Black|Heavy)$/i, "").replace(/ (Italic|Oblique|Condensed|Extended|Narrow|Wide)$/i, "").trim()
-                if (!seenMonoFamilies.has(rootName2) && rootName2 !== "") {
-                    seenMonoFamilies.add(rootName2)
-                    monoFamilies.push(rootName2)
-                }
-            }
-        }
-        cachedMonoFamilies = monoFonts.concat(monoFamilies.sort())
     }
 
     Component.onCompleted: {
@@ -1540,7 +1517,7 @@ Item {
                         enableFuzzySearch: true
                         popupWidthOffset: 100
                         maxPopupHeight: 400
-                        options: cachedMonoFamilies
+                        options: cachedFontFamilies
                         onValueChanged: value => {
                                             if (value === "Default")
                                             SettingsData.setMonoFontFamily(SettingsData.defaultMonoFontFamily)
