@@ -21,20 +21,6 @@ Variants {
 
     signal colorPickerRequested()
 
-    function getNotepadInstanceForScreen() {
-        if (typeof notepadSlideoutVariants === "undefined" || !notepadSlideoutVariants || !notepadSlideoutVariants.instances) {
-            return null
-        }
-
-        for (var i = 0; i < notepadSlideoutVariants.instances.length; i++) {
-            var slideout = notepadSlideoutVariants.instances[i]
-            if (slideout.modelData && slideout.modelData.name === root.screen?.name) {
-                return slideout
-            }
-        }
-
-        return notepadSlideoutVariants.instances.length > 0 ? notepadSlideoutVariants.instances[0] : null
-    }
 
     delegate: PanelWindow {
         id: root
@@ -170,8 +156,6 @@ Variants {
             return SettingsData.dankBarVisible && (!autoHide || topBarMouseArea.containsMouse || hasActivePopout || revealSticky)
         }
 
-        property var notepadInstance: null
-        property bool notepadInstanceVisible: notepadInstance?.isVisible ?? false
         
         readonly property bool hasActivePopout: {
             const loaders = [{
@@ -202,7 +186,7 @@ Variants {
                                  "loader": systemUpdateLoader,
                                  "prop": "shouldBeVisible"
                              }]
-            return notepadInstanceVisible || loaders.some(item => {
+            return loaders.some(item => {
                 if (item.loader) {
                     return item.loader?.item?.[item.prop]
                 }
@@ -210,9 +194,6 @@ Variants {
             })
         }
 
-        Component.onCompleted: {
-            notepadInstance = dankBarVariants.getNotepadInstanceForScreen()
-        }
 
         Connections {
             function onDankBarTransparencyChanged() {
@@ -1245,18 +1226,10 @@ Variants {
                             id: notepadButtonComponent
 
                             NotepadButton {
-                                property var notepadInstance: topBarCore.notepadInstance
-                                isActive: notepadInstance?.isVisible ?? false
                                 widgetHeight: root.widgetHeight
                                 barHeight: root.effectiveBarHeight
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                popupTarget: notepadInstance
                                 parentScreen: root.screen
-                                onClicked: {
-                                    if (notepadInstance) {
-                                        notepadInstance.toggle()
-                                    }
-                                }
                             }
                         }
 
