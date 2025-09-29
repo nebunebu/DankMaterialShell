@@ -15,34 +15,26 @@ import qs.Modules.DankBar
 import qs.Services
 import qs.Widgets
 
-PanelWindow {
-    id: root
+Variants {
+    id: dankBarVariants
+    model: SettingsData.getFilteredScreens("dankBar")
 
-    WlrLayershell.namespace: "quickshell:bar"
+    signal colorPickerRequested()
 
-    property var modelData
-    property var notepadVariants: null
 
-    property bool gothCornersEnabled: SettingsData.dankBarGothCornersEnabled
+    delegate: PanelWindow {
+        id: root
+
+        WlrLayershell.namespace: "quickshell:bar"
+
+        property var modelData: item
+
+        property bool gothCornersEnabled: SettingsData.dankBarGothCornersEnabled
     property real wingtipsRadius: Theme.cornerRadius
     readonly property real _wingR: Math.max(0, wingtipsRadius)
     readonly property color _bgColor: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency)
     readonly property real _dpr: (root.screen && root.screen.devicePixelRatio) ? root.screen.devicePixelRatio : 1
     function px(v) { return Math.round(v * _dpr) / _dpr }
-
-    signal colorPickerRequested()
-
-    function getNotepadInstanceForScreen() {
-        if (!notepadVariants || !notepadVariants.instances) return null
-
-        for (var i = 0; i < notepadVariants.instances.length; i++) {
-            var slideout = notepadVariants.instances[i]
-            if (slideout.modelData && slideout.modelData.name === root.screen?.name) {
-                return slideout
-            }
-        }
-        return null
-    }
     property string screenName: modelData.name
     readonly property int notificationCount: NotificationService.notifications.length
     readonly property real effectiveBarHeight: Math.max(root.widgetHeight + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
@@ -57,30 +49,9 @@ PanelWindow {
             ToastService.showError("Please install Material Symbols Rounded and Restart your Shell. See README.md for instructions")
         }
 
-        if (SettingsData.forceStatusBarLayoutRefresh) {
-            SettingsData.forceStatusBarLayoutRefresh.connect(() => {
-                Qt.callLater(() => {
-                    leftSection.visible = false
-                    centerSection.visible = false
-                    rightSection.visible = false
-                    Qt.callLater(() => {
-                        leftSection.visible = true
-                        centerSection.visible = true
-                        rightSection.visible = true
-                    })
-                })
-            })
-        }
-
         updateGpuTempConfig()
-        Qt.callLater(() => Qt.callLater(forceWidgetRefresh))
     }
 
-    function forceWidgetRefresh() {
-        const sections = [leftSection, centerSection, rightSection]
-        sections.forEach(section => section && (section.visible = false))
-        Qt.callLater(() => sections.forEach(section => section && (section.visible = true)))
-    }
 
     function updateGpuTempConfig() {
         const allWidgets = [...(SettingsData.dankBarLeftWidgets || []), ...(SettingsData.dankBarCenterWidgets || []), ...(SettingsData.dankBarRightWidgets || [])]
@@ -185,8 +156,6 @@ PanelWindow {
             return SettingsData.dankBarVisible && (!autoHide || topBarMouseArea.containsMouse || hasActivePopout || revealSticky)
         }
 
-        property var notepadInstance: null
-        property bool notepadInstanceVisible: notepadInstance?.isVisible ?? false
         
         readonly property bool hasActivePopout: {
             const loaders = [{
@@ -217,7 +186,7 @@ PanelWindow {
                                  "loader": systemUpdateLoader,
                                  "prop": "shouldBeVisible"
                              }]
-            return notepadInstanceVisible || loaders.some(item => {
+            return loaders.some(item => {
                 if (item.loader) {
                     return item.loader?.item?.[item.prop]
                 }
@@ -225,9 +194,6 @@ PanelWindow {
             })
         }
 
-        Component.onCompleted: {
-            notepadInstance = root.getNotepadInstanceForScreen()
-        }
 
         Connections {
             function onDankBarTransparencyChanged() {
@@ -1260,18 +1226,10 @@ PanelWindow {
                             id: notepadButtonComponent
 
                             NotepadButton {
-                                property var notepadInstance: topBarCore.notepadInstance
-                                isActive: notepadInstance?.isVisible ?? false
                                 widgetHeight: root.widgetHeight
                                 barHeight: root.effectiveBarHeight
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                popupTarget: notepadInstance
                                 parentScreen: root.screen
-                                onClicked: {
-                                    if (notepadInstance) {
-                                        notepadInstance.toggle()
-                                    }
-                                }
                             }
                         }
 
@@ -1284,7 +1242,7 @@ PanelWindow {
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 parentScreen: root.screen
                                 onColorPickerRequested: {
-                                    root.colorPickerRequested()
+                                    dankBarVariants.colorPickerRequested()
                                 }
                             }
                         }
@@ -1313,6 +1271,5 @@ PanelWindow {
                 }
             }
         }
-
-
+    }
 }

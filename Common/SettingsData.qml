@@ -12,6 +12,13 @@ import qs.Services
 Singleton {
     id: root
 
+    enum Position {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
+
     // Theme settings
     property string currentThemeName: "blue"
     property string customThemeFile: ""
@@ -119,6 +126,9 @@ Singleton {
     property bool dockAutoHide: false
     property bool dockGroupByApp: false
     property bool dockOpenOnOverview: false
+    property int dockPosition: SettingsData.Position.Bottom
+    property real dockSpacing: 4
+    property real dockBottomGap: 0
     property real cornerRadius: 12
     property bool notificationOverlayEnabled: false
     property bool dankBarAutoHide: false
@@ -146,6 +156,7 @@ Singleton {
     readonly property string _configDir: Paths.strip(_configUrl)
 
     signal forceDankBarLayoutRefresh
+    signal forceDockLayoutRefresh
     signal widgetDataChanged
     signal workspaceIconsUpdated
 
@@ -312,6 +323,9 @@ Singleton {
                 showDock = settings.showDock !== undefined ? settings.showDock : false
                 dockAutoHide = settings.dockAutoHide !== undefined ? settings.dockAutoHide : false
                 dockGroupByApp = settings.dockGroupByApp !== undefined ? settings.dockGroupByApp : false
+                dockPosition = settings.dockPosition !== undefined ? settings.dockPosition : SettingsData.Position.Bottom
+                dockSpacing = settings.dockSpacing !== undefined ? settings.dockSpacing : 4
+                dockBottomGap = settings.dockBottomGap !== undefined ? settings.dockBottomGap : 0
                 cornerRadius = settings.cornerRadius !== undefined ? settings.cornerRadius : 12
                 notificationOverlayEnabled = settings.notificationOverlayEnabled !== undefined ? settings.notificationOverlayEnabled : false
                 dankBarAutoHide = settings.dankBarAutoHide !== undefined ? settings.dankBarAutoHide : (settings.topBarAutoHide !== undefined ? settings.topBarAutoHide : false)
@@ -428,6 +442,9 @@ Singleton {
                                                 "dockAutoHide": dockAutoHide,
                                                 "dockGroupByApp": dockGroupByApp,
                                                 "dockOpenOnOverview": dockOpenOnOverview,
+                                                "dockPosition": dockPosition,
+                                                "dockSpacing": dockSpacing,
+                                                "dockBottomGap": dockBottomGap,
                                                 "cornerRadius": cornerRadius,
                                                 "notificationOverlayEnabled": notificationOverlayEnabled,
                                                 "dankBarAutoHide": dankBarAutoHide,
@@ -959,7 +976,7 @@ Singleton {
 
     function setShowDock(enabled) {
         showDock = enabled
-        if (enabled && dankBarAtBottom) {
+        if (enabled && dankBarAtBottom && dockPosition === SettingsData.Position.Bottom) {
             setDankBarAtBottom(false)
         }
         saveSettings()
@@ -1057,9 +1074,36 @@ Singleton {
 
     function setDankBarAtBottom(enabled) {
         dankBarAtBottom = enabled
-        if (enabled && showDock) {
-            setShowDock(false)
+        if (enabled && showDock && dockPosition === SettingsData.Position.Bottom) {
+            setDockPosition(SettingsData.Position.Top)
         }
+        if (!enabled && showDock && dockPosition === SettingsData.Position.Top) {
+            setDockPosition(SettingsData.Position.Bottom)
+        }
+        saveSettings()
+    }
+
+    function setDockPosition(position) {
+        dockPosition = position
+        if (position === SettingsData.Position.Bottom && dankBarAtBottom && showDock) {
+            setDankBarAtBottom(false)
+        }
+        if (position === SettingsData.Position.Top && !dankBarAtBottom && showDock) {
+            setDankBarAtBottom(true)
+        }
+        saveSettings()
+        Qt.callLater(() => forceDockLayoutRefresh())
+    }
+    function setDockSpacing(spacing) {
+        dockSpacing = spacing
+        saveSettings()
+    }
+    function setDockBottomGap(gap) {
+        dockBottomGap = gap
+        saveSettings()
+    }
+    function setDockOpenOnOverview(enabled) {
+        dockOpenOnOverview = enabled
         saveSettings()
     }
 
