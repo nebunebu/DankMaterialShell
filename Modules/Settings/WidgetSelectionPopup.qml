@@ -85,7 +85,6 @@ Popup {
     onOpened: {
         isOpening = false
         Qt.callLater(() => {
-            contentItem.forceActiveFocus()
             searchField.forceActiveFocus()
         })
     }
