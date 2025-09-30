@@ -158,7 +158,6 @@ PanelWindow {
         border.width: root.borderWidth
         layer.enabled: root.enableShadow
         opacity: root.shouldBeVisible ? 1 : 0
-        scale: root.animationType === "scale" ? (root.shouldBeVisible ? 1 : 0.9) : 1
         transform: root.animationType === "slide" ? slideTransform : null
 
         Translate {
@@ -177,15 +176,6 @@ PanelWindow {
         }
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: root.animationDuration
-                easing.type: root.animationEasing
-            }
-        }
-
-        Behavior on scale {
-            enabled: root.animationType === "scale"
-
             NumberAnimation {
                 duration: root.animationDuration
                 easing.type: root.animationEasing
