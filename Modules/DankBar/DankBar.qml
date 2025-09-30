@@ -11,136 +11,216 @@ import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Common
 import qs.Modules
-import qs.Modules.DankBar
+import qs.Modules.DankBar.Widgets
+import qs.Modules.DankBar.Popouts
 import qs.Services
 import qs.Widgets
 
-Variants {
-    id: dankBarVariants
-    model: SettingsData.getFilteredScreens("dankBar")
+Item {
+    id: root
 
     signal colorPickerRequested()
 
+    Variants {
+        model: SettingsData.getFilteredScreens("dankBar")
 
-    delegate: PanelWindow {
-        id: root
+        delegate: PanelWindow {
+            id: barWindow
 
-        WlrLayershell.namespace: "quickshell:bar"
+            WlrLayershell.namespace: "quickshell:bar"
 
-        property var modelData: item
+            property var modelData: item
 
-        property bool gothCornersEnabled: SettingsData.dankBarGothCornersEnabled
-    property real wingtipsRadius: Theme.cornerRadius
-    readonly property real _wingR: Math.max(0, wingtipsRadius)
-    readonly property color _bgColor: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency)
-    readonly property real _dpr: (root.screen && root.screen.devicePixelRatio) ? root.screen.devicePixelRatio : 1
-    function px(v) { return Math.round(v * _dpr) / _dpr }
-    property string screenName: modelData.name
-    readonly property int notificationCount: NotificationService.notifications.length
-    readonly property real effectiveBarHeight: Math.max(root.widgetHeight + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
-    readonly property real widgetHeight: Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
+            signal colorPickerRequested()
 
-    screen: modelData
-    implicitHeight: px(effectiveBarHeight + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0))
-    color: "transparent"
-    Component.onCompleted: {
-        const fonts = Qt.fontFamilies()
-        if (fonts.indexOf("Material Symbols Rounded") === -1) {
-            ToastService.showError("Please install Material Symbols Rounded and Restart your Shell. See README.md for instructions")
-        }
-
-        updateGpuTempConfig()
-    }
+            onColorPickerRequested: root.colorPickerRequested()
 
 
-    function updateGpuTempConfig() {
-        const allWidgets = [...(SettingsData.dankBarLeftWidgets || []), ...(SettingsData.dankBarCenterWidgets || []), ...(SettingsData.dankBarRightWidgets || [])]
-
-        const hasGpuTempWidget = allWidgets.some(widget => {
-                                                     const widgetId = typeof widget === "string" ? widget : widget.id
-                                                     const widgetEnabled = typeof widget === "string" ? true : (widget.enabled !== false)
-                                                     return widgetId === "gpuTemp" && widgetEnabled
-                                                 })
-
-        DgopService.gpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled || SessionData.nonNvidiaGpuTempEnabled
-        DgopService.nvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled
-        DgopService.nonNvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nonNvidiaGpuTempEnabled
-    }
-
-    Connections {
-        function onDankBarLeftWidgetsChanged() {
-            root.updateGpuTempConfig()
-        }
-
-        function onDankBarCenterWidgetsChanged() {
-            root.updateGpuTempConfig()
-        }
-
-        function onDankBarRightWidgetsChanged() {
-            root.updateGpuTempConfig()
-        }
-
-        target: SettingsData
-    }
-
-    Connections {
-        function onNvidiaGpuTempEnabledChanged() {
-            root.updateGpuTempConfig()
-        }
-
-        function onNonNvidiaGpuTempEnabledChanged() {
-            root.updateGpuTempConfig()
-        }
-
-        target: SessionData
-    }
-
-    Connections {
-        target: root.screen
-        function onGeometryChanged() {
-            if (centerSection?.width > 0) {
-                Qt.callLater(centerSection.updateLayout)
+            AxisContext {
+                id: axis
+                edge: {
+                    switch (SettingsData.dankBarPosition) {
+                        case SettingsData.Position.Top:
+                            return "top";
+                        case SettingsData.Position.Bottom:
+                            return "bottom";
+                        case SettingsData.Position.Left:
+                            return "left";
+                        case SettingsData.Position.Right:
+                            return "right";
+                        default:
+                            return "top";
+                    }
+                }
             }
-        }
-    }
 
-    anchors {
-        top: !SettingsData.dankBarAtBottom
-        bottom: SettingsData.dankBarAtBottom
-        left: true
-        right: true
-    }
-
-    exclusiveZone: (!SettingsData.dankBarVisible || topBarCore.autoHide) ? -1 : (root.effectiveBarHeight + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap)
-
-    Item {
-        id: inputMask
-        anchors {
-            top: SettingsData.dankBarAtBottom ? undefined : parent.top
-            bottom: SettingsData.dankBarAtBottom ? parent.bottom : undefined
-            left: parent.left
-            right: parent.right
-        }
-        height: {
-            const base = px(root.effectiveBarHeight + SettingsData.dankBarSpacing)
-            if (topBarCore.autoHide && !topBarCore.reveal) return 1
-            if (CompositorService.isNiri && NiriService.inOverview && SettingsData.dankBarOpenOnOverview) return base
-            return SettingsData.dankBarVisible ? base : 0
-        }
-    }
-
-    mask: Region {
-        item: inputMask
-    }
+            readonly property bool isVertical: axis.isVertical
 
 
-    Item {
-        id: topBarCore
-        anchors.fill: parent
+            property bool gothCornersEnabled: SettingsData.dankBarGothCornersEnabled
+            property real wingtipsRadius: Theme.cornerRadius
+            readonly property real _wingR: Math.max(0, wingtipsRadius)
+            readonly property color _bgColor: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency)
+            readonly property real _dpr: (barWindow.screen && barWindow.screen.devicePixelRatio) ? barWindow.screen.devicePixelRatio : 1
+            function px(v) { return Math.round(v * _dpr) / _dpr }
 
-        property real backgroundTransparency: SettingsData.dankBarTransparency
-        property bool autoHide: SettingsData.dankBarAutoHide
-        property bool revealSticky: false
+            property string screenName: modelData.name
+            readonly property int notificationCount: NotificationService.notifications.length
+            readonly property real effectiveBarThickness: Math.max(barWindow.widgetThickness + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
+            readonly property real widgetThickness: Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
+
+            screen: modelData
+            implicitHeight: !isVertical ? px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0)) : 0
+            implicitWidth: isVertical ? px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0)) : 0
+            color: "transparent"
+
+            Component.onCompleted: {
+                const fonts = Qt.fontFamilies()
+                if (fonts.indexOf("Material Symbols Rounded") === -1) {
+                    ToastService.showError("Please install Material Symbols Rounded and Restart your Shell. See README.md for instructions")
+                }
+
+                if (SettingsData.forceStatusBarLayoutRefresh) {
+                    SettingsData.forceStatusBarLayoutRefresh.connect(() => {
+                        Qt.callLater(() => {
+                            stackLoader.visible = false
+                            Qt.callLater(() => {
+                                stackLoader.visible = true
+                            })
+                        })
+                    })
+                }
+
+                updateGpuTempConfig()
+                Qt.callLater(() => Qt.callLater(forceWidgetRefresh))
+            }
+
+            function forceWidgetRefresh() {
+            }
+
+            function updateGpuTempConfig() {
+                const allWidgets = [...(SettingsData.dankBarLeftWidgets || []), ...(SettingsData.dankBarCenterWidgets || []), ...(SettingsData.dankBarRightWidgets || [])]
+
+                const hasGpuTempWidget = allWidgets.some(widget => {
+                                                             const widgetId = typeof widget === "string" ? widget : widget.id
+                                                             const widgetEnabled = typeof widget === "string" ? true : (widget.enabled !== false)
+                                                             return widgetId === "gpuTemp" && widgetEnabled
+                                                         })
+
+                DgopService.gpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled || SessionData.nonNvidiaGpuTempEnabled
+                DgopService.nvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled
+                DgopService.nonNvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nonNvidiaGpuTempEnabled
+            }
+
+            Connections {
+                function onDankBarLeftWidgetsChanged() {
+                    barWindow.updateGpuTempConfig()
+                }
+
+                function onDankBarCenterWidgetsChanged() {
+                    barWindow.updateGpuTempConfig()
+                }
+
+                function onDankBarRightWidgetsChanged() {
+                    barWindow.updateGpuTempConfig()
+                }
+
+                target: SettingsData
+            }
+
+            Connections {
+                function onNvidiaGpuTempEnabledChanged() {
+                    barWindow.updateGpuTempConfig()
+                }
+
+                function onNonNvidiaGpuTempEnabledChanged() {
+                    barWindow.updateGpuTempConfig()
+                }
+
+                target: SessionData
+            }
+
+            Connections {
+                target: barWindow.screen
+                function onGeometryChanged() {
+                    Qt.callLater(forceWidgetRefresh)
+                }
+            }
+
+            Timer {
+                id: refreshTimer
+                interval: 0
+                running: false
+                repeat: false
+                onTriggered: {
+                    forceWidgetRefresh()
+                }
+            }
+
+            Connections {
+                target: axis
+                function onChanged() {
+                    Qt.application.active
+                    refreshTimer.restart()
+                }
+            }
+
+            anchors.top: !isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Top) : true
+            anchors.bottom: !isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Bottom) : true
+            anchors.left: !isVertical ? true : (SettingsData.dankBarPosition === SettingsData.Position.Left)
+            anchors.right: !isVertical ? true : (SettingsData.dankBarPosition === SettingsData.Position.Right)
+
+            exclusiveZone: (!SettingsData.dankBarVisible || topBarCore.autoHide) ? -1 : (barWindow.effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap)
+
+            Item {
+                id: inputMask
+
+                readonly property int barThickness: px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing)
+
+                readonly property bool showing: SettingsData.dankBarVisible && (topBarCore.reveal
+                                         || (CompositorService.isNiri && NiriService.inOverview && SettingsData.dankBarOpenOnOverview)
+                                         || !topBarCore.autoHide)
+
+                readonly property int maskThickness: showing ? barThickness : 1
+
+                x: {
+                    if (!axis.isVertical) {
+                        return 0
+                    } else {
+                        switch (SettingsData.dankBarPosition) {
+                        case SettingsData.Position.Left:  return 0
+                        case SettingsData.Position.Right: return parent.width - maskThickness
+                        default: return 0
+                        }
+                    }
+                }
+                y: {
+                    if (axis.isVertical) {
+                        return 0
+                    } else {
+                        switch (SettingsData.dankBarPosition) {
+                        case SettingsData.Position.Top:    return 0
+                        case SettingsData.Position.Bottom: return parent.height - maskThickness
+                        default: return 0
+                        }
+                    }
+                }
+                width: axis.isVertical ? maskThickness : parent.width
+                height: axis.isVertical ? parent.height : maskThickness
+            }
+
+            mask: Region {
+                item: inputMask
+            }
+
+            Item {
+                id: topBarCore
+                anchors.fill: parent
+                layer.enabled: true
+
+                property real backgroundTransparency: SettingsData.dankBarTransparency
+                property bool autoHide: SettingsData.dankBarAutoHide
+                property bool revealSticky: false
 
         Timer {
             id: revealHold
@@ -156,7 +236,6 @@ Variants {
             return SettingsData.dankBarVisible && (!autoHide || topBarMouseArea.containsMouse || hasActivePopout || revealSticky)
         }
 
-        
         readonly property bool hasActivePopout: {
             const loaders = [{
                                  "loader": appDrawerLoader,
@@ -194,7 +273,6 @@ Variants {
             })
         }
 
-
         Connections {
             function onDankBarTransparencyChanged() {
                 topBarCore.backgroundTransparency = SettingsData.dankBarTransparency
@@ -226,15 +304,20 @@ Variants {
 
         MouseArea {
             id: topBarMouseArea
-            y: SettingsData.dankBarAtBottom ? parent.height - height : 0
-            height: px(root.effectiveBarHeight + SettingsData.dankBarSpacing)
+            y: !barWindow.isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Bottom ? parent.height - height : 0) : 0
+            x: barWindow.isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Right ? parent.width - width : 0) : 0
+            height: !barWindow.isVertical ? px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing) : undefined
+            width: barWindow.isVertical ? px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing) : undefined
             anchors {
-                left: parent.left
-                right: parent.right
+                left: !barWindow.isVertical ? parent.left : (SettingsData.dankBarPosition === SettingsData.Position.Left ? parent.left : undefined)
+                right: !barWindow.isVertical ? parent.right : (SettingsData.dankBarPosition === SettingsData.Position.Right ? parent.right : undefined)
+                top: barWindow.isVertical ? parent.top : undefined
+                bottom: barWindow.isVertical ? parent.bottom : undefined
             }
-            hoverEnabled: true
+            // Only enable mouse handling while hidden (for reveal-on-edge logic).
+            hoverEnabled: SettingsData.dankBarAutoHide && !topBarCore.reveal
             acceptedButtons: Qt.NoButton
-            enabled: true
+            enabled: SettingsData.dankBarAutoHide && !topBarCore.reveal
 
             Item {
                 id: topBarContainer
@@ -242,7 +325,15 @@ Variants {
 
                 transform: Translate {
                     id: topBarSlide
-                    y: px(topBarCore.reveal ? 0 : (SettingsData.dankBarAtBottom ? root.implicitHeight : -root.implicitHeight))
+                    x: barWindow.isVertical ? px(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Right ? barWindow.implicitWidth : -barWindow.implicitWidth)) : 0
+                    y: !barWindow.isVertical ? px(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Bottom ? barWindow.implicitHeight : -barWindow.implicitHeight)) : 0
+
+                    Behavior on x {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
+                    }
 
                     Behavior on y {
                         NumberAnimation {
@@ -255,188 +346,24 @@ Variants {
                 Item {
                     id: barUnitInset
                     anchors.fill: parent
-                    anchors.leftMargin: px(SettingsData.dankBarSpacing)
-                    anchors.rightMargin: px(SettingsData.dankBarSpacing)
-                    anchors.topMargin: SettingsData.dankBarAtBottom ? 0 : px(SettingsData.dankBarSpacing)
-                    anchors.bottomMargin: SettingsData.dankBarAtBottom ? px(SettingsData.dankBarSpacing) : 0
+                    anchors.leftMargin: !barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.edge === "left" ? px(SettingsData.dankBarSpacing) : 0)
+                    anchors.rightMargin: !barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.edge === "right" ? px(SettingsData.dankBarSpacing) : 0)
+                    anchors.topMargin: barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.outerVisualEdge() === "bottom" ? 0 : px(SettingsData.dankBarSpacing))
+                    anchors.bottomMargin: barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.outerVisualEdge() === "bottom" ? px(SettingsData.dankBarSpacing) : 0)
 
-                    Item {
+                    BarCanvas {
                         id: barBackground
-                        anchors.fill: parent
-                        anchors.bottomMargin: -(SettingsData.dankBarGothCornersEnabled && !SettingsData.dankBarAtBottom ? root._wingR : 0)
-                        anchors.topMargin: -(SettingsData.dankBarGothCornersEnabled && SettingsData.dankBarAtBottom ? root._wingR : 0)
-
-                    Canvas {
-                            id: barShape
-                            anchors.fill: parent
-                            antialiasing: true
-                            renderTarget: Canvas.Image
-                            canvasSize: Qt.size(px(width), px(height))
-
-                            property real wing: SettingsData.dankBarGothCornersEnabled ? root._wingR : 0
-                            property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.cornerRadius
-                            property real h: height
-                            property real contentH: height - wing
-                            property real y0: SettingsData.dankBarAtBottom ? wing : 0
-
-                            onWingChanged: requestPaint()
-                            onRtChanged: requestPaint()
-                            onWidthChanged: requestPaint()
-                            onHeightChanged: requestPaint()
-
-                            Connections {
-                                target: root
-                                function on_BgColorChanged() { barShape.requestPaint() }
-                                function on_DprChanged() { barShape.requestPaint() }
-                            }
-
-                            onPaint: {
-                                const ctx = getContext("2d")
-                                const scale = root._dpr
-                                const W = px(width)
-                                const H_raw = px(height)
-                                const R = px(wing)
-                                const RT = px(rt)
-                                const H = H_raw - (R > 0 ? R : 0)
-                                const isBottom = SettingsData.dankBarAtBottom
-
-                                ctx.scale(scale, scale)
-
-                                function drawTopPath() {
-                                    ctx.beginPath()
-                                    ctx.moveTo(RT, 0)
-                                    ctx.lineTo(W - RT, 0)
-                                    ctx.arcTo(W, 0, W, RT, RT)
-                                    ctx.lineTo(W, H)
-
-                                    if (R > 0) {
-                                        ctx.lineTo(W, H + R)
-                                        ctx.arc(W - R, H + R, R, 0, -Math.PI / 2, true)
-                                        ctx.lineTo(R, H)
-                                        ctx.arc(R, H + R, R, -Math.PI / 2, -Math.PI, true)
-                                        ctx.lineTo(0, H + R)
-                                    } else {
-                                        ctx.lineTo(W, H - RT)
-                                        ctx.arcTo(W, H, W - RT, H, RT)
-                                        ctx.lineTo(RT, H)
-                                        ctx.arcTo(0, H, 0, H - RT, RT)
-                                    }
-
-                                    ctx.lineTo(0, RT)
-                                    ctx.arcTo(0, 0, RT, 0, RT)
-                                    ctx.closePath()
-                                }
-
-                                ctx.reset()
-                                ctx.clearRect(0, 0, W, H_raw)
-
-                                if (isBottom) {
-                                    ctx.save()
-                                    ctx.translate(0, H_raw)
-                                    ctx.scale(1, -1)
-                                    drawTopPath()
-                                    ctx.restore()
-                                } else {
-                                    drawTopPath()
-                                }
-
-                                ctx.fillStyle = root._bgColor
-                                ctx.fill()
-
-                            }
-
-                        }
-
-                        Canvas {
-                            id: barTint
-                            anchors.fill: parent
-                            antialiasing: true
-                            renderTarget: Canvas.Image
-                            canvasSize: Qt.size(px(width), px(height))
-
-                            property real wing: SettingsData.dankBarGothCornersEnabled ? root._wingR : 0
-                            property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.cornerRadius
-                            property real h: height
-                            property real contentH: height - wing
-                            property real y0: SettingsData.dankBarAtBottom ? wing : 0
-                            property real alphaTint: (root._bgColor?.a ?? 1) < 0.99 ? (Theme.stateLayerOpacity ?? 0) : 0
-
-                            onWingChanged: requestPaint()
-                            onRtChanged: requestPaint()
-                            onAlphaTintChanged: requestPaint()
-                            onWidthChanged: requestPaint()
-                            onHeightChanged: requestPaint()
-
-                            Connections {
-                                target: root
-                                function on_BgColorChanged() { barTint.requestPaint() }
-                                function on_DprChanged() { barTint.requestPaint() }
-                            }
-
-                            onPaint: {
-                                const ctx = getContext("2d")
-                                const scale = root._dpr
-                                const W = px(width)
-                                const H_raw = px(height)
-                                const R = px(wing)
-                                const RT = px(rt)
-                                const H = H_raw - (R > 0 ? R : 0)
-                                const isBottom = SettingsData.dankBarAtBottom
-
-                                ctx.scale(scale, scale)
-
-                                function drawTopPath() {
-                                    ctx.beginPath()
-                                    ctx.moveTo(RT, 0)
-                                    ctx.lineTo(W - RT, 0)
-                                    ctx.arcTo(W, 0, W, RT, RT)
-                                    ctx.lineTo(W, H)
-
-                                    if (R > 0) {
-                                        ctx.lineTo(W, H + R)
-                                        ctx.arc(W - R, H + R, R, 0, -Math.PI / 2, true)
-                                        ctx.lineTo(R, H)
-                                        ctx.arc(R, H + R, R, -Math.PI / 2, -Math.PI, true)
-                                        ctx.lineTo(0, H + R)
-                                    } else {
-                                        ctx.lineTo(W, H - RT)
-                                        ctx.arcTo(W, H, W - RT, H, RT)
-                                        ctx.lineTo(RT, H)
-                                        ctx.arcTo(0, H, 0, H - RT, RT)
-                                    }
-
-                                    ctx.lineTo(0, RT)
-                                    ctx.arcTo(0, 0, RT, 0, RT)
-                                    ctx.closePath()
-                                }
-
-                                ctx.reset()
-                                ctx.clearRect(0, 0, W, H_raw)
-
-                                if (isBottom) {
-                                    ctx.save()
-                                    ctx.translate(0, H_raw)
-                                    ctx.scale(1, -1)
-                                    drawTopPath()
-                                    ctx.restore()
-                                } else {
-                                    drawTopPath()
-                                }
-
-                                ctx.fillStyle = Qt.rgba(Theme.surface.r, Theme.surface.g, Theme.surface.b, alphaTint)
-                                ctx.fill()
-
-                            }
-                        }
+                        barWindow: barWindow
+                        axis: axis
                     }
 
                     Item {
                         id: topBarContent
                         anchors.fill: parent
-                        anchors.leftMargin: Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8)
-                        anchors.rightMargin: Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8)
-                        anchors.topMargin: SettingsData.dankBarInnerPadding / 2
-                        anchors.bottomMargin: SettingsData.dankBarInnerPadding / 2
+                        anchors.leftMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8) : SettingsData.dankBarInnerPadding / 2
+                        anchors.rightMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8) : SettingsData.dankBarInnerPadding / 2
+                        anchors.topMargin: !barWindow.isVertical ? SettingsData.dankBarInnerPadding / 2 : Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8)
+                        anchors.bottomMargin: !barWindow.isVertical ? SettingsData.dankBarInnerPadding / 2 : Math.max(Theme.spacingXS, SettingsData.dankBarInnerPadding * 0.8)
                         clip: true
 
                     readonly property int availableWidth: width
@@ -444,7 +371,7 @@ Variants {
                         readonly property int workspaceSwitcherWidth: 120
                         readonly property int focusedAppMaxWidth: 456
                         readonly property int estimatedLeftSectionWidth: launcherButtonWidth + workspaceSwitcherWidth + focusedAppMaxWidth + (Theme.spacingXS * 2)
-                        readonly property int rightSectionWidth: rightSection.width
+                        readonly property int rightSectionWidth: 200
                         readonly property int clockWidth: 120
                         readonly property int mediaMaxWidth: 280
                         readonly property int weatherWidth: 80
@@ -458,27 +385,28 @@ Variants {
                         readonly property int leftToMediaGap: mediaMaxWidth > 0 ? Math.max(0, mediaLeftEdge - leftSectionRightEdge) : leftToClockGap
                         readonly property int mediaToClockGap: mediaMaxWidth > 0 ? Theme.spacingS : 0
                         readonly property int clockToRightGap: validLayout ? Math.max(0, rightSectionLeftEdge - clockRightEdge) : 1000
-                        readonly property bool spacingTight: validLayout && (leftToMediaGap < 150 || clockToRightGap < 100)
-                        readonly property bool overlapping: validLayout && (leftToMediaGap < 100 || clockToRightGap < 50)
+                        readonly property bool spacingTight: !barWindow.isVertical && validLayout && (leftToMediaGap < 150 || clockToRightGap < 100)
+                        readonly property bool overlapping: !barWindow.isVertical && validLayout && (leftToMediaGap < 100 || clockToRightGap < 50)
 
                         function getWidgetEnabled(enabled) {
                             return enabled !== false
                         }
 
                         function getWidgetSection(parentItem) {
-                            if (!parentItem?.parent) {
-                                return "left"
+                            let current = parentItem
+                            while (current) {
+                                if (current.objectName === "leftSection" || current === hLeftSection || current === vLeftSection) {
+                                    return "left"
+                                }
+                                if (current.objectName === "centerSection" || current === hCenterSection || current === vCenterSection) {
+                                    return "center"
+                                }
+                                if (current.objectName === "rightSection" || current === hRightSection || current === vRightSection) {
+                                    return "right"
+                                }
+                                current = current.parent
                             }
-                            if (parentItem.parent === leftSection) {
-                                return "left"
-                            }
-                            if (parentItem.parent === rightSection) {
-                                return "right"
-                            }
-                            if (parentItem.parent === centerSection) {
-                                return "center"
-                            }
-                            return "left"
+                            return "left" // fallback
                         }
 
                         readonly property var widgetVisibility: ({
@@ -527,330 +455,142 @@ Variants {
                             return componentMap[widgetId] || null
                         }
 
-                        Row {
-                            id: leftSection
-
-                            height: parent.height
-                            spacing: SettingsData.dankBarNoBackground ? 2 : Theme.spacingXS
-                            anchors.left: parent.left
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            Repeater {
-                                model: SettingsData.dankBarLeftWidgetsModel
-
-                                Loader {
-                                    property string widgetId: model.widgetId
-                                    property var widgetData: model
-                                    property int spacerSize: model.size || 20
-
-                                    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
-                                    active: topBarContent.getWidgetVisible(model.widgetId) && (model.widgetId !== "music" || MprisController.activePlayer !== null)
-                                    sourceComponent: topBarContent.getWidgetComponent(model.widgetId)
-                                    opacity: topBarContent.getWidgetEnabled(model.enabled) ? 1 : 0
-                                    asynchronous: false
-                                }
-                            }
-                        }
+                        readonly property var allComponents: ({
+                            launcherButtonComponent: launcherButtonComponent,
+                            workspaceSwitcherComponent: workspaceSwitcherComponent,
+                            focusedWindowComponent: focusedWindowComponent,
+                            runningAppsComponent: runningAppsComponent,
+                            clockComponent: clockComponent,
+                            mediaComponent: mediaComponent,
+                            weatherComponent: weatherComponent,
+                            systemTrayComponent: systemTrayComponent,
+                            privacyIndicatorComponent: privacyIndicatorComponent,
+                            clipboardComponent: clipboardComponent,
+                            cpuUsageComponent: cpuUsageComponent,
+                            memUsageComponent: memUsageComponent,
+                            diskUsageComponent: diskUsageComponent,
+                            cpuTempComponent: cpuTempComponent,
+                            gpuTempComponent: gpuTempComponent,
+                            notificationButtonComponent: notificationButtonComponent,
+                            batteryComponent: batteryComponent,
+                            controlCenterButtonComponent: controlCenterButtonComponent,
+                            idleInhibitorComponent: idleInhibitorComponent,
+                            spacerComponent: spacerComponent,
+                            separatorComponent: separatorComponent,
+                            networkComponent: networkComponent,
+                            keyboardLayoutNameComponent: keyboardLayoutNameComponent,
+                            vpnComponent: vpnComponent,
+                            notepadButtonComponent: notepadButtonComponent,
+                            colorPickerComponent: colorPickerComponent,
+                            systemUpdateComponent: systemUpdateComponent
+                        })
 
                         Item {
-                            id: centerSection
+                            id: stackContainer
+                            anchors.fill: parent
 
-                            property var centerWidgets: []
-                            property int totalWidgets: 0
-                            property real totalWidth: 0
-                            property real spacing: SettingsData.dankBarNoBackground ? 2 : Theme.spacingXS
+                            Item {
+                                id: horizontalStack
+                                anchors.fill: parent
+                                visible: !axis.isVertical
 
-                            function updateLayout() {
-                                if (width <= 0 || height <= 0 || !visible) {
-                                    Qt.callLater(updateLayout)
-                                    return
+                                LeftSection {
+                                    id: hLeftSection
+                                    anchors {
+                                        left: parent.left
+                                        verticalCenter: parent.verticalCenter
+                                    }
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarLeftWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
                                 }
 
-                                centerWidgets = []
-                                totalWidgets = 0
-                                totalWidth = 0
-
-                                let configuredWidgets = 0
-                                for (var i = 0; i < centerRepeater.count; i++) {
-                                    const item = centerRepeater.itemAt(i)
-                                    if (item && topBarContent.getWidgetVisible(item.widgetId)) {
-                                        configuredWidgets++
-                                        if (item.active && item.item) {
-                                            centerWidgets.push(item.item)
-                                            totalWidgets++
-                                            totalWidth += item.item.width
-                                        }
+                                RightSection {
+                                    id: hRightSection
+                                    anchors {
+                                        right: parent.right
+                                        verticalCenter: parent.verticalCenter
                                     }
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarRightWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
                                 }
 
-                                if (totalWidgets > 1) {
-                                    totalWidth += spacing * (totalWidgets - 1)
-                                }
-                                positionWidgets(configuredWidgets)
-                            }
-
-                            function positionWidgets(configuredWidgets) {
-                                if (totalWidgets === 0 || width <= 0) {
-                                    return
-                                }
-
-                                const parentCenterX = width / 2
-                                const isOdd = configuredWidgets % 2 === 1
-
-                                centerWidgets.forEach(widget => widget.anchors.horizontalCenter = undefined)
-
-                                if (isOdd) {
-                                    const middleIndex = Math.floor(configuredWidgets / 2)
-                                    let currentActiveIndex = 0
-                                    let middleWidget = null
-
-                                    for (var i = 0; i < centerRepeater.count; i++) {
-                                        const item = centerRepeater.itemAt(i)
-                                        if (item && topBarContent.getWidgetVisible(item.widgetId)) {
-                                            if (currentActiveIndex === middleIndex && item.active && item.item) {
-                                                middleWidget = item.item
-                                                break
-                                            }
-                                            currentActiveIndex++
-                                        }
+                                CenterSection {
+                                    id: hCenterSection
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
+                                        horizontalCenter: parent.horizontalCenter
                                     }
-
-                                    if (middleWidget) {
-                                        middleWidget.x = parentCenterX - (middleWidget.width / 2)
-
-                                        let leftWidgets = []
-                                        let rightWidgets = []
-                                        let foundMiddle = false
-
-                                        for (var i = 0; i < centerWidgets.length; i++) {
-                                            if (centerWidgets[i] === middleWidget) {
-                                                foundMiddle = true
-                                                continue
-                                            }
-                                            if (!foundMiddle) {
-                                                leftWidgets.push(centerWidgets[i])
-                                            } else {
-                                                rightWidgets.push(centerWidgets[i])
-                                            }
-                                        }
-
-                                        let currentX = middleWidget.x
-                                        for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                                            currentX -= (spacing + leftWidgets[i].width)
-                                            leftWidgets[i].x = currentX
-                                        }
-
-                                        currentX = middleWidget.x + middleWidget.width
-                                        for (var i = 0; i < rightWidgets.length; i++) {
-                                            currentX += spacing
-                                            rightWidgets[i].x = currentX
-                                            currentX += rightWidgets[i].width
-                                        }
-                                    }
-                                } else {
-                                    let configuredLeftIndex = (configuredWidgets / 2) - 1
-                                    let configuredRightIndex = configuredWidgets / 2
-                                    const halfSpacing = spacing / 2
-
-                                    let leftWidget = null
-                                    let rightWidget = null
-                                    let leftWidgets = []
-                                    let rightWidgets = []
-
-                                    let currentConfigIndex = 0
-                                    for (var i = 0; i < centerRepeater.count; i++) {
-                                        const item = centerRepeater.itemAt(i)
-                                        if (item && topBarContent.getWidgetVisible(item.widgetId)) {
-                                            if (item.active && item.item) {
-                                                if (currentConfigIndex < configuredLeftIndex) {
-                                                    leftWidgets.push(item.item)
-                                                } else if (currentConfigIndex === configuredLeftIndex) {
-                                                    leftWidget = item.item
-                                                } else if (currentConfigIndex === configuredRightIndex) {
-                                                    rightWidget = item.item
-                                                } else {
-                                                    rightWidgets.push(item.item)
-                                                }
-                                            }
-                                            currentConfigIndex++
-                                        }
-                                    }
-
-                                    if (leftWidget && rightWidget) {
-                                        leftWidget.x = parentCenterX - halfSpacing - leftWidget.width
-                                        rightWidget.x = parentCenterX + halfSpacing
-
-                                        let currentX = leftWidget.x
-                                        for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                                            currentX -= (spacing + leftWidgets[i].width)
-                                            leftWidgets[i].x = currentX
-                                        }
-
-                                        currentX = rightWidget.x + rightWidget.width
-                                        for (var i = 0; i < rightWidgets.length; i++) {
-                                            currentX += spacing
-                                            rightWidgets[i].x = currentX
-                                            currentX += rightWidgets[i].width
-                                        }
-                                    } else if (leftWidget && !rightWidget) {
-                                        leftWidget.x = parentCenterX - halfSpacing - leftWidget.width
-
-                                        let currentX = leftWidget.x
-                                        for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                                            currentX -= (spacing + leftWidgets[i].width)
-                                            leftWidgets[i].x = currentX
-                                        }
-
-                                        currentX = leftWidget.x + leftWidget.width + spacing
-                                        for (var i = 0; i < rightWidgets.length; i++) {
-                                            currentX += spacing
-                                            rightWidgets[i].x = currentX
-                                            currentX += rightWidgets[i].width
-                                        }
-                                    } else if (!leftWidget && rightWidget) {
-                                        rightWidget.x = parentCenterX + halfSpacing
-
-                                        let currentX = rightWidget.x - spacing
-                                        for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                                            currentX -= leftWidgets[i].width
-                                            leftWidgets[i].x = currentX
-                                            currentX -= spacing
-                                        }
-
-                                        currentX = rightWidget.x + rightWidget.width
-                                        for (var i = 0; i < rightWidgets.length; i++) {
-                                            currentX += spacing
-                                            rightWidgets[i].x = currentX
-                                            currentX += rightWidgets[i].width
-                                        }
-                                    } else if (totalWidgets === 1 && centerWidgets[0]) {
-                                        centerWidgets[0].x = parentCenterX - (centerWidgets[0].width / 2)
-                                    }
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarCenterWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
                                 }
                             }
 
-                            height: parent.height
-                            width: parent.width
-                            anchors.centerIn: parent
-                            Component.onCompleted: {
-                                Qt.callLater(() => {
-                                                 Qt.callLater(updateLayout)
-                                             })
-                            }
+                            Item {
+                                id: verticalStack
+                                anchors.fill: parent
+                                visible: axis.isVertical
 
-                            onWidthChanged: {
-                                if (width > 0) {
-                                    Qt.callLater(updateLayout)
-                                }
-                            }
-
-                            onVisibleChanged: {
-                                if (visible && width > 0) {
-                                    Qt.callLater(updateLayout)
-                                }
-                            }
-
-                            Repeater {
-                                id: centerRepeater
-
-                                model: SettingsData.dankBarCenterWidgetsModel
-
-                                Loader {
-                                    property string widgetId: model.widgetId
-                                    property var widgetData: model
-                                    property int spacerSize: model.size || 20
-
-                                    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
-                                    active: topBarContent.getWidgetVisible(model.widgetId) && (model.widgetId !== "music" || MprisController.activePlayer !== null)
-                                    sourceComponent: topBarContent.getWidgetComponent(model.widgetId)
-                                    opacity: topBarContent.getWidgetEnabled(model.enabled) ? 1 : 0
-                                    asynchronous: false
-
-                                    onLoaded: {
-                                        if (!item) {
-                                            return
-                                        }
-                                        item.onWidthChanged.connect(centerSection.updateLayout)
-                                        if (model.widgetId === "spacer") {
-                                            item.spacerSize = Qt.binding(() => model.size || 20)
-                                        }
-                                        Qt.callLater(centerSection.updateLayout)
+                                LeftSection {
+                                    id: vLeftSection
+                                    width: parent.width
+                                    anchors {
+                                        top: parent.top
+                                        horizontalCenter: parent.horizontalCenter
                                     }
-                                    onActiveChanged: {
-                                        Qt.callLater(centerSection.updateLayout)
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarLeftWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
+                                }
+
+                                CenterSection {
+                                    id: vCenterSection
+                                    width: parent.width
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
+                                        horizontalCenter: parent.horizontalCenter
                                     }
-                                }
-                            }
-
-                            Connections {
-                                function onCountChanged() {
-                                    Qt.callLater(centerSection.updateLayout)
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarCenterWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
                                 }
 
-                                target: SettingsData.dankBarCenterWidgetsModel
+                                RightSection {
+                                    id: vRightSection
+                                    width: parent.width
+                                    height: implicitHeight
+                                    anchors {
+                                        bottom: parent.bottom
+                                        horizontalCenter: parent.horizontalCenter
+                                    }
+                                    axis: axis
+                                    widgetsModel: SettingsData.dankBarRightWidgetsModel
+                                    components: topBarContent.allComponents
+                                    noBackground: SettingsData.dankBarNoBackground
+                                }
                             }
                         }
 
-                        Row {
-                            id: rightSection
 
-                            height: parent.height
-                            spacing: SettingsData.dankBarNoBackground ? 2 : Theme.spacingXS
-                            anchors.right: parent.right
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            Repeater {
-                                model: SettingsData.dankBarRightWidgetsModel
-
-                                Loader {
-                                    property string widgetId: model.widgetId
-                                    property var widgetData: model
-                                    property int spacerSize: model.size || 20
-
-                                    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
-                                    active: topBarContent.getWidgetVisible(model.widgetId) && (model.widgetId !== "music" || MprisController.activePlayer !== null)
-                                    sourceComponent: topBarContent.getWidgetComponent(model.widgetId)
-                                    opacity: topBarContent.getWidgetEnabled(model.enabled) ? 1 : 0
-                                    asynchronous: false
-                                }
-                            }
-                        }
 
                         Component {
                             id: clipboardComponent
 
-                            Rectangle {
-                                readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (root.widgetHeight / 30))
-                                width: clipboardIcon.width + horizontalPadding * 2
-                                height: root.widgetHeight
-                                radius: SettingsData.dankBarNoBackground ? 0 : Theme.cornerRadius
-                                color: {
-                                    if (SettingsData.dankBarNoBackground) {
-                                        return "transparent"
-                                    }
-                                    const baseColor = clipboardArea.containsMouse ? Theme.widgetBaseHoverColor : Theme.widgetBaseBackgroundColor
-                                    return Qt.rgba(baseColor.r, baseColor.g, baseColor.b, baseColor.a * Theme.widgetTransparency)
+                            ClipboardButton {
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
+                                section: topBarContent.getWidgetSection(parent)
+                                parentScreen: barWindow.screen
+                                onClicked: {
+                                    clipboardHistoryModalPopup.toggle()
                                 }
-
-                                DankIcon {
-                                    id: clipboardIcon
-                                    anchors.centerIn: parent
-                                    name: "content_paste"
-                                    size: Theme.iconSize - 6
-                                    color: Theme.surfaceText
-                                }
-
-                                MouseArea {
-                                    id: clipboardArea
-
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: {
-                                        clipboardHistoryModalPopup.toggle()
-                                    }
-                                }
-
                             }
                         }
 
@@ -859,11 +599,11 @@ Variants {
 
                             LauncherButton {
                                 isActive: false
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent)
                                 popupTarget: appDrawerLoader.item
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClicked: {
                                     appDrawerLoader.active = true
                                     appDrawerLoader.item?.toggle()
@@ -875,8 +615,8 @@ Variants {
                             id: workspaceSwitcherComponent
 
                             WorkspaceSwitcher {
-                                screenName: root.screenName
-                                widgetHeight: root.widgetHeight
+                                screenName: barWindow.screenName
+                                widgetHeight: barWindow.widgetThickness
                             }
                         }
 
@@ -885,7 +625,8 @@ Variants {
 
                             FocusedApp {
                                 availableWidth: topBarContent.leftToMediaGap
-                                widgetHeight: root.widgetHeight
+                                widgetThickness: barWindow.widgetThickness
+                                parentScreen: barWindow.screen
                             }
                         }
 
@@ -893,9 +634,9 @@ Variants {
                             id: runningAppsComponent
 
                             RunningApps {
-                                widgetHeight: root.widgetHeight
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent)
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 topBar: topBarContent
                             }
                         }
@@ -905,14 +646,14 @@ Variants {
 
                             Clock {
                                 compactMode: topBarContent.overlapping
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "center"
                                 popupTarget: {
                                     dankDashPopoutLoader.active = true
                                     return dankDashPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClockClicked: {
                                     dankDashPopoutLoader.active = true
                                     if (dankDashPopoutLoader.item) {
@@ -928,14 +669,14 @@ Variants {
 
                             Media {
                                 compactMode: topBarContent.spacingTight || topBarContent.overlapping
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "center"
                                 popupTarget: {
                                     dankDashPopoutLoader.active = true
                                     return dankDashPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClicked: {
                                     dankDashPopoutLoader.active = true
                                     if (dankDashPopoutLoader.item) {
@@ -950,14 +691,14 @@ Variants {
                             id: weatherComponent
 
                             Weather {
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "center"
                                 popupTarget: {
                                     dankDashPopoutLoader.active = true
                                     return dankDashPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClicked: {
                                     dankDashPopoutLoader.active = true
                                     if (dankDashPopoutLoader.item) {
@@ -973,10 +714,10 @@ Variants {
 
                             SystemTrayBar {
                                 parentWindow: root
-                                parentScreen: root.screen
-                                widgetHeight: root.widgetHeight
-                                isAtBottom: SettingsData.dankBarAtBottom
-                                visible: SettingsData.getFilteredScreens("systemTray").includes(root.screen)
+                                parentScreen: barWindow.screen
+                                widgetThickness: barWindow.widgetThickness
+                                isAtBottom: SettingsData.dankBarPosition === SettingsData.Position.Bottom
+                                visible: SettingsData.getFilteredScreens("systemTray").includes(barWindow.screen)
                             }
                         }
 
@@ -984,9 +725,9 @@ Variants {
                             id: privacyIndicatorComponent
 
                             PrivacyIndicator {
-                                widgetHeight: root.widgetHeight
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                             }
                         }
 
@@ -994,14 +735,14 @@ Variants {
                             id: cpuUsageComponent
 
                             CpuMonitor {
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     processListPopoutLoader.active = true
                                     return processListPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()
@@ -1013,14 +754,14 @@ Variants {
                             id: memUsageComponent
 
                             RamMonitor {
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     processListPopoutLoader.active = true
                                     return processListPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()
@@ -1032,8 +773,9 @@ Variants {
                             id: diskUsageComponent
 
                             DiskUsage {
-                                widgetHeight: root.widgetHeight
+                                widgetThickness: barWindow.widgetThickness
                                 widgetData: parent.widgetData
+                                parentScreen: barWindow.screen
                             }
                         }
 
@@ -1041,14 +783,14 @@ Variants {
                             id: cpuTempComponent
 
                             CpuTemperature {
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     processListPopoutLoader.active = true
                                     return processListPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()
@@ -1060,14 +802,14 @@ Variants {
                             id: gpuTempComponent
 
                             GpuTemperature {
-                                barHeight: root.effectiveBarHeight
-                                widgetHeight: root.widgetHeight
+                                barThickness: barWindow.effectiveBarThickness
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     processListPopoutLoader.active = true
                                     return processListPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 widgetData: parent.widgetData
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
@@ -1086,16 +828,16 @@ Variants {
                             id: notificationButtonComponent
 
                             NotificationCenterButton {
-                                hasUnread: root.notificationCount > 0
+                                hasUnread: barWindow.notificationCount > 0
                                 isActive: notificationCenterLoader.item ? notificationCenterLoader.item.shouldBeVisible : false
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     notificationCenterLoader.active = true
                                     return notificationCenterLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClicked: {
                                     notificationCenterLoader.active = true
                                     notificationCenterLoader.item?.toggle()
@@ -1108,14 +850,14 @@ Variants {
 
                             Battery {
                                 batteryPopupVisible: batteryPopoutLoader.item ? batteryPopoutLoader.item.shouldBeVisible : false
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     batteryPopoutLoader.active = true
                                     return batteryPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onToggleBatteryPopup: {
                                     batteryPopoutLoader.active = true
                                     batteryPopoutLoader.item?.toggle()
@@ -1127,14 +869,14 @@ Variants {
                             id: vpnComponent
 
                             Vpn {
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     vpnPopoutLoader.active = true
                                     return vpnPopoutLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onToggleVpnPopup: {
                                     vpnPopoutLoader.active = true
                                     vpnPopoutLoader.item?.toggle()
@@ -1147,21 +889,21 @@ Variants {
 
                             ControlCenterButton {
                                 isActive: controlCenterLoader.item ? controlCenterLoader.item.shouldBeVisible : false
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     controlCenterLoader.active = true
                                     return controlCenterLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 widgetData: parent.widgetData
                                 onClicked: {
                                     controlCenterLoader.active = true
                                     if (!controlCenterLoader.item) {
                                         return
                                     }
-                                    controlCenterLoader.item.triggerScreen = root.screen
+                                    controlCenterLoader.item.triggerScreen = barWindow.screen
                                     controlCenterLoader.item.toggle()
                                     if (controlCenterLoader.item.shouldBeVisible && NetworkService.wifiEnabled) {
                                         NetworkService.scanWifi()
@@ -1174,9 +916,9 @@ Variants {
                             id: idleInhibitorComponent
 
                             IdleInhibitor {
-                                widgetHeight: root.widgetHeight
+                                widgetThickness: barWindow.widgetThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                             }
                         }
 
@@ -1184,8 +926,10 @@ Variants {
                             id: spacerComponent
 
                             Item {
-                                width: parent.spacerSize || 20
-                                height: root.widgetHeight
+                                width: barWindow.isVertical ? barWindow.widgetThickness : (parent.spacerSize || 20)
+                                height: barWindow.isVertical ? (parent.spacerSize || 20) : barWindow.widgetThickness
+                                implicitWidth: width
+                                implicitHeight: height
 
                                 Rectangle {
                                     anchors.fill: parent
@@ -1198,6 +942,9 @@ Variants {
                                     MouseArea {
                                         anchors.fill: parent
                                         hoverEnabled: true
+                                        acceptedButtons: Qt.NoButton      // do not consume clicks
+                                        propagateComposedEvents: true     // let events pass through
+                                        cursorShape: Qt.ArrowCursor       // don't override widget cursors
                                         onEntered: parent.visible = true
                                         onExited: parent.visible = false
                                     }
@@ -1209,8 +956,10 @@ Variants {
                             id: separatorComponent
 
                             Rectangle {
-                                width: 1
-                                height: root.widgetHeight * 0.67
+                                width: barWindow.isVertical ? barWindow.widgetThickness * 0.67 : 1
+                                height: barWindow.isVertical ? 1 : barWindow.widgetThickness * 0.67
+                                implicitWidth: width
+                                implicitHeight: height
                                 color: Theme.outline
                                 opacity: 0.3
                             }
@@ -1226,10 +975,11 @@ Variants {
                             id: notepadButtonComponent
 
                             NotepadButton {
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                isVertical: barWindow.isVertical
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                             }
                         }
 
@@ -1237,12 +987,12 @@ Variants {
                             id: colorPickerComponent
 
                             ColorPicker {
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onColorPickerRequested: {
-                                    dankBarVariants.colorPickerRequested()
+                                    barWindow.colorPickerRequested()
                                 }
                             }
                         }
@@ -1252,14 +1002,14 @@ Variants {
 
                             SystemUpdate {
                                 isActive: systemUpdateLoader.item ? systemUpdateLoader.item.shouldBeVisible : false
-                                widgetHeight: root.widgetHeight
-                                barHeight: root.effectiveBarHeight
+                                widgetThickness: barWindow.widgetThickness
+                                barThickness: barWindow.effectiveBarThickness
                                 section: topBarContent.getWidgetSection(parent) || "right"
                                 popupTarget: {
                                     systemUpdateLoader.active = true
                                     return systemUpdateLoader.item
                                 }
-                                parentScreen: root.screen
+                                parentScreen: barWindow.screen
                                 onClicked: {
                                     systemUpdateLoader.active = true
                                     systemUpdateLoader.item?.toggle()
@@ -1268,8 +1018,9 @@ Variants {
                         }
                     }
                 }
-                }
             }
+        }
+        }
         }
     }
 }

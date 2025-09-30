@@ -83,7 +83,7 @@ Rectangle {
                 width: parent.width - Theme.spacingS * 2
                 height: 44
                 radius: Theme.cornerRadius
-                color: isActive ? Theme.primaryContainer : tabMouseArea.containsMouse ? Theme.surfaceHover : "transparent"
+                color: isActive ? Theme.primaryContainer : tabMouseArea.containsMouse ? Theme.surfaceHover : Theme.withAlpha(Theme.primaryContainer, 0)
 
                 Row {
                     anchors.left: parent.left

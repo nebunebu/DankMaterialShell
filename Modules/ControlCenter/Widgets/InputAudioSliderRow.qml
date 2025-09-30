@@ -20,11 +20,7 @@ Row {
         height: Theme.iconSize + Theme.spacingS * 2
         anchors.verticalCenter: parent.verticalCenter
         radius: (Theme.iconSize + Theme.spacingS * 2) / 2
-        color: iconArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
-
-        Behavior on color {
-            ColorAnimation { duration: Theme.shortDuration }
-        }
+        color: iconArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.primary, 0)
 
         MouseArea {
             id: iconArea

@@ -12,7 +12,6 @@ import qs.Widgets
 DankPopout {
     id: appDrawerPopout
 
-    property string triggerSection: "left"
     property var triggerScreen: null
 
     // Setting to Exclusive, so virtual keyboards can send input to app drawer
@@ -33,9 +32,9 @@ DankPopout {
     popupWidth: 520
     popupHeight: 600
     triggerX: Theme.spacingL
-    triggerY: Math.max(26 + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding)) + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap - 2 + Theme.popupDistance
+    triggerY: Math.max(26 + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding)) + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap - 2
     triggerWidth: 40
-    positioning: "center"
+    positioning: ""
     screen: triggerScreen
 
     onShouldBeVisibleChanged: {

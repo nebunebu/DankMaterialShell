@@ -12,8 +12,9 @@ Rectangle {
     property bool enabled: true
     property string secondaryText: ""
     property real iconRotation: 0
-    
+
     signal clicked()
+    signal iconRotationCompleted()
 
     width: parent ? parent.width : 200
     height: 60
@@ -46,7 +47,7 @@ Rectangle {
     Rectangle {
         anchors.fill: parent
         radius: Theme.cornerRadius
-        color: mouseArea.containsMouse ? hoverTint(_containerBg) : "transparent"
+        color: mouseArea.containsMouse ? hoverTint(_containerBg) : Theme.withAlpha(_containerBg, 0)
         opacity: mouseArea.containsMouse ? 0.08 : 0.0
 
         Behavior on opacity {
@@ -66,6 +67,7 @@ Rectangle {
             color: isActive ? Theme.primaryContainer : Theme.primary
             anchors.verticalCenter: parent.verticalCenter
             rotation: root.iconRotation
+            onRotationCompleted: root.iconRotationCompleted()
         }
 
         Item {
@@ -108,13 +110,6 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         enabled: root.enabled
         onClicked: root.clicked()
-    }
-
-    Behavior on color {
-        ColorAnimation {
-            duration: Theme.shortDuration
-            easing.type: Theme.standardEasing
-        }
     }
 
     Behavior on radius {

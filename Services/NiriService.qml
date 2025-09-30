@@ -412,13 +412,13 @@ Singleton {
     }
 
     function doScreenTransition() {
-        return send({
-                        "Action": {
-                            "DoScreenTransition": {
-                                "delay_ms": 100,
-                            }
+        send({
+                    "Action": {
+                        "DoScreenTransition": {
+                            "delay_ms": 0,
                         }
-                    })
+                    }
+                })
     }
 
     function switchToWorkspace(workspaceIndex) {

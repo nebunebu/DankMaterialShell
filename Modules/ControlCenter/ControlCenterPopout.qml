@@ -22,7 +22,6 @@ DankPopout {
 
     property string expandedSection: ""
     property bool powerOptionsExpanded: false
-    property string triggerSection: "right"
     property var triggerScreen: null
     property bool editMode: false
     property int expandedWidgetIndex: -1
@@ -66,9 +65,9 @@ DankPopout {
     popupWidth: 550
     popupHeight: Math.min((triggerScreen?.height ?? 1080) - 100, contentLoader.item && contentLoader.item.implicitHeight > 0 ? contentLoader.item.implicitHeight + 20 : 400)
     triggerX: (triggerScreen?.width ?? 1920) - 600 - Theme.spacingL
-    triggerY: Theme.barHeight - 4 + SettingsData.dankBarSpacing + Theme.popupDistance
+    triggerY: Theme.barHeight - 4 + SettingsData.dankBarSpacing
     triggerWidth: 80
-    positioning: "center"
+    positioning: ""
     screen: triggerScreen
     shouldBeVisible: false
     visible: shouldBeVisible
@@ -102,7 +101,7 @@ DankPopout {
             property alias bluetoothCodecSelector: bluetoothCodecSelector
 
             color: {
-                const transparency = Theme.popupTransparency || 0.92
+                const transparency = Theme.popupTransparency
                 const surface = Theme.surfaceContainer || Qt.rgba(0.1, 0.1, 0.1, 1)
                 return Qt.rgba(surface.r, surface.g, surface.b, transparency)
             }
@@ -154,6 +153,7 @@ DankPopout {
                     expandedWidgetData: root.expandedWidgetData
                     model: widgetModel
                     bluetoothCodecSelector: bluetoothCodecSelector
+                    colorPickerModal: root.colorPickerModal
                     onExpandClicked: (widgetData, globalIndex) => {
                         root.expandedWidgetIndex = globalIndex
                         root.expandedWidgetData = widgetData
@@ -223,4 +223,6 @@ DankPopout {
         id: batteryDetailComponent
         BatteryDetail {}
     }
+
+    property var colorPickerModal: null
 }

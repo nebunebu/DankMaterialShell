@@ -41,7 +41,7 @@ Rectangle {
     readonly property color _labelSecondary: Theme.surfaceVariantText
     readonly property color _tileBgActive: Theme.primary
     readonly property color _tileBgInactive: {
-        const transparency = Theme.popupTransparency || 0.92
+        const transparency = Theme.popupTransparency
         const surface = Theme.surfaceContainer || Qt.rgba(0.1, 0.1, 0.1, 1)
         return Qt.rgba(surface.r, surface.g, surface.b, transparency)
     }

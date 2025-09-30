@@ -19,8 +19,15 @@ Flow {
     property int textSize: Theme.fontSizeMedium
 
     signal selectionChanged(int index, bool selected)
+    signal animationCompleted()
 
     spacing: Theme.spacingXS
+
+    Timer {
+        id: animationTimer
+        interval: Theme.shortDuration
+        onTriggered: root.animationCompleted()
+    }
 
     function isSelected(index) {
         if (multiSelect) {
@@ -43,6 +50,7 @@ Flow {
 
             currentSelection = newSelection
             selectionChanged(index, !isCurrentlySelected)
+            animationTimer.restart()
         } else {
             const oldIndex = currentIndex
             currentIndex = index
@@ -50,6 +58,7 @@ Flow {
             if (oldIndex !== index && oldIndex >= 0) {
                 selectionChanged(oldIndex, false)
             }
+            animationTimer.restart()
         }
     }
 

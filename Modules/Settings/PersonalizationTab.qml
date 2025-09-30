@@ -985,7 +985,8 @@ Item {
                         text: "Light Mode"
                         description: "Use light theme instead of dark theme"
                         checked: SessionData.isLightMode
-                        onToggled: checked => {
+                        onToggleCompleted: checked => {
+                                       Theme.screenTransition()
                                        Theme.setLightMode(checked)
                                    }
                     }
@@ -1331,17 +1332,17 @@ Item {
                 }
             }
 
-            // Lock Screen Settings
+            // Notification Popup Settings
             StyledRect {
                 width: parent.width
-                height: lockScreenSection.implicitHeight + Theme.spacingL * 2
+                height: notificationPopupSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
                 border.width: 0
 
                 Column {
-                    id: lockScreenSection
+                    id: notificationPopupSection
 
                     anchors.fill: parent
                     anchors.margins: Theme.spacingL
@@ -1352,14 +1353,14 @@ Item {
                         spacing: Theme.spacingM
 
                         DankIcon {
-                            name: "lock"
+                            name: "notifications"
                             size: Theme.iconSize
                             color: Theme.primary
                             anchors.verticalCenter: parent.verticalCenter
                         }
 
                         StyledText {
-                            text: "Lock Screen"
+                            text: "Notification Popups"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1367,14 +1368,48 @@ Item {
                         }
                     }
 
-                    DankToggle {
+                    DankDropdown {
                         width: parent.width
-                        text: "Show Power Actions"
-                        description: "Show power, restart, and logout buttons on the lock screen"
-                        checked: SettingsData.lockScreenShowPowerActions
-                        onToggled: checked => {
-                                       SettingsData.setLockScreenShowPowerActions(checked)
-                                   }
+                        text: "Popup Position"
+                        description: "Choose where notification popups appear on screen"
+                        currentValue: {
+                            if (SettingsData.notificationPopupPosition === -1) {
+                                return "Top Center"
+                            }
+                            switch (SettingsData.notificationPopupPosition) {
+                            case SettingsData.Position.Top:
+                                return "Top Right"
+                            case SettingsData.Position.Bottom:
+                                return "Bottom Left"
+                            case SettingsData.Position.Left:
+                                return "Top Left"
+                            case SettingsData.Position.Right:
+                                return "Bottom Right"
+                            default:
+                                return "Top Right"
+                            }
+                        }
+                        options: ["Top Right", "Top Left", "Top Center", "Bottom Right", "Bottom Left"]
+                        onValueChanged: value => {
+                            switch (value) {
+                            case "Top Right":
+                                SettingsData.setNotificationPopupPosition(SettingsData.Position.Top)
+                                break
+                            case "Top Left":
+                                SettingsData.setNotificationPopupPosition(SettingsData.Position.Left)
+                                break
+                            case "Top Center":
+                                SettingsData.setNotificationPopupPosition(-1)
+                                break
+                            case "Bottom Right":
+                                SettingsData.setNotificationPopupPosition(SettingsData.Position.Right)
+                                break
+                            case "Bottom Left":
+                                SettingsData.setNotificationPopupPosition(SettingsData.Position.Bottom)
+                                break
+                            }
+                            SettingsData.sendTestNotifications()
+                        }
                     }
                 }
             }
@@ -1608,6 +1643,54 @@ Item {
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            // Lock Screen Settings
+            StyledRect {
+                width: parent.width
+                height: lockScreenSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: lockScreenSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "lock"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: "Lock Screen"
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    DankToggle {
+                        width: parent.width
+                        text: "Show Power Actions"
+                        description: "Show power, restart, and logout buttons on the lock screen"
+                        checked: SettingsData.lockScreenShowPowerActions
+                        onToggled: checked => {
+                                       SettingsData.setLockScreenShowPowerActions(checked)
+                                   }
                     }
                 }
             }

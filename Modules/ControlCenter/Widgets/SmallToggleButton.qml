@@ -12,6 +12,7 @@ Rectangle {
     property real iconRotation: 0
 
     signal clicked()
+    signal iconRotationCompleted()
 
     width: parent ? ((parent.width - parent.spacing * 3) / 4) : 48
     height: 48
@@ -58,6 +59,7 @@ Rectangle {
         size: Theme.iconSize
         color: isActive ? _tileIconActive : _tileIconInactive
         rotation: iconRotation
+        onRotationCompleted: root.iconRotationCompleted()
     }
 
     MouseArea {
@@ -67,13 +69,6 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         enabled: root.enabled
         onClicked: root.clicked()
-    }
-
-    Behavior on color {
-        ColorAnimation {
-            duration: Theme.shortDuration
-            easing.type: Theme.standardEasing
-        }
     }
 
     Behavior on radius {

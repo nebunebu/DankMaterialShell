@@ -57,6 +57,7 @@ PanelWindow {
 
     StyledRect {
         id: contentRect
+        layer.enabled: true
 
         anchors.top: parent.top
         anchors.bottom: parent.bottom

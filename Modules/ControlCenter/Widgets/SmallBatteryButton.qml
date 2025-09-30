@@ -91,13 +91,6 @@ Rectangle {
         onClicked: root.clicked()
     }
 
-    Behavior on color {
-        ColorAnimation {
-            duration: Theme.shortDuration
-            easing.type: Theme.standardEasing
-        }
-    }
-
     Behavior on radius {
         NumberAnimation {
             duration: Theme.shortDuration

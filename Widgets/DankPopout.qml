@@ -16,6 +16,7 @@ PanelWindow {
     property real triggerX: 0
     property real triggerY: 0
     property real triggerWidth: 40
+    property string triggerSection: ""
     property string positioning: "center"
     property int animationDuration: Theme.mediumDuration
     property var animationEasing: Theme.emphasizedEasing
@@ -89,25 +90,29 @@ PanelWindow {
 
     Item {
         id: contentContainer
+        layer.enabled: true
 
         readonly property real screenWidth: root.screen ? root.screen.width : 1920
         readonly property real screenHeight: root.screen ? root.screen.height : 1080
+        readonly property real gothOffset: SettingsData.dankBarGothCornersEnabled ? Theme.cornerRadius : 0
         readonly property real calculatedX: {
-            if (positioning === "center") {
-                var centerX = triggerX + (triggerWidth / 2) - (popupWidth / 2)
-                return Math.max(Theme.spacingM, Math.min(screenWidth - popupWidth - Theme.spacingM, centerX))
-            } else if (positioning === "left") {
-                return Math.max(Theme.spacingM, triggerX)
-            } else if (positioning === "right") {
-                return Math.min(screenWidth - popupWidth - Theme.spacingM, triggerX + triggerWidth - popupWidth)
+            if (SettingsData.dankBarPosition === SettingsData.Position.Left) {
+                return triggerY
+            } else if (SettingsData.dankBarPosition === SettingsData.Position.Right) {
+                return screenWidth - triggerY - popupWidth
+            } else {
+                const centerX = triggerX + (triggerWidth / 2) - (popupWidth / 2)
+                return Math.max(Theme.popupDistance, Math.min(screenWidth - popupWidth - Theme.popupDistance, centerX))
             }
-            return triggerX
         }
         readonly property real calculatedY: {
-            if (SettingsData.dankBarAtBottom) {
-                return Math.max(Theme.spacingM, Math.min(screenHeight - popupHeight - Theme.spacingM, screenHeight - triggerY - popupHeight - SettingsData.dankBarSpacing - 10))
+            if (SettingsData.dankBarPosition === SettingsData.Position.Left || SettingsData.dankBarPosition === SettingsData.Position.Right) {
+                const centerY = triggerX + (triggerWidth / 2) - (popupHeight / 2)
+                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, centerY))
+            } else if (SettingsData.dankBarPosition === SettingsData.Position.Bottom) {
+                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, screenHeight - triggerY - popupHeight + Theme.popupDistance))
             } else {
-                return Math.max(0, Math.min(screenHeight - popupHeight - Theme.spacingM, triggerY + SettingsData.dankBarSpacing + 10))
+                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, triggerY + Theme.popupDistance))
             }
         }
         

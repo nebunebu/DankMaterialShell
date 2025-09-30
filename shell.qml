@@ -25,6 +25,7 @@ import qs.Modules.OSD
 import qs.Modules.ProcessList
 import qs.Modules.Settings
 import qs.Modules.DankBar
+import qs.Modules.DankBar.Popouts
 import qs.Services
 
 ShellRoot {
@@ -48,21 +49,19 @@ ShellRoot {
 
     Loader {
         id: dankBarLoader
-        active: true
         asynchronous: false
 
-        property var currentPosition: SettingsData.dankBarAtBottom
+        property var currentPosition: SettingsData.dankBarPosition
 
         sourceComponent: DankBar {
             onColorPickerRequested: colorPickerModal.show()
         }
 
         onCurrentPositionChanged: {
-            console.log("DEBUG: DankBar position changed to:", currentPosition, "- recreating bar")
-            const comp = sourceComponent
+            const component = sourceComponent
             sourceComponent = null
             Qt.callLater(() => {
-                sourceComponent = comp
+                sourceComponent = component
             })
         }
     }
@@ -140,8 +139,11 @@ ShellRoot {
 
         active: false
 
+        property var modalRef: colorPickerModal
+
         ControlCenterPopout {
             id: controlCenterPopout
+            colorPickerModal: controlCenterLoader.modalRef
 
             onPowerActionRequested: (action, title, message) => {
                                         powerConfirmModalLoader.active = true

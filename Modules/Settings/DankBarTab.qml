@@ -623,11 +623,24 @@ Item {
                         DankButtonGroup {
                             id: positionButtonGroup
                             anchors.verticalCenter: parent.verticalCenter
-                            model: ["Top", "Bottom"]
-                            currentIndex: SettingsData.dankBarAtBottom ? 1 : 0
+                            model: ["Top", "Bottom", "Left", "Right"]
+                            currentIndex: {
+                                switch (SettingsData.dankBarPosition) {
+                                    case SettingsData.Position.Top: return 0
+                                    case SettingsData.Position.Bottom: return 1
+                                    case SettingsData.Position.Left: return 2
+                                    case SettingsData.Position.Right: return 3
+                                    default: return 0
+                                }
+                            }
                             onSelectionChanged: (index, selected) => {
                                 if (selected) {
-                                    SettingsData.setDankBarAtBottom(index === 1)
+                                    switch (index) {
+                                        case 0: SettingsData.setDankBarPosition(SettingsData.Position.Top); break
+                                        case 1: SettingsData.setDankBarPosition(SettingsData.Position.Bottom); break
+                                        case 2: SettingsData.setDankBarPosition(SettingsData.Position.Left); break
+                                        case 3: SettingsData.setDankBarPosition(SettingsData.Position.Right); break
+                                    }
                                 }
                             }
                         }
@@ -876,7 +889,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: "Height to Edge Gap (Exclusive Zone)"
+                            text: "Exclusive Zone Offset"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -1086,7 +1099,7 @@ Item {
                 width: parent.width
                 spacing: Theme.spacingL
 
-                // Left Section
+                // Left/Top Section
                 StyledRect {
                     width: parent.width
                     height: leftSection.implicitHeight + Theme.spacingL * 2
@@ -1100,7 +1113,7 @@ Item {
                         id: leftSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: "Left Section"
+                        title: SettingsData.dankBarIsVertical ? "Top Section" : "Left Section"
                         titleIcon: "format_align_left"
                         sectionId: "left"
                         allWidgets: dankBarTab.baseWidgetDefinitions
@@ -1230,7 +1243,7 @@ Item {
                     }
                 }
 
-                // Right Section
+                // Right/Bottom Section
                 StyledRect {
                     width: parent.width
                     height: rightSection.implicitHeight + Theme.spacingL * 2
@@ -1244,7 +1257,7 @@ Item {
                         id: rightSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: "Right Section"
+                        title: SettingsData.dankBarIsVertical ? "Bottom Section" : "Right Section"
                         titleIcon: "format_align_right"
                         sectionId: "right"
                         allWidgets: dankBarTab.baseWidgetDefinitions

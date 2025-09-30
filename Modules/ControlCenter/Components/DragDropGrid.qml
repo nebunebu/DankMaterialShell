@@ -14,6 +14,7 @@ Column {
     property var model: null
     property var expandedWidgetData: null
     property var bluetoothCodecSelector: null
+    property bool darkModeTransitionPending: false
 
     signal expandClicked(var widgetData, int globalIndex)
     signal removeWidget(int index)
@@ -25,6 +26,7 @@ Column {
     property var currentRowWidgets: []
     property real currentRowWidth: 0
     property int expandedRowIndex: -1
+    property var colorPickerModal: null
 
     function calculateRowsAndWidgets() {
         return LayoutUtils.calculateRowsAndWidgets(root, expandedSection, expandedWidgetIndex)
@@ -131,6 +133,8 @@ Column {
                                 return widgetWidth <= 25 ? smallBatteryComponent : batteryPillComponent
                             } else if (id === "diskUsage") {
                                 return diskUsagePillComponent
+                            } else if (id === "colorPicker") {
+                                return colorPickerPillComponent
                             } else {
                                 return widgetWidth <= 25 ? smallToggleComponent : toggleButtonComponent
                             }
@@ -532,7 +536,13 @@ Column {
                 }
             }
 
-            iconRotation: widgetData.id === "darkMode" && SessionData.isLightMode ? 180 : 0
+            iconRotation: {
+                if (widgetData.id !== "darkMode") return 0
+                if (darkModeTransitionPending) {
+                    return SessionData.isLightMode ? 0 : 180
+                }
+                return SessionData.isLightMode ? 180 : 0
+            }
 
             isActive: {
                 switch (widgetData.id || "") {
@@ -551,6 +561,14 @@ Column {
 
 enabled: !root.editMode
 
+            onIconRotationCompleted: {
+                if (root.darkModeTransitionPending && widgetData.id === "darkMode") {
+                    root.darkModeTransitionPending = false
+                    Theme.screenTransition()
+                    Theme.toggleLightMode()
+                }
+            }
+
             onClicked: {
                 if (root.editMode)
                     return
@@ -563,7 +581,7 @@ enabled: !root.editMode
                 }
                 case "darkMode":
                 {
-                    Theme.toggleLightMode()
+                    root.darkModeTransitionPending = true
                     break
                 }
                 case "doNotDisturb":
@@ -604,7 +622,13 @@ enabled: !root.editMode
                 }
             }
 
-            iconRotation: widgetData.id === "darkMode" && SessionData.isLightMode ? 180 : 0
+            iconRotation: {
+                if (widgetData.id !== "darkMode") return 0
+                if (darkModeTransitionPending) {
+                    return SessionData.isLightMode ? 0 : 180
+                }
+                return SessionData.isLightMode ? 180 : 0
+            }
 
             isActive: {
                 switch (widgetData.id || "") {
@@ -623,6 +647,14 @@ enabled: !root.editMode
 
 enabled: !root.editMode
 
+            onIconRotationCompleted: {
+                if (root.darkModeTransitionPending && widgetData.id === "darkMode") {
+                    root.darkModeTransitionPending = false
+                    Theme.screenTransition()
+                    Theme.toggleLightMode()
+                }
+            }
+
             onClicked: {
                 if (root.editMode)
                     return
@@ -635,7 +667,7 @@ enabled: !root.editMode
                 }
                 case "darkMode":
                 {
-                    Theme.toggleLightMode()
+                    root.darkModeTransitionPending = true
                     break
                 }
                 case "doNotDisturb":
@@ -669,6 +701,18 @@ enabled: !root.editMode
                     root.expandClicked(widgetData, widgetIndex)
                 }
             }
+        }
+    }
+
+    Component {
+        id: colorPickerPillComponent
+        ColorPickerPill {
+            property var widgetData: parent.widgetData || {}
+            property int widgetIndex: parent.widgetIndex || 0
+            width: parent.width
+            height: 60
+
+            colorPickerModal: root.colorPickerModal
         }
     }
 }

@@ -16,7 +16,8 @@ Singleton {
 
     readonly property bool envDisableMatugen: Quickshell.env("DMS_DISABLE_MATUGEN") === "1" || Quickshell.env("DMS_DISABLE_MATUGEN") === "true"
 
-    readonly property real popupDistance: 4
+    // ! TODO - Synchronize with niri/hyprland gaps?
+    readonly property real popupDistance: 2
 
     property string currentTheme: "blue"
     property string currentThemeCategory: "generic"
@@ -88,7 +89,7 @@ Singleton {
         }
 
         if (typeof SettingsData !== "undefined" && SettingsData.currentThemeName) {
-            switchTheme(SettingsData.currentThemeName, false)
+            switchTheme(SettingsData.currentThemeName, false, false)
         }
     }
 
@@ -268,7 +269,12 @@ Singleton {
     function switchTheme(themeName, savePrefs = true, enableTransition = true) {
         if (enableTransition) {
             screenTransition()
+            themeTransitionTimer.themeName = themeName
+            themeTransitionTimer.savePrefs = savePrefs
+            themeTransitionTimer.restart()
+            return
         }
+
         if (themeName === dynamic) {
             currentTheme = dynamic
             currentThemeCategory = dynamic
@@ -280,7 +286,6 @@ Singleton {
             }
         } else {
             currentTheme = themeName
-            // Determine category based on theme name
             if (StockThemes.isCatppuccinVariant(themeName)) {
                 currentThemeCategory = "catppuccin"
             } else {
@@ -293,8 +298,15 @@ Singleton {
         generateSystemThemesFromCurrentTheme()
     }
 
-    function setLightMode(light, savePrefs = true) {
-        screenTransition()
+    function setLightMode(light, savePrefs = true, enableTransition = false) {
+        if (enableTransition) {
+            screenTransition()
+            lightModeTransitionTimer.lightMode = light
+            lightModeTransitionTimer.savePrefs = savePrefs
+            lightModeTransitionTimer.restart()
+            return
+        }
+
         isLightMode = light
         if (savePrefs && typeof SessionData !== "undefined")
             SessionData.setLightMode(isLightMode)
@@ -303,11 +315,10 @@ Singleton {
     }
 
     function toggleLightMode(savePrefs = true) {
-        setLightMode(!isLightMode, savePrefs)
+        setLightMode(!isLightMode, savePrefs, true)
     }
 
     function forceGenerateSystemThemes() {
-        screenTransition()
         if (!matugenAvailable) {
             return
         }
@@ -331,8 +342,10 @@ Singleton {
     }
 
     function switchThemeCategory(category, defaultTheme) {
-        currentThemeCategory = category
-        switchTheme(defaultTheme, true, false)
+        screenTransition()
+        themeCategoryTransitionTimer.category = category
+        themeCategoryTransitionTimer.defaultTheme = defaultTheme
+        themeCategoryTransitionTimer.restart()
     }
 
     function getCatppuccinColor(variantName) {
@@ -356,7 +369,6 @@ Singleton {
     }
 
     function loadCustomTheme(themeData) {
-        screenTransition()
         if (themeData.dark || themeData.light) {
             const colorMode = (typeof SessionData !== "undefined" && SessionData.isLightMode) ? "light" : "dark"
             const selectedTheme = themeData[colorMode] || themeData.dark || themeData.light
@@ -640,6 +652,7 @@ Singleton {
         qtApplier.running = true
     }
 
+    function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a); }
 
     Process {
         id: matugenCheck
@@ -839,17 +852,48 @@ Singleton {
         }
 
         function light(): string {
-            root.setLightMode(true)
+            root.setLightMode(true, true, true)
             return "light"
         }
 
         function dark(): string {
-            root.setLightMode(false)
+            root.setLightMode(false, true, true)
             return "dark"
         }
 
         function getMode(): string {
             return root.isLightMode ? "light" : "dark"
+        }
+    }
+
+    // These timers are for screen transitions, since sometimes QML still beats the niri call
+    Timer {
+        id: themeTransitionTimer
+        interval: 50
+        repeat: false
+        property string themeName: ""
+        property bool savePrefs: true
+        onTriggered: root.switchTheme(themeName, savePrefs, false)
+    }
+
+    Timer {
+        id: lightModeTransitionTimer
+        interval: 100
+        repeat: false
+        property bool lightMode: false
+        property bool savePrefs: true
+        onTriggered: root.setLightMode(lightMode, savePrefs, false)
+    }
+
+    Timer {
+        id: themeCategoryTransitionTimer
+        interval: 50
+        repeat: false
+        property string category: ""
+        property string defaultTheme: ""
+        onTriggered: {
+            root.currentThemeCategory = category
+            root.switchTheme(defaultTheme, true, false)
         }
     }
 }

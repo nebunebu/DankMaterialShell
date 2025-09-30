@@ -21,7 +21,6 @@ Item {
 
     property color thumbOutlineColor: Theme.surfaceContainer
     property color trackColor: enabled ? Theme.outline : Theme.outline
-    function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a) }
 
     signal sliderValueChanged(int newValue)
     signal sliderDragFinished(int finalValue)
@@ -73,7 +72,7 @@ Item {
                     const center = (travel * ratio) + sliderHandle.width / 2
                     return Math.max(0, Math.min(sliderTrack.width, center))
                 }
-                color: slider.enabled ? Theme.primary : withAlpha(Theme.onSurface, 0.12)
+                color: slider.enabled ? Theme.primary : Theme.withAlpha(Theme.onSurface, 0.12)
 
             }
 
@@ -91,7 +90,7 @@ Item {
                     return Math.max(0, Math.min(travel, travel * ratio))
                 }
                 anchors.verticalCenter: parent.verticalCenter
-                color: slider.enabled ? Theme.primary : withAlpha(Theme.onSurface, 0.12)
+                color: slider.enabled ? Theme.primary : Theme.withAlpha(Theme.onSurface, 0.12)
                 border.width: 3
                 border.color: slider.thumbOutlineColor
 

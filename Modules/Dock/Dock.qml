@@ -32,13 +32,16 @@ Variants {
     property real backgroundTransparency: SettingsData.dockTransparency
     property bool groupByApp: SettingsData.dockGroupByApp
 
-    readonly property bool isDockAtTop: SettingsData.dockPosition === SettingsData.Position.Top
-    readonly property bool isDankBarAtTop: !SettingsData.dankBarAtBottom
-    readonly property bool isDankBarVisible: SettingsData.dankBarVisible
-    readonly property bool needsBarSpacing: isDankBarVisible && (isDockAtTop === isDankBarAtTop)
     readonly property real widgetHeight: Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
     readonly property real effectiveBarHeight: Math.max(widgetHeight + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
-    readonly property real barSpacing: needsBarSpacing ? (SettingsData.dankBarSpacing + effectiveBarHeight + SettingsData.dankBarBottomGap) : 0
+    readonly property real barSpacing: {
+        // Only add spacing if bar is visible, horizontal (Top/Bottom), and at same position as dock
+        const barIsHorizontal = (SettingsData.dankBarPosition === SettingsData.Position.Top || SettingsData.dankBarPosition === SettingsData.Position.Bottom)
+        const samePosition = (SettingsData.dockPosition === SettingsData.dankBarPosition)
+        return (SettingsData.dankBarVisible && barIsHorizontal && samePosition) 
+            ? (SettingsData.dankBarSpacing + effectiveBarHeight + SettingsData.dankBarBottomGap) 
+            : 0
+    }
 
     readonly property real dockMargin: SettingsData.dockSpacing
     readonly property real positionSpacing: barSpacing + SettingsData.dockBottomGap
@@ -92,7 +95,7 @@ Variants {
 
     exclusiveZone: {
         if (!SettingsData.showDock || autoHide) return -1
-        if (needsBarSpacing) return -1
+        if (barSpacing > 0) return -1
         return px(58 + SettingsData.dockSpacing + SettingsData.dockBottomGap)
     }
 

@@ -140,7 +140,8 @@ Singleton {
     property bool dankBarSquareCorners: false
     property bool dankBarNoBackground: false
     property bool dankBarGothCornersEnabled: false
-    property bool dankBarAtBottom: false
+    property int dankBarPosition: SettingsData.Position.Top
+    property bool dankBarIsVertical: dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right
     property bool lockScreenShowPowerActions: true
     property bool hideBrightnessSlider: false
     property string widgetBackgroundColor: "sch"
@@ -148,6 +149,7 @@ Singleton {
     property int notificationTimeoutLow: 5000
     property int notificationTimeoutNormal: 5000
     property int notificationTimeoutCritical: 0
+    property int notificationPopupPosition: SettingsData.Position.Top
     property var screenPreferences: ({})
     readonly property string defaultFontFamily: "Inter Variable"
     readonly property string defaultMonoFontFamily: "Fira Code"
@@ -335,13 +337,14 @@ Singleton {
                 notificationTimeoutLow = settings.notificationTimeoutLow !== undefined ? settings.notificationTimeoutLow : 5000
                 notificationTimeoutNormal = settings.notificationTimeoutNormal !== undefined ? settings.notificationTimeoutNormal : 5000
                 notificationTimeoutCritical = settings.notificationTimeoutCritical !== undefined ? settings.notificationTimeoutCritical : 0
+                notificationPopupPosition = settings.notificationPopupPosition !== undefined ? settings.notificationPopupPosition : SettingsData.Position.Top
                 dankBarSpacing = settings.dankBarSpacing !== undefined ? settings.dankBarSpacing : (settings.topBarSpacing !== undefined ? settings.topBarSpacing : 4)
                 dankBarBottomGap = settings.dankBarBottomGap !== undefined ? settings.dankBarBottomGap : (settings.topBarBottomGap !== undefined ? settings.topBarBottomGap : 0)
                 dankBarInnerPadding = settings.dankBarInnerPadding !== undefined ? settings.dankBarInnerPadding : (settings.topBarInnerPadding !== undefined ? settings.topBarInnerPadding : 4)
                 dankBarSquareCorners = settings.dankBarSquareCorners !== undefined ? settings.dankBarSquareCorners : (settings.topBarSquareCorners !== undefined ? settings.topBarSquareCorners : false)
                 dankBarNoBackground = settings.dankBarNoBackground !== undefined ? settings.dankBarNoBackground : (settings.topBarNoBackground !== undefined ? settings.topBarNoBackground : false)
                 dankBarGothCornersEnabled = settings.dankBarGothCornersEnabled !== undefined ? settings.dankBarGothCornersEnabled : (settings.topBarGothCornersEnabled !== undefined ? settings.topBarGothCornersEnabled : false)
-                dankBarAtBottom = settings.dankBarAtBottom !== undefined ? settings.dankBarAtBottom : (settings.topBarAtBottom !== undefined ? settings.topBarAtBottom : false)
+                dankBarPosition = settings.dankBarPosition !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 hideBrightnessSlider = settings.hideBrightnessSlider !== undefined ? settings.hideBrightnessSlider : false
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
@@ -456,7 +459,7 @@ Singleton {
                                                 "dankBarSquareCorners": dankBarSquareCorners,
                                                 "dankBarNoBackground": dankBarNoBackground,
                                                 "dankBarGothCornersEnabled": dankBarGothCornersEnabled,
-                                                "dankBarAtBottom": dankBarAtBottom,
+                                                "dankBarPosition": dankBarPosition,
                                                 "lockScreenShowPowerActions": lockScreenShowPowerActions,
                                                 "hideBrightnessSlider": hideBrightnessSlider,
                                                 "widgetBackgroundColor": widgetBackgroundColor,
@@ -464,6 +467,7 @@ Singleton {
                                                 "notificationTimeoutLow": notificationTimeoutLow,
                                                 "notificationTimeoutNormal": notificationTimeoutNormal,
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
+                                                "notificationPopupPosition": notificationPopupPosition,
                                                 "screenPreferences": screenPreferences
                                             }, null, 2))
     }
@@ -580,11 +584,11 @@ Singleton {
 
     function applyStoredTheme() {
         if (typeof Theme !== "undefined")
-            Theme.switchTheme(currentThemeName, false)
+            Theme.switchTheme(currentThemeName, false, false)
         else
             Qt.callLater(() => {
                              if (typeof Theme !== "undefined")
-                             Theme.switchTheme(currentThemeName, false)
+                             Theme.switchTheme(currentThemeName, false, false)
                          })
     }
 
@@ -976,8 +980,13 @@ Singleton {
 
     function setShowDock(enabled) {
         showDock = enabled
-        if (enabled && dankBarAtBottom && dockPosition === SettingsData.Position.Bottom) {
-            setDankBarAtBottom(false)
+        if (enabled && dankBarPosition === SettingsData.Position.Top) {
+            setDockPosition(SettingsData.Position.Bottom)
+            return
+        }
+        if (enabled && dankBarPosition === SettingsData.Position.Top) {
+            setDockPosition(SettingsData.Position.Bottom)
+            return
         }
         saveSettings()
     }
@@ -1042,6 +1051,56 @@ Singleton {
         saveSettings()
     }
 
+    function setNotificationPopupPosition(position) {
+        notificationPopupPosition = position
+        saveSettings()
+    }
+
+    function sendTestNotifications() {
+        sendTestNotification(0)
+        testNotifTimer1.start()
+        testNotifTimer2.start()
+    }
+
+    function sendTestNotification(index) {
+        const notifications = [
+            ["Notification Position Test", "DMS test notification 1 of 3 ~ Hi there!", "dialog-information"],
+            ["Second Test", "DMS Notification 2 of 3 ~ Check it out!", "emblem-default"],
+            ["Third Test", "DMS notification 3 of 3 ~ Enjoy!", "emblem-favorite"]
+        ]
+
+        if (index < 0 || index >= notifications.length) {
+            return
+        }
+
+        const notif = notifications[index]
+        testNotificationProcess.command = ["notify-send", "-h", "int:transient:1", "-a", "DMS", "-i", notif[2], notif[0], notif[1]]
+        testNotificationProcess.running = true
+    }
+
+    property Process testNotificationProcess
+
+    testNotificationProcess: Process {
+        command: []
+        running: false
+    }
+
+    property Timer testNotifTimer1
+
+    testNotifTimer1: Timer {
+        interval: 400
+        repeat: false
+        onTriggered: sendTestNotification(1)
+    }
+
+    property Timer testNotifTimer2
+
+    testNotifTimer2: Timer {
+        interval: 800
+        repeat: false
+        onTriggered: sendTestNotification(2)
+    }
+
     function setDankBarSpacing(spacing) {
         dankBarSpacing = spacing
         saveSettings()
@@ -1072,24 +1131,26 @@ Singleton {
         saveSettings()
     }
 
-    function setDankBarAtBottom(enabled) {
-        dankBarAtBottom = enabled
-        if (enabled && showDock && dockPosition === SettingsData.Position.Bottom) {
+    function setDankBarPosition(position) {
+        dankBarPosition = position
+        if (position === SettingsData.Position.Bottom && showDock) {
             setDockPosition(SettingsData.Position.Top)
+            return
         }
-        if (!enabled && showDock && dockPosition === SettingsData.Position.Top) {
+        if (position === SettingsData.Position.Top && showDock) {
             setDockPosition(SettingsData.Position.Bottom)
+            return
         }
         saveSettings()
     }
 
     function setDockPosition(position) {
         dockPosition = position
-        if (position === SettingsData.Position.Bottom && dankBarAtBottom && showDock) {
-            setDankBarAtBottom(false)
+        if (position === SettingsData.Position.Bottom && dankBarPosition === SettingsData.Position.Bottom && showDock) {
+            setDankBarPosition(SettingsData.Position.Top)
         }
-        if (position === SettingsData.Position.Top && !dankBarAtBottom && showDock) {
-            setDankBarAtBottom(true)
+        if (position === SettingsData.Position.Top && dankBarPosition === SettingsData.Position.Top && showDock) {
+            setDankBarPosition(SettingsData.Position.Bottom)
         }
         saveSettings()
         Qt.callLater(() => forceDockLayoutRefresh())
@@ -1108,7 +1169,28 @@ Singleton {
     }
 
     function getPopupYPosition(barHeight) {
-        return barHeight + dankBarSpacing + dankBarBottomGap - 2 + Theme.popupDistance
+        const gothOffset = dankBarGothCornersEnabled ? Theme.cornerRadius : 0
+        return barHeight + dankBarSpacing + dankBarBottomGap - gothOffset + Theme.popupDistance
+    }
+
+    function getPopupTriggerPosition(globalPos, screen, barThickness, widgetWidth) {
+        const screenX = screen ? screen.x : 0
+        const screenY = screen ? screen.y : 0
+        const relativeX = globalPos.x - screenX
+        const relativeY = globalPos.y - screenY
+
+        if (dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right) {
+            return {
+                x: relativeY,
+                y: barThickness + dankBarSpacing + Theme.popupDistance,
+                width: widgetWidth
+            }
+        }
+        return {
+            x: relativeX,
+            y: barThickness + dankBarSpacing + dankBarBottomGap + Theme.popupDistance,
+            width: widgetWidth
+        }
     }
 
     function setLockScreenShowPowerActions(enabled) {

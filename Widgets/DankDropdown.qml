@@ -124,6 +124,7 @@ Rectangle {
                 }
                 size: 18
                 color: Theme.surfaceVariantText
+                anchors.verticalCenter: parent.verticalCenter
                 visible: name !== "" && root.width > 60
             }
 
@@ -131,6 +132,7 @@ Rectangle {
                 text: root.currentValue
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.surfaceText
+                anchors.verticalCenter: parent.verticalCenter
                 width: root.width <= 60 ? dropdown.width - expandIcon.width - Theme.spacingS * 2 : dropdown.width - contentRow.x - expandIcon.width - Theme.spacingM - Theme.spacingS
                 elide: root.width <= 60 ? Text.ElideNone : Text.ElideRight
                 horizontalAlignment: root.width <= 60 ? Text.AlignHCenter : Text.AlignLeft

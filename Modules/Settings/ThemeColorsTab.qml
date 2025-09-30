@@ -226,6 +226,7 @@ Item {
                                 if (Theme.currentThemeCategory === "catppuccin") return 1
                                 return 0
                             }
+                            property int pendingThemeIndex: -1
 
                             model: ["Generic", "Catppuccin", "Auto", "Custom"]
                             currentIndex: currentThemeIndex
@@ -233,7 +234,11 @@ Item {
                             anchors.horizontalCenter: parent.horizontalCenter
                             onSelectionChanged: (index, selected) => {
                                 if (!selected) return
-                                switch (index) {
+                                pendingThemeIndex = index
+                            }
+                            onAnimationCompleted: {
+                                if (pendingThemeIndex === -1) return
+                                switch (pendingThemeIndex) {
                                     case 0: Theme.switchThemeCategory("generic", "blue"); break
                                     case 1: Theme.switchThemeCategory("catppuccin", "cat-mauve"); break
                                     case 2:
@@ -242,14 +247,15 @@ Item {
                                         else if (ToastService.wallpaperErrorStatus === "error")
                                             ToastService.showError("Wallpaper processing failed - check wallpaper path")
                                         else
-                                            Theme.switchTheme(Theme.dynamic, true, false)
+                                            Theme.switchTheme(Theme.dynamic, true, true)
                                         break
                                     case 3:
                                         if (Theme.currentThemeName !== "custom") {
-                                            Theme.switchTheme("custom", true, false)
+                                            Theme.switchTheme("custom", true, true)
                                         }
                                         break
                                 }
+                                pendingThemeIndex = -1
                             }
                         }
 
