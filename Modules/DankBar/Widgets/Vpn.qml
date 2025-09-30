@@ -37,15 +37,6 @@ Rectangle {
         size: Theme.iconSize - 6
         color: VpnService.connected ? Theme.primary : Theme.surfaceText
         anchors.centerIn: parent
-
-        RotationAnimation on rotation {
-            running: VpnService.isBusy
-            loops: Animation.Infinite
-            from: 0
-            to: 360
-            duration: 900
-        }
-
     }
 
     Loader {
