@@ -338,32 +338,28 @@ Rectangle {
 
                 width: {
                     if (root.isVertical) {
-                        // Vertical mode: width is like horizontal height (small and fixed)
-                        return SettingsData.showWorkspaceApps ? widgetHeight * 0.8 : widgetHeight * 0.6;
+                        return SettingsData.showWorkspaceApps ? widgetHeight * 0.7 : widgetHeight * 0.5;
                     } else {
-                        // Horizontal mode - original logic
                         if (SettingsData.showWorkspaceApps && loadedIcons.length > 0) {
                             const numIcons = Math.min(loadedIcons.length, SettingsData.maxWorkspaceIcons);
                             const iconsWidth = numIcons * 18 + (numIcons > 0 ? (numIcons - 1) * Theme.spacingXS : 0);
-                            const baseWidth = isActive ? root.widgetHeight * 1.0 + Theme.spacingXS : root.widgetHeight * 0.8;
+                            const baseWidth = isActive ? root.widgetHeight * 0.9 + Theme.spacingXS : root.widgetHeight * 0.7;
                             return baseWidth + iconsWidth;
                         }
-                        return isActive ? root.widgetHeight * 1.2 : root.widgetHeight * 0.8;
+                        return isActive ? root.widgetHeight * 1.05 : root.widgetHeight * 0.7;
                     }
                 }
                 height: {
                     if (root.isVertical) {
-                        // Vertical mode: height is like horizontal width (dynamic)
                         if (SettingsData.showWorkspaceApps && loadedIcons.length > 0) {
                             const numIcons = Math.min(loadedIcons.length, SettingsData.maxWorkspaceIcons);
                             const iconsHeight = numIcons * 18 + (numIcons > 0 ? (numIcons - 1) * Theme.spacingXS : 0);
-                            const baseHeight = isActive ? root.widgetHeight * 1.0 + Theme.spacingXS : root.widgetHeight * 0.8;
+                            const baseHeight = isActive ? root.widgetHeight * 0.9 + Theme.spacingXS : root.widgetHeight * 0.7;
                             return baseHeight + iconsHeight;
                         }
-                        return isActive ? root.widgetHeight * 1.2 : root.widgetHeight * 0.8;
+                        return isActive ? root.widgetHeight * 1.05 : root.widgetHeight * 0.7;
                     } else {
-                        // Horizontal mode - original logic
-                        return SettingsData.showWorkspaceApps ? widgetHeight * 0.8 : widgetHeight * 0.6;
+                        return SettingsData.showWorkspaceApps ? widgetHeight * 0.7 : widgetHeight * 0.5;
                     }
                 }
                 radius: Math.min(width, height) / 2
@@ -388,7 +384,9 @@ Rectangle {
                 MouseArea {
                     id: mouseArea
 
-                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    width: root.isVertical ? parent.width + Theme.spacingXL : parent.width
+                    height: root.isVerical ? parent.height : parent.height + Theme.spacingXL
                     hoverEnabled: !isPlaceholder
                     cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
                     enabled: !isPlaceholder
