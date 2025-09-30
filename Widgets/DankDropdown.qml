@@ -266,6 +266,21 @@ Rectangle {
                                 Keys.onUpPressed: selectPrevious()
                                 Keys.onReturnPressed: selectCurrent()
                                 Keys.onEnterPressed: selectCurrent()
+                                Keys.onPressed: event => {
+                                    if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
+                                        selectNext()
+                                        event.accepted = true
+                                    } else if (event.key === Qt.Key_P && event.modifiers & Qt.ControlModifier) {
+                                        selectPrevious()
+                                        event.accepted = true
+                                    } else if (event.key === Qt.Key_J && event.modifiers & Qt.ControlModifier) {
+                                        selectNext()
+                                        event.accepted = true
+                                    } else if (event.key === Qt.Key_K && event.modifiers & Qt.ControlModifier) {
+                                        selectPrevious()
+                                        event.accepted = true
+                                    }
+                                }
                             }
                         }
 

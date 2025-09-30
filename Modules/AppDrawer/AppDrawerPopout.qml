@@ -127,6 +127,44 @@ DankPopout {
                         return
                     }
 
+                    if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
+                        appLauncher.selectNext()
+                        event.accepted = true
+                        return
+                    }
+
+                    if (event.key === Qt.Key_P && event.modifiers & Qt.ControlModifier) {
+                        appLauncher.selectPrevious()
+                        event.accepted = true
+                        return
+                    }
+
+                    if (event.key === Qt.Key_J && event.modifiers & Qt.ControlModifier) {
+                        appLauncher.selectNext()
+                        event.accepted = true
+                        return
+                    }
+
+                    if (event.key === Qt.Key_K && event.modifiers & Qt.ControlModifier) {
+                        appLauncher.selectPrevious()
+                        event.accepted = true
+                        return
+                    }
+
+                    if (appLauncher.viewMode === "grid") {
+                        if (event.key === Qt.Key_L && event.modifiers & Qt.ControlModifier) {
+                            appLauncher.selectNextInRow()
+                            event.accepted = true
+                            return
+                        }
+
+                        if (event.key === Qt.Key_H && event.modifiers & Qt.ControlModifier) {
+                            appLauncher.selectPreviousInRow()
+                            event.accepted = true
+                            return
+                        }
+                    }
+
                     if (!searchField.activeFocus && event.text && /[a-zA-Z0-9\s]/.test(event.text)) {
                         searchField.forceActiveFocus()
                         searchField.insertText(event.text)

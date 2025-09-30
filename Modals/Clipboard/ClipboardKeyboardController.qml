@@ -74,6 +74,42 @@ QtObject {
                 selectPrevious()
                 event.accepted = true
             }
+        } else if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
+            if (!modal.keyboardNavigationActive) {
+                modal.keyboardNavigationActive = true
+                modal.selectedIndex = 0
+            } else {
+                selectNext()
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_P && event.modifiers & Qt.ControlModifier) {
+            if (!modal.keyboardNavigationActive) {
+                modal.keyboardNavigationActive = true
+                modal.selectedIndex = 0
+            } else if (modal.selectedIndex === 0) {
+                modal.keyboardNavigationActive = false
+            } else {
+                selectPrevious()
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_J && event.modifiers & Qt.ControlModifier) {
+            if (!modal.keyboardNavigationActive) {
+                modal.keyboardNavigationActive = true
+                modal.selectedIndex = 0
+            } else {
+                selectNext()
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_K && event.modifiers & Qt.ControlModifier) {
+            if (!modal.keyboardNavigationActive) {
+                modal.keyboardNavigationActive = true
+                modal.selectedIndex = 0
+            } else if (modal.selectedIndex === 0) {
+                modal.keyboardNavigationActive = false
+            } else {
+                selectPrevious()
+            }
+            event.accepted = true
         } else if (event.key === Qt.Key_Delete && (event.modifiers & Qt.ShiftModifier)) {
             modal.clearAll()
             modal.hide()
