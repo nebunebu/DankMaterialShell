@@ -64,11 +64,6 @@ Rectangle {
             if (root.parentScreen && !(popupTarget && popupTarget.shouldBeVisible)) {
                 tooltipLoader.active = true
                 if (tooltipLoader.item) {
-                const globalPos = mapToGlobal(0, 0)
-                const currentScreen = parentScreen || Screen
-                    const screenY = currentScreen ? currentScreen.y : 0
-                    const relativeY = globalPos.y - screenY
-
                     let tooltipText = ""
                     if (!VpnService.connected) {
                         tooltipText = "VPN Disconnected"
@@ -82,11 +77,17 @@ Rectangle {
                     }
 
                     if (root.isVertical) {
-                        const tooltipX = root.axis?.edge === "left" ? (Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS) : (currentScreen.width - Theme.barHeight - SettingsData.dankBarSpacing - Theme.spacingXS)
+                        const globalPos = mapToGlobal(width / 2, height / 2)
+                        const screenX = root.parentScreen ? root.parentScreen.x : 0
+                        const screenY = root.parentScreen ? root.parentScreen.y : 0
+                        const relativeY = globalPos.y - screenY
+                        const tooltipX = root.axis?.edge === "left" ? (Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS) : (root.parentScreen.width - Theme.barHeight - SettingsData.dankBarSpacing - Theme.spacingXS)
                         const isLeft = root.axis?.edge === "left"
-                        tooltipLoader.item.show(tooltipText, screenX + tooltipX, relativeY, currentScreen, isLeft, !isLeft)
+                        tooltipLoader.item.show(tooltipText, screenX + tooltipX, relativeY, root.parentScreen, isLeft, !isLeft)
                     } else {
-                        tooltipLoader.item.show(tooltipText, relativeX, screenY + root.barThickness + SettingsData.dankBarSpacing + Theme.spacingXS, currentScreen, false, false)
+                        const globalPos = mapToGlobal(width / 2, height)
+                        const tooltipY = Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS
+                        tooltipLoader.item.show(tooltipText, globalPos.x, tooltipY, root.parentScreen, false, false)
                     }
                 }
             }
