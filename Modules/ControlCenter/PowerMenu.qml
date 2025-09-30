@@ -47,6 +47,7 @@ PanelWindow {
         border.width: 0
         opacity: powerMenuVisible ? 1 : 0
         scale: powerMenuVisible ? 1 : 0.85
+        antialiasing: true
 
         MouseArea {
 

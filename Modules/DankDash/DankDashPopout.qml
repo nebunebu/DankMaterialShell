@@ -63,6 +63,7 @@ DankPopout {
             implicitHeight: contentColumn.height + Theme.spacingM * 2
             color: Theme.surfaceContainer
             radius: Theme.cornerRadius
+            antialiasing: true
             focus: true
 
             Component.onCompleted: {
@@ -93,6 +94,7 @@ DankPopout {
                 anchors.fill: parent
                 color: Qt.rgba(Theme.surfaceTint.r, Theme.surfaceTint.g, Theme.surfaceTint.b, 0.04)
                 radius: parent.radius
+                antialiasing: true
 
                 SequentialAnimation on opacity {
                     running: root.shouldBeVisible
