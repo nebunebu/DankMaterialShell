@@ -235,11 +235,22 @@ Singleton {
     property color shadowMedium: Qt.rgba(0, 0, 0, 0.08)
     property color shadowStrong: Qt.rgba(0, 0, 0, 0.3)
 
-    property int shorterDuration: 100
-    property int shortDuration: 150
-    property int mediumDuration: 300
-    property int longDuration: 500
-    property int extraLongDuration: 1000
+    readonly property var animationDurations: [
+        { shorter: 0, short: 0, medium: 0, long: 0, extraLong: 0 },
+        { shorter: 50, short: 75, medium: 150, long: 250, extraLong: 500 },
+        { shorter: 100, short: 150, medium: 300, long: 500, extraLong: 1000 },
+        { shorter: 150, short: 225, medium: 450, long: 750, extraLong: 1500 },
+        { shorter: 200, short: 300, medium: 600, long: 1000, extraLong: 2000 }
+    ]
+
+    readonly property int currentAnimationSpeed: typeof SettingsData !== "undefined" ? SettingsData.animationSpeed : SettingsData.AnimationSpeed.Short
+    readonly property var currentDurations: animationDurations[currentAnimationSpeed] || animationDurations[SettingsData.AnimationSpeed.Short]
+
+    property int shorterDuration: currentDurations.shorter
+    property int shortDuration: currentDurations.short
+    property int mediumDuration: currentDurations.medium
+    property int longDuration: currentDurations.long
+    property int extraLongDuration: currentDurations.extraLong
     property int standardEasing: Easing.OutCubic
     property int emphasizedEasing: Easing.OutQuart
 

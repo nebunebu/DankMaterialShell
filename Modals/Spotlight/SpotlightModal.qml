@@ -32,11 +32,7 @@ DankModal {
     function hide() {
         spotlightOpen = false
         close()
-        if (contentLoader.item && contentLoader.item.appLauncher) {
-            contentLoader.item.appLauncher.searchQuery = ""
-            contentLoader.item.appLauncher.selectedIndex = 0
-            contentLoader.item.appLauncher.setCategory("All")
-        }
+        cleanupTimer.restart()
     }
 
     function toggle() {
@@ -72,6 +68,19 @@ DankModal {
                              return hide()
                          }
     content: spotlightContent
+
+    Timer {
+        id: cleanupTimer
+
+        interval: animationDuration + 50
+        onTriggered: {
+            if (contentLoader.item && contentLoader.item.appLauncher) {
+                contentLoader.item.appLauncher.searchQuery = ""
+                contentLoader.item.appLauncher.selectedIndex = 0
+                contentLoader.item.appLauncher.setCategory("All")
+            }
+        }
+    }
 
     Connections {
         function onCloseAllModalsExcept(excludedModal) {

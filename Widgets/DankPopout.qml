@@ -18,7 +18,7 @@ PanelWindow {
     property real triggerWidth: 40
     property string triggerSection: ""
     property string positioning: "center"
-    property int animationDuration: Theme.mediumDuration
+    property int animationDuration: Theme.shortDuration
     property var animationEasing: Theme.emphasizedEasing
     property bool shouldBeVisible: false
 

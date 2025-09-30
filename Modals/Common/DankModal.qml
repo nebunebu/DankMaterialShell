@@ -22,7 +22,7 @@ PanelWindow {
     property bool closeOnEscapeKey: true
     property bool closeOnBackgroundClick: true
     property string animationType: "scale"
-    property int animationDuration: Theme.shorterDuration
+    property int animationDuration: Theme.shortDuration
     property var animationEasing: Theme.emphasizedEasing
     property color backgroundColor: Theme.surfaceContainer
     property color borderColor: Theme.outlineMedium
@@ -91,7 +91,7 @@ PanelWindow {
     Timer {
         id: closeTimer
 
-        interval: animationDuration + 50
+        interval: animationDuration + 100
         onTriggered: {
             visible = false
         }

@@ -1702,6 +1702,77 @@ Item {
                 }
             }
 
+            // Animation Settings
+            StyledRect {
+                width: parent.width
+                height: animationSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: animationSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "animation"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: "Animations"
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingS
+
+                        StyledText {
+                            text: "Animation Speed"
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceText
+                            font.weight: Font.Medium
+                        }
+
+                        StyledText {
+                            text: "Control the speed of animations throughout the interface"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                            wrapMode: Text.WordWrap
+                            width: parent.width
+                        }
+
+                        DankButtonGroup {
+                            id: animationSpeedGroup
+                            width: parent.width
+                            model: ["None", "Shortest", "Short", "Medium", "Long"]
+                            selectionMode: "single"
+                            currentIndex: SettingsData.animationSpeed
+                            onSelectionChanged: (index, selected) => {
+                                if (selected) {
+                                    SettingsData.setAnimationSpeed(index)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             // Lock Screen Settings
             StyledRect {
                 width: parent.width

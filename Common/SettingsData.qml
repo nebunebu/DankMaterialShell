@@ -19,6 +19,14 @@ Singleton {
         Right
     }
 
+    enum AnimationSpeed {
+        None,
+        Shortest,
+        Short,
+        Medium,
+        Long
+    }
+
     // Theme settings
     property string currentThemeName: "blue"
     property string customThemeFile: ""
@@ -151,6 +159,7 @@ Singleton {
     property int notificationTimeoutCritical: 0
     property int notificationPopupPosition: SettingsData.Position.Top
     property var screenPreferences: ({})
+    property int animationSpeed: SettingsData.AnimationSpeed.Short
     readonly property string defaultFontFamily: "Inter Variable"
     readonly property string defaultMonoFontFamily: "Fira Code"
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
@@ -350,6 +359,7 @@ Singleton {
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
+                animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 applyStoredTheme()
                 detectAvailableIconThemes()
                 detectQtTools()
@@ -468,7 +478,8 @@ Singleton {
                                                 "notificationTimeoutNormal": notificationTimeoutNormal,
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
                                                 "notificationPopupPosition": notificationPopupPosition,
-                                                "screenPreferences": screenPreferences
+                                                "screenPreferences": screenPreferences,
+                                                "animationSpeed": animationSpeed
                                             }, null, 2))
     }
 
@@ -1227,6 +1238,11 @@ Singleton {
             return Quickshell.screens
         }
         return Quickshell.screens.filter(screen => prefs.includes(screen.name))
+    }
+
+    function setAnimationSpeed(speed) {
+        animationSpeed = speed
+        saveSettings()
     }
 
     function _shq(s) {
