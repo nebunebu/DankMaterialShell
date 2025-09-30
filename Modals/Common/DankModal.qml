@@ -34,6 +34,7 @@ PanelWindow {
     property bool shouldHaveFocus: shouldBeVisible
     property bool allowFocusOverride: false
     property bool allowStacking: false
+    property bool keepContentLoaded: false
 
     signal opened
     signal dialogClosed
@@ -171,7 +172,7 @@ PanelWindow {
             id: contentLoader
 
             anchors.fill: parent
-            active: root.shouldBeVisible || root.visible
+            active: root.keepContentLoaded || root.shouldBeVisible || root.visible
             asynchronous: false
         }
 

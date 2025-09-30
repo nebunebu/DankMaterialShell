@@ -55,6 +55,7 @@ DankModal {
     borderColor: Theme.outlineMedium
     borderWidth: 1
     enableShadow: true
+    keepContentLoaded: true
     onVisibleChanged: () => {
                           if (visible && !spotlightOpen) {
                               show()
