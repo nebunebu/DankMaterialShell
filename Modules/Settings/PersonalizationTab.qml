@@ -391,6 +391,63 @@ Item {
                         }
                     }
 
+                    // Per-Mode Wallpaper Section - Full Width
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                        visible: SessionData.wallpaperPath !== ""
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingM
+                        visible: SessionData.wallpaperPath !== ""
+
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingM
+
+                            DankIcon {
+                                name: "brightness_6"
+                                size: Theme.iconSize
+                                color: SessionData.perModeWallpaper ? Theme.primary : Theme.surfaceVariantText
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Column {
+                                width: parent.width - Theme.iconSize - Theme.spacingM - perModeToggle.width - Theme.spacingM
+                                spacing: Theme.spacingXS
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                StyledText {
+                                    text: "Per-Mode Wallpapers"
+                                    font.pixelSize: Theme.fontSizeLarge
+                                    font.weight: Font.Medium
+                                    color: Theme.surfaceText
+                                }
+
+                                StyledText {
+                                    text: "Set different wallpapers for light and dark mode"
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceVariantText
+                                    width: parent.width
+                                }
+                            }
+
+                            DankToggle {
+                                id: perModeToggle
+
+                                anchors.verticalCenter: parent.verticalCenter
+                                checked: SessionData.perModeWallpaper
+                                onToggled: toggled => {
+                                               return SessionData.setPerModeWallpaper(toggled)
+                                           }
+                            }
+                        }
+                    }
+
                     // Per-Monitor Wallpaper Section - Full Width
                     Rectangle {
                         width: parent.width
@@ -482,19 +539,18 @@ Item {
                         }
                     }
 
-                    // Wallpaper Cycling Section - Full Width
                     Rectangle {
                         width: parent.width
                         height: 1
                         color: Theme.outline
                         opacity: 0.2
-                        visible: SessionData.wallpaperPath !== "" || SessionData.perMonitorWallpaper
+                        visible: (SessionData.wallpaperPath !== "" || SessionData.perMonitorWallpaper) && !SessionData.perModeWallpaper
                     }
 
                     Column {
                         width: parent.width
                         spacing: Theme.spacingM
-                        visible: SessionData.wallpaperPath !== "" || SessionData.perMonitorWallpaper
+                        visible: (SessionData.wallpaperPath !== "" || SessionData.perMonitorWallpaper) && !SessionData.perModeWallpaper
 
                         Row {
                             width: parent.width
@@ -551,7 +607,6 @@ Item {
                             }
                         }
 
-                        // Cycling mode and settings
                         Column {
                             width: parent.width
                             spacing: Theme.spacingS

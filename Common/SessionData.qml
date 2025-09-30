@@ -18,6 +18,11 @@ Singleton {
     property string profileLastPath: ""
     property bool perMonitorWallpaper: false
     property var monitorWallpapers: ({})
+    property bool perModeWallpaper: false
+    property string wallpaperPathLight: ""
+    property string wallpaperPathDark: ""
+    property var monitorWallpapersLight: ({})
+    property var monitorWallpapersDark: ({})
     property bool doNotDisturb: false
     property bool nightModeEnabled: false
     property int nightModeTemperature: 4500
@@ -83,6 +88,11 @@ Singleton {
                 profileLastPath = settings.profileLastPath !== undefined ? settings.profileLastPath : ""
                 perMonitorWallpaper = settings.perMonitorWallpaper !== undefined ? settings.perMonitorWallpaper : false
                 monitorWallpapers = settings.monitorWallpapers !== undefined ? settings.monitorWallpapers : {}
+                perModeWallpaper = settings.perModeWallpaper !== undefined ? settings.perModeWallpaper : false
+                wallpaperPathLight = settings.wallpaperPathLight !== undefined ? settings.wallpaperPathLight : ""
+                wallpaperPathDark = settings.wallpaperPathDark !== undefined ? settings.wallpaperPathDark : ""
+                monitorWallpapersLight = settings.monitorWallpapersLight !== undefined ? settings.monitorWallpapersLight : {}
+                monitorWallpapersDark = settings.monitorWallpapersDark !== undefined ? settings.monitorWallpapersDark : {}
                 doNotDisturb = settings.doNotDisturb !== undefined ? settings.doNotDisturb : false
                 nightModeEnabled = settings.nightModeEnabled !== undefined ? settings.nightModeEnabled : false
                 nightModeTemperature = settings.nightModeTemperature !== undefined ? settings.nightModeTemperature : 4500
@@ -151,6 +161,11 @@ Singleton {
                                                 "profileLastPath": profileLastPath,
                                                 "perMonitorWallpaper": perMonitorWallpaper,
                                                 "monitorWallpapers": monitorWallpapers,
+                                                "perModeWallpaper": perModeWallpaper,
+                                                "wallpaperPathLight": wallpaperPathLight,
+                                                "wallpaperPathDark": wallpaperPathDark,
+                                                "monitorWallpapersLight": monitorWallpapersLight,
+                                                "monitorWallpapersDark": monitorWallpapersDark,
                                                 "doNotDisturb": doNotDisturb,
                                                 "nightModeEnabled": nightModeEnabled,
                                                 "nightModeTemperature": nightModeTemperature,
@@ -191,7 +206,19 @@ Singleton {
 
     function setLightMode(lightMode) {
         isLightMode = lightMode
+        syncWallpaperForCurrentMode()
         saveSettings()
+    }
+
+    function syncWallpaperForCurrentMode() {
+        if (!perModeWallpaper) return
+
+        if (perMonitorWallpaper) {
+            monitorWallpapers = isLightMode ? Object.assign({}, monitorWallpapersLight) : Object.assign({}, monitorWallpapersDark)
+            return
+        }
+
+        wallpaperPath = isLightMode ? wallpaperPathLight : wallpaperPathDark
     }
 
     function setDoNotDisturb(enabled) {
@@ -264,6 +291,13 @@ Singleton {
 
     function setWallpaper(imagePath) {
         wallpaperPath = imagePath
+        if (perModeWallpaper) {
+            if (isLightMode) {
+                wallpaperPathLight = imagePath
+            } else {
+                wallpaperPathDark = imagePath
+            }
+        }
         saveSettings()
 
         if (typeof Theme !== "undefined") {
@@ -273,6 +307,13 @@ Singleton {
 
     function setWallpaperColor(color) {
         wallpaperPath = color
+        if (perModeWallpaper) {
+            if (isLightMode) {
+                wallpaperPathLight = color
+            } else {
+                wallpaperPathDark = color
+            }
+        }
         saveSettings()
 
         if (typeof Theme !== "undefined") {
@@ -420,9 +461,51 @@ Singleton {
 
     function setPerMonitorWallpaper(enabled) {
         perMonitorWallpaper = enabled
+        if (enabled && perModeWallpaper) {
+            syncWallpaperForCurrentMode()
+        }
         saveSettings()
 
-        // Refresh dynamic theming when per-monitor mode changes
+        if (typeof Theme !== "undefined") {
+            Theme.generateSystemThemesFromCurrentTheme()
+        }
+    }
+
+    function setPerModeWallpaper(enabled) {
+        if (enabled && wallpaperCyclingEnabled) {
+            setWallpaperCyclingEnabled(false)
+        }
+        if (enabled && perMonitorWallpaper) {
+            var monitorCyclingAny = false
+            for (var key in monitorCyclingSettings) {
+                if (monitorCyclingSettings[key].enabled) {
+                    monitorCyclingAny = true
+                    break
+                }
+            }
+            if (monitorCyclingAny) {
+                var newSettings = Object.assign({}, monitorCyclingSettings)
+                for (var screenName in newSettings) {
+                    newSettings[screenName].enabled = false
+                }
+                monitorCyclingSettings = newSettings
+            }
+        }
+
+        perModeWallpaper = enabled
+        if (enabled) {
+            if (perMonitorWallpaper) {
+                monitorWallpapersLight = Object.assign({}, monitorWallpapers)
+                monitorWallpapersDark = Object.assign({}, monitorWallpapers)
+            } else {
+                wallpaperPathLight = wallpaperPath
+                wallpaperPathDark = wallpaperPath
+            }
+        } else {
+            syncWallpaperForCurrentMode()
+        }
+        saveSettings()
+
         if (typeof Theme !== "undefined") {
             Theme.generateSystemThemesFromCurrentTheme()
         }
@@ -436,9 +519,29 @@ Singleton {
             delete newMonitorWallpapers[screenName]
         }
         monitorWallpapers = newMonitorWallpapers
+
+        if (perModeWallpaper) {
+            if (isLightMode) {
+                var newLight = Object.assign({}, monitorWallpapersLight)
+                if (path && path !== "") {
+                    newLight[screenName] = path
+                } else {
+                    delete newLight[screenName]
+                }
+                monitorWallpapersLight = newLight
+            } else {
+                var newDark = Object.assign({}, monitorWallpapersDark)
+                if (path && path !== "") {
+                    newDark[screenName] = path
+                } else {
+                    delete newDark[screenName]
+                }
+                monitorWallpapersDark = newDark
+            }
+        }
+
         saveSettings()
 
-        // Trigger dynamic theming if this is the first monitor and dynamic theming is enabled
         if (typeof Theme !== "undefined" && typeof Quickshell !== "undefined") {
             var screens = Quickshell.screens
             if (screens.length > 0 && screenName === screens[0].name) {
