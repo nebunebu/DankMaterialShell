@@ -30,7 +30,9 @@ Row {
             cursorShape: Qt.PointingHandCursor
             onClicked: {
                 if (defaultSink) {
+                    AudioService.suppressOSD = true
                     defaultSink.audio.muted = !defaultSink.audio.muted
+                    AudioService.suppressOSD = false
                 }
             }
         }
@@ -67,6 +69,9 @@ Row {
         valueOverride: actualVolumePercent
         thumbOutlineColor: Theme.surfaceContainer
         trackColor: root.sliderTrackColor.a > 0 ? root.sliderTrackColor : Theme.surfaceContainerHigh
+        onIsDraggingChanged: {
+            AudioService.suppressOSD = isDragging
+        }
         onSliderValueChanged: function(newValue) {
             if (defaultSink) {
                 defaultSink.audio.volume = newValue / 100.0
