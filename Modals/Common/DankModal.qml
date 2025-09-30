@@ -172,7 +172,7 @@ PanelWindow {
             id: contentLoader
 
             anchors.fill: parent
-            active: root.shouldBeVisible
+            active: root.shouldBeVisible || root.visible
             asynchronous: false
         }
 
@@ -207,7 +207,7 @@ PanelWindow {
 
         objectName: "modalFocusScope"
         anchors.fill: parent
-        visible: root.shouldBeVisible
+        visible: root.shouldBeVisible || root.visible
         focus: root.shouldBeVisible
         Keys.onEscapePressed: event => {
                                   if (root.closeOnEscapeKey && shouldHaveFocus) {
