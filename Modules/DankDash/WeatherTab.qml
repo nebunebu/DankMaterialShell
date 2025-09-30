@@ -218,7 +218,6 @@ Item {
             width: parent.width
             height: 1
             color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.1)
-            antialiasing: true
         }
 
         GridLayout {
@@ -233,7 +232,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -245,7 +243,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -282,7 +279,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -294,7 +290,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -331,7 +326,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -343,7 +337,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -380,7 +373,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -392,7 +384,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -429,7 +420,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -441,7 +431,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -478,7 +467,6 @@ Item {
                 Layout.fillHeight: true
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                antialiasing: true
 
                 Column {
                     anchors.centerIn: parent
@@ -490,7 +478,6 @@ Item {
                         radius: 16
                         color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.1)
                         anchors.horizontalCenter: parent.horizontalCenter
-                        antialiasing: true
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -527,7 +514,6 @@ Item {
             width: parent.width
             height: 1
             color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.1)
-            antialiasing: true
         }
 
         Column {
@@ -554,8 +540,7 @@ Item {
                         width: (parent.width - Theme.spacingXS * 6) / 7
                         height: parent.height
                         radius: Theme.cornerRadius
-                        antialiasing: true
-
+                        
                         property var dayDate: {
                             const date = new Date()
                             date.setDate(date.getDate() + index)

@@ -271,7 +271,6 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: Theme.cornerRadius
-        antialiasing: true
         opacity: 1.0
         gradient: Gradient {
             GradientStop {
@@ -360,7 +359,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.6)
                 border.width: 2
                 radius: Theme.cornerRadius * 2
-                antialiasing: true
 
                 layer.enabled: true
                 layer.effect: MultiEffect {
@@ -433,11 +431,10 @@ Item {
                             delegate: Rectangle {
                                 required property var modelData
                                 required property int index
-
+                                
                                 width: parent.width
                                 height: 48
                                 radius: Theme.cornerRadius
-                                antialiasing: true
                                 color: deviceMouseAreaLeft.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.surfaceContainerHigh
                                 border.color: modelData === AudioService.sink ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
                                 border.width: modelData === AudioService.sink ? 2 : 1
@@ -520,7 +517,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.6)
                 border.width: 2
                 radius: Theme.cornerRadius * 2
-                antialiasing: true
 
                 layer.enabled: true
                 layer.effect: MultiEffect {
@@ -597,7 +593,6 @@ Item {
                                 width: parent.width
                                 height: 48
                                 radius: Theme.cornerRadius
-                                antialiasing: true
                                 color: playerMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.surfaceContainerHigh
                                 border.color: modelData === activePlayer ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
                                 border.width: modelData === activePlayer ? 2 : 1
@@ -843,7 +838,6 @@ Item {
                                 height: 40
                                 radius: 20
                                 anchors.centerIn: parent
-                                antialiasing: true
                                 color: shuffleArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
                                 DankIcon {
@@ -885,7 +879,6 @@ Item {
                                 height: 40
                                 radius: 20
                                 anchors.centerIn: parent
-                                antialiasing: true
                                 color: prevBtnArea.containsMouse ? Theme.surfaceContainerHigh : "transparent"
 
                                 DankIcon {
@@ -925,7 +918,6 @@ Item {
                                 height: 50
                                 radius: 25
                                 anchors.centerIn: parent
-                                antialiasing: true
                                 color: Theme.primary
 
                                 DankIcon {
@@ -965,7 +957,6 @@ Item {
                                 height: 40
                                 radius: 20
                                 anchors.centerIn: parent
-                                antialiasing: true
                                 color: nextBtnArea.containsMouse ? Theme.surfaceContainerHigh : "transparent"
 
                                 DankIcon {
@@ -996,7 +987,6 @@ Item {
                                 height: 40
                                 radius: 20
                                 anchors.centerIn: parent
-                                antialiasing: true
                                 color: repeatArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
                                 DankIcon {
@@ -1057,7 +1047,6 @@ Item {
             radius: 20
             x: parent.width - 40 - Theme.spacingM
             y: 185
-            antialiasing: true
             color: playerSelectorArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
             border.width: 1
@@ -1111,7 +1100,6 @@ Item {
             radius: 20
             x: parent.width - 40 - Theme.spacingM
             y: 130
-            antialiasing: true
             color: volumeButtonArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
             border.width: 1
@@ -1166,8 +1154,7 @@ Item {
             height: 40
             radius: 20
             x: parent.width - 40 - Theme.spacingM
-            y: 240
-            antialiasing: true
+            y: 240  
             color: audioDevicesArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
             border.width: 1
@@ -1229,7 +1216,6 @@ Item {
 
         background: Rectangle {
             radius: Theme.cornerRadius * 2
-            antialiasing: true
             color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.95)
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
             border.width: 1
@@ -1290,7 +1276,6 @@ Item {
                     anchors.centerIn: parent
                     color: Theme.surfaceContainerHigh
                     radius: Theme.cornerRadius
-                    antialiasing: true
                 }
 
                 Rectangle {
@@ -1304,7 +1289,6 @@ Item {
                     bottomRightRadius: Theme.cornerRadius
                     topLeftRadius: 0
                     topRightRadius: 0
-                    antialiasing: true
                 }
 
                 Rectangle {
@@ -1312,7 +1296,6 @@ Item {
                     width: parent.width + 8
                     height: 8
                     radius: Theme.cornerRadius
-                    antialiasing: true
                     y: {
                         const ratio = defaultSink ? Math.min(1.0, defaultSink.audio.volume) : 0
                         const travel = parent.height - height
@@ -1326,7 +1309,6 @@ Item {
                     Rectangle {
                         anchors.fill: parent
                         radius: Theme.cornerRadius
-                        antialiasing: true
                         color: Theme.onPrimary
                         opacity: volumeSliderArea.pressed ? 0.16 : (volumeSliderArea.containsMouse ? 0.08 : 0)
                         visible: opacity > 0
@@ -1338,7 +1320,6 @@ Item {
                         width: 0
                         height: 0
                         radius: width / 2
-                        antialiasing: true
                         color: Theme.onPrimary
                         opacity: 0
 
