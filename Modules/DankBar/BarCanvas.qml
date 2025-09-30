@@ -7,11 +7,7 @@ Item {
     required property var barWindow
     required property var axis
 
-    readonly property real correctWidth: barWindow.isVertical ? barWindow.implicitWidth : parent.width
-    readonly property real correctHeight: barWindow.isVertical ? parent.height : barWindow.implicitHeight
-
-    width: correctWidth
-    height: correctHeight
+    anchors.fill: parent
 
     anchors.left: parent.left
     anchors.top: parent.top
@@ -27,8 +23,8 @@ Item {
         renderTarget: Canvas.FramebufferObject
         renderStrategy: Canvas.Cooperative
 
-        readonly property real correctWidth: barWindow.isVertical ? barWindow.implicitWidth : parent.width
-        readonly property real correctHeight: barWindow.isVertical ? parent.height : barWindow.implicitHeight
+        readonly property real correctWidth: root.width
+        readonly property real correctHeight: root.height
         canvasSize: Qt.size(barWindow.px(correctWidth), barWindow.px(correctHeight))
 
         property real wing: SettingsData.dankBarGothCornersEnabled ? barWindow._wingR : 0
@@ -122,8 +118,8 @@ Item {
         renderTarget: Canvas.FramebufferObject
         renderStrategy: Canvas.Cooperative
 
-        readonly property real correctWidth: barWindow.isVertical ? barWindow.implicitWidth : parent.width
-        readonly property real correctHeight: barWindow.isVertical ? parent.height : barWindow.implicitHeight
+        readonly property real correctWidth: root.width
+        readonly property real correctHeight: root.height
         canvasSize: Qt.size(barWindow.px(correctWidth), barWindow.px(correctHeight))
 
         property real wing: SettingsData.dankBarGothCornersEnabled ? barWindow._wingR : 0
