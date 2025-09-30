@@ -172,7 +172,7 @@ PanelWindow {
             id: contentLoader
 
             anchors.fill: parent
-            active: root.visible
+            active: root.shouldBeVisible
             asynchronous: false
         }
 
@@ -207,8 +207,8 @@ PanelWindow {
 
         objectName: "modalFocusScope"
         anchors.fill: parent
-        visible: root.visible // Only active when the modal is visible
-        focus: root.visible
+        visible: root.shouldBeVisible
+        focus: root.shouldBeVisible
         Keys.onEscapePressed: event => {
                                   if (root.closeOnEscapeKey && shouldHaveFocus) {
                                       root.close()
@@ -223,7 +223,7 @@ PanelWindow {
 
         Connections {
             function onShouldHaveFocusChanged() {
-                if (shouldHaveFocus && visible) {
+                if (shouldHaveFocus && shouldBeVisible) {
                     Qt.callLater(() => focusScope.forceActiveFocus())
                 }
             }
