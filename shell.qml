@@ -84,7 +84,6 @@ ShellRoot {
         }
 
         onCurrentPositionChanged: {
-            console.log("DEBUG: Dock position changed to:", currentPosition, "- recreating dock")
             const comp = sourceComponent
             sourceComponent = null
             Qt.callLater(() => {

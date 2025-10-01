@@ -991,13 +991,23 @@ Singleton {
 
     function setShowDock(enabled) {
         showDock = enabled
-        if (enabled && dankBarPosition === SettingsData.Position.Top) {
-            setDockPosition(SettingsData.Position.Bottom)
-            return
-        }
-        if (enabled && dankBarPosition === SettingsData.Position.Top) {
-            setDockPosition(SettingsData.Position.Bottom)
-            return
+        if (enabled && dockPosition === dankBarPosition) {
+            if (dankBarPosition === SettingsData.Position.Top) {
+                setDockPosition(SettingsData.Position.Bottom)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Bottom) {
+                setDockPosition(SettingsData.Position.Top)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Left) {
+                setDockPosition(SettingsData.Position.Right)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Right) {
+                setDockPosition(SettingsData.Position.Left)
+                return
+            }
         }
         saveSettings()
     }
@@ -1144,12 +1154,20 @@ Singleton {
 
     function setDankBarPosition(position) {
         dankBarPosition = position
-        if (position === SettingsData.Position.Bottom && showDock) {
+        if (position === SettingsData.Position.Bottom && dockPosition === SettingsData.Position.Bottom && showDock) {
             setDockPosition(SettingsData.Position.Top)
             return
         }
-        if (position === SettingsData.Position.Top && showDock) {
+        if (position === SettingsData.Position.Top && dockPosition === SettingsData.Position.Top && showDock) {
             setDockPosition(SettingsData.Position.Bottom)
+            return
+        }
+        if (position === SettingsData.Position.Left && dockPosition === SettingsData.Position.Left && showDock) {
+            setDockPosition(SettingsData.Position.Right)
+            return
+        }
+        if (position === SettingsData.Position.Right && dockPosition === SettingsData.Position.Right && showDock) {
+            setDockPosition(SettingsData.Position.Left)
             return
         }
         saveSettings()
@@ -1162,6 +1180,12 @@ Singleton {
         }
         if (position === SettingsData.Position.Top && dankBarPosition === SettingsData.Position.Top && showDock) {
             setDankBarPosition(SettingsData.Position.Bottom)
+        }
+        if (position === SettingsData.Position.Left && dankBarPosition === SettingsData.Position.Left && showDock) {
+            setDankBarPosition(SettingsData.Position.Right)
+        }
+        if (position === SettingsData.Position.Right && dankBarPosition === SettingsData.Position.Right && showDock) {
+            setDankBarPosition(SettingsData.Position.Left)
         }
         saveSettings()
         Qt.callLater(() => forceDockLayoutRefresh())
