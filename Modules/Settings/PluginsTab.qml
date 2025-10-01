@@ -32,14 +32,12 @@ Item {
             width: parent.width
             spacing: Theme.spacingXL
 
-            // Header Section
             StyledRect {
                 width: parent.width
                 height: headerColumn.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
-                border.width: 1
+                border.width: 0
 
                 Column {
                     id: headerColumn
@@ -54,7 +52,7 @@ Item {
 
                         DankIcon {
                             name: "extension"
-                            size: Theme.iconSizeLarge
+                            size: Theme.iconSize
                             color: Theme.primary
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -65,15 +63,15 @@ Item {
 
                             StyledText {
                                 text: "Plugin Management"
-                                font.pixelSize: Theme.fontSizeXLarge
-                                color: "#FFFFFF"
+                                font.pixelSize: Theme.fontSizeLarge
+                                color: Theme.surfaceText
                                 font.weight: Font.Medium
                             }
 
                             StyledText {
                                 text: "Manage and configure plugins for extending DMS functionality"
                                 font.pixelSize: Theme.fontSizeSmall
-                                color: "#CCCCCC"
+                                color: Theme.surfaceVariantText
                             }
                         }
                     }
@@ -82,42 +80,18 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingM
 
-                        Button {
+                        DankButton {
                             text: "Scan for Plugins"
-                            background: Rectangle {
-                                color: parent.hovered ? "#4A90E2" : "#3A3A3A"
-                                radius: Theme.cornerRadius
-                                border.color: "#666666"
-                                border.width: 1
-                            }
-                            contentItem: Text {
-                                text: parent.text
-                                color: "#FFFFFF"
-                                font.pixelSize: Theme.fontSizeMedium
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                            }
+                            iconName: "refresh"
                             onClicked: {
                                 PluginService.scanPlugins()
                                 ToastService.showInfo("Scanning for plugins...")
                             }
                         }
 
-                        Button {
+                        DankButton {
                             text: "Create Plugin Directory"
-                            background: Rectangle {
-                                color: parent.hovered ? "#4A90E2" : "#3A3A3A"
-                                radius: Theme.cornerRadius
-                                border.color: "#666666"
-                                border.width: 1
-                            }
-                            contentItem: Text {
-                                text: parent.text
-                                color: "#FFFFFF"
-                                font.pixelSize: Theme.fontSizeMedium
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                            }
+                            iconName: "create_new_folder"
                             onClicked: {
                                 PluginService.createPluginDirectory()
                                 ToastService.showInfo("Created plugin directory: " + PluginService.pluginDirectory)
@@ -127,14 +101,12 @@ Item {
                 }
             }
 
-            // Plugin Directory Info
             StyledRect {
                 width: parent.width
                 height: directoryColumn.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
-                border.width: 1
+                border.width: 0
 
                 Column {
                     id: directoryColumn
@@ -146,35 +118,33 @@ Item {
                     StyledText {
                         text: "Plugin Directory"
                         font.pixelSize: Theme.fontSizeLarge
-                        color: "#FFFFFF"
+                        color: Theme.surfaceText
                         font.weight: Font.Medium
                     }
 
                     StyledText {
                         text: PluginService.pluginDirectory
                         font.pixelSize: Theme.fontSizeSmall
-                        color: "#CCCCCC"
+                        color: Theme.surfaceVariantText
                         font.family: "monospace"
                     }
 
                     StyledText {
                         text: "Place plugin directories here. Each plugin should have a plugin.json manifest file."
                         font.pixelSize: Theme.fontSizeSmall
-                        color: "#CCCCCC"
+                        color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
                         width: parent.width
                     }
                 }
             }
 
-            // Available Plugins Section
             StyledRect {
                 width: parent.width
                 height: Math.max(200, availableColumn.implicitHeight + Theme.spacingL * 2)
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
-                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
-                border.width: 1
+                border.width: 0
 
                 Column {
                     id: availableColumn
@@ -186,7 +156,7 @@ Item {
                     StyledText {
                         text: "Available Plugins"
                         font.pixelSize: Theme.fontSizeLarge
-                        color: "#FFFFFF"
+                        color: Theme.surfaceText
                         font.weight: Font.Medium
                     }
 
@@ -208,7 +178,6 @@ Item {
                                 height: pluginItemColumn.implicitHeight + Theme.spacingM * 2 + settingsContainer.height
                                 radius: Theme.cornerRadius
 
-                                // Store plugin data in properties to avoid scope issues
                                 property var pluginData: modelData
                                 property string pluginId: pluginData ? pluginData.id : ""
                                 property string pluginName: pluginData ? (pluginData.name || pluginData.id) : ""
@@ -225,9 +194,8 @@ Item {
                                     console.log("Plugin", pluginId, "isExpanded changed to:", isExpanded)
                                 }
 
-                                color: pluginMouseArea.containsMouse ? Theme.surfacePressed : (isExpanded ? Theme.surfaceContainerHigh : Theme.surfaceContainer)
-                                border.color: isExpanded ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
-                                border.width: isExpanded ? 2 : 1
+                                color: pluginMouseArea.containsMouse ? Theme.surfacePressed : (isExpanded ? Theme.surfaceContainerHighest : Theme.surfaceContainer)
+                                border.width: 0
 
                                 Behavior on height {
                                     NumberAnimation {
@@ -237,13 +205,6 @@ Item {
                                 }
 
                                 Behavior on color {
-                                    ColorAnimation {
-                                        duration: Theme.shortDuration
-                                        easing.type: Theme.standardEasing
-                                    }
-                                }
-
-                                Behavior on border.color {
                                     ColorAnimation {
                                         duration: Theme.shortDuration
                                         easing.type: Theme.standardEasing
@@ -286,7 +247,7 @@ Item {
                                         DankIcon {
                                             name: pluginDelegate.pluginIcon
                                             size: Theme.iconSize
-                                            color: PluginService.isPluginLoaded(pluginDelegate.pluginId) ? Theme.primary : "#CCCCCC"
+                                            color: PluginService.isPluginLoaded(pluginDelegate.pluginId) ? Theme.primary : Theme.surfaceVariantText
                                             anchors.verticalCenter: parent.verticalCenter
                                         }
 
@@ -302,7 +263,7 @@ Item {
                                                 StyledText {
                                                     text: pluginDelegate.pluginName
                                                     font.pixelSize: Theme.fontSizeMedium
-                                                    color: "#FFFFFF"
+                                                    color: Theme.surfaceText
                                                     font.weight: Font.Medium
                                                     anchors.verticalCenter: parent.verticalCenter
                                                 }
@@ -326,7 +287,7 @@ Item {
                                             StyledText {
                                                 text: "v" + pluginDelegate.pluginVersion + " by " + pluginDelegate.pluginAuthor
                                                 font.pixelSize: Theme.fontSizeSmall
-                                                color: "#CCCCCC"
+                                                color: Theme.surfaceVariantText
                                                 width: parent.width
                                                 elide: Text.ElideRight
                                             }
@@ -367,7 +328,7 @@ Item {
                                         width: parent.width
                                         text: pluginDelegate.pluginDescription
                                         font.pixelSize: Theme.fontSizeSmall
-                                        color: "#CCCCCC"
+                                        color: Theme.surfaceVariantText
                                         wrapMode: Text.WordWrap
                                         visible: pluginDelegate.pluginDescription !== ""
                                     }
@@ -422,11 +383,10 @@ Item {
 
                                     Rectangle {
                                         anchors.fill: parent
-                                        color: Qt.rgba(Theme.surfaceContainerHighest.r, Theme.surfaceContainerHighest.g, Theme.surfaceContainerHighest.b, 0.5)
+                                        color: Theme.surfaceContainerHighest
                                         radius: Theme.cornerRadius
                                         anchors.topMargin: Theme.spacingXS
-                                        border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.1)
-                                        border.width: 1
+                                        border.width: 0
                                     }
 
                                     DankFlickable {
@@ -514,7 +474,7 @@ Item {
                                                "Failed to load settings" :
                                                "No configurable settings")
                                         font.pixelSize: Theme.fontSizeSmall
-                                        color: "#CCCCCC"
+                                        color: Theme.surfaceVariantText
                                         visible: pluginDelegate.isExpanded && (!settingsLoader.active || settingsLoader.status === Loader.Error)
                                     }
                                 }
@@ -525,7 +485,7 @@ Item {
                             anchors.centerIn: parent
                             text: "No plugins found.\nPlace plugins in " + PluginService.pluginDirectory
                             font.pixelSize: Theme.fontSizeMedium
-                            color: "#CCCCCC"
+                            color: Theme.surfaceVariantText
                             horizontalAlignment: Text.AlignHCenter
                             visible: pluginListView.model.length === 0
                         }
@@ -535,7 +495,6 @@ Item {
         }
     }
 
-    // Connections to update plugin list when plugins are loaded/unloaded
     Connections {
         target: PluginService
         function onPluginLoaded() {
@@ -543,7 +502,6 @@ Item {
         }
         function onPluginUnloaded() {
             pluginListView.model = PluginService.getAvailablePlugins()
-            // Close expanded plugin if it was unloaded
             if (pluginsTab.expandedPluginId !== "" && !PluginService.isPluginLoaded(pluginsTab.expandedPluginId)) {
                 pluginsTab.expandedPluginId = ""
             }
