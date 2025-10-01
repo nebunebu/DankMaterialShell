@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Services.Greetd
 import qs.Common
-import "Modules/Greetd"
+import qs.Modules.Greetd
 
 ShellRoot {
     id: root
