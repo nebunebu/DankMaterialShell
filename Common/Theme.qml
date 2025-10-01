@@ -31,9 +31,8 @@ Singleton {
     readonly property string shellDir: Paths.strip(Qt.resolvedUrl(".").toString()).replace("/Common/", "")
     readonly property string wallpaperPath: {
         if (typeof SessionData === "undefined") return ""
-        
+
         if (SessionData.perMonitorWallpaper) {
-            // Use first monitor's wallpaper for dynamic theming
             var screens = Quickshell.screens
             if (screens.length > 0) {
                 var firstMonitorWallpaper = SessionData.getMonitorWallpaper(screens[0].name)
@@ -90,6 +89,13 @@ Singleton {
 
         if (typeof SettingsData !== "undefined" && SettingsData.currentThemeName) {
             switchTheme(SettingsData.currentThemeName, false, false)
+        }
+    }
+
+    function applyGreeterTheme(themeName) {
+        switchTheme(themeName, false, false)
+        if (themeName === dynamic && dynamicColorsFileView.path) {
+            dynamicColorsFileView.reload()
         }
     }
 
@@ -303,10 +309,13 @@ Singleton {
                 currentThemeCategory = "generic"
             }
         }
-        if (savePrefs && typeof SettingsData !== "undefined")
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
+        if (savePrefs && typeof SettingsData !== "undefined" && !isGreeterMode)
             SettingsData.setTheme(currentTheme)
 
-        generateSystemThemesFromCurrentTheme()
+        if (!isGreeterMode) {
+            generateSystemThemesFromCurrentTheme()
+        }
     }
 
     function setLightMode(light, savePrefs = true, enableTransition = false) {
@@ -318,11 +327,14 @@ Singleton {
             return
         }
 
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
         isLightMode = light
-        if (savePrefs && typeof SessionData !== "undefined")
+        if (savePrefs && typeof SessionData !== "undefined" && !isGreeterMode)
             SessionData.setLightMode(isLightMode)
-        PortalService.setLightMode(isLightMode)
-        generateSystemThemesFromCurrentTheme()
+        if (!isGreeterMode) {
+            PortalService.setLightMode(isLightMode)
+            generateSystemThemesFromCurrentTheme()
+        }
     }
 
     function toggleLightMode(savePrefs = true) {
@@ -599,7 +611,8 @@ Singleton {
     }
 
     function generateSystemThemesFromCurrentTheme() {
-        if (!matugenAvailable)
+        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
+        if (!matugenAvailable || isGreeterMode)
             return
 
         const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode)
@@ -670,8 +683,9 @@ Singleton {
         command: ["which", "matugen"]
         onExited: code => {
             matugenAvailable = (code === 0) && !envDisableMatugen
-            if (!matugenAvailable) {
-                console.log("matugen not not available in path or disabled via DMS_DISABLE_MATUGEN")
+            const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
+
+            if (!matugenAvailable || isGreeterMode) {
                 return
             }
 
@@ -722,10 +736,7 @@ Singleton {
         onExited: exitCode => {
             workerRunning = false
 
-            if (exitCode === 2) {
-                // Exit code 2 means wallpaper/color not found - this is expected on first run
-                console.log("Theme worker: wallpaper/color not found, skipping theme generation")
-            } else if (exitCode !== 0) {
+            if (exitCode !== 0 && exitCode !== 2) {
                 if (typeof ToastService !== "undefined") {
                     ToastService.showError("Theme worker failed (" + exitCode + ")")
                 }
@@ -814,8 +825,14 @@ Singleton {
 
     FileView {
         id: dynamicColorsFileView
-        path: stateDir + "/dms-colors.json"
-        watchChanges: currentTheme === dynamic
+        path: {
+            const greetCfgDir = Quickshell.env("DMS_GREET_CFG_DIR") || "/etc/greetd/.dms"
+            const colorsPath = SessionData.isGreeterMode
+                ? greetCfgDir + "/colors.json"
+                : stateDir + "/dms-colors.json"
+            return colorsPath
+        }
+        watchChanges: currentTheme === dynamic && !SessionData.isGreeterMode
 
         function parseAndLoadColors() {
             try {
@@ -828,6 +845,7 @@ Singleton {
                     }
                 }
             } catch (e) {
+                console.error("Theme: Failed to parse dynamic colors:", e)
                 if (typeof ToastService !== "undefined") {
                     ToastService.wallpaperErrorStatus = "error"
                     ToastService.showError("Dynamic colors parse error: " + e.message)
