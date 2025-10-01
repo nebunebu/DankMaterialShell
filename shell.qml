@@ -37,6 +37,8 @@ ShellRoot {
         DisplayService.nightModeEnabled
         // Initialize WallpaperCyclingService
         WallpaperCyclingService.cyclingActive
+        // Initialize PluginService by accessing its properties
+        PluginService.pluginDirectory
     }
 
     WallpaperBackground {}
