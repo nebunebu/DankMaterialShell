@@ -93,93 +93,300 @@ The manifest file defines plugin metadata and configuration:
 
 ### Widget Component
 
-The main widget component is displayed in the DankBar. It receives several properties from the shell:
+The main widget component uses the **PluginComponent** wrapper which provides automatic property injection and bar integration:
 
 ```qml
 import QtQuick
+import qs.Common
+import qs.Widgets
+import qs.Modules.Plugins
 
-Rectangle {
-    id: root
+PluginComponent {
+    // Define horizontal bar pill (optional)
+    horizontalBarPill: Component {
+        StyledRect {
+            width: content.implicitWidth + Theme.spacingM * 2
+            height: parent.widgetThickness
+            radius: Theme.cornerRadius
+            color: Theme.surfaceContainerHigh
 
-    // Standard properties provided by DankBar
-    property bool compactMode: false
-    property string section: "center"       // "left", "center", or "right"
-    property var popupTarget: null
-    property var parentScreen: null
-    property real barHeight: 48
-    property real widgetHeight: 30
-
-    // Widget dimensions
-    width: content.implicitWidth + horizontalPadding * 2
-    height: widgetHeight
-
-    // PluginService is injected by PluginsTab when loading settings
-    property var pluginService
-
-    // Access plugin data
-    Component.onCompleted: {
-        if (pluginService) {
-            var savedData = pluginService.loadPluginData("yourPlugin", "dataKey", defaultValue)
+            StyledText {
+                id: content
+                anchors.centerIn: parent
+                text: "Hello World"
+                color: Theme.surfaceText
+                font.pixelSize: Theme.fontSizeMedium
+            }
         }
     }
 
-    // Save plugin data
-    function saveData(key, value) {
-        if (pluginService) {
-            pluginService.savePluginData("yourPlugin", key, value)
+    // Define vertical bar pill (optional)
+    verticalBarPill: Component {
+        // Same as horizontal but optimized for vertical layout
+    }
+
+    // Define popout content (optional)
+    popoutContent: Component {
+        Column {
+            width: parent.width
+            spacing: Theme.spacingM
+            padding: Theme.spacingM
+
+            StyledText {
+                text: "Popout Content"
+                font.pixelSize: Theme.fontSizeLarge
+                color: Theme.surfaceText
+            }
         }
     }
+
+    // Popout dimensions (required if popoutContent is set)
+    popoutWidth: 400
+    popoutHeight: 300
 }
 ```
 
-**Important Properties:**
-- `compactMode`: Whether the bar is in compact display mode
-- `section`: Which bar section the widget is in
-- `barHeight`: Height of the entire bar
-- `widgetHeight`: Recommended widget height
-- `parentScreen`: Reference to the screen object
+**PluginComponent Properties (automatically injected):**
+- `axis`: Bar axis information (horizontal/vertical)
+- `section`: Bar section ("left", "center", "right")
+- `parentScreen`: Screen reference for multi-monitor support
+- `widgetThickness`: Recommended widget size perpendicular to bar
+- `barThickness`: Bar thickness parallel to edge
+
+**Component Options:**
+- `horizontalBarPill`: Component shown in horizontal bars
+- `verticalBarPill`: Component shown in vertical bars
+- `popoutContent`: Optional popout window content
+- `popoutWidth`: Popout window width
+- `popoutHeight`: Popout window height
+
+The PluginComponent automatically handles:
+- Bar orientation detection
+- Click handlers for popouts
+- Proper positioning and anchoring
+- Theme integration
 
 ### Settings Component
 
-Optional settings UI loaded inline in the PluginsTab accordion interface:
+Optional settings UI loaded inline in the PluginsTab accordion interface. Use the simplified settings API with auto-storage components:
 
 ```qml
 import QtQuick
-import QtQuick.Controls
 import qs.Common
-import qs.Services
 import qs.Widgets
+import qs.Modules.Plugins
 
-Column {
+PluginSettings {
     id: root
+    pluginId: "yourPlugin"
 
-    // PluginService is injected by PluginsTab
-    property var pluginService
-
-    spacing: Theme.spacingM
-
-    DankTextField {
-        id: settingInput
-        width: parent.width
-        label: "Setting Label"
-        text: pluginService ? pluginService.loadPluginData("yourPlugin", "settingKey", "default") : ""
-        onTextChanged: {
-            if (pluginService) {
-                pluginService.savePluginData("yourPlugin", "settingKey", text)
-            }
-        }
+    StringSetting {
+        settingKey: "apiKey"
+        label: "API Key"
+        description: "Your API key for accessing the service"
+        placeholder: "Enter API key..."
     }
 
-    DankToggle {
-        checked: pluginService ? pluginService.loadPluginData("yourPlugin", "enabled", true) : false
-        onToggled: {
-            if (pluginService) {
-                pluginService.savePluginData("yourPlugin", "enabled", checked)
+    ToggleSetting {
+        settingKey: "notifications"
+        label: "Enable Notifications"
+        description: "Show desktop notifications for updates"
+        defaultValue: true
+    }
+
+    SelectionSetting {
+        settingKey: "updateInterval"
+        label: "Update Interval"
+        description: "How often to refresh data"
+        options: [
+            {label: "1 minute", value: "60"},
+            {label: "5 minutes", value: "300"},
+            {label: "15 minutes", value: "900"}
+        ]
+        defaultValue: "300"
+    }
+
+    ListSetting {
+        id: itemList
+        settingKey: "items"
+        label: "Saved Items"
+        description: "List of configured items"
+        delegate: Component {
+            StyledRect {
+                width: parent.width
+                height: 40
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+
+                StyledText {
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.spacingM
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: modelData.name
+                    color: Theme.surfaceText
+                }
+
+                Rectangle {
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.spacingM
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 60
+                    height: 28
+                    color: removeArea.containsMouse ? Theme.errorHover : Theme.error
+                    radius: Theme.cornerRadius
+
+                    StyledText {
+                        anchors.centerIn: parent
+                        text: "Remove"
+                        color: Theme.errorText
+                        font.pixelSize: Theme.fontSizeSmall
+                        font.weight: Font.Medium
+                    }
+
+                    MouseArea {
+                        id: removeArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: itemList.removeItem(index)
+                    }
+                }
             }
         }
     }
 }
 ```
+
+**Available Setting Components:**
+
+All settings automatically save on change and load on component creation. No manual `pluginService.savePluginData()` calls needed!
+
+1. **PluginSettings** - Root wrapper for all plugin settings
+   - `pluginId`: Your plugin ID (required)
+   - Auto-handles storage and provides saveValue/loadValue to children
+   - Place all other setting components inside this wrapper
+
+2. **StringSetting** - Text input field
+   - `settingKey`: Storage key (required)
+   - `label`: Display label (required)
+   - `description`: Help text (optional)
+   - `placeholder`: Input placeholder (optional)
+   - `defaultValue`: Default value (optional)
+   - Layout: Vertical stack (label, description, input field)
+
+3. **ToggleSetting** - Boolean toggle switch
+   - `settingKey`: Storage key (required)
+   - `label`: Display label (required)
+   - `description`: Help text (optional)
+   - `defaultValue`: Default boolean (optional)
+   - Layout: Horizontal (label/description left, toggle right)
+
+4. **SelectionSetting** - Dropdown menu
+   - `settingKey`: Storage key (required)
+   - `label`: Display label (required)
+   - `description`: Help text (optional)
+   - `options`: Array of `{label, value}` objects or simple strings (required)
+   - `defaultValue`: Default value (optional)
+   - Layout: Horizontal (label/description left, dropdown right)
+   - Stores the `value` field, displays the `label` field
+
+5. **ListSetting** - Manage list of items (manual add/remove)
+   - `settingKey`: Storage key (required)
+   - `label`: Display label (required)
+   - `description`: Help text (optional)
+   - `delegate`: Custom item delegate Component (optional)
+   - `addItem(item)`: Add item to list
+   - `removeItem(index)`: Remove item from list
+   - Use when you need custom UI for adding items
+
+6. **ListSettingWithInput** - Complete list management with built-in form
+   - `settingKey`: Storage key (required)
+   - `label`: Display label (required)
+   - `description`: Help text (optional)
+   - `fields`: Array of field definitions (required)
+     - `id`: Field ID in saved object (required)
+     - `label`: Column header text (required)
+     - `placeholder`: Input placeholder (optional)
+     - `width`: Column width in pixels (optional, default 200)
+     - `required`: Must have value to add (optional, default false)
+     - `default`: Default value if empty (optional)
+   - Automatically generates:
+     - Column headers from field labels
+     - Input fields with placeholders
+     - Add button with validation
+     - List display showing all field values
+     - Remove buttons for each item
+   - Best for collecting structured data (servers, locations, etc.)
+
+**Complete Settings Example:**
+
+```qml
+import QtQuick
+import qs.Common
+import qs.Widgets
+import qs.Modules.Plugins
+
+PluginSettings {
+    pluginId: "myPlugin"
+
+    // Section header (optional)
+    StyledText {
+        width: parent.width
+        text: "General Settings"
+        font.pixelSize: Theme.fontSizeLarge
+        font.weight: Font.Bold
+        color: Theme.surfaceText
+    }
+
+    // Text input
+    StringSetting {
+        settingKey: "apiKey"
+        label: "API Key"
+        description: "Your service API key"
+        placeholder: "sk-..."
+        defaultValue: ""
+    }
+
+    // Toggle switches
+    ToggleSetting {
+        settingKey: "enabled"
+        label: "Enable Feature"
+        description: "Turn this feature on or off"
+        defaultValue: true
+    }
+
+    // Dropdown selection
+    SelectionSetting {
+        settingKey: "theme"
+        label: "Theme"
+        description: "Choose your preferred theme"
+        options: [
+            {label: "Dark", value: "dark"},
+            {label: "Light", value: "light"},
+            {label: "Auto", value: "auto"}
+        ]
+        defaultValue: "dark"
+    }
+
+    // Structured list with multi-field input
+    ListSettingWithInput {
+        settingKey: "locations"
+        label: "Locations"
+        description: "Track multiple locations"
+        fields: [
+            {id: "name", label: "Name", placeholder: "Home", width: 150, required: true},
+            {id: "timezone", label: "Timezone", placeholder: "America/New_York", width: 200, required: true}
+        ]
+    }
+}
+```
+
+**Key Benefits:**
+- Zero boilerplate - just define your settings
+- Automatic persistence to `settings.json`
+- Clean, consistent UI across all plugins
+- No manual `pluginService` calls needed
+- Proper layout and spacing handled automatically
 
 ## PluginService API
 
@@ -262,39 +469,49 @@ Create `MyWidget.qml`:
 
 ```qml
 import QtQuick
-import qs.Services
+import qs.Common
+import qs.Widgets
+import qs.Modules.Plugins
 
-Rectangle {
-    id: root
+PluginComponent {
+    horizontalBarPill: Component {
+        StyledRect {
+            width: textItem.implicitWidth + Theme.spacingM * 2
+            height: parent.widgetThickness
+            radius: Theme.cornerRadius
+            color: Theme.surfaceContainerHigh
 
-    property bool compactMode: false
-    property string section: "center"
-    property real widgetHeight: 30
-    property string displayText: "Hello World"
-
-    width: textItem.implicitWidth + 16
-    height: widgetHeight
-    radius: 8
-    color: "#20FFFFFF"
-
-    Component.onCompleted: {
-        displayText = PluginService.loadPluginData("myPlugin", "text", "Hello World")
+            StyledText {
+                id: textItem
+                anchors.centerIn: parent
+                text: "Hello World"
+                color: Theme.surfaceText
+                font.pixelSize: Theme.fontSizeMedium
+            }
+        }
     }
 
-    Text {
-        id: textItem
-        anchors.centerIn: parent
-        text: root.displayText
-        color: "#FFFFFF"
-        font.pixelSize: 13
-    }
+    verticalBarPill: Component {
+        StyledRect {
+            width: parent.widgetThickness
+            height: textItem.implicitWidth + Theme.spacingM * 2
+            radius: Theme.cornerRadius
+            color: Theme.surfaceContainerHigh
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: console.log("Plugin clicked!")
+            StyledText {
+                id: textItem
+                anchors.centerIn: parent
+                text: "Hello"
+                color: Theme.surfaceText
+                font.pixelSize: Theme.fontSizeSmall
+                rotation: 90
+            }
+        }
     }
 }
 ```
+
+**Note:** Use `PluginComponent` wrapper for automatic property injection and bar integration. Define separate components for horizontal and vertical orientations.
 
 ### Step 4: Create Settings Component (Optional)
 
@@ -302,32 +519,34 @@ Create `MySettings.qml`:
 
 ```qml
 import QtQuick
-import QtQuick.Controls
 import qs.Common
-import qs.Services
 import qs.Widgets
+import qs.Modules.Plugins
 
-Column {
-    // PluginService is injected by PluginsTab
-    property var pluginService
-
-    spacing: Theme.spacingM
+PluginSettings {
+    pluginId: "myPlugin"
 
     StyledText {
-        text: "Plugin Settings"
-        font.pixelSize: Theme.fontSizeLarge
-        font.weight: Font.Medium
+        width: parent.width
+        text: "Configure your plugin settings"
+        font.pixelSize: Theme.fontSizeMedium
+        color: Theme.surfaceVariantText
+        wrapMode: Text.WordWrap
     }
 
-    DankTextField {
-        width: parent.width
+    StringSetting {
+        settingKey: "text"
         label: "Display Text"
-        text: pluginService ? pluginService.loadPluginData("myPlugin", "text", "Hello World") : ""
-        onTextChanged: {
-            if (pluginService) {
-                pluginService.savePluginData("myPlugin", "text", text)
-            }
-        }
+        description: "Text shown in the bar widget"
+        placeholder: "Hello World"
+        defaultValue: "Hello World"
+    }
+
+    ToggleSetting {
+        settingKey: "showIcon"
+        label: "Show Icon"
+        description: "Display an icon next to the text"
+        defaultValue: true
     }
 }
 ```

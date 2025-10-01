@@ -9,6 +9,10 @@ Item {
     property var components: null
     property bool noBackground: false
     required property var axis
+    property string section: "center"
+    property var parentScreen: null
+    property real widgetThickness: 30
+    property real barThickness: 48
 
     readonly property bool isVertical: axis?.isVertical ?? false
     readonly property real spacing: noBackground ? 2 : Theme.spacingXS
@@ -371,7 +375,24 @@ Item {
                     item.axis = root.axis
                 }
                 if (root.axis && "isVertical" in item) {
-                    item.isVertical = root.axis.isVertical
+                    try {
+                        item.isVertical = root.axis.isVertical
+                    } catch (e) {
+                    }
+                }
+
+                // Inject properties for plugin widgets
+                if ("section" in item) {
+                    item.section = root.section
+                }
+                if ("parentScreen" in item) {
+                    item.parentScreen = root.parentScreen
+                }
+                if ("widgetThickness" in item) {
+                    item.widgetThickness = root.widgetThickness
+                }
+                if ("barThickness" in item) {
+                    item.barThickness = root.barThickness
                 }
 
                 // Inject PluginService for plugin widgets

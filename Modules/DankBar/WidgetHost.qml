@@ -11,6 +11,10 @@ Loader {
     property var components: null
     property bool isInColumn: false
     property var axis: null
+    property string section: "center"
+    property var parentScreen: null
+    property real widgetThickness: 30
+    property real barThickness: 48
 
     asynchronous: false
 
@@ -21,20 +25,59 @@ Loader {
 
     signal contentItemReady(var item)
 
+    Binding {
+        target: root.item
+        when: root.item && "parentScreen" in root.item
+        property: "parentScreen"
+        value: root.parentScreen
+        restoreMode: Binding.RestoreNone
+    }
+
+    Binding {
+        target: root.item
+        when: root.item && "section" in root.item
+        property: "section"
+        value: root.section
+        restoreMode: Binding.RestoreNone
+    }
+
+    Binding {
+        target: root.item
+        when: root.item && "widgetThickness" in root.item
+        property: "widgetThickness"
+        value: root.widgetThickness
+        restoreMode: Binding.RestoreNone
+    }
+
+    Binding {
+        target: root.item
+        when: root.item && "barThickness" in root.item
+        property: "barThickness"
+        value: root.barThickness
+        restoreMode: Binding.RestoreNone
+    }
+
+    Binding {
+        target: root.item
+        when: root.item && "axis" in root.item
+        property: "axis"
+        value: root.axis
+        restoreMode: Binding.RestoreNone
+    }
+
     onLoaded: {
         if (item) {
             contentItemReady(item)
             if (widgetId === "spacer") {
                 item.spacerSize = Qt.binding(() => spacerSize)
             }
-            if (axis && "axis" in item) {
-                item.axis = axis
-            }
             if (axis && "isVertical" in item) {
-                item.isVertical = axis.isVertical
+                try {
+                    item.isVertical = axis.isVertical
+                } catch (e) {
+                }
             }
 
-            // Inject PluginService for plugin widgets
             if (item.pluginService !== undefined) {
                 console.log("WidgetHost: Injecting PluginService into plugin widget:", widgetId)
                 item.pluginService = PluginService

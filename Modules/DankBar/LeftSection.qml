@@ -8,6 +8,9 @@ Item {
     property var components: null
     property bool noBackground: false
     required property var axis
+    property var parentScreen: null
+    property real widgetThickness: 30
+    property real barThickness: 48
 
     readonly property bool isVertical: axis?.isVertical ?? false
 
@@ -38,6 +41,10 @@ Item {
                         components: root.components
                         isInColumn: false
                         axis: root.axis
+                        section: "left"
+                        parentScreen: root.parentScreen
+                        widgetThickness: root.widgetThickness
+                        barThickness: root.barThickness
                     }
                 }
             }
@@ -63,6 +70,10 @@ Item {
                         components: root.components
                         isInColumn: true
                         axis: root.axis
+                        section: "left"
+                        parentScreen: root.parentScreen
+                        widgetThickness: root.widgetThickness
+                        barThickness: root.barThickness
                     }
                 }
             }

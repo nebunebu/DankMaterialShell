@@ -160,21 +160,17 @@ Item {
                         font.weight: Font.Medium
                     }
 
-                    Item {
+                    Column {
                         width: parent.width
-                        height: Math.max(150, pluginListView.contentHeight)
+                        spacing: Theme.spacingM
 
-                        ListView {
-                            id: pluginListView
-
-                            anchors.fill: parent
+                        Repeater {
+                            id: pluginRepeater
                             model: PluginService.getAvailablePlugins()
-                            spacing: Theme.spacingM
-                            clip: true
 
-                            delegate: StyledRect {
+                            StyledRect {
                                 id: pluginDelegate
-                                width: pluginListView.width
+                                width: parent.width
                                 height: pluginItemColumn.implicitHeight + Theme.spacingM * 2 + settingsContainer.height
                                 radius: Theme.cornerRadius
 
@@ -194,22 +190,8 @@ Item {
                                     console.log("Plugin", pluginId, "isExpanded changed to:", isExpanded)
                                 }
 
-                                color: pluginMouseArea.containsMouse ? Theme.surfacePressed : (isExpanded ? Theme.surfaceContainerHighest : Theme.surfaceContainer)
+                                color: pluginMouseArea.containsMouse ? Theme.surfacePressed : (isExpanded ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh)
                                 border.width: 0
-
-                                Behavior on height {
-                                    NumberAnimation {
-                                        duration: Theme.mediumDuration
-                                        easing.type: Theme.standardEasing
-                                    }
-                                }
-
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: Theme.shortDuration
-                                        easing.type: Theme.standardEasing
-                                    }
-                                }
 
                                 MouseArea {
                                     id: pluginMouseArea
@@ -238,7 +220,7 @@ Item {
                                     anchors.left: parent.left
                                     anchors.right: parent.right
                                     anchors.margins: Theme.spacingM
-                                    spacing: Theme.spacingS
+                                    spacing: Theme.spacingM
 
                                     Row {
                                         width: parent.width
@@ -252,9 +234,9 @@ Item {
                                         }
 
                                         Column {
+                                            width: parent.width - Theme.iconSize - Theme.spacingM - pluginToggle.width - Theme.spacingM
+                                            spacing: Theme.spacingXS
                                             anchors.verticalCenter: parent.verticalCenter
-                                            spacing: 2
-                                            width: parent.width - 250
 
                                             Row {
                                                 spacing: Theme.spacingXS
@@ -262,7 +244,7 @@ Item {
 
                                                 StyledText {
                                                     text: pluginDelegate.pluginName
-                                                    font.pixelSize: Theme.fontSizeMedium
+                                                    font.pixelSize: Theme.fontSizeLarge
                                                     color: Theme.surfaceText
                                                     font.weight: Font.Medium
                                                     anchors.verticalCenter: parent.verticalCenter
@@ -274,13 +256,6 @@ Item {
                                                     color: pluginDelegate.hasSettings ? Theme.primary : "transparent"
                                                     anchors.verticalCenter: parent.verticalCenter
                                                     visible: pluginDelegate.hasSettings
-
-                                                    Behavior on rotation {
-                                                        NumberAnimation {
-                                                            duration: Theme.shortDuration
-                                                            easing.type: Theme.standardEasing
-                                                        }
-                                                    }
                                                 }
                                             }
 
@@ -289,16 +264,11 @@ Item {
                                                 font.pixelSize: Theme.fontSizeSmall
                                                 color: Theme.surfaceVariantText
                                                 width: parent.width
-                                                elide: Text.ElideRight
                                             }
                                         }
 
-                                        Item {
-                                            width: 10
-                                            height: 1
-                                        }
-
                                         DankToggle {
+                                            id: pluginToggle
                                             anchors.verticalCenter: parent.verticalCenter
                                             checked: PluginService.isPluginLoaded(pluginDelegate.pluginId)
                                             onToggled: (isChecked) => {
@@ -367,19 +337,8 @@ Item {
                                     anchors.bottom: parent.bottom
                                     anchors.left: parent.left
                                     anchors.right: parent.right
-                                    height: pluginDelegate.isExpanded && pluginDelegate.hasSettings ? Math.min(500, settingsLoader.item ? settingsLoader.item.implicitHeight + Theme.spacingL * 2 : 200) : 0
+                                    height: pluginDelegate.isExpanded && pluginDelegate.hasSettings ? (settingsLoader.item ? settingsLoader.item.implicitHeight + Theme.spacingL * 2 : 0) : 0
                                     clip: true
-
-                                    onHeightChanged: {
-                                        console.log("Settings container height changed:", height, "for plugin:", pluginDelegate.pluginId)
-                                    }
-
-                                    Behavior on height {
-                                        NumberAnimation {
-                                            duration: Theme.mediumDuration
-                                            easing.type: Theme.standardEasing
-                                        }
-                                    }
 
                                     Rectangle {
                                         anchors.fill: parent
@@ -389,78 +348,61 @@ Item {
                                         border.width: 0
                                     }
 
-                                    DankFlickable {
+                                    Loader {
+                                        id: settingsLoader
                                         anchors.fill: parent
                                         anchors.margins: Theme.spacingL
-                                        contentHeight: settingsLoader.height
-                                        contentWidth: width
-                                        clip: true
+                                        active: pluginDelegate.isExpanded && pluginDelegate.hasSettings && PluginService.isPluginLoaded(pluginDelegate.pluginId)
+                                        asynchronous: false
 
-                                        Loader {
-                                            id: settingsLoader
-                                            width: parent.width
-                                            active: pluginDelegate.isExpanded && pluginDelegate.hasSettings && PluginService.isPluginLoaded(pluginDelegate.pluginId)
-                                            asynchronous: false
+                                        onActiveChanged: {
+                                            console.log("Settings loader active changed to:", active, "for plugin:", pluginDelegate.pluginId,
+                                                      "isExpanded:", pluginDelegate.isExpanded, "hasSettings:", pluginDelegate.hasSettings,
+                                                      "isLoaded:", PluginService.isPluginLoaded(pluginDelegate.pluginId))
+                                        }
 
-                                            onActiveChanged: {
-                                                console.log("Settings loader active changed to:", active, "for plugin:", pluginDelegate.pluginId,
-                                                          "isExpanded:", pluginDelegate.isExpanded, "hasSettings:", pluginDelegate.hasSettings,
-                                                          "isLoaded:", PluginService.isPluginLoaded(pluginDelegate.pluginId))
-                                            }
-
-                                            source: {
-                                                if (active && pluginDelegate.pluginSettingsPath) {
-                                                    console.log("Loading plugin settings from:", pluginDelegate.pluginSettingsPath)
-                                                    var path = pluginDelegate.pluginSettingsPath
-                                                    if (!path.startsWith("file://")) {
-                                                        path = "file://" + path
-                                                    }
-                                                    return path
+                                        source: {
+                                            if (active && pluginDelegate.pluginSettingsPath) {
+                                                console.log("Loading plugin settings from:", pluginDelegate.pluginSettingsPath)
+                                                var path = pluginDelegate.pluginSettingsPath
+                                                if (!path.startsWith("file://")) {
+                                                    path = "file://" + path
                                                 }
-                                                return ""
+                                                return path
                                             }
+                                            return ""
+                                        }
 
-                                            onStatusChanged: {
-                                                console.log("Settings loader status changed:", status, "for plugin:", pluginDelegate.pluginId)
-                                                if (status === Loader.Error) {
-                                                    console.error("Failed to load plugin settings:", pluginDelegate.pluginSettingsPath)
-                                                } else if (status === Loader.Ready) {
-                                                    console.log("Settings successfully loaded for plugin:", pluginDelegate.pluginId)
+                                        onStatusChanged: {
+                                            console.log("Settings loader status changed:", status, "for plugin:", pluginDelegate.pluginId)
+                                            if (status === Loader.Error) {
+                                                console.error("Failed to load plugin settings:", pluginDelegate.pluginSettingsPath)
+                                            } else if (status === Loader.Ready) {
+                                                console.log("Settings successfully loaded for plugin:", pluginDelegate.pluginId)
+                                            }
+                                        }
+
+                                        onLoaded: {
+                                            if (item) {
+                                                console.log("Plugin settings loaded for:", pluginDelegate.pluginId)
+
+                                                if (typeof PluginService !== "undefined") {
+                                                    console.log("Making PluginService available to plugin settings")
+                                                    console.log("PluginService functions available:",
+                                                              "savePluginData" in PluginService,
+                                                              "loadPluginData" in PluginService)
+                                                    item.pluginService = PluginService
+                                                    console.log("PluginService assignment completed, item.pluginService:", item.pluginService !== null)
+                                                } else {
+                                                    console.error("PluginService not available in PluginsTab context")
                                                 }
-                                            }
 
-                                            onLoaded: {
-                                                if (item) {
-                                                    console.log("Plugin settings loaded for:", pluginDelegate.pluginId)
-
-                                                    // Make PluginService available to the loaded component
-                                                    if (typeof PluginService !== "undefined") {
-                                                        console.log("Making PluginService available to plugin settings")
-                                                        console.log("PluginService functions available:",
-                                                                  "savePluginData" in PluginService,
-                                                                  "loadPluginData" in PluginService)
-                                                        item.pluginService = PluginService
-                                                        console.log("PluginService assignment completed, item.pluginService:", item.pluginService !== null)
-                                                    } else {
-                                                        console.error("PluginService not available in PluginsTab context")
-                                                    }
-
-                                                    // Connect to height changes for dynamic resizing
-                                                    if (item.implicitHeightChanged) {
-                                                        item.implicitHeightChanged.connect(function() {
-                                                            console.log("Plugin settings height changed:", item.implicitHeight)
-                                                        })
-                                                    }
-
-                                                    // Force load timezones for WorldClock plugin
-                                                    if (item.loadTimezones) {
-                                                        console.log("Calling loadTimezones for WorldClock plugin")
-                                                        item.loadTimezones()
-                                                    }
-                                                    // Generic initialization for any plugin
-                                                    if (item.initializeSettings) {
-                                                        item.initializeSettings()
-                                                    }
+                                                if (item.loadTimezones) {
+                                                    console.log("Calling loadTimezones for WorldClock plugin")
+                                                    item.loadTimezones()
+                                                }
+                                                if (item.initializeSettings) {
+                                                    item.initializeSettings()
                                                 }
                                             }
                                         }
@@ -482,12 +424,12 @@ Item {
                         }
 
                         StyledText {
-                            anchors.centerIn: parent
+                            width: parent.width
                             text: "No plugins found.\nPlace plugins in " + PluginService.pluginDirectory
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceVariantText
                             horizontalAlignment: Text.AlignHCenter
-                            visible: pluginListView.model.length === 0
+                            visible: pluginRepeater.model.length === 0
                         }
                     }
                 }
@@ -498,10 +440,10 @@ Item {
     Connections {
         target: PluginService
         function onPluginLoaded() {
-            pluginListView.model = PluginService.getAvailablePlugins()
+            pluginRepeater.model = PluginService.getAvailablePlugins()
         }
         function onPluginUnloaded() {
-            pluginListView.model = PluginService.getAvailablePlugins()
+            pluginRepeater.model = PluginService.getAvailablePlugins()
             if (pluginsTab.expandedPluginId !== "" && !PluginService.isPluginLoaded(pluginsTab.expandedPluginId)) {
                 pluginsTab.expandedPluginId = ""
             }

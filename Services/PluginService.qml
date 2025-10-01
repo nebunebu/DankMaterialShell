@@ -22,6 +22,8 @@ Singleton {
         }
         return configDirStr + "/DankMaterialShell/plugins"
     }
+    property string systemPluginDirectory: "/etc/xdg/quickshell/dms-plugins"
+    property var pluginDirectories: [pluginDirectory, systemPluginDirectory]
 
     signal pluginLoaded(string pluginId)
     signal pluginUnloaded(string pluginId)
@@ -35,37 +37,54 @@ Singleton {
         scanPlugins()
     }
 
+    property int currentScanIndex: 0
+    property var scanResults: []
+
     property var lsProcess: Process {
         id: dirScanner
 
         stdout: StdioCollector {
             onStreamFinished: {
                 var output = text.trim()
+                var currentDir = pluginDirectories[currentScanIndex]
                 if (output) {
                     var directories = output.split('\n')
                     for (var i = 0; i < directories.length; i++) {
                         var dir = directories[i].trim()
                         if (dir) {
-                            var manifestPath = pluginDirectory + "/" + dir + "/plugin.json"
+                            var manifestPath = currentDir + "/" + dir + "/plugin.json"
                             console.log("PluginService: Found plugin directory:", dir, "checking manifest at:", manifestPath)
                             loadPluginManifest(manifestPath)
                         }
                     }
                 } else {
-                    console.log("PluginService: No directories found in plugin directory")
+                    console.log("PluginService: No directories found in:", currentDir)
                 }
             }
         }
 
         onExited: function(exitCode) {
             if (exitCode !== 0) {
-                console.error("PluginService: Failed to scan plugin directory, exit code:", exitCode)
+                console.log("PluginService: Directory scan failed for:", pluginDirectories[currentScanIndex], "exit code:", exitCode)
+            }
+            currentScanIndex++
+            if (currentScanIndex < pluginDirectories.length) {
+                scanNextDirectory()
+            } else {
+                currentScanIndex = 0
             }
         }
     }
 
     function scanPlugins() {
-        lsProcess.command = ["find", pluginDirectory, "-maxdepth", "1", "-type", "d", "-not", "-path", pluginDirectory, "-exec", "basename", "{}", ";"]
+        currentScanIndex = 0
+        scanNextDirectory()
+    }
+
+    function scanNextDirectory() {
+        var dir = pluginDirectories[currentScanIndex]
+        console.log("PluginService: Scanning directory:", dir)
+        lsProcess.command = ["find", "-L", dir, "-maxdepth", "1", "-type", "d", "-not", "-path", dir, "-exec", "basename", "{}", ";"]
         lsProcess.running = true
     }
 

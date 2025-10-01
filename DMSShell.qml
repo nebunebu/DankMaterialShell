@@ -22,6 +22,7 @@ import qs.Modules.ProcessList
 import qs.Modules.Settings
 import qs.Modules.DankBar
 import qs.Modules.DankBar.Popouts
+import qs.Modules.Plugins
 import qs.Services
 
 
