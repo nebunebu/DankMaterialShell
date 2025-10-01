@@ -120,6 +120,18 @@ Popup {
             } else if (event.key === Qt.Key_Up) {
                 root.selectPrevious()
                 event.accepted = true
+            } else if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
+                root.selectNext()
+                event.accepted = true
+            } else if (event.key === Qt.Key_P && event.modifiers & Qt.ControlModifier) {
+                root.selectPrevious()
+                event.accepted = true
+            } else if (event.key === Qt.Key_J && event.modifiers & Qt.ControlModifier) {
+                root.selectNext()
+                event.accepted = true
+            } else if (event.key === Qt.Key_K && event.modifiers & Qt.ControlModifier) {
+                root.selectPrevious()
+                event.accepted = true
             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 if (root.keyboardNavigationActive) {
                     root.selectWidget()

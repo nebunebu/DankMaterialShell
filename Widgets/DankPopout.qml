@@ -18,7 +18,7 @@ PanelWindow {
     property real triggerWidth: 40
     property string triggerSection: ""
     property string positioning: "center"
-    property int animationDuration: Theme.mediumDuration
+    property int animationDuration: Theme.shortDuration
     property var animationEasing: Theme.emphasizedEasing
     property bool shouldBeVisible: false
 
@@ -57,16 +57,8 @@ PanelWindow {
     }
 
     color: "transparent"
-    WlrLayershell.layer: WlrLayershell.Top // if set to overlay -> virtual keyboards can be stuck under popup
+    WlrLayershell.layer: WlrLayershell.Top
     WlrLayershell.exclusiveZone: -1
-
-    // WlrLayershell.keyboardFocus should be set to Exclusive,
-    // if popup contains input fields and does NOT create new popups/modals
-    // with input fields.
-    // With OnDemand virtual keyboards can't send input to popup
-    // If set to Exclusive AND this popup creates other popups, that also have
-    // input fields -> they can't get keyboard focus, because the parent popup
-    // already took the lock
     WlrLayershell.keyboardFocus: shouldBeVisible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None 
 
     anchors {
@@ -116,12 +108,12 @@ PanelWindow {
             }
         }
         
-        width: popupWidth
-        height: popupHeight
-        x: calculatedX
-        y: calculatedY
+        width: Math.round(popupWidth)
+        height: Math.round(popupHeight)
+        x: Math.round(calculatedX)
+        y: Math.round(calculatedY)
         opacity: shouldBeVisible ? 1 : 0
-        scale: shouldBeVisible ? 1 : 0.9
+        scale: 1
 
         Behavior on opacity {
             NumberAnimation {
@@ -130,12 +122,7 @@ PanelWindow {
             }
         }
 
-        Behavior on scale {
-            NumberAnimation {
-                duration: animationDuration
-                easing.type: animationEasing
-            }
-        }
+        
 
         Loader {
             id: contentLoader

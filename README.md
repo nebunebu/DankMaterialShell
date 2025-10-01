@@ -18,7 +18,7 @@ A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) 
 <div align="center">
 <div style="max-width: 700px; margin: 0 auto;">
 
-https://github.com/user-attachments/assets/fd619c0e-6edc-457e-b3d6-5a5c3bae7173
+https://github.com/user-attachments/assets/9b99dbbf-42d3-44ab-83b6-fae6c2aa3cc0
 
 </div>
 </div>
@@ -43,7 +43,7 @@ https://github.com/user-attachments/assets/fd619c0e-6edc-457e-b3d6-5a5c3bae7173
 
 ### Control Center
 
-<img width="600" alt="Control Center" src="https://github.com/user-attachments/assets/98889bd8-55d2-44c7-b278-75ca49c596fa" />
+<img width="600" alt="Control Center" src="https://github.com/user-attachments/assets/732c30de-5f4a-4a2b-a995-c8ab656cecd5" />
 
 ### System Monitor
 
@@ -439,6 +439,12 @@ bindl = , XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5 ""
 # Night mode toggle
 bind = SUPERSHIFT, N, exec, dms ipc call night toggle
 ```
+
+## Greeter
+
+You can install a matching [greetd](https://github.com/kennylevinsen/greetd) greeter, that will give you a greeter that matches the lock screen.
+
+It's as simple as running `dms greeter install` in most cases, but more information is in the [Greetd module](Modules/Greetd/README.md)
 
 ## IPC Commands
 

@@ -76,6 +76,30 @@ DankModal {
             }
             event.accepted = true;
             break;
+        case Qt.Key_N:
+            if (event.modifiers & Qt.ControlModifier) {
+                selectedIndex = (selectedIndex + 1) % optionCount;
+                event.accepted = true;
+            }
+            break;
+        case Qt.Key_P:
+            if (event.modifiers & Qt.ControlModifier) {
+                selectedIndex = (selectedIndex - 1 + optionCount) % optionCount;
+                event.accepted = true;
+            }
+            break;
+        case Qt.Key_J:
+            if (event.modifiers & Qt.ControlModifier) {
+                selectedIndex = (selectedIndex + 1) % optionCount;
+                event.accepted = true;
+            }
+            break;
+        case Qt.Key_K:
+            if (event.modifiers & Qt.ControlModifier) {
+                selectedIndex = (selectedIndex - 1 + optionCount) % optionCount;
+                event.accepted = true;
+            }
+            break;
         }
     }
 

@@ -12,11 +12,21 @@ import qs.Services
 Singleton {
     id: root
 
+    readonly property bool isGreeterMode: Quickshell.env("DMS_RUN_GREETER") === "1" || Quickshell.env("DMS_RUN_GREETER") === "true"
+
     enum Position {
         Top,
         Bottom,
         Left,
         Right
+    }
+
+    enum AnimationSpeed {
+        None,
+        Shortest,
+        Short,
+        Medium,
+        Long
     }
 
     // Theme settings
@@ -151,6 +161,7 @@ Singleton {
     property int notificationTimeoutCritical: 0
     property int notificationPopupPosition: SettingsData.Position.Top
     property var screenPreferences: ({})
+    property int animationSpeed: SettingsData.AnimationSpeed.Short
     readonly property string defaultFontFamily: "Inter Variable"
     readonly property string defaultMonoFontFamily: "Fira Code"
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
@@ -353,6 +364,7 @@ Singleton {
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
                 pluginSettings = settings.pluginSettings !== undefined ? settings.pluginSettings : ({})
+                animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 applyStoredTheme()
                 detectAvailableIconThemes()
                 detectQtTools()
@@ -472,7 +484,8 @@ Singleton {
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
                                                 "notificationPopupPosition": notificationPopupPosition,
                                                 "screenPreferences": screenPreferences,
-                                                "pluginSettings": pluginSettings
+                                                "pluginSettings": pluginSettings,
+                                                "animationSpeed": animationSpeed
                                             }, null, 2))
     }
 
@@ -984,13 +997,23 @@ Singleton {
 
     function setShowDock(enabled) {
         showDock = enabled
-        if (enabled && dankBarPosition === SettingsData.Position.Top) {
-            setDockPosition(SettingsData.Position.Bottom)
-            return
-        }
-        if (enabled && dankBarPosition === SettingsData.Position.Top) {
-            setDockPosition(SettingsData.Position.Bottom)
-            return
+        if (enabled && dockPosition === dankBarPosition) {
+            if (dankBarPosition === SettingsData.Position.Top) {
+                setDockPosition(SettingsData.Position.Bottom)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Bottom) {
+                setDockPosition(SettingsData.Position.Top)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Left) {
+                setDockPosition(SettingsData.Position.Right)
+                return
+            }
+            if (dankBarPosition === SettingsData.Position.Right) {
+                setDockPosition(SettingsData.Position.Left)
+                return
+            }
         }
         saveSettings()
     }
@@ -1137,12 +1160,20 @@ Singleton {
 
     function setDankBarPosition(position) {
         dankBarPosition = position
-        if (position === SettingsData.Position.Bottom && showDock) {
+        if (position === SettingsData.Position.Bottom && dockPosition === SettingsData.Position.Bottom && showDock) {
             setDockPosition(SettingsData.Position.Top)
             return
         }
-        if (position === SettingsData.Position.Top && showDock) {
+        if (position === SettingsData.Position.Top && dockPosition === SettingsData.Position.Top && showDock) {
             setDockPosition(SettingsData.Position.Bottom)
+            return
+        }
+        if (position === SettingsData.Position.Left && dockPosition === SettingsData.Position.Left && showDock) {
+            setDockPosition(SettingsData.Position.Right)
+            return
+        }
+        if (position === SettingsData.Position.Right && dockPosition === SettingsData.Position.Right && showDock) {
+            setDockPosition(SettingsData.Position.Left)
             return
         }
         saveSettings()
@@ -1155,6 +1186,12 @@ Singleton {
         }
         if (position === SettingsData.Position.Top && dankBarPosition === SettingsData.Position.Top && showDock) {
             setDankBarPosition(SettingsData.Position.Bottom)
+        }
+        if (position === SettingsData.Position.Left && dankBarPosition === SettingsData.Position.Left && showDock) {
+            setDankBarPosition(SettingsData.Position.Right)
+        }
+        if (position === SettingsData.Position.Right && dankBarPosition === SettingsData.Position.Right && showDock) {
+            setDankBarPosition(SettingsData.Position.Left)
         }
         saveSettings()
         Qt.callLater(() => forceDockLayoutRefresh())
@@ -1260,14 +1297,21 @@ Singleton {
         return pluginSettings[pluginId] || {}
     }
 
+    function setAnimationSpeed(speed) {
+        animationSpeed = speed
+        saveSettings()
+    }
+
     function _shq(s) {
         return "'" + String(s).replace(/'/g, "'\\''") + "'"
     }
 
     Component.onCompleted: {
-        loadSettings()
-        fontCheckTimer.start()
-        initializeListModels()
+        if (!isGreeterMode) {
+            loadSettings()
+            fontCheckTimer.start()
+            initializeListModels()
+        }
     }
 
     ListModel {
@@ -1308,20 +1352,22 @@ Singleton {
     FileView {
         id: settingsFile
 
-        path: StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/DankMaterialShell/settings.json"
-        blockLoading: true
+        path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/DankMaterialShell/settings.json"
+        blockLoading: isGreeterMode
         blockWrites: true
         atomicWrites: true
-        watchChanges: true
+        watchChanges: !isGreeterMode
         onLoaded: {
-            parseSettings(settingsFile.text())
-            hasTriedDefaultSettings = false
+            if (!isGreeterMode) {
+                parseSettings(settingsFile.text())
+                hasTriedDefaultSettings = false
+            }
         }
         onLoadFailed: error => {
-            if (!hasTriedDefaultSettings) {
+            if (!isGreeterMode && !hasTriedDefaultSettings) {
                 hasTriedDefaultSettings = true
                 defaultSettingsCheckProcess.running = true
-            } else {
+            } else if (!isGreeterMode) {
                 applyStoredTheme()
             }
         }

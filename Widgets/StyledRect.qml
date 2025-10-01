@@ -4,7 +4,6 @@ import qs.Common
 Rectangle {
     color: "transparent"
     radius: Appearance.rounding.normal
-    antialiasing: true
 
     readonly property var standardAnimation: {
         "duration": Appearance.anim.durations.normal,

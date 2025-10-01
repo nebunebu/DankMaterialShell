@@ -92,24 +92,41 @@ PanelWindow {
         }
 
         const dockBackground = findDockBackground(dockWindow.contentItem)
+        let actualDockWidth = dockWindow.width
         if (dockBackground) {
             actualDockHeight = dockBackground.height
+            actualDockWidth = dockBackground.width
         }
 
-        const isDockAtBottom = SettingsData.dockPosition === SettingsData.Position.Bottom
-        const dockBottomMargin = 16
-        let buttonScreenY
+        const isVertical = SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right
+        const dockMargin = 16
+        let buttonScreenX, buttonScreenY
 
-        if (isDockAtBottom) {
-            buttonScreenY = root.screen.height - actualDockHeight - dockBottomMargin - 20
+        if (isVertical) {
+            const dockContentHeight = dockWindow.height
+            const screenHeight = root.screen.height
+            const dockTopMargin = Math.round((screenHeight - dockContentHeight) / 2)
+            buttonScreenY = dockTopMargin + buttonPosInDock.y + anchorItem.height / 2
+
+            if (SettingsData.dockPosition === SettingsData.Position.Right) {
+                buttonScreenX = root.screen.width - actualDockWidth - dockMargin - 20
+            } else {
+                buttonScreenX = actualDockWidth + dockMargin + 20
+            }
         } else {
-            buttonScreenY = actualDockHeight + dockBottomMargin + 20
-        }
+            const isDockAtBottom = SettingsData.dockPosition === SettingsData.Position.Bottom
 
-        const dockContentWidth = dockWindow.width
-        const screenWidth = root.screen.width
-        const dockLeftMargin = Math.round((screenWidth - dockContentWidth) / 2)
-        const buttonScreenX = dockLeftMargin + buttonPosInDock.x + anchorItem.width / 2
+            if (isDockAtBottom) {
+                buttonScreenY = root.screen.height - actualDockHeight - dockMargin - 20
+            } else {
+                buttonScreenY = actualDockHeight + dockMargin + 20
+            }
+
+            const dockContentWidth = dockWindow.width
+            const screenWidth = root.screen.width
+            const dockLeftMargin = Math.round((screenWidth - dockContentWidth) / 2)
+            buttonScreenX = dockLeftMargin + buttonPosInDock.x + anchorItem.width / 2
+        }
 
         anchorPos = Qt.point(buttonScreenX, buttonScreenY)
     }
@@ -121,17 +138,35 @@ PanelWindow {
         height: Math.max(60, menuColumn.implicitHeight + Theme.spacingS * 2)
 
         x: {
-            const left = 10
-            const right = root.width - width - 10
-            const want = root.anchorPos.x - width / 2
-            return Math.max(left, Math.min(right, want))
+            const isVertical = SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right
+            if (isVertical) {
+                const isDockAtRight = SettingsData.dockPosition === SettingsData.Position.Right
+                if (isDockAtRight) {
+                    return Math.max(10, root.anchorPos.x - width + 30)
+                } else {
+                    return Math.min(root.width - width - 10, root.anchorPos.x - 30)
+                }
+            } else {
+                const left = 10
+                const right = root.width - width - 10
+                const want = root.anchorPos.x - width / 2
+                return Math.max(left, Math.min(right, want))
+            }
         }
         y: {
-            const isDockAtBottom = SettingsData.dockPosition === SettingsData.Position.Bottom
-            if (isDockAtBottom) {
-                return Math.max(10, root.anchorPos.y - height + 30)
+            const isVertical = SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right
+            if (isVertical) {
+                const top = 10
+                const bottom = root.height - height - 10
+                const want = root.anchorPos.y - height / 2
+                return Math.max(top, Math.min(bottom, want))
             } else {
-                return Math.min(root.height - height - 10, root.anchorPos.y - 30)
+                const isDockAtBottom = SettingsData.dockPosition === SettingsData.Position.Bottom
+                if (isDockAtBottom) {
+                    return Math.max(10, root.anchorPos.y - height + 30)
+                } else {
+                    return Math.min(root.height - height - 10, root.anchorPos.y - 30)
+                }
             }
         }
         color: Theme.popupBackground()

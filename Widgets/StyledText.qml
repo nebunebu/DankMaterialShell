@@ -32,7 +32,6 @@ Text {
     elide: Text.ElideRight
     verticalAlignment: Text.AlignVCenter
     antialiasing: true
-    renderType: Text.NativeRendering
 
     Behavior on opacity {
         NumberAnimation {
