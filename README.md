@@ -315,7 +315,7 @@ sudo sh -c "curl -L https://github.com/AvengeMedia/dgop/releases/latest/download
 
 A lot of options are subject to personal preference, but the below sets a good starting point for most features.
 
-### Niri Integration
+### niri Integration
 
 Add to your niri config
 
@@ -393,6 +393,17 @@ binds {
       spawn "dms" "ipc" "call" "night" "toggle";
    }
 }
+```
+
+#### niri theming
+
+If using a niri build newer than [3933903](https://github.com/YaLTeR/niri/commit/39339032cee3453faa54c361a38db6d83756f750), you can synchronize colors and gaps with the shell settings by adding the following to your niri config.
+
+```bash
+# For colors
+echo -e 'include "dms/colors.kdl"' >> ~/.config/niri/config.kdl
+# For gaps, border widths, certain window rules
+echo -e 'include "dms/layout.kdl"' >> ~/.config/niri/config.kdl
 ```
 
 ### Hyprland Integration
