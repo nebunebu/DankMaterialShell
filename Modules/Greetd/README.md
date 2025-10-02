@@ -18,7 +18,7 @@ Manual installation:
 1. Install `greetd` (in most distro's standard repositories)
 2. Copy `assets/dms-niri.kdl` or `assets/dms-hypr.conf` to `/etc/greetd`
   - niri if you want to run the greeter under niri, hypr if you want to run the greeter under Hyprland
-3. Copy `assets/greet-niri.sh` or `assets/greet-hyprland.sh` to `/etc/greetd/start-dms.sh`
+3. Copy `assets/greet-niri.sh` or `assets/greet-hyprland.sh` to `/usr/local/bin/start-dms-greetd.sh`
 4. Edit `/etc/greetd/dms-niri.kdl` or `/etc/greetd/dms-hypr.conf` and replace `_DMS_PATH_` with the absolute path to dms, e.g. `/home/joecool/.config/quickshell/dms`
 5. Edit or create `/etc/greetd/config.toml` 
 ```toml
@@ -38,7 +38,7 @@ vt = 1
 # in the `video` group.
 user = "greeter"
 
-command = "/etc/greetd/start-dms.sh"%
+command = "/usr/local/bin/start-dms-greetd.sh"
 ```
 
 Enable the greeter with `sudo systemctl enable greetd`

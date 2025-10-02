@@ -19,6 +19,9 @@ Item {
 
     property string screenName: ""
     property string randomFact: ""
+    property string hyprlandCurrentLayout: ""
+    property string hyprlandKeyboard: ""
+    property int hyprlandLayoutCount: 0
     property bool isPrimaryScreen: {
         if (!Qt.application.screens || Qt.application.screens.length === 0)
             return true
@@ -61,6 +64,11 @@ Item {
             sessionListProc.running = true
             applyLastSuccessfulUser()
         }
+
+        if (CompositorService.isHyprland) {
+            updateHyprlandLayout()
+            hyprlandLayoutUpdateTimer.start()
+        }
     }
 
     function applyLastSuccessfulUser() {
@@ -75,6 +83,56 @@ Item {
 
     Component.onDestruction: {
         WeatherService.removeRef()
+        if (CompositorService.isHyprland) {
+            hyprlandLayoutUpdateTimer.stop()
+        }
+    }
+
+    function updateHyprlandLayout() {
+        if (CompositorService.isHyprland) {
+            hyprlandLayoutProcess.running = true
+        }
+    }
+
+    Process {
+        id: hyprlandLayoutProcess
+        running: false
+        command: ["hyprctl", "-j", "devices"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    const data = JSON.parse(text)
+                    const mainKeyboard = data.keyboards.find(kb => kb.main === true)
+                    hyprlandKeyboard = mainKeyboard.name
+                    if (mainKeyboard && mainKeyboard.active_keymap) {
+                        const parts = mainKeyboard.active_keymap.split(" ")
+                        if (parts.length > 0) {
+                            hyprlandCurrentLayout = parts[0].substring(0, 2).toUpperCase()
+                        } else {
+                            hyprlandCurrentLayout = mainKeyboard.active_keymap.substring(0, 2).toUpperCase()
+                        }
+                    } else {
+                        hyprlandCurrentLayout = ""
+                    }
+                    if (mainKeyboard && mainKeyboard.layout_names) {
+                        hyprlandLayoutCount = mainKeyboard.layout_names.length
+                    } else {
+                        hyprlandLayoutCount = 0
+                    }
+                } catch (e) {
+                    hyprlandCurrentLayout = ""
+                    hyprlandLayoutCount = 0
+                }
+            }
+        }
+    }
+
+    Timer {
+        id: hyprlandLayoutUpdateTimer
+        interval: 1000
+        running: false
+        repeat: true
+        onTriggered: updateHyprlandLayout()
     }
 
     // ! This was for development and testing, just leaving so people can see how I did it.
@@ -438,6 +496,8 @@ Item {
                 StyledText {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
+                    Layout.topMargin: -Theme.spacingS
+                    Layout.bottomMargin: -Theme.spacingS
                     text: {
                         if (GreeterState.pamState === "error")
                             return "Authentication error - try again"
@@ -448,7 +508,6 @@ Item {
                     color: Theme.error
                     font.pixelSize: Theme.fontSizeSmall
                     horizontalAlignment: Text.AlignHCenter
-                    visible: GreeterState.pamState !== ""
                     opacity: GreeterState.pamState !== "" ? 1 : 0
 
                     Behavior on opacity {
@@ -461,7 +520,7 @@ Item {
 
                 Rectangle {
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.topMargin: Theme.spacingS
+                    Layout.topMargin: 0
                     Layout.preferredWidth: switchUserRow.width + Theme.spacingL * 2
                     Layout.preferredHeight: 40
                     radius: Theme.cornerRadius
@@ -515,6 +574,91 @@ Item {
             anchors.right: parent.right
             anchors.margins: Theme.spacingXL
             spacing: Theme.spacingL
+
+            Item {
+                width: keyboardLayoutRow.width
+                height: keyboardLayoutRow.height
+                anchors.verticalCenter: parent.verticalCenter
+                visible: {
+                    if (CompositorService.isNiri) {
+                        return NiriService.keyboardLayoutNames.length > 1
+                    } else if (CompositorService.isHyprland) {
+                        return hyprlandLayoutCount > 1
+                    }
+                    return false
+                }
+
+                Row {
+                    id: keyboardLayoutRow
+                    spacing: 4
+
+                    Item {
+                        width: Theme.iconSize
+                        height: Theme.iconSize
+
+                        DankIcon {
+                            name: "keyboard"
+                            size: Theme.iconSize
+                            color: "white"
+                            anchors.centerIn: parent
+                        }
+                    }
+
+                    Item {
+                        width: childrenRect.width
+                        height: Theme.iconSize
+
+                        StyledText {
+                            text: {
+                                if (CompositorService.isNiri) {
+                                    const layout = NiriService.getCurrentKeyboardLayoutName()
+                                    if (!layout) return ""
+                                    const parts = layout.split(" ")
+                                    if (parts.length > 0) {
+                                        return parts[0].substring(0, 2).toUpperCase()
+                                    }
+                                    return layout.substring(0, 2).toUpperCase()
+                                } else if (CompositorService.isHyprland) {
+                                    return hyprlandCurrentLayout
+                                }
+                                return ""
+                            }
+                            font.pixelSize: Theme.fontSizeMedium
+                            font.weight: Font.Light
+                            color: "white"
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+                }
+
+                MouseArea {
+                    id: keyboardLayoutArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (CompositorService.isNiri) {
+                            NiriService.cycleKeyboardLayout()
+                        } else if (CompositorService.isHyprland) {
+                            Quickshell.execDetached([
+                                "hyprctl",
+                                "switchxkblayout",
+                                hyprlandKeyboard,
+                                "next"
+                            ])
+                            updateHyprlandLayout()
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                width: 1
+                height: 24
+                color: Qt.rgba(255, 255, 255, 0.2)
+                anchors.verticalCenter: parent.verticalCenter
+                visible: MprisController.activePlayer
+            }
 
             Row {
                 spacing: Theme.spacingS
@@ -1106,9 +1250,8 @@ Item {
 
         function onAuthFailure(message) {
             GreeterState.pamState = "fail"
-            GreeterState.reset()
+            GreeterState.passwordBuffer = ""
             inputField.text = ""
-            PortalService.profileImage = ""
             placeholderDelay.restart()
         }
 
