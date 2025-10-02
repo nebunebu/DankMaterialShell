@@ -16,6 +16,7 @@ Singleton {
 
     property var sessionList: []
     property var sessionExecs: []
+    property var sessionPaths: []
     property int currentSessionIndex: 0
 
     function reset() {

@@ -1353,7 +1353,7 @@ Singleton {
         id: settingsFile
 
         path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/DankMaterialShell/settings.json"
-        blockLoading: isGreeterMode
+        blockLoading: true
         blockWrites: true
         atomicWrites: true
         watchChanges: !isGreeterMode
