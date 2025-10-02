@@ -171,6 +171,7 @@ DankPopout {
                 EditControls {
                     width: parent.width
                     visible: editMode
+                    popoutContent: controlContent
                     availableWidgets: {
                         const existingIds = (SettingsData.controlCenterWidgets || []).map(w => w.id)
                         return widgetModel.baseWidgetDefinitions.filter(w => w.allowMultiple || !existingIds.includes(w.id))
