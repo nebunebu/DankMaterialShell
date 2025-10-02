@@ -57,18 +57,6 @@ The manifest file defines plugin metadata and configuration:
     "icon": "material_icon_name",
     "component": "./YourWidget.qml",
     "settings": "./YourSettings.qml",
-    "dependencies": {
-        "libraryName": {
-            "url": "https://cdn.example.com/library.js",
-            "optional": true
-        }
-    },
-    "settings_schema": {
-        "settingKey": {
-            "type": "string|number|boolean|array|object",
-            "default": "defaultValue"
-        }
-    },
     "permissions": [
         "settings_read",
         "settings_write"
@@ -82,14 +70,20 @@ The manifest file defines plugin metadata and configuration:
 - `component`: Relative path to widget QML file
 
 **Optional Fields:**
-- `description`: Short description of plugin functionality
-- `version`: Semantic version string
-- `author`: Plugin creator name
-- `icon`: Material Design icon name
-- `settings`: Path to settings component
-- `dependencies`: External JS libraries
-- `settings_schema`: Configuration schema
-- `permissions`: Required capabilities
+- `description`: Short description of plugin functionality (displayed in UI)
+- `version`: Semantic version string (displayed in UI)
+- `author`: Plugin creator name (displayed in UI)
+- `icon`: Material Design icon name (displayed in UI)
+- `settings`: Path to settings component (enables settings UI)
+- `permissions`: Required capabilities (enforced by PluginSettings component)
+
+**Permissions:**
+
+The plugin system enforces permissions when settings are accessed:
+- `settings_read`: Required to read plugin settings (currently not enforced)
+- `settings_write`: **Required** to use PluginSettings component and save settings
+
+If your plugin includes a settings component but doesn't declare `settings_write` permission, users will see an error message instead of the settings UI.
 
 ### Widget Component
 
@@ -261,6 +255,27 @@ PluginSettings {
 
 All settings automatically save on change and load on component creation. No manual `pluginService.savePluginData()` calls needed!
 
+**How Default Values Work:**
+
+Each setting component has a `defaultValue` property that is used when no saved value exists. Define sensible defaults in your settings UI:
+
+```qml
+StringSetting {
+    settingKey: "apiKey"
+    defaultValue: ""  // Empty string if no key saved
+}
+
+ToggleSetting {
+    settingKey: "enabled"
+    defaultValue: true  // Enabled by default
+}
+
+ListSettingWithInput {
+    settingKey: "locations"
+    defaultValue: []  // Empty array if no locations saved
+}
+```
+
 1. **PluginSettings** - Root wrapper for all plugin settings
    - `pluginId`: Your plugin ID (required)
    - Auto-handles storage and provides saveValue/loadValue to children
@@ -271,14 +286,14 @@ All settings automatically save on change and load on component creation. No man
    - `label`: Display label (required)
    - `description`: Help text (optional)
    - `placeholder`: Input placeholder (optional)
-   - `defaultValue`: Default value (optional)
+   - `defaultValue`: Default value (optional, default: `""`)
    - Layout: Vertical stack (label, description, input field)
 
 3. **ToggleSetting** - Boolean toggle switch
    - `settingKey`: Storage key (required)
    - `label`: Display label (required)
    - `description`: Help text (optional)
-   - `defaultValue`: Default boolean (optional)
+   - `defaultValue`: Default boolean (optional, default: `false`)
    - Layout: Horizontal (label/description left, toggle right)
 
 4. **SelectionSetting** - Dropdown menu
@@ -286,7 +301,7 @@ All settings automatically save on change and load on component creation. No man
    - `label`: Display label (required)
    - `description`: Help text (optional)
    - `options`: Array of `{label, value}` objects or simple strings (required)
-   - `defaultValue`: Default value (optional)
+   - `defaultValue`: Default value (optional, default: `""`)
    - Layout: Horizontal (label/description left, dropdown right)
    - Stores the `value` field, displays the `label` field
 
@@ -294,6 +309,7 @@ All settings automatically save on change and load on component creation. No man
    - `settingKey`: Storage key (required)
    - `label`: Display label (required)
    - `description`: Help text (optional)
+   - `defaultValue`: Default array (optional, default: `[]`)
    - `delegate`: Custom item delegate Component (optional)
    - `addItem(item)`: Add item to list
    - `removeItem(index)`: Remove item from list
@@ -303,6 +319,7 @@ All settings automatically save on change and load on component creation. No man
    - `settingKey`: Storage key (required)
    - `label`: Display label (required)
    - `description`: Help text (optional)
+   - `defaultValue`: Default array (optional, default: `[]`)
    - `fields`: Array of field definitions (required)
      - `id`: Field ID in saved object (required)
      - `label`: Column header text (required)
@@ -329,7 +346,6 @@ import qs.Modules.Plugins
 PluginSettings {
     pluginId: "myPlugin"
 
-    // Section header (optional)
     StyledText {
         width: parent.width
         text: "General Settings"
@@ -338,7 +354,6 @@ PluginSettings {
         color: Theme.surfaceText
     }
 
-    // Text input
     StringSetting {
         settingKey: "apiKey"
         label: "API Key"
@@ -347,7 +362,6 @@ PluginSettings {
         defaultValue: ""
     }
 
-    // Toggle switches
     ToggleSetting {
         settingKey: "enabled"
         label: "Enable Feature"
@@ -355,7 +369,6 @@ PluginSettings {
         defaultValue: true
     }
 
-    // Dropdown selection
     SelectionSetting {
         settingKey: "theme"
         label: "Theme"
@@ -368,11 +381,11 @@ PluginSettings {
         defaultValue: "dark"
     }
 
-    // Structured list with multi-field input
     ListSettingWithInput {
         settingKey: "locations"
         label: "Locations"
         description: "Track multiple locations"
+        defaultValue: []
         fields: [
             {id: "name", label: "Name", placeholder: "Home", width: 150, required: true},
             {id: "timezone", label: "Timezone", placeholder: "America/New_York", width: 200, required: true}
@@ -636,12 +649,12 @@ Look for lines prefixed with:
 Plugins run with full QML runtime access. Only install plugins from trusted sources.
 
 **Permissions System:**
-- `settings_read`: Read plugin configuration
-- `settings_write`: Write plugin configuration
-- `process`: Execute system commands
-- `network`: Network access
+- `settings_read`: Read plugin configuration (not currently enforced)
+- `settings_write`: **Required** to use PluginSettings - write plugin configuration (enforced)
+- `process`: Execute system commands (not currently enforced)
+- `network`: Network access (not currently enforced)
 
-Future versions may enforce permission restrictions.
+Currently, only `settings_write` is enforced by the PluginSettings component.
 
 ## API Stability
 

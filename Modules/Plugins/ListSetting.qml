@@ -8,7 +8,8 @@ Column {
     required property string settingKey
     required property string label
     property string description: ""
-    property var items: []
+    property var defaultValue: []
+    property var items: defaultValue
     property Component delegate: null
 
     width: parent.width
@@ -17,7 +18,7 @@ Column {
     Component.onCompleted: {
         const settings = findSettings()
         if (settings) {
-            items = settings.loadValue(settingKey, [])
+            items = settings.loadValue(settingKey, defaultValue)
         }
     }
 

@@ -171,6 +171,15 @@ Singleton {
         console.log("PluginService: Component path:", pluginInfo.componentPath)
     }
 
+    function hasPermission(pluginId, permission) {
+        var plugin = availablePlugins[pluginId]
+        if (!plugin) {
+            return false
+        }
+        var permissions = plugin.permissions || []
+        return permissions.indexOf(permission) !== -1
+    }
+
     function loadPlugin(pluginId) {
         console.log("PluginService: loadPlugin called for", pluginId)
         var plugin = availablePlugins[pluginId]
@@ -185,15 +194,34 @@ Singleton {
             return true
         }
 
+        if (pluginWidgetComponents[pluginId]) {
+            var oldComponent = pluginWidgetComponents[pluginId]
+            if (oldComponent) {
+                oldComponent.destroy()
+            }
+            delete pluginWidgetComponents[pluginId]
+        }
+
         try {
-            // Create the widget component
             var componentUrl = "file://" + plugin.componentPath
             console.log("PluginService: Loading component from:", componentUrl)
 
-            var component = Qt.createComponent(componentUrl)
+            var component = Qt.createComponent(componentUrl, Component.PreferSynchronous)
+
+            if (component.status === Component.Loading) {
+                component.statusChanged.connect(function() {
+                    if (component.status === Component.Error) {
+                        console.error("PluginService: Failed to create component for plugin:", pluginId, "Error:", component.errorString())
+                        pluginLoadFailed(pluginId, component.errorString())
+                        component.destroy()
+                    }
+                })
+            }
+
             if (component.status === Component.Error) {
                 console.error("PluginService: Failed to create component for plugin:", pluginId, "Error:", component.errorString())
                 pluginLoadFailed(pluginId, component.errorString())
+                component.destroy()
                 return false
             }
 
@@ -220,10 +248,14 @@ Singleton {
         }
 
         try {
-            // Remove from component map
+            if (pluginWidgetComponents[pluginId]) {
+                var component = pluginWidgetComponents[pluginId]
+                if (component) {
+                    component.destroy()
+                }
+            }
             delete pluginWidgetComponents[pluginId]
 
-            // Mark as unloaded
             plugin.loaded = false
             delete loadedPlugins[pluginId]
 
@@ -281,17 +313,12 @@ Singleton {
     }
 
     function savePluginData(pluginId, key, value) {
-        console.log("PluginService: Saving plugin data:", pluginId, key, JSON.stringify(value))
         SettingsData.setPluginSetting(pluginId, key, value)
-        console.log("PluginService: Data saved successfully")
         return true
     }
 
     function loadPluginData(pluginId, key, defaultValue) {
-        console.log("PluginService: Loading plugin data:", pluginId, key)
-        var value = SettingsData.getPluginSetting(pluginId, key, defaultValue)
-        console.log("PluginService: Loaded key:", key, "value:", JSON.stringify(value))
-        return value
+        return SettingsData.getPluginSetting(pluginId, key, defaultValue)
     }
 
     function createPluginDirectory() {

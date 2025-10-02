@@ -44,7 +44,7 @@ Item {
         DankIcon {
             name: slider.leftIcon
             size: Theme.iconSize
-            color: slider.enabled ? Theme.onSurface : Theme.onSurface_38
+            color: slider.enabled ? Theme.surfaceText : Theme.onSurface_38
             anchors.verticalCenter: parent.verticalCenter
             visible: slider.leftIcon.length > 0
         }
@@ -265,7 +265,7 @@ Item {
         DankIcon {
             name: slider.rightIcon
             size: Theme.iconSize
-            color: slider.enabled ? Theme.onSurface : Theme.onSurface_38
+            color: slider.enabled ? Theme.surfaceText : Theme.onSurface_38
             anchors.verticalCenter: parent.verticalCenter
             visible: slider.rightIcon.length > 0
         }

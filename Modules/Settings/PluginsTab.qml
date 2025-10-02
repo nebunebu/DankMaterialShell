@@ -271,22 +271,25 @@ Item {
                                             id: pluginToggle
                                             anchors.verticalCenter: parent.verticalCenter
                                             checked: PluginService.isPluginLoaded(pluginDelegate.pluginId)
-                                            onToggled: (isChecked) => {
+                                            onToggled: isChecked => {
+                                                const currentPluginId = pluginDelegate.pluginId
+                                                const currentPluginName = pluginDelegate.pluginName
+
                                                 if (isChecked) {
-                                                    if (PluginService.enablePlugin(pluginDelegate.pluginId)) {
-                                                        ToastService.showInfo("Plugin enabled: " + pluginDelegate.pluginName)
+                                                    if (PluginService.enablePlugin(currentPluginId)) {
+                                                        ToastService.showInfo("Plugin enabled: " + currentPluginName)
                                                     } else {
-                                                        ToastService.showError("Failed to enable plugin: " + pluginDelegate.pluginName)
+                                                        ToastService.showError("Failed to enable plugin: " + currentPluginName)
                                                         checked = false
                                                     }
                                                 } else {
-                                                    if (PluginService.disablePlugin(pluginDelegate.pluginId)) {
-                                                        ToastService.showInfo("Plugin disabled: " + pluginDelegate.pluginName)
-                                                        if (pluginsTab.expandedPluginId === pluginDelegate.pluginId) {
-                                                            pluginsTab.expandedPluginId = ""
+                                                    if (PluginService.disablePlugin(currentPluginId)) {
+                                                        ToastService.showInfo("Plugin disabled: " + currentPluginName)
+                                                        if (pluginDelegate.isExpanded) {
+                                                            expandedPluginId = ""
                                                         }
                                                     } else {
-                                                        ToastService.showError("Failed to disable plugin: " + pluginDelegate.pluginName)
+                                                        ToastService.showError("Failed to disable plugin: " + currentPluginName)
                                                         checked = true
                                                     }
                                                 }
