@@ -4,8 +4,6 @@ hotkey-overlay {
 
 environment {
     DMS_RUN_GREETER "1"
-    QT_QPA_PLATFORM "wayland"
-    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
 }
 
 spawn-at-startup "sh" "-c" "qs -p _DMS_PATH_; niri msg action quit --skip-confirmation"
