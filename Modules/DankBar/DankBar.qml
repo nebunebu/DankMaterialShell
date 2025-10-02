@@ -617,6 +617,9 @@ Item {
                                     widgetsModel: SettingsData.dankBarRightWidgetsModel
                                     components: topBarContent.allComponents
                                     noBackground: SettingsData.dankBarNoBackground
+                                    parentScreen: barWindow.screen
+                                    widgetThickness: barWindow.widgetThickness
+                                    barThickness: barWindow.effectiveBarThickness
                                 }
                             }
                         }
