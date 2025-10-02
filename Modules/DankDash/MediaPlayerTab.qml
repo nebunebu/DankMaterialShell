@@ -17,7 +17,7 @@ Item {
     property MprisPlayer activePlayer: MprisController.activePlayer
     property var allPlayers: MprisController.availablePlayers
 
-
+    readonly property bool isRightEdge: SettingsData.dankBarPosition === SettingsData.Position.Right
     property var defaultSink: AudioService.sink
 
     // Palette that stays stable across track switches until new colors are ready
@@ -342,7 +342,7 @@ Item {
             id: audioDevicesDropdown
             width: 280
             height: audioDevicesButton.devicesExpanded ? Math.max(200, Math.min(280, audioDevicesDropdown.availableDevices.length * 50 + 100)) : 0
-            x: root.width + Theme.spacingS
+            x: isRightEdge ? -width - Theme.spacingS : root.width + Theme.spacingS
             y: audioDevicesButton.y - 50
             visible: audioDevicesButton.devicesExpanded
             closePolicy: Popup.NoAutoClose
@@ -504,7 +504,7 @@ Item {
             id: playerSelectorDropdown
             width: 240
             height: playerSelectorButton.playersExpanded ? Math.max(180, Math.min(240, (root.allPlayers?.length || 0) * 50 + 80)) : 0
-            x: root.width + Theme.spacingS
+            x: isRightEdge ? -width - Theme.spacingS : root.width + Theme.spacingS
             y: playerSelectorButton.y - 50
             visible: playerSelectorButton.playersExpanded
             closePolicy: Popup.NoAutoClose
@@ -1045,7 +1045,7 @@ Item {
             width: 40
             height: 40
             radius: 20
-            x: parent.width - 40 - Theme.spacingM
+            x: isRightEdge ? Theme.spacingM : parent.width - 40 - Theme.spacingM
             y: 185
             color: playerSelectorArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
@@ -1098,7 +1098,7 @@ Item {
             width: 40
             height: 40
             radius: 20
-            x: parent.width - 40 - Theme.spacingM
+            x: isRightEdge ? Theme.spacingM : parent.width - 40 - Theme.spacingM
             y: 130
             color: volumeButtonArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
@@ -1153,8 +1153,8 @@ Item {
             width: 40
             height: 40
             radius: 20
-            x: parent.width - 40 - Theme.spacingM
-            y: 240  
+            x: isRightEdge ? Theme.spacingM : parent.width - 40 - Theme.spacingM
+            y: 240
             color: audioDevicesArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.2) : "transparent"
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
             border.width: 1
@@ -1206,7 +1206,7 @@ Item {
         id: volumeSliderPanel
         width: 60
         height: 180
-        x: root.width + Theme.spacingS
+        x: isRightEdge ? -width - Theme.spacingS : root.width + Theme.spacingS
         y: volumeButton.y - 50
         visible: volumeButton.volumeExpanded
         closePolicy: Popup.NoAutoClose
