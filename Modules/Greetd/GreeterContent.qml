@@ -1114,7 +1114,7 @@ Item {
                                     if (idx >= 0) {
                                         GreeterState.currentSessionIndex = idx
                                         GreeterState.selectedSession = GreeterState.sessionExecs[idx]
-                                        GreetdMemory.setLastSessionId(GreeterState.sessionExecs[idx].split(" ")[0])
+                                        GreetdMemory.setLastSessionId(GreeterState.sessionPaths[idx])
                                     }
                                 }
             }
@@ -1131,6 +1131,7 @@ Item {
     property string currentSessionName: GreeterState.sessionList[GreeterState.currentSessionIndex] || ""
     property int pendingParsers: 0
 
+
     function finalizeSessionSelection() {
         if (GreeterState.sessionList.length === 0) {
             return
@@ -1141,8 +1142,8 @@ Item {
         const savedSession = GreetdMemory.lastSessionId
         let foundSaved = false
         if (savedSession) {
-            for (var i = 0; i < GreeterState.sessionExecs.length; i++) {
-                if (GreeterState.sessionExecs[i].toLowerCase().includes(savedSession.toLowerCase()) || GreeterState.sessionList[i].toLowerCase().includes(savedSession.toLowerCase())) {
+            for (var i = 0; i < GreeterState.sessionPaths.length; i++) {
+                if (GreeterState.sessionPaths[i] === savedSession) {
                     GreeterState.currentSessionIndex = i
                     foundSaved = true
                     break
@@ -1203,10 +1204,13 @@ Item {
                         if (!GreeterState.sessionList.includes(name)) {
                             let newList = GreeterState.sessionList.slice()
                             let newExecs = GreeterState.sessionExecs.slice()
+                            let newPaths = GreeterState.sessionPaths.slice()
                             newList.push(name)
                             newExecs.push(exec)
+                            newPaths.push(desktopPath)
                             GreeterState.sessionList = newList
                             GreeterState.sessionExecs = newExecs
+                            GreeterState.sessionPaths = newPaths
                             root.sessionCount = GreeterState.sessionList.length
                         }
                     }
@@ -1242,9 +1246,9 @@ Item {
             GreeterState.unlocking = true
             const sessionCmd = GreeterState.selectedSession || GreeterState.sessionExecs[GreeterState.currentSessionIndex]
             if (sessionCmd) {
-                GreetdMemory.setLastSessionId(sessionCmd.split(" ")[0])
+                GreetdMemory.setLastSessionId(GreeterState.sessionPaths[GreeterState.currentSessionIndex])
                 GreetdMemory.setLastSuccessfulUser(GreeterState.username)
-                Greetd.launch(sessionCmd.split(" "), [], true)
+                Greetd.launch(sessionCmd.split(" "), ["XDG_SESSION_TYPE=wayland"], true)
             }
         }
 
