@@ -79,18 +79,15 @@ Loader {
             }
 
             if (item.pluginService !== undefined) {
-                console.log("WidgetHost: Injecting PluginService into plugin widget:", widgetId)
-                item.pluginService = PluginService
-                if (item.loadTimezones) {
-                    console.log("WidgetHost: Calling loadTimezones for widget:", widgetId)
-                    item.loadTimezones()
+                if (item.pluginId !== undefined) {
+                    item.pluginId = widgetId
                 }
+                item.pluginService = PluginService
             }
         }
     }
 
     function getWidgetComponent(widgetId, components) {
-        // Build component map for built-in widgets
         const componentMap = {
             "launcherButton": components.launcherButtonComponent,
             "workspaceSwitcher": components.workspaceSwitcherComponent,
@@ -121,12 +118,10 @@ Loader {
             "systemUpdate": components.systemUpdateComponent
         }
 
-        // Check for built-in component first
         if (componentMap[widgetId]) {
             return componentMap[widgetId]
         }
 
-        // Check for plugin component
         let pluginMap = PluginService.getWidgetComponents()
         return pluginMap[widgetId] || null
     }

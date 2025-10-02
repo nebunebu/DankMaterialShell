@@ -271,18 +271,17 @@ DankPopout {
                         spacing: Theme.spacingM
                         visible: searchField.text.length === 0
                         leftPadding: Theme.spacingS
-                        topPadding: Theme.spacingXS
 
-                        Item {
-                            width: 200
-                            height: 36
+                        Rectangle {
+                            width: 180
+                            height: 40
+                            radius: Theme.cornerRadius
+                            color: "transparent"
 
                             DankDropdown {
                                 anchors.fill: parent
-                            anchors.leftMargin: Theme.spacingS
-                            anchors.rightMargin: Theme.spacingS
-                            anchors.bottomMargin: Theme.spacingS
                                 text: ""
+                                dropdownWidth: 180
                                 currentValue: appLauncher.selectedCategory
                                 options: appLauncher.categories
                                 optionIcons: appLauncher.categoryIcons
@@ -293,7 +292,7 @@ DankPopout {
                         }
 
                         Item {
-                            width: parent.width - 310
+                            width: parent.width - 290
                             height: 1
                         }
 

@@ -10,14 +10,6 @@ Item {
 
     property string expandedPluginId: ""
 
-    Component.onCompleted: {
-        console.log("PluginsTab: Component completed")
-        console.log("PluginsTab: PluginService available:", typeof PluginService !== "undefined")
-        if (typeof PluginService !== "undefined") {
-            console.log("PluginsTab: Available plugins:", Object.keys(PluginService.availablePlugins).length)
-            console.log("PluginsTab: Plugin directory:", PluginService.pluginDirectory)
-        }
-    }
 
     DankFlickable {
         anchors.fill: parent
@@ -186,9 +178,6 @@ Item {
                                 property bool hasSettings: pluginData && pluginData.settings !== undefined && pluginData.settings !== ""
                                 property bool isExpanded: pluginsTab.expandedPluginId === pluginId
 
-                                onIsExpandedChanged: {
-                                    console.log("Plugin", pluginId, "isExpanded changed to:", isExpanded)
-                                }
 
                                 color: pluginMouseArea.containsMouse ? Theme.surfacePressed : (isExpanded ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh)
                                 border.width: 0
@@ -200,15 +189,8 @@ Item {
                                     hoverEnabled: true
                                     cursorShape: pluginDelegate.hasSettings ? Qt.PointingHandCursor : Qt.ArrowCursor
                                     onClicked: {
-                                        console.log("Plugin clicked:", pluginDelegate.pluginId, "hasSettings:", pluginDelegate.hasSettings, "isLoaded:", PluginService.isPluginLoaded(pluginDelegate.pluginId))
                                         if (pluginDelegate.hasSettings) {
-                                            if (pluginsTab.expandedPluginId === pluginDelegate.pluginId) {
-                                                console.log("Collapsing plugin:", pluginDelegate.pluginId)
-                                                pluginsTab.expandedPluginId = ""
-                                            } else {
-                                                console.log("Expanding plugin:", pluginDelegate.pluginId)
-                                                pluginsTab.expandedPluginId = pluginDelegate.pluginId
-                                            }
+                                            pluginsTab.expandedPluginId = pluginsTab.expandedPluginId === pluginDelegate.pluginId ? "" : pluginDelegate.pluginId
                                         }
                                     }
                                 }
@@ -234,7 +216,7 @@ Item {
                                         }
 
                                         Column {
-                                            width: parent.width - Theme.iconSize - Theme.spacingM - pluginToggle.width - Theme.spacingM
+                                            width: parent.width - Theme.iconSize - Theme.spacingM - toggleRow.width - Theme.spacingM
                                             spacing: Theme.spacingXS
                                             anchors.verticalCenter: parent.verticalCenter
 
@@ -267,30 +249,69 @@ Item {
                                             }
                                         }
 
-                                        DankToggle {
-                                            id: pluginToggle
+                                        Row {
+                                            id: toggleRow
                                             anchors.verticalCenter: parent.verticalCenter
-                                            checked: PluginService.isPluginLoaded(pluginDelegate.pluginId)
-                                            onToggled: isChecked => {
-                                                const currentPluginId = pluginDelegate.pluginId
-                                                const currentPluginName = pluginDelegate.pluginName
+                                            spacing: Theme.spacingXS
 
-                                                if (isChecked) {
-                                                    if (PluginService.enablePlugin(currentPluginId)) {
-                                                        ToastService.showInfo("Plugin enabled: " + currentPluginName)
-                                                    } else {
-                                                        ToastService.showError("Failed to enable plugin: " + currentPluginName)
-                                                        checked = false
+                                            Rectangle {
+                                                width: 28
+                                                height: 28
+                                                radius: 14
+                                                color: reloadArea.containsMouse ? Theme.surfaceContainerHighest : "transparent"
+                                                visible: PluginService.isPluginLoaded(pluginDelegate.pluginId)
+
+                                                DankIcon {
+                                                    anchors.centerIn: parent
+                                                    name: "refresh"
+                                                    size: 16
+                                                    color: reloadArea.containsMouse ? Theme.primary : Theme.surfaceVariantText
+                                                }
+
+                                                MouseArea {
+                                                    id: reloadArea
+                                                    anchors.fill: parent
+                                                    hoverEnabled: true
+                                                    cursorShape: Qt.PointingHandCursor
+                                                    onClicked: {
+                                                        const currentPluginId = pluginDelegate.pluginId
+                                                        const currentPluginName = pluginDelegate.pluginName
+                                                        pluginsTab.isReloading = true
+                                                        if (PluginService.reloadPlugin(currentPluginId)) {
+                                                            ToastService.showInfo("Plugin reloaded: " + currentPluginName)
+                                                        } else {
+                                                            ToastService.showError("Failed to reload plugin: " + currentPluginName)
+                                                            pluginsTab.isReloading = false
+                                                        }
                                                     }
-                                                } else {
-                                                    if (PluginService.disablePlugin(currentPluginId)) {
-                                                        ToastService.showInfo("Plugin disabled: " + currentPluginName)
-                                                        if (pluginDelegate.isExpanded) {
-                                                            expandedPluginId = ""
+                                                }
+                                            }
+
+                                            DankToggle {
+                                                id: pluginToggle
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                checked: PluginService.isPluginLoaded(pluginDelegate.pluginId)
+                                                onToggled: isChecked => {
+                                                    const currentPluginId = pluginDelegate.pluginId
+                                                    const currentPluginName = pluginDelegate.pluginName
+
+                                                    if (isChecked) {
+                                                        if (PluginService.enablePlugin(currentPluginId)) {
+                                                            ToastService.showInfo("Plugin enabled: " + currentPluginName)
+                                                        } else {
+                                                            ToastService.showError("Failed to enable plugin: " + currentPluginName)
+                                                            checked = false
                                                         }
                                                     } else {
-                                                        ToastService.showError("Failed to disable plugin: " + currentPluginName)
-                                                        checked = true
+                                                        if (PluginService.disablePlugin(currentPluginId)) {
+                                                            ToastService.showInfo("Plugin disabled: " + currentPluginName)
+                                                            if (pluginDelegate.isExpanded) {
+                                                                expandedPluginId = ""
+                                                            }
+                                                        } else {
+                                                            ToastService.showError("Failed to disable plugin: " + currentPluginName)
+                                                            checked = true
+                                                        }
                                                     }
                                                 }
                                             }
@@ -358,15 +379,8 @@ Item {
                                         active: pluginDelegate.isExpanded && pluginDelegate.hasSettings && PluginService.isPluginLoaded(pluginDelegate.pluginId)
                                         asynchronous: false
 
-                                        onActiveChanged: {
-                                            console.log("Settings loader active changed to:", active, "for plugin:", pluginDelegate.pluginId,
-                                                      "isExpanded:", pluginDelegate.isExpanded, "hasSettings:", pluginDelegate.hasSettings,
-                                                      "isLoaded:", PluginService.isPluginLoaded(pluginDelegate.pluginId))
-                                        }
-
                                         source: {
                                             if (active && pluginDelegate.pluginSettingsPath) {
-                                                console.log("Loading plugin settings from:", pluginDelegate.pluginSettingsPath)
                                                 var path = pluginDelegate.pluginSettingsPath
                                                 if (!path.startsWith("file://")) {
                                                     path = "file://" + path
@@ -376,37 +390,9 @@ Item {
                                             return ""
                                         }
 
-                                        onStatusChanged: {
-                                            console.log("Settings loader status changed:", status, "for plugin:", pluginDelegate.pluginId)
-                                            if (status === Loader.Error) {
-                                                console.error("Failed to load plugin settings:", pluginDelegate.pluginSettingsPath)
-                                            } else if (status === Loader.Ready) {
-                                                console.log("Settings successfully loaded for plugin:", pluginDelegate.pluginId)
-                                            }
-                                        }
-
                                         onLoaded: {
-                                            if (item) {
-                                                console.log("Plugin settings loaded for:", pluginDelegate.pluginId)
-
-                                                if (typeof PluginService !== "undefined") {
-                                                    console.log("Making PluginService available to plugin settings")
-                                                    console.log("PluginService functions available:",
-                                                              "savePluginData" in PluginService,
-                                                              "loadPluginData" in PluginService)
-                                                    item.pluginService = PluginService
-                                                    console.log("PluginService assignment completed, item.pluginService:", item.pluginService !== null)
-                                                } else {
-                                                    console.error("PluginService not available in PluginsTab context")
-                                                }
-
-                                                if (item.loadTimezones) {
-                                                    console.log("Calling loadTimezones for WorldClock plugin")
-                                                    item.loadTimezones()
-                                                }
-                                                if (item.initializeSettings) {
-                                                    item.initializeSettings()
-                                                }
+                                            if (item && typeof PluginService !== "undefined") {
+                                                item.pluginService = PluginService
                                             }
                                         }
                                     }
@@ -440,14 +426,19 @@ Item {
         }
     }
 
+    property bool isReloading: false
+
     Connections {
         target: PluginService
         function onPluginLoaded() {
             pluginRepeater.model = PluginService.getAvailablePlugins()
+            if (isReloading) {
+                isReloading = false
+            }
         }
         function onPluginUnloaded() {
             pluginRepeater.model = PluginService.getAvailablePlugins()
-            if (pluginsTab.expandedPluginId !== "" && !PluginService.isPluginLoaded(pluginsTab.expandedPluginId)) {
+            if (!isReloading && pluginsTab.expandedPluginId !== "" && !PluginService.isPluginLoaded(pluginsTab.expandedPluginId)) {
                 pluginsTab.expandedPluginId = ""
             }
         }

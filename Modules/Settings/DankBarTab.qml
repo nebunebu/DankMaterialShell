@@ -8,6 +8,15 @@ import qs.Widgets
 Item {
     id: dankBarTab
 
+    function getWidgetsForPopup() {
+        return baseWidgetDefinitions.filter(widget => {
+            if (widget.warning && widget.warning.includes("Plugin is disabled")) {
+                return false
+            }
+            return true
+        })
+    }
+
     property var baseWidgetDefinitions: {
         var coreWidgets = [{
             "id": "launcherButton",
@@ -179,16 +188,18 @@ Item {
             "enabled": SystemUpdateService.distributionSupported
         }]
 
-        // Add plugin widgets dynamically
-        var loadedPlugins = PluginService.getLoadedPlugins()
-        for (var i = 0; i < loadedPlugins.length; i++) {
-            var plugin = loadedPlugins[i]
+        // Add all available plugins (loaded and unloaded)
+        var allPlugins = PluginService.getAvailablePlugins()
+        for (var i = 0; i < allPlugins.length; i++) {
+            var plugin = allPlugins[i]
+            var isLoaded = PluginService.isPluginLoaded(plugin.id)
             coreWidgets.push({
                 "id": plugin.id,
                 "text": plugin.name,
                 "description": plugin.description || "Plugin widget",
                 "icon": plugin.icon || "extension",
-                "enabled": true
+                "enabled": isLoaded,
+                "warning": !isLoaded ? "Plugin is disabled - enable in Plugins settings to use" : undefined
             })
         }
 
@@ -1146,7 +1157,7 @@ Item {
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = dankBarTab.baseWidgetDefinitions
+                                         = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.safeOpen()
                                      }
@@ -1218,7 +1229,7 @@ Item {
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = dankBarTab.baseWidgetDefinitions
+                                         = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.safeOpen()
                                      }
@@ -1290,7 +1301,7 @@ Item {
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = dankBarTab.baseWidgetDefinitions
+                                         = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.safeOpen()
                                      }

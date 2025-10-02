@@ -163,7 +163,7 @@ Item {
 
                 DankDropdown {
                     id: fontDropdown
-                    anchors.left: parent.left
+                    anchors.left: parent.left 
                     anchors.leftMargin: -Theme.spacingM
                     width: parent.width + Theme.spacingM
                     text: "Font Family"

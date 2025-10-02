@@ -10,10 +10,23 @@ Item {
     property var pluginService: null
     default property alias content: settingsColumn.children
 
+    signal settingChanged()
+
     implicitHeight: hasPermission ? settingsColumn.implicitHeight : errorText.implicitHeight
     height: implicitHeight
 
     readonly property bool hasPermission: pluginService && pluginService.hasPermission ? pluginService.hasPermission(pluginId, "settings_write") : true
+
+    onPluginServiceChanged: {
+        if (pluginService) {
+            for (let i = 0; i < settingsColumn.children.length; i++) {
+                const child = settingsColumn.children[i]
+                if (child.loadValue) {
+                    child.loadValue()
+                }
+            }
+        }
+    }
 
     function saveValue(key, value) {
         if (!pluginService) {
@@ -25,6 +38,7 @@ Item {
         }
         if (pluginService.savePluginData) {
             pluginService.savePluginData(pluginId, key, value)
+            settingChanged()
         }
     }
 

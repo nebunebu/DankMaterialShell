@@ -157,7 +157,6 @@ Rectangle {
         }
 
         DankDropdown {
-            width: parent.width
             text: "Low Priority"
             description: "Timeout for low priority notifications"
             currentValue: getTimeoutText(SettingsData.notificationTimeoutLow)
@@ -173,7 +172,6 @@ Rectangle {
         }
 
         DankDropdown {
-            width: parent.width
             text: "Normal Priority"
             description: "Timeout for normal priority notifications"
             currentValue: getTimeoutText(SettingsData.notificationTimeoutNormal)
@@ -189,7 +187,6 @@ Rectangle {
         }
 
         DankDropdown {
-            width: parent.width
             text: "Critical Priority"
             description: "Timeout for critical priority notifications"
             currentValue: getTimeoutText(SettingsData.notificationTimeoutCritical)

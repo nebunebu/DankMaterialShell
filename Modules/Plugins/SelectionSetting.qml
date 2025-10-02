@@ -15,6 +15,17 @@ Column {
     width: parent.width
     spacing: Theme.spacingS
 
+    function loadValue() {
+        const settings = findSettings()
+        if (settings && settings.pluginService) {
+            value = settings.loadValue(settingKey, defaultValue)
+        }
+    }
+
+    Component.onCompleted: {
+        loadValue()
+    }
+
     readonly property var optionLabels: {
         const labels = []
         for (let i = 0; i < options.length; i++) {
@@ -49,13 +60,6 @@ Column {
         return map
     }
 
-    Component.onCompleted: {
-        const settings = findSettings()
-        if (settings) {
-            value = settings.loadValue(settingKey, defaultValue)
-        }
-    }
-
     onValueChanged: {
         const settings = findSettings()
         if (settings) {
@@ -74,40 +78,14 @@ Column {
         return null
     }
 
-    Row {
+    DankDropdown {
         width: parent.width
-        spacing: Theme.spacingM
-
-        Column {
-            width: parent.width * 0.4
-            spacing: Theme.spacingXS
-            anchors.verticalCenter: parent.verticalCenter
-
-            StyledText {
-                text: root.label
-                font.pixelSize: Theme.fontSizeMedium
-                font.weight: Font.Medium
-                color: Theme.surfaceText
-            }
-
-            StyledText {
-                text: root.description
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.surfaceVariantText
-                width: parent.width
-                wrapMode: Text.WordWrap
-                visible: root.description !== ""
-            }
-        }
-
-        DankDropdown {
-            width: parent.width * 0.6 - Theme.spacingM
-            anchors.verticalCenter: parent.verticalCenter
-            currentValue: root.valueToLabel[root.value] || root.value
-            options: root.optionLabels
-            onValueChanged: newValue => {
-                root.value = root.labelToValue[newValue] || newValue
-            }
+        text: root.label
+        description: root.description
+        currentValue: root.valueToLabel[root.value] || root.value
+        options: root.optionLabels
+        onValueChanged: newValue => {
+            root.value = root.labelToValue[newValue] || newValue
         }
     }
 }

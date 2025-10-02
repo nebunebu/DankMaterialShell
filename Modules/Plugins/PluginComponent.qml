@@ -11,6 +11,8 @@ Item {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
+    property string pluginId: ""
+    property var pluginService: null
 
     property Component horizontalBarPill: null
     property Component verticalBarPill: null
@@ -18,10 +20,41 @@ Item {
     property real popoutWidth: 400
     property real popoutHeight: 400
 
+    property var pluginData: ({})
+
     readonly property bool isVertical: axis?.isVertical ?? false
     readonly property bool hasHorizontalPill: horizontalBarPill !== null
     readonly property bool hasVerticalPill: verticalBarPill !== null
     readonly property bool hasPopout: popoutContent !== null
+
+    Component.onCompleted: {
+        loadPluginData()
+    }
+
+    onPluginServiceChanged: {
+        loadPluginData()
+    }
+
+    onPluginIdChanged: {
+        loadPluginData()
+    }
+
+    Connections {
+        target: pluginService
+        function onPluginDataChanged(changedPluginId) {
+            if (changedPluginId === pluginId) {
+                loadPluginData()
+            }
+        }
+    }
+
+    function loadPluginData() {
+        if (!pluginService || !pluginId) {
+            pluginData = {}
+            return
+        }
+        pluginData = SettingsData.getPluginSettingsForPlugin(pluginId)
+    }
 
     width: isVertical ? (hasVerticalPill ? verticalPill.width : 0) : (hasHorizontalPill ? horizontalPill.width : 0)
     height: isVertical ? (hasVerticalPill ? verticalPill.height : 0) : (hasHorizontalPill ? horizontalPill.height : 0)
@@ -57,6 +90,12 @@ Item {
             if (hasPopout) {
                 pluginPopout.toggle()
             }
+        }
+    }
+
+    function closePopout() {
+        if (pluginPopout) {
+            pluginPopout.close()
         }
     }
 

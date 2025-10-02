@@ -1,6 +1,6 @@
 # Emoji Cycler Plugin
 
-An example DankMaterialShell plugin that displays cycling emojis in your bar with an emoji picker popout.
+An example dms plugin that displays cycling emojis in your bar with an emoji picker popout.
 
 ## Features
 

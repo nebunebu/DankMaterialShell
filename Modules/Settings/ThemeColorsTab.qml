@@ -651,7 +651,6 @@ Item {
 
                             DankDropdown {
                                 id: matugenPaletteDropdown
-                                width: parent.width
                                 text: "Matugen Palette"
                                 description: "Select the palette algorithm used for wallpaper-based colors"
                                 options: Theme.availableMatugenSchemes.map(function (option) { return option.label })
@@ -993,7 +992,6 @@ Item {
                         }
 
                         DankDropdown {
-                            width: parent.width - Theme.iconSize - Theme.spacingXS
                             anchors.verticalCenter: parent.verticalCenter
                             text: "Icon Theme"
                             description: "DankShell & System Icons\n(requires restart)"

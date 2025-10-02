@@ -28,6 +28,7 @@ Singleton {
     signal pluginLoaded(string pluginId)
     signal pluginUnloaded(string pluginId)
     signal pluginLoadFailed(string pluginId, string error)
+    signal pluginDataChanged(string pluginId)
 
     Component.onCompleted: {
         Qt.callLater(initializePlugins)
@@ -225,7 +226,10 @@ Singleton {
                 return false
             }
 
-            pluginWidgetComponents[pluginId] = component
+            var newComponents = Object.assign({}, pluginWidgetComponents)
+            newComponents[pluginId] = component
+            pluginWidgetComponents = newComponents
+
             plugin.loaded = true
             loadedPlugins[pluginId] = plugin
 
@@ -254,7 +258,9 @@ Singleton {
                     component.destroy()
                 }
             }
-            delete pluginWidgetComponents[pluginId]
+            var newComponents = Object.assign({}, pluginWidgetComponents)
+            delete newComponents[pluginId]
+            pluginWidgetComponents = newComponents
 
             plugin.loaded = false
             delete loadedPlugins[pluginId]
@@ -314,6 +320,7 @@ Singleton {
 
     function savePluginData(pluginId, key, value) {
         SettingsData.setPluginSetting(pluginId, key, value)
+        pluginDataChanged(pluginId)
         return true
     }
 

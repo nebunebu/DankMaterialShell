@@ -273,7 +273,7 @@ DankPopout {
                         height: 32
                         radius: 16
                         color: closeBatteryArea.containsMouse ? Theme.errorHover : "transparent"
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.top: parent.top
 
                         DankIcon {
                             anchors.centerIn: parent

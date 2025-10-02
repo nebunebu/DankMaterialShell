@@ -19,11 +19,15 @@ Column {
     width: parent.width
     spacing: Theme.spacingS
 
-    Component.onCompleted: {
+    function loadValue() {
         const settings = findSettings()
-        if (settings) {
+        if (settings && settings.pluginService) {
             value = settings.loadValue(settingKey, defaultValue)
         }
+    }
+
+    Component.onCompleted: {
+        loadValue()
     }
 
     onValueChanged: {
@@ -69,6 +73,7 @@ Column {
         rightIcon: root.rightIcon
         unit: root.unit
         wheelEnabled: false
+        thumbOutlineColor: Theme.surfaceContainerHighest
         onSliderValueChanged: newValue => {
             root.value = newValue
         }

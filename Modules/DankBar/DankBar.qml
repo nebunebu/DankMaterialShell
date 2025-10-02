@@ -99,17 +99,11 @@ Item {
                 target: PluginService
                 function onPluginLoaded(pluginId) {
                     console.log("DankBar: Plugin loaded:", pluginId)
-                    // Force componentMap to update by triggering property change
-                    if (topBarContent) {
-                        topBarContent.updateComponentMap()
-                    }
+                    SettingsData.widgetDataChanged()
                 }
                 function onPluginUnloaded(pluginId) {
                     console.log("DankBar: Plugin unloaded:", pluginId)
-                    // Force componentMap to update by triggering property change
-                    if (topBarContent) {
-                        topBarContent.updateComponentMap()
-                    }
+                    SettingsData.widgetDataChanged()
                 }
             }
 

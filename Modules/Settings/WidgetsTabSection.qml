@@ -142,13 +142,14 @@ Column {
                         spacing: Theme.spacingXS
 
                         Item {
-                            width: 120
+                            width: 60
                             height: 32
                             visible: modelData.id === "gpuTemp"
 
                             DankDropdown {
                                 id: gpuDropdown
                                 anchors.fill: parent
+                                popupWidth: -1
                                 currentValue: {
                                     var selectedIndex = modelData.selectedGpuIndex
                                             !== undefined ? modelData.selectedGpuIndex : 0
@@ -223,12 +224,7 @@ Column {
                         Item {
                             width: 32
                             height: 32
-                            visible: (modelData.warning !== undefined
-                                      && modelData.warning !== "")
-                                     && (modelData.id === "cpuUsage"
-                                         || modelData.id === "memUsage"
-                                         || modelData.id === "cpuTemp"
-                                         || modelData.id === "gpuTemp")
+                            visible: modelData.warning !== undefined && modelData.warning !== ""
 
                             DankIcon {
                                 name: "warning"

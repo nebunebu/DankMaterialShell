@@ -11,7 +11,7 @@
 
 </div>
 
-A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and designed for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors. Features Material 3 design principles with a heavy focus on functionality and customizability.
+A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and optimized for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors.
 
 ## Screenshots
 
@@ -122,6 +122,8 @@ curl -fsSL https://install.danklinux.com | sh
 - Configure bluetooth, wifi, and audio input+output devices.
 - A lock screen
 - Idle monitoring - configure auto lock, screen off, suspend, and hibernate with different knobs for battery + AC power.
+- A greeter
+- A comprehensive plugin system for endless customization possibilities.
 
 **TL;DR** *dms replaces your waybar, swaylock, swayidle, hypridle, hyprlock, fuzzels, walker, mako, and basically everything you use to stitch a desktop together*
 
@@ -628,6 +630,14 @@ echo "app-notifications = no-clipboard-copy,no-config-reload" >> ~/.config/ghost
 ```bash
 echo "include dank-theme.conf" >> ~/.config/kitty/kitty.conf
 ```
+
+## Plugins
+
+dms features a plugin system - meaning you can create your own widgets and load other user widgets.
+
+More comprehensive details available in the [PLUGINS](PLUGINS/README.md) - and example [Emoji Plugin](PLUGINS/ExampleEmojiPlugin) is available for reference.
+
+The example plugin can be installed by `cp -R ./PLUGINS/ExampleEmojiPlugin ~/.config/DankMaterialShell/plugins` - then it will appear in dms settings.
 
 ### Calendar Setup
 

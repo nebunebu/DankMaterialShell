@@ -121,15 +121,21 @@ PluginComponent {
 
     // Define popout content (optional)
     popoutContent: Component {
-        Column {
-            width: parent.width
-            spacing: Theme.spacingM
-            padding: Theme.spacingM
+        PopoutComponent {
+            headerText: "My Plugin"
+            detailsText: "Optional description text goes here"
+            showCloseButton: true
 
-            StyledText {
-                text: "Popout Content"
-                font.pixelSize: Theme.fontSizeLarge
-                color: Theme.surfaceText
+            // Your popout content goes here
+            Column {
+                width: parent.width
+                spacing: Theme.spacingM
+
+                StyledText {
+                    text: "Popout Content"
+                    font.pixelSize: Theme.fontSizeLarge
+                    color: Theme.surfaceText
+                }
             }
         }
     }
@@ -159,6 +165,42 @@ The PluginComponent automatically handles:
 - Click handlers for popouts
 - Proper positioning and anchoring
 - Theme integration
+
+### PopoutComponent
+
+PopoutComponent provides a consistent header/content layout for plugin popouts:
+
+```qml
+import qs.Modules.Plugins
+
+PopoutComponent {
+    headerText: "Header Title"        // Main header text (bold, large)
+    detailsText: "Description text"   // Optional description (smaller, gray)
+    showCloseButton: true             // Show X button in top-right
+
+    // Access to exposed properties for dynamic sizing
+    readonly property int headerHeight    // Height of header area
+    readonly property int detailsHeight   // Height of description area
+
+    // Your content here - use parent.width for full width
+    // Calculate available height: root.popoutHeight - headerHeight - detailsHeight - spacing
+    DankGridView {
+        width: parent.width
+        height: parent.height
+        // ...
+    }
+}
+```
+
+**PopoutComponent Properties:**
+- `headerText`: Main header text (optional, hidden if empty)
+- `detailsText`: Description text below header (optional, hidden if empty)
+- `showCloseButton`: Show close button in header (default: false)
+- `closePopout`: Function to close popout (auto-injected by PluginPopout)
+- `headerHeight`: Readonly height of header (0 if not visible)
+- `detailsHeight`: Readonly height of description (0 if not visible)
+
+The component automatically handles spacing and layout. Content children are rendered below the description with proper padding.
 
 ### Settings Component
 

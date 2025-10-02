@@ -520,7 +520,6 @@ Item {
                             DankDropdown {
                                 id: monitorDropdown
 
-                                width: parent.width - parent.leftPadding
                                 text: "Monitor"
                                 description: "Select monitor to configure wallpaper"
                                 currentValue: selectedMonitorName || "No monitors"
@@ -678,7 +677,6 @@ Item {
                                 property var intervalOptions: ["1 minute", "5 minutes", "15 minutes", "30 minutes", "1 hour", "1.5 hours", "2 hours", "3 hours", "4 hours", "6 hours", "8 hours", "12 hours"]
                                 property var intervalValues: [60, 300, 900, 1800, 3600, 5400, 7200, 10800, 14400, 21600, 28800, 43200]
 
-                                width: parent.width - parent.leftPadding
                                 visible: {
                                     if (SessionData.perMonitorWallpaper) {
                                         return SessionData.getMonitorCyclingSettings(selectedMonitorName).mode === "interval"
@@ -833,7 +831,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Transition Effect"
                         description: "Visual effect used when wallpaper changes"
                         currentValue: {
@@ -851,8 +848,6 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
                         visible: SessionData.wallpaperTransition === "random"
-                        leftPadding: Theme.spacingM
-                        rightPadding: Theme.spacingM
 
                         StyledText {
                             text: "Include Transitions"
@@ -866,12 +861,12 @@ Item {
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                             wrapMode: Text.WordWrap
-                            width: parent.width - parent.leftPadding - parent.rightPadding
+                            width: parent.width
                         }
 
                         DankButtonGroup {
                             id: transitionGroup
-                            width: parent.width - parent.leftPadding - parent.rightPadding
+                            width: parent.width
                             selectionMode: "multi"
                             model: SessionData.availableWallpaperTransitions.filter(t => t !== "none")
                             initialSelection: SessionData.includedTransitions
@@ -959,7 +954,6 @@ Item {
 
                     DankDropdown {
                         id: personalizationMatugenPaletteDropdown
-                        width: parent.width
                         text: "Matugen Palette"
                         description: "Select the palette algorithm used for wallpaper-based colors"
                         options: Theme.availableMatugenSchemes.map(function (option) { return option.label })
@@ -1075,7 +1069,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Temperature"
                         description: "Color temperature for night mode"
                         currentValue: SessionData.nightModeTemperature + "K"
@@ -1424,7 +1417,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Popup Position"
                         description: "Choose where notification popups appear on screen"
                         currentValue: {
@@ -1506,7 +1498,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Font Family"
                         description: "Select system font family"
                         currentValue: {
@@ -1528,7 +1519,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Font Weight"
                         description: "Select font weight"
                         currentValue: {
@@ -1595,7 +1585,6 @@ Item {
                     }
 
                     DankDropdown {
-                        width: parent.width
                         text: "Monospace Font"
                         description: "Select monospace font for process list and technical displays"
                         currentValue: {
