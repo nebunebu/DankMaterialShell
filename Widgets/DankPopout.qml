@@ -84,8 +84,8 @@ PanelWindow {
         id: contentContainer
         layer.enabled: true
 
-        readonly property real screenWidth: root.screen ? root.screen.width : 1920
-        readonly property real screenHeight: root.screen ? root.screen.height : 1080
+        readonly property real screenWidth: root.screen.width
+        readonly property real screenHeight: root.screen.height
         readonly property real gothOffset: SettingsData.dankBarGothCornersEnabled ? Theme.cornerRadius : 0
         readonly property real calculatedX: {
             if (SettingsData.dankBarPosition === SettingsData.Position.Left) {
@@ -108,8 +108,8 @@ PanelWindow {
             }
         }
         
-        width: Math.round(popupWidth)
-        height: Math.round(popupHeight)
+        width: popupWidth
+        height: popupHeight
         x: Math.round(calculatedX)
         y: Math.round(calculatedY)
         opacity: shouldBeVisible ? 1 : 0
@@ -121,8 +121,6 @@ PanelWindow {
                 easing.type: animationEasing
             }
         }
-
-        
 
         Loader {
             id: contentLoader
