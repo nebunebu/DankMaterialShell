@@ -306,7 +306,7 @@ Item {
                                                         if (PluginService.disablePlugin(currentPluginId)) {
                                                             ToastService.showInfo("Plugin disabled: " + currentPluginName)
                                                             if (pluginDelegate.isExpanded) {
-                                                                expandedPluginId = ""
+                                                                pluginsTab.expandedPluginId = ""
                                                             }
                                                         } else {
                                                             ToastService.showError("Failed to disable plugin: " + currentPluginName)

@@ -397,12 +397,10 @@ Item {
 
                 // Inject PluginService for plugin widgets
                 if (item.pluginService !== undefined) {
-                    console.log("CenterSection: Injecting PluginService into plugin widget:", model.widgetId)
-                    item.pluginService = PluginService
-                    if (item.loadTimezones) {
-                        console.log("CenterSection: Calling loadTimezones for widget:", model.widgetId)
-                        item.loadTimezones()
+                    if (item.pluginId !== undefined) {
+                        item.pluginId = model.widgetId
                     }
+                    item.pluginService = PluginService
                 }
 
                 layoutTimer.restart()

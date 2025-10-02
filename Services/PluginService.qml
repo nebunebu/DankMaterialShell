@@ -54,20 +54,14 @@ Singleton {
                         var dir = directories[i].trim()
                         if (dir) {
                             var manifestPath = currentDir + "/" + dir + "/plugin.json"
-                            console.log("PluginService: Found plugin directory:", dir, "checking manifest at:", manifestPath)
                             loadPluginManifest(manifestPath)
                         }
                     }
-                } else {
-                    console.log("PluginService: No directories found in:", currentDir)
                 }
             }
         }
 
         onExited: function(exitCode) {
-            if (exitCode !== 0) {
-                console.log("PluginService: Directory scan failed for:", pluginDirectories[currentScanIndex], "exit code:", exitCode)
-            }
             currentScanIndex++
             if (currentScanIndex < pluginDirectories.length) {
                 scanNextDirectory()
@@ -84,7 +78,6 @@ Singleton {
 
     function scanNextDirectory() {
         var dir = pluginDirectories[currentScanIndex]
-        console.log("PluginService: Scanning directory:", dir)
         lsProcess.command = ["find", "-L", dir, "-maxdepth", "1", "-type", "d", "-not", "-path", dir, "-exec", "basename", "{}", ";"]
         lsProcess.running = true
     }
@@ -92,9 +85,6 @@ Singleton {
     property var manifestReaders: ({})
 
     function loadPluginManifest(manifestPath) {
-        console.log("PluginService: Loading manifest:", manifestPath)
-
-        // Create a unique key for this manifest reader
         var readerId = "reader_" + Date.now() + "_" + Math.random()
 
         var catProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { stdout: StdioCollector { } }")
@@ -103,9 +93,7 @@ Singleton {
             process.command = ["cat", manifestPath]
             process.stdout.streamFinished.connect(function() {
                 try {
-                    console.log("PluginService: DEBUGGING parsing manifest, text length:", process.stdout.text.length)
                     var manifest = JSON.parse(process.stdout.text.trim())
-                    console.log("PluginService: Successfully parsed manifest for plugin:", manifest.id)
                     processManifest(manifest, manifestPath)
                 } catch (e) {
                     console.error("PluginService: Failed to parse manifest", manifestPath, ":", e.message)
@@ -138,7 +126,6 @@ Singleton {
     }
 
     function registerPlugin(manifest, manifestPath) {
-        console.log("PluginService: registerPlugin called with", manifest.id)
         if (!manifest.id || !manifest.name || !manifest.component) {
             console.error("PluginService: Invalid manifest, missing required fields:", manifestPath)
             return
@@ -168,8 +155,6 @@ Singleton {
         pluginInfo.loaded = false
 
         availablePlugins[manifest.id] = pluginInfo
-        console.log("PluginService: Registered plugin:", manifest.id, "-", manifest.name)
-        console.log("PluginService: Component path:", pluginInfo.componentPath)
     }
 
     function hasPermission(pluginId, permission) {
@@ -182,7 +167,6 @@ Singleton {
     }
 
     function loadPlugin(pluginId) {
-        console.log("PluginService: loadPlugin called for", pluginId)
         var plugin = availablePlugins[pluginId]
         if (!plugin) {
             console.error("PluginService: Plugin not found:", pluginId)
@@ -191,7 +175,6 @@ Singleton {
         }
 
         if (plugin.loaded) {
-            console.log("PluginService: Plugin already loaded:", pluginId)
             return true
         }
 
@@ -205,8 +188,6 @@ Singleton {
 
         try {
             var componentUrl = "file://" + plugin.componentPath
-            console.log("PluginService: Loading component from:", componentUrl)
-
             var component = Qt.createComponent(componentUrl, Component.PreferSynchronous)
 
             if (component.status === Component.Loading) {
@@ -233,7 +214,6 @@ Singleton {
             plugin.loaded = true
             loadedPlugins[pluginId] = plugin
 
-            console.log("PluginService: Successfully loaded plugin:", pluginId)
             pluginLoaded(pluginId)
             return true
 
@@ -265,7 +245,6 @@ Singleton {
             plugin.loaded = false
             delete loadedPlugins[pluginId]
 
-            console.log("PluginService: Successfully unloaded plugin:", pluginId)
             pluginUnloaded(pluginId)
             return true
 
@@ -300,13 +279,11 @@ Singleton {
     }
 
     function enablePlugin(pluginId) {
-        console.log("PluginService: Enabling plugin:", pluginId)
         SettingsData.setPluginSetting(pluginId, "enabled", true)
         return loadPlugin(pluginId)
     }
 
     function disablePlugin(pluginId) {
-        console.log("PluginService: Disabling plugin:", pluginId)
         SettingsData.setPluginSetting(pluginId, "enabled", false)
         return unloadPlugin(pluginId)
     }
@@ -329,15 +306,12 @@ Singleton {
     }
 
     function createPluginDirectory() {
-        console.log("PluginService: Creating plugin directory:", pluginDirectory)
         var mkdirProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { }")
         if (mkdirProcess.status === Component.Ready) {
             var process = mkdirProcess.createObject(root)
             process.command = ["mkdir", "-p", pluginDirectory]
             process.exited.connect(function(exitCode) {
-                if (exitCode === 0) {
-                    console.log("PluginService: Successfully created plugin directory")
-                } else {
+                if (exitCode !== 0) {
                     console.error("PluginService: Failed to create plugin directory, exit code:", exitCode)
                 }
                 process.destroy()
