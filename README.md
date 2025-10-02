@@ -650,6 +650,8 @@ More comprehensive details available in the [PLUGINS](PLUGINS/README.md) - and e
 
 The example plugin can be installed by `cp -R ./PLUGINS/ExampleEmojiPlugin ~/.config/DankMaterialShell/plugins` - then it will appear in dms settings.
 
+**Only install plugins from TRUSTED sources.** Plugins execute QML and javascript at runtime, plugins from third parties should be reviewed before enabling them in dms.
+
 ### Calendar Setup
 
 Sync your caldev compatible calendar (Google, Office365, etc.) for dashboard integration:

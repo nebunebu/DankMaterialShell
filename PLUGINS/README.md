@@ -29,6 +29,7 @@ The plugin system enables developers to create custom widgets that can be displa
    - Renders plugin widgets in the bar
    - Merges plugin components with built-in widgets
    - Supports left, center, and right sections
+   - Supports any dankbar position (top/left/right/bottom)
 
 ## Plugin Structure
 
@@ -39,7 +40,6 @@ $CONFIGPATH/DankMaterialShell/plugins/YourPlugin/
 ├── plugin.json          # Required: Plugin manifest
 ├── YourWidget.qml       # Required: Widget component
 ├── YourSettings.qml     # Optional: Settings UI
-├── qmldir               # Optional: QML module definition
 └── *.js                 # Optional: JavaScript utilities
 ```
 
@@ -96,7 +96,7 @@ import qs.Widgets
 import qs.Modules.Plugins
 
 PluginComponent {
-    // Define horizontal bar pill (optional)
+    // Define horizontal bar pill, for top and bottom DankBar positions (optional)
     horizontalBarPill: Component {
         StyledRect {
             width: content.implicitWidth + Theme.spacingM * 2
@@ -114,12 +114,12 @@ PluginComponent {
         }
     }
 
-    // Define vertical bar pill (optional)
+    // Define vertical bar pill, for left and right DankBar positions (optional)
     verticalBarPill: Component {
         // Same as horizontal but optimized for vertical layout
     }
 
-    // Define popout content (optional)
+    // Define popout content, opens when clicking the bar pill (optional)
     popoutContent: Component {
         PopoutComponent {
             headerText: "My Plugin"
@@ -295,7 +295,7 @@ PluginSettings {
 
 **Available Setting Components:**
 
-All settings automatically save on change and load on component creation. No manual `pluginService.savePluginData()` calls needed!
+All settings automatically save on change and load on component creation.
 
 **How Default Values Work:**
 
@@ -640,12 +640,11 @@ Or edit `$CONFIGPATH/quickshell/dms/config.json`:
 2. **Follow Theme**: Use `Theme` singleton for colors, spacing, and fonts
 3. **Data Persistence**: Use PluginService data APIs instead of manual file operations
 4. **Error Handling**: Gracefully handle missing dependencies and invalid data
-5. **Performance**: Keep widgets lightweight, avoid expensive operations
+5. **Performance**: Keep widgets lightweight, avoid long operations that block the UI loop
 6. **Responsive Design**: Adapt to `compactMode` and different screen sizes
-7. **Clean Code**: Follow QML code conventions from CLAUDE.md
-8. **Documentation**: Include README.md explaining plugin usage
-9. **Versioning**: Use semantic versioning for updates
-10. **Dependencies**: Document external library requirements
+7. **Documentation**: Include README.md explaining plugin usage
+8. **Versioning**: Use semantic versioning for updates
+9. **Dependencies**: Document external library requirements
 
 ## Debugging
 
@@ -711,7 +710,7 @@ The plugin API is currently **experimental**. Breaking changes may occur in mino
 
 ## Resources
 
-- **Example Plugin**: https://github.com/rochacbruno/WorldClock
+- **Example Plugins**: [Emoji Picker](./ExampleEmojiPlugin/) [WorldClock](https://github.com/rochacbruno/WorldClock)
 - **PluginService**: `Services/PluginService.qml`
 - **Settings UI**: `Modules/Settings/PluginsTab.qml`
 - **DankBar Integration**: `Modules/DankBar/DankBar.qml`
