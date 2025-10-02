@@ -51,7 +51,7 @@ Rectangle {
                     }
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primary
+                color: Theme.surfaceText
                 font.weight: Font.Normal
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
@@ -68,7 +68,7 @@ Rectangle {
                     }
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primary
+                color: Theme.surfaceText
                 font.weight: Font.Normal
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
@@ -82,7 +82,7 @@ Rectangle {
             StyledText {
                 text: String(systemClock?.date?.getMinutes()).padStart(2, '0').charAt(0)
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primary
+                color: Theme.surfaceText
                 font.weight: Font.Normal
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
@@ -91,7 +91,7 @@ Rectangle {
             StyledText {
                 text: String(systemClock?.date?.getMinutes()).padStart(2, '0').charAt(1)
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primary
+                color: Theme.surfaceText
                 font.weight: Font.Normal
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
@@ -124,13 +124,8 @@ Rectangle {
                     return value.charAt(0)
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.surfaceText
-                font.weight: {
-                    const locale = Qt.locale()
-                    const dateFormatShort = locale.dateFormat(Locale.ShortFormat)
-                    const dayFirst = dateFormatShort.indexOf('d') < dateFormatShort.indexOf('M')
-                    return dayFirst ? Font.Normal : Font.Light
-                }
+                color: Theme.primary
+                font.weight: Font.Light
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -144,13 +139,8 @@ Rectangle {
                     return value.charAt(1)
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.surfaceText
-                font.weight: {
-                    const locale = Qt.locale()
-                    const dateFormatShort = locale.dateFormat(Locale.ShortFormat)
-                    const dayFirst = dateFormatShort.indexOf('d') < dateFormatShort.indexOf('M')
-                    return dayFirst ? Font.Normal : Font.Light
-                }
+                color: Theme.primary
+                font.weight: Font.Light
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -169,13 +159,8 @@ Rectangle {
                     return value.charAt(0)
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.surfaceText
-                font.weight: {
-                    const locale = Qt.locale()
-                    const dateFormatShort = locale.dateFormat(Locale.ShortFormat)
-                    const dayFirst = dateFormatShort.indexOf('d') < dateFormatShort.indexOf('M')
-                    return dayFirst ? Font.Light : Font.Normal
-                }
+                color: Theme.primary
+                font.weight: Font.Light
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -189,13 +174,8 @@ Rectangle {
                     return value.charAt(1)
                 }
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.surfaceText
-                font.weight: {
-                    const locale = Qt.locale()
-                    const dateFormatShort = locale.dateFormat(Locale.ShortFormat)
-                    const dayFirst = dateFormatShort.indexOf('d') < dateFormatShort.indexOf('M')
-                    return dayFirst ? Font.Light : Font.Normal
-                }
+                color: Theme.primary
+                font.weight: Font.Light
                 width: 9
                 horizontalAlignment: Text.AlignHCenter
             }
