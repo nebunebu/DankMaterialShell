@@ -59,7 +59,7 @@ Item {
     width: isVertical ? (hasVerticalPill ? verticalPill.width : 0) : (hasHorizontalPill ? horizontalPill.width : 0)
     height: isVertical ? (hasVerticalPill ? verticalPill.height : 0) : (hasHorizontalPill ? horizontalPill.height : 0)
 
-    BaseHorizontalPill {
+    BasePill {
         id: horizontalPill
         visible: !isVertical && hasHorizontalPill
         axis: root.axis
@@ -76,7 +76,7 @@ Item {
         }
     }
 
-    BaseVerticalPill {
+    BasePill {
         id: verticalPill
         visible: isVertical && hasVerticalPill
         axis: root.axis
@@ -86,6 +86,7 @@ Item {
         widgetThickness: root.widgetThickness
         barThickness: root.barThickness
         content: root.verticalBarPill
+        isVerticalOrientation: true
         onClicked: {
             if (hasPopout) {
                 pluginPopout.toggle()

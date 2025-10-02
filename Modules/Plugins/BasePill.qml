@@ -12,14 +12,15 @@ Rectangle {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
+    property bool isVerticalOrientation: false
     property alias content: contentLoader.sourceComponent
 
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
 
     signal clicked()
 
-    width: widgetThickness
-    height: contentLoader.item ? (contentLoader.item.implicitHeight + horizontalPadding * 2) : 0
+    width: isVerticalOrientation ? widgetThickness : contentLoader.item ? (contentLoader.item.implicitWidth + horizontalPadding * 2) : 0
+    height: isVerticalOrientation ? (contentLoader.item ? (contentLoader.item.implicitHeight + horizontalPadding * 2) : 0) : widgetThickness
     radius: SettingsData.dankBarNoBackground ? 0 : Theme.cornerRadius
     color: {
         if (SettingsData.dankBarNoBackground) {
@@ -44,7 +45,7 @@ Rectangle {
             if (popoutTarget && popoutTarget.setTriggerPosition) {
                 const globalPos = mapToGlobal(0, 0)
                 const currentScreen = parentScreen || Screen
-                const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, height)
+                const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, width)
                 popoutTarget.setTriggerPosition(pos.x, pos.y, pos.width, section, currentScreen)
             }
             root.clicked()
