@@ -143,36 +143,13 @@ ShellRoot {
       active: false
 
       property var modalRef: colorPickerModal
+      property LazyLoader powerModalLoaderRef: powerMenuModalLoader
 
       ControlCenterPopout {
           id: controlCenterPopout
           colorPickerModal: controlCenterLoader.modalRef
+          powerMenuModalLoader: controlCenterLoader.powerModalLoaderRef
 
-          onPowerActionRequested: (action, title, message) => {
-                                      powerConfirmModalLoader.active = true
-                                      if (powerConfirmModalLoader.item) {
-                                          powerConfirmModalLoader.item.confirmButtonColor = action === "poweroff" ? Theme.error : action === "reboot" ? Theme.warning : Theme.primary
-                                          powerConfirmModalLoader.item.show(title, message, function () {
-                                              switch (action) {
-                                              case "logout":
-                                                  SessionService.logout()
-                                                  break
-                                              case "suspend":
-                                                  SessionService.suspend()
-                                                  break
-                                              case "hibernate":
-                                                  SessionService.hibernate()
-                                                  break
-                                              case "reboot":
-                                                  SessionService.reboot()
-                                                  break
-                                              case "poweroff":
-                                                  SessionService.poweroff()
-                                                  break
-                                              }
-                                          }, function () {})
-                                      }
-                                  }
           onLockRequested: {
               lock.activate()
           }
