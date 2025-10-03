@@ -565,7 +565,7 @@ paru -S qt6ct-kde
 
 You'll have to restart your session for themes to take effect.
 
-Nevigate to dms settings -> themes & colors -> and click "Apply QT Themes"
+Navigate to dms settings -> themes & colors -> and click "Apply QT Themes"
 
 #### Firefox
 
@@ -591,12 +591,7 @@ Firefox does use the GTK3 theme, but it doesn't look that good on the stock them
 - set `svg.context-properties.content.enabled` to `true`
 - Create a new property called `userChrome.theme-material` and type `boolean`
   - set to `true`
-
-<details><summary><strong>Expand for firefox screenshots</strong></summary>
-<img width="1262" height="104" alt="image" src="https://github.com/user-attachments/assets/4bca43d1-5735-4401-9b91-5ee4f0b1e357" />
-<img width="1262" height="104" alt="image" src="https://github.com/user-attachments/assets/348d37e0-5c6c-4db8-b7c9-89cabf282c25" />
-<img width="1244" height="106" alt="image" src="https://github.com/user-attachments/assets/75fd4972-bc4a-4657-b756-b31ef8061b3b" />
-</details>
+l
 
 2. **Install material fox theme**
 ```bash
@@ -614,6 +609,18 @@ rm "$PROFILE_DIR/chrome.zip"
 export PROFILE_DIR=$(find ~/.mozilla/firefox -maxdepth 1 -type d -name "*.default-release" | head -n 1)
 rm -f "$PROFILE_DIR/chrome/theme-material-blue.css"
 ln -sf ~/.config/DankMaterialShell/firefox.css "$PROFILE_DIR/chrome/theme-material-blue.css"
+```
+
+#### Betterbird/Thunderbird
+
+1. **In betterbird** - open config editor
+- set `toolkit.legacyuserprofilecustomizations.stylesheets` to `true`
+
+2. **Create chrome directory and symlink**
+```bash
+export TB_PROFILE=$(find ~/.thunderbird -maxdepth 1 -type d -name "*.default-default" | head -n 1)
+mkdir $TB_PROFILE/chrome
+ln -sf ~/.thunderbird/dms-thunderbird.css $TB_PROFILE/chrome/userChrome.css
 ```
 
 ### Terminal Integration

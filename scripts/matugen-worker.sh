@@ -108,6 +108,11 @@ build_once() {
     cat "$SHELL_DIR/matugen/configs/vesktop.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
+
+  if command -v thunderbird >/dev/null 2>&1 || command -v betterbird >/dev/null 2>&1; then
+    cat "$SHELL_DIR/matugen/configs/thunderbird.toml" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  fi
   
   # GTK3 colors based on colloid
   COLLOID_TEMPLATE="$SHELL_DIR/matugen/templates/gtk3-colors.css"

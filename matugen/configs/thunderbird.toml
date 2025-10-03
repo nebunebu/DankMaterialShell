@@ -1,0 +1,3 @@
+[templates.thunderbird]
+input_path = './matugen/templates/thunderbird-userchrome.css'
+output_path = '~/.thunderbird/dms-thunderbird.css'
