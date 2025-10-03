@@ -1162,6 +1162,8 @@ Item {
     Process {
         id: sessionListProc
         command: ["find"]
+            .concat("/usr/share/wayland-sessions")
+            .concat("/usr/share/xsessions")
             .concat(xdgDataDirs.split(":").map(d => d + "/wayland-sessions"))
             .concat(xdgDataDirs.split(":").map(d => d + "/xsessions"))
             .concat(["-name", "*.desktop", "-type", "f", "-follow"])
