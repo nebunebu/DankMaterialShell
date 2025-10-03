@@ -372,11 +372,11 @@ Item {
                     item.spacerSize = Qt.binding(() => model.size || 20)
                 }
                 if (root.axis && "axis" in item) {
-                    item.axis = root.axis
+                    item.axis = Qt.binding(() => root.axis)
                 }
                 if (root.axis && "isVertical" in item) {
                     try {
-                        item.isVertical = root.axis.isVertical
+                        item.isVertical = Qt.binding(() => root.axis.isVertical)
                     } catch (e) {
                     }
                 }
@@ -386,13 +386,13 @@ Item {
                     item.section = root.section
                 }
                 if ("parentScreen" in item) {
-                    item.parentScreen = root.parentScreen
+                    item.parentScreen = Qt.binding(() => root.parentScreen)
                 }
                 if ("widgetThickness" in item) {
-                    item.widgetThickness = root.widgetThickness
+                    item.widgetThickness = Qt.binding(() => root.widgetThickness)
                 }
                 if ("barThickness" in item) {
-                    item.barThickness = root.barThickness
+                    item.barThickness = Qt.binding(() => root.barThickness)
                 }
 
                 // Inject PluginService for plugin widgets

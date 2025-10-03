@@ -56,8 +56,8 @@ Item {
         SystemLogo {
             visible: SettingsData.useOSLogo
             anchors.centerIn: parent
-            width: widgetThickness - 8
-            height: widgetThickness - 8
+            width: Theme.iconSize - 3
+            height: Theme.iconSize - 3
             colorOverride: SettingsData.osLogoColorOverride
             brightnessOverride: SettingsData.osLogoBrightness
             contrastOverride: SettingsData.osLogoContrast
@@ -65,11 +65,9 @@ Item {
 
         DankIcon {
             visible: !SettingsData.useOSLogo
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 1
+            anchors.centerIn: parent
             name: "apps"
-            size: widgetThickness - 8
+            size: Theme.iconSize - 6
             color: Theme.surfaceText
         }
     }

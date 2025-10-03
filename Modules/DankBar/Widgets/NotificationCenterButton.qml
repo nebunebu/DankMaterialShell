@@ -57,7 +57,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             name: SessionData.doNotDisturb ? "notifications_off" : "notifications"
-            size: widgetThickness - 8
+            size: Theme.iconSize - 6
             color: SessionData.doNotDisturb ? Theme.error : (notificationArea.containsMouse || root.isActive ? Theme.primary : Theme.surfaceText)
         }
 
