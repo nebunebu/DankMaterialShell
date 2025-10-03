@@ -82,7 +82,8 @@ PanelWindow {
 
     Item {
         id: contentContainer
-        layer.enabled: true
+        // ! TODO - cannot figure out the proper fix for this, some texture artifacts with certain drivers screen scales
+        layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true"
 
         readonly property real screenWidth: root.screen.width
         readonly property real screenHeight: root.screen.height
@@ -110,8 +111,8 @@ PanelWindow {
 
         readonly property real dpr: root.screen.devicePixelRatio
         function snap(v) { return Math.round(v * dpr) / dpr }
-        width: snap(popupWidth)
-        height: snap(popupHeight)
+        width: popupWidth
+        height: popupHeight
         x: snap(calculatedX)
         y: snap(calculatedY)
 
