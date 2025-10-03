@@ -21,11 +21,13 @@ DankPopout {
     id: root
 
     property string expandedSection: ""
+    property bool powerOptionsExpanded: false
     property var triggerScreen: null
     property bool editMode: false
     property int expandedWidgetIndex: -1
     property var expandedWidgetData: null
 
+    signal powerActionRequested(string action, string title, string message)
     signal lockRequested
 
     function collapseAll() {
@@ -120,19 +122,25 @@ DankPopout {
                 HeaderPane {
                     id: headerPane
                     width: parent.width
+                    powerOptionsExpanded: root.powerOptionsExpanded
                     editMode: root.editMode
+                    onPowerOptionsExpandedChanged: root.powerOptionsExpanded = powerOptionsExpanded
                     onEditModeToggled: root.editMode = !root.editMode
-                    onPowerButtonClicked: {
-                        if (powerMenuModalLoader) {
-                            powerMenuModalLoader.active = true
-                            if (powerMenuModalLoader.item) {
-                                powerMenuModalLoader.item.open()
-                            }
-                        }
-                    }
+                    onPowerActionRequested: (action, title, message) => root.powerActionRequested(action, title, message)
                     onLockRequested: {
                         root.close()
                         root.lockRequested()
+                    }
+                }
+
+                PowerOptionsPane {
+                    id: powerOptionsPane
+                    width: parent.width
+                    expanded: root.powerOptionsExpanded
+                    onPowerActionRequested: (action, title, message) => {
+                        root.powerOptionsExpanded = false
+                        root.close()
+                        root.powerActionRequested(action, title, message)
                     }
                 }
 
@@ -218,5 +226,4 @@ DankPopout {
     }
 
     property var colorPickerModal: null
-    property var powerMenuModalLoader: null
 }

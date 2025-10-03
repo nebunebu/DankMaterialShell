@@ -6,9 +6,10 @@ import qs.Widgets
 Rectangle {
     id: root
 
+    property bool powerOptionsExpanded: false
     property bool editMode: false
 
-    signal powerButtonClicked()
+    signal powerActionRequested(string action, string title, string message)
     signal lockRequested()
     signal editModeToggled()
 
@@ -82,11 +83,13 @@ Rectangle {
 
         DankActionButton {
             buttonSize: 36
-            iconName: "power_settings_new"
+            iconName: root.powerOptionsExpanded ? "expand_less" : "power_settings_new"
             iconSize: Theme.iconSize - 4
-            iconColor: Theme.surfaceText
+            iconColor: root.powerOptionsExpanded ? Theme.primary : Theme.surfaceText
             backgroundColor: "transparent"
-            onClicked: root.powerButtonClicked()
+            onClicked: {
+                root.powerOptionsExpanded = !root.powerOptionsExpanded
+            }
         }
 
         DankActionButton {
