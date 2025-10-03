@@ -17,6 +17,7 @@ Item {
 
     required property var sessionLock
 
+    readonly property string xdgDataDirs: Quickshell.env("XDG_DATA_DIRS")
     property string screenName: ""
     property string randomFact: ""
     property string hyprlandCurrentLayout: ""
@@ -1160,7 +1161,10 @@ Item {
 
     Process {
         id: sessionListProc
-        command: ["find", "/usr/share/wayland-sessions", "/usr/share/xsessions", "-name", "*.desktop", "-type", "f"]
+        command: ["find"]
+            .concat(xdgDataDirs.split(":").map(d => d + "/wayland-sessions"))
+            .concat(xdgDataDirs.split(":").map(d => d + "/xsessions"))
+            .concat(["-name", "*.desktop", "-type", "f", "-follow"])
         running: false
 
         stdout: SplitParser {

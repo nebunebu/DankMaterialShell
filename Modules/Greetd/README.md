@@ -12,9 +12,12 @@ A greeter for [greetd](https://github.com/kennylevinsen/greetd) that follows the
 
 ## Installation
 
+### Automatic
+
 The easiest thing is to run `dms greeter install` or `dms` for interactive installation.
 
-Manual installation:
+### Manual
+
 1. Install `greetd` (in most distro's standard repositories)
 2. Copy `assets/dms-niri.kdl` or `assets/dms-hypr.conf` to `/etc/greetd`
   - niri if you want to run the greeter under niri, hypr if you want to run the greeter under Hyprland
@@ -42,6 +45,24 @@ command = "/usr/local/bin/start-dms-greetd.sh"
 ```
 
 Enable the greeter with `sudo systemctl enable greetd`
+
+### NixOS
+
+To install the greeter on NixOS add the repo to your flake inputs as described in the readme. Then somewhere in your NixOS config add this to imports:
+```nix
+imports = [
+  inputs.dankMaterialShell.nixosModules.greeter
+]
+```
+
+Enable the greeter with this in your NixOS config:
+```nix
+programs.dankMaterialShell.greeter = {
+  enable = true;
+  compositor = "niri"; # or set to hyprland
+  configHome = "/home/user"; # optionally symlinks that users DMS settings to the greeters data directory
+};
+```
 
 ## Usage
 
