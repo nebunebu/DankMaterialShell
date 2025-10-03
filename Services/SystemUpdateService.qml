@@ -17,6 +17,7 @@ Singleton {
     property string pkgManager: ""
     property string distribution: ""
     property bool distributionSupported: false
+    property string shellVersion: ""
 
     readonly property list<string> supportedDistributions: ["arch", "cachyos", "manjaro", "endeavouros"]
     readonly property int updateCount: availableUpdates.length
@@ -39,6 +40,23 @@ Singleton {
                 }
             } else {
                 console.warn("SystemUpdate: Failed to detect distribution")
+            }
+        }
+
+        stdout: StdioCollector {}
+
+        Component.onCompleted: {
+            versionDetection.running = true
+        }
+    }
+
+    Process {
+        id: versionDetection
+        command: ["sh", "-c", "if [ -d .git ]; then echo \"(git) $(git rev-parse --short HEAD)\"; elif [ -f VERSION ]; then cat VERSION; fi"]
+
+        onExited: (exitCode) => {
+            if (exitCode === 0) {
+                shellVersion = stdout.text.trim()
             }
         }
 
