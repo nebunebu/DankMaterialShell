@@ -372,7 +372,7 @@ ShellRoot {
       function open() {
           powerMenuModalLoader.active = true
           if (powerMenuModalLoader.item)
-              powerMenuModalLoader.item.open()
+              powerMenuModalLoader.item.openCentered()
 
           return "POWERMENU_OPEN_SUCCESS"
       }
@@ -386,8 +386,13 @@ ShellRoot {
 
       function toggle() {
           powerMenuModalLoader.active = true
-          if (powerMenuModalLoader.item)
-              powerMenuModalLoader.item.toggle()
+          if (powerMenuModalLoader.item) {
+              if (powerMenuModalLoader.item.shouldBeVisible) {
+                  powerMenuModalLoader.item.close()
+              } else {
+                  powerMenuModalLoader.item.openCentered()
+              }
+          }
 
           return "POWERMENU_TOGGLE_SUCCESS"
       }

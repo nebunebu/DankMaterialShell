@@ -126,8 +126,9 @@ DankPopout {
                         if (powerMenuModalLoader) {
                             powerMenuModalLoader.active = true
                             if (powerMenuModalLoader.item) {
-                                const globalPos = controlContent.mapToGlobal(0, 0)
-                                powerMenuModalLoader.item.parentBounds = Qt.rect(globalPos.x, globalPos.y, controlContent.width, controlContent.height)
+                                const popoutPos = controlContent.mapToItem(null, 0, 0)
+                                powerMenuModalLoader.item.parentScreen = root.triggerScreen
+                                powerMenuModalLoader.item.parentBounds = Qt.rect(popoutPos.x, popoutPos.y, controlContent.width, controlContent.height)
                                 powerMenuModalLoader.item.open()
                             }
                         }

@@ -10,8 +10,15 @@ DankModal {
     property int selectedIndex: 0
     property int optionCount: SessionService.hibernateSupported ? 5 : 4
     property rect parentBounds: Qt.rect(0, 0, 0, 0)
+    property var parentScreen: null
 
     signal powerActionRequested(string action, string title, string message)
+
+    function openCentered() {
+        parentBounds = Qt.rect(0, 0, 0, 0)
+        parentScreen = null
+        open()
+    }
 
     function selectOption(action) {
         close();
@@ -48,6 +55,7 @@ DankModal {
     width: 320
     height: contentLoader.item ? contentLoader.item.implicitHeight : 300
     enableShadow: true
+    screen: parentScreen
     positioning: parentBounds.width > 0 ? "custom" : "center"
     customPosition: {
         if (parentBounds.width > 0) {
