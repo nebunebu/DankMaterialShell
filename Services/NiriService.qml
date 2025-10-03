@@ -23,6 +23,8 @@ Singleton {
 
     property var windows: []
 
+    signal windowUrgentChanged()
+
     property bool inOverview: false
 
     property int currentKeyboardLayoutIndex: 0
@@ -188,6 +190,9 @@ Singleton {
                 break;
             case 'KeyboardLayoutSwitched':
                 handleKeyboardLayoutSwitched(event.KeyboardLayoutSwitched);
+                break;
+            case 'WorkspaceUrgencyChanged':
+                handleWorkspaceUrgencyChanged(event.WorkspaceUrgencyChanged);
                 break;
         }
     }
@@ -371,6 +376,22 @@ Singleton {
 
     function handleKeyboardLayoutSwitched(data) {
         currentKeyboardLayoutIndex = data.idx
+    }
+
+    function handleWorkspaceUrgencyChanged(data) {
+        const ws = root.workspaces[data.id]
+        if (!ws) {
+            return
+        }
+
+        ws.is_urgent = data.urgent
+
+        const idx = allWorkspaces.findIndex(w => w.id === data.id)
+        if (idx >= 0) {
+            allWorkspaces[idx].is_urgent = data.urgent
+        }
+
+        windowUrgentChanged()
     }
 
     Process {

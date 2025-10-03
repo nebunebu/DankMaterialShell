@@ -293,19 +293,30 @@ Rectangle {
                 property bool isHovered: mouseArea.containsMouse
 
                 property var loadedWorkspaceData: null
+                property bool loadedIsUrgent: false
+                property bool isUrgent: {
+                    if (CompositorService.isHyprland) {
+                        return modelData?.urgent ?? false
+                    }
+                    if (CompositorService.isNiri) {
+                        return loadedIsUrgent
+                    }
+                    return false
+                }
                 property var loadedIconData: null
                 property bool loadedHasIcon: false
                 property var loadedIcons: []
 
                 Timer {
                     id: dataUpdateTimer
-                    interval: 50 // Defer data calculation by 50ms
+                    interval: 50
                     onTriggered: {
                         if (isPlaceholder) {
                             delegateRoot.loadedWorkspaceData = null
                             delegateRoot.loadedIconData = null
                             delegateRoot.loadedHasIcon = false
                             delegateRoot.loadedIcons = []
+                            delegateRoot.loadedIsUrgent = false
                             return
                         }
 
@@ -316,6 +327,7 @@ Rectangle {
                             wsData = modelData;
                         }
                         delegateRoot.loadedWorkspaceData = wsData;
+                        delegateRoot.loadedIsUrgent = wsData?.is_urgent ?? false;
 
                         var icData = null;
                         if (wsData?.name) {
@@ -363,7 +375,10 @@ Rectangle {
                     }
                 }
                 radius: Math.min(width, height) / 2
-                color: isActive ? Theme.primary : isPlaceholder ? Theme.surfaceTextLight : isHovered ? Theme.outlineButton : Theme.surfaceTextAlpha
+                color: isActive ? Theme.primary : isUrgent ? Theme.error : isPlaceholder ? Theme.surfaceTextLight : isHovered ? Theme.outlineButton : Theme.surfaceTextAlpha
+
+                border.width: isUrgent && !isActive ? 2 : 0
+                border.color: isUrgent && !isActive ? Theme.error : Theme.withAlpha(Theme.error, 0)
 
                 Behavior on width {
                     enabled: (!SettingsData.showWorkspaceApps || SettingsData.maxWorkspaceIcons <= 3)
@@ -377,6 +392,20 @@ Rectangle {
                     enabled: root.isVertical && (!SettingsData.showWorkspaceApps || SettingsData.maxWorkspaceIcons <= 3)
                     NumberAnimation {
                         duration: Theme.mediumDuration
+                        easing.type: Theme.emphasizedEasing
+                    }
+                }
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: Theme.mediumDuration
+                        easing.type: Theme.emphasizedEasing
+                    }
+                }
+
+                Behavior on border.width {
+                    NumberAnimation {
+                        duration: Theme.shortDuration
                         easing.type: Theme.emphasizedEasing
                     }
                 }
@@ -619,6 +648,7 @@ Rectangle {
                     target: NiriService
                     enabled: CompositorService.isNiri
                     function onAllWorkspacesChanged() { delegateRoot.updateAllData() }
+                    function onWindowUrgentChanged() { delegateRoot.updateAllData() }
                 }
                 Connections {
                     target: SettingsData
