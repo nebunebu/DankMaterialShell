@@ -1,3 +1,6 @@
+//@ pragma Env QSG_RENDER_LOOP=threaded
+//@ pragma UseQApplication
+
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -26,7 +29,9 @@ import qs.Modules.Plugins
 import qs.Services
 
 
-Item {
+ShellRoot {
+  id: root
+
   Component.onCompleted: {
     PortalService.init()
     // Initialize DisplayService night mode functionality

@@ -10,7 +10,11 @@ ShellRoot {
 
     WlSessionLock {
         id: sessionLock
-        locked: true
+        locked: false
+
+        Component.onCompleted: {
+            Qt.callLater(() => { locked = true })
+        }
 
         onLockedChanged: {
             if (!locked) {

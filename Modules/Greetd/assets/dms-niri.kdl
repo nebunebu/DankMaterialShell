@@ -17,3 +17,7 @@ gestures {
      off
    }
 }
+
+layout {
+  background-color "#000000"
+}
