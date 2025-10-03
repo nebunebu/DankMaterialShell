@@ -75,7 +75,7 @@ Singleton {
             return
         }
 
-        const colorScheme = isLightMode ? "prefer-light" : "prefer-dark"
+        const colorScheme = isLightMode ? "default" : "prefer-dark"
         const script = `gsettings set org.gnome.desktop.interface color-scheme '${colorScheme}'`
 
         systemColorSchemeSetProcess.command = ["bash", "-c", script]
