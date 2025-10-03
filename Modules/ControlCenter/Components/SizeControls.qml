@@ -32,7 +32,7 @@ Row {
                 text: modelData.toString()
                 font.pixelSize: 8
                 font.weight: Font.Medium
-                color: modelData === root.currentSize ? Theme.primaryContainer : Theme.surfaceText
+                color: modelData === root.currentSize ? Theme.primaryText : Theme.surfaceText
             }
 
             MouseArea {

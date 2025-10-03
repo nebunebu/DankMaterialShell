@@ -86,7 +86,7 @@ Rectangle {
                 width: parent.width - Theme.spacingS * 2
                 height: 44
                 radius: Theme.cornerRadius
-                color: isActive ? Theme.primaryContainer : tabMouseArea.containsMouse ? Theme.surfaceHover : Theme.withAlpha(Theme.primaryContainer, 0)
+                color: isActive ? Theme.primary : tabMouseArea.containsMouse ? Theme.surfaceHover : "transparent"
 
                 Row {
                     anchors.left: parent.left
@@ -97,14 +97,14 @@ Rectangle {
                     DankIcon {
                         name: modelData.icon || ""
                         size: Theme.iconSize - 2
-                        color: parent.parent.isActive ? Theme.surfaceText : Theme.surfaceText
+                        color: parent.parent.isActive ? Theme.primaryText : Theme.surfaceText
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
                     StyledText {
                         text: modelData.text || ""
                         font.pixelSize: Theme.fontSizeMedium
-                        color: parent.parent.isActive ? Theme.surfaceText : Theme.surfaceText
+                        color: parent.parent.isActive ? Theme.primaryText : Theme.surfaceText
                         font.weight: parent.parent.isActive ? Font.Medium : Font.Normal
                         anchors.verticalCenter: parent.verticalCenter
                     }

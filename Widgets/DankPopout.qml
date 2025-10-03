@@ -107,11 +107,14 @@ PanelWindow {
                 return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, triggerY + Theme.popupDistance))
             }
         }
-        
-        width: popupWidth
-        height: popupHeight
-        x: Math.round(calculatedX)
-        y: Math.round(calculatedY)
+
+        readonly property real dpr: root.screen.devicePixelRatio
+        function snap(v) { return Math.round(v * dpr) / dpr }
+        width: snap(popupWidth)
+        height: snap(popupHeight)
+        x: snap(calculatedX)
+        y: snap(calculatedY)
+
         opacity: shouldBeVisible ? 1 : 0
         scale: 1
 
