@@ -678,6 +678,10 @@ Singleton {
 
     function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a); }
 
+    function snap(value, dpr) {
+        return Math.round(value * dpr) / dpr
+    }
+
     Process {
         id: matugenCheck
         command: ["which", "matugen"]

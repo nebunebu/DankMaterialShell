@@ -157,8 +157,7 @@ PanelWindow {
         radius: root.cornerRadius
         border.color: root.borderColor
         border.width: root.borderWidth
-        layer.enabled: root.enableShadow
-        opacity: root.shouldBeVisible ? 1 : 0
+        layer.enabled: true
         transform: root.animationType === "slide" ? slideTransform : null
 
         Translate {
@@ -176,13 +175,6 @@ PanelWindow {
             asynchronous: false
         }
 
-        Behavior on opacity {
-            NumberAnimation {
-                duration: root.animationDuration
-                easing.type: root.animationEasing
-            }
-        }
-
         layer.effect: MultiEffect {
             shadowEnabled: true
             shadowHorizontalOffset: 0
@@ -190,6 +182,15 @@ PanelWindow {
             shadowBlur: 1
             shadowColor: Theme.shadowStrong
             shadowOpacity: 0.3
+            source: contentContainer
+            opacity: root.shouldBeVisible ? 1 : 0
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: animationDuration
+                    easing.type: animationEasing
+                }
+            }
         }
     }
 

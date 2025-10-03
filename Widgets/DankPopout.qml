@@ -68,56 +68,69 @@ PanelWindow {
         bottom: true
     }
 
+    readonly property real screenWidth: root.screen.width
+    readonly property real screenHeight: root.screen.height
+    readonly property real dpr: root.screen.devicePixelRatio
+
+    readonly property real calculatedX: {
+        if (SettingsData.dankBarPosition === SettingsData.Position.Left) {
+            return triggerY
+        } else if (SettingsData.dankBarPosition === SettingsData.Position.Right) {
+            return screenWidth - triggerY - popupWidth
+        } else {
+            const centerX = triggerX + (triggerWidth / 2) - (popupWidth / 2)
+            return Math.max(Theme.popupDistance, Math.min(screenWidth - popupWidth - Theme.popupDistance, centerX))
+        }
+    }
+    readonly property real calculatedY: {
+        if (SettingsData.dankBarPosition === SettingsData.Position.Left || SettingsData.dankBarPosition === SettingsData.Position.Right) {
+            const centerY = triggerX + (triggerWidth / 2) - (popupHeight / 2)
+            return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, centerY))
+        } else if (SettingsData.dankBarPosition === SettingsData.Position.Bottom) {
+            return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, screenHeight - triggerY - popupHeight + Theme.popupDistance))
+        } else {
+            return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, triggerY + Theme.popupDistance))
+        }
+    }
+
+    readonly property real alignedWidth: Theme.snap(popupWidth, dpr)
+    readonly property real alignedHeight: Theme.snap(popupHeight, dpr)
+    readonly property real alignedX: Theme.snap(calculatedX, dpr)
+    readonly property real alignedY: Theme.snap(calculatedY, dpr)
+
     MouseArea {
         anchors.fill: parent
         enabled: shouldBeVisible
         onClicked: mouse => {
-                       var localPos = mapToItem(contentContainer, mouse.x, mouse.y)
-                       if (localPos.x < 0 || localPos.x > contentContainer.width || localPos.y < 0 || localPos.y > contentContainer.height) {
-                           backgroundClicked()
-                           close()
-                       }
-                   }
+            if (mouse.x < alignedX || mouse.x > alignedX + alignedWidth ||
+                mouse.y < alignedY || mouse.y > alignedY + alignedHeight) {
+                backgroundClicked()
+                close()
+            }
+        }
     }
 
-    Item {
-        id: contentContainer
-        // ! TODO - cannot figure out the proper fix for this, some texture artifacts with certain drivers screen scales
+    Loader {
+        id: contentLoader
+        x: alignedX
+        y: alignedY
+        width: alignedWidth
+        height: alignedHeight
+        active: root.visible
+        asynchronous: false
+        opacity: Quickshell.env("DMS_DISABLE_LAYER") === "true" ? (shouldBeVisible ? 1 : 0) : 1
         layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true"
+        layer.effect: MultiEffect {
+            source: contentLoader
+            opacity: shouldBeVisible ? 1 : 0
 
-        readonly property real screenWidth: root.screen.width
-        readonly property real screenHeight: root.screen.height
-        readonly property real gothOffset: SettingsData.dankBarGothCornersEnabled ? Theme.cornerRadius : 0
-        readonly property real calculatedX: {
-            if (SettingsData.dankBarPosition === SettingsData.Position.Left) {
-                return triggerY
-            } else if (SettingsData.dankBarPosition === SettingsData.Position.Right) {
-                return screenWidth - triggerY - popupWidth
-            } else {
-                const centerX = triggerX + (triggerWidth / 2) - (popupWidth / 2)
-                return Math.max(Theme.popupDistance, Math.min(screenWidth - popupWidth - Theme.popupDistance, centerX))
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: animationDuration
+                    easing.type: animationEasing
+                }
             }
         }
-        readonly property real calculatedY: {
-            if (SettingsData.dankBarPosition === SettingsData.Position.Left || SettingsData.dankBarPosition === SettingsData.Position.Right) {
-                const centerY = triggerX + (triggerWidth / 2) - (popupHeight / 2)
-                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, centerY))
-            } else if (SettingsData.dankBarPosition === SettingsData.Position.Bottom) {
-                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, screenHeight - triggerY - popupHeight + Theme.popupDistance))
-            } else {
-                return Math.max(Theme.popupDistance, Math.min(screenHeight - popupHeight - Theme.popupDistance, triggerY + Theme.popupDistance))
-            }
-        }
-
-        readonly property real dpr: root.screen.devicePixelRatio
-        function snap(v) { return Math.round(v * dpr) / dpr }
-        width: popupWidth
-        height: popupHeight
-        x: snap(calculatedX)
-        y: snap(calculatedY)
-
-        opacity: shouldBeVisible ? 1 : 0
-        scale: 1
 
         Behavior on opacity {
             NumberAnimation {
@@ -125,26 +138,21 @@ PanelWindow {
                 easing.type: animationEasing
             }
         }
+    }
 
-        Loader {
-            id: contentLoader
-            anchors.fill: parent
-            active: root.visible
-            asynchronous: false
+    Item {
+        x: alignedX
+        y: alignedY
+        width: alignedWidth
+        height: alignedHeight
+        focus: true
+        Keys.onPressed: event => {
+            if (event.key === Qt.Key_Escape) {
+                close()
+                event.accepted = true
+            }
         }
-
-        Item {
-            anchors.fill: parent
-            focus: true
-            Keys.onPressed: event => {
-                                if (event.key === Qt.Key_Escape) {
-                                    close()
-                                    event.accepted = true
-                                }
-                            }
-            Component.onCompleted: forceActiveFocus()
-            onVisibleChanged: if (visible)
-                                  forceActiveFocus()
-        }
+        Component.onCompleted: forceActiveFocus()
+        onVisibleChanged: if (visible) forceActiveFocus()
     }
 }
