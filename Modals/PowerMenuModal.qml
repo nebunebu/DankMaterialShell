@@ -9,6 +9,7 @@ DankModal {
 
     property int selectedIndex: 0
     property int optionCount: SessionService.hibernateSupported ? 5 : 4
+    property rect parentBounds: Qt.rect(0, 0, 0, 0)
 
     signal powerActionRequested(string action, string title, string message)
 
@@ -47,6 +48,15 @@ DankModal {
     width: 320
     height: contentLoader.item ? contentLoader.item.implicitHeight : 300
     enableShadow: true
+    positioning: parentBounds.width > 0 ? "custom" : "center"
+    customPosition: {
+        if (parentBounds.width > 0) {
+            const centerX = parentBounds.x + (parentBounds.width - width) / 2
+            const centerY = parentBounds.y + (parentBounds.height - height) / 2
+            return Qt.point(centerX, centerY)
+        }
+        return Qt.point(0, 0)
+    }
     onBackgroundClicked: () => {
         return close();
     }

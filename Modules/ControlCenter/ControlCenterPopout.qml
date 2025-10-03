@@ -126,6 +126,8 @@ DankPopout {
                         if (powerMenuModalLoader) {
                             powerMenuModalLoader.active = true
                             if (powerMenuModalLoader.item) {
+                                const globalPos = controlContent.mapToGlobal(0, 0)
+                                powerMenuModalLoader.item.parentBounds = Qt.rect(globalPos.x, globalPos.y, controlContent.width, controlContent.height)
                                 powerMenuModalLoader.item.open()
                             }
                         }
