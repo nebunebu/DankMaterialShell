@@ -54,13 +54,11 @@ Singleton {
         id: versionDetection
         command: ["sh", "-c", "if [ -d .git ]; then echo \"(git) $(git rev-parse --short HEAD)\"; elif [ -f VERSION ]; then cat VERSION; fi"]
 
-        onExited: (exitCode) => {
-            if (exitCode === 0) {
-                shellVersion = stdout.text.trim()
-            }
+        stdout: StdioCollector {
+            onStreamFinished: {
+                shellVersion = text.trim()
+            }            
         }
-
-        stdout: StdioCollector {}
     }
 
     Process {
