@@ -74,6 +74,8 @@ Item {
             implicitWidth: isVertical ? px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0)) : 0
             color: "transparent"
 
+            property var nativeInhibitor: null
+
             Component.onCompleted: {
                 const fonts = Qt.fontFamilies()
                 if (fonts.indexOf("Material Symbols Rounded") === -1) {
@@ -93,6 +95,10 @@ Item {
 
                 updateGpuTempConfig()
                 Qt.callLater(() => Qt.callLater(forceWidgetRefresh))
+
+                if (SessionService.nativeInhibitorAvailable) {
+                    createNativeInhibitor()
+                }
             }
 
             Connections {
@@ -122,6 +128,38 @@ Item {
                 DgopService.gpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled || SessionData.nonNvidiaGpuTempEnabled
                 DgopService.nvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nvidiaGpuTempEnabled
                 DgopService.nonNvidiaGpuTempEnabled = hasGpuTempWidget || SessionData.nonNvidiaGpuTempEnabled
+            }
+
+            function createNativeInhibitor() {
+                if (!SessionService.nativeInhibitorAvailable) {
+                    return
+                }
+
+                try {
+                    const qmlString = `
+                        import QtQuick
+                        import Quickshell.Wayland
+
+                        IdleInhibitor {
+                            enabled: false
+                        }
+                    `
+
+                    nativeInhibitor = Qt.createQmlObject(qmlString, barWindow, "DankBar.NativeInhibitor")
+                    nativeInhibitor.window = barWindow
+                    nativeInhibitor.enabled = Qt.binding(() => SessionService.idleInhibited)
+                    nativeInhibitor.enabledChanged.connect(function() {
+                        console.log("DankBar: Native inhibitor enabled changed to:", nativeInhibitor.enabled)
+                        if (SessionService.idleInhibited !== nativeInhibitor.enabled) {
+                            SessionService.idleInhibited = nativeInhibitor.enabled
+                            SessionService.inhibitorChanged()
+                        }
+                    })
+                    console.log("DankBar: Created native Wayland IdleInhibitor for", barWindow.screenName)
+                } catch (e) {
+                    console.warn("DankBar: Failed to create native IdleInhibitor:", e)
+                    nativeInhibitor = null
+                }
             }
 
             Connections {

@@ -673,6 +673,38 @@ ShellRoot {
       target: "notepad"
   }
 
+  IpcHandler {
+      function toggle(): string {
+          SessionService.toggleIdleInhibit()
+          return SessionService.idleInhibited ? "Idle inhibit enabled" : "Idle inhibit disabled"
+      }
+
+      function enable(): string {
+          SessionService.enableIdleInhibit()
+          return "Idle inhibit enabled"
+      }
+
+      function disable(): string {
+          SessionService.disableIdleInhibit()
+          return "Idle inhibit disabled"
+      }
+
+      function status(): string {
+          return SessionService.idleInhibited ? "Idle inhibit is enabled" : "Idle inhibit is disabled"
+      }
+
+      function reason(newReason: string): string {
+          if (!newReason) {
+              return `Current reason: ${SessionService.inhibitReason}`
+          }
+
+          SessionService.setInhibitReason(newReason)
+          return `Inhibit reason set to: ${newReason}`
+      }
+
+      target: "inhibit"
+  }
+
   Variants {
       model: SettingsData.getFilteredScreens("toast")
 
