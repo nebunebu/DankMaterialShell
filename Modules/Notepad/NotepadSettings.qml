@@ -15,6 +15,7 @@ Item {
     property bool fontsEnumerated: false
 
     signal settingsRequested()
+    signal findRequested()
 
     function enumerateFonts() {
         var fonts = ["Default"]
@@ -152,6 +153,51 @@ Item {
                 checked: SettingsData.notepadShowLineNumbers
                 onToggled: checked => {
                     SettingsData.notepadShowLineNumbers = checked
+                }
+            }
+
+            Rectangle {
+                width: parent.width
+                height: 48
+                color: findMouseArea.containsMouse ? Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.05) : "transparent"
+
+                MouseArea {
+                    id: findMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: root.findRequested()
+                }
+
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: -Theme.spacingM
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: Theme.spacingM
+
+                    DankActionButton {
+                        iconName: "search"
+                        iconSize: Theme.iconSize - 2
+                        iconColor: Theme.primary
+                        onClicked: root.findRequested()
+                    }
+
+                    Column {
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: Theme.spacingXS
+
+                        StyledText {
+                            text: "Find in Text"
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceText
+                        }
+
+                        StyledText {
+                            text: "Open search bar to find text"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceTextMedium
+                        }
+                    }
                 }
             }
 

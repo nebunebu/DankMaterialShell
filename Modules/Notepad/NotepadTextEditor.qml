@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell.Io
 import qs.Common
 import qs.Services
@@ -15,6 +16,11 @@ Column {
     property bool contentLoaded: false
     property string lastSavedContent: ""
     property var currentTab: NotepadStorageService.tabs.length > NotepadStorageService.currentTabIndex ? NotepadStorageService.tabs[NotepadStorageService.currentTabIndex] : null
+    property bool searchVisible: false
+    property string searchQuery: ""
+    property var searchMatches: []
+    property int currentMatchIndex: -1
+    property int matchCount: 0
 
     signal saveRequested()
     signal openRequested()
@@ -83,11 +89,250 @@ Column {
         }
     }
 
+    function performSearch() {
+        let matches = []
+        currentMatchIndex = -1
+
+        if (!searchQuery || searchQuery.length === 0) {
+            searchMatches = []
+            matchCount = 0
+            textArea.select(0, 0)
+            return
+        }
+
+        const text = textArea.text
+        const query = searchQuery.toLowerCase()
+        let index = 0
+
+        while (index < text.length) {
+            const foundIndex = text.toLowerCase().indexOf(query, index)
+            if (foundIndex === -1) break
+
+            matches.push({
+                start: foundIndex,
+                end: foundIndex + searchQuery.length
+            })
+            index = foundIndex + 1
+        }
+
+        searchMatches = matches
+        matchCount = matches.length
+
+        if (matchCount > 0) {
+            currentMatchIndex = 0
+            highlightCurrentMatch()
+        } else {
+            textArea.select(0, 0)
+        }
+    }
+
+    function highlightCurrentMatch() {
+        if (currentMatchIndex >= 0 && currentMatchIndex < searchMatches.length) {
+            const match = searchMatches[currentMatchIndex]
+            
+            textArea.cursorPosition = match.start
+            textArea.moveCursorSelection(match.end, TextEdit.SelectCharacters)
+            
+            const flickable = textArea.parent
+            if (flickable && flickable.contentY !== undefined) {
+                const lineHeight = textArea.font.pixelSize * 1.5
+                const approxLine = textArea.text.substring(0, match.start).split('\n').length
+                const targetY = approxLine * lineHeight - flickable.height / 2
+                flickable.contentY = Math.max(0, Math.min(targetY, flickable.contentHeight - flickable.height))
+            }
+        }
+    }
+
+    function findNext() {
+        if (matchCount === 0 || searchMatches.length === 0) return
+
+        currentMatchIndex = (currentMatchIndex + 1) % matchCount
+        highlightCurrentMatch()
+    }
+
+    function findPrevious() {
+        if (matchCount === 0 || searchMatches.length === 0) return
+
+        currentMatchIndex = currentMatchIndex <= 0 ? matchCount - 1 : currentMatchIndex - 1
+        highlightCurrentMatch()
+    }
+
+    function showSearch() {
+        searchVisible = true
+        Qt.callLater(() => {
+            searchField.forceActiveFocus()
+        })
+    }
+
+    function hideSearch() {
+        searchVisible = false
+        searchQuery = ""
+        searchMatches = []
+        matchCount = 0
+        currentMatchIndex = -1
+        textArea.select(0, 0)
+        textArea.forceActiveFocus()
+    }
+
     spacing: Theme.spacingM
 
     StyledRect {
+        id: searchBar
         width: parent.width
-        height: parent.height - bottomControls.height - Theme.spacingM
+        height: 48
+        visible: searchVisible
+        opacity: searchVisible ? 1 : 0
+        color: Qt.rgba(Theme.surfaceContainerHigh.r, Theme.surfaceContainerHigh.g, Theme.surfaceContainerHigh.b, 0.95)
+        border.color: Theme.primary
+        border.width: 1
+        radius: Theme.cornerRadius
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Theme.shortDuration
+                easing.type: Theme.standardEasing
+            }
+        }
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: Theme.spacingM
+            anchors.rightMargin: Theme.spacingM
+            spacing: Theme.spacingS
+
+            StyledRect {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                height: 40
+                radius: Theme.cornerRadius
+                color: Theme.surface
+                border.color: searchField.activeFocus ? Theme.primary : Theme.outlineMedium
+                border.width: searchField.activeFocus ? 2 : 1
+
+                Item {
+                    anchors.fill: parent
+                    anchors.margins: 1
+
+                    DankIcon {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingM
+                        name: "search"
+                        size: Theme.iconSize - 2
+                        color: searchField.activeFocus ? Theme.primary : Theme.surfaceVariantText
+                    }
+
+                    TextInput {
+                        id: searchField
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingM + (Theme.iconSize - 2) + Theme.spacingM
+                        anchors.right: parent.right
+                        anchors.rightMargin: Theme.spacingM + 96 + Theme.spacingS * 2
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: parent.height
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.surfaceText
+                        verticalAlignment: TextInput.AlignVCenter
+                        selectByMouse: true
+                        clip: true
+                        
+                        Component.onCompleted: {
+                            text = root.searchQuery
+                        }
+                        
+                        Connections {
+                            target: root
+                            function onSearchQueryChanged() {
+                                if (searchField.text !== root.searchQuery) {
+                                    searchField.text = root.searchQuery
+                                }
+                            }
+                        }
+                        
+                        onTextChanged: {
+                            if (root.searchQuery !== text) {
+                                root.searchQuery = text
+                                root.performSearch()
+                            }
+                        }
+                        Keys.onEscapePressed: event => {
+                            root.hideSearch()
+                            event.accepted = true
+                        }
+                        Keys.onReturnPressed: event => {
+                            if (event.modifiers & Qt.ShiftModifier) {
+                                root.findPrevious()
+                            } else {
+                                root.findNext()
+                            }
+                            event.accepted = true
+                        }
+                        Keys.onEnterPressed: event => {
+                            if (event.modifiers & Qt.ShiftModifier) {
+                                root.findPrevious()
+                            } else {
+                                root.findNext()
+                            }
+                            event.accepted = true
+                        }
+                    }
+                    
+                    StyledText {
+                        anchors.left: searchField.left
+                        anchors.verticalCenter: searchField.verticalCenter
+                        text: qsTr("Find in note...")
+                        font: searchField.font
+                        color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
+                        visible: searchField.text.length === 0 && !searchField.activeFocus
+                    }
+                }
+            }
+
+            DankActionButton {
+                id: prevButton
+                Layout.alignment: Qt.AlignVCenter
+                iconName: "keyboard_arrow_up"
+                iconSize: Theme.iconSize
+                iconColor: matchCount > 0 ? Theme.surfaceText : Theme.surfaceTextAlpha
+                enabled: matchCount > 0
+                onClicked: root.findPrevious()
+            }
+
+            DankActionButton {
+                id: nextButton
+                Layout.alignment: Qt.AlignVCenter
+                iconName: "keyboard_arrow_down"
+                iconSize: Theme.iconSize
+                iconColor: matchCount > 0 ? Theme.surfaceText : Theme.surfaceTextAlpha
+                enabled: matchCount > 0
+                onClicked: root.findNext()
+            }
+
+            DankActionButton {
+                id: closeSearchButton
+                Layout.alignment: Qt.AlignVCenter
+                iconName: "close"
+                iconSize: Theme.iconSize - 2
+                iconColor: Theme.surfaceText
+                onClicked: root.hideSearch()
+            }
+        }
+
+        StyledText {
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.rightMargin: Theme.spacingM
+            anchors.topMargin: 2
+            text: matchCount > 0 ? qsTr("%1/%2").arg(currentMatchIndex + 1).arg(matchCount) : searchQuery.length > 0 ? qsTr("No matches") : ""
+            font.pixelSize: Theme.fontSizeSmall
+            color: matchCount > 0 ? Theme.primary : Theme.surfaceTextMedium
+            visible: searchQuery.length > 0
+        }
+    }
+
+    StyledRect {
+        width: parent.width
+        height: parent.height - bottomControls.height - Theme.spacingM - (searchVisible ? searchBar.height + Theme.spacingM : 0)
         color: Qt.rgba(Theme.surface.r, Theme.surface.g, Theme.surface.b, Theme.notepadTransparency)
         border.color: Theme.outlineMedium
         border.width: 1
@@ -159,6 +404,8 @@ Column {
                 font.pixelSize: SettingsData.notepadFontSize * SettingsData.fontScale
                 font.letterSpacing: 0
                 color: Theme.surfaceText
+                selectedTextColor: Theme.background
+                selectionColor: Theme.primary
                 selectByMouse: true
                 selectByKeyboard: true
                 wrapMode: TextArea.Wrap
@@ -177,12 +424,18 @@ Column {
                     loadCurrentTabContent()
                     setTextDocumentLineHeight()
                     root.updateLineModel()
+                    Qt.callLater(() => {
+                        textArea.forceActiveFocus()
+                    })
                 }
 
                 Connections {
                     target: NotepadStorageService
                     function onCurrentTabIndexChanged() {
                         loadCurrentTabContent()
+                        Qt.callLater(() => {
+                            textArea.forceActiveFocus()
+                        })
                     }
                     function onTabsChanged() {
                         if (NotepadStorageService.tabs.length > 0 && !contentLoaded) {
@@ -229,6 +482,10 @@ Column {
                         case Qt.Key_A:
                             event.accepted = true
                             selectAll()
+                            break
+                        case Qt.Key_F:
+                            event.accepted = true
+                            root.showSearch()
                             break
                         }
                     }
