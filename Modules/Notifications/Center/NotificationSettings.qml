@@ -11,7 +11,7 @@ Rectangle {
     readonly property real contentHeight: contentColumn.height + Theme.spacingL * 2
 
     width: parent.width
-    height: expanded ? Math.min(contentHeight, 400) : 0
+    height: expanded ? contentHeight : 0
     visible: expanded
     clip: true
     radius: Theme.cornerRadius
