@@ -13,7 +13,10 @@ Singleton {
     readonly property string preferredBatteryOverride: Quickshell.env("DMS_PREFERRED_BATTERY")
 
     readonly property UPowerDevice device: {
-        const preferredDev = UPower.devices.values.find(dev => dev.nativePath.toLowerCase().includes(preferredBatteryOverride.toLowerCase()))
+        var preferredDev
+        if (preferredBatteryOverride && preferredBatteryOverride.length > 0) {
+            preferredDev = UPower.devices.values.find(dev => dev.nativePath.toLowerCase().includes(preferredBatteryOverride.toLowerCase()))
+        }
         return preferredDev || UPower.devices.values.find(dev => dev.isLaptopBattery)
     }
     readonly property bool batteryAvailable: device && device.ready
