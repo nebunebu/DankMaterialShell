@@ -645,9 +645,14 @@ echo "include dank-theme.conf" >> ~/.config/kitty/kitty.conf
 
 dms features a plugin system - meaning you can create your own widgets and load other user widgets.
 
-More comprehensive details available in the [PLUGINS](PLUGINS/README.md) - and example [Emoji Plugin](PLUGINS/ExampleEmojiPlugin) is available for reference.
+More comprehensive details available in the [PLUGINS](PLUGINS/README.md) - and examples [Emoji Plugin](PLUGINS/ExampleEmojiPlugin) and [Wallpaper Change Hook](PLUGINS/WallpaperWatcherDaemon) are available for reference.
 
-The example plugin can be installed by `cp -R ./PLUGINS/ExampleEmojiPlugin ~/.config/DankMaterialShell/plugins` - then it will appear in dms settings.
+Install an example plugin by:
+
+```bash
+mkdir ~/.config/DankMaterialShell/plugins
+cp -R ./PLUGINS/ExampleEmojiPlugin ~/.config/DankMaterialShell/plugins
+```
 
 **Only install plugins from TRUSTED sources.** Plugins execute QML and javascript at runtime, plugins from third parties should be reviewed before enabling them in dms.
 
