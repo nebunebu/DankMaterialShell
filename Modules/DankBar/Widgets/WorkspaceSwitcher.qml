@@ -630,7 +630,7 @@ Rectangle {
                                 }
                                 return CompositorService.isHyprland ? (modelData?.id || "") : (modelData - 1);
                             }
-                            color: isActive ? Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.95) : isPlaceholder ? Theme.surfaceTextAlpha : Theme.surfaceTextMedium
+                            color: (isActive || isUrgent) ? Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.95) : isPlaceholder ? Theme.surfaceTextAlpha : Theme.surfaceTextMedium
                             font.pixelSize: Theme.fontSizeSmall
                             font.weight: (isActive && !isPlaceholder) ? Font.DemiBold : Font.Normal
                         }
