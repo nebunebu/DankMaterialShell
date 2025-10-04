@@ -13,6 +13,8 @@
 
 A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and optimized for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors.
 
+Features notifications, app launcher, wallpaper customization, and fully customizable with [plugins](https://github.com/AvengeMedia/dms-plugin-registry).
+
 ## Screenshots
 
 <div align="center">
@@ -642,6 +644,8 @@ echo "include dank-theme.conf" >> ~/.config/kitty/kitty.conf
 ```
 
 ## Plugins
+
+[Plugin registry](https://github.com/AvengeMedia/dms-plugin-registry) - collection of available dms plugins.
 
 dms features a plugin system - meaning you can create your own widgets and load other user widgets.
 
