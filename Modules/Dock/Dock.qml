@@ -78,8 +78,8 @@ Variants {
     }
 
     property bool reveal: {
-        if (CompositorService.isNiri && NiriService.inOverview) {
-            return SettingsData.dockOpenOnOverview
+        if (CompositorService.isNiri && NiriService.inOverview && SettingsData.dockOpenOnOverview) {
+            return true
         }
         return (!autoHide || dockMouseArea.containsMouse || dockApps.requestDockShow || contextMenuOpen || revealSticky) && !windowIsFullscreen
     }
@@ -99,7 +99,7 @@ Variants {
     }
 
     screen: modelData
-    visible: SettingsData.showDock
+    visible: SettingsData.showDock || (CompositorService.isNiri && SettingsData.dockOpenOnOverview && NiriService.inOverview)
     color: "transparent"
 
 

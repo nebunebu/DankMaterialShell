@@ -159,6 +159,29 @@ PluginComponent {
 - `popoutContent`: Optional popout window content
 - `popoutWidth`: Popout window width
 - `popoutHeight`: Popout window height
+- `pillClickAction`: Custom click handler function (overrides popout)
+
+**Custom Click Actions:**
+
+Override the default popout behavior with `pillClickAction`:
+
+```qml
+PluginComponent {
+    horizontalBarPill: Component {
+        StyledText { text: "Click Me" }
+    }
+
+    // Simple 0-parameter function
+    pillClickAction: () => {
+        Process.exec("bash", ["-c", "notify-send 'Clicked!'"])
+    }
+
+    // Or with position parameters for popouts: (x, y, width, section, screen)
+    pillClickAction: (x, y, width, section, screen) => {
+        popoutService?.toggleControlCenter(x, y, width, section, screen)
+    }
+}
+```
 
 The PluginComponent automatically handles:
 - Bar orientation detection

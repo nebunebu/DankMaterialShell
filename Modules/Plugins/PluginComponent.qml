@@ -19,6 +19,7 @@ Item {
     property Component popoutContent: null
     property real popoutWidth: 400
     property real popoutHeight: 400
+    property var pillClickAction: null
 
     property var pluginData: ({})
 
@@ -70,7 +71,16 @@ Item {
         barThickness: root.barThickness
         content: root.horizontalBarPill
         onClicked: {
-            if (hasPopout) {
+            if (pillClickAction) {
+                if (pillClickAction.length === 0) {
+                    pillClickAction()
+                } else {
+                    const globalPos = mapToGlobal(0, 0)
+                    const currentScreen = parentScreen || Screen
+                    const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, width)
+                    pillClickAction(pos.x, pos.y, pos.width, section, currentScreen)
+                }
+            } else if (hasPopout) {
                 pluginPopout.toggle()
             }
         }
@@ -88,7 +98,16 @@ Item {
         content: root.verticalBarPill
         isVerticalOrientation: true
         onClicked: {
-            if (hasPopout) {
+            if (pillClickAction) {
+                if (pillClickAction.length === 0) {
+                    pillClickAction()
+                } else {
+                    const globalPos = mapToGlobal(0, 0)
+                    const currentScreen = parentScreen || Screen
+                    const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, width)
+                    pillClickAction(pos.x, pos.y, pos.width, section, currentScreen)
+                }
+            } else if (hasPopout) {
                 pluginPopout.toggle()
             }
         }

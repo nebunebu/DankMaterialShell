@@ -394,6 +394,9 @@ Item {
                                             if (item && typeof PluginService !== "undefined") {
                                                 item.pluginService = PluginService
                                             }
+                                            if (item && typeof PopoutService !== "undefined") {
+                                                item.popoutService = PopoutService
+                                            }
                                         }
                                     }
 

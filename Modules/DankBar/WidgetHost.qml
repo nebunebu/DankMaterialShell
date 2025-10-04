@@ -84,6 +84,10 @@ Loader {
                 }
                 item.pluginService = PluginService
             }
+
+            if (item.popoutService !== undefined) {
+                item.popoutService = PopoutService
+            }
         }
     }
 

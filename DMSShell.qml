@@ -34,11 +34,8 @@ ShellRoot {
 
   Component.onCompleted: {
     PortalService.init()
-    // Initialize DisplayService night mode functionality
     DisplayService.nightModeEnabled
-    // Initialize WallpaperCyclingService
     WallpaperCyclingService.cyclingActive
-    // Initialize PluginService by accessing its properties
     PluginService.pluginDirectory
   }
 
@@ -54,6 +51,9 @@ ShellRoot {
           onLoaded: {
               if (item) {
                   item.pluginService = PluginService
+                  if (item.popoutService !== undefined) {
+                      item.popoutService = PopoutService
+                  }
                   item.pluginId = pluginId
                   console.log("Daemon plugin loaded:", pluginId)
               }
@@ -124,6 +124,10 @@ ShellRoot {
       sourceComponent: Component {
           DankDashPopout {
               id: dankDashPopout
+
+              Component.onCompleted: {
+                  PopoutService.dankDashPopout = dankDashPopout
+              }
           }
       }
   }
@@ -145,6 +149,10 @@ ShellRoot {
 
       NotificationCenterPopout {
           id: notificationCenter
+
+          Component.onCompleted: {
+              PopoutService.notificationCenterPopout = notificationCenter
+          }
       }
   }
 
@@ -172,6 +180,10 @@ ShellRoot {
           onLockRequested: {
               lock.activate()
           }
+
+          Component.onCompleted: {
+              PopoutService.controlCenterPopout = controlCenterPopout
+          }
       }
   }
 
@@ -182,6 +194,10 @@ ShellRoot {
 
       WifiPasswordModal {
           id: wifiPasswordModal
+
+          Component.onCompleted: {
+              PopoutService.wifiPasswordModal = wifiPasswordModal
+          }
       }
   }
 
@@ -192,6 +208,10 @@ ShellRoot {
 
       NetworkInfoModal {
           id: networkInfoModal
+
+          Component.onCompleted: {
+              PopoutService.networkInfoModal = networkInfoModal
+          }
       }
   }
 
@@ -202,6 +222,10 @@ ShellRoot {
 
       BatteryPopout {
           id: batteryPopout
+
+          Component.onCompleted: {
+              PopoutService.batteryPopout = batteryPopout
+          }
       }
   }
 
@@ -212,6 +236,10 @@ ShellRoot {
 
       VpnPopout {
           id: vpnPopout
+
+          Component.onCompleted: {
+              PopoutService.vpnPopout = vpnPopout
+          }
       }
   }
 
@@ -268,11 +296,19 @@ ShellRoot {
 
       ProcessListPopout {
           id: processListPopout
+
+          Component.onCompleted: {
+              PopoutService.processListPopout = processListPopout
+          }
       }
   }
 
   SettingsModal {
       id: settingsModal
+
+      Component.onCompleted: {
+          PopoutService.settingsModal = settingsModal
+      }
   }
 
   LazyLoader {
@@ -282,22 +318,43 @@ ShellRoot {
 
       AppDrawerPopout {
           id: appDrawerPopout
+
+          Component.onCompleted: {
+              PopoutService.appDrawerPopout = appDrawerPopout
+          }
       }
   }
 
   SpotlightModal {
       id: spotlightModal
+
+      Component.onCompleted: {
+          PopoutService.spotlightModal = spotlightModal
+      }
   }
 
   ClipboardHistoryModal {
       id: clipboardHistoryModalPopup
+
+      Component.onCompleted: {
+          PopoutService.clipboardHistoryModal = clipboardHistoryModalPopup
+      }
   }
 
   NotificationModal {
       id: notificationModal
+
+      Component.onCompleted: {
+          PopoutService.notificationModal = notificationModal
+      }
   }
+
   ColorPickerModal {
       id: colorPickerModal
+
+      Component.onCompleted: {
+          PopoutService.colorPickerModal = colorPickerModal
+      }
   }
 
   LazyLoader {
@@ -307,6 +364,10 @@ ShellRoot {
 
       ProcessListModal {
           id: processListModal
+
+          Component.onCompleted: {
+              PopoutService.processListModal = processListModal
+          }
       }
   }
 
@@ -317,6 +378,10 @@ ShellRoot {
 
       SystemUpdatePopout {
           id: systemUpdatePopout
+
+          Component.onCompleted: {
+              PopoutService.systemUpdatePopout = systemUpdatePopout
+          }
       }
   }
 
@@ -384,6 +449,10 @@ ShellRoot {
                                           }, function () {})
                                       }
                                   }
+
+          Component.onCompleted: {
+              PopoutService.powerMenuModal = powerMenuModal
+          }
       }
   }
 

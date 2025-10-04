@@ -33,7 +33,8 @@ Rectangle {
 
     Loader {
         id: contentLoader
-        anchors.centerIn: parent
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     MouseArea {

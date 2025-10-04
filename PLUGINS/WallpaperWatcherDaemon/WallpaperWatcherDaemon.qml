@@ -9,6 +9,7 @@ PluginComponent {
     id: root
 
     property string scriptPath: pluginData.scriptPath || ""
+    property var popoutService: null
 
     Connections {
         target: SessionData
