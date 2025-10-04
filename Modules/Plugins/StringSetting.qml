@@ -15,11 +15,22 @@ Column {
     width: parent.width
     spacing: Theme.spacingS
 
-    Component.onCompleted: {
+    function loadValue() {
         const settings = findSettings()
-        if (settings) {
+        if (settings && settings.pluginService) {
             value = settings.loadValue(settingKey, defaultValue)
             textField.text = value
+        }
+    }
+
+    Component.onCompleted: {
+        loadValue()
+    }
+
+    onValueChanged: {
+        const settings = findSettings()
+        if (settings) {
+            settings.saveValue(settingKey, value)
         }
     }
 
@@ -54,11 +65,15 @@ Column {
         id: textField
         width: parent.width
         placeholderText: root.placeholder
+        onTextEdited: {
+            root.value = text
+        }
         onEditingFinished: {
             root.value = text
-            const settings = findSettings()
-            if (settings) {
-                settings.saveValue(settingKey, text)
+        }
+        onActiveFocusChanged: {
+            if (!activeFocus) {
+                root.value = text
             }
         }
     }

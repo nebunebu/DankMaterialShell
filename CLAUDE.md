@@ -448,7 +448,13 @@ When modifying the shell:
 
 ### Creating Plugins
 
-Plugins are external, dynamically-loaded components that extend DankBar functionality. Plugins are stored in `~/.config/DankMaterialShell/plugins/` and have their settings isolated from core DMS settings.
+Plugins are external, dynamically-loaded components that extend DankMaterialShell functionality. Plugins are stored in `~/.config/DankMaterialShell/plugins/` and have their settings isolated from core DMS settings.
+
+**Plugin Types:**
+- **Widget plugins** (`"type": "widget"` or omit type field): Display UI components in DankBar
+- **Daemon plugins** (`"type": "daemon"`): Run invisibly in the background without UI
+
+#### Widget Plugins
 
 1. **Create plugin directory**:
    ```bash
@@ -464,6 +470,7 @@ Plugins are external, dynamically-loaded components that extend DankBar function
        "version": "1.0.0",
        "author": "Your Name",
        "icon": "extension",
+       "type": "widget",
        "component": "./YourWidget.qml",
        "settings": "./YourSettings.qml",
        "permissions": ["settings_read", "settings_write"]
@@ -544,6 +551,65 @@ Plugins are external, dynamically-loaded components that extend DankBar function
    - Click "Scan for Plugins"
    - Toggle plugin to enable
    - Add plugin ID to DankBar widget list
+
+#### Daemon Plugins
+
+Daemon plugins run invisibly in the background without any UI components. They're useful for monitoring system events, background tasks, or data synchronization.
+
+1. **Create plugin directory**:
+   ```bash
+   mkdir -p ~/.config/DankMaterialShell/plugins/YourDaemon
+   ```
+
+2. **Create manifest** (`plugin.json`):
+   ```json
+   {
+       "id": "yourDaemon",
+       "name": "Your Daemon",
+       "description": "Background daemon description",
+       "version": "1.0.0",
+       "author": "Your Name",
+       "icon": "settings_applications",
+       "type": "daemon",
+       "component": "./YourDaemon.qml",
+       "permissions": ["settings_read", "settings_write"]
+   }
+   ```
+
+3. **Create daemon component** (`YourDaemon.qml`):
+   ```qml
+   import QtQuick
+   import qs.Common
+   import qs.Services
+
+   Item {
+       id: root
+
+       property var pluginService: null
+
+       Connections {
+           target: SessionData
+           function onWallpaperPathChanged() {
+               console.log("Wallpaper changed:", SessionData.wallpaperPath)
+               if (pluginService) {
+                   pluginService.savePluginData("yourDaemon", "lastEvent", Date.now())
+               }
+           }
+       }
+
+       Component.onCompleted: {
+           console.log("Daemon started")
+       }
+   }
+   ```
+
+4. **Enable daemon**:
+   - Open Settings → Plugins
+   - Click "Scan for Plugins"
+   - Toggle daemon to enable
+   - Daemon runs automatically in background
+
+**Example**: See `PLUGINS/WallpaperWatcherDaemon/` for a complete daemon plugin that monitors wallpaper changes
 
 **Plugin Directory Structure:**
 ```

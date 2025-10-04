@@ -14,6 +14,7 @@ Singleton {
     property var availablePlugins: ({})
     property var loadedPlugins: ({})
     property var pluginWidgetComponents: ({})
+    property var pluginDaemonComponents: ({})
     property string pluginDirectory: {
         var configDir = StandardPaths.writableLocation(StandardPaths.ConfigLocation)
         var configDirStr = configDir.toString()
@@ -153,6 +154,7 @@ Singleton {
         pluginInfo.componentPath = pluginDir + '/' + componentFile
         pluginInfo.settingsPath = settingsFile ? pluginDir + '/' + settingsFile : null
         pluginInfo.loaded = false
+        pluginInfo.type = manifest.type || "widget"
 
         availablePlugins[manifest.id] = pluginInfo
     }
@@ -178,12 +180,19 @@ Singleton {
             return true
         }
 
-        if (pluginWidgetComponents[pluginId]) {
-            var oldComponent = pluginWidgetComponents[pluginId]
+        var isDaemon = plugin.type === "daemon"
+        var componentMap = isDaemon ? pluginDaemonComponents : pluginWidgetComponents
+
+        if (componentMap[pluginId]) {
+            var oldComponent = componentMap[pluginId]
             if (oldComponent) {
                 oldComponent.destroy()
             }
-            delete pluginWidgetComponents[pluginId]
+            if (isDaemon) {
+                delete pluginDaemonComponents[pluginId]
+            } else {
+                delete pluginWidgetComponents[pluginId]
+            }
         }
 
         try {
@@ -207,9 +216,15 @@ Singleton {
                 return false
             }
 
-            var newComponents = Object.assign({}, pluginWidgetComponents)
-            newComponents[pluginId] = component
-            pluginWidgetComponents = newComponents
+            if (isDaemon) {
+                var newDaemons = Object.assign({}, pluginDaemonComponents)
+                newDaemons[pluginId] = component
+                pluginDaemonComponents = newDaemons
+            } else {
+                var newComponents = Object.assign({}, pluginWidgetComponents)
+                newComponents[pluginId] = component
+                pluginWidgetComponents = newComponents
+            }
 
             plugin.loaded = true
             loadedPlugins[pluginId] = plugin
@@ -232,15 +247,25 @@ Singleton {
         }
 
         try {
-            if (pluginWidgetComponents[pluginId]) {
+            var isDaemon = plugin.type === "daemon"
+
+            if (isDaemon && pluginDaemonComponents[pluginId]) {
+                var daemonComponent = pluginDaemonComponents[pluginId]
+                if (daemonComponent) {
+                    daemonComponent.destroy()
+                }
+                var newDaemons = Object.assign({}, pluginDaemonComponents)
+                delete newDaemons[pluginId]
+                pluginDaemonComponents = newDaemons
+            } else if (pluginWidgetComponents[pluginId]) {
                 var component = pluginWidgetComponents[pluginId]
                 if (component) {
                     component.destroy()
                 }
+                var newComponents = Object.assign({}, pluginWidgetComponents)
+                delete newComponents[pluginId]
+                pluginWidgetComponents = newComponents
             }
-            var newComponents = Object.assign({}, pluginWidgetComponents)
-            delete newComponents[pluginId]
-            pluginWidgetComponents = newComponents
 
             plugin.loaded = false
             delete loadedPlugins[pluginId]
@@ -256,6 +281,10 @@ Singleton {
 
     function getWidgetComponents() {
         return pluginWidgetComponents
+    }
+
+    function getDaemonComponents() {
+        return pluginDaemonComponents
     }
 
     function getAvailablePlugins() {

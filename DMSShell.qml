@@ -42,6 +42,25 @@ ShellRoot {
     PluginService.pluginDirectory
   }
 
+  Instantiator {
+      id: daemonPluginInstantiator
+      model: Object.keys(PluginService.pluginDaemonComponents)
+
+      delegate: Loader {
+          id: daemonLoader
+          property string pluginId: modelData
+          sourceComponent: PluginService.pluginDaemonComponents[pluginId]
+
+          onLoaded: {
+              if (item) {
+                  item.pluginService = PluginService
+                  item.pluginId = pluginId
+                  console.log("Daemon plugin loaded:", pluginId)
+              }
+          }
+      }
+  }
+
   WallpaperBackground {}
 
   Lock {

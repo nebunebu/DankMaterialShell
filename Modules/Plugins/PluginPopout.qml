@@ -19,7 +19,7 @@ DankPopout {
     }
 
     popupWidth: contentWidth
-    popupHeight: popoutContent.item ? popoutContent.item.implicitHeight : contentHeight
+    popupHeight: contentHeight
     screen: triggerScreen
     shouldBeVisible: false
     visible: shouldBeVisible
