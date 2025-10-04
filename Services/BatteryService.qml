@@ -10,8 +10,11 @@ import Quickshell.Services.UPower
 Singleton {
     id: root
 
+    readonly property string preferredBatteryOverride: Quickshell.env("DMS_PREFERRED_BATTERY")
+
     readonly property UPowerDevice device: {
-        UPower.devices.values.find(dev => dev.isLaptopBattery) || null
+        const preferredDev = UPower.devices.values.find(dev => dev.nativePath.toLowerCase().includes(preferredBatteryOverride.toLowerCase()))
+        return preferredDev || UPower.devices.values.find(dev => dev.isLaptopBattery)
     }
     readonly property bool batteryAvailable: device && device.ready
     readonly property real batteryLevel: batteryAvailable ? Math.round(device.percentage * 100) : 0
