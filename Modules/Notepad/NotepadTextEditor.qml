@@ -154,6 +154,7 @@ Column {
             TextArea.flickable: TextArea {
                 id: textArea
                 placeholderText: qsTr("Start typing your notes here...")
+                placeholderTextColor: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
                 font.family: SettingsData.notepadUseMonospace ? SettingsData.monoFontFamily : (SettingsData.notepadFontFamily || SettingsData.fontFamily)
                 font.pixelSize: SettingsData.notepadFontSize * SettingsData.fontScale
                 font.letterSpacing: 0
