@@ -183,8 +183,8 @@ Column {
         visible: searchVisible
         opacity: searchVisible ? 1 : 0
         color: Qt.rgba(Theme.surfaceContainerHigh.r, Theme.surfaceContainerHigh.g, Theme.surfaceContainerHigh.b, 0.95)
-        border.color: Theme.primary
-        border.width: 1
+        border.color: searchField.activeFocus ? Theme.primary : Theme.outlineMedium
+        border.width: searchField.activeFocus ? 2 : 1
         radius: Theme.cornerRadius
 
         Behavior on opacity {
@@ -200,94 +200,89 @@ Column {
             anchors.rightMargin: Theme.spacingM
             spacing: Theme.spacingS
 
-            StyledRect {
-                Layout.fillWidth: true
+            // Search icon
+            DankIcon {
                 Layout.alignment: Qt.AlignVCenter
-                height: 40
-                radius: Theme.cornerRadius
-                color: Theme.surface
-                border.color: searchField.activeFocus ? Theme.primary : Theme.outlineMedium
-                border.width: searchField.activeFocus ? 2 : 1
-
-                Item {
-                    anchors.fill: parent
-                    anchors.margins: 1
-
-                    DankIcon {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.spacingM
-                        name: "search"
-                        size: Theme.iconSize - 2
-                        color: searchField.activeFocus ? Theme.primary : Theme.surfaceVariantText
-                    }
-
-                    TextInput {
-                        id: searchField
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.spacingM + (Theme.iconSize - 2) + Theme.spacingM
-                        anchors.right: parent.right
-                        anchors.rightMargin: Theme.spacingM + 96 + Theme.spacingS * 2
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: parent.height
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.surfaceText
-                        verticalAlignment: TextInput.AlignVCenter
-                        selectByMouse: true
-                        clip: true
-                        
-                        Component.onCompleted: {
-                            text = root.searchQuery
-                        }
-                        
-                        Connections {
-                            target: root
-                            function onSearchQueryChanged() {
-                                if (searchField.text !== root.searchQuery) {
-                                    searchField.text = root.searchQuery
-                                }
-                            }
-                        }
-                        
-                        onTextChanged: {
-                            if (root.searchQuery !== text) {
-                                root.searchQuery = text
-                                root.performSearch()
-                            }
-                        }
-                        Keys.onEscapePressed: event => {
-                            root.hideSearch()
-                            event.accepted = true
-                        }
-                        Keys.onReturnPressed: event => {
-                            if (event.modifiers & Qt.ShiftModifier) {
-                                root.findPrevious()
-                            } else {
-                                root.findNext()
-                            }
-                            event.accepted = true
-                        }
-                        Keys.onEnterPressed: event => {
-                            if (event.modifiers & Qt.ShiftModifier) {
-                                root.findPrevious()
-                            } else {
-                                root.findNext()
-                            }
-                            event.accepted = true
-                        }
-                    }
-                    
-                    StyledText {
-                        anchors.left: searchField.left
-                        anchors.verticalCenter: searchField.verticalCenter
-                        text: qsTr("Find in note...")
-                        font: searchField.font
-                        color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
-                        visible: searchField.text.length === 0 && !searchField.activeFocus
-                    }
-                }
+                name: "search"
+                size: Theme.iconSize - 2
+                color: searchField.activeFocus ? Theme.primary : Theme.surfaceVariantText
             }
 
+            // Search input field
+            TextInput {
+                id: searchField
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                height: 32
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.surfaceText
+                verticalAlignment: TextInput.AlignVCenter
+                selectByMouse: true
+                clip: true
+                
+                Component.onCompleted: {
+                    text = root.searchQuery
+                }
+                
+                Connections {
+                    target: root
+                    function onSearchQueryChanged() {
+                        if (searchField.text !== root.searchQuery) {
+                            searchField.text = root.searchQuery
+                        }
+                    }
+                }
+                
+                onTextChanged: {
+                    if (root.searchQuery !== text) {
+                        root.searchQuery = text
+                        root.performSearch()
+                    }
+                }
+                Keys.onEscapePressed: event => {
+                    root.hideSearch()
+                    event.accepted = true
+                }
+                Keys.onReturnPressed: event => {
+                    if (event.modifiers & Qt.ShiftModifier) {
+                        root.findPrevious()
+                    } else {
+                        root.findNext()
+                    }
+                    event.accepted = true
+                }
+                Keys.onEnterPressed: event => {
+                    if (event.modifiers & Qt.ShiftModifier) {
+                        root.findPrevious()
+                    } else {
+                        root.findNext()
+                    }
+                    event.accepted = true
+                }
+            }
+            
+            // Placeholder text
+            StyledText {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                text: qsTr("Find in note...")
+                font: searchField.font
+                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
+                visible: searchField.text.length === 0 && !searchField.activeFocus
+                Layout.leftMargin: -(searchField.width - 20) // Position over the input field
+            }
+
+            // Match count display
+            StyledText {
+                Layout.alignment: Qt.AlignVCenter
+                text: matchCount > 0 ? qsTr("%1/%2").arg(currentMatchIndex + 1).arg(matchCount) : searchQuery.length > 0 ? qsTr("No matches") : ""
+                font.pixelSize: Theme.fontSizeSmall
+                color: matchCount > 0 ? Theme.primary : Theme.surfaceTextMedium
+                visible: searchQuery.length > 0
+                Layout.rightMargin: Theme.spacingS
+            }
+
+            // Navigation buttons
             DankActionButton {
                 id: prevButton
                 Layout.alignment: Qt.AlignVCenter
@@ -308,6 +303,7 @@ Column {
                 onClicked: root.findNext()
             }
 
+            // Close button
             DankActionButton {
                 id: closeSearchButton
                 Layout.alignment: Qt.AlignVCenter
@@ -316,17 +312,6 @@ Column {
                 iconColor: Theme.surfaceText
                 onClicked: root.hideSearch()
             }
-        }
-
-        StyledText {
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.rightMargin: Theme.spacingM
-            anchors.topMargin: 2
-            text: matchCount > 0 ? qsTr("%1/%2").arg(currentMatchIndex + 1).arg(matchCount) : searchQuery.length > 0 ? qsTr("No matches") : ""
-            font.pixelSize: Theme.fontSizeSmall
-            color: matchCount > 0 ? Theme.primary : Theme.surfaceTextMedium
-            visible: searchQuery.length > 0
         }
     }
 

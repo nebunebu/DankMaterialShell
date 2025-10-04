@@ -156,30 +156,34 @@ Item {
                 }
             }
 
-            Rectangle {
+            StyledRect {
                 width: parent.width
-                height: 48
-                color: findMouseArea.containsMouse ? Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.05) : "transparent"
+                height: 60
+                radius: Theme.cornerRadius
+                color: "transparent"
 
-                MouseArea {
-                    id: findMouseArea
+                StateLayer {
                     anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                    anchors.leftMargin: -Theme.spacingM
+                    width: parent.width + Theme.spacingM
+                    stateColor: Theme.primary
+                    cornerRadius: parent.radius
                     onClicked: root.findRequested()
                 }
 
                 Row {
                     anchors.left: parent.left
                     anchors.leftMargin: -Theme.spacingM
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.spacingM
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: Theme.spacingM
 
-                    DankActionButton {
-                        iconName: "search"
-                        iconSize: Theme.iconSize - 2
-                        iconColor: Theme.primary
-                        onClicked: root.findRequested()
+                    DankIcon {
+                        name: "search"
+                        size: Theme.iconSize - 2
+                        color: Theme.primary
+                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     Column {
@@ -189,13 +193,14 @@ Item {
                         StyledText {
                             text: "Find in Text"
                             font.pixelSize: Theme.fontSizeMedium
+                            font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
                             text: "Open search bar to find text"
                             font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceTextMedium
+                            color: Theme.surfaceVariantText
                         }
                     }
                 }
