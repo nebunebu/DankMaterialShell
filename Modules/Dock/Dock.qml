@@ -264,19 +264,21 @@ Variants {
                     x: {
                         if (!dock.isVertical) return 0
                         if (dock.reveal) return 0
+                        const hideDistance = 58 + SettingsData.dockSpacing + SettingsData.dockBottomGap + 10
                         if (SettingsData.dockPosition === SettingsData.Position.Right) {
-                            return 60
+                            return hideDistance
                         } else {
-                            return -60
+                            return -hideDistance
                         }
                     }
                     y: {
                         if (dock.isVertical) return 0
                         if (dock.reveal) return 0
+                        const hideDistance = 58 + SettingsData.dockSpacing + SettingsData.dockBottomGap + 10
                         if (SettingsData.dockPosition === SettingsData.Position.Bottom) {
-                            return 60
+                            return hideDistance
                         } else {
-                            return -60
+                            return -hideDistance
                         }
                     }
 
