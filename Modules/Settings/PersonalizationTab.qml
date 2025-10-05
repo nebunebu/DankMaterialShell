@@ -1458,6 +1458,23 @@ Item {
                             SettingsData.sendTestNotifications()
                         }
                     }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                    }
+
+                    DankToggle {
+                        width: parent.width
+                        text: "Always Show OSD Percentage"
+                        description: "Display volume and brightness percentage values by default in OSD popups"
+                        checked: SettingsData.osdAlwaysShowValue
+                        onToggled: checked => {
+                                       SettingsData.setOsdAlwaysShowValue(checked)
+                                   }
+                    }
                 }
             }
 

@@ -160,6 +160,7 @@ Singleton {
     property int notificationTimeoutNormal: 5000
     property int notificationTimeoutCritical: 0
     property int notificationPopupPosition: SettingsData.Position.Top
+    property bool osdAlwaysShowValue: false
     property var screenPreferences: ({})
     property int animationSpeed: SettingsData.AnimationSpeed.Short
     readonly property string defaultFontFamily: "Inter Variable"
@@ -351,6 +352,7 @@ Singleton {
                 notificationTimeoutNormal = settings.notificationTimeoutNormal !== undefined ? settings.notificationTimeoutNormal : 5000
                 notificationTimeoutCritical = settings.notificationTimeoutCritical !== undefined ? settings.notificationTimeoutCritical : 0
                 notificationPopupPosition = settings.notificationPopupPosition !== undefined ? settings.notificationPopupPosition : SettingsData.Position.Top
+                osdAlwaysShowValue = settings.osdAlwaysShowValue !== undefined ? settings.osdAlwaysShowValue : false
                 dankBarSpacing = settings.dankBarSpacing !== undefined ? settings.dankBarSpacing : (settings.topBarSpacing !== undefined ? settings.topBarSpacing : 4)
                 dankBarBottomGap = settings.dankBarBottomGap !== undefined ? settings.dankBarBottomGap : (settings.topBarBottomGap !== undefined ? settings.topBarBottomGap : 0)
                 dankBarInnerPadding = settings.dankBarInnerPadding !== undefined ? settings.dankBarInnerPadding : (settings.topBarInnerPadding !== undefined ? settings.topBarInnerPadding : 4)
@@ -483,6 +485,7 @@ Singleton {
                                                 "notificationTimeoutNormal": notificationTimeoutNormal,
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
                                                 "notificationPopupPosition": notificationPopupPosition,
+                                                "osdAlwaysShowValue": osdAlwaysShowValue,
                                                 "screenPreferences": screenPreferences,
                                                 "pluginSettings": pluginSettings,
                                                 "animationSpeed": animationSpeed
@@ -1080,6 +1083,11 @@ Singleton {
 
     function setNotificationPopupPosition(position) {
         notificationPopupPosition = position
+        saveSettings()
+    }
+
+    function setOsdAlwaysShowValue(enabled) {
+        osdAlwaysShowValue = enabled
         saveSettings()
     }
 
