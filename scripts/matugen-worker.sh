@@ -75,9 +75,13 @@ build_once() {
   cat "$SHELL_DIR/matugen/configs/base.toml" > "$TMP_CFG"
   echo "" >> "$TMP_CFG"
 
-  # Always include dank config for dms-colors.json
-  cat "$SHELL_DIR/matugen/configs/dank.toml" >> "$TMP_CFG"
-  echo "" >> "$TMP_CFG"
+  # Generate dank config dynamically with correct state directory
+  cat >> "$TMP_CFG" << EOF
+[templates.dank]
+input_path = '$SHELL_DIR/matugen/templates/dank.json'
+output_path = '$STATE_DIR/dms-colors.json'
+
+EOF
 
   if command -v niri >/dev/null 2>&1; then
     cat "$SHELL_DIR/matugen/configs/niri.toml" >> "$TMP_CFG"
