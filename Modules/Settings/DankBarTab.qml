@@ -8,6 +8,8 @@ import qs.Widgets
 Item {
     id: dankBarTab
 
+    property var parentModal: null
+
     function getWidgetsForPopup() {
         return baseWidgetDefinitions.filter(widget => {
             if (widget.warning && widget.warning.includes("Plugin is disabled")) {
@@ -1159,7 +1161,7 @@ Item {
                                          widgetSelectionPopup.allWidgets
                                          = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
-                                         widgetSelectionPopup.safeOpen()
+                                         widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
                                             dankBarTab.removeWidgetFromSection(
@@ -1231,7 +1233,7 @@ Item {
                                          widgetSelectionPopup.allWidgets
                                          = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
-                                         widgetSelectionPopup.safeOpen()
+                                         widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
                                             dankBarTab.removeWidgetFromSection(
@@ -1303,7 +1305,7 @@ Item {
                                          widgetSelectionPopup.allWidgets
                                          = dankBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
-                                         widgetSelectionPopup.safeOpen()
+                                         widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
                                             dankBarTab.removeWidgetFromSection(
@@ -1349,7 +1351,7 @@ Item {
     WidgetSelectionPopup {
         id: widgetSelectionPopup
 
-        anchors.centerIn: parent
+        parentModal: dankBarTab.parentModal
         onWidgetSelected: (widgetId, targetSection) => {
                               dankBarTab.addWidgetToSection(widgetId,
                                                            targetSection)

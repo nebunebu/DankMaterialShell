@@ -68,6 +68,7 @@ Item {
             asynchronous: true
 
             sourceComponent: DankBarTab {
+                parentModal: root.parentModal
             }
 
         }
