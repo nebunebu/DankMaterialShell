@@ -539,7 +539,7 @@ Column {
             iconRotation: {
                 if (widgetData.id !== "darkMode") return 0
                 if (darkModeTransitionPending) {
-                    return SessionData.isLightMode ? 0 : 180
+                    return SessionData.isLightMode ? 180 : 0
                 }
                 return SessionData.isLightMode ? 180 : 0
             }
@@ -549,7 +549,7 @@ Column {
                 case "nightMode":
                     return DisplayService.nightModeEnabled || false
                 case "darkMode":
-                    return !SessionData.isLightMode
+                    return SessionData.isLightMode
                 case "doNotDisturb":
                     return SessionData.doNotDisturb || false
                 case "idleInhibitor":
@@ -560,14 +560,6 @@ Column {
             }
 
 enabled: !root.editMode
-
-            onIconRotationCompleted: {
-                if (root.darkModeTransitionPending && widgetData.id === "darkMode") {
-                    root.darkModeTransitionPending = false
-                    Theme.screenTransition()
-                    Theme.toggleLightMode()
-                }
-            }
 
             onClicked: {
                 if (root.editMode)
@@ -581,7 +573,7 @@ enabled: !root.editMode
                 }
                 case "darkMode":
                 {
-                    root.darkModeTransitionPending = true
+                    Theme.setLightMode(!SessionData.isLightMode)
                     break
                 }
                 case "doNotDisturb":
@@ -625,7 +617,7 @@ enabled: !root.editMode
             iconRotation: {
                 if (widgetData.id !== "darkMode") return 0
                 if (darkModeTransitionPending) {
-                    return SessionData.isLightMode ? 0 : 180
+                    return SessionData.isLightMode ? 180 : 0
                 }
                 return SessionData.isLightMode ? 180 : 0
             }
@@ -635,7 +627,7 @@ enabled: !root.editMode
                 case "nightMode":
                     return DisplayService.nightModeEnabled || false
                 case "darkMode":
-                    return !SessionData.isLightMode
+                    return SessionData.isLightMode
                 case "doNotDisturb":
                     return SessionData.doNotDisturb || false
                 case "idleInhibitor":
@@ -646,14 +638,6 @@ enabled: !root.editMode
             }
 
 enabled: !root.editMode
-
-            onIconRotationCompleted: {
-                if (root.darkModeTransitionPending && widgetData.id === "darkMode") {
-                    root.darkModeTransitionPending = false
-                    Theme.screenTransition()
-                    Theme.toggleLightMode()
-                }
-            }
 
             onClicked: {
                 if (root.editMode)
@@ -667,7 +651,7 @@ enabled: !root.editMode
                 }
                 case "darkMode":
                 {
-                    root.darkModeTransitionPending = true
+                    Theme.setLightMode(!SessionData.isLightMode)
                     break
                 }
                 case "doNotDisturb":
