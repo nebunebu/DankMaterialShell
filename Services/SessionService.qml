@@ -101,6 +101,19 @@ Singleton {
         });
     }
 
+    function launchDesktopAction(desktopEntry, action) {
+        let cmd = action.command
+        if (SessionData.launchPrefix && SessionData.launchPrefix.length > 0) {
+            const launchPrefix = SessionData.launchPrefix.trim().split(" ")
+            cmd = launchPrefix.concat(cmd)
+        }
+
+        Quickshell.execDetached({
+            command: cmd,
+            workingDirectory: desktopEntry.workingDirectory,
+        });
+    }
+
     // * Session management
     function logout() {
         if (hasUwsm) {

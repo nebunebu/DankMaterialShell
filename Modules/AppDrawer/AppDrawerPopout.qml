@@ -797,6 +797,76 @@ DankPopout {
                 }
             }
 
+            Repeater {
+                model: contextMenu.currentApp && contextMenu.currentApp.desktopEntry && contextMenu.currentApp.desktopEntry.actions ? contextMenu.currentApp.desktopEntry.actions : []
+
+                Rectangle {
+                    width: parent.width
+                    height: 32
+                    radius: Theme.cornerRadius
+                    color: actionMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
+
+                    Row {
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingS
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: Theme.spacingS
+
+                        Item {
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: Theme.iconSize - 2
+                            height: Theme.iconSize - 2
+                            visible: modelData.icon && modelData.icon !== ""
+
+                            IconImage {
+                                anchors.fill: parent
+                                source: modelData.icon ? Quickshell.iconPath(modelData.icon, true) : ""
+                                smooth: true
+                                asynchronous: true
+                                visible: status === Image.Ready
+                            }
+                        }
+
+                        StyledText {
+                            text: modelData.name || ""
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceText
+                            font.weight: Font.Normal
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    MouseArea {
+                        id: actionMouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if (modelData && contextMenu.currentApp && contextMenu.currentApp.desktopEntry) {
+                                SessionService.launchDesktopAction(contextMenu.currentApp.desktopEntry, modelData)
+                                appLauncher.appLaunched(contextMenu.currentApp)
+                            }
+                            contextMenu.close()
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: contextMenu.currentApp && contextMenu.currentApp.desktopEntry && contextMenu.currentApp.desktopEntry.actions && contextMenu.currentApp.desktopEntry.actions.length > 0
+                width: parent.width - Theme.spacingS * 2
+                height: 5
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "transparent"
+
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: parent.width
+                    height: 1
+                    color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                }
+            }
+
             Rectangle {
                 width: parent.width
                 height: 32

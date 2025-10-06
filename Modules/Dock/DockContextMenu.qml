@@ -16,12 +16,14 @@ PanelWindow {
     property real dockVisibleHeight: 40
     property int margin: 10
     property bool hidePin: false
+    property var desktopEntry: null
 
-    function showForButton(button, data, dockHeight, hidePinOption) {
+    function showForButton(button, data, dockHeight, hidePinOption, entry) {
         anchorItem = button
         appData = data
         dockVisibleHeight = dockHeight || 40
         hidePin = hidePinOption || false
+        desktopEntry = entry || null
 
         const dockWindow = button.Window.window
         if (dockWindow) {
@@ -134,7 +136,7 @@ PanelWindow {
     Rectangle {
         id: menuContainer
 
-        width: Math.min(400, Math.max(200, menuColumn.implicitWidth + Theme.spacingS * 2))
+        width: Math.min(400, Math.max(180, menuColumn.implicitWidth + Theme.spacingS * 2))
         height: Math.max(60, menuColumn.implicitHeight + Theme.spacingS * 2)
 
         x: {
@@ -284,6 +286,71 @@ PanelWindow {
                     if (root.appData.type !== "grouped") return false
                     return root.appData.windowCount > 0
                 }
+                width: parent.width
+                height: 1
+                color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+            }
+
+            Repeater {
+                model: root.desktopEntry && root.desktopEntry.actions ? root.desktopEntry.actions : []
+
+                Rectangle {
+                    width: parent.width
+                    height: 28
+                    radius: Theme.cornerRadius
+                    color: actionArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
+
+                    Row {
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingS
+                        anchors.right: parent.right
+                        anchors.rightMargin: Theme.spacingS
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: Theme.spacingXS
+
+                        Item {
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: 16
+                            height: 16
+                            visible: modelData.icon && modelData.icon !== ""
+
+                            IconImage {
+                                anchors.fill: parent
+                                source: modelData.icon ? Quickshell.iconPath(modelData.icon, true) : ""
+                                smooth: true
+                                asynchronous: true
+                                visible: status === Image.Ready
+                            }
+                        }
+
+                        StyledText {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: modelData.name || ""
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceText
+                            font.weight: Font.Normal
+                            elide: Text.ElideRight
+                            wrapMode: Text.NoWrap
+                        }
+                    }
+
+                    MouseArea {
+                        id: actionArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if (modelData) {
+                                SessionService.launchDesktopAction(root.desktopEntry, modelData)
+                            }
+                            root.close()
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: root.desktopEntry && root.desktopEntry.actions && root.desktopEntry.actions.length > 0
                 width: parent.width
                 height: 1
                 color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
