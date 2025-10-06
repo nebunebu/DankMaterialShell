@@ -167,12 +167,24 @@ PanelWindow {
             y: root.shouldBeVisible ? 0 : -30
         }
 
-        Loader {
-            id: contentLoader
-
+        FocusScope {
             anchors.fill: parent
-            active: root.keepContentLoaded || root.shouldBeVisible || root.visible
-            asynchronous: false
+            focus: root.shouldBeVisible
+
+            Loader {
+                id: contentLoader
+
+                anchors.fill: parent
+                active: root.keepContentLoaded || root.shouldBeVisible || root.visible
+                asynchronous: false
+                focus: true
+
+                onLoaded: {
+                    if (item) {
+                        Qt.callLater(() => item.forceActiveFocus())
+                    }
+                }
+            }
         }
 
         layer.effect: MultiEffect {

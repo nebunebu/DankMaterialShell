@@ -18,7 +18,7 @@ Item {
     property Component verticalBarPill: null
     property Component popoutContent: null
     property real popoutWidth: 400
-    property real popoutHeight: 400
+    property real popoutHeight: 0
     property var pillClickAction: null
 
     property Component controlCenterWidget: null

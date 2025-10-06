@@ -115,7 +115,7 @@ DankModal {
     }
 
     settingsContent: Component {
-        Item {
+        FocusScope {
             anchors.fill: parent
             focus: true
 
