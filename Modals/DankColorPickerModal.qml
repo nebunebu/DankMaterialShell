@@ -92,6 +92,7 @@ PanelWindow {
                 if (colorStr.length >= 7 && colorStr.startsWith('#')) {
                     root.currentColor = colorStr
                     root.updateFromColor(root.currentColor)
+                    hexInput.text = root.currentColor.toString()
                     copyColorToClipboard(colorStr)
                     root.open()
                 }
