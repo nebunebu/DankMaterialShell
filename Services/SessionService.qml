@@ -97,7 +97,7 @@ Singleton {
 
         Quickshell.execDetached({
             command: cmd,
-            workingDirectory: desktopEntry.workingDirectory,
+            workingDirectory: desktopEntry.workingDirectory || Quickshell.env("HOME"),
         });
     }
 
@@ -110,7 +110,7 @@ Singleton {
 
         Quickshell.execDetached({
             command: cmd,
-            workingDirectory: desktopEntry.workingDirectory,
+            workingDirectory: desktopEntry.workingDirectory || Quickshell.env("HOME"),
         });
     }
 
