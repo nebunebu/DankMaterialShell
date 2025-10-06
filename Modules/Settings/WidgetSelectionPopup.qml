@@ -90,6 +90,11 @@ DankModal {
             parentModal.shouldHaveFocus = Qt.binding(() => {
                 return parentModal.shouldBeVisible
             })
+            Qt.callLater(() => {
+                if (parentModal && parentModal.modalFocusScope) {
+                    parentModal.modalFocusScope.forceActiveFocus()
+                }
+            })
         }
     }
 
@@ -105,6 +110,16 @@ DankModal {
         filteredWidgets = []
         selectedIndex = -1
         keyboardNavigationActive = false
+        if (parentModal) {
+            parentModal.shouldHaveFocus = Qt.binding(() => {
+                return parentModal.shouldBeVisible
+            })
+            Qt.callLater(() => {
+                if (parentModal && parentModal.modalFocusScope) {
+                    parentModal.modalFocusScope.forceActiveFocus()
+                }
+            })
+        }
     }
     onBackgroundClicked: () => {
         return hide()
