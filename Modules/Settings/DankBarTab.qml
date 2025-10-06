@@ -1003,6 +1003,16 @@ Item {
                                            checked)
                                    }
                     }
+
+                    DankToggle {
+                        width: parent.width
+                        text: "Border"
+                        description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
+                        checked: SettingsData.dankBarBorderEnabled
+                        onToggled: checked => {
+                                       SettingsData.setDankBarBorderEnabled(checked)
+                                   }
+                    }
                 }
             }
 
