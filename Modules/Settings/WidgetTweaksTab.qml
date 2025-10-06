@@ -48,7 +48,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Launcher Button"
+                            text: qsTr("Launcher Button")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -58,7 +58,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Use OS Logo"
+                        text: qsTr("Use OS Logo")
                         description: "Display operating system logo instead of apps icon"
                         checked: SettingsData.useOSLogo
                         onToggled: checked => {
@@ -79,7 +79,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: "Color Override"
+                                text: qsTr("Color Override")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -111,7 +111,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: "Brightness"
+                                text: qsTr("Brightness")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -140,7 +140,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: "Contrast"
+                                text: qsTr("Contrast")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -202,7 +202,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Workspace Settings"
+                            text: qsTr("Workspace Settings")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -212,7 +212,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Workspace Index Numbers"
+                        text: qsTr("Workspace Index Numbers")
                         description: "Show workspace index numbers in the top bar workspace switcher"
                         checked: SettingsData.showWorkspaceIndex
                         onToggled: checked => {
@@ -223,7 +223,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Workspace Padding"
+                        text: qsTr("Workspace Padding")
                         description: "Always show a minimum of 3 workspaces, even if fewer are available"
                         checked: SettingsData.showWorkspacePadding
                         onToggled: checked => {
@@ -234,7 +234,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Show Workspace Apps"
+                        text: qsTr("Show Workspace Apps")
                         description: "Display application icons in workspace indicators"
                         checked: SettingsData.showWorkspaceApps
                         onToggled: checked => {
@@ -256,7 +256,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: "Max apps to show"
+                                text: qsTr("Max apps to show")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -287,7 +287,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Per-Monitor Workspaces"
+                        text: qsTr("Per-Monitor Workspaces")
                         description: "Show only workspaces belonging to each specific monitor."
                         checked: SettingsData.workspacesPerMonitor
                         onToggled: checked => {
@@ -325,7 +325,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Media Player Settings"
+                            text: qsTr("Media Player Settings")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -335,7 +335,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Wave Progress Bars"
+                        text: qsTr("Wave Progress Bars")
                         description: "Use animated wave progress bars for media playback"
                         checked: SettingsData.waveProgressEnabled
                         onToggled: checked => {
@@ -373,7 +373,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Running Apps Settings"
+                            text: qsTr("Running Apps Settings")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -383,7 +383,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Running Apps Only In Current Workspace"
+                        text: qsTr("Running Apps Only In Current Workspace")
                         description: "Show only apps running in current workspace"
                         checked: SettingsData.runningAppsCurrentWorkspace
                         onToggled: checked => {
@@ -423,7 +423,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Named Workspace Icons"
+                            text: qsTr("Named Workspace Icons")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -433,7 +433,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: "Configure icons for named workspaces. Icons take priority over numbers when both are enabled."
+                        text: qsTr("Configure icons for named workspaces. Icons take priority over numbers when both are enabled.")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.outline
                         wrapMode: Text.WordWrap

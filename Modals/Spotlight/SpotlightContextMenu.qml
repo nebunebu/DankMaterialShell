@@ -244,7 +244,7 @@ Rectangle {
                 }
 
                 StyledText {
-                    text: "Launch"
+                    text: qsTr("Launch")
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal

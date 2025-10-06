@@ -610,7 +610,7 @@ Rectangle {
                 
                 StyledText {
                     anchors.centerIn: parent
-                    text: "Close"
+                    text: qsTr("Close")
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal

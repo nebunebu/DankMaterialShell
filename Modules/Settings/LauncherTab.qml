@@ -47,7 +47,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Launch Prefix"
+                            text: qsTr("Launch Prefix")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -127,7 +127,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Recently Used Apps"
+                            text: qsTr("Recently Used Apps")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -157,7 +157,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: "Apps are ordered by usage frequency, then last used, then alphabetically."
+                        text: qsTr("Apps are ordered by usage frequency, then last used, then alphabetically.")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap

@@ -82,7 +82,7 @@ PluginComponent {
                             }
 
                             StyledText {
-                                text: "Disconnect"
+                                text: qsTr("Disconnect")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -133,14 +133,14 @@ PluginComponent {
                                 }
 
                                 StyledText {
-                                    text: "No VPN profiles found"
+                                    text: qsTr("No VPN profiles found")
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceVariantText
                                     anchors.horizontalCenter: parent.horizontalCenter
                                 }
 
                                 StyledText {
-                                    text: "Add a VPN in NetworkManager"
+                                    text: qsTr("Add a VPN in NetworkManager")
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     anchors.horizontalCenter: parent.horizontalCenter

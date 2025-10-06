@@ -225,7 +225,7 @@ PanelWindow {
                         anchors.right: closeButton.left
                         anchors.rightMargin: Theme.spacingXS
                         anchors.verticalCenter: parent.verticalCenter
-                        text: (modelData && modelData.title) ? modelData.title : "(Unnamed)"
+                        text: (modelData && modelData.title) ? modelData.title: qsTr("(Unnamed)")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal

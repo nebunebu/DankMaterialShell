@@ -186,7 +186,7 @@ DankPopout {
 
                         StyledText {
                             anchors.verticalCenter: parent.verticalCenter
-                            text: "Applications"
+                            text: qsTr("Applications")
                             font.pixelSize: Theme.fontSizeLarge + 4
                             font.weight: Font.Bold
                             color: Theme.surfaceText
@@ -888,7 +888,7 @@ DankPopout {
                     }
 
                     StyledText {
-                        text: "Launch"
+                        text: qsTr("Launch")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal

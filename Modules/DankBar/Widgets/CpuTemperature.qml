@@ -140,7 +140,7 @@ Rectangle {
                 id: tempBaseline
                 font.pixelSize: Theme.fontSizeSmall
                 font.weight: Font.Medium
-                text: "100°"
+                text: qsTr("100°")
             }
 
             width: root.minimumWidth ? Math.max(tempBaseline.width, paintedWidth) : paintedWidth

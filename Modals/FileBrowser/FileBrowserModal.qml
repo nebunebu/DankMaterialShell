@@ -755,7 +755,7 @@ DankModal {
                     width: parent.width - saveButton.width - Theme.spacingM
                     height: 40
                     text: defaultFileName
-                    placeholderText: "Enter filename..."
+                    placeholderText: qsTr("Enter filename...")
                     ignoreLeftRightKeys: false
                     focus: saveMode
                     topPadding: Theme.spacingS
@@ -788,7 +788,7 @@ DankModal {
 
                     StyledText {
                         anchors.centerIn: parent
-                        text: "Save"
+                        text: qsTr("Save")
                         color: fileNameInput.text.trim() !== "" ? Theme.primaryText : Theme.surfaceVariantText
                         font.pixelSize: Theme.fontSizeMedium
                     }

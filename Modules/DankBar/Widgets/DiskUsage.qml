@@ -225,7 +225,7 @@ Rectangle {
                 id: diskBaseline
                 font.pixelSize: Theme.fontSizeSmall
                 font.weight: Font.Medium
-                text: "100%"
+                text: qsTr("100%")
             }
 
             width: Math.max(diskBaseline.width, paintedWidth)

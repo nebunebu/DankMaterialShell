@@ -207,7 +207,7 @@ Rectangle {
                 id: gpuTempBaseline
                 font.pixelSize: Theme.fontSizeSmall
                 font.weight: Font.Medium
-                text: "100°"
+                text: qsTr("100°")
             }
 
             width: root.minimumWidth ? Math.max(gpuTempBaseline.width, paintedWidth) : paintedWidth

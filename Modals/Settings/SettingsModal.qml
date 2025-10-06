@@ -144,7 +144,7 @@ DankModal {
                         }
 
                         StyledText {
-                            text: "Settings"
+                            text: qsTr("Settings")
                             font.pixelSize: Theme.fontSizeXLarge
                             color: Theme.surfaceText
                             font.weight: Font.Medium

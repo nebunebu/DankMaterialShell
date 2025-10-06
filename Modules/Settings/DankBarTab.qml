@@ -695,7 +695,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Position"
+                            text: qsTr("Position")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -765,14 +765,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: "Auto-hide"
+                                text: qsTr("Auto-hide")
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: "Automatically hide the top bar to expand screen real estate"
+                                text: qsTr("Automatically hide the top bar to expand screen real estate")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -824,7 +824,7 @@ Item {
                             }
 
                             StyledText {
-                                text: "Toggle top bar visibility manually (can be controlled via IPC)"
+                                text: qsTr("Toggle top bar visibility manually (can be controlled via IPC)")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -871,7 +871,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: "Show on Overview"
+                                text: qsTr("Show on Overview")
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
@@ -930,7 +930,7 @@ Item {
                         }
 
                         StyledText {
-                            text: "Spacing"
+                            text: qsTr("Spacing")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -971,7 +971,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: "Exclusive Zone Offset"
+                            text: qsTr("Exclusive Zone Offset")
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -999,7 +999,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: "Size"
+                            text: qsTr("Size")
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -1025,7 +1025,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Square Corners"
+                        text: qsTr("Square Corners")
                         description: "Removes rounded corners from bar container."
                         checked: SettingsData.dankBarSquareCorners
                         onToggled: checked => {
@@ -1036,7 +1036,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "No Background"
+                        text: qsTr("No Background")
                         description: "Remove widget backgrounds for a minimal look with tighter spacing."
                         checked: SettingsData.dankBarNoBackground
                         onToggled: checked => {
@@ -1047,7 +1047,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Goth Corners"
+                        text: qsTr("Goth Corners")
                         description: "Add curved swooping tips at the bottom of the bar."
                         checked: SettingsData.dankBarGothCornersEnabled
                         onToggled: checked => {
@@ -1058,7 +1058,7 @@ Item {
 
                     DankToggle {
                         width: parent.width
-                        text: "Border"
+                        text: qsTr("Border")
                         description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
                         checked: SettingsData.dankBarBorderEnabled
                         onToggled: checked => {
@@ -1099,7 +1099,7 @@ Item {
 
                         StyledText {
                             id: widgetTitle
-                            text: "Widget Management"
+                            text: qsTr("Widget Management")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1137,7 +1137,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: "Reset"
+                                    text: qsTr("Reset")
                                     font.pixelSize: Theme.fontSizeSmall
                                     font.weight: Font.Medium
                                     color: Theme.surfaceText
@@ -1281,7 +1281,7 @@ Item {
                         id: centerSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: "Center Section"
+                        title: qsTr("Center Section")
                         titleIcon: "format_align_center"
                         sectionId: "center"
                         allWidgets: dankBarTab.baseWidgetDefinitions
