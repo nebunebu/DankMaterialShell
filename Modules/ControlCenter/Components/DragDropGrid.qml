@@ -584,6 +584,7 @@ Column {
                 }
                 case "darkMode":
                 {
+                    Theme.screenTransition()
                     Theme.setLightMode(!SessionData.isLightMode)
                     break
                 }
@@ -663,6 +664,7 @@ Column {
                 }
                 case "darkMode":
                 {
+                    Theme.screenTransition()
                     Theme.setLightMode(!SessionData.isLightMode)
                     break
                 }
