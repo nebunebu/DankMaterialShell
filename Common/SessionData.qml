@@ -70,6 +70,7 @@ Singleton {
     property int batteryHibernateTimeout: 0 // Never
 
     property bool lockBeforeSuspend: false
+    property var recentColors: []
 
 
     Component.onCompleted: {
@@ -150,6 +151,7 @@ Singleton {
                 batterySuspendTimeout = settings.batterySuspendTimeout !== undefined ? settings.batterySuspendTimeout : 0
                 batteryHibernateTimeout = settings.batteryHibernateTimeout !== undefined ? settings.batteryHibernateTimeout : 0
                 lockBeforeSuspend = settings.lockBeforeSuspend !== undefined ? settings.lockBeforeSuspend : false
+                recentColors = settings.recentColors !== undefined ? settings.recentColors : []
 
                 if (!isGreeterMode) {
                     if (typeof Theme !== "undefined") {
@@ -210,7 +212,8 @@ Singleton {
                                                 "batteryLockTimeout": batteryLockTimeout,
                                                 "batterySuspendTimeout": batterySuspendTimeout,
                                                 "batteryHibernateTimeout": batteryHibernateTimeout,
-                                                "lockBeforeSuspend": lockBeforeSuspend
+                                                "lockBeforeSuspend": lockBeforeSuspend,
+                                                "recentColors": recentColors
                                             }, null, 2))
     }
 
@@ -356,6 +359,16 @@ Singleton {
 
     function setPinnedApps(apps) {
         pinnedApps = apps
+        saveSettings()
+    }
+
+    function addRecentColor(color) {
+        const colorStr = color.toString()
+        let recent = recentColors.slice()
+        recent = recent.filter(c => c !== colorStr)
+        recent.unshift(colorStr)
+        if (recent.length > 5) recent = recent.slice(0, 5)
+        recentColors = recent
         saveSettings()
     }
 

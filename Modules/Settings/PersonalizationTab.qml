@@ -252,7 +252,19 @@ Item {
                                             anchors.fill: parent
                                             cursorShape: Qt.PointingHandCursor
                                             onClicked: {
-                                                colorPicker.open()
+                                                if (PopoutService.colorPickerModal) {
+                                                    var currentWallpaper = SessionData.perMonitorWallpaper ? SessionData.getMonitorWallpaper(selectedMonitorName) : SessionData.wallpaperPath
+                                                    PopoutService.colorPickerModal.selectedColor = currentWallpaper.startsWith("#") ? currentWallpaper : Theme.primary
+                                                    PopoutService.colorPickerModal.pickerTitle = "Choose Wallpaper Color"
+                                                    PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
+                                                        if (SessionData.perMonitorWallpaper) {
+                                                            SessionData.setMonitorWallpaper(selectedMonitorName, selectedColor)
+                                                        } else {
+                                                            SessionData.setWallpaperColor(selectedColor)
+                                                        }
+                                                    }
+                                                    PopoutService.colorPickerModal.show()
+                                                }
                                             }
                                         }
                                     }
@@ -1852,19 +1864,5 @@ Item {
                                                          })
             }
         }
-    }
-
-
-    DankColorPicker {
-        id: colorPicker
-
-        pickerTitle: "Choose Wallpaper Color"
-        onColorSelected: selectedColor => {
-                             if (SessionData.perMonitorWallpaper) {
-                                 SessionData.setMonitorWallpaper(selectedMonitorName, selectedColor)
-                             } else {
-                                 SessionData.setWallpaperColor(selectedColor)
-                             }
-                         }
     }
 }

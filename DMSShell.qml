@@ -349,7 +349,7 @@ ShellRoot {
       }
   }
 
-  ColorPickerModal {
+  DankColorPickerModal {
       id: colorPickerModal
 
       Component.onCompleted: {
