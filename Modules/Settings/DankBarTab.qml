@@ -190,18 +190,16 @@ Item {
             "enabled": SystemUpdateService.distributionSupported
         }]
 
-        // Add all available plugins (loaded and unloaded)
-        var allPlugins = PluginService.getAvailablePlugins()
-        for (var i = 0; i < allPlugins.length; i++) {
-            var plugin = allPlugins[i]
-            var isLoaded = PluginService.isPluginLoaded(plugin.id)
+        var allPluginVariants = PluginService.getAllPluginVariants()
+        for (var i = 0; i < allPluginVariants.length; i++) {
+            var variant = allPluginVariants[i]
             coreWidgets.push({
-                "id": plugin.id,
-                "text": plugin.name,
-                "description": plugin.description || "Plugin widget",
-                "icon": plugin.icon || "extension",
-                "enabled": isLoaded,
-                "warning": !isLoaded ? "Plugin is disabled - enable in Plugins settings to use" : undefined
+                "id": variant.fullId,
+                "text": variant.name,
+                "description": variant.description,
+                "icon": variant.icon,
+                "enabled": variant.loaded,
+                "warning": !variant.loaded ? "Plugin is disabled - enable in Plugins settings to use" : undefined
             })
         }
 

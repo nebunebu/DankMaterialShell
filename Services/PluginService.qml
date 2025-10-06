@@ -333,6 +333,93 @@ Singleton {
         return result
     }
 
+    function getPluginVariants(pluginId) {
+        var plugin = availablePlugins[pluginId]
+        if (!plugin) {
+            return []
+        }
+        var variants = SettingsData.getPluginSetting(pluginId, "variants", [])
+        return variants
+    }
+
+    function getAllPluginVariants() {
+        var result = []
+        for (var pluginId in availablePlugins) {
+            var plugin = availablePlugins[pluginId]
+            if (plugin.type !== "widget") {
+                continue
+            }
+            var variants = getPluginVariants(pluginId)
+            if (variants.length === 0) {
+                result.push({
+                    pluginId: pluginId,
+                    variantId: null,
+                    fullId: pluginId,
+                    name: plugin.name,
+                    icon: plugin.icon || "extension",
+                    description: plugin.description || "Plugin widget",
+                    loaded: plugin.loaded
+                })
+            } else {
+                for (var i = 0; i < variants.length; i++) {
+                    var variant = variants[i]
+                    result.push({
+                        pluginId: pluginId,
+                        variantId: variant.id,
+                        fullId: pluginId + ":" + variant.id,
+                        name: plugin.name + " - " + variant.name,
+                        icon: variant.icon || plugin.icon || "extension",
+                        description: variant.description || plugin.description || "Plugin widget variant",
+                        loaded: plugin.loaded
+                    })
+                }
+            }
+        }
+        return result
+    }
+
+    function createPluginVariant(pluginId, variantName, variantConfig) {
+        var variants = getPluginVariants(pluginId)
+        var variantId = "variant_" + Date.now()
+        var newVariant = Object.assign({}, variantConfig, {
+            id: variantId,
+            name: variantName
+        })
+        variants.push(newVariant)
+        SettingsData.setPluginSetting(pluginId, "variants", variants)
+        pluginDataChanged(pluginId)
+        return variantId
+    }
+
+    function removePluginVariant(pluginId, variantId) {
+        var variants = getPluginVariants(pluginId)
+        var newVariants = variants.filter(function(v) { return v.id !== variantId })
+        SettingsData.setPluginSetting(pluginId, "variants", newVariants)
+        pluginDataChanged(pluginId)
+    }
+
+    function updatePluginVariant(pluginId, variantId, variantConfig) {
+        var variants = getPluginVariants(pluginId)
+        for (var i = 0; i < variants.length; i++) {
+            if (variants[i].id === variantId) {
+                variants[i] = Object.assign({}, variants[i], variantConfig)
+                break
+            }
+        }
+        SettingsData.setPluginSetting(pluginId, "variants", variants)
+        pluginDataChanged(pluginId)
+    }
+
+    function getPluginVariantData(pluginId, variantId) {
+        var variants = getPluginVariants(pluginId)
+        for (var i = 0; i < variants.length; i++) {
+            if (variants[i].id === variantId) {
+                return variants[i]
+            }
+        }
+        return null
+    }
+
     function getLoadedPlugins() {
         var result = []
         for (var key in loadedPlugins) {

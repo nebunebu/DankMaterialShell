@@ -378,6 +378,7 @@ Item {
                                         anchors.margins: Theme.spacingL
                                         active: pluginDelegate.isExpanded && pluginDelegate.hasSettings && PluginService.isPluginLoaded(pluginDelegate.pluginId)
                                         asynchronous: false
+                                        focus: true
 
                                         source: {
                                             if (active && pluginDelegate.pluginSettingsPath) {
@@ -394,8 +395,12 @@ Item {
                                             if (item && typeof PluginService !== "undefined") {
                                                 item.pluginService = PluginService
                                             }
-                                            if (item && typeof PopoutService !== "undefined") {
+                                            if (item && typeof PopoutService !== "undefined" && "popoutService" in item) {
                                                 item.popoutService = PopoutService
+                                            }
+                                            if (item) {
+                                                item.focus = true
+                                                item.forceActiveFocus()
                                             }
                                         }
                                     }

@@ -34,6 +34,7 @@ Item {
     signal ccWidgetExpanded()
 
     property var pluginData: ({})
+    property var variants: []
 
     readonly property bool isVertical: axis?.isVertical ?? false
     readonly property bool hasHorizontalPill: horizontalBarPill !== null
@@ -64,9 +65,32 @@ Item {
     function loadPluginData() {
         if (!pluginService || !pluginId) {
             pluginData = {}
+            variants = []
             return
         }
         pluginData = SettingsData.getPluginSettingsForPlugin(pluginId)
+        variants = pluginService.getPluginVariants(pluginId)
+    }
+
+    function createVariant(variantName, variantConfig) {
+        if (!pluginService || !pluginId) {
+            return null
+        }
+        return pluginService.createPluginVariant(pluginId, variantName, variantConfig)
+    }
+
+    function removeVariant(variantId) {
+        if (!pluginService || !pluginId) {
+            return
+        }
+        pluginService.removePluginVariant(pluginId, variantId)
+    }
+
+    function updateVariant(variantId, variantConfig) {
+        if (!pluginService || !pluginId) {
+            return
+        }
+        pluginService.updatePluginVariant(pluginId, variantId, variantConfig)
     }
 
     width: isVertical ? (hasVerticalPill ? verticalPill.width : 0) : (hasHorizontalPill ? horizontalPill.width : 0)
