@@ -633,23 +633,28 @@ FocusScope {
         property var parentModal: null
 
         function updateFilteredPlugins() {
-            if (!searchQuery || searchQuery.length === 0) {
-                filteredPlugins = allPlugins.slice()
-                return
-            }
-
             var filtered = []
-            var query = searchQuery.toLowerCase()
+            var query = searchQuery ? searchQuery.toLowerCase() : ""
 
             for (var i = 0; i < allPlugins.length; i++) {
                 var plugin = allPlugins[i]
-                var name = plugin.name ? plugin.name.toLowerCase() : ""
-                var description = plugin.description ? plugin.description.toLowerCase() : ""
-                var author = plugin.author ? plugin.author.toLowerCase() : ""
+                var isFirstParty = plugin.firstParty || false
 
-                if (name.indexOf(query) !== -1 ||
-                    description.indexOf(query) !== -1 ||
-                    author.indexOf(query) !== -1) {
+                if (!SessionData.showThirdPartyPlugins && !isFirstParty) {
+                    continue
+                }
+
+                if (query.length > 0) {
+                    var name = plugin.name ? plugin.name.toLowerCase() : ""
+                    var description = plugin.description ? plugin.description.toLowerCase() : ""
+                    var author = plugin.author ? plugin.author.toLowerCase() : ""
+
+                    if (name.indexOf(query) !== -1 ||
+                        description.indexOf(query) !== -1 ||
+                        author.indexOf(query) !== -1) {
+                        filtered.push(plugin)
+                    }
+                } else {
                     filtered.push(plugin)
                 }
             }
@@ -790,6 +795,21 @@ FocusScope {
                             anchors.right: parent.right
                             anchors.verticalCenter: parent.verticalCenter
                             spacing: Theme.spacingXS
+
+                            DankButton {
+                                id: thirdPartyButton
+                                text: SessionData.showThirdPartyPlugins ? "Hide 3rd Party" : "Show 3rd Party"
+                                iconName: SessionData.showThirdPartyPlugins ? "visibility_off" : "visibility"
+                                height: 28
+                                onClicked: {
+                                    if (SessionData.showThirdPartyPlugins) {
+                                        SessionData.setShowThirdPartyPlugins(false)
+                                        pluginBrowserModal.updateFilteredPlugins()
+                                    } else {
+                                        thirdPartyConfirmModal.open()
+                                    }
+                                }
+                            }
 
                             DankActionButton {
                                 id: refreshButton
@@ -1062,26 +1082,6 @@ FocusScope {
                                     visible: modelData.description && modelData.description.length > 0
                                 }
 
-                                StyledRect {
-                                    width: parent.width
-                                    height: warningText.implicitHeight + Theme.spacingS * 2
-                                    radius: Theme.cornerRadius
-                                    color: Qt.rgba(Theme.warning.r, Theme.warning.g, Theme.warning.b, 0.1)
-                                    border.color: Theme.warning
-                                    border.width: 1
-                                    visible: !isFirstParty
-
-                                    StyledText {
-                                        id: warningText
-                                        anchors.fill: parent
-                                        anchors.margins: Theme.spacingS
-                                        text: "⚠ Third-party plugin - install at your own risk"
-                                        font.pixelSize: Theme.fontSizeSmall - 1
-                                        color: Theme.warning
-                                        wrapMode: Text.WordWrap
-                                    }
-                                }
-
                                 Flow {
                                     width: parent.width
                                     spacing: Theme.spacingXS
@@ -1118,6 +1118,113 @@ FocusScope {
                         color: Theme.surfaceVariantText
                         anchors.horizontalCenter: parent.horizontalCenter
                         visible: !pluginBrowserModal.isLoading && pluginBrowserModal.filteredPlugins.length === 0
+                    }
+                }
+            }
+        }
+    }
+
+    DankModal {
+        id: thirdPartyConfirmModal
+
+        width: 500
+        height: 300
+        allowStacking: true
+        backgroundOpacity: 0.4
+        closeOnEscapeKey: true
+
+        content: Component {
+            FocusScope {
+                anchors.fill: parent
+                focus: true
+
+                Keys.onPressed: event => {
+                    if (event.key === Qt.Key_Escape) {
+                        thirdPartyConfirmModal.close()
+                        event.accepted = true
+                    }
+                }
+
+                Column {
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingL
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "warning"
+                            size: Theme.iconSize
+                            color: Theme.warning
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: "Third-Party Plugin Warning"
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    StyledText {
+                        width: parent.width
+                        text: "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk."
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.surfaceText
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingS
+
+                        StyledText {
+                            text: "• Plugins may contain bugs or security issues"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                        }
+
+                        StyledText {
+                            text: "• Review code before installation when possible"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                        }
+
+                        StyledText {
+                            text: "• Install only from trusted sources"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                        }
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: parent.height - parent.spacing * 3 - y
+                    }
+
+                    Row {
+                        anchors.right: parent.right
+                        spacing: Theme.spacingM
+
+                        DankButton {
+                            text: "Cancel"
+                            iconName: "close"
+                            onClicked: thirdPartyConfirmModal.close()
+                        }
+
+                        DankButton {
+                            text: "I Understand"
+                            iconName: "check"
+                            onClicked: {
+                                SessionData.setShowThirdPartyPlugins(true)
+                                pluginBrowserModal.updateFilteredPlugins()
+                                thirdPartyConfirmModal.close()
+                            }
+                        }
                     }
                 }
             }

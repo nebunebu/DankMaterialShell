@@ -71,6 +71,7 @@ Singleton {
 
     property bool lockBeforeSuspend: false
     property var recentColors: []
+    property bool showThirdPartyPlugins: false
 
 
     Component.onCompleted: {
@@ -152,6 +153,7 @@ Singleton {
                 batteryHibernateTimeout = settings.batteryHibernateTimeout !== undefined ? settings.batteryHibernateTimeout : 0
                 lockBeforeSuspend = settings.lockBeforeSuspend !== undefined ? settings.lockBeforeSuspend : false
                 recentColors = settings.recentColors !== undefined ? settings.recentColors : []
+                showThirdPartyPlugins = settings.showThirdPartyPlugins !== undefined ? settings.showThirdPartyPlugins : false
 
                 if (!isGreeterMode) {
                     if (typeof Theme !== "undefined") {
@@ -213,7 +215,8 @@ Singleton {
                                                 "batterySuspendTimeout": batterySuspendTimeout,
                                                 "batteryHibernateTimeout": batteryHibernateTimeout,
                                                 "lockBeforeSuspend": lockBeforeSuspend,
-                                                "recentColors": recentColors
+                                                "recentColors": recentColors,
+                                                "showThirdPartyPlugins": showThirdPartyPlugins
                                             }, null, 2))
     }
 
@@ -637,6 +640,11 @@ Singleton {
 
     function setLockBeforeSuspend(enabled) {
         lockBeforeSuspend = enabled
+        saveSettings()
+    }
+
+    function setShowThirdPartyPlugins(enabled) {
+        showThirdPartyPlugins = enabled
         saveSettings()
     }
 
