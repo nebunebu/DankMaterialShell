@@ -1,0 +1,11 @@
+{
+    "id": "controlCenterExample",
+    "name": "CC Toggle Example",
+    "description": "Example plugin with Control Center toggle widget",
+    "version": "1.0.0",
+    "author": "DankMaterialShell",
+    "icon": "toggle_on",
+    "type": "widget",
+    "component": "./ControlCenterExampleWidget.qml",
+    "permissions": ["settings_read", "settings_write"]
+}

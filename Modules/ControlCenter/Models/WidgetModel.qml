@@ -6,7 +6,7 @@ import "../utils/widgets.js" as WidgetUtils
 QtObject {
     id: root
 
-    readonly property var baseWidgetDefinitions: [
+    readonly property var coreWidgetDefinitions: [
         {
             "id": "nightMode",
             "text": "Night Mode",
@@ -126,6 +126,51 @@ QtObject {
             "enabled": true
         }
     ]
+
+    function getPluginWidgets() {
+        const plugins = []
+        const loadedPlugins = PluginService.getLoadedPlugins()
+
+        for (let i = 0; i < loadedPlugins.length; i++) {
+            const plugin = loadedPlugins[i]
+
+            if (plugin.type === "daemon") {
+                continue
+            }
+
+            const pluginComponent = PluginService.pluginWidgetComponents[plugin.id]
+            if (!pluginComponent) {
+                continue
+            }
+
+            const tempInstance = pluginComponent.createObject(null)
+            if (!tempInstance) {
+                continue
+            }
+
+            const hasCCWidget = tempInstance.ccWidgetIcon && tempInstance.ccWidgetIcon.length > 0
+            tempInstance.destroy()
+
+            if (!hasCCWidget) {
+                continue
+            }
+
+            plugins.push({
+                "id": "plugin_" + plugin.id,
+                "pluginId": plugin.id,
+                "text": plugin.name || "Plugin",
+                "description": plugin.description || "",
+                "icon": plugin.icon || "extension",
+                "type": "plugin",
+                "enabled": true,
+                "isPlugin": true
+            })
+        }
+
+        return plugins
+    }
+
+    readonly property var baseWidgetDefinitions: coreWidgetDefinitions
 
     function getWidgetForId(widgetId) {
         return WidgetUtils.getWidgetForId(baseWidgetDefinitions, widgetId)

@@ -1,10 +1,10 @@
 # Plugin System
 
-The DMS shell includes an experimental plugin system that allows extending functionality through self-contained, dynamically-loaded QML components.
+Create widgets for DankBar and Control Center using dynamically-loaded QML components.
 
 ## Overview
 
-The plugin system enables developers to create custom widgets that can be displayed in the DankBar alongside built-in widgets. Plugins are discovered, loaded, and managed through the **PluginService**, providing a clean separation between core shell functionality and user extensions.
+Plugins let you add custom widgets to DankBar and Control Center. They're discovered from `~/.config/DankMaterialShell/plugins/` and managed via PluginService.
 
 ## Architecture
 
@@ -161,25 +161,65 @@ PluginComponent {
 - `popoutHeight`: Popout window height
 - `pillClickAction`: Custom click handler function (overrides popout)
 
-**Custom Click Actions:**
+### Control Center Integration
 
-Override the default popout behavior with `pillClickAction`:
+Add your plugin to Control Center by defining CC properties:
 
 ```qml
 PluginComponent {
-    horizontalBarPill: Component {
-        StyledText { text: "Click Me" }
+    ccWidgetIcon: "toggle_on"
+    ccWidgetPrimaryText: "My Feature"
+    ccWidgetSecondaryText: isEnabled ? "Active" : "Inactive"
+    ccWidgetIsActive: isEnabled
+
+    onCcWidgetToggled: {
+        isEnabled = !isEnabled
+        if (pluginService) {
+            pluginService.savePluginData("myPlugin", "isEnabled", isEnabled)
+        }
     }
 
-    // Simple 0-parameter function
-    pillClickAction: () => {
-        Process.exec("bash", ["-c", "notify-send 'Clicked!'"])
+    ccDetailContent: Component {
+        Rectangle {
+            implicitHeight: 200
+            color: Theme.surfaceContainerHigh
+            radius: Theme.cornerRadius
+            // Your detail UI here
+        }
     }
 
-    // Or with position parameters for popouts: (x, y, width, section, screen)
-    pillClickAction: (x, y, width, section, screen) => {
-        popoutService?.toggleControlCenter(x, y, width, section, screen)
-    }
+    horizontalBarPill: Component { /* ... */ }
+}
+```
+
+**CC Properties:**
+- `ccWidgetIcon`: Material icon name
+- `ccWidgetPrimaryText`: Main label
+- `ccWidgetSecondaryText`: Subtitle/status
+- `ccWidgetIsActive`: Active state styling
+- `ccDetailContent`: Optional dropdown panel (use for CompoundPill)
+
+**Signals:**
+- `ccWidgetToggled()`: Fired when icon clicked
+- `ccWidgetExpanded()`: Fired when expand area clicked (CompoundPill only)
+
+**Widget Sizing:**
+- 25% width → SmallToggleButton (icon only)
+- 50% width → ToggleButton (no detail) or CompoundPill (with detail)
+- Users can resize in edit mode
+
+**Custom Click Actions:**
+
+Override default popout with `pillClickAction`:
+
+```qml
+pillClickAction: () => {
+    Process.exec("bash", ["-c", "notify-send 'Clicked!'"])
+}
+
+// Or with position params: (x, y, width, section, screen)
+pillClickAction: (x, y, width, section, screen) => {
+    popoutService?.toggleControlCenter(x, y, width, section, screen)
 }
 ```
 
