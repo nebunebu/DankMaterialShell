@@ -19,6 +19,7 @@ Rectangle {
     property real barThickness: 48
     property real widgetThickness: 30
     property int selectedGpuIndex: (widgetData && widgetData.selectedGpuIndex !== undefined) ? widgetData.selectedGpuIndex : 0
+    property bool minimumWidth: (widgetData && widgetData.minimumWidth !== undefined) ? widgetData.minimumWidth : true
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
     property real displayTemp: {
         if (!DgopService.availableGpus || DgopService.availableGpus.length === 0) {
@@ -209,7 +210,7 @@ Rectangle {
                 text: "100°"
             }
 
-            width: Math.max(gpuTempBaseline.width, paintedWidth)
+            width: root.minimumWidth ? Math.max(gpuTempBaseline.width, paintedWidth) : paintedWidth
 
             Behavior on width {
                 NumberAnimation {

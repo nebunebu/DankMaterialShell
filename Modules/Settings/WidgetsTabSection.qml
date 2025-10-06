@@ -22,6 +22,7 @@ Column {
     signal gpuSelectionChanged(string sectionId, int widgetIndex, int selectedIndex)
     signal diskMountSelectionChanged(string sectionId, int widgetIndex, string mountPath)
     signal controlCenterSettingChanged(string sectionId, int widgetIndex, string settingName, bool value)
+    signal minimumWidthChanged(string sectionId, int widgetIndex, bool enabled)
 
     width: parent.width
     height: implicitHeight
@@ -280,6 +281,37 @@ Column {
                                         easing.type: Theme.standardEasing
                                     }
                                 }
+                            }
+                        }
+
+                        DankActionButton {
+                            id: minimumWidthButton
+                            buttonSize: 28
+                            visible: modelData.id === "cpuUsage"
+                                     || modelData.id === "memUsage"
+                                     || modelData.id === "cpuTemp"
+                                     || modelData.id === "gpuTemp"
+                            iconName: "straighten"
+                            iconSize: 16
+                            iconColor: (modelData.minimumWidth !== undefined ? modelData.minimumWidth : true) ? Theme.primary : Theme.outline
+                            onClicked: {
+                                var currentEnabled = modelData.minimumWidth !== undefined ? modelData.minimumWidth : true
+                                root.minimumWidthChanged(root.sectionId, index, !currentEnabled)
+                            }
+                            onEntered: {
+                                minimumWidthTooltipLoader.active = true
+                                if (minimumWidthTooltipLoader.item) {
+                                    var currentEnabled = modelData.minimumWidth !== undefined ? modelData.minimumWidth : true
+                                    const tooltipText = currentEnabled ? "Force Padding" : "Dynamic Width"
+                                    const p = minimumWidthButton.mapToItem(null, minimumWidthButton.width / 2, 0)
+                                    minimumWidthTooltipLoader.item.show(tooltipText, p.x, p.y - 40, null)
+                                }
+                            }
+                            onExited: {
+                                if (minimumWidthTooltipLoader.item) {
+                                    minimumWidthTooltipLoader.item.hide()
+                                }
+                                minimumWidthTooltipLoader.active = false
                             }
                         }
 
@@ -889,6 +921,12 @@ Column {
 
     Loader {
         id: visibilityTooltipLoader
+        active: false
+        sourceComponent: DankTooltip {}
+    }
+
+    Loader {
+        id: minimumWidthTooltipLoader
         active: false
         sourceComponent: DankTooltip {}
     }

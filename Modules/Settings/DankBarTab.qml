@@ -263,6 +263,9 @@ Item {
         if (widgetId === "diskUsage") {
             widgetObj.mountPath = "/"
         }
+        if (widgetId === "cpuUsage" || widgetId === "memUsage" || widgetId === "cpuTemp" || widgetId === "gpuTemp") {
+            widgetObj.minimumWidth = true
+        }
 
         var widgets = []
         if (targetSection === "left") {
@@ -509,6 +512,54 @@ Item {
         }
     }
 
+    function handleMinimumWidthChanged(sectionId, widgetIndex, enabled) {
+        var widgets = []
+        if (sectionId === "left")
+            widgets = SettingsData.dankBarLeftWidgets.slice()
+        else if (sectionId === "center")
+            widgets = SettingsData.dankBarCenterWidgets.slice()
+        else if (sectionId === "right")
+            widgets = SettingsData.dankBarRightWidgets.slice()
+
+        if (widgetIndex >= 0 && widgetIndex < widgets.length) {
+            var widget = widgets[widgetIndex]
+            if (typeof widget === "string") {
+                widgets[widgetIndex] = {
+                    "id": widget,
+                    "enabled": true,
+                    "minimumWidth": enabled
+                }
+            } else {
+                var newWidget = {
+                    "id": widget.id,
+                    "enabled": widget.enabled,
+                    "minimumWidth": enabled
+                }
+                if (widget.size !== undefined)
+                    newWidget.size = widget.size
+                if (widget.selectedGpuIndex !== undefined)
+                    newWidget.selectedGpuIndex = widget.selectedGpuIndex
+                if (widget.pciId !== undefined)
+                    newWidget.pciId = widget.pciId
+                if (widget.mountPath !== undefined)
+                    newWidget.mountPath = widget.mountPath
+                if (widget.id === "controlCenterButton") {
+                    newWidget.showNetworkIcon = widget.showNetworkIcon !== undefined ? widget.showNetworkIcon : true
+                    newWidget.showBluetoothIcon = widget.showBluetoothIcon !== undefined ? widget.showBluetoothIcon : true
+                    newWidget.showAudioIcon = widget.showAudioIcon !== undefined ? widget.showAudioIcon : true
+                }
+                widgets[widgetIndex] = newWidget
+            }
+        }
+
+        if (sectionId === "left")
+            SettingsData.setDankBarLeftWidgets(widgets)
+        else if (sectionId === "center")
+            SettingsData.setDankBarCenterWidgets(widgets)
+        else if (sectionId === "right")
+            SettingsData.setDankBarRightWidgets(widgets)
+    }
+
     function getItemsForSection(sectionId) {
         var widgets = []
         var widgetData = []
@@ -532,6 +583,7 @@ Item {
                                var widgetShowNetworkIcon = typeof widget === "string" ? undefined : widget.showNetworkIcon
                                var widgetShowBluetoothIcon = typeof widget === "string" ? undefined : widget.showBluetoothIcon
                                var widgetShowAudioIcon = typeof widget === "string" ? undefined : widget.showAudioIcon
+                               var widgetMinimumWidth = typeof widget === "string" ? undefined : widget.minimumWidth
                                var widgetDef = baseWidgetDefinitions.find(w => {
                                                                               return w.id === widgetId
                                                                           })
@@ -552,6 +604,8 @@ Item {
                                    item.showBluetoothIcon = widgetShowBluetoothIcon
                                    if (widgetShowAudioIcon !== undefined)
                                    item.showAudioIcon = widgetShowAudioIcon
+                                   if (widgetMinimumWidth !== undefined)
+                                   item.minimumWidth = widgetMinimumWidth
 
                                    widgets.push(item)
                                }
@@ -1208,6 +1262,10 @@ Item {
                                                          dankBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
+                        onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
+                                                   dankBarTab.handleMinimumWidthChanged(
+                                                       sectionId, widgetIndex, enabled)
+                                               }
                     }
                 }
 
@@ -1280,6 +1338,10 @@ Item {
                                                          dankBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
+                        onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
+                                                   dankBarTab.handleMinimumWidthChanged(
+                                                       sectionId, widgetIndex, enabled)
+                                               }
                     }
                 }
 
@@ -1352,6 +1414,10 @@ Item {
                                                          dankBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
+                        onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
+                                                   dankBarTab.handleMinimumWidthChanged(
+                                                       sectionId, widgetIndex, enabled)
+                                               }
                     }
                 }
             }

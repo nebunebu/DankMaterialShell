@@ -827,6 +827,7 @@ Item {
                                     return processListPopoutLoader.item
                                 }
                                 parentScreen: barWindow.screen
+                                widgetData: parent.widgetData
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()
@@ -846,6 +847,7 @@ Item {
                                     return processListPopoutLoader.item
                                 }
                                 parentScreen: barWindow.screen
+                                widgetData: parent.widgetData
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()
@@ -875,6 +877,7 @@ Item {
                                     return processListPopoutLoader.item
                                 }
                                 parentScreen: barWindow.screen
+                                widgetData: parent.widgetData
                                 toggleProcessList: () => {
                                                        processListPopoutLoader.active = true
                                                        return processListPopoutLoader.item?.toggle()

@@ -17,6 +17,8 @@ Rectangle {
     property var parentScreen: null
     property real barThickness: 48
     property real widgetThickness: 30
+    property var widgetData: null
+    property bool minimumWidth: (widgetData && widgetData.minimumWidth !== undefined) ? widgetData.minimumWidth : true
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
 
     width: isVertical ? widgetThickness : (ramContent.implicitWidth + horizontalPadding * 2)
@@ -30,6 +32,7 @@ Rectangle {
         const baseColor = ramArea.containsMouse ? Theme.widgetBaseHoverColor : Theme.widgetBaseBackgroundColor;
         return Qt.rgba(baseColor.r, baseColor.g, baseColor.b, baseColor.a * Theme.widgetTransparency);
     }
+
     Component.onCompleted: {
         DgopService.addRef(["memory"]);
     }
@@ -141,7 +144,7 @@ Rectangle {
                 text: "100%"
             }
 
-            width: Math.max(ramBaseline.width, paintedWidth)
+            width: root.minimumWidth ? Math.max(ramBaseline.width, paintedWidth) : paintedWidth
 
             Behavior on width {
                 NumberAnimation {

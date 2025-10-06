@@ -65,6 +65,14 @@ Loader {
         restoreMode: Binding.RestoreNone
     }
 
+    Binding {
+        target: root.item
+        when: root.item && "widgetData" in root.item
+        property: "widgetData"
+        value: root.widgetData
+        restoreMode: Binding.RestoreNone
+    }
+
     onLoaded: {
         if (item) {
             contentItemReady(item)

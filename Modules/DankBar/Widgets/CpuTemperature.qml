@@ -17,6 +17,8 @@ Rectangle {
     property var parentScreen: null
     property real barThickness: 48
     property real widgetThickness: 30
+    property var widgetData: null
+    property bool minimumWidth: (widgetData && widgetData.minimumWidth !== undefined) ? widgetData.minimumWidth : true
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
 
     width: isVertical ? widgetThickness : (cpuTempContent.implicitWidth + horizontalPadding * 2)
@@ -141,7 +143,7 @@ Rectangle {
                 text: "100°"
             }
 
-            width: Math.max(tempBaseline.width, paintedWidth)
+            width: root.minimumWidth ? Math.max(tempBaseline.width, paintedWidth) : paintedWidth
 
             Behavior on width {
                 NumberAnimation {
