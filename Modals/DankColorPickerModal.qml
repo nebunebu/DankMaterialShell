@@ -491,7 +491,11 @@ PanelWindow {
                         height: 38
                         text: root.currentColor.toString()
                         font.pixelSize: Theme.fontSizeMedium
-                        textColor: Theme.surfaceText
+                        textColor: {
+                            if (text.length === 0) return Theme.surfaceText
+                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
+                            return hexPattern.test(text) ? Theme.surfaceText : Theme.error
+                        }
                         placeholderText: "#000000"
                         backgroundColor: Theme.surfaceHover
                         borderWidth: 1
@@ -500,6 +504,8 @@ PanelWindow {
                         bottomPadding: Theme.spacingS
                         anchors.verticalCenter: parent.verticalCenter
                         onAccepted: () => {
+                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
+                            if (!hexPattern.test(text)) return
                             const color = Qt.color(text)
                             if (color) {
                                 root.currentColor = color
@@ -516,6 +522,8 @@ PanelWindow {
                         textColor: Theme.background
                         anchors.verticalCenter: parent.verticalCenter
                         onClicked: {
+                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
+                            if (!hexPattern.test(hexInput.text)) return
                             const color = Qt.color(hexInput.text)
                             if (color) {
                                 root.currentColor = color
