@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -136,9 +135,6 @@ PanelWindow {
     Rectangle {
         id: menuContainer
 
-        width: Math.min(400, Math.max(180, menuColumn.implicitWidth + Theme.spacingS * 2))
-        height: Math.max(60, menuColumn.implicitHeight + Theme.spacingS * 2)
-
         x: {
             const isVertical = SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right
             if (isVertical) {
@@ -171,12 +167,23 @@ PanelWindow {
                 }
             }
         }
+
+        width: Math.min(400, Math.max(180, menuColumn.implicitWidth + Theme.spacingS * 2))
+        height: Math.max(60, menuColumn.implicitHeight + Theme.spacingS * 2)
         color: Theme.popupBackground()
         radius: Theme.cornerRadius
         border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
         border.width: 1
-        opacity: showContextMenu ? 1 : 0
-        scale: showContextMenu ? 1 : 0.85
+
+        opacity: root.showContextMenu ? 1 : 0
+        visible: opacity > 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Theme.shortDuration
+                easing.type: Theme.emphasizedEasing
+            }
+        }
 
         Rectangle {
             anchors.fill: parent
@@ -186,7 +193,7 @@ PanelWindow {
             anchors.bottomMargin: -4
             radius: parent.radius
             color: Qt.rgba(0, 0, 0, 0.15)
-            z: parent.z - 1
+            z: -1
         }
 
         Column {
@@ -404,13 +411,6 @@ PanelWindow {
             }
 
             Rectangle {
-                visible: root.appData && root.appData.type === "window"
-                width: parent.width
-                height: 1
-                color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
-            }
-
-            Rectangle {
                 visible: root.appData && (root.appData.type === "window" || (root.appData.type === "grouped" && root.appData.windowCount > 0))
                 width: parent.width
                 height: 28
@@ -468,27 +468,11 @@ PanelWindow {
                 }
             }
         }
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.mediumDuration
-                easing.type: Theme.emphasizedEasing
-            }
-        }
-
-        Behavior on scale {
-            NumberAnimation {
-                duration: Theme.mediumDuration
-                easing.type: Theme.emphasizedEasing
-            }
-        }
     }
 
     MouseArea {
         anchors.fill: parent
         z: -1
-        onClicked: {
-            root.close()
-        }
+        onClicked: root.close()
     }
 }

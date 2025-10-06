@@ -157,6 +157,7 @@ PanelWindow {
         radius: root.cornerRadius
         border.color: root.borderColor
         border.width: root.borderWidth
+        clip: false
         layer.enabled: true
         transform: root.animationType === "slide" ? slideTransform : null
 
@@ -170,6 +171,7 @@ PanelWindow {
         FocusScope {
             anchors.fill: parent
             focus: root.shouldBeVisible
+            clip: false
 
             Loader {
                 id: contentLoader
@@ -178,6 +180,7 @@ PanelWindow {
                 active: root.keepContentLoaded || root.shouldBeVisible || root.visible
                 asynchronous: false
                 focus: true
+                clip: false
 
                 onLoaded: {
                     if (item) {

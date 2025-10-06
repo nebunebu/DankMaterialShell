@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
@@ -488,7 +489,8 @@ DankPopout {
                                                    if (mouse.button === Qt.LeftButton) {
                                                        appList.itemClicked(index, model)
                                                    } else if (mouse.button === Qt.RightButton) {
-                                                       var panelPos = mapToItem(contextMenu.parent, mouse.x, mouse.y)
+                                                       var globalPos = mapToItem(null, mouse.x, mouse.y)
+                                                       var panelPos = contextMenu.parent.mapFromItem(null, globalPos.x, globalPos.y)
                                                        appList.itemRightClicked(index, model, panelPos.x, panelPos.y)
                                                    }
                                                }
@@ -649,7 +651,8 @@ DankPopout {
                                                    if (mouse.button === Qt.LeftButton) {
                                                        appGrid.itemClicked(index, model)
                                                    } else if (mouse.button === Qt.RightButton) {
-                                                       var panelPos = mapToItem(contextMenu.parent, mouse.x, mouse.y)
+                                                       var globalPos = mapToItem(null, mouse.x, mouse.y)
+                                                       var panelPos = contextMenu.parent.mapFromItem(null, globalPos.x, globalPos.y)
                                                        appGrid.itemRightClicked(index, model, panelPos.x, panelPos.y)
                                                    }
                                                }
@@ -662,68 +665,68 @@ DankPopout {
         }
     }
 
-    Rectangle {
+    Popup {
         id: contextMenu
 
         property var currentApp: null
-        property bool menuVisible: false
 
         readonly property string appId: (currentApp && currentApp.desktopEntry) ? (currentApp.desktopEntry.id || currentApp.desktopEntry.execString || "") : ""
         readonly property bool isPinned: appId && SessionData.isPinnedApp(appId)
 
         function show(x, y, app) {
             currentApp = app
-
-            const menuWidth = 180
-            const menuHeight = menuColumn.implicitHeight + Theme.spacingS * 2
-
-            let finalX = x + 8
-            let finalY = y + 8
-
-            if (finalX + menuWidth > appDrawerPopout.popupWidth) {
-                finalX = x - menuWidth - 8
-            }
-
-            if (finalY + menuHeight > appDrawerPopout.popupHeight) {
-                finalY = y - menuHeight - 8
-            }
-
-            finalX = Math.max(8, Math.min(finalX, appDrawerPopout.popupWidth - menuWidth - 8))
-            finalY = Math.max(8, Math.min(finalY, appDrawerPopout.popupHeight - menuHeight - 8))
-
-            contextMenu.x = finalX
-            contextMenu.y = finalY
-            contextMenu.visible = true
-            contextMenu.menuVisible = true
+            contextMenu.x = x + 4
+            contextMenu.y = y + 4
+            contextMenu.open()
         }
 
-        function close() {
-            contextMenu.menuVisible = false
-            Qt.callLater(() => {
-                             contextMenu.visible = false
-                         })
+        function hide() {
+            contextMenu.close()
         }
 
-        visible: false
         width: 180
         height: menuColumn.implicitHeight + Theme.spacingS * 2
-        radius: Theme.cornerRadius
-        color: Theme.popupBackground()
-        border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
-        border.width: 0
-        z: 1000
-        opacity: menuVisible ? 1 : 0
-        scale: menuVisible ? 1 : 0.85
+        padding: 0
+        closePolicy: Popup.CloseOnPressOutside
+        modal: false
+        dim: false
 
-        Rectangle {
-            anchors.fill: parent
-            anchors.topMargin: 4
-            anchors.leftMargin: 2
-            anchors.rightMargin: -2
-            anchors.bottomMargin: -4
-            radius: parent.radius
-            color: Qt.rgba(0, 0, 0, 0.15)
-            z: parent.z - 1
+        background: Rectangle {
+            radius: Theme.cornerRadius
+            color: Theme.popupBackground()
+            border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
+            border.width: 1
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.topMargin: 4
+                anchors.leftMargin: 2
+                anchors.rightMargin: -2
+                anchors.bottomMargin: -4
+                radius: parent.radius
+                color: Qt.rgba(0, 0, 0, 0.15)
+                z: -1
+            }
+        }
+
+        enter: Transition {
+            NumberAnimation {
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: Theme.shortDuration
+                easing.type: Theme.emphasizedEasing
+            }
+        }
+
+        exit: Transition {
+            NumberAnimation {
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: Theme.shortDuration
+                easing.type: Theme.emphasizedEasing
+            }
         }
 
         Column {
@@ -778,7 +781,7 @@ DankPopout {
                         } else {
                             SessionData.addPinnedApp(contextMenu.appId)
                         }
-                        contextMenu.close()
+                        contextMenu.hide()
                     }
                 }
             }
@@ -846,7 +849,7 @@ DankPopout {
                                 SessionService.launchDesktopAction(contextMenu.currentApp.desktopEntry, modelData)
                                 appLauncher.appLaunched(contextMenu.currentApp)
                             }
-                            contextMenu.close()
+                            contextMenu.hide()
                         }
                     }
                 }
@@ -906,23 +909,9 @@ DankPopout {
                         if (contextMenu.currentApp)
                             appLauncher.launchApp(contextMenu.currentApp)
 
-                        contextMenu.close()
+                        contextMenu.hide()
                     }
                 }
-            }
-        }
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.mediumDuration
-                easing.type: Theme.emphasizedEasing
-            }
-        }
-
-        Behavior on scale {
-            NumberAnimation {
-                duration: Theme.mediumDuration
-                easing.type: Theme.emphasizedEasing
             }
         }
     }
@@ -932,7 +921,7 @@ DankPopout {
         visible: contextMenu.visible
         z: 999
         onClicked: {
-            contextMenu.close()
+            contextMenu.hide()
         }
 
         MouseArea {
