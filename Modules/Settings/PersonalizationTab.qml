@@ -768,7 +768,7 @@ Item {
                                             return SessionData.wallpaperCyclingTime
                                         }
                                     }
-                                    placeholderText: qsTr("00:00")
+                                    placeholderText: "00:00"
                                     maximumLength: 5
                                     topPadding: Theme.spacingS
                                     bottomPadding: Theme.spacingS
@@ -1346,7 +1346,7 @@ Item {
                                         width: 120
                                         height: 40
                                         text: SessionData.latitude.toString()
-                                        placeholderText: qsTr("0.0")
+                                        placeholderText: "0.0"
                                         onTextChanged: {
                                             const lat = parseFloat(text) || 0.0
                                             if (lat >= -90 && lat <= 90) {
@@ -1369,7 +1369,7 @@ Item {
                                         width: 120
                                         height: 40
                                         text: SessionData.longitude.toString()
-                                        placeholderText: qsTr("0.0")
+                                        placeholderText: "0.0"
                                         onTextChanged: {
                                             const lon = parseFloat(text) || 0.0
                                             if (lon >= -180 && lon <= 180) {

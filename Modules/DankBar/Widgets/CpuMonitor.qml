@@ -140,7 +140,7 @@ Rectangle {
                 id: cpuBaseline
                 font.pixelSize: Theme.fontSizeSmall
                 font.weight: Font.Medium
-                text: qsTr("100%")
+                text: "100%"
             }
 
             width: root.minimumWidth ? Math.max(cpuBaseline.width, paintedWidth) : paintedWidth

@@ -257,7 +257,7 @@ Item {
                                         id: latitudeInput
                                         width: parent.width
                                         height: 48
-                                        placeholderText: qsTr("40.7128")
+                                        placeholderText: "40.7128"
                                         backgroundColor: Theme.surfaceVariant
                                         normalBorderColor: Theme.primarySelected
                                         focusedBorderColor: Theme.primary
@@ -308,7 +308,7 @@ Item {
                                         id: longitudeInput
                                         width: parent.width
                                         height: 48
-                                        placeholderText: qsTr("-74.0060")
+                                        placeholderText: "-74.0060"
                                         backgroundColor: Theme.surfaceVariant
                                         normalBorderColor: Theme.primarySelected
                                         focusedBorderColor: Theme.primary

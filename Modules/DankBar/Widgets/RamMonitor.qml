@@ -141,7 +141,7 @@ Rectangle {
                 id: ramBaseline
                 font.pixelSize: Theme.fontSizeSmall
                 font.weight: Font.Medium
-                text: qsTr("100%")
+                text: "100%"
             }
 
             width: root.minimumWidth ? Math.max(ramBaseline.width, paintedWidth) : paintedWidth

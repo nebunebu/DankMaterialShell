@@ -30,42 +30,6 @@
     "comment": ""
   },
   {
-    "term": "-74.0060",
-    "context": "Modules/Settings/WeatherTab.qml:311",
-    "reference": "Modules/Settings/WeatherTab.qml:311",
-    "comment": ""
-  },
-  {
-    "term": "0.0",
-    "context": "Modules/Settings/PersonalizationTab.qml:1349",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1349, Modules/Settings/PersonalizationTab.qml:1372",
-    "comment": ""
-  },
-  {
-    "term": "00:00",
-    "context": "Modules/Settings/PersonalizationTab.qml:771",
-    "reference": "Modules/Settings/PersonalizationTab.qml:771",
-    "comment": ""
-  },
-  {
-    "term": "100%",
-    "context": "Modules/DankBar/Widgets/RamMonitor.qml:144",
-    "reference": "Modules/DankBar/Widgets/RamMonitor.qml:144, Modules/DankBar/Widgets/DiskUsage.qml:228, Modules/DankBar/Widgets/CpuMonitor.qml:143",
-    "comment": ""
-  },
-  {
-    "term": "100°",
-    "context": "Modules/DankBar/Widgets/CpuTemperature.qml:143",
-    "reference": "Modules/DankBar/Widgets/CpuTemperature.qml:143, Modules/DankBar/Widgets/GpuTemperature.qml:210",
-    "comment": ""
-  },
-  {
-    "term": "123",
-    "context": "Modules/Lock/Keyboard.qml:172",
-    "reference": "Modules/Lock/Keyboard.qml:172",
-    "comment": ""
-  },
-  {
     "term": "24-Hour Format",
     "context": "Modules/Settings/TimeTab.qml:57",
     "reference": "Modules/Settings/TimeTab.qml:57",
@@ -81,12 +45,6 @@
     "term": "3rd party",
     "context": "Modules/Settings/PluginsTab.qml:992",
     "reference": "Modules/Settings/PluginsTab.qml:992",
-    "comment": ""
-  },
-  {
-    "term": "40.7128",
-    "context": "Modules/Settings/WeatherTab.qml:260",
-    "reference": "Modules/Settings/WeatherTab.qml:260",
     "comment": ""
   },
   {
