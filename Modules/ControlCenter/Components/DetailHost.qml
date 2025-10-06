@@ -2,6 +2,7 @@ import QtQuick
 import qs.Common
 import qs.Services
 import qs.Modules.ControlCenter.Details
+import qs.Modules.ControlCenter.Models
 
 Item {
     id: root
@@ -11,6 +12,7 @@ Item {
     property var bluetoothCodecSelector: null
 
     property var pluginDetailInstance: null
+    property var widgetModel: null
 
     Loader {
         id: pluginDetailLoader
@@ -39,6 +41,23 @@ Item {
         coreDetailLoader.active = false
 
         if (!root.expandedSection) {
+            return
+        }
+
+        if (root.expandedSection.startsWith("builtin_")) {
+            const builtinId = root.expandedSection
+            let builtinInstance = null
+
+            if (builtinId === "builtin_vpn" && widgetModel?.vpnBuiltinInstance) {
+                builtinInstance = widgetModel.vpnBuiltinInstance
+            }
+
+            if (!builtinInstance || !builtinInstance.ccDetailContent) {
+                return
+            }
+
+            pluginDetailLoader.sourceComponent = builtinInstance.ccDetailContent
+            pluginDetailLoader.active = parent.height > 0
             return
         }
 
