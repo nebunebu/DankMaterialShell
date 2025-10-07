@@ -172,6 +172,7 @@ Singleton {
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     readonly property string _configUrl: StandardPaths.writableLocation(StandardPaths.ConfigLocation)
     readonly property string _configDir: Paths.strip(_configUrl)
+    readonly property string pluginSettingsPath: _configDir + "/DankMaterialShell/plugin_settings.json"
 
     signal forceDankBarLayoutRefresh
     signal forceDockLayoutRefresh
@@ -179,6 +180,7 @@ Singleton {
     signal workspaceIconsUpdated
 
     property bool _loading: false
+    property bool _pluginSettingsLoading: false
 
     property var pluginSettings: ({})
 
@@ -223,13 +225,41 @@ Singleton {
         _loading = true
         parseSettings(settingsFile.text())
         _loading = false
+        loadPluginSettings()
+    }
+
+    function loadPluginSettings() {
+        _pluginSettingsLoading = true
+        parsePluginSettings(pluginSettingsFile.text())
+        _pluginSettingsLoading = false
+    }
+
+    function parsePluginSettings(content) {
+        _pluginSettingsLoading = true
+        try {
+            if (content && content.trim()) {
+                pluginSettings = JSON.parse(content)
+            } else {
+                pluginSettings = {}
+            }
+        } catch (e) {
+            console.warn("SettingsData: Failed to parse plugin settings:", e.message)
+            pluginSettings = {}
+        } finally {
+            _pluginSettingsLoading = false
+        }
     }
 
     function parseSettings(content) {
         _loading = true
+        var shouldMigrate = false
         try {
             if (content && content.trim()) {
                 var settings = JSON.parse(content)
+                if (settings.pluginSettings !== undefined) {
+                    pluginSettings = settings.pluginSettings
+                    shouldMigrate = true
+                }
                 // Auto-migrate from old theme system
                 if (settings.themeIndex !== undefined || settings.themeIsDynamic !== undefined) {
                     const themeNames = ["blue", "deepBlue", "purple", "green", "orange", "red", "cyan", "pink", "amber", "coral"]
@@ -381,7 +411,6 @@ Singleton {
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
-                pluginSettings = settings.pluginSettings !== undefined ? settings.pluginSettings : ({})
                 animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 applyStoredTheme()
                 detectAvailableIconThemes()
@@ -395,6 +424,11 @@ Singleton {
             applyStoredTheme()
         } finally {
             _loading = false
+        }
+
+        if (shouldMigrate) {
+            savePluginSettings()
+            saveSettings()
         }
     }
 
@@ -507,9 +541,14 @@ Singleton {
                                                 "notificationPopupPosition": notificationPopupPosition,
                                                 "osdAlwaysShowValue": osdAlwaysShowValue,
                                                 "screenPreferences": screenPreferences,
-                                                "pluginSettings": pluginSettings,
                                                 "animationSpeed": animationSpeed
                                             }, null, 2))
+    }
+
+    function savePluginSettings() {
+        if (_pluginSettingsLoading)
+            return
+        pluginSettingsFile.setText(JSON.stringify(pluginSettings, null, 2))
     }
 
     function setShowWorkspaceIndex(enabled) {
@@ -1334,13 +1373,13 @@ Singleton {
             pluginSettings[pluginId] = {}
         }
         pluginSettings[pluginId][key] = value
-        saveSettings()
+        savePluginSettings()
     }
 
     function removePluginSettings(pluginId) {
         if (pluginSettings[pluginId]) {
             delete pluginSettings[pluginId]
-            saveSettings()
+            savePluginSettings()
         }
     }
 
@@ -1420,6 +1459,26 @@ Singleton {
                 defaultSettingsCheckProcess.running = true
             } else if (!isGreeterMode) {
                 applyStoredTheme()
+            }
+        }
+    }
+
+    FileView {
+        id: pluginSettingsFile
+
+        path: isGreeterMode ? "" : pluginSettingsPath
+        blockLoading: true
+        blockWrites: true
+        atomicWrites: true
+        watchChanges: !isGreeterMode
+        onLoaded: {
+            if (!isGreeterMode) {
+                parsePluginSettings(pluginSettingsFile.text())
+            }
+        }
+        onLoadFailed: error => {
+            if (!isGreeterMode) {
+                pluginSettings = {}
             }
         }
     }

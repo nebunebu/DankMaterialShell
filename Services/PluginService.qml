@@ -459,6 +459,10 @@ Singleton {
         return SettingsData.getPluginSetting(pluginId, key, defaultValue)
     }
 
+    function saveAllPluginSettings() {
+        SettingsData.savePluginSettings()
+    }
+
     function createPluginDirectory() {
         var mkdirProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { }")
         if (mkdirProcess.status === Component.Ready) {
