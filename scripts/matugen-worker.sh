@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ $# -lt 3 ]; then
-    echo "Usage: $0 STATE_DIR SHELL_DIR --run" >&2
+if [ $# -lt 4 ]; then
+    echo "Usage: $0 STATE_DIR SHELL_DIR CONFIG_DIR --run" >&2
     exit 1
 fi
 
 STATE_DIR="$1"
 SHELL_DIR="$2"
+CONFIG_DIR="$3"
 
 if [ ! -d "$STATE_DIR" ]; then
     echo "Error: STATE_DIR '$STATE_DIR' does not exist" >&2
@@ -19,10 +20,15 @@ if [ ! -d "$SHELL_DIR" ]; then
     exit 1
 fi
 
-shift 2  # Remove STATE_DIR and SHELL_DIR from arguments
+if [ ! -d "$CONFIG_DIR" ]; then
+    echo "Error: CONFIG_DIR '$CONFIG_DIR' does not exist" >&2
+    exit 1
+fi
+
+shift 3  # Remove STATE_DIR, SHELL_DIR, and CONFIG_DIR from arguments
 
 if [[ "${1:-}" != "--run" ]]; then
-  echo "usage: $0 STATE_DIR SHELL_DIR --run" >&2
+  echo "usage: $0 STATE_DIR SHELL_DIR CONFIG_DIR --run" >&2
   exit 1
 fi
 
@@ -67,7 +73,6 @@ build_once() {
   [[ -z "$matugen_type" ]] && matugen_type="scheme-tonal-spot"
   [[ -z "$surface_base" ]] && surface_base="sc"
 
-  CONFIG_DIR="${CONFIG_DIR:-$HOME/.config}"
   USER_MATUGEN_DIR="$CONFIG_DIR/matugen/dms"
   
   TMP_CFG="$(mktemp)"

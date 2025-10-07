@@ -615,10 +615,10 @@ Singleton {
             console.log("calling matugen worker")
             systemThemeGenerator.command = [
                 "sh", "-c",
-                `sleep 1 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' --run`
+                `sleep 1 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' '${configDir}' --run`
             ]
         } else {
-            systemThemeGenerator.command = [shellDir + "/scripts/matugen-worker.sh", stateDir, shellDir, "--run"]
+            systemThemeGenerator.command = [shellDir + "/scripts/matugen-worker.sh", stateDir, shellDir, configDir, "--run"]
         }
         systemThemeGenerator.running = true
     }
