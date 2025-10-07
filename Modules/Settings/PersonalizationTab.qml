@@ -12,7 +12,7 @@ import qs.Widgets
 Item {
     id: personalizationTab
 
-    property alias wallpaperBrowser: wallpaperBrowser
+    property var wallpaperBrowser: wallpaperBrowserLoader.item
     property var parentModal: null
     property var cachedFontFamilies: []
     property bool fontsEnumerated: false
@@ -46,13 +46,21 @@ Item {
         cachedFontFamilies = fonts.concat(rootFamilies.sort())
     }
 
-    Component.onCompleted: {
-        // Access WallpaperCyclingService to ensure it's initialized
-        WallpaperCyclingService.cyclingActive
-        if (!fontsEnumerated) {
-            enumerateFonts()
-            fontsEnumerated = true
+    Timer {
+        id: fontEnumerationTimer
+        interval: 50
+        running: false
+        onTriggered: {
+            if (!fontsEnumerated) {
+                enumerateFonts()
+                fontsEnumerated = true
+            }
         }
+    }
+
+    Component.onCompleted: {
+        WallpaperCyclingService.cyclingActive
+        fontEnumerationTimer.start()
     }
 
     DankFlickable {
@@ -229,7 +237,7 @@ Item {
                                                     parentModal.allowFocusOverride = true
                                                     parentModal.shouldHaveFocus = false
                                                 }
-                                                wallpaperBrowser.open()
+                                                wallpaperBrowserLoader.active = true
                                             }
                                         }
                                     }
@@ -1841,27 +1849,33 @@ Item {
         }
     }
 
-    FileBrowserModal {
-        id: wallpaperBrowser
+    Loader {
+        id: wallpaperBrowserLoader
+        active: false
+        asynchronous: true
 
-        browserTitle: "Select Wallpaper"
-        browserIcon: "wallpaper"
-        browserType: "wallpaper"
-        fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
-        onFileSelected: path => {
-                            if (SessionData.perMonitorWallpaper) {
-                                SessionData.setMonitorWallpaper(selectedMonitorName, path)
-                            } else {
-                                SessionData.setWallpaper(path)
+        sourceComponent: FileBrowserModal {
+            Component.onCompleted: open()
+            browserTitle: "Select Wallpaper"
+            browserIcon: "wallpaper"
+            browserType: "wallpaper"
+            fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
+            onFileSelected: path => {
+                                if (SessionData.perMonitorWallpaper) {
+                                    SessionData.setMonitorWallpaper(selectedMonitorName, path)
+                                } else {
+                                    SessionData.setWallpaper(path)
+                                }
+                                close()
                             }
-                            close()
-                        }
-        onDialogClosed: {
-            if (parentModal) {
-                parentModal.allowFocusOverride = false
-                parentModal.shouldHaveFocus = Qt.binding(() => {
-                                                             return parentModal.shouldBeVisible
-                                                         })
+            onDialogClosed: {
+                if (parentModal) {
+                    parentModal.allowFocusOverride = false
+                    parentModal.shouldHaveFocus = Qt.binding(() => {
+                                                                 return parentModal.shouldBeVisible
+                                                             })
+                }
+                Qt.callLater(() => wallpaperBrowserLoader.active = false)
             }
         }
     }
