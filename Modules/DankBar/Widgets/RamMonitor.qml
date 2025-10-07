@@ -69,7 +69,7 @@ Rectangle {
 
         DankIcon {
             name: "developer_board"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (DgopService.memoryUsage > 90) {
                     return Theme.tempDanger;
@@ -92,7 +92,7 @@ Rectangle {
 
                 return DgopService.memoryUsage.toFixed(0);
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.horizontalCenter: parent.horizontalCenter
@@ -107,7 +107,7 @@ Rectangle {
 
         DankIcon {
             name: "developer_board"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (DgopService.memoryUsage > 90) {
                     return Theme.tempDanger;
@@ -130,7 +130,7 @@ Rectangle {
 
                 return DgopService.memoryUsage.toFixed(0) + "%";
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.verticalCenter: parent.verticalCenter
@@ -139,7 +139,7 @@ Rectangle {
 
             StyledTextMetrics {
                 id: ramBaseline
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.barTextSize(barThickness)
                 font.weight: Font.Medium
                 text: "100%"
             }

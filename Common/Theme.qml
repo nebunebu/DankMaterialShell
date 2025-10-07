@@ -473,6 +473,18 @@ Singleton {
         return (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) < 0.5
     }
 
+    function barIconSize(barThickness, offset) {
+        const defaultOffset = offset !== undefined ? offset : -6
+        return Math.round((barThickness / 48) * (iconSize + defaultOffset))
+    }
+
+    function barTextSize(barThickness) {
+        const scale = barThickness / 48
+        if (scale <= 0.75) return fontSizeSmall * 0.9
+        if (scale >= 1.25) return fontSizeMedium
+        return fontSizeSmall
+    }
+
     function getBatteryIcon(level, isCharging, batteryAvailable) {
         if (!batteryAvailable)
             return _getBatteryPowerProfileIcon()

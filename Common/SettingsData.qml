@@ -108,6 +108,7 @@ Singleton {
     property string launcherLogoColorOverride: ""
     property real launcherLogoBrightness: 0.5
     property real launcherLogoContrast: 1
+    property int launcherLogoSizeOffset: 0
     property bool weatherEnabled: true
     property string fontFamily: "Inter Variable"
     property string monoFontFamily: "Fira Code"
@@ -334,6 +335,7 @@ Singleton {
                     launcherLogoColorOverride = settings.launcherLogoColorOverride !== undefined ? settings.launcherLogoColorOverride : ""
                     launcherLogoBrightness = settings.launcherLogoBrightness !== undefined ? settings.launcherLogoBrightness : 0.5
                     launcherLogoContrast = settings.launcherLogoContrast !== undefined ? settings.launcherLogoContrast : 1
+                    launcherLogoSizeOffset = settings.launcherLogoSizeOffset !== undefined ? settings.launcherLogoSizeOffset : 0
                 }
                 fontFamily = settings.fontFamily !== undefined ? settings.fontFamily : defaultFontFamily
                 monoFontFamily = settings.monoFontFamily !== undefined ? settings.monoFontFamily : defaultMonoFontFamily
@@ -459,6 +461,7 @@ Singleton {
                                                 "launcherLogoColorOverride": launcherLogoColorOverride,
                                                 "launcherLogoBrightness": launcherLogoBrightness,
                                                 "launcherLogoContrast": launcherLogoContrast,
+                                                "launcherLogoSizeOffset": launcherLogoSizeOffset,
                                                 "fontFamily": fontFamily,
                                                 "monoFontFamily": monoFontFamily,
                                                 "fontWeight": fontWeight,
@@ -981,6 +984,11 @@ Singleton {
 
     function setLauncherLogoContrast(contrast) {
         launcherLogoContrast = contrast
+        saveSettings()
+    }
+
+    function setLauncherLogoSizeOffset(offset) {
+        launcherLogoSizeOffset = offset
         saveSettings()
     }
 

@@ -68,7 +68,7 @@ Rectangle {
 
         DankIcon {
             name: "device_thermostat"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (DgopService.cpuTemperature > 85) {
                     return Theme.tempDanger;
@@ -91,7 +91,7 @@ Rectangle {
 
                 return Math.round(DgopService.cpuTemperature).toString();
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.horizontalCenter: parent.horizontalCenter
@@ -106,7 +106,7 @@ Rectangle {
 
         DankIcon {
             name: "device_thermostat"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (DgopService.cpuTemperature > 85) {
                     return Theme.tempDanger;
@@ -129,7 +129,7 @@ Rectangle {
 
                 return Math.round(DgopService.cpuTemperature) + "°";
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.verticalCenter: parent.verticalCenter
@@ -138,7 +138,7 @@ Rectangle {
 
             StyledTextMetrics {
                 id: tempBaseline
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.barTextSize(barThickness)
                 font.weight: Font.Medium
                 text: "100°"
             }

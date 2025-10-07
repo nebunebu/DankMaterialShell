@@ -181,7 +181,7 @@ Item {
 
                         Row {
                             id: slidersRow
-                            spacing: Theme.spacingL
+                            spacing: Theme.spacingS
                             anchors.horizontalCenter: parent.horizontalCenter
 
                             Column {
@@ -218,7 +218,7 @@ Item {
                                         cursorShape: Qt.PointingHandCursor
                                         onClicked: {
                                             if (PopoutService.colorPickerModal) {
-                                                PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Theme.primary
+                                                PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(0, 0, 0, 0)
                                                 PopoutService.colorPickerModal.pickerTitle = qsTr("Choose Launcher Logo Color")
                                                 PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
                                                     SettingsData.setLauncherLogoColorOverride(selectedColor)
@@ -226,6 +226,35 @@ Item {
                                                 PopoutService.colorPickerModal.show()
                                             }
                                         }
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: 120
+                                spacing: Theme.spacingS
+
+                                StyledText {
+                                    text: qsTr("Size Offset")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
+                                DankSlider {
+                                    width: 100
+                                    height: 20
+                                    minimum: -12
+                                    maximum: 12
+                                    value: SettingsData.launcherLogoSizeOffset
+                                    unit: ""
+                                    showValue: true
+                                    wheelEnabled: false
+                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    onSliderValueChanged: newValue => {
+                                        SettingsData.setLauncherLogoSizeOffset(newValue)
                                     }
                                 }
                             }

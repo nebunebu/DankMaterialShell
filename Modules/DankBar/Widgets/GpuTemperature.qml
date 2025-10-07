@@ -135,7 +135,7 @@ Rectangle {
 
         DankIcon {
             name: "auto_awesome_mosaic"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (root.displayTemp > 80) {
                     return Theme.tempDanger;
@@ -158,7 +158,7 @@ Rectangle {
 
                 return Math.round(root.displayTemp).toString();
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.horizontalCenter: parent.horizontalCenter
@@ -173,7 +173,7 @@ Rectangle {
 
         DankIcon {
             name: "auto_awesome_mosaic"
-            size: Theme.iconSize - 8
+            size: Theme.barIconSize(barThickness)
             color: {
                 if (root.displayTemp > 80) {
                     return Theme.tempDanger;
@@ -196,7 +196,7 @@ Rectangle {
 
                 return Math.round(root.displayTemp) + "°";
             }
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: Theme.barTextSize(barThickness)
             font.weight: Font.Medium
             color: Theme.surfaceText
             anchors.verticalCenter: parent.verticalCenter
@@ -205,7 +205,7 @@ Rectangle {
 
             StyledTextMetrics {
                 id: gpuTempBaseline
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.barTextSize(barThickness)
                 font.weight: Font.Medium
                 text: "100°"
             }

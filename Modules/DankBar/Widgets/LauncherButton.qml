@@ -60,15 +60,15 @@ Item {
             visible: SettingsData.launcherLogoMode === "apps"
             anchors.centerIn: parent
             name: "apps"
-            size: Theme.iconSize - 6
+            size: Theme.barIconSize(barThickness, -4)
             color: Theme.surfaceText
         }
 
         SystemLogo {
             visible: SettingsData.launcherLogoMode === "os"
             anchors.centerIn: parent
-            width: Theme.iconSize - 3
-            height: Theme.iconSize - 3
+            width: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
+            height: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
             colorOverride: SettingsData.launcherLogoColorOverride
             brightnessOverride: SettingsData.launcherLogoBrightness
             contrastOverride: SettingsData.launcherLogoContrast
@@ -77,8 +77,8 @@ Item {
         IconImage {
             visible: SettingsData.launcherLogoMode === "compositor"
             anchors.centerIn: parent
-            width: Theme.iconSize - 3
-            height: Theme.iconSize - 3
+            width: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
+            height: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
             smooth: true
             asynchronous: true
             source: {
@@ -101,8 +101,8 @@ Item {
         IconImage {
             visible: SettingsData.launcherLogoMode === "custom" && SettingsData.launcherLogoCustomPath !== ""
             anchors.centerIn: parent
-            width: Theme.iconSize - 3
-            height: Theme.iconSize - 3
+            width: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
+            height: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
             smooth: true
             asynchronous: true
             source: SettingsData.launcherLogoCustomPath ? "file://" + SettingsData.launcherLogoCustomPath.replace("file://", "") : ""
