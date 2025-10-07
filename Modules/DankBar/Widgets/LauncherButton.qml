@@ -69,7 +69,7 @@ Item {
             anchors.centerIn: parent
             width: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
             height: Theme.barIconSize(barThickness, SettingsData.launcherLogoSizeOffset)
-            colorOverride: SettingsData.launcherLogoColorOverride
+            colorOverride: Theme.effectiveLogoColor
             brightnessOverride: SettingsData.launcherLogoBrightness
             contrastOverride: SettingsData.launcherLogoContrast
         }
@@ -89,10 +89,10 @@ Item {
                 }
                 return ""
             }
-            layer.enabled: SettingsData.launcherLogoColorOverride !== ""
+            layer.enabled: Theme.effectiveLogoColor !== ""
             layer.effect: MultiEffect {
                 colorization: 1
-                colorizationColor: SettingsData.launcherLogoColorOverride
+                colorizationColor: Theme.effectiveLogoColor
                 brightness: SettingsData.launcherLogoBrightness
                 contrast: SettingsData.launcherLogoContrast
             }
@@ -106,10 +106,10 @@ Item {
             smooth: true
             asynchronous: true
             source: SettingsData.launcherLogoCustomPath ? "file://" + SettingsData.launcherLogoCustomPath.replace("file://", "") : ""
-            layer.enabled: SettingsData.launcherLogoColorOverride !== ""
+            layer.enabled: Theme.effectiveLogoColor !== ""
             layer.effect: MultiEffect {
                 colorization: 1
-                colorizationColor: SettingsData.launcherLogoColorOverride
+                colorizationColor: Theme.effectiveLogoColor
                 brightness: SettingsData.launcherLogoBrightness
                 contrast: SettingsData.launcherLogoContrast
             }

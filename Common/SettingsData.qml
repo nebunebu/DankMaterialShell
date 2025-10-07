@@ -106,6 +106,7 @@ Singleton {
     property string launcherLogoMode: "apps"
     property string launcherLogoCustomPath: ""
     property string launcherLogoColorOverride: ""
+    property bool launcherLogoColorInvertOnMode: false
     property real launcherLogoBrightness: 0.5
     property real launcherLogoContrast: 1
     property int launcherLogoSizeOffset: 0
@@ -333,6 +334,7 @@ Singleton {
                     launcherLogoMode = settings.launcherLogoMode !== undefined ? settings.launcherLogoMode : "apps"
                     launcherLogoCustomPath = settings.launcherLogoCustomPath !== undefined ? settings.launcherLogoCustomPath : ""
                     launcherLogoColorOverride = settings.launcherLogoColorOverride !== undefined ? settings.launcherLogoColorOverride : ""
+                    launcherLogoColorInvertOnMode = settings.launcherLogoColorInvertOnMode !== undefined ? settings.launcherLogoColorInvertOnMode : false
                     launcherLogoBrightness = settings.launcherLogoBrightness !== undefined ? settings.launcherLogoBrightness : 0.5
                     launcherLogoContrast = settings.launcherLogoContrast !== undefined ? settings.launcherLogoContrast : 1
                     launcherLogoSizeOffset = settings.launcherLogoSizeOffset !== undefined ? settings.launcherLogoSizeOffset : 0
@@ -459,6 +461,7 @@ Singleton {
                                                 "launcherLogoMode": launcherLogoMode,
                                                 "launcherLogoCustomPath": launcherLogoCustomPath,
                                                 "launcherLogoColorOverride": launcherLogoColorOverride,
+                                                "launcherLogoColorInvertOnMode": launcherLogoColorInvertOnMode,
                                                 "launcherLogoBrightness": launcherLogoBrightness,
                                                 "launcherLogoContrast": launcherLogoContrast,
                                                 "launcherLogoSizeOffset": launcherLogoSizeOffset,
@@ -974,6 +977,11 @@ Singleton {
 
     function setLauncherLogoColorOverride(color) {
         launcherLogoColorOverride = color
+        saveSettings()
+    }
+
+    function setLauncherLogoColorInvertOnMode(invert) {
+        launcherLogoColorInvertOnMode = invert
         saveSettings()
     }
 

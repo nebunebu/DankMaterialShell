@@ -694,6 +694,59 @@ Singleton {
         return Math.round(value * dpr) / dpr
     }
 
+    function invertHex(hex) {
+        hex = hex.replace('#', '');
+
+        if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+            return hex;
+        }
+
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+
+        const invR = (255 - r).toString(16).padStart(2, '0');
+        const invG = (255 - g).toString(16).padStart(2, '0');
+        const invB = (255 - b).toString(16).padStart(2, '0');
+
+        return `#${invR}${invG}${invB}`;
+    }
+
+    property string baseLogoColor: ""
+    property string effectiveLogoColor: {
+        if (typeof SettingsData === "undefined") return ""
+
+        const colorOverride = SettingsData.launcherLogoColorOverride
+        if (!colorOverride || colorOverride === "") return ""
+
+        if (!SettingsData.launcherLogoColorInvertOnMode) {
+            return colorOverride
+        }
+
+        if (baseLogoColor === "") {
+            baseLogoColor = colorOverride
+        }
+
+        if (typeof SessionData !== "undefined" && SessionData.isLightMode) {
+            return invertHex(baseLogoColor)
+        }
+
+        return baseLogoColor
+    }
+
+    onIsLightModeChanged: {
+        if (typeof SettingsData !== "undefined" && SettingsData.launcherLogoColorInvertOnMode && baseLogoColor === "") {
+            baseLogoColor = SettingsData.launcherLogoColorOverride
+        }
+    }
+
+    Connections {
+        target: typeof SettingsData !== "undefined" ? SettingsData : null
+        function onLauncherLogoColorOverrideChanged() {
+            baseLogoColor = SettingsData.launcherLogoColorOverride
+        }
+    }
+
     Process {
         id: matugenCheck
         command: ["which", "matugen"]

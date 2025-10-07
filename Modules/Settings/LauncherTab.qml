@@ -166,9 +166,9 @@ Item {
                         }
                     }
 
-                    Item {
+                    Row {
                         width: parent.width
-                        height: slidersRow.height
+                        spacing: Theme.spacingL
                         visible: SettingsData.launcherLogoMode !== "apps"
                         opacity: visible ? 1 : 0
 
@@ -179,56 +179,55 @@ Item {
                             }
                         }
 
-                        Row {
-                            id: slidersRow
+                        Column {
+                            width: 120
                             spacing: Theme.spacingS
-                            anchors.horizontalCenter: parent.horizontalCenter
 
-                            Column {
-                                width: 120
-                                spacing: Theme.spacingS
+                            StyledText {
+                                text: qsTr("Color Override")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
 
-                                StyledText {
-                                    text: qsTr("Color Override")
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    color: Theme.surfaceText
-                                    font.weight: Font.Medium
-                                    anchors.horizontalCenter: parent.horizontalCenter
+                            Rectangle {
+                                width: 32
+                                height: 32
+                                radius: 16
+                                color: SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(255, 255, 255, 0.9)
+                                border.color: Theme.outline
+                                border.width: 1
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                DankIcon {
+                                    visible: SettingsData.launcherLogoColorOverride === ""
+                                    anchors.centerIn: parent
+                                    name: "palette"
+                                    size: 18
+                                    color: "black"
                                 }
 
-                                Rectangle {
-                                    width: 32
-                                    height: 32
-                                    radius: 16
-                                    color: SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(255, 255, 255, 0.9)
-                                    border.color: Theme.outline
-                                    border.width: 1
-                                    anchors.horizontalCenter: parent.horizontalCenter
-
-                                    DankIcon {
-                                        visible: SettingsData.launcherLogoColorOverride === ""
-                                        anchors.centerIn: parent
-                                        name: "palette"
-                                        size: 18
-                                        color: "black"
-                                    }
-
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        cursorShape: Qt.PointingHandCursor
-                                        onClicked: {
-                                            if (PopoutService.colorPickerModal) {
-                                                PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(0, 0, 0, 0)
-                                                PopoutService.colorPickerModal.pickerTitle = qsTr("Choose Launcher Logo Color")
-                                                PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
-                                                    SettingsData.setLauncherLogoColorOverride(selectedColor)
-                                                }
-                                                PopoutService.colorPickerModal.show()
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: {
+                                        if (PopoutService.colorPickerModal) {
+                                            PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(0, 0, 0, 0)
+                                            PopoutService.colorPickerModal.pickerTitle = qsTr("Choose Launcher Logo Color")
+                                            PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
+                                                SettingsData.setLauncherLogoColorOverride(selectedColor)
                                             }
+                                            PopoutService.colorPickerModal.show()
                                         }
                                     }
                                 }
                             }
+                        }
+
+                        Flow {
+                            width: parent.width - 120 - Theme.spacingL
+                            spacing: Theme.spacingS
 
                             Column {
                                 width: 120
@@ -313,6 +312,30 @@ Item {
                                     anchors.horizontalCenter: parent.horizontalCenter
                                     onSliderValueChanged: newValue => {
                                         SettingsData.setLauncherLogoContrast(newValue / 100)
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: 120
+                                spacing: Theme.spacingS
+                                visible: SettingsData.launcherLogoColorOverride !== ""
+
+                                StyledText {
+                                    text: qsTr("Invert on mode change")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
+                                DankToggle {
+                                    width: 32
+                                    height: 18
+                                    checked: SettingsData.launcherLogoColorInvertOnMode
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    onToggled: checked => {
+                                        SettingsData.setLauncherLogoColorInvertOnMode(checked)
                                     }
                                 }
                             }
