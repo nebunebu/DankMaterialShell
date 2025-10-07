@@ -480,9 +480,10 @@ Singleton {
 
     function barTextSize(barThickness) {
         const scale = barThickness / 48
-        if (scale <= 0.75) return fontSizeSmall * 0.9
-        if (scale >= 1.25) return fontSizeMedium
-        return fontSizeSmall
+        const dankBarScale = (typeof SettingsData !== "undefined" ? SettingsData.dankBarFontScale : 1.0)
+        if (scale <= 0.75) return fontSizeSmall * 0.9 * dankBarScale
+        if (scale >= 1.25) return fontSizeMedium * dankBarScale
+        return fontSizeSmall * dankBarScale
     }
 
     function getBatteryIcon(level, isCharging, batteryAvailable) {

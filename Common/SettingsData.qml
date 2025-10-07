@@ -115,6 +115,7 @@ Singleton {
     property string monoFontFamily: "Fira Code"
     property int fontWeight: Font.Normal
     property real fontScale: 1.0
+    property real dankBarFontScale: 1.0
     property bool notepadUseMonospace: true
     property string notepadFontFamily: ""
     property real notepadFontSize: 14
@@ -373,6 +374,7 @@ Singleton {
                 monoFontFamily = settings.monoFontFamily !== undefined ? settings.monoFontFamily : defaultMonoFontFamily
                 fontWeight = settings.fontWeight !== undefined ? settings.fontWeight : Font.Normal
                 fontScale = settings.fontScale !== undefined ? settings.fontScale : 1.0
+                dankBarFontScale = settings.dankBarFontScale !== undefined ? settings.dankBarFontScale : 1.0
                 notepadUseMonospace = settings.notepadUseMonospace !== undefined ? settings.notepadUseMonospace : true
                 notepadFontFamily = settings.notepadFontFamily !== undefined ? settings.notepadFontFamily : ""
                 notepadFontSize = settings.notepadFontSize !== undefined ? settings.notepadFontSize : 14
@@ -503,6 +505,7 @@ Singleton {
                                                 "monoFontFamily": monoFontFamily,
                                                 "fontWeight": fontWeight,
                                                 "fontScale": fontScale,
+                                                "dankBarFontScale": dankBarFontScale,
                                                 "notepadUseMonospace": notepadUseMonospace,
                                                 "notepadFontFamily": notepadFontFamily,
                                                 "notepadFontSize": notepadFontSize,
@@ -1056,6 +1059,11 @@ Singleton {
 
     function setFontScale(scale) {
         fontScale = scale
+        saveSettings()
+    }
+
+    function setDankBarFontScale(scale) {
+        dankBarFontScale = scale
         saveSettings()
     }
 
