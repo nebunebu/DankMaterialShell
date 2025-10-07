@@ -15,6 +15,15 @@ PanelWindow {
     property real height: 300
     readonly property real screenWidth: screen ? screen.width : 1920
     readonly property real screenHeight: screen ? screen.height : 1080
+    readonly property real dpr: (screen && screen.devicePixelRatio) || 1
+
+    function snap(v) {
+        return Math.round(v * dpr) / dpr
+    }
+
+    function px(v) {
+        return Math.round(v)
+    }
     property bool showBackground: true
     property real backgroundOpacity: 0.5
     property string positioning: "center"
@@ -134,22 +143,26 @@ PanelWindow {
     Rectangle {
         id: contentContainer
 
-        width: root.width
-        height: root.height
-        anchors.centerIn: positioning === "center" ? parent : undefined
+        width: px(root.width)
+        height: px(root.height)
+        anchors.centerIn: undefined
         x: {
-            if (positioning === "top-right") {
-                return Math.max(Theme.spacingL, root.screenWidth - width - Theme.spacingL)
+            if (positioning === "center") {
+                return snap((root.screenWidth - width) / 2)
+            } else if (positioning === "top-right") {
+                return px(Math.max(Theme.spacingL, root.screenWidth - width - Theme.spacingL))
             } else if (positioning === "custom") {
-                return root.customPosition.x
+                return snap(root.customPosition.x)
             }
             return 0
         }
         y: {
-            if (positioning === "top-right") {
-                return Theme.barHeight + Theme.spacingXS
+            if (positioning === "center") {
+                return snap((root.screenHeight - height) / 2)
+            } else if (positioning === "top-right") {
+                return px(Theme.barHeight + Theme.spacingXS)
             } else if (positioning === "custom") {
-                return root.customPosition.y
+                return snap(root.customPosition.y)
             }
             return 0
         }
@@ -159,13 +172,18 @@ PanelWindow {
         border.width: root.borderWidth
         clip: false
         layer.enabled: true
+        layer.smooth: false
+        layer.mipmap: false
         transform: root.animationType === "slide" ? slideTransform : null
 
         Translate {
             id: slideTransform
 
-            x: root.shouldBeVisible ? 0 : 15
-            y: root.shouldBeVisible ? 0 : -30
+            readonly property real rawX: root.shouldBeVisible ? 0 : 15
+            readonly property real rawY: root.shouldBeVisible ? 0 : -30
+
+            x: snap(rawX)
+            y: snap(rawY)
         }
 
         FocusScope {
@@ -197,7 +215,6 @@ PanelWindow {
             shadowBlur: 1
             shadowColor: Theme.shadowStrong
             shadowOpacity: 0.3
-            source: contentContainer
             opacity: root.shouldBeVisible ? 1 : 0
 
             Behavior on opacity {
