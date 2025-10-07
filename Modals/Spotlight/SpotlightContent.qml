@@ -108,27 +108,6 @@ Item {
         spacing: Theme.spacingM
         clip: false
 
-        Rectangle {
-            width: parent.width
-            height: categorySelector.height + Theme.spacingS * 2
-            radius: Theme.cornerRadius
-            color: "transparent"
-            visible: appLauncher.categories.length > 1 || appLauncher.model.count > 0
-
-            CategorySelector {
-                id: categorySelector
-
-                anchors.centerIn: parent
-                width: parent.width - Theme.spacingS * 2
-                categories: appLauncher.categories
-                selectedCategory: appLauncher.selectedCategory
-                compact: false
-                onCategorySelected: category => {
-                                        appLauncher.setCategory(category)
-                                    }
-            }
-        }
-
         Row {
             width: parent.width
             spacing: Theme.spacingM
