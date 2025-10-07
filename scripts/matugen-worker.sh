@@ -68,7 +68,8 @@ build_once() {
   [[ -z "$surface_base" ]] && surface_base="sc"
 
   CONFIG_DIR="${CONFIG_DIR:-$HOME/.config}"
-
+  USER_MATUGEN_DIR="$CONFIG_DIR/matugen/dms"
+  
   TMP_CFG="$(mktemp)"
   trap 'rm -f "$TMP_CFG"' RETURN
 
@@ -113,6 +114,13 @@ EOF
     echo "" >> "$TMP_CFG"
   fi
   
+  # Load user's matugen configurations
+  for config in "$USER_MATUGEN_DIR/configs"/*.toml; do
+    [[ -f "$config" ]] || continue
+    cat "$config" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  done
+  
   # GTK3 colors based on colloid
   COLLOID_TEMPLATE="$SHELL_DIR/matugen/templates/gtk3-colors.css"
   
@@ -125,7 +133,8 @@ EOF
     trap 'rm -rf "$TMP_TEMPLATES_DIR"' RETURN
 
     # Create shifted versions of templates
-    for template in "$SHELL_DIR/matugen/templates"/*.{css,conf,json,kdl,colors}; do
+    for template in "$SHELL_DIR/matugen/templates"/*.{css,conf,json,kdl,colors} \
+                    "$USER_MATUGEN_DIR/templates"/*.{css,conf,json,kdl,colors,toml}; do
       [[ -f "$template" ]] || continue
       template_name="$(basename "$template")"
       shifted_template="$TMP_TEMPLATES_DIR/$template_name"
@@ -140,6 +149,7 @@ EOF
 
     # Update config to use shifted templates
     sed -i "s|input_path = '$SHELL_DIR/matugen/templates/|input_path = '$TMP_TEMPLATES_DIR/|g" "$TMP_CFG"
+    sed -i "s|input_path = '$USER_MATUGEN_DIR/templates/|input_path = '$TMP_TEMPLATES_DIR/|g" "$TMP_CFG"
 
     # Handle the special colloid template path
     if [[ -f "$TMP_TEMPLATES_DIR/gtk3-colors.css" ]]; then
