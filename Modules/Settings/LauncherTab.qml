@@ -1,11 +1,26 @@
 import QtQuick
 import QtQuick.Controls
+import Quickshell
 import Quickshell.Widgets
 import qs.Common
+import qs.Modals
+import qs.Modals.FileBrowser
+import qs.Services
 import qs.Widgets
 
 Item {
     id: recentAppsTab
+
+    FileBrowserModal {
+        id: logoFileBrowser
+        browserTitle: qsTr("Select Launcher Logo")
+        browserIcon: "image"
+        browserType: "generic"
+        filterExtensions: ["*.svg", "*.png", "*.jpg", "*.jpeg", "*.webp"]
+        onFileSelected: path => {
+            SettingsData.setLauncherLogoCustomPath(path.replace("file://", ""))
+        }
+    }
 
     DankFlickable {
         anchors.fill: parent
@@ -18,6 +33,264 @@ Item {
             id: mainColumn
             width: parent.width
             spacing: Theme.spacingXL
+
+            StyledRect {
+                width: parent.width
+                height: launcherLogoSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: launcherLogoSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "apps"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: qsTr("Launcher Button Logo")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    StyledText {
+                        width: parent.width
+                        text: qsTr("Choose the logo displayed on the launcher button in DankBar")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.surfaceVariantText
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: logoModeGroup.height
+
+                        DankButtonGroup {
+                            id: logoModeGroup
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            model: {
+                                const modes = [qsTr("Apps Icon"), qsTr("OS Logo")]
+                                if (CompositorService.isNiri || CompositorService.isHyprland) {
+                                    const compositorName = CompositorService.isNiri ? "niri" : "Hyprland"
+                                    modes.push(compositorName)
+                                }
+                                modes.push(qsTr("Custom"))
+                                return modes
+                            }
+                            currentIndex: {
+                                if (SettingsData.launcherLogoMode === "apps") return 0
+                                if (SettingsData.launcherLogoMode === "os") return 1
+                                if (SettingsData.launcherLogoMode === "compositor") {
+                                    return (CompositorService.isNiri || CompositorService.isHyprland) ? 2 : -1
+                                }
+                                if (SettingsData.launcherLogoMode === "custom") {
+                                    return (CompositorService.isNiri || CompositorService.isHyprland) ? 3 : 2
+                                }
+                                return 0
+                            }
+                            onSelectionChanged: (index, selected) => {
+                                if (!selected) return
+                                if (index === 0) {
+                                    SettingsData.setLauncherLogoMode("apps")
+                                } else if (index === 1) {
+                                    SettingsData.setLauncherLogoMode("os")
+                                } else if (CompositorService.isNiri || CompositorService.isHyprland) {
+                                    if (index === 2) {
+                                        SettingsData.setLauncherLogoMode("compositor")
+                                    } else if (index === 3) {
+                                        SettingsData.setLauncherLogoMode("custom")
+                                    }
+                                } else if (index === 2) {
+                                    SettingsData.setLauncherLogoMode("custom")
+                                }
+                            }
+                        }
+                    }
+
+                    Row {
+                        width: parent.width
+                        visible: SettingsData.launcherLogoMode === "custom"
+                        opacity: visible ? 1 : 0
+                        spacing: Theme.spacingM
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Theme.mediumDuration
+                                easing.type: Theme.emphasizedEasing
+                            }
+                        }
+
+                        StyledRect {
+                            width: parent.width - selectButton.width - Theme.spacingM
+                            height: 36
+                            radius: Theme.cornerRadius
+                            color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.9)
+                            border.color: Theme.outlineStrong
+                            border.width: 1
+
+                            StyledText {
+                                anchors.left: parent.left
+                                anchors.leftMargin: Theme.spacingM
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: SettingsData.launcherLogoCustomPath || qsTr("Select an image file...")
+                                font.pixelSize: Theme.fontSizeMedium
+                                color: SettingsData.launcherLogoCustomPath ? Theme.surfaceText : Theme.outlineButton
+                                width: parent.width - Theme.spacingM * 2
+                                elide: Text.ElideMiddle
+                            }
+                        }
+
+                        DankActionButton {
+                            id: selectButton
+                            iconName: "folder_open"
+                            width: 36
+                            height: 36
+                            onClicked: logoFileBrowser.open()
+                        }
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: slidersRow.height
+                        visible: SettingsData.launcherLogoMode !== "apps"
+                        opacity: visible ? 1 : 0
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Theme.mediumDuration
+                                easing.type: Theme.emphasizedEasing
+                            }
+                        }
+
+                        Row {
+                            id: slidersRow
+                            spacing: Theme.spacingL
+                            anchors.horizontalCenter: parent.horizontalCenter
+
+                            Column {
+                                width: 120
+                                spacing: Theme.spacingS
+
+                                StyledText {
+                                    text: qsTr("Color Override")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
+                                Rectangle {
+                                    width: 32
+                                    height: 32
+                                    radius: 16
+                                    color: SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Qt.rgba(255, 255, 255, 0.9)
+                                    border.color: Theme.outline
+                                    border.width: 1
+                                    anchors.horizontalCenter: parent.horizontalCenter
+
+                                    DankIcon {
+                                        visible: SettingsData.launcherLogoColorOverride === ""
+                                        anchors.centerIn: parent
+                                        name: "palette"
+                                        size: 18
+                                        color: "black"
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            if (PopoutService.colorPickerModal) {
+                                                PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride !== "" ? SettingsData.launcherLogoColorOverride : Theme.primary
+                                                PopoutService.colorPickerModal.pickerTitle = qsTr("Choose Launcher Logo Color")
+                                                PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
+                                                    SettingsData.setLauncherLogoColorOverride(selectedColor)
+                                                }
+                                                PopoutService.colorPickerModal.show()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: 120
+                                spacing: Theme.spacingS
+
+                                StyledText {
+                                    text: qsTr("Brightness")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
+                                DankSlider {
+                                    width: 100
+                                    height: 20
+                                    minimum: 0
+                                    maximum: 100
+                                    value: Math.round(SettingsData.launcherLogoBrightness * 100)
+                                    unit: "%"
+                                    showValue: true
+                                    wheelEnabled: false
+                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    onSliderValueChanged: newValue => {
+                                        SettingsData.setLauncherLogoBrightness(newValue / 100)
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: 120
+                                spacing: Theme.spacingS
+
+                                StyledText {
+                                    text: qsTr("Contrast")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                }
+
+                                DankSlider {
+                                    width: 100
+                                    height: 20
+                                    minimum: 0
+                                    maximum: 200
+                                    value: Math.round(SettingsData.launcherLogoContrast * 100)
+                                    unit: "%"
+                                    showValue: true
+                                    wheelEnabled: false
+                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    onSliderValueChanged: newValue => {
+                                        SettingsData.setLauncherLogoContrast(newValue / 100)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             StyledRect {
                 width: parent.width

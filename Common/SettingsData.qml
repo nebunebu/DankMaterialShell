@@ -103,10 +103,11 @@ Singleton {
     property bool qt5ctAvailable: false
     property bool qt6ctAvailable: false
     property bool gtkAvailable: false
-    property bool useOSLogo: false
-    property string osLogoColorOverride: ""
-    property real osLogoBrightness: 0.5
-    property real osLogoContrast: 1
+    property string launcherLogoMode: "apps"
+    property string launcherLogoCustomPath: ""
+    property string launcherLogoColorOverride: ""
+    property real launcherLogoBrightness: 0.5
+    property real launcherLogoContrast: 1
     property bool weatherEnabled: true
     property string fontFamily: "Inter Variable"
     property string monoFontFamily: "Fira Code"
@@ -322,10 +323,18 @@ Singleton {
                 spotlightModalViewMode = settings.spotlightModalViewMode !== undefined ? settings.spotlightModalViewMode : "list"
                 networkPreference = settings.networkPreference !== undefined ? settings.networkPreference : "auto"
                 iconTheme = settings.iconTheme !== undefined ? settings.iconTheme : "System Default"
-                useOSLogo = settings.useOSLogo !== undefined ? settings.useOSLogo : false
-                osLogoColorOverride = settings.osLogoColorOverride !== undefined ? settings.osLogoColorOverride : ""
-                osLogoBrightness = settings.osLogoBrightness !== undefined ? settings.osLogoBrightness : 0.5
-                osLogoContrast = settings.osLogoContrast !== undefined ? settings.osLogoContrast : 1
+                if (settings.useOSLogo !== undefined) {
+                    launcherLogoMode = settings.useOSLogo ? "os" : "apps"
+                    launcherLogoColorOverride = settings.osLogoColorOverride !== undefined ? settings.osLogoColorOverride : ""
+                    launcherLogoBrightness = settings.osLogoBrightness !== undefined ? settings.osLogoBrightness : 0.5
+                    launcherLogoContrast = settings.osLogoContrast !== undefined ? settings.osLogoContrast : 1
+                } else {
+                    launcherLogoMode = settings.launcherLogoMode !== undefined ? settings.launcherLogoMode : "apps"
+                    launcherLogoCustomPath = settings.launcherLogoCustomPath !== undefined ? settings.launcherLogoCustomPath : ""
+                    launcherLogoColorOverride = settings.launcherLogoColorOverride !== undefined ? settings.launcherLogoColorOverride : ""
+                    launcherLogoBrightness = settings.launcherLogoBrightness !== undefined ? settings.launcherLogoBrightness : 0.5
+                    launcherLogoContrast = settings.launcherLogoContrast !== undefined ? settings.launcherLogoContrast : 1
+                }
                 fontFamily = settings.fontFamily !== undefined ? settings.fontFamily : defaultFontFamily
                 monoFontFamily = settings.monoFontFamily !== undefined ? settings.monoFontFamily : defaultMonoFontFamily
                 fontWeight = settings.fontWeight !== undefined ? settings.fontWeight : Font.Normal
@@ -445,10 +454,11 @@ Singleton {
                                                 "spotlightModalViewMode": spotlightModalViewMode,
                                                 "networkPreference": networkPreference,
                                                 "iconTheme": iconTheme,
-                                                "useOSLogo": useOSLogo,
-                                                "osLogoColorOverride": osLogoColorOverride,
-                                                "osLogoBrightness": osLogoBrightness,
-                                                "osLogoContrast": osLogoContrast,
+                                                "launcherLogoMode": launcherLogoMode,
+                                                "launcherLogoCustomPath": launcherLogoCustomPath,
+                                                "launcherLogoColorOverride": launcherLogoColorOverride,
+                                                "launcherLogoBrightness": launcherLogoBrightness,
+                                                "launcherLogoContrast": launcherLogoContrast,
                                                 "fontFamily": fontFamily,
                                                 "monoFontFamily": monoFontFamily,
                                                 "fontWeight": fontWeight,
@@ -949,23 +959,28 @@ Singleton {
         updateQtIconTheme(iconTheme)
     }
 
-    function setUseOSLogo(enabled) {
-        useOSLogo = enabled
+    function setLauncherLogoMode(mode) {
+        launcherLogoMode = mode
         saveSettings()
     }
 
-    function setOSLogoColorOverride(color) {
-        osLogoColorOverride = color
+    function setLauncherLogoCustomPath(path) {
+        launcherLogoCustomPath = path
         saveSettings()
     }
 
-    function setOSLogoBrightness(brightness) {
-        osLogoBrightness = brightness
+    function setLauncherLogoColorOverride(color) {
+        launcherLogoColorOverride = color
         saveSettings()
     }
 
-    function setOSLogoContrast(contrast) {
-        osLogoContrast = contrast
+    function setLauncherLogoBrightness(brightness) {
+        launcherLogoBrightness = brightness
+        saveSettings()
+    }
+
+    function setLauncherLogoContrast(contrast) {
+        launcherLogoContrast = contrast
         saveSettings()
     }
 
