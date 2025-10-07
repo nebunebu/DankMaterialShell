@@ -418,7 +418,7 @@ Rectangle {
 
                     anchors.centerIn: parent
                     width: root.isVertical ? parent.width + Theme.spacingXL : parent.width
-                    height: root.isVerical ? parent.height : parent.height + Theme.spacingXL
+                    height: root.isVertical ? parent.height : parent.height + Theme.spacingXL
                     hoverEnabled: !isPlaceholder
                     cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
                     enabled: !isPlaceholder
