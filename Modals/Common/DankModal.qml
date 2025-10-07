@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import qs.Common
@@ -171,9 +170,7 @@ PanelWindow {
         border.color: root.borderColor
         border.width: root.borderWidth
         clip: false
-        layer.enabled: true
-        layer.smooth: false
-        layer.mipmap: false
+        opacity: root.shouldBeVisible ? 1 : 0
         transform: root.animationType === "slide" ? slideTransform : null
 
         Translate {
@@ -184,6 +181,13 @@ PanelWindow {
 
             x: snap(rawX)
             y: snap(rawY)
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: animationDuration
+                easing.type: animationEasing
+            }
         }
 
         FocusScope {
@@ -204,23 +208,6 @@ PanelWindow {
                     if (item) {
                         Qt.callLater(() => item.forceActiveFocus())
                     }
-                }
-            }
-        }
-
-        layer.effect: MultiEffect {
-            shadowEnabled: true
-            shadowHorizontalOffset: 0
-            shadowVerticalOffset: 8
-            shadowBlur: 1
-            shadowColor: Theme.shadowStrong
-            shadowOpacity: 0.3
-            opacity: root.shouldBeVisible ? 1 : 0
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: animationDuration
-                    easing.type: animationEasing
                 }
             }
         }
