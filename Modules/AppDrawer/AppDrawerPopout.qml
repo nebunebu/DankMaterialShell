@@ -913,6 +913,67 @@ DankPopout {
                     }
                 }
             }
+
+            Rectangle {
+                visible: SessionService.hasPrimeRun
+                width: parent.width - Theme.spacingS * 2
+                height: 5
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "transparent"
+
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: parent.width
+                    height: 1
+                    color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                }
+            }
+
+            Rectangle {
+                visible: SessionService.hasPrimeRun
+                width: parent.width
+                height: 32
+                radius: Theme.cornerRadius
+                color: primeRunMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
+
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.spacingS
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: Theme.spacingS
+
+                    DankIcon {
+                        name: "memory"
+                        size: Theme.iconSize - 2
+                        color: Theme.surfaceText
+                        opacity: 0.7
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    StyledText {
+                        text: qsTr("Launch on dGPU")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.surfaceText
+                        font.weight: Font.Normal
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
+                MouseArea {
+                    id: primeRunMouseArea
+
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (contextMenu.currentApp && contextMenu.currentApp.desktopEntry) {
+                            SessionService.launchDesktopEntry(contextMenu.currentApp.desktopEntry, true)
+                            appLauncher.appLaunched(contextMenu.currentApp)
+                        }
+                        contextMenu.hide()
+                    }
+                }
+            }
         }
     }
 

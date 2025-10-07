@@ -404,7 +404,49 @@ PanelWindow {
             }
 
             Rectangle {
-                visible: root.appData && root.appData.type === "window"
+                visible: (root.appData && root.appData.type === "window") || (root.desktopEntry && SessionService.hasPrimeRun)
+                width: parent.width
+                height: 1
+                color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+            }
+
+            Rectangle {
+                visible: root.desktopEntry && SessionService.hasPrimeRun
+                width: parent.width
+                height: 28
+                radius: Theme.cornerRadius
+                color: primeRunArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
+
+                StyledText {
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.spacingS
+                    anchors.right: parent.right
+                    anchors.rightMargin: Theme.spacingS
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: qsTr("Launch on dGPU")
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.surfaceText
+                    font.weight: Font.Normal
+                    elide: Text.ElideRight
+                    wrapMode: Text.NoWrap
+                }
+
+                MouseArea {
+                    id: primeRunArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (root.desktopEntry) {
+                            SessionService.launchDesktopEntry(root.desktopEntry, true)
+                        }
+                        root.close()
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: root.appData && (root.appData.type === "window" || (root.appData.type === "grouped" && root.appData.windowCount > 0))
                 width: parent.width
                 height: 1
                 color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
@@ -444,7 +486,6 @@ PanelWindow {
                     onClicked: {
                         const sortedToplevels = CompositorService.sortedToplevels
                         if (root.appData && root.appData.type === "window") {
-                            // Find and close the specific window
                             for (var i = 0; i < sortedToplevels.length; i++) {
                                 const toplevel = sortedToplevels[i]
                                 const checkId = toplevel.title + "|" + (toplevel.appId || "") + "|" + i
@@ -454,7 +495,6 @@ PanelWindow {
                                 }
                             }
                         } else if (root.appData && root.appData.type === "grouped") {
-                            // Close all windows for this app
                             const allToplevels = ToplevelManager.toplevels.values
                             for (let i = 0; i < allToplevels.length; i++) {
                                 const toplevel = allToplevels[i]
