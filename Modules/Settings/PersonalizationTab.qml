@@ -233,10 +233,6 @@ Item {
                                             anchors.fill: parent
                                             cursorShape: Qt.PointingHandCursor
                                             onClicked: {
-                                                if (parentModal) {
-                                                    parentModal.allowFocusOverride = true
-                                                    parentModal.shouldHaveFocus = false
-                                                }
                                                 wallpaperBrowserLoader.active = true
                                             }
                                         }
@@ -1855,7 +1851,10 @@ Item {
         asynchronous: true
 
         sourceComponent: FileBrowserModal {
-            Component.onCompleted: open()
+            parentModal: personalizationTab.parentModal
+            Component.onCompleted: {
+                open()
+            }
             browserTitle: "Select Wallpaper"
             browserIcon: "wallpaper"
             browserType: "wallpaper"
@@ -1869,12 +1868,6 @@ Item {
                                 close()
                             }
             onDialogClosed: {
-                if (parentModal) {
-                    parentModal.allowFocusOverride = false
-                    parentModal.shouldHaveFocus = Qt.binding(() => {
-                                                                 return parentModal.shouldBeVisible
-                                                             })
-                }
                 Qt.callLater(() => wallpaperBrowserLoader.active = false)
             }
         }

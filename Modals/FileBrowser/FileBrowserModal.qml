@@ -35,6 +35,7 @@ DankModal {
     property bool weAvailable: false
     property string wePath: ""
     property bool weMode: false
+    property var parentModal: null
 
     signal fileSelected(string path)
 
@@ -131,6 +132,8 @@ DankModal {
 
     objectName: "fileBrowserModal"
     allowStacking: true
+    closeOnEscapeKey: false
+    shouldHaveFocus: shouldBeVisible
     Component.onCompleted: {
         currentPath = getLastPath()
     }
@@ -165,10 +168,23 @@ DankModal {
     visible: false
     onBackgroundClicked: close()
     onOpened: {
-        modalFocusScope.forceActiveFocus()
+        if (parentModal) {
+            parentModal.shouldHaveFocus = false
+            parentModal.allowFocusOverride = true
+        }
+        Qt.callLater(() => {
+            if (contentLoader && contentLoader.item) {
+                contentLoader.item.forceActiveFocus()
+            }
+        })
     }
-    modalFocusScope.Keys.onPressed: function (event) {
-        keyboardController.handleKey(event)
+    onDialogClosed: {
+        if (parentModal) {
+            parentModal.allowFocusOverride = false
+            parentModal.shouldHaveFocus = Qt.binding(() => {
+                return parentModal.shouldBeVisible
+            })
+        }
     }
     onVisibleChanged: {
         if (visible) {
@@ -454,6 +470,16 @@ DankModal {
     content: Component {
         Item {
             anchors.fill: parent
+
+            Keys.onPressed: event => {
+                keyboardController.handleKey(event)
+            }
+
+            onVisibleChanged: {
+                if (visible) {
+                    forceActiveFocus()
+                }
+            }
 
             Column {
                 anchors.fill: parent

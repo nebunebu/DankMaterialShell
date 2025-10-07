@@ -712,7 +712,13 @@ Singleton {
         return `#${invR}${invG}${invB}`;
     }
 
-    property string baseLogoColor: ""
+    property string baseLogoColor: {
+        if (typeof SettingsData === "undefined") return ""
+        const colorOverride = SettingsData.launcherLogoColorOverride
+        if (!colorOverride || colorOverride === "") return ""
+        return colorOverride
+    }
+
     property string effectiveLogoColor: {
         if (typeof SettingsData === "undefined") return ""
 
@@ -723,10 +729,6 @@ Singleton {
             return colorOverride
         }
 
-        if (baseLogoColor === "") {
-            baseLogoColor = colorOverride
-        }
-
         if (typeof SessionData !== "undefined" && SessionData.isLightMode) {
             return invertHex(baseLogoColor)
         }
@@ -734,18 +736,7 @@ Singleton {
         return baseLogoColor
     }
 
-    onIsLightModeChanged: {
-        if (typeof SettingsData !== "undefined" && SettingsData.launcherLogoColorInvertOnMode && baseLogoColor === "") {
-            baseLogoColor = SettingsData.launcherLogoColorOverride
-        }
-    }
 
-    Connections {
-        target: typeof SettingsData !== "undefined" ? SettingsData : null
-        function onLauncherLogoColorOverrideChanged() {
-            baseLogoColor = SettingsData.launcherLogoColorOverride
-        }
-    }
 
     Process {
         id: matugenCheck

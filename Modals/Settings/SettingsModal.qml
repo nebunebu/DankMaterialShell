@@ -78,6 +78,7 @@ DankModal {
         id: profileBrowser
 
         allowStacking: true
+        parentModal: settingsModal
         browserTitle: "Select Profile Image"
         browserIcon: "person"
         browserType: "profile"
@@ -87,12 +88,6 @@ DankModal {
             close();
         }
         onDialogClosed: () => {
-            if (settingsModal) {
-                settingsModal.allowFocusOverride = false;
-                settingsModal.shouldHaveFocus = Qt.binding(() => {
-                    return settingsModal.shouldBeVisible;
-                });
-            }
             allowStacking = true;
         }
     }
@@ -101,6 +96,7 @@ DankModal {
         id: wallpaperBrowser
 
         allowStacking: true
+        parentModal: settingsModal
         browserTitle: "Select Wallpaper"
         browserIcon: "wallpaper"
         browserType: "wallpaper"
