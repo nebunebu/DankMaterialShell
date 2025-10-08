@@ -684,7 +684,7 @@ DankPopout {
             contextMenu.close()
         }
 
-        width: 180
+        width: Math.max(180, menuColumn.implicitWidth + Theme.spacingS * 2)
         height: menuColumn.implicitHeight + Theme.spacingS * 2
         padding: 0
         closePolicy: Popup.CloseOnPressOutside
