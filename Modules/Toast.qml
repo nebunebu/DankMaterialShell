@@ -280,7 +280,7 @@ PanelWindow {
                         StyledText {
                             id: tooltipLabel
                             anchors.centerIn: parent
-                            text: qsTr("Copied!")
+                            text: I18n.tr("Copied!")
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                         }

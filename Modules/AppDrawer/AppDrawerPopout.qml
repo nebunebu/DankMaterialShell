@@ -42,7 +42,7 @@ DankPopout {
         if (shouldBeVisible) {
             appLauncher.searchQuery = ""
             appLauncher.selectedIndex = 0
-            appLauncher.setCategory("All")
+            appLauncher.setCategory(I18n.tr("All"))
             Qt.callLater(() => {
                              if (contentLoader.item && contentLoader.item.searchField) {
                                  contentLoader.item.searchField.text = ""
@@ -180,25 +180,23 @@ DankPopout {
                     y: Theme.spacingS
                     spacing: Theme.spacingS
 
-                    Row {
+                    Item {
                         width: parent.width
                         height: 40
-                        leftPadding: Theme.spacingS
 
                         StyledText {
+                            anchors.left: parent.left
+                            anchors.leftMargin: Theme.spacingS
                             anchors.verticalCenter: parent.verticalCenter
-                            text: qsTr("Applications")
+                            text: I18n.tr("Applications")
                             font.pixelSize: Theme.fontSizeLarge + 4
                             font.weight: Font.Bold
                             color: Theme.surfaceText
                         }
 
-                        Item {
-                            width: parent.width - 200
-                            height: 1
-                        }
-
                         StyledText {
+                            anchors.right: parent.right
+                            anchors.rightMargin: Theme.spacingS
                             anchors.verticalCenter: parent.verticalCenter
                             text: appLauncher.model.count + " apps"
                             font.pixelSize: Theme.fontSizeMedium
@@ -757,7 +755,7 @@ DankPopout {
                     }
 
                     StyledText {
-                        text: contextMenu.isPinned ? "Unpin from Dock" : "Pin to Dock"
+                        text: contextMenu.isPinned ? I18n.tr("Unpin from Dock") : I18n.tr("Pin to Dock")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal
@@ -891,7 +889,7 @@ DankPopout {
                     }
 
                     StyledText {
-                        text: qsTr("Launch")
+                        text: I18n.tr("Launch")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal
@@ -951,7 +949,7 @@ DankPopout {
                     }
 
                     StyledText {
-                        text: qsTr("Launch on dGPU")
+                        text: I18n.tr("Launch on dGPU")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal

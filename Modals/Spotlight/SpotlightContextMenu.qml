@@ -105,10 +105,10 @@ Popup {
                 StyledText {
                     text: {
                         if (!contextMenu.currentApp || !contextMenu.currentApp.desktopEntry)
-                            return "Pin to Dock"
+                            return I18n.tr("Pin to Dock")
 
                         const appId = contextMenu.currentApp.desktopEntry.id || contextMenu.currentApp.desktopEntry.execString || ""
-                        return SessionData.isPinnedApp(appId) ? "Unpin from Dock" : "Pin to Dock"
+                        return SessionData.isPinnedApp(appId) ? I18n.tr("Unpin from Dock") : I18n.tr("Pin to Dock")
                     }
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
@@ -248,7 +248,7 @@ Popup {
                 }
 
                 StyledText {
-                    text: qsTr("Launch")
+                    text: I18n.tr("Launch")
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal
@@ -308,7 +308,7 @@ Popup {
                 }
 
                 StyledText {
-                    text: qsTr("Launch on dGPU")
+                    text: I18n.tr("Launch on dGPU")
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal

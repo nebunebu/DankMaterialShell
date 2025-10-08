@@ -203,7 +203,7 @@ DankModal {
                 }
 
                 StyledText {
-                    text: qsTr("Add Widget to ") + root.targetSection + " Section"
+                    text: I18n.tr("Add Widget to ") + root.targetSection + " Section"
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Medium
                     color: Theme.surfaceText
@@ -212,7 +212,7 @@ DankModal {
             }
 
             StyledText {
-                text: qsTr("Select a widget to add to the ") + root.targetSection.toLowerCase(
+                text: I18n.tr("Select a widget to add to the ") + root.targetSection.toLowerCase(
                           ) + " section of the top bar. You can add multiple instances of the same widget if needed."
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.outline

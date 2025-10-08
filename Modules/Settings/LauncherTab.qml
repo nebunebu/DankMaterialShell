@@ -13,7 +13,7 @@ Item {
 
     FileBrowserModal {
         id: logoFileBrowser
-        browserTitle: qsTr("Select Launcher Logo")
+        browserTitle: I18n.tr("Select Launcher Logo")
         browserIcon: "image"
         browserType: "generic"
         filterExtensions: ["*.svg", "*.png", "*.jpg", "*.jpeg", "*.webp"]
@@ -62,7 +62,7 @@ Item {
                         }
 
                         StyledText {
-                            text: qsTr("Launcher Button Logo")
+                            text: I18n.tr("Launcher Button Logo")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -72,7 +72,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: qsTr("Choose the logo displayed on the launcher button in DankBar")
+                        text: I18n.tr("Choose the logo displayed on the launcher button in DankBar")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -86,12 +86,12 @@ Item {
                             id: logoModeGroup
                             anchors.horizontalCenter: parent.horizontalCenter
                             model: {
-                                const modes = [qsTr("Apps Icon"), qsTr("OS Logo")]
+                                const modes = [I18n.tr("Apps Icon"), I18n.tr("OS Logo")]
                                 if (CompositorService.isNiri || CompositorService.isHyprland) {
                                     const compositorName = CompositorService.isNiri ? "niri" : "Hyprland"
                                     modes.push(compositorName)
                                 }
-                                modes.push(qsTr("Custom"))
+                                modes.push(I18n.tr("Custom"))
                                 return modes
                             }
                             currentIndex: {
@@ -149,7 +149,7 @@ Item {
                                 anchors.left: parent.left
                                 anchors.leftMargin: Theme.spacingM
                                 anchors.verticalCenter: parent.verticalCenter
-                                text: SettingsData.launcherLogoCustomPath || qsTr("Select an image file...")
+                                text: SettingsData.launcherLogoCustomPath || I18n.tr("Select an image file...")
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: SettingsData.launcherLogoCustomPath ? Theme.surfaceText : Theme.outlineButton
                                 width: parent.width - Theme.spacingM * 2
@@ -184,7 +184,7 @@ Item {
                             spacing: Theme.spacingM
 
                             StyledText {
-                                text: qsTr("Color Override")
+                                text: I18n.tr("Color Override")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -197,7 +197,7 @@ Item {
 
                                 DankButtonGroup {
                                     id: colorModeGroup
-                                    model: [qsTr("Default"), qsTr("Primary"), qsTr("Surface"), qsTr("Custom")]
+                                    model: [I18n.tr("Default"), I18n.tr("Primary"), I18n.tr("Surface"), I18n.tr("Custom")]
                                     currentIndex: {
                                         const override = SettingsData.launcherLogoColorOverride
                                         if (override === "") return 0
@@ -248,7 +248,7 @@ Item {
                                         onClicked: {
                                             if (PopoutService.colorPickerModal) {
                                                 PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride
-                                                PopoutService.colorPickerModal.pickerTitle = qsTr("Choose Launcher Logo Color")
+                                                PopoutService.colorPickerModal.pickerTitle = I18n.tr("Choose Launcher Logo Color")
                                                 PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
                                                     SettingsData.setLauncherLogoColorOverride(selectedColor)
                                                 }
@@ -270,7 +270,7 @@ Item {
                                 anchors.horizontalCenter: parent.horizontalCenter
 
                                 StyledText {
-                                    text: qsTr("Size Offset")
+                                    text: I18n.tr("Size Offset")
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceText
                                     font.weight: Font.Medium
@@ -321,7 +321,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: qsTr("Brightness")
+                                        text: I18n.tr("Brightness")
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -350,7 +350,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: qsTr("Contrast")
+                                        text: I18n.tr("Contrast")
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -379,7 +379,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: qsTr("Invert on mode change")
+                                        text: I18n.tr("Invert on mode change")
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -430,7 +430,7 @@ Item {
                         }
 
                         StyledText {
-                            text: qsTr("Launch Prefix")
+                            text: I18n.tr("Launch Prefix")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -440,7 +440,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: "Add a custom prefix to all application launches. This can be used for things like 'uwsm-app', 'systemd-run', or other command wrappers."
+                        text: I18n.tr("Add a custom prefix to all application launches. This can be used for things like 'uwsm-app', 'systemd-run', or other command wrappers.")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -510,7 +510,7 @@ Item {
                         }
 
                         StyledText {
-                            text: qsTr("Recently Used Apps")
+                            text: I18n.tr("Recently Used Apps")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -540,7 +540,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: qsTr("Apps are ordered by usage frequency, then last used, then alphabetically.")
+                        text: I18n.tr("Apps are ordered by usage frequency, then last used, then alphabetically.")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
