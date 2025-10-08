@@ -127,7 +127,7 @@ Item {
                 font.pixelSize: Theme.fontSizeLarge
                 enabled: parentModal ? parentModal.spotlightOpen : true
                 placeholderText: ""
-                ignoreLeftRightKeys: true
+                ignoreLeftRightKeys: appLauncher.viewMode !== "list"
                 keyForwardTargets: [spotlightKeyHandler]
                 text: appLauncher.searchQuery
                 onTextEdited: () => {

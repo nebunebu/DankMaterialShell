@@ -216,7 +216,7 @@ DankPopout {
                         showClearButton: true
                         font.pixelSize: Theme.fontSizeLarge
                         enabled: appDrawerPopout.shouldBeVisible
-                        ignoreLeftRightKeys: true
+                        ignoreLeftRightKeys: appLauncher.viewMode !== "list"
                         keyForwardTargets: [keyHandler]
                         onTextEdited: {
                             appLauncher.searchQuery = text
