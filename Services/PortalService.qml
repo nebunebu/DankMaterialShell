@@ -151,20 +151,6 @@ Singleton {
 
     Component.onCompleted: {
         Qt.callLater(initializeDMSConnection)
-        fallbackCheckTimer.start()
-    }
-
-    Timer {
-        id: fallbackCheckTimer
-        interval: 1000
-        running: false
-        onTriggered: {
-            if (!freedeskAvailable) {
-                console.log("PortalService: DMS not available, using fallback methods")
-                checkAccountsServiceFallback()
-                checkSettingsPortalFallback()
-            }
-        }
     }
 
     function initializeDMSConnection() {
@@ -175,10 +161,23 @@ Singleton {
                 dmsService.service.capabilitiesChanged.connect(onDMSCapabilitiesChanged)
                 if (dmsService.service.isConnected) {
                     onDMSConnected()
+                } else {
+                    Qt.callLater(checkFallback)
                 }
+            } else {
+                Qt.callLater(checkFallback)
             }
         } catch (e) {
             console.warn("PortalService: Failed to initialize DMS connection:", e)
+            Qt.callLater(checkFallback)
+        }
+    }
+
+    function checkFallback() {
+        if (!freedeskAvailable) {
+            console.log("PortalService: DMS not available, using fallback methods")
+            checkAccountsServiceFallback()
+            checkSettingsPortalFallback()
         }
     }
 

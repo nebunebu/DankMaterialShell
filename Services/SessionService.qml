@@ -63,19 +63,6 @@ Singleton {
             detectPrimeRunProcess.running = true
             console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
             Qt.callLater(initializeDMSConnection)
-            fallbackCheckTimer.start()
-        }
-    }
-
-    Timer {
-        id: fallbackCheckTimer
-        interval: 1000
-        running: false
-        onTriggered: {
-            if (!loginctlAvailable) {
-                console.log("SessionService: DMS not available, using fallback methods")
-                initFallbackLoginctl()
-            }
         }
     }
 
@@ -330,11 +317,23 @@ Singleton {
                 checkCapabilities()
                 dmsService.service.connectionStateChanged.connect(onDMSConnectionStateChanged)
                 dmsService.service.capabilitiesChanged.connect(onDMSCapabilitiesChanged)
+                if (!dmsService.service.isConnected) {
+                    Qt.callLater(checkFallback)
+                }
             } else {
                 console.warn("SessionService: Failed to get DMS service reference")
+                Qt.callLater(checkFallback)
             }
         } catch (e) {
             console.warn("SessionService: Failed to initialize DMS connection:", e)
+            Qt.callLater(checkFallback)
+        }
+    }
+
+    function checkFallback() {
+        if (!loginctlAvailable) {
+            console.log("SessionService: DMS not available, using fallback methods")
+            initFallbackLoginctl()
         }
     }
 
