@@ -73,7 +73,7 @@ Singleton {
     }
 
     function getAppUsageRanking() {
-        return appUsageRanking
+        return appUsageRanking || {}
     }
 
     function getRankedApps() {
