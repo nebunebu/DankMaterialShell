@@ -17,7 +17,7 @@ DankModal {
         wifiPasswordInput = ""
         wifiUsernameInput = ""
 
-        const network = NetworkManagerService.wifiNetworks.find(n => n.ssid === ssid)
+        const network = NetworkService.wifiNetworks.find(n => n.ssid === ssid)
         requiresEnterprise = network?.enterprise || false
 
         open()
@@ -59,14 +59,14 @@ DankModal {
                          }
 
     Connections {
-        target: NetworkManagerService
+        target: NetworkService
 
         function onPasswordDialogShouldReopenChanged() {
-            if (NetworkManagerService.passwordDialogShouldReopen && NetworkManagerService.connectingSSID !== "") {
-                wifiPasswordSSID = NetworkManagerService.connectingSSID
+            if (NetworkService.passwordDialogShouldReopen && NetworkService.connectingSSID !== "") {
+                wifiPasswordSSID = NetworkService.connectingSSID
                 wifiPasswordInput = ""
                 open()
-                NetworkManagerService.passwordDialogShouldReopen = false
+                NetworkService.passwordDialogShouldReopen = false
             }
         }
     }
@@ -196,7 +196,7 @@ DankModal {
                                       }
                         onAccepted: () => {
                                         const username = requiresEnterprise ? usernameInput.text : ""
-                                        NetworkManagerService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
+                                        NetworkService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
                                         close()
                                         wifiPasswordInput = ""
                                         wifiUsernameInput = ""
@@ -344,7 +344,7 @@ DankModal {
                                 enabled: parent.enabled
                                 onClicked: () => {
                                                const username = requiresEnterprise ? usernameInput.text : ""
-                                               NetworkManagerService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
+                                               NetworkService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
                                                close()
                                                wifiPasswordInput = ""
                                                wifiUsernameInput = ""

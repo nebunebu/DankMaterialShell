@@ -1003,8 +1003,8 @@ Item {
                                     }
                                     controlCenterLoader.item.triggerScreen = barWindow.screen
                                     controlCenterLoader.item.toggle()
-                                    if (controlCenterLoader.item.shouldBeVisible && NetworkManagerService.wifiEnabled) {
-                                        NetworkManagerService.scanWifi()
+                                    if (controlCenterLoader.item.shouldBeVisible && NetworkService.wifiEnabled) {
+                                        NetworkService.scanWifi()
                                     }
                                 }
                             }

@@ -311,28 +311,24 @@ Singleton {
     }
 
     function initializeDMSConnection() {
+        if (!socketPath || socketPath.length === 0) {
+            console.log("SessionService: DMS_SOCKET not set, using fallback")
+            initFallbackLoginctl()
+            return
+        }
+
         try {
             dmsService = Qt.createQmlObject('import QtQuick; import qs.Services; QtObject { property var service: DMSService }', root)
             if (dmsService && dmsService.service) {
-                checkCapabilities()
                 dmsService.service.connectionStateChanged.connect(onDMSConnectionStateChanged)
                 dmsService.service.capabilitiesChanged.connect(onDMSCapabilitiesChanged)
-                if (!dmsService.service.isConnected) {
-                    Qt.callLater(checkFallback)
-                }
+                checkCapabilities()
             } else {
-                console.warn("SessionService: Failed to get DMS service reference")
-                Qt.callLater(checkFallback)
+                console.warn("SessionService: Failed to get DMS service reference, using fallback")
+                initFallbackLoginctl()
             }
         } catch (e) {
-            console.warn("SessionService: Failed to initialize DMS connection:", e)
-            Qt.callLater(checkFallback)
-        }
-    }
-
-    function checkFallback() {
-        if (!loginctlAvailable) {
-            console.log("SessionService: DMS not available, using fallback methods")
+            console.warn("SessionService: Failed to initialize DMS connection, using fallback:", e)
             initFallbackLoginctl()
         }
     }
@@ -350,12 +346,17 @@ Singleton {
     }
 
     function onDMSCapabilitiesChanged() {
-        if (dmsService && dmsService.service && dmsService.service.capabilities.includes("loginctl")) {
-            loginctlAvailable = true
-            if (dmsService.service.isConnected && !stateInitialized) {
-                stateInitialized = true
-                getLoginctlState()
-                subscriptionSocket.connected = true
+        if (dmsService && dmsService.service) {
+            if (dmsService.service.capabilities.includes("loginctl")) {
+                loginctlAvailable = true
+                if (dmsService.service.isConnected && !stateInitialized) {
+                    stateInitialized = true
+                    getLoginctlState()
+                    subscriptionSocket.connected = true
+                }
+            } else if (dmsService.service.capabilities.length > 0 && !loginctlAvailable) {
+                console.log("SessionService: loginctl capability not available in DMS, using fallback")
+                initFallbackLoginctl()
             }
         }
     }
@@ -368,6 +369,9 @@ Singleton {
                 stateInitialized = true
                 getLoginctlState()
                 subscriptionSocket.connected = true
+            } else if (!loginctlAvailable) {
+                console.log("SessionService: loginctl capability not available in DMS, using fallback")
+                initFallbackLoginctl()
             }
         }
     }

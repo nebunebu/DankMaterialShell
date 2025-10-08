@@ -73,13 +73,17 @@ DankPopout {
     onShouldBeVisibleChanged: {
         if (shouldBeVisible) {
             Qt.callLater(() => {
-                NetworkManagerService.autoRefreshEnabled = NetworkManagerService.wifiEnabled
+                if (NetworkService.activeService) {
+                    NetworkService.activeService.autoRefreshEnabled = NetworkService.wifiEnabled
+                }
                 if (UserInfoService)
                     UserInfoService.getUptime()
             })
         } else {
             Qt.callLater(() => {
-                NetworkManagerService.autoRefreshEnabled = false
+                if (NetworkService.activeService) {
+                    NetworkService.activeService.autoRefreshEnabled = false
+                }
                 if (BluetoothService.adapter && BluetoothService.adapter.discovering)
                     BluetoothService.adapter.discovering = false
                 editMode = false

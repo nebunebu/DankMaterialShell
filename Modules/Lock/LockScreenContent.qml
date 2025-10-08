@@ -906,20 +906,20 @@ Item {
                 height: 24
                 color: Qt.rgba(255, 255, 255, 0.2)
                 anchors.verticalCenter: parent.verticalCenter
-                visible: WeatherService.weather.available && (NetworkManagerService.networkStatus !== "disconnected" || BluetoothService.enabled || (AudioService.sink && AudioService.sink.audio) || BatteryService.batteryAvailable)
+                visible: WeatherService.weather.available && (NetworkService.networkStatus !== "disconnected" || BluetoothService.enabled || (AudioService.sink && AudioService.sink.audio) || BatteryService.batteryAvailable)
             }
 
             Row {
                 spacing: Theme.spacingM
                 anchors.verticalCenter: parent.verticalCenter
-                visible: NetworkManagerService.networkStatus !== "disconnected" || (BluetoothService.available && BluetoothService.enabled) || (AudioService.sink && AudioService.sink.audio)
+                visible: NetworkService.networkStatus !== "disconnected" || (BluetoothService.available && BluetoothService.enabled) || (AudioService.sink && AudioService.sink.audio)
 
                 DankIcon {
-                    name: NetworkManagerService.networkStatus === "ethernet" ? "lan" : NetworkManagerService.wifiSignalIcon
+                    name: NetworkService.networkStatus === "ethernet" ? "lan" : NetworkService.wifiSignalIcon
                     size: Theme.iconSize - 2
-                    color: NetworkManagerService.networkStatus !== "disconnected" ? "white" : Qt.rgba(255, 255, 255, 0.5)
+                    color: NetworkService.networkStatus !== "disconnected" ? "white" : Qt.rgba(255, 255, 255, 0.5)
                     anchors.verticalCenter: parent.verticalCenter
-                    visible: NetworkManagerService.networkStatus !== "disconnected"
+                    visible: NetworkService.networkStatus !== "disconnected"
                 }
 
                 DankIcon {
@@ -955,7 +955,7 @@ Item {
                 height: 24
                 color: Qt.rgba(255, 255, 255, 0.2)
                 anchors.verticalCenter: parent.verticalCenter
-                visible: BatteryService.batteryAvailable && (NetworkManagerService.networkStatus !== "disconnected" || BluetoothService.enabled || (AudioService.sink && AudioService.sink.audio))
+                visible: BatteryService.batteryAvailable && (NetworkService.networkStatus !== "disconnected" || BluetoothService.enabled || (AudioService.sink && AudioService.sink.audio))
             }
 
             Row {

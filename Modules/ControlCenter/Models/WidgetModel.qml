@@ -67,8 +67,8 @@ QtObject {
             "description": "Wi-Fi and Ethernet connection",
             "icon": "wifi",
             "type": "connection",
-            "enabled": NetworkManagerService.wifiAvailable,
-            "warning": !NetworkManagerService.wifiAvailable ? "Wi-Fi not available" : undefined
+            "enabled": NetworkService.wifiAvailable,
+            "warning": !NetworkService.wifiAvailable ? "Wi-Fi not available" : undefined
         }, {
             "id": "bluetooth",
             "text": "Bluetooth",

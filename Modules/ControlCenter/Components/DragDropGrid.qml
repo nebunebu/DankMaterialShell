@@ -126,15 +126,7 @@ Column {
                                 return builtinPluginWidgetComponent
                             } else if (id.startsWith("plugin_")) {
                                 return pluginWidgetComponent
-                            } else if (id === "wifi") {
-                                if (!DMSService.dmsAvailable) {
-                                    return errorPillComponent
-                                }
-                                if (DMSService.dmsAvailable && !DMSService.capabilities.includes("network")) {
-                                    return errorPillComponent
-                                }
-                                return compoundPillComponent
-                            } else if (id === "bluetooth" || id === "audioOutput" || id === "audioInput") {
+                            } else if (id === "wifi" || id === "bluetooth" || id === "audioOutput" || id === "audioInput") {
                                 return compoundPillComponent
                             } else if (id === "volumeSlider") {
                                 return audioSliderComponent
@@ -211,13 +203,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkManagerService.wifiToggling)
+                    if (NetworkService.wifiToggling)
                         return "sync"
-                    if (NetworkManagerService.networkStatus === "ethernet")
+                    if (NetworkService.networkStatus === "ethernet")
                         return "settings_ethernet"
-                    if (NetworkManagerService.networkStatus === "wifi")
-                        return NetworkManagerService.wifiSignalIcon
-                    if (NetworkManagerService.wifiEnabled)
+                    if (NetworkService.networkStatus === "wifi")
+                        return NetworkService.wifiSignalIcon
+                    if (NetworkService.wifiEnabled)
                         return "wifi_off"
                     return "wifi_off"
                 }
@@ -270,13 +262,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkManagerService.wifiToggling)
-                        return NetworkManagerService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
-                    if (NetworkManagerService.networkStatus === "ethernet")
+                    if (NetworkService.wifiToggling)
+                        return NetworkService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
+                    if (NetworkService.networkStatus === "ethernet")
                         return "Ethernet"
-                    if (NetworkManagerService.networkStatus === "wifi" && NetworkManagerService.currentWifiSSID)
-                        return NetworkManagerService.currentWifiSSID
-                    if (NetworkManagerService.wifiEnabled)
+                    if (NetworkService.networkStatus === "wifi" && NetworkService.currentWifiSSID)
+                        return NetworkService.currentWifiSSID
+                    if (NetworkService.wifiEnabled)
                         return "Not connected"
                     return "WiFi off"
                 }
@@ -302,13 +294,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkManagerService.wifiToggling)
+                    if (NetworkService.wifiToggling)
                         return "Please wait..."
-                    if (NetworkManagerService.networkStatus === "ethernet")
+                    if (NetworkService.networkStatus === "ethernet")
                         return "Connected"
-                    if (NetworkManagerService.networkStatus === "wifi")
-                        return NetworkManagerService.wifiSignalStrength > 0 ? NetworkManagerService.wifiSignalStrength + "%" : "Connected"
-                    if (NetworkManagerService.wifiEnabled)
+                    if (NetworkService.networkStatus === "wifi")
+                        return NetworkService.wifiSignalStrength > 0 ? NetworkService.wifiSignalStrength + "%" : "Connected"
+                    if (NetworkService.wifiEnabled)
                         return "Select network"
                     return ""
                 }
@@ -356,13 +348,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkManagerService.wifiToggling)
+                    if (NetworkService.wifiToggling)
                         return false
-                    if (NetworkManagerService.networkStatus === "ethernet")
+                    if (NetworkService.networkStatus === "ethernet")
                         return true
-                    if (NetworkManagerService.networkStatus === "wifi")
+                    if (NetworkService.networkStatus === "wifi")
                         return true
-                    return NetworkManagerService.wifiEnabled
+                    return NetworkService.wifiEnabled
                 }
                 case "bluetooth":
                     return !!(BluetoothService.available && BluetoothService.adapter && BluetoothService.adapter.enabled)

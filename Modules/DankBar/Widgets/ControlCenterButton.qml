@@ -42,26 +42,26 @@ Rectangle {
 
         DankIcon {
             name: {
-                if (NetworkManagerService.wifiToggling) {
+                if (NetworkService.wifiToggling) {
                     return "sync"
                 }
 
-                if (NetworkManagerService.networkStatus === "ethernet") {
+                if (NetworkService.networkStatus === "ethernet") {
                     return "lan"
                 }
 
-                return NetworkManagerService.wifiSignalIcon
+                return NetworkService.wifiSignalIcon
             }
             size: Theme.barIconSize(barThickness)
             color: {
-                if (NetworkManagerService.wifiToggling) {
+                if (NetworkService.wifiToggling) {
                     return Theme.primary
                 }
 
-                return NetworkManagerService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton
+                return NetworkService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton
             }
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: root.showNetworkIcon && NetworkManagerService.networkAvailable
+            visible: root.showNetworkIcon && NetworkService.networkAvailable
         }
 
         DankIcon {
@@ -141,26 +141,26 @@ Rectangle {
             id: networkIcon
 
             name: {
-                if (NetworkManagerService.wifiToggling) {
+                if (NetworkService.wifiToggling) {
                     return "sync";
                 }
 
-                if (NetworkManagerService.networkStatus === "ethernet") {
+                if (NetworkService.networkStatus === "ethernet") {
                     return "lan";
                 }
 
-                return NetworkManagerService.wifiSignalIcon;
+                return NetworkService.wifiSignalIcon;
             }
             size: Theme.barIconSize(barThickness)
             color: {
-                if (NetworkManagerService.wifiToggling) {
+                if (NetworkService.wifiToggling) {
                     return Theme.primary;
                 }
 
-                return NetworkManagerService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton;
+                return NetworkService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton;
             }
             anchors.verticalCenter: parent.verticalCenter
-            visible: root.showNetworkIcon && NetworkManagerService.networkAvailable
+            visible: root.showNetworkIcon && NetworkService.networkAvailable
 
 
         }
