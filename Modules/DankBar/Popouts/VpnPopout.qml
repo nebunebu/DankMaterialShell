@@ -13,6 +13,10 @@ import qs.Widgets
 DankPopout {
     id: root
 
+    Ref {
+        service: VpnService
+    }
+
     property var triggerScreen: null
 
     function setTriggerPosition(x, y, width, section, screen) {

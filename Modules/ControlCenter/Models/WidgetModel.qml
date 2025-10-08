@@ -7,7 +7,30 @@ import "../utils/widgets.js" as WidgetUtils
 QtObject {
     id: root
 
-    property var vpnBuiltinInstance: VpnWidget {}
+    property var vpnBuiltinInstance: null
+
+    property var vpnLoader: Loader {
+        active: false
+        sourceComponent: Component {
+            VpnWidget {}
+        }
+
+        onItemChanged: {
+            root.vpnBuiltinInstance = item
+        }
+
+        Connections {
+            target: SettingsData
+            function onControlCenterWidgetsChanged() {
+                const widgets = SettingsData.controlCenterWidgets || []
+                const hasVpnWidget = widgets.some(w => w.id === "builtin_vpn")
+                if (!hasVpnWidget && vpnLoader.active) {
+                    console.log("VpnWidget: No VPN widget in control center, deactivating loader")
+                    vpnLoader.active = false
+                }
+            }
+        }
+    }
 
     readonly property var coreWidgetDefinitions: [{
             "id": "nightMode",
@@ -44,8 +67,8 @@ QtObject {
             "description": "Wi-Fi and Ethernet connection",
             "icon": "wifi",
             "type": "connection",
-            "enabled": NetworkService.wifiAvailable,
-            "warning": !NetworkService.wifiAvailable ? "Wi-Fi not available" : undefined
+            "enabled": NetworkManagerService.wifiAvailable,
+            "warning": !NetworkManagerService.wifiAvailable ? "Wi-Fi not available" : undefined
         }, {
             "id": "bluetooth",
             "text": "Bluetooth",

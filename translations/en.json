@@ -13,8 +13,8 @@
   },
   {
     "term": "(Unnamed)",
-    "context": "Modules/Dock/DockContextMenu.qml:228",
-    "reference": "Modules/Dock/DockContextMenu.qml:228",
+    "context": "Modules/Dock/DockContextMenu.qml:235",
+    "reference": "Modules/Dock/DockContextMenu.qml:235",
     "comment": ""
   },
   {
@@ -37,8 +37,8 @@
   },
   {
     "term": "24-hour format",
-    "context": "Modules/Settings/PersonalizationTab.qml:829",
-    "reference": "Modules/Settings/PersonalizationTab.qml:829",
+    "context": "Modules/Settings/PersonalizationTab.qml:833",
+    "reference": "Modules/Settings/PersonalizationTab.qml:833",
     "comment": ""
   },
   {
@@ -55,8 +55,8 @@
   },
   {
     "term": "A file with this name already exists. Do you want to overwrite it?",
-    "context": "Modals/FileBrowser/FileBrowserModal.qml:903",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:903",
+    "context": "Modals/FileBrowser/FileBrowserModal.qml:929",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:929",
     "comment": ""
   },
   {
@@ -85,14 +85,14 @@
   },
   {
     "term": "Add Widget to ",
-    "context": "Modules/Settings/WidgetSelectionPopup.qml:191",
-    "reference": "Modules/Settings/WidgetSelectionPopup.qml:191",
+    "context": "Modules/Settings/WidgetSelectionPopup.qml:206",
+    "reference": "Modules/Settings/WidgetSelectionPopup.qml:206",
     "comment": ""
   },
   {
     "term": "Add a VPN in NetworkManager",
-    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:143",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:143, Modules/DankBar/Popouts/VpnPopout.qml:272",
+    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:148",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:148, Modules/DankBar/Popouts/VpnPopout.qml:276",
     "comment": ""
   },
   {
@@ -109,26 +109,26 @@
   },
   {
     "term": "Always Show OSD Percentage",
-    "context": "Modules/Settings/PersonalizationTab.qml:1483",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1483",
+    "context": "Modules/Settings/PersonalizationTab.qml:1487",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1487",
     "comment": ""
   },
   {
     "term": "Animation Speed",
-    "context": "Modules/Settings/PersonalizationTab.qml:1764",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1764",
+    "context": "Modules/Settings/PersonalizationTab.qml:1768",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1768",
     "comment": ""
   },
   {
     "term": "Animations",
-    "context": "Modules/Settings/PersonalizationTab.qml:1751",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1751",
+    "context": "Modules/Settings/PersonalizationTab.qml:1755",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1755",
     "comment": ""
   },
   {
     "term": "Applications",
-    "context": "Modules/AppDrawer/AppDrawerPopout.qml:189",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:189",
+    "context": "Modules/AppDrawer/AppDrawerPopout.qml:190",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:190",
     "comment": ""
   },
   {
@@ -150,9 +150,15 @@
     "comment": ""
   },
   {
+    "term": "Apps Icon",
+    "context": "Modules/Settings/LauncherTab.qml:89",
+    "reference": "Modules/Settings/LauncherTab.qml:89",
+    "comment": ""
+  },
+  {
     "term": "Apps are ordered by usage frequency, then last used, then alphabetically.",
-    "context": "Modules/Settings/LauncherTab.qml:160",
-    "reference": "Modules/Settings/LauncherTab.qml:160",
+    "context": "Modules/Settings/LauncherTab.qml:485",
+    "reference": "Modules/Settings/LauncherTab.qml:485",
     "comment": ""
   },
   {
@@ -235,8 +241,8 @@
   },
   {
     "term": "Auto-location",
-    "context": "Modules/Settings/PersonalizationTab.qml:1310",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1310",
+    "context": "Modules/Settings/PersonalizationTab.qml:1314",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1314",
     "comment": ""
   },
   {
@@ -247,20 +253,20 @@
   },
   {
     "term": "Automatic Control",
-    "context": "Modules/Settings/PersonalizationTab.qml:1103",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1103",
+    "context": "Modules/Settings/PersonalizationTab.qml:1107",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1107",
     "comment": ""
   },
   {
     "term": "Automatic Cycling",
-    "context": "Modules/Settings/PersonalizationTab.qml:583",
-    "reference": "Modules/Settings/PersonalizationTab.qml:583",
+    "context": "Modules/Settings/PersonalizationTab.qml:587",
+    "reference": "Modules/Settings/PersonalizationTab.qml:587",
     "comment": ""
   },
   {
     "term": "Automatically cycle through wallpapers in the same folder",
-    "context": "Modules/Settings/PersonalizationTab.qml:590",
-    "reference": "Modules/Settings/PersonalizationTab.qml:590",
+    "context": "Modules/Settings/PersonalizationTab.qml:594",
+    "reference": "Modules/Settings/PersonalizationTab.qml:594",
     "comment": ""
   },
   {
@@ -271,8 +277,8 @@
   },
   {
     "term": "Automatically extract colors from wallpaper",
-    "context": "Modules/Settings/PersonalizationTab.qml:944",
-    "reference": "Modules/Settings/PersonalizationTab.qml:944",
+    "context": "Modules/Settings/PersonalizationTab.qml:948",
+    "reference": "Modules/Settings/PersonalizationTab.qml:948",
     "comment": ""
   },
   {
@@ -337,8 +343,8 @@
   },
   {
     "term": "Brightness",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:114",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:114",
+    "context": "Modules/Settings/LauncherTab.qml:266",
+    "reference": "Modules/Settings/LauncherTab.qml:266",
     "comment": ""
   },
   {
@@ -362,7 +368,7 @@
   {
     "term": "Cancel",
     "context": "Modals/DankColorPickerModal.qml:548",
-    "reference": "Modals/DankColorPickerModal.qml:548, Modals/WifiPasswordModal.qml:232, Modals/FileBrowser/FileBrowserModal.qml:925, Modules/Lock/LockScreenContent.qml:1247, Modules/Greetd/GreeterContent.qml:1328, Modules/Settings/PluginsTab.qml:1214",
+    "reference": "Modals/DankColorPickerModal.qml:548, Modals/WifiPasswordModal.qml:300, Modals/FileBrowser/FileBrowserModal.qml:951, Modules/Lock/LockScreenContent.qml:1247, Modules/Greetd/GreeterContent.qml:1328, Modules/Settings/PluginsTab.qml:1214",
     "comment": ""
   },
   {
@@ -373,8 +379,14 @@
   },
   {
     "term": "Center Section",
-    "context": "Modules/Settings/DankBarTab.qml:1284",
-    "reference": "Modules/Settings/DankBarTab.qml:1284",
+    "context": "Modules/Settings/DankBarTab.qml:1375",
+    "reference": "Modules/Settings/DankBarTab.qml:1375",
+    "comment": ""
+  },
+  {
+    "term": "Choose Launcher Logo Color",
+    "context": "Modules/Settings/LauncherTab.qml:217",
+    "reference": "Modules/Settings/LauncherTab.qml:217",
     "comment": ""
   },
   {
@@ -384,9 +396,15 @@
     "comment": ""
   },
   {
+    "term": "Choose the logo displayed on the launcher button in DankBar",
+    "context": "Modules/Settings/LauncherTab.qml:75",
+    "reference": "Modules/Settings/LauncherTab.qml:75",
+    "comment": ""
+  },
+  {
     "term": "Clear",
-    "context": "Modules/Notifications/Popup/NotificationPopup.qml:490",
-    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:490, Modules/Notifications/Center/NotificationCard.qml:552, Modules/Notifications/Center/NotificationCard.qml:645",
+    "context": "Modules/Notifications/Popup/NotificationPopup.qml:488",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:488, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
     "comment": ""
   },
   {
@@ -398,13 +416,13 @@
   {
     "term": "Close",
     "context": "Modules/SystemUpdatePopout.qml:329",
-    "reference": "Modules/SystemUpdatePopout.qml:329, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:613",
+    "reference": "Modules/SystemUpdatePopout.qml:329, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:614",
     "comment": ""
   },
   {
     "term": "Color Override",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:82",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
+    "context": "Modules/Settings/LauncherTab.qml:187",
+    "reference": "Modules/Settings/LauncherTab.qml:187",
     "comment": ""
   },
   {
@@ -427,8 +445,8 @@
   },
   {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:436",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:436",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:281",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:281",
     "comment": ""
   },
   {
@@ -439,14 +457,14 @@
   },
   {
     "term": "Connect",
-    "context": "Modals/WifiPasswordModal.qml:263",
-    "reference": "Modals/WifiPasswordModal.qml:263",
+    "context": "Modals/WifiPasswordModal.qml:332",
+    "reference": "Modals/WifiPasswordModal.qml:332",
     "comment": ""
   },
   {
     "term": "Connect to Wi-Fi",
-    "context": "Modals/WifiPasswordModal.qml:81",
-    "reference": "Modals/WifiPasswordModal.qml:81",
+    "context": "Modals/WifiPasswordModal.qml:103",
+    "reference": "Modals/WifiPasswordModal.qml:103",
     "comment": ""
   },
   {
@@ -457,20 +475,20 @@
   },
   {
     "term": "Contrast",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:143",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:143",
+    "context": "Modules/Settings/LauncherTab.qml:295",
+    "reference": "Modules/Settings/LauncherTab.qml:295",
     "comment": ""
   },
   {
     "term": "Control the speed of animations throughout the interface",
-    "context": "Modules/Settings/PersonalizationTab.qml:1771",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1771",
+    "context": "Modules/Settings/PersonalizationTab.qml:1775",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1775",
     "comment": ""
   },
   {
     "term": "Copied!",
-    "context": "Modules/Toast.qml:285",
-    "reference": "Modules/Toast.qml:285",
+    "context": "Modules/Toast.qml:283",
+    "reference": "Modules/Toast.qml:283",
     "comment": ""
   },
   {
@@ -510,6 +528,12 @@
     "comment": ""
   },
   {
+    "term": "Custom",
+    "context": "Modules/Settings/LauncherTab.qml:94",
+    "reference": "Modules/Settings/LauncherTab.qml:94",
+    "comment": ""
+  },
+  {
     "term": "Custom Location",
     "context": "Modules/Settings/WeatherTab.qml:236",
     "reference": "Modules/Settings/WeatherTab.qml:236",
@@ -540,9 +564,15 @@
     "comment": ""
   },
   {
+    "term": "DMS_SOCKET not available",
+    "context": "Modules/ControlCenter/Components/DragDropGrid.qml:194",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:194",
+    "comment": ""
+  },
+  {
     "term": "Daily at:",
-    "context": "Modules/Settings/PersonalizationTab.qml:754",
-    "reference": "Modules/Settings/PersonalizationTab.qml:754",
+    "context": "Modules/Settings/PersonalizationTab.qml:758",
+    "reference": "Modules/Settings/PersonalizationTab.qml:758",
     "comment": ""
   },
   {
@@ -561,6 +591,12 @@
     "term": "Dank Suite:",
     "context": "Modules/Settings/AboutTab.qml:483",
     "reference": "Modules/Settings/AboutTab.qml:483",
+    "comment": ""
+  },
+  {
+    "term": "DankBar Font Scale",
+    "context": "Modules/Settings/DankBarTab.qml:1091",
+    "reference": "Modules/Settings/DankBarTab.qml:1091",
     "comment": ""
   },
   {
@@ -595,8 +631,8 @@
   },
   {
     "term": "Disconnect",
-    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:85",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:85, Modules/DankBar/Popouts/VpnPopout.qml:209",
+    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:90",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:90, Modules/DankBar/Popouts/VpnPopout.qml:213",
     "comment": ""
   },
   {
@@ -607,8 +643,8 @@
   },
   {
     "term": "Display Settings",
-    "context": "Modules/Settings/PersonalizationTab.qml:1036",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1036",
+    "context": "Modules/Settings/PersonalizationTab.qml:1040",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1040",
     "comment": ""
   },
   {
@@ -643,8 +679,8 @@
   },
   {
     "term": "Dynamic Theming",
-    "context": "Modules/Settings/PersonalizationTab.qml:937",
-    "reference": "Modules/Settings/PersonalizationTab.qml:937",
+    "context": "Modules/Settings/PersonalizationTab.qml:941",
+    "reference": "Modules/Settings/PersonalizationTab.qml:941",
     "comment": ""
   },
   {
@@ -673,14 +709,14 @@
   },
   {
     "term": "Enable WiFi",
-    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:157",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:157",
+    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:169",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:169",
     "comment": ""
   },
   {
     "term": "End",
-    "context": "Modules/Settings/PersonalizationTab.qml:1259",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1259",
+    "context": "Modules/Settings/PersonalizationTab.qml:1263",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1263",
     "comment": ""
   },
   {
@@ -697,8 +733,8 @@
   },
   {
     "term": "Enter filename...",
-    "context": "Modals/FileBrowser/FileBrowserModal.qml:758",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:758",
+    "context": "Modals/FileBrowser/FileBrowserModal.qml:784",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:784",
     "comment": ""
   },
   {
@@ -715,8 +751,8 @@
   },
   {
     "term": "File Already Exists",
-    "context": "Modals/FileBrowser/FileBrowserModal.qml:895",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:895",
+    "context": "Modals/FileBrowser/FileBrowserModal.qml:921",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:921",
     "comment": ""
   },
   {
@@ -740,19 +776,19 @@
   {
     "term": "Font Family",
     "context": "Modules/Notepad/NotepadSettings.qml:220",
-    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/PersonalizationTab.qml:1530",
+    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/PersonalizationTab.qml:1534",
     "comment": ""
   },
   {
     "term": "Font Scale",
-    "context": "Modules/Settings/PersonalizationTab.qml:1652",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1652",
+    "context": "Modules/Settings/PersonalizationTab.qml:1656",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1656",
     "comment": ""
   },
   {
     "term": "Font Settings",
-    "context": "Modules/Settings/PersonalizationTab.qml:1521",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1521",
+    "context": "Modules/Settings/PersonalizationTab.qml:1525",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1525",
     "comment": ""
   },
   {
@@ -763,8 +799,8 @@
   },
   {
     "term": "Font Weight",
-    "context": "Modules/Settings/PersonalizationTab.qml:1551",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1551",
+    "context": "Modules/Settings/PersonalizationTab.qml:1555",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1555",
     "comment": ""
   },
   {
@@ -781,8 +817,8 @@
   },
   {
     "term": "Forget Network",
-    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:406",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:406",
+    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:422",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:422",
     "comment": ""
   },
   {
@@ -889,8 +925,8 @@
   },
   {
     "term": "Hour",
-    "context": "Modules/Settings/PersonalizationTab.qml:1186",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1186",
+    "context": "Modules/Settings/PersonalizationTab.qml:1190",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1190",
     "comment": ""
   },
   {
@@ -925,8 +961,8 @@
   },
   {
     "term": "Include Transitions",
-    "context": "Modules/Settings/PersonalizationTab.qml:865",
-    "reference": "Modules/Settings/PersonalizationTab.qml:865",
+    "context": "Modules/Settings/PersonalizationTab.qml:869",
+    "reference": "Modules/Settings/PersonalizationTab.qml:869",
     "comment": ""
   },
   {
@@ -949,8 +985,14 @@
   },
   {
     "term": "Interval",
-    "context": "Modules/Settings/PersonalizationTab.qml:699",
-    "reference": "Modules/Settings/PersonalizationTab.qml:699",
+    "context": "Modules/Settings/PersonalizationTab.qml:703",
+    "reference": "Modules/Settings/PersonalizationTab.qml:703",
+    "comment": ""
+  },
+  {
+    "term": "Invert on mode change",
+    "context": "Modules/Settings/LauncherTab.qml:325",
+    "reference": "Modules/Settings/LauncherTab.qml:325",
     "comment": ""
   },
   {
@@ -967,32 +1009,38 @@
   },
   {
     "term": "Latitude",
-    "context": "Modules/Settings/PersonalizationTab.qml:1340",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1340, Modules/Settings/WeatherTab.qml:251",
+    "context": "Modules/Settings/PersonalizationTab.qml:1344",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1344, Modules/Settings/WeatherTab.qml:251",
     "comment": ""
   },
   {
     "term": "Launch",
-    "context": "Modals/Spotlight/SpotlightContextMenu.qml:247",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:247, Modules/AppDrawer/AppDrawerPopout.qml:891",
+    "context": "Modals/Spotlight/SpotlightContextMenu.qml:251",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:251, Modules/AppDrawer/AppDrawerPopout.qml:894",
     "comment": ""
   },
   {
     "term": "Launch Prefix",
-    "context": "Modules/Settings/LauncherTab.qml:50",
-    "reference": "Modules/Settings/LauncherTab.qml:50",
+    "context": "Modules/Settings/LauncherTab.qml:375",
+    "reference": "Modules/Settings/LauncherTab.qml:375",
     "comment": ""
   },
   {
-    "term": "Launcher Button",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:51",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:51",
+    "term": "Launch on dGPU",
+    "context": "Modals/Spotlight/SpotlightContextMenu.qml:311",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:311, Modules/AppDrawer/AppDrawerPopout.qml:954, Modules/Dock/DockContextMenu.qml:426",
+    "comment": ""
+  },
+  {
+    "term": "Launcher Button Logo",
+    "context": "Modules/Settings/LauncherTab.qml:65",
+    "reference": "Modules/Settings/LauncherTab.qml:65",
     "comment": ""
   },
   {
     "term": "Light Mode",
-    "context": "Modules/Settings/PersonalizationTab.qml:1046",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1046",
+    "context": "Modules/Settings/PersonalizationTab.qml:1050",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1050",
     "comment": ""
   },
   {
@@ -1015,8 +1063,8 @@
   },
   {
     "term": "Lock Screen",
-    "context": "Modules/Settings/PersonalizationTab.qml:1822",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1822",
+    "context": "Modules/Settings/PersonalizationTab.qml:1826",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1826",
     "comment": ""
   },
   {
@@ -1039,8 +1087,8 @@
   },
   {
     "term": "Longitude",
-    "context": "Modules/Settings/PersonalizationTab.qml:1363",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1363, Modules/Settings/WeatherTab.qml:302",
+    "context": "Modules/Settings/PersonalizationTab.qml:1367",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1367, Modules/Settings/WeatherTab.qml:302",
     "comment": ""
   },
   {
@@ -1057,8 +1105,8 @@
   },
   {
     "term": "Manual Coordinates",
-    "context": "Modules/Settings/PersonalizationTab.qml:1326",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1326",
+    "context": "Modules/Settings/PersonalizationTab.qml:1330",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1330",
     "comment": ""
   },
   {
@@ -1070,13 +1118,13 @@
   {
     "term": "Matugen Palette",
     "context": "Modules/Settings/ThemeColorsTab.qml:654",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:654, Modules/Settings/PersonalizationTab.qml:969",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:654, Modules/Settings/PersonalizationTab.qml:973",
     "comment": ""
   },
   {
     "term": "Max apps to show",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:259",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:259",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:104",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:104",
     "comment": ""
   },
   {
@@ -1087,8 +1135,8 @@
   },
   {
     "term": "Media Player Settings",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:328",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:328",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:173",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:173",
     "comment": ""
   },
   {
@@ -1105,32 +1153,32 @@
   },
   {
     "term": "Minute",
-    "context": "Modules/Settings/PersonalizationTab.qml:1195",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1195",
+    "context": "Modules/Settings/PersonalizationTab.qml:1199",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1199",
     "comment": ""
   },
   {
     "term": "Mode:",
-    "context": "Modules/Settings/PersonalizationTab.qml:632",
-    "reference": "Modules/Settings/PersonalizationTab.qml:632",
+    "context": "Modules/Settings/PersonalizationTab.qml:636",
+    "reference": "Modules/Settings/PersonalizationTab.qml:636",
     "comment": ""
   },
   {
     "term": "Monitor",
-    "context": "Modules/Settings/PersonalizationTab.qml:535",
-    "reference": "Modules/Settings/PersonalizationTab.qml:535",
+    "context": "Modules/Settings/PersonalizationTab.qml:539",
+    "reference": "Modules/Settings/PersonalizationTab.qml:539",
     "comment": ""
   },
   {
     "term": "Monitor Selection:",
-    "context": "Modules/Settings/PersonalizationTab.qml:526",
-    "reference": "Modules/Settings/PersonalizationTab.qml:526",
+    "context": "Modules/Settings/PersonalizationTab.qml:530",
+    "reference": "Modules/Settings/PersonalizationTab.qml:530",
     "comment": ""
   },
   {
     "term": "Monospace Font",
-    "context": "Modules/Settings/PersonalizationTab.qml:1617",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1617",
+    "context": "Modules/Settings/PersonalizationTab.qml:1621",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1621",
     "comment": ""
   },
   {
@@ -1140,9 +1188,15 @@
     "comment": ""
   },
   {
+    "term": "NM not supported",
+    "context": "Modules/ControlCenter/Components/DragDropGrid.qml:196",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:196",
+    "comment": ""
+  },
+  {
     "term": "Named Workspace Icons",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:426",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:426",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:271",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:271",
     "comment": ""
   },
   {
@@ -1165,8 +1219,8 @@
   },
   {
     "term": "Network Info",
-    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:383",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:383",
+    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:399",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:399",
     "comment": ""
   },
   {
@@ -1177,8 +1231,8 @@
   },
   {
     "term": "Network Settings",
-    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:47",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:47",
+    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:44",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:44",
     "comment": ""
   },
   {
@@ -1195,8 +1249,8 @@
   },
   {
     "term": "Night Mode",
-    "context": "Modules/Settings/PersonalizationTab.qml:1067",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1067",
+    "context": "Modules/Settings/PersonalizationTab.qml:1071",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1071",
     "comment": ""
   },
   {
@@ -1225,8 +1279,8 @@
   },
   {
     "term": "No VPN profiles found",
-    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:136",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:136, Modules/DankBar/Popouts/VpnPopout.qml:265",
+    "context": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:141",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:141, Modules/DankBar/Popouts/VpnPopout.qml:269",
     "comment": ""
   },
   {
@@ -1267,8 +1321,8 @@
   },
   {
     "term": "Notepad",
-    "context": "DMSShell.qml:410",
-    "reference": "DMSShell.qml:410",
+    "context": "DMSShell.qml:412",
+    "reference": "DMSShell.qml:412",
     "comment": ""
   },
   {
@@ -1291,8 +1345,8 @@
   },
   {
     "term": "Notification Popups",
-    "context": "Modules/Settings/PersonalizationTab.qml:1423",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1423",
+    "context": "Modules/Settings/PersonalizationTab.qml:1427",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1427",
     "comment": ""
   },
   {
@@ -1317,6 +1371,12 @@
     "term": "Numbers",
     "context": "Widgets/DankIconPicker.qml:25",
     "reference": "Widgets/DankIconPicker.qml:25",
+    "comment": ""
+  },
+  {
+    "term": "OS Logo",
+    "context": "Modules/Settings/LauncherTab.qml:89",
+    "reference": "Modules/Settings/LauncherTab.qml:89",
     "comment": ""
   },
   {
@@ -1357,8 +1417,8 @@
   },
   {
     "term": "Overwrite",
-    "context": "Modals/FileBrowser/FileBrowserModal.qml:951",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:951",
+    "context": "Modals/FileBrowser/FileBrowserModal.qml:977",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:977",
     "comment": ""
   },
   {
@@ -1369,20 +1429,20 @@
   },
   {
     "term": "Per-Mode Wallpapers",
-    "context": "Modules/Settings/PersonalizationTab.qml:437",
-    "reference": "Modules/Settings/PersonalizationTab.qml:437",
+    "context": "Modules/Settings/PersonalizationTab.qml:441",
+    "reference": "Modules/Settings/PersonalizationTab.qml:441",
     "comment": ""
   },
   {
     "term": "Per-Monitor Wallpapers",
-    "context": "Modules/Settings/PersonalizationTab.qml:494",
-    "reference": "Modules/Settings/PersonalizationTab.qml:494",
+    "context": "Modules/Settings/PersonalizationTab.qml:498",
+    "reference": "Modules/Settings/PersonalizationTab.qml:498",
     "comment": ""
   },
   {
     "term": "Per-Monitor Workspaces",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:290",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:290",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:135",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:135",
     "comment": ""
   },
   {
@@ -1405,8 +1465,8 @@
   },
   {
     "term": "Popup Position",
-    "context": "Modules/Settings/PersonalizationTab.qml:1432",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1432",
+    "context": "Modules/Settings/PersonalizationTab.qml:1436",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1436",
     "comment": ""
   },
   {
@@ -1477,8 +1537,8 @@
   },
   {
     "term": "Recently Used Apps",
-    "context": "Modules/Settings/LauncherTab.qml:130",
-    "reference": "Modules/Settings/LauncherTab.qml:130",
+    "context": "Modules/Settings/LauncherTab.qml:455",
+    "reference": "Modules/Settings/LauncherTab.qml:455",
     "comment": ""
   },
   {
@@ -1495,26 +1555,26 @@
   },
   {
     "term": "Reset",
-    "context": "Modules/Settings/DankBarTab.qml:1140",
-    "reference": "Modules/Settings/DankBarTab.qml:1140, Modules/ControlCenter/Components/EditControls.qml:226",
+    "context": "Modules/Settings/DankBarTab.qml:1231",
+    "reference": "Modules/Settings/DankBarTab.qml:1231, Modules/ControlCenter/Components/EditControls.qml:226",
     "comment": ""
   },
   {
     "term": "Running Apps Only In Current Workspace",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:386",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:386",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:231",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:231",
     "comment": ""
   },
   {
     "term": "Running Apps Settings",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:376",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:376",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:221",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:221",
     "comment": ""
   },
   {
     "term": "Save",
-    "context": "Modals/FileBrowser/FileBrowserModal.qml:791",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:791, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:476",
+    "context": "Modals/FileBrowser/FileBrowserModal.qml:817",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:817, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:476",
     "comment": ""
   },
   {
@@ -1530,9 +1590,15 @@
     "comment": ""
   },
   {
+    "term": "Scale DankBar font sizes independently",
+    "context": "Modules/Settings/DankBarTab.qml:1098",
+    "reference": "Modules/Settings/DankBarTab.qml:1098",
+    "comment": ""
+  },
+  {
     "term": "Scale all font sizes",
-    "context": "Modules/Settings/PersonalizationTab.qml:1659",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1659",
+    "context": "Modules/Settings/PersonalizationTab.qml:1663",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1663",
     "comment": ""
   },
   {
@@ -1566,6 +1632,12 @@
     "comment": ""
   },
   {
+    "term": "Select Launcher Logo",
+    "context": "Modules/Settings/LauncherTab.qml:16",
+    "reference": "Modules/Settings/LauncherTab.qml:16",
+    "comment": ""
+  },
+  {
     "term": "Select a color from the palette or use custom sliders",
     "context": "Modals/DankColorPickerModal.qml:191",
     "reference": "Modals/DankColorPickerModal.qml:191",
@@ -1573,32 +1645,38 @@
   },
   {
     "term": "Select a widget to add to the ",
-    "context": "Modules/Settings/WidgetSelectionPopup.qml:200",
-    "reference": "Modules/Settings/WidgetSelectionPopup.qml:200",
+    "context": "Modules/Settings/WidgetSelectionPopup.qml:215",
+    "reference": "Modules/Settings/WidgetSelectionPopup.qml:215",
+    "comment": ""
+  },
+  {
+    "term": "Select an image file...",
+    "context": "Modules/Settings/LauncherTab.qml:152",
+    "reference": "Modules/Settings/LauncherTab.qml:152",
     "comment": ""
   },
   {
     "term": "Select which transitions to include in randomization",
-    "context": "Modules/Settings/PersonalizationTab.qml:872",
-    "reference": "Modules/Settings/PersonalizationTab.qml:872",
+    "context": "Modules/Settings/PersonalizationTab.qml:876",
+    "reference": "Modules/Settings/PersonalizationTab.qml:876",
     "comment": ""
   },
   {
     "term": "Set different wallpapers for each connected monitor",
-    "context": "Modules/Settings/PersonalizationTab.qml:501",
-    "reference": "Modules/Settings/PersonalizationTab.qml:501",
+    "context": "Modules/Settings/PersonalizationTab.qml:505",
+    "reference": "Modules/Settings/PersonalizationTab.qml:505",
     "comment": ""
   },
   {
     "term": "Set different wallpapers for light and dark mode",
-    "context": "Modules/Settings/PersonalizationTab.qml:444",
-    "reference": "Modules/Settings/PersonalizationTab.qml:444",
+    "context": "Modules/Settings/PersonalizationTab.qml:448",
+    "reference": "Modules/Settings/PersonalizationTab.qml:448",
     "comment": ""
   },
   {
     "term": "Settings",
     "context": "Services/AppSearchService.qml:173",
-    "reference": "Services/AppSearchService.qml:173, Modals/Settings/SettingsModal.qml:147, Modules/DankDash/DankDashPopout.qml:142",
+    "reference": "Services/AppSearchService.qml:173, Modals/Settings/SettingsModal.qml:143, Modules/DankDash/DankDashPopout.qml:142",
     "comment": ""
   },
   {
@@ -1621,14 +1699,14 @@
   },
   {
     "term": "Show Power Actions",
-    "context": "Modules/Settings/PersonalizationTab.qml:1832",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1832",
+    "context": "Modules/Settings/PersonalizationTab.qml:1836",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1836",
     "comment": ""
   },
   {
     "term": "Show Workspace Apps",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:237",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:237",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:82",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
     "comment": ""
   },
   {
@@ -1645,8 +1723,8 @@
   },
   {
     "term": "Show password",
-    "context": "Modals/WifiPasswordModal.qml:204",
-    "reference": "Modals/WifiPasswordModal.qml:204",
+    "context": "Modals/WifiPasswordModal.qml:272",
+    "reference": "Modals/WifiPasswordModal.qml:272",
     "comment": ""
   },
   {
@@ -1659,6 +1737,12 @@
     "term": "Size",
     "context": "Modules/ProcessList/SystemTab.qml:456",
     "reference": "Modules/ProcessList/SystemTab.qml:456, Modules/Settings/DankBarTab.qml:1002",
+    "comment": ""
+  },
+  {
+    "term": "Size Offset",
+    "context": "Modules/Settings/LauncherTab.qml:237",
+    "reference": "Modules/Settings/LauncherTab.qml:237",
     "comment": ""
   },
   {
@@ -1675,8 +1759,8 @@
   },
   {
     "term": "Start",
-    "context": "Modules/Settings/PersonalizationTab.qml:1211",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1211",
+    "context": "Modules/Settings/PersonalizationTab.qml:1215",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1215",
     "comment": ""
   },
   {
@@ -1765,8 +1849,8 @@
   },
   {
     "term": "Temperature",
-    "context": "Modules/Settings/PersonalizationTab.qml:1084",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1084",
+    "context": "Modules/Settings/PersonalizationTab.qml:1088",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1088",
     "comment": ""
   },
   {
@@ -1813,8 +1897,8 @@
   },
   {
     "term": "Transition Effect",
-    "context": "Modules/Settings/PersonalizationTab.qml:846",
-    "reference": "Modules/Settings/PersonalizationTab.qml:846",
+    "context": "Modules/Settings/PersonalizationTab.qml:850",
+    "reference": "Modules/Settings/PersonalizationTab.qml:850",
     "comment": ""
   },
   {
@@ -1872,12 +1956,6 @@
     "comment": ""
   },
   {
-    "term": "Use OS Logo",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:61",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:61",
-    "comment": ""
-  },
-  {
     "term": "Use%",
     "context": "Modules/ProcessList/SystemTab.qml:489",
     "reference": "Modules/ProcessList/SystemTab.qml:489",
@@ -1897,8 +1975,8 @@
   },
   {
     "term": "VPN Connections",
-    "context": "Modules/DankBar/Popouts/VpnPopout.qml:99",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:99",
+    "context": "Modules/DankBar/Popouts/VpnPopout.qml:103",
+    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:103",
     "comment": ""
   },
   {
@@ -1909,14 +1987,14 @@
   },
   {
     "term": "Wallpaper",
-    "context": "Modules/Settings/PersonalizationTab.qml:99",
-    "reference": "Modules/Settings/PersonalizationTab.qml:99",
+    "context": "Modules/Settings/PersonalizationTab.qml:107",
+    "reference": "Modules/Settings/PersonalizationTab.qml:107",
     "comment": ""
   },
   {
     "term": "Wave Progress Bars",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:338",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:338",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:183",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:183",
     "comment": ""
   },
   {
@@ -1927,14 +2005,14 @@
   },
   {
     "term": "WiFi is off",
-    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:139",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:139",
+    "context": "Modules/ControlCenter/Details/NetworkDetail.qml:151",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:151",
     "comment": ""
   },
   {
     "term": "Widget Management",
-    "context": "Modules/Settings/DankBarTab.qml:1102",
-    "reference": "Modules/Settings/DankBarTab.qml:1102",
+    "context": "Modules/Settings/DankBarTab.qml:1193",
+    "reference": "Modules/Settings/DankBarTab.qml:1193",
     "comment": ""
   },
   {
@@ -1957,20 +2035,20 @@
   },
   {
     "term": "Workspace Index Numbers",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:215",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:215",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:60",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:60",
     "comment": ""
   },
   {
     "term": "Workspace Padding",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:226",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:226",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:71",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:71",
     "comment": ""
   },
   {
     "term": "Workspace Settings",
-    "context": "Modules/Settings/WidgetTweaksTab.qml:205",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:205",
+    "context": "Modules/Settings/WidgetTweaksTab.qml:50",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:50",
     "comment": ""
   },
   {
@@ -1999,14 +2077,20 @@
   },
   {
     "term": "matugen not detected - dynamic theming unavailable",
-    "context": "Modules/Settings/PersonalizationTab.qml:998",
-    "reference": "Modules/Settings/PersonalizationTab.qml:998",
+    "context": "Modules/Settings/PersonalizationTab.qml:1002",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1002",
     "comment": ""
   },
   {
     "term": "official",
     "context": "Modules/Settings/PluginsTab.qml:972",
     "reference": "Modules/Settings/PluginsTab.qml:972",
+    "comment": ""
+  },
+  {
+    "term": "update dms for NM integration.",
+    "context": "Modules/ControlCenter/Components/DragDropGrid.qml:198",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:198",
     "comment": ""
   },
   {

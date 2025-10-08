@@ -7,6 +7,10 @@ import qs.Widgets
 Rectangle {
     id: root
 
+    Ref {
+        service: VpnService
+    }
+
     property bool isVertical: axis?.isVertical ?? false
     property var axis: null
     property int widgetThickness: 28

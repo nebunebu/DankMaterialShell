@@ -48,7 +48,10 @@ Item {
             const builtinId = root.expandedSection
             let builtinInstance = null
 
-            if (builtinId === "builtin_vpn" && widgetModel?.vpnBuiltinInstance) {
+            if (builtinId === "builtin_vpn") {
+                if (widgetModel?.vpnLoader) {
+                    widgetModel.vpnLoader.active = true
+                }
                 builtinInstance = widgetModel.vpnBuiltinInstance
             }
 

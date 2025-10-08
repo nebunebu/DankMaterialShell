@@ -28,6 +28,30 @@ Singleton {
         }
     }
 
+    property bool loginctlAvailable: false
+    property string sessionId: ""
+    property string sessionPath: ""
+    property bool locked: false
+    property bool active: false
+    property bool idleHint: false
+    property bool lockedHint: false
+    property bool preparingForSleep: false
+    property string sessionType: ""
+    property string userName: ""
+    property string seat: ""
+    property string display: ""
+
+    signal sessionLocked()
+    signal sessionUnlocked()
+    signal prepareForSleep()
+    signal loginctlStateChanged()
+
+    property var dmsService: null
+    property bool subscriptionConnected: false
+    property bool stateInitialized: false
+
+    readonly property string socketPath: Quickshell.env("DMS_SOCKET")
+
     Timer {
         id: sessionInitTimer
         interval: 200
@@ -38,6 +62,7 @@ Singleton {
             detectHibernateProcess.running = true
             detectPrimeRunProcess.running = true
             console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
+            Qt.callLater(initializeDMSConnection)
         }
     }
 
@@ -241,6 +266,157 @@ Singleton {
                 ToastService.showWarning("Idle inhibitor failed")
             }
         }
+    }
+
+    DankSocket {
+        id: subscriptionSocket
+        path: root.socketPath
+        connected: loginctlAvailable
+
+        onConnectionStateChanged: {
+            root.subscriptionConnected = connected
+        }
+
+        parser: SplitParser {
+            onRead: line => {
+                if (!line || line.length === 0) {
+                    return
+                }
+
+                try {
+                    const response = JSON.parse(line)
+
+                    if (response.capabilities) {
+                        Qt.callLater(() => sendSubscribeRequest())
+                        return
+                    }
+
+                    if (response.result && response.result.type === "loginctl_event") {
+                        handleLoginctlEvent(response.result)
+                    } else if (response.result && response.result.type === "state_changed" && response.result.data) {
+                        updateLoginctlState(response.result.data)
+                    }
+                } catch (e) {
+                    console.warn("SessionService: Failed to parse subscription response:", line, e)
+                }
+            }
+        }
+    }
+
+    function sendSubscribeRequest() {
+        subscriptionSocket.send({
+            "id": 2,
+            "method": "loginctl.subscribe"
+        })
+    }
+
+    function initializeDMSConnection() {
+        try {
+            dmsService = Qt.createQmlObject('import QtQuick; import qs.Services; QtObject { property var service: DMSService }', root)
+            if (dmsService && dmsService.service) {
+                checkCapabilities()
+                dmsService.service.connectionStateChanged.connect(onDMSConnectionStateChanged)
+                dmsService.service.capabilitiesChanged.connect(onDMSCapabilitiesChanged)
+            } else {
+                console.warn("SessionService: Failed to get DMS service reference")
+            }
+        } catch (e) {
+            console.warn("SessionService: Failed to initialize DMS connection:", e)
+        }
+    }
+
+    function checkCapabilities() {
+        if (dmsService && dmsService.service && dmsService.service.isConnected) {
+            onDMSConnected()
+        }
+    }
+
+    function onDMSConnectionStateChanged() {
+        if (dmsService && dmsService.service && dmsService.service.isConnected) {
+            onDMSConnected()
+        }
+    }
+
+    function onDMSCapabilitiesChanged() {
+        if (dmsService && dmsService.service && dmsService.service.capabilities.includes("loginctl")) {
+            loginctlAvailable = true
+            if (dmsService.service.isConnected && !stateInitialized) {
+                stateInitialized = true
+                getLoginctlState()
+                subscriptionSocket.connected = true
+            }
+        }
+    }
+
+    function onDMSConnected() {
+        if (dmsService && dmsService.service && dmsService.service.capabilities && dmsService.service.capabilities.length > 0) {
+            loginctlAvailable = dmsService.service.capabilities.includes("loginctl")
+
+            if (loginctlAvailable && !stateInitialized) {
+                stateInitialized = true
+                getLoginctlState()
+                subscriptionSocket.connected = true
+            }
+        }
+    }
+
+    function getLoginctlState() {
+        if (!loginctlAvailable || !dmsService || !dmsService.service) return
+
+        dmsService.service.sendRequest("loginctl.getState", null, response => {
+            if (response.result) {
+                updateLoginctlState(response.result)
+            }
+        })
+    }
+
+    function updateLoginctlState(state) {
+        sessionId = state.sessionId || ""
+        sessionPath = state.sessionPath || ""
+        locked = state.locked || false
+        active = state.active || false
+        idleHint = state.idleHint || false
+        lockedHint = state.lockedHint || false
+        sessionType = state.sessionType || ""
+        userName = state.userName || ""
+        seat = state.seat || ""
+        display = state.display || ""
+
+        const wasPreparing = preparingForSleep
+        preparingForSleep = state.preparingForSleep || false
+
+        if (preparingForSleep && !wasPreparing) {
+            prepareForSleep()
+        }
+
+        loginctlStateChanged()
+    }
+
+    function handleLoginctlEvent(event) {
+        if (event.event === "Lock") {
+            locked = true
+            lockedHint = true
+            sessionLocked()
+        } else if (event.event === "Unlock") {
+            locked = false
+            lockedHint = false
+            sessionUnlocked()
+        } else if (event.event === "PrepareForSleep") {
+            preparingForSleep = event.data?.sleeping || false
+            if (preparingForSleep) {
+                prepareForSleep()
+            }
+        }
+    }
+
+    function lockSession() {
+        if (!loginctlAvailable || !dmsService || !dmsService.service) return
+
+        dmsService.service.sendRequest("loginctl.lock", null, response => {
+            if (response.error) {
+                console.warn("SessionService: Failed to lock session:", response.error)
+            }
+        })
     }
 
 }

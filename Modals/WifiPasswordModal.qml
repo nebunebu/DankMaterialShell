@@ -9,44 +9,64 @@ DankModal {
 
     property string wifiPasswordSSID: ""
     property string wifiPasswordInput: ""
+    property string wifiUsernameInput: ""
+    property bool requiresEnterprise: false
 
     function show(ssid) {
         wifiPasswordSSID = ssid
         wifiPasswordInput = ""
+        wifiUsernameInput = ""
+
+        const network = NetworkManagerService.wifiNetworks.find(n => n.ssid === ssid)
+        requiresEnterprise = network?.enterprise || false
+
         open()
         Qt.callLater(() => {
-                         if (contentLoader.item && contentLoader.item.passwordInput)
-                         contentLoader.item.passwordInput.forceActiveFocus()
+                         if (contentLoader.item) {
+                             if (requiresEnterprise && contentLoader.item.usernameInput) {
+                                 contentLoader.item.usernameInput.forceActiveFocus()
+                             } else if (contentLoader.item.passwordInput) {
+                                 contentLoader.item.passwordInput.forceActiveFocus()
+                             }
+                         }
                      })
     }
 
     shouldBeVisible: false
     width: 420
-    height: 230
+    height: requiresEnterprise ? 310 : 230
     onShouldBeVisibleChanged: () => {
-                                  if (!shouldBeVisible)
-                                  wifiPasswordInput = ""
+                                  if (!shouldBeVisible) {
+                                      wifiPasswordInput = ""
+                                      wifiUsernameInput = ""
+                                  }
                               }
     onOpened: {
         Qt.callLater(() => {
-                         if (contentLoader.item && contentLoader.item.passwordInput)
-                         contentLoader.item.passwordInput.forceActiveFocus()
+                         if (contentLoader.item) {
+                             if (requiresEnterprise && contentLoader.item.usernameInput) {
+                                 contentLoader.item.usernameInput.forceActiveFocus()
+                             } else if (contentLoader.item.passwordInput) {
+                                 contentLoader.item.passwordInput.forceActiveFocus()
+                             }
+                         }
                      })
     }
     onBackgroundClicked: () => {
                              close()
                              wifiPasswordInput = ""
+                             wifiUsernameInput = ""
                          }
 
     Connections {
-        target: NetworkService
+        target: NetworkManagerService
 
         function onPasswordDialogShouldReopenChanged() {
-            if (NetworkService.passwordDialogShouldReopen && NetworkService.connectingSSID !== "") {
-                wifiPasswordSSID = NetworkService.connectingSSID
+            if (NetworkManagerService.passwordDialogShouldReopen && NetworkManagerService.connectingSSID !== "") {
+                wifiPasswordSSID = NetworkManagerService.connectingSSID
                 wifiPasswordInput = ""
                 open()
-                NetworkService.passwordDialogShouldReopen = false
+                NetworkManagerService.passwordDialogShouldReopen = false
             }
         }
     }
@@ -55,6 +75,7 @@ DankModal {
         FocusScope {
             id: wifiContent
 
+            property alias usernameInput: usernameInput
             property alias passwordInput: passwordInput
 
             anchors.fill: parent
@@ -62,6 +83,7 @@ DankModal {
             Keys.onEscapePressed: event => {
                                       close()
                                       wifiPasswordInput = ""
+                                      wifiUsernameInput = ""
                                       event.accepted = true
                                   }
 
@@ -85,7 +107,7 @@ DankModal {
                         }
 
                         StyledText {
-                            text: `Enter password for "${wifiPasswordSSID}"`
+                            text: requiresEnterprise ? `Enter credentials for "${wifiPasswordSSID}"` : `Enter password for "${wifiPasswordSSID}"`
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceTextMedium
                             width: parent.width
@@ -100,7 +122,45 @@ DankModal {
                         onClicked: () => {
                                        close()
                                        wifiPasswordInput = ""
+                                       wifiUsernameInput = ""
                                    }
+                    }
+                }
+
+                Rectangle {
+                    width: parent.width
+                    height: 50
+                    radius: Theme.cornerRadius
+                    color: Theme.surfaceHover
+                    border.color: usernameInput.activeFocus ? Theme.primary : Theme.outlineStrong
+                    border.width: usernameInput.activeFocus ? 2 : 1
+                    visible: requiresEnterprise
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: () => {
+                                       usernameInput.forceActiveFocus()
+                                   }
+                    }
+
+                    DankTextField {
+                        id: usernameInput
+
+                        anchors.fill: parent
+                        font.pixelSize: Theme.fontSizeMedium
+                        textColor: Theme.surfaceText
+                        text: wifiUsernameInput
+                        placeholderText: "Username"
+                        backgroundColor: "transparent"
+                        enabled: root.shouldBeVisible
+                        onTextEdited: () => {
+                                          wifiUsernameInput = text
+                                      }
+                        onAccepted: () => {
+                                        if (passwordInput) {
+                                            passwordInput.forceActiveFocus()
+                                        }
+                                    }
                     }
                 }
 
@@ -127,21 +187,24 @@ DankModal {
                         textColor: Theme.surfaceText
                         text: wifiPasswordInput
                         echoMode: showPasswordCheckbox.checked ? TextInput.Normal : TextInput.Password
-                        placeholderText: ""
+                        placeholderText: requiresEnterprise ? "Password" : ""
                         backgroundColor: "transparent"
-                        focus: true
+                        focus: !requiresEnterprise
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
                                           wifiPasswordInput = text
                                       }
                         onAccepted: () => {
-                                        NetworkService.connectToWifi(wifiPasswordSSID, passwordInput.text)
+                                        const username = requiresEnterprise ? usernameInput.text : ""
+                                        NetworkManagerService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
                                         close()
                                         wifiPasswordInput = ""
+                                        wifiUsernameInput = ""
                                         passwordInput.text = ""
+                                        if (requiresEnterprise) usernameInput.text = ""
                                     }
                         Component.onCompleted: () => {
-                                                   if (root.shouldBeVisible)
+                                                   if (root.shouldBeVisible && !requiresEnterprise)
                                                    focusDelayTimer.start()
                                                }
 
@@ -151,8 +214,13 @@ DankModal {
                             interval: 100
                             repeat: false
                             onTriggered: () => {
-                                             if (root.shouldBeVisible)
-                                             passwordInput.forceActiveFocus()
+                                             if (root.shouldBeVisible) {
+                                                 if (requiresEnterprise && usernameInput) {
+                                                     usernameInput.forceActiveFocus()
+                                                 } else {
+                                                     passwordInput.forceActiveFocus()
+                                                 }
+                                             }
                                          }
                         }
 
@@ -244,6 +312,7 @@ DankModal {
                                 onClicked: () => {
                                                close()
                                                wifiPasswordInput = ""
+                                               wifiUsernameInput = ""
                                            }
                             }
                         }
@@ -253,7 +322,7 @@ DankModal {
                             height: 36
                             radius: Theme.cornerRadius
                             color: connectArea.containsMouse ? Qt.darker(Theme.primary, 1.1) : Theme.primary
-                            enabled: passwordInput.text.length > 0
+                            enabled: requiresEnterprise ? (usernameInput.text.length > 0 && passwordInput.text.length > 0) : passwordInput.text.length > 0
                             opacity: enabled ? 1 : 0.5
 
                             StyledText {
@@ -274,10 +343,13 @@ DankModal {
                                 cursorShape: Qt.PointingHandCursor
                                 enabled: parent.enabled
                                 onClicked: () => {
-                                               NetworkService.connectToWifi(wifiPasswordSSID, passwordInput.text)
+                                               const username = requiresEnterprise ? usernameInput.text : ""
+                                               NetworkManagerService.connectToWifi(wifiPasswordSSID, passwordInput.text, username)
                                                close()
                                                wifiPasswordInput = ""
+                                               wifiUsernameInput = ""
                                                passwordInput.text = ""
+                                               if (requiresEnterprise) usernameInput.text = ""
                                            }
                             }
 

@@ -126,7 +126,15 @@ Column {
                                 return builtinPluginWidgetComponent
                             } else if (id.startsWith("plugin_")) {
                                 return pluginWidgetComponent
-                            } else if (id === "wifi" || id === "bluetooth" || id === "audioOutput" || id === "audioInput") {
+                            } else if (id === "wifi") {
+                                if (!DMSService.dmsAvailable) {
+                                    return errorPillComponent
+                                }
+                                if (DMSService.dmsAvailable && !DMSService.capabilities.includes("network")) {
+                                    return errorPillComponent
+                                }
+                                return compoundPillComponent
+                            } else if (id === "bluetooth" || id === "audioOutput" || id === "audioInput") {
                                 return compoundPillComponent
                             } else if (id === "volumeSlider") {
                                 return audioSliderComponent
@@ -176,6 +184,22 @@ Column {
     }
 
     Component {
+        id: errorPillComponent
+        ErrorPill {
+            property var widgetData: parent.widgetData || {}
+            width: parent.width
+            height: 60
+            primaryMessage: {
+                if (!DMSService.dmsAvailable) {
+                    return qsTr("DMS_SOCKET not available")
+                }
+                return qsTr("NM not supported")
+            }
+            secondaryMessage: qsTr("update dms for NM integration.")
+        }
+    }
+
+    Component {
         id: compoundPillComponent
         CompoundPill {
             property var widgetData: parent.widgetData || {}
@@ -187,13 +211,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkService.wifiToggling)
+                    if (NetworkManagerService.wifiToggling)
                         return "sync"
-                    if (NetworkService.networkStatus === "ethernet")
+                    if (NetworkManagerService.networkStatus === "ethernet")
                         return "settings_ethernet"
-                    if (NetworkService.networkStatus === "wifi")
-                        return NetworkService.wifiSignalIcon
-                    if (NetworkService.wifiEnabled)
+                    if (NetworkManagerService.networkStatus === "wifi")
+                        return NetworkManagerService.wifiSignalIcon
+                    if (NetworkManagerService.wifiEnabled)
                         return "wifi_off"
                     return "wifi_off"
                 }
@@ -246,13 +270,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkService.wifiToggling)
-                        return NetworkService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
-                    if (NetworkService.networkStatus === "ethernet")
+                    if (NetworkManagerService.wifiToggling)
+                        return NetworkManagerService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
+                    if (NetworkManagerService.networkStatus === "ethernet")
                         return "Ethernet"
-                    if (NetworkService.networkStatus === "wifi" && NetworkService.currentWifiSSID)
-                        return NetworkService.currentWifiSSID
-                    if (NetworkService.wifiEnabled)
+                    if (NetworkManagerService.networkStatus === "wifi" && NetworkManagerService.currentWifiSSID)
+                        return NetworkManagerService.currentWifiSSID
+                    if (NetworkManagerService.wifiEnabled)
                         return "Not connected"
                     return "WiFi off"
                 }
@@ -278,13 +302,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkService.wifiToggling)
+                    if (NetworkManagerService.wifiToggling)
                         return "Please wait..."
-                    if (NetworkService.networkStatus === "ethernet")
+                    if (NetworkManagerService.networkStatus === "ethernet")
                         return "Connected"
-                    if (NetworkService.networkStatus === "wifi")
-                        return NetworkService.wifiSignalStrength > 0 ? NetworkService.wifiSignalStrength + "%" : "Connected"
-                    if (NetworkService.wifiEnabled)
+                    if (NetworkManagerService.networkStatus === "wifi")
+                        return NetworkManagerService.wifiSignalStrength > 0 ? NetworkManagerService.wifiSignalStrength + "%" : "Connected"
+                    if (NetworkManagerService.wifiEnabled)
                         return "Select network"
                     return ""
                 }
@@ -332,13 +356,13 @@ Column {
                 switch (widgetData.id || "") {
                 case "wifi":
                 {
-                    if (NetworkService.wifiToggling)
+                    if (NetworkManagerService.wifiToggling)
                         return false
-                    if (NetworkService.networkStatus === "ethernet")
+                    if (NetworkManagerService.networkStatus === "ethernet")
                         return true
-                    if (NetworkService.networkStatus === "wifi")
+                    if (NetworkManagerService.networkStatus === "wifi")
                         return true
-                    return NetworkService.wifiEnabled
+                    return NetworkManagerService.wifiEnabled
                 }
                 case "bluetooth":
                     return !!(BluetoothService.available && BluetoothService.adapter && BluetoothService.adapter.enabled)
@@ -723,12 +747,16 @@ Column {
             width: parent.width
             height: 60
 
-            property var builtinInstance: {
+            property var builtinInstance: null
+
+            Component.onCompleted: {
                 const id = widgetData.id || ""
                 if (id === "builtin_vpn") {
-                    return root.model?.vpnBuiltinInstance
+                    if (root.model?.vpnLoader) {
+                        root.model.vpnLoader.active = true
+                    }
+                    builtinInstance = Qt.binding(() => root.model?.vpnBuiltinInstance)
                 }
-                return null
             }
 
             sourceComponent: {

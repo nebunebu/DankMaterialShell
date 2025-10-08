@@ -6,11 +6,13 @@ import QtCore
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.Common
 
 Singleton {
     id: root
 
     property bool dmsAvailable: false
+    property var capabilities: []
     property var availablePlugins: []
     property var installedPlugins: []
     property bool isConnected: false
@@ -18,14 +20,15 @@ Singleton {
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
-    property int nextRequestId: 1
     property var pendingRequests: ({})
+    property int requestIdCounter: 0
 
     signal pluginsListReceived(var plugins)
     signal installedPluginsReceived(var plugins)
     signal searchResultsReceived(var plugins)
     signal operationSuccess(string message)
     signal operationError(string error)
+    signal connectionStateChanged()
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
@@ -60,7 +63,7 @@ Singleton {
         socket.connected = true
     }
 
-    Socket {
+    DankSocket {
         id: socket
         path: root.socketPath
         connected: false
@@ -69,9 +72,11 @@ Singleton {
             if (connected) {
                 root.isConnected = true
                 root.isConnecting = false
+                root.connectionStateChanged()
             } else {
                 root.isConnected = false
                 root.isConnecting = false
+                root.connectionStateChanged()
             }
         }
 
@@ -83,6 +88,12 @@ Singleton {
 
                 try {
                     const response = JSON.parse(line)
+
+                    if (response.capabilities) {
+                        root.capabilities = response.capabilities
+                        return
+                    }
+
                     handleResponse(response)
                 } catch (e) {
                     console.warn("DMSService: Failed to parse response:", line, e)
@@ -101,7 +112,8 @@ Singleton {
             return
         }
 
-        const id = nextRequestId++
+        requestIdCounter++
+        const id = Date.now() + requestIdCounter
         const request = {
             "id": id,
             "method": method
@@ -115,11 +127,21 @@ Singleton {
             pendingRequests[id] = callback
         }
 
-        const json = JSON.stringify(request) + "\n"
-        socket.write(json)
+        socket.send(request)
     }
 
+    property var networkUpdateCallback: null
+
     function handleResponse(response) {
+        if (response.id === undefined && response.result) {
+            if (response.result.type === "state_changed" && response.result.data) {
+                if (networkUpdateCallback) {
+                    networkUpdateCallback(response.result.data)
+                }
+            }
+            return
+        }
+
         const callback = pendingRequests[response.id]
 
         if (callback) {

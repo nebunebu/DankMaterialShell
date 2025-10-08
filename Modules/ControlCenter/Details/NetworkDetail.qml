@@ -8,10 +8,10 @@ import qs.Modals
 
 Rectangle {
     implicitHeight: {
-        if (NetworkService.wifiToggling) {
+        if (NetworkManagerService.wifiToggling) {
             return headerRow.height + wifiToggleContent.height + Theme.spacingM
         }
-        if (NetworkService.wifiEnabled) {
+        if (NetworkManagerService.wifiEnabled) {
             return headerRow.height + wifiContent.height + Theme.spacingM
         }
         return headerRow.height + wifiOffContent.height + Theme.spacingM
@@ -20,16 +20,13 @@ Rectangle {
     color: Theme.surfaceContainerHigh
     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
     border.width: 0
-    
+
     Component.onCompleted: {
-        NetworkService.addRef()
-        if (NetworkService.wifiEnabled) {
-            NetworkService.scanWifi()
-        }
+        NetworkManagerService.addRef()
     }
 
     Component.onDestruction: {
-        NetworkService.removeRef()
+        NetworkManagerService.removeRef()
     }
     
     Row {
@@ -59,16 +56,31 @@ Rectangle {
         DankButtonGroup {
             id: preferenceControls
             anchors.verticalCenter: parent.verticalCenter
-            visible: NetworkService.ethernetConnected && NetworkService.wifiConnected
+            visible: NetworkManagerService.ethernetConnected
 
-            property int currentPreferenceIndex: NetworkService.userPreference === "ethernet" ? 0 : 1
+            property int currentPreferenceIndex: {
+                const pref = NetworkManagerService.userPreference
+                const status = NetworkManagerService.networkStatus
+                let index = 1
+
+                if (pref === "ethernet") {
+                    index = 0
+                } else if (pref === "wifi") {
+                    index = 1
+                } else {
+                    index = status === "ethernet" ? 0 : 1
+                }
+
+                return index
+            }
 
             model: ["Ethernet", "WiFi"]
             currentIndex: currentPreferenceIndex
             selectionMode: "single"
             onSelectionChanged: (index, selected) => {
                 if (!selected) return
-                NetworkService.setNetworkPreference(index === 0 ? "ethernet" : "wifi")
+                console.log("NetworkDetail: Setting preference to", index === 0 ? "ethernet" : "wifi")
+                NetworkManagerService.setNetworkPreference(index === 0 ? "ethernet" : "wifi")
             }
         }
     }
@@ -80,31 +92,31 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: NetworkService.wifiToggling
+        visible: NetworkManagerService.wifiToggling
         height: visible ? 80 : 0
-        
+
         Column {
             anchors.centerIn: parent
             spacing: Theme.spacingM
-            
+
             DankIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
                 name: "sync"
                 size: 32
                 color: Theme.primary
-                
+
                 RotationAnimation on rotation {
-                    running: NetworkService.wifiToggling
+                    running: NetworkManagerService.wifiToggling
                     loops: Animation.Infinite
                     from: 0
                     to: 360
                     duration: 1000
                 }
             }
-            
+
             StyledText {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: NetworkService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
+                text: NetworkManagerService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.surfaceText
                 horizontalAlignment: Text.AlignHCenter
@@ -119,7 +131,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: !NetworkService.wifiEnabled && !NetworkService.wifiToggling
+        visible: !NetworkManagerService.wifiEnabled && !NetworkManagerService.wifiToggling
         height: visible ? 120 : 0
         
         Column {
@@ -165,7 +177,7 @@ Rectangle {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: NetworkService.toggleWifiRadio()
+                    onClicked: NetworkManagerService.toggleWifiRadio()
                 }
                 
             }
@@ -180,7 +192,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: NetworkService.wifiInterface && NetworkService.wifiEnabled && !NetworkService.wifiToggling
+        visible: NetworkManagerService.wifiInterface && NetworkManagerService.wifiEnabled && !NetworkManagerService.wifiToggling
         contentHeight: wifiColumn.height
         clip: true
         
@@ -192,16 +204,16 @@ Rectangle {
             Item {
                 width: parent.width
                 height: 200
-                visible: NetworkService.wifiInterface && NetworkService.wifiNetworks?.length < 1 && !NetworkService.wifiToggling
-                
+                visible: NetworkManagerService.wifiInterface && NetworkManagerService.wifiNetworks?.length < 1 && !NetworkManagerService.wifiToggling && NetworkManagerService.isScanning
+
                 DankIcon {
                     anchors.centerIn: parent
                     name: "refresh"
                     size: 48
                     color: Qt.rgba(Theme.surfaceText.r || 0.8, Theme.surfaceText.g || 0.8, Theme.surfaceText.b || 0.8, 0.3)
-                    
+
                     RotationAnimation on rotation {
-                        running: true
+                        running: NetworkManagerService.isScanning
                         loops: Animation.Infinite
                         from: 0
                         to: 360
@@ -211,14 +223,18 @@ Rectangle {
             }
             
             Repeater {
-                model: {
-                    let networks = [...NetworkService.wifiNetworks]
-                    networks.sort((a, b) => {
-                        if (a.ssid === NetworkService.currentWifiSSID) return -1
-                        if (b.ssid === NetworkService.currentWifiSSID) return 1
+                model: sortedNetworks
+
+                property var sortedNetworks: {
+                    const ssid = NetworkManagerService.currentWifiSSID
+                    const networks = NetworkManagerService.wifiNetworks
+                    let sorted = [...networks]
+                    sorted.sort((a, b) => {
+                        if (a.ssid === ssid) return -1
+                        if (b.ssid === ssid) return 1
                         return b.signal - a.signal
                     })
-                    return networks
+                    return sorted
                 }
                 delegate: Rectangle {
                     required property var modelData
@@ -228,7 +244,7 @@ Rectangle {
                     height: 50
                     radius: Theme.cornerRadius
                     color: networkMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08) : Theme.surfaceContainerHighest
-                    border.color: modelData.ssid === NetworkService.currentWifiSSID ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.12)
+                    border.color: modelData.ssid === NetworkManagerService.currentWifiSSID ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.12)
                     border.width: 0
                     
                     Row {
@@ -245,7 +261,7 @@ Rectangle {
                                 return "wifi_1_bar"
                             }
                             size: Theme.iconSize - 4
-                            color: modelData.ssid === NetworkService.currentWifiSSID ? Theme.primary : Theme.surfaceText
+                            color: modelData.ssid === NetworkManagerService.currentWifiSSID ? Theme.primary : Theme.surfaceText
                             anchors.verticalCenter: parent.verticalCenter
                         }
                         
@@ -257,16 +273,16 @@ Rectangle {
                                 text: modelData.ssid || "Unknown Network"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
-                                font.weight: modelData.ssid === NetworkService.currentWifiSSID ? Font.Medium : Font.Normal
+                                font.weight: modelData.ssid === NetworkManagerService.currentWifiSSID ? Font.Medium : Font.Normal
                                 elide: Text.ElideRight
                                 width: parent.width
                             }
-                            
+
                             Row {
                                 spacing: Theme.spacingXS
-                                
+
                                 StyledText {
-                                    text: modelData.ssid === NetworkService.currentWifiSSID ? "Connected" : (modelData.secured ? "Secured" : "Open")
+                                    text: modelData.ssid === NetworkManagerService.currentWifiSSID ? "Connected" : (modelData.secured ? "Secured" : "Open")
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                 }
@@ -300,7 +316,7 @@ Rectangle {
                             } else {
                                 networkContextMenu.currentSSID = modelData.ssid
                                 networkContextMenu.currentSecured = modelData.secured
-                                networkContextMenu.currentConnected = modelData.ssid === NetworkService.currentWifiSSID
+                                networkContextMenu.currentConnected = modelData.ssid === NetworkManagerService.currentWifiSSID
                                 networkContextMenu.currentSaved = modelData.saved
                                 networkContextMenu.currentSignal = modelData.signal
                                 networkContextMenu.popup(optionsButton, -networkContextMenu.width + optionsButton.width, optionsButton.height + Theme.spacingXS)
@@ -315,11 +331,11 @@ Rectangle {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: function(event) {
-                            if (modelData.ssid !== NetworkService.currentWifiSSID) {
+                            if (modelData.ssid !== NetworkManagerService.currentWifiSSID) {
                                 if (modelData.secured && !modelData.saved) {
                                     wifiPasswordModal.show(modelData.ssid)
                                 } else {
-                                    NetworkService.connectToWifi(modelData.ssid)
+                                    NetworkManagerService.connectToWifi(modelData.ssid)
                                 }
                             }
                             event.accepted = true
@@ -368,12 +384,12 @@ Rectangle {
             
             onTriggered: {
                 if (networkContextMenu.currentConnected) {
-                    NetworkService.disconnectWifi()
+                    NetworkManagerService.disconnectWifi()
                 } else {
                     if (networkContextMenu.currentSecured && !networkContextMenu.currentSaved) {
                         wifiPasswordModal.show(networkContextMenu.currentSSID)
                     } else {
-                        NetworkService.connectToWifi(networkContextMenu.currentSSID)
+                        NetworkManagerService.connectToWifi(networkContextMenu.currentSSID)
                     }
                 }
             }
@@ -397,7 +413,7 @@ Rectangle {
             }
             
             onTriggered: {
-                let networkData = NetworkService.getNetworkInfo(networkContextMenu.currentSSID)
+                let networkData = NetworkManagerService.getNetworkInfo(networkContextMenu.currentSSID)
                 networkInfoModal.showNetworkInfo(networkContextMenu.currentSSID, networkData)
             }
         }
@@ -421,7 +437,7 @@ Rectangle {
             }
             
             onTriggered: {
-                NetworkService.forgetWifiNetwork(networkContextMenu.currentSSID)
+                NetworkManagerService.forgetWifiNetwork(networkContextMenu.currentSSID)
             }
         }
     }

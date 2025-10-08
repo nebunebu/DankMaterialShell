@@ -9,6 +9,20 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    property int refCount: 0
+
+    onRefCountChanged: {
+        console.log("VpnService: refCount changed to", refCount)
+        if (refCount > 0 && !nmMonitor.running) {
+            console.log("VpnService: Starting nmMonitor")
+            nmMonitor.running = true
+            refreshAll()
+        } else if (refCount === 0 && nmMonitor.running) {
+            console.log("VpnService: Stopping nmMonitor")
+            nmMonitor.running = false
+        }
+    }
+
     // State
     property bool available: true
     property bool isBusy: false
@@ -35,18 +49,6 @@ Singleton {
     property bool connected: activeUuids.length > 0
 
     // Use implicit property notify signals (profilesChanged, activeUuidChanged, etc.)
-
-    Component.onCompleted: initialize()
-
-    Component.onDestruction: {
-        nmMonitor.running = false
-    }
-
-    function initialize() {
-        // Start monitoring NetworkManager for changes
-        nmMonitor.running = true
-        refreshAll()
-    }
 
     function refreshAll() {
         listProfiles()

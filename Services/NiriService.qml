@@ -36,25 +36,9 @@ Singleton {
     property bool matugenSuppression: false
     property bool configGenerationPending: false
 
-    property bool _wantSockets: true
-    property int _reconnectAttempt: 0
-
-    readonly property int _reconnectBaseMs: 400
-    readonly property int _reconnectMaxMs: 15000
-
     signal windowUrgentChanged()
 
     Component.onCompleted: fetchOutputs()
-
-    Timer {
-        id: reconnectTimer
-        interval: 0
-        repeat: false
-        onTriggered: {
-            root._wantSockets = false
-            Qt.callLater(() => root._wantSockets = true)
-        }
-    }
 
     Timer {
         id: suppressToastTimer
@@ -150,20 +134,15 @@ Singleton {
         }
     }
 
-    Socket {
+    DankSocket {
         id: eventStreamSocket
         path: root.socketPath
-        connected: CompositorService.isNiri && root._wantSockets
+        connected: CompositorService.isNiri
 
         onConnectionStateChanged: {
             if (connected) {
-                _reconnectAttempt = 0
-                write('"EventStream"\n')
+                send('"EventStream"')
                 fetchOutputs()
-                return
-            }
-            if (CompositorService.isNiri) {
-                _scheduleReconnect()
             }
         }
 
@@ -179,35 +158,15 @@ Singleton {
         }
     }
 
-    Socket {
+    DankSocket {
         id: requestSocket
         path: root.socketPath
-        connected: CompositorService.isNiri && root._wantSockets
-
-        onConnectionStateChanged: {
-            if (connected) {
-                _reconnectAttempt = 0
-                return
-            }
-            if (CompositorService.isNiri) {
-                _scheduleReconnect()
-            }
-        }
+        connected: CompositorService.isNiri
     }
 
     function fetchOutputs() {
         if (!CompositorService.isNiri) return
         outputsProcess.running = true
-    }
-
-    function _scheduleReconnect() {
-        const pow = Math.min(_reconnectAttempt, 10)
-        const base = Math.min(_reconnectBaseMs * Math.pow(2, pow), _reconnectMaxMs)
-        const jitter = Math.floor(Math.random() * Math.floor(base / 4))
-        reconnectTimer.interval = base + jitter
-        reconnectTimer.restart()
-        _reconnectAttempt++
-        console.warn("NiriService: scheduling reconnect in ~", reconnectTimer.interval, "ms (attempt", _reconnectAttempt, ")")
     }
 
     function sortWindowsByLayout(windowList) {
@@ -500,7 +459,7 @@ Singleton {
 
     function send(request) {
         if (!CompositorService.isNiri || !requestSocket.connected) return false
-        requestSocket.write(JSON.stringify(request) + "\n")
+        requestSocket.send(request)
         return true
     }
 

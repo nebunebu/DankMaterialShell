@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import qs.Common
 import qs.Services
 import qs.Widgets
@@ -7,6 +8,10 @@ import qs.Modules.Plugins
 
 PluginComponent {
     id: root
+
+    Ref {
+        service: VpnService
+    }
 
     ccWidgetIcon: VpnService.isBusy ? "sync" : (VpnService.connected ? "vpn_lock" : "vpn_key_off")
     ccWidgetPrimaryText: "VPN"

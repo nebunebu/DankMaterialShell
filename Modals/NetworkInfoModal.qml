@@ -17,7 +17,7 @@ DankModal {
         networkData = data
         networkInfoModalVisible = true
         open()
-        NetworkService.fetchNetworkInfo(ssid)
+        NetworkManagerService.fetchNetworkInfo(ssid)
     }
 
     function hideDialog() {
@@ -101,7 +101,7 @@ DankModal {
                             id: detailsText
 
                             width: parent.width
-                            text: NetworkService.networkInfoDetails && NetworkService.networkInfoDetails.replace(/\\n/g, '\n') || "No information available"
+                            text: NetworkManagerService.networkInfoDetails && NetworkManagerService.networkInfoDetails.replace(/\\n/g, '\n') || "No information available"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceText
                             wrapMode: Text.WordWrap

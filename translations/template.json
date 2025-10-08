@@ -175,6 +175,13 @@
     "comment": ""
   },
   {
+    "term": "Apps Icon",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Apps are ordered by usage frequency, then last used, then alphabetically.",
     "translation": "",
     "context": "",
@@ -441,7 +448,21 @@
     "comment": ""
   },
   {
+    "term": "Choose Launcher Logo Color",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Choose icon",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Choose the logo displayed on the launcher button in DankBar",
     "translation": "",
     "context": "",
     "reference": "",
@@ -595,6 +616,13 @@
     "comment": ""
   },
   {
+    "term": "Custom",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Custom Location",
     "translation": "",
     "context": "",
@@ -630,6 +658,13 @@
     "comment": ""
   },
   {
+    "term": "DMS_SOCKET not available",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Daily at:",
     "translation": "",
     "context": "",
@@ -652,6 +687,13 @@
   },
   {
     "term": "Dank Suite:",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "DankBar Font Scale",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1113,6 +1155,13 @@
     "comment": ""
   },
   {
+    "term": "Invert on mode change",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Kill Process",
     "translation": "",
     "context": "",
@@ -1148,7 +1197,14 @@
     "comment": ""
   },
   {
-    "term": "Launcher Button",
+    "term": "Launch on dGPU",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Launcher Button Logo",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1324,6 +1380,13 @@
   },
   {
     "term": "Mount",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "NM not supported",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1534,6 +1597,13 @@
   },
   {
     "term": "Numbers",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "OS Logo",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1785,6 +1855,13 @@
     "comment": ""
   },
   {
+    "term": "Scale DankBar font sizes independently",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Scale all font sizes",
     "translation": "",
     "context": "",
@@ -1827,6 +1904,13 @@
     "comment": ""
   },
   {
+    "term": "Select Launcher Logo",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Select a color from the palette or use custom sliders",
     "translation": "",
     "context": "",
@@ -1835,6 +1919,13 @@
   },
   {
     "term": "Select a widget to add to the ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Select an image file...",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1933,6 +2024,13 @@
   },
   {
     "term": "Size",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Size Offset",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2184,13 +2282,6 @@
     "comment": ""
   },
   {
-    "term": "Use OS Logo",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Use%",
     "translation": "",
     "context": "",
@@ -2339,6 +2430,13 @@
   },
   {
     "term": "official",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "update dms for NM integration.",
     "translation": "",
     "context": "",
     "reference": "",

@@ -69,7 +69,7 @@ DankFlickable {
                         }
 
                         StyledText {
-                            text: `Up ${UserInfoService.uptime} • Boot: ${DgopService.bootTime}`
+                            text: `${UserInfoService.uptime} • Boot: ${DgopService.bootTime}`
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
