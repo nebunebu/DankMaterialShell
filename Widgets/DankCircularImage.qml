@@ -23,17 +23,12 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 2
         asynchronous: true
-        fillMode: Image.PreserveAspectCrop
+        fillMode: Image.PreserveAspectFit
         smooth: true
         mipmap: true
         cache: true
         visible: false
         source: root.imageSource
-
-        Component.onCompleted: {
-            sourceSize.width = 128
-            sourceSize.height = 128
-        }
     }
 
     MultiEffect {
@@ -49,9 +44,8 @@ Rectangle {
 
     Item {
         id: circularMask
-        width: parent.width - 4
-        height: parent.height - 4
-        anchors.centerIn: parent
+        anchors.fill: parent
+        anchors.margins: 2
         layer.enabled: true
         layer.smooth: true
         visible: false

@@ -316,10 +316,8 @@ PanelWindow {
                     }
 
                     hasImage: hasNotificationImage
-                    fallbackIcon: notificationData?.appIcon || "notifications"
+                    fallbackIcon: ""
                     fallbackText: {
-                        if (hasNotificationImage || (notificationData?.appIcon && notificationData.appIcon !== ""))
-                            return ""
                         const appName = notificationData?.appName || "?"
                         return appName.charAt(0).toUpperCase()
                     }
