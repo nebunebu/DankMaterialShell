@@ -166,11 +166,6 @@ DankPopout {
                         }
                     }
 
-                    if (!searchField.activeFocus && event.text && /[a-zA-Z0-9\s]/.test(event.text)) {
-                        searchField.forceActiveFocus()
-                        searchField.insertText(event.text)
-                        event.accepted = true
-                    }
                 }
 
                 Column {

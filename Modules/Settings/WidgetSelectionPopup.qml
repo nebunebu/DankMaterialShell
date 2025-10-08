@@ -165,10 +165,6 @@ DankModal {
                     root.close()
                 }
                 event.accepted = true
-            } else if (!searchField.activeFocus && event.text && event.text.length > 0 && event.text.match(/[a-zA-Z0-9\s]/)) {
-                searchField.forceActiveFocus()
-                searchField.insertText(event.text)
-                event.accepted = true
             }
         }
 
