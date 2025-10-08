@@ -97,7 +97,7 @@ Item {
 
         function lock() {
             console.log("Lock screen requested via IPC")
-            SessionService.lockSession()
+            loader.activeAsync = true
         }
 
         function demo() {
