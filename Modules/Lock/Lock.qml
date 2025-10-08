@@ -13,7 +13,7 @@ Item {
     }
 
     Component.onCompleted: {
-        if (SessionService.loginctlAvailable) {
+        if (SessionService.loginctlAvailable || SessionService.sessionPath) {
             if (SessionService.locked || SessionService.lockedHint) {
                 console.log("Lock: Session locked on startup")
                 loader.activeAsync = true

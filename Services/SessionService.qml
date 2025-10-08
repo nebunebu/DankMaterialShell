@@ -63,6 +63,19 @@ Singleton {
             detectPrimeRunProcess.running = true
             console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
             Qt.callLater(initializeDMSConnection)
+            fallbackCheckTimer.start()
+        }
+    }
+
+    Timer {
+        id: fallbackCheckTimer
+        interval: 1000
+        running: false
+        onTriggered: {
+            if (!loginctlAvailable) {
+                console.log("SessionService: DMS not available, using fallback methods")
+                initFallbackLoginctl()
+            }
         }
     }
 
@@ -410,13 +423,100 @@ Singleton {
     }
 
     function lockSession() {
-        if (!loginctlAvailable || !dmsService || !dmsService.service) return
+        if (loginctlAvailable && dmsService && dmsService.service) {
+            dmsService.service.sendRequest("loginctl.lock", null, response => {
+                if (response.error) {
+                    console.warn("SessionService: Failed to lock session:", response.error)
+                }
+            })
+        } else {
+            lockSessionFallback.running = true
+        }
+    }
 
-        dmsService.service.sendRequest("loginctl.lock", null, response => {
-            if (response.error) {
-                console.warn("SessionService: Failed to lock session:", response.error)
+    function initFallbackLoginctl() {
+        getSessionPathFallback.running = true
+    }
+
+    Process {
+        id: getSessionPathFallback
+        command: ["gdbus", "call", "--system", "--dest", "org.freedesktop.login1", "--object-path", "/org/freedesktop/login1", "--method", "org.freedesktop.login1.Manager.GetSession", Quickshell.env("XDG_SESSION_ID") || "self"]
+        running: false
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const match = text.match(/objectpath '([^']+)'/)
+                if (match) {
+                    sessionPath = match[1]
+                    console.log("SessionService: Found session path (fallback):", sessionPath)
+                    checkCurrentLockStateFallback.running = true
+                    lockStateMonitorFallback.running = true
+                }
             }
-        })
+        }
+    }
+
+    Process {
+        id: checkCurrentLockStateFallback
+        command: sessionPath ? ["gdbus", "call", "--system", "--dest", "org.freedesktop.login1", "--object-path", sessionPath, "--method", "org.freedesktop.DBus.Properties.Get", "org.freedesktop.login1.Session", "LockedHint"] : []
+        running: false
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                if (text.includes("true")) {
+                    locked = true
+                    lockedHint = true
+                    sessionLocked()
+                }
+            }
+        }
+    }
+
+    Process {
+        id: lockStateMonitorFallback
+        command: sessionPath ? ["gdbus", "monitor", "--system", "--dest", "org.freedesktop.login1"] : []
+        running: false
+
+        stdout: SplitParser {
+            splitMarker: "\n"
+            onRead: line => {
+                if (sessionPath && line.includes(sessionPath)) {
+                    if (line.includes("org.freedesktop.login1.Session.Lock")) {
+                        locked = true
+                        lockedHint = true
+                        sessionLocked()
+                    } else if (line.includes("org.freedesktop.login1.Session.Unlock")) {
+                        locked = false
+                        lockedHint = false
+                        sessionUnlocked()
+                    } else if (line.includes("LockedHint") && line.includes("true")) {
+                        locked = true
+                        lockedHint = true
+                        loginctlStateChanged()
+                    } else if (line.includes("LockedHint") && line.includes("false")) {
+                        locked = false
+                        lockedHint = false
+                        loginctlStateChanged()
+                    }
+                }
+                if (line.includes("PrepareForSleep") && line.includes("true") && SessionData.lockBeforeSuspend) {
+                    preparingForSleep = true
+                    prepareForSleep()
+                }
+            }
+        }
+
+        onExited: exitCode => {
+            if (exitCode !== 0) {
+                console.warn("SessionService: gdbus monitor fallback failed, exit code:", exitCode)
+            }
+        }
+    }
+
+    Process {
+        id: lockSessionFallback
+        command: ["loginctl", "lock-session"]
+        running: false
     }
 
 }
