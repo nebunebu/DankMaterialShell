@@ -80,9 +80,15 @@ Singleton {
         return ToplevelManager.toplevels.values
     }
 
-    Component.onCompleted: {
-        detectCompositor()
-        NiriService.generateNiriLayoutConfig()
+    Timer {
+        id: compositorInitTimer
+        interval: 100
+        running: true
+        repeat: false
+        onTriggered: {
+            detectCompositor()
+            Qt.callLater(() => NiriService.generateNiriLayoutConfig())
+        }
     }
 
     function filterCurrentWorkspace(toplevels, screen) {

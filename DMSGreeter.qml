@@ -5,7 +5,7 @@ import Quickshell.Services.Greetd
 import qs.Common
 import qs.Modules.Greetd
 
-ShellRoot {
+Item {
     id: root
 
     WlSessionLock {

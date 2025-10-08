@@ -96,8 +96,17 @@ Item {
                 updateGpuTempConfig()
                 Qt.callLater(() => Qt.callLater(forceWidgetRefresh))
 
-                if (SessionService.nativeInhibitorAvailable) {
-                    createNativeInhibitor()
+                inhibitorInitTimer.start()
+            }
+
+            Timer {
+                id: inhibitorInitTimer
+                interval: 300
+                repeat: false
+                onTriggered: {
+                    if (SessionService.nativeInhibitorAvailable) {
+                        createNativeInhibitor()
+                    }
                 }
             }
 

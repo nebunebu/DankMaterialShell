@@ -28,11 +28,17 @@ Singleton {
         }
     }
 
-    Component.onCompleted: {
-        detectElogindProcess.running = true
-        detectHibernateProcess.running = true
-        detectPrimeRunProcess.running = true
-        console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
+    Timer {
+        id: sessionInitTimer
+        interval: 200
+        running: true
+        repeat: false
+        onTriggered: {
+            detectElogindProcess.running = true
+            detectHibernateProcess.running = true
+            detectPrimeRunProcess.running = true
+            console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
+        }
     }
 
 
