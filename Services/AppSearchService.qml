@@ -20,7 +20,7 @@ Singleton {
 
         const queryLower = query.toLowerCase().trim()
         const scoredApps = []
-        const usageRanking = AppUsageHistoryData.getAppUsageRanking()
+        const usageRanking = AppUsageHistoryData.appUsageRanking || {}
 
         for (const app of applications) {
             const name = (app.name || "").toLowerCase()
