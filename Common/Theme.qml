@@ -717,6 +717,8 @@ Singleton {
         if (typeof SettingsData === "undefined") return ""
         const colorOverride = SettingsData.launcherLogoColorOverride
         if (!colorOverride || colorOverride === "") return ""
+        if (colorOverride === "primary") return Theme.primary
+        if (colorOverride === "surface") return Theme.surfaceText
         return colorOverride
     }
 
@@ -726,15 +728,19 @@ Singleton {
         const colorOverride = SettingsData.launcherLogoColorOverride
         if (!colorOverride || colorOverride === "") return ""
 
+        let baseColor = colorOverride
+        if (colorOverride === "primary") baseColor = Theme.primary
+        if (colorOverride === "surface") baseColor = Theme.surfaceText
+
         if (!SettingsData.launcherLogoColorInvertOnMode) {
-            return colorOverride
+            return baseColor
         }
 
         if (typeof SessionData !== "undefined" && SessionData.isLightMode) {
-            return invertHex(baseLogoColor)
+            return invertHex(baseColor)
         }
 
-        return baseLogoColor
+        return baseColor
     }
 
 
