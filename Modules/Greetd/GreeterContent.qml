@@ -1291,7 +1291,7 @@ Item {
             if (sessionCmd) {
                 GreetdMemory.setLastSessionId(GreeterState.sessionPaths[GreeterState.currentSessionIndex])
                 GreetdMemory.setLastSuccessfulUser(GreeterState.username)
-                Greetd.launch(sessionCmd.split(" "), ["XDG_SESSION_TYPE=wayland"], true)
+                Greetd.launch(sessionCmd.split(" "), ["XDG_SESSION_TYPE=wayland"])
             }
         }
 
