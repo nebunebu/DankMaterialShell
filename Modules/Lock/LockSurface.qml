@@ -4,33 +4,26 @@ import Quickshell
 import Quickshell.Wayland
 import qs.Common
 
-WlSessionLockSurface {
+Rectangle {
     id: root
 
     required property WlSessionLock lock
     required property string sharedPasswordBuffer
 
     signal passwordChanged(string newPassword)
-
-    readonly property bool locked: lock && !lock.locked
-
-    function unlock(): void {
-        lock.locked = false
-    }
+    signal unlockRequested()
 
     color: "transparent"
 
-    Loader {
+    LockScreenContent {
         anchors.fill: parent
-        sourceComponent: LockScreenContent {
-            demoMode: false
-            passwordBuffer: root.sharedPasswordBuffer
-            screenName: root.screen?.name ?? ""
-            onUnlockRequested: root.unlock()
-            onPasswordBufferChanged: {
-                if (root.sharedPasswordBuffer !== passwordBuffer) {
-                    root.passwordChanged(passwordBuffer)
-                }
+        demoMode: false
+        passwordBuffer: root.sharedPasswordBuffer
+        screenName: ""
+        onUnlockRequested: root.unlockRequested()
+        onPasswordBufferChanged: {
+            if (root.sharedPasswordBuffer !== passwordBuffer) {
+                root.passwordChanged(passwordBuffer)
             }
         }
     }

@@ -366,6 +366,8 @@ Singleton {
     }
 
     function updateLoginctlState(state) {
+        const wasLocked = locked
+
         sessionId = state.sessionId || ""
         sessionPath = state.sessionPath || ""
         locked = state.locked || false
@@ -382,6 +384,12 @@ Singleton {
 
         if (preparingForSleep && !wasPreparing) {
             prepareForSleep()
+        }
+
+        if (locked && !wasLocked) {
+            sessionLocked()
+        } else if (!locked && wasLocked) {
+            sessionUnlocked()
         }
 
         loginctlStateChanged()
@@ -481,12 +489,6 @@ Singleton {
                 console.warn("SessionService: gdbus monitor fallback failed, exit code:", exitCode)
             }
         }
-    }
-
-    Process {
-        id: lockSessionFallback
-        command: ["loginctl", "lock-session"]
-        running: false
     }
 
 }

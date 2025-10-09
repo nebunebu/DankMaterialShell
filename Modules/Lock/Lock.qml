@@ -8,81 +8,54 @@ import qs.Services
 Item {
     id: root
 
-    function activate() {
-        loader.activeAsync = true
-    }
+    property string sharedPasswordBuffer: ""
+    property bool shouldLock: false
 
     Component.onCompleted: {
-        if (SessionService.loginctlAvailable || SessionService.sessionPath) {
-            if (SessionService.locked || SessionService.lockedHint) {
-                console.log("Lock: Session locked on startup")
-                loader.activeAsync = true
-            }
-        }
+        IdleService.lockComponent = root
     }
 
-    Connections {
-        target: IdleService
-        function onLockRequested() {
-            console.log("Lock: Received lock request from IdleService")
-            loader.activeAsync = true
-        }
+    function activate() {
+        shouldLock = true
     }
 
     Connections {
         target: SessionService
 
         function onSessionLocked() {
-            console.log("Lock: Lock signal received -> show lock")
-            loader.activeAsync = true
+            shouldLock = true
         }
 
         function onSessionUnlocked() {
-            console.log("Lock: Unlock signal received -> hide lock")
-            loader.active = false
-        }
-
-        function onLoginctlStateChanged() {
-            if (SessionService.lockedHint && !loader.active) {
-                console.log("Lock: LockedHint=true -> show lock")
-                loader.activeAsync = true
-            } else if (!SessionService.locked && !SessionService.lockedHint && loader.active) {
-                console.log("Lock: LockedHint=false -> hide lock")
-                loader.active = false
-            }
-        }
-
-        function onPrepareForSleep() {
-            if (SessionService.preparingForSleep && SessionData.lockBeforeSuspend) {
-                console.log("Lock: PrepareForSleep -> lock before suspend")
-                loader.activeAsync = true
-            }
+            shouldLock = false
         }
     }
 
-    LazyLoader {
-        id: loader
+    Connections {
+        target: IdleService
 
-        WlSessionLock {
-            id: sessionLock
+        function onLockRequested() {
+            shouldLock = true
+        }
+    }
 
-            property bool unlocked: false
-            property string sharedPasswordBuffer: ""
+    WlSessionLock {
+        id: sessionLock
 
-            locked: true
+        locked: root.shouldLock
 
-            onLockedChanged: {
-                if (!locked) {
-                    loader.active = false
-                }
-            }
+        WlSessionLockSurface {
+            color: "transparent"
 
             LockSurface {
-                id: lockSurface
+                anchors.fill: parent
                 lock: sessionLock
-                sharedPasswordBuffer: sessionLock.sharedPasswordBuffer
+                sharedPasswordBuffer: root.sharedPasswordBuffer
+                onUnlockRequested: {
+                    root.shouldLock = false
+                }
                 onPasswordChanged: newPassword => {
-                                       sessionLock.sharedPasswordBuffer = newPassword
+                                       root.sharedPasswordBuffer = newPassword
                                    }
             }
         }
@@ -96,17 +69,15 @@ Item {
         target: "lock"
 
         function lock() {
-            console.log("Lock screen requested via IPC")
-            loader.activeAsync = true
+            shouldLock = true
         }
 
         function demo() {
-            console.log("Lock screen DEMO mode requested via IPC")
             demoWindow.showDemo()
         }
 
         function isLocked(): bool {
-            return SessionService.locked || loader.active
+            return sessionLock.locked
         }
     }
 }
