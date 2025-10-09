@@ -61,6 +61,10 @@ Singleton {
             detectHibernateProcess.running = true
             detectPrimeRunProcess.running = true
             console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
+            if (!SessionData.loginctlLockIntegration) {
+                console.log("SessionService: loginctl lock integration disabled by user")
+                return
+            }
             if (socketPath && socketPath.length > 0) {
                 checkDMSCapabilities()
             } else {
@@ -291,10 +295,29 @@ Singleton {
         }
     }
 
+    Connections {
+        target: SessionData
+
+        function onLoginctlLockIntegrationChanged() {
+            if (SessionData.loginctlLockIntegration) {
+                if (socketPath && socketPath.length > 0) {
+                    checkDMSCapabilities()
+                } else {
+                    initFallbackLoginctl()
+                }
+            } else {
+                subscriptionSocket.connected = false
+                lockStateMonitorFallback.running = false
+                loginctlAvailable = false
+                stateInitialized = false
+            }
+        }
+    }
+
     DankSocket {
         id: subscriptionSocket
         path: root.socketPath
-        connected: loginctlAvailable
+        connected: loginctlAvailable && SessionData.loginctlLockIntegration
 
         onConnectionStateChanged: {
             root.subscriptionConnected = connected
@@ -339,6 +362,10 @@ Singleton {
         }
 
         if (DMSService.capabilities.length === 0) {
+            return
+        }
+
+        if (!SessionData.loginctlLockIntegration) {
             return
         }
 

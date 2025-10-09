@@ -221,9 +221,18 @@ Item {
 
                     DankToggle {
                         width: parent.width
+                        text: I18n.tr("Enable loginctl lock integration")
+                        description: "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen."
+                        checked: SessionData.loginctlLockIntegration
+                        onToggled: checked => SessionData.setLoginctlLockIntegration(checked)
+                    }
+
+                    DankToggle {
+                        width: parent.width
                         text: I18n.tr("Lock before suspend")
                         description: "Automatically lock the screen when the system prepares to suspend"
                         checked: SessionData.lockBeforeSuspend
+                        visible: SessionData.loginctlLockIntegration
                         onToggled: checked => SessionData.setLockBeforeSuspend(checked)
                     }
 

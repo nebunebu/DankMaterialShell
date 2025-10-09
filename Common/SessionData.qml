@@ -70,6 +70,7 @@ Singleton {
     property int batteryHibernateTimeout: 0 // Never
 
     property bool lockBeforeSuspend: false
+    property bool loginctlLockIntegration: true
     property var recentColors: []
     property bool showThirdPartyPlugins: false
 
@@ -152,6 +153,7 @@ Singleton {
                 batterySuspendTimeout = settings.batterySuspendTimeout !== undefined ? settings.batterySuspendTimeout : 0
                 batteryHibernateTimeout = settings.batteryHibernateTimeout !== undefined ? settings.batteryHibernateTimeout : 0
                 lockBeforeSuspend = settings.lockBeforeSuspend !== undefined ? settings.lockBeforeSuspend : false
+                loginctlLockIntegration = settings.loginctlLockIntegration !== undefined ? settings.loginctlLockIntegration : true
                 recentColors = settings.recentColors !== undefined ? settings.recentColors : []
                 showThirdPartyPlugins = settings.showThirdPartyPlugins !== undefined ? settings.showThirdPartyPlugins : false
 
@@ -215,6 +217,7 @@ Singleton {
                                                 "batterySuspendTimeout": batterySuspendTimeout,
                                                 "batteryHibernateTimeout": batteryHibernateTimeout,
                                                 "lockBeforeSuspend": lockBeforeSuspend,
+                                                "loginctlLockIntegration": loginctlLockIntegration,
                                                 "recentColors": recentColors,
                                                 "showThirdPartyPlugins": showThirdPartyPlugins
                                             }, null, 2))
@@ -640,6 +643,11 @@ Singleton {
 
     function setLockBeforeSuspend(enabled) {
         lockBeforeSuspend = enabled
+        saveSettings()
+    }
+
+    function setLoginctlLockIntegration(enabled) {
+        loginctlLockIntegration = enabled
         saveSettings()
     }
 
