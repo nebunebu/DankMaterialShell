@@ -38,6 +38,10 @@ Singleton {
         return stringify(path).replace("file://", "")
     }
 
+    function toFileUrl(path: string): string {
+        return path.startsWith("file://") ? path : "file://" + path
+    }
+
     function mkdir(path: url): void {
         Quickshell.execDetached(["mkdir", "-p", strip(path)])
     }

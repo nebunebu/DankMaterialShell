@@ -600,6 +600,9 @@ FocusScope {
                 pluginsTab.expandedPluginId = ""
             }
         }
+        function onPluginListUpdated() {
+            refreshPluginList()
+        }
     }
 
     Connections {

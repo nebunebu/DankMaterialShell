@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 
 import QtCore
 import QtQuick
+import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
 import qs.Common
@@ -24,197 +25,192 @@ Singleton {
         return configDirStr + "/DankMaterialShell/plugins"
     }
     property string systemPluginDirectory: "/etc/xdg/quickshell/dms-plugins"
-    property var pluginDirectories: [pluginDirectory, systemPluginDirectory]
+
+    property var knownManifests: ({})
+    property var pathToPluginId: ({})
+    property var pluginInstances: ({})
 
     signal pluginLoaded(string pluginId)
     signal pluginUnloaded(string pluginId)
     signal pluginLoadFailed(string pluginId, string error)
     signal pluginDataChanged(string pluginId)
+    signal pluginListUpdated()
+
+    Timer {
+        id: resyncDebounce
+        interval: 120
+        repeat: false
+        onTriggered: resyncAll()
+    }
 
     Component.onCompleted: {
-        Qt.callLater(initializePlugins)
+        userWatcher.folder = Paths.toFileUrl(root.pluginDirectory)
+        systemWatcher.folder = Paths.toFileUrl(root.systemPluginDirectory)
+        Qt.callLater(resyncAll)
     }
 
-    function initializePlugins() {
-        scanPlugins()
+    FolderListModel {
+        id: userWatcher
+        showDirs: true
+        showFiles: false
+        showDotAndDotDot: false
+
+        onCountChanged: resyncDebounce.restart()
+        onStatusChanged: if (status === FolderListModel.Ready) resyncDebounce.restart()
     }
 
-    property int currentScanIndex: 0
-    property var scanResults: []
-    property var foundPlugins: ({})
+    FolderListModel {
+        id: systemWatcher
+        showDirs: true
+        showFiles: false
+        showDotAndDotDot: false
 
-    property var lsProcess: Process {
-        id: dirScanner
+        onCountChanged: resyncDebounce.restart()
+        onStatusChanged: if (status === FolderListModel.Ready) resyncDebounce.restart()
+    }
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                var output = text.trim()
-                var currentDir = pluginDirectories[currentScanIndex]
-                if (output) {
-                    var directories = output.split('\n')
-                    for (var i = 0; i < directories.length; i++) {
-                        var dir = directories[i].trim()
-                        if (dir) {
-                            var manifestPath = currentDir + "/" + dir + "/plugin.json"
-                            loadPluginManifest(manifestPath)
-                        }
-                    }
-                }
+    function snapshotModel(model, sourceTag) {
+        const out = []
+        const n = model.count
+        for (let i = 0; i < n; i++) {
+            const dirPath = model.get(i, "filePath")
+            const manifestPath = dirPath + "/plugin.json"
+            out.push({ path: manifestPath, source: sourceTag })
+        }
+        return out
+    }
+
+    function resyncAll() {
+        const userList = snapshotModel(userWatcher, "user")
+        const sysList  = snapshotModel(systemWatcher, "system")
+        const seenPaths = {}
+
+        function consider(entry) {
+            const key = entry.path
+            seenPaths[key] = true
+            const prev = knownManifests[key]
+            if (!prev) {
+                loadPluginManifestFile(entry.path, entry.source, Date.now())
             }
         }
+        for (let i=0;i<userList.length;i++) consider(userList[i])
+        for (let i=0;i<sysList.length;i++)  consider(sysList[i])
 
-        onExited: function(exitCode) {
-            currentScanIndex++
-            if (currentScanIndex < pluginDirectories.length) {
-                scanNextDirectory()
-            } else {
-                currentScanIndex = 0
-                cleanupRemovedPlugins()
-            }
+        const removed = []
+        for (const path in knownManifests) {
+            if (!seenPaths[path]) removed.push(path)
         }
-    }
-
-    function scanPlugins() {
-        currentScanIndex = 0
-        foundPlugins = {}
-        scanNextDirectory()
-    }
-
-    function scanNextDirectory() {
-        var dir = pluginDirectories[currentScanIndex]
-        lsProcess.command = ["find", "-L", dir, "-maxdepth", "1", "-type", "d", "-not", "-path", dir, "-exec", "basename", "{}", ";"]
-        lsProcess.running = true
-    }
-
-    property var manifestReaders: ({})
-
-    function loadPluginManifest(manifestPath) {
-        var readerId = "reader_" + Date.now() + "_" + Math.random()
-
-        var checkProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { stdout: StdioCollector { } }")
-        if (checkProcess.status === Component.Ready) {
-            var checker = checkProcess.createObject(root)
-            checker.command = ["test", "-f", manifestPath]
-            checker.exited.connect(function(exitCode) {
-                if (exitCode !== 0) {
-                    checker.destroy()
-                    delete manifestReaders[readerId]
-                    return
+        if (removed.length) {
+            removed.forEach(function(path) {
+                const pid = pathToPluginId[path]
+                if (pid) {
+                    unregisterPluginByPath(path, pid)
                 }
-
-                var catProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { stdout: StdioCollector { } }")
-                if (catProcess.status === Component.Ready) {
-                    var process = catProcess.createObject(root)
-                    process.command = ["cat", manifestPath]
-                    process.stdout.streamFinished.connect(function() {
-                        try {
-                            var manifest = JSON.parse(process.stdout.text.trim())
-                            processManifest(manifest, manifestPath)
-                        } catch (e) {
-                            console.error("PluginService: Failed to parse manifest", manifestPath, ":", e.message)
-                        }
-                        process.destroy()
-                        delete manifestReaders[readerId]
-                    })
-                    process.exited.connect(function(exitCode) {
-                        if (exitCode !== 0) {
-                            console.error("PluginService: Failed to read manifest file:", manifestPath, "exit code:", exitCode)
-                            process.destroy()
-                            delete manifestReaders[readerId]
-                        }
-                    })
-                    manifestReaders[readerId] = process
-                    process.running = true
-                } else {
-                    console.error("PluginService: Failed to create manifest reader process")
-                }
-
-                checker.destroy()
+                delete knownManifests[path]
+                delete pathToPluginId[path]
             })
-            manifestReaders[readerId] = checker
-            checker.running = true
-        } else {
-            console.error("PluginService: Failed to create file check process")
+            pluginListUpdated()
         }
     }
 
-    function processManifest(manifest, manifestPath) {
-        registerPlugin(manifest, manifestPath)
-
-        var enabled = SettingsData.getPluginSetting(manifest.id, "enabled", false)
-        if (enabled) {
-            loadPlugin(manifest.id)
-        }
+    function loadPluginManifestFile(manifestPathNoScheme, sourceTag, mtimeEpochMs) {
+        const manifestId = "m_" + Math.random().toString(36).slice(2)
+        const qml = `
+            import QtQuick
+            import Quickshell.Io
+            FileView {
+                id: fv
+                property string absPath: ""
+                onLoaded: {
+                    try {
+                        let raw = text()
+                        if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1)
+                        const manifest = JSON.parse(raw)
+                        root._onManifestParsed(absPath, manifest, "${sourceTag}", ${mtimeEpochMs})
+                    } catch (e) {
+                        console.error("PluginService: bad manifest", absPath, e.message)
+                        knownManifests[absPath] = { mtime: ${mtimeEpochMs}, source: "${sourceTag}", bad: true }
+                    }
+                    fv.destroy()
+                }
+                onLoadFailed: (err) => {
+                    console.warn("PluginService: manifest load failed", absPath, err)
+                    fv.destroy()
+                }
+            }
+        `
+        const loader = Qt.createQmlObject(qml, root, "mf_" + manifestId)
+        loader.absPath = manifestPathNoScheme
+        loader.path = manifestPathNoScheme
     }
 
-    function registerPlugin(manifest, manifestPath) {
-        if (!manifest.id || !manifest.name || !manifest.component) {
-            console.error("PluginService: Invalid manifest, missing required fields:", manifestPath)
+    function _onManifestParsed(absPath, manifest, sourceTag, mtimeEpochMs) {
+        if (!manifest || !manifest.id || !manifest.name || !manifest.component) {
+            console.error("PluginService: invalid manifest fields:", absPath)
+            knownManifests[absPath] = { mtime: mtimeEpochMs, source: sourceTag, bad: true }
             return
         }
 
-        var pluginDir = manifestPath.substring(0, manifestPath.lastIndexOf('/'))
+        const dir = absPath.substring(0, absPath.lastIndexOf('/'))
+        let comp = manifest.component
+        if (comp.startsWith("./")) comp = comp.slice(2)
+        let settings = manifest.settings
+        if (settings && settings.startsWith("./")) settings = settings.slice(2)
 
-        // Clean up relative paths by removing './' prefix
-        var componentFile = manifest.component
-        if (componentFile.startsWith('./')) {
-            componentFile = componentFile.substring(2)
+        const info = {}
+        for (const k in manifest) info[k] = manifest[k]
+        info.manifestPath = absPath
+        info.pluginDirectory = dir
+        info.componentPath = dir + "/" + comp
+        info.settingsPath  = settings ? (dir + "/" + settings) : null
+        info.loaded = isPluginLoaded(manifest.id)
+        info.type = manifest.type || "widget"
+        info.source = sourceTag
+
+        const existing = availablePlugins[manifest.id]
+        const shouldReplace =
+            (!existing) ||
+            (existing && existing.source === "system" && sourceTag === "user")
+
+        if (shouldReplace) {
+            if (existing && existing.loaded && existing.source !== sourceTag) {
+                unloadPlugin(manifest.id)
+            }
+            const newMap = Object.assign({}, availablePlugins)
+            newMap[manifest.id] = info
+            availablePlugins = newMap
+            pathToPluginId[absPath] = manifest.id
+            knownManifests[absPath] = { mtime: mtimeEpochMs, source: sourceTag }
+            pluginListUpdated()
+            const enabled = SettingsData.getPluginSetting(manifest.id, "enabled", false)
+            if (enabled && !info.loaded) loadPlugin(manifest.id)
+        } else {
+            knownManifests[absPath] = { mtime: mtimeEpochMs, source: sourceTag, shadowedBy: existing.source }
+            pathToPluginId[absPath] = manifest.id
         }
+    }
 
-        var settingsFile = manifest.settings
-        if (settingsFile && settingsFile.startsWith('./')) {
-            settingsFile = settingsFile.substring(2)
+    function unregisterPluginByPath(absPath, pluginId) {
+        const current = availablePlugins[pluginId]
+        if (current && current.manifestPath === absPath) {
+            if (current.loaded) unloadPlugin(pluginId)
+            const newMap = Object.assign({}, availablePlugins)
+            delete newMap[pluginId]
+            availablePlugins = newMap
         }
-
-        var pluginInfo = {}
-        for (var key in manifest) {
-            pluginInfo[key] = manifest[key]
-        }
-        pluginInfo.manifestPath = manifestPath
-        pluginInfo.pluginDirectory = pluginDir
-        pluginInfo.componentPath = pluginDir + '/' + componentFile
-        pluginInfo.settingsPath = settingsFile ? pluginDir + '/' + settingsFile : null
-        pluginInfo.loaded = false
-        pluginInfo.type = manifest.type || "widget"
-
-        var newPlugins = Object.assign({}, availablePlugins)
-        newPlugins[manifest.id] = pluginInfo
-        availablePlugins = newPlugins
-        foundPlugins[manifest.id] = true
     }
 
     function hasPermission(pluginId, permission) {
-        var plugin = availablePlugins[pluginId]
+        const plugin = availablePlugins[pluginId]
         if (!plugin) {
             return false
         }
-        var permissions = plugin.permissions || []
+        const permissions = plugin.permissions || []
         return permissions.indexOf(permission) !== -1
     }
 
-    function cleanupRemovedPlugins() {
-        var pluginsToRemove = []
-        for (var pluginId in availablePlugins) {
-            if (!foundPlugins[pluginId]) {
-                pluginsToRemove.push(pluginId)
-            }
-        }
-
-        if (pluginsToRemove.length > 0) {
-            var newPlugins = Object.assign({}, availablePlugins)
-            for (var i = 0; i < pluginsToRemove.length; i++) {
-                var pluginId = pluginsToRemove[i]
-                if (isPluginLoaded(pluginId)) {
-                    unloadPlugin(pluginId)
-                }
-                delete newPlugins[pluginId]
-            }
-            availablePlugins = newPlugins
-        }
-    }
-
     function loadPlugin(pluginId) {
-        var plugin = availablePlugins[pluginId]
+        const plugin = availablePlugins[pluginId]
         if (!plugin) {
             console.error("PluginService: Plugin not found:", pluginId)
             pluginLoadFailed(pluginId, "Plugin not found")
@@ -225,48 +221,43 @@ Singleton {
             return true
         }
 
-        var isDaemon = plugin.type === "daemon"
-        var componentMap = isDaemon ? pluginDaemonComponents : pluginWidgetComponents
+        const isDaemon = plugin.type === "daemon"
+        const map = isDaemon ? pluginDaemonComponents : pluginWidgetComponents
 
-        if (componentMap[pluginId]) {
-            componentMap[pluginId]?.destroy()
-            if (isDaemon) {
-                var newDaemons = Object.assign({}, pluginDaemonComponents)
-                delete newDaemons[pluginId]
-                pluginDaemonComponents = newDaemons
-            } else {
-                var newComponents = Object.assign({}, pluginWidgetComponents)
-                delete newComponents[pluginId]
-                pluginWidgetComponents = newComponents
-            }
+        const prevInstance = pluginInstances[pluginId]
+        if (prevInstance) {
+            prevInstance.destroy()
+            const newInstances = Object.assign({}, pluginInstances)
+            delete newInstances[pluginId]
+            pluginInstances = newInstances
         }
 
         try {
-            var componentUrl = "file://" + plugin.componentPath
-            var component = Qt.createComponent(componentUrl, Component.PreferSynchronous)
-
-            if (component.status === Component.Loading) {
-                component.statusChanged.connect(function() {
-                    if (component.status === Component.Error) {
-                        console.error("PluginService: Failed to create component for plugin:", pluginId, "Error:", component.errorString())
-                        pluginLoadFailed(pluginId, component.errorString())
-                    }
-                })
-            }
-
-            if (component.status === Component.Error) {
-                console.error("PluginService: Failed to create component for plugin:", pluginId, "Error:", component.errorString())
-                pluginLoadFailed(pluginId, component.errorString())
+            const url = "file://" + plugin.componentPath
+            const comp = Qt.createComponent(url, Component.PreferSynchronous)
+            if (comp.status === Component.Error) {
+                console.error("PluginService: component error", pluginId, comp.errorString())
+                pluginLoadFailed(pluginId, comp.errorString())
                 return false
             }
 
             if (isDaemon) {
-                var newDaemons = Object.assign({}, pluginDaemonComponents)
-                newDaemons[pluginId] = component
+                const instance = comp.createObject(root, { "pluginId": pluginId })
+                if (!instance) {
+                    console.error("PluginService: failed to instantiate daemon:", pluginId, comp.errorString())
+                    pluginLoadFailed(pluginId, comp.errorString())
+                    return false
+                }
+                const newInstances = Object.assign({}, pluginInstances)
+                newInstances[pluginId] = instance
+                pluginInstances = newInstances
+
+                const newDaemons = Object.assign({}, pluginDaemonComponents)
+                newDaemons[pluginId] = comp
                 pluginDaemonComponents = newDaemons
             } else {
-                var newComponents = Object.assign({}, pluginWidgetComponents)
-                newComponents[pluginId] = component
+                const newComponents = Object.assign({}, pluginWidgetComponents)
+                newComponents[pluginId] = comp
                 pluginWidgetComponents = newComponents
             }
 
@@ -276,31 +267,37 @@ Singleton {
             pluginLoaded(pluginId)
             return true
 
-        } catch (error) {
-            console.error("PluginService: Error loading plugin:", pluginId, "Error:", error.message)
-            pluginLoadFailed(pluginId, error.message)
+        } catch (e) {
+            console.error("PluginService: Error loading plugin:", pluginId, e.message)
+            pluginLoadFailed(pluginId, e.message)
             return false
         }
     }
 
     function unloadPlugin(pluginId) {
-        var plugin = loadedPlugins[pluginId]
+        const plugin = loadedPlugins[pluginId]
         if (!plugin) {
             console.warn("PluginService: Plugin not loaded:", pluginId)
             return false
         }
 
         try {
-            var isDaemon = plugin.type === "daemon"
+            const isDaemon = plugin.type === "daemon"
+
+            const instance = pluginInstances[pluginId]
+            if (instance) {
+                instance.destroy()
+                const newInstances = Object.assign({}, pluginInstances)
+                delete newInstances[pluginId]
+                pluginInstances = newInstances
+            }
 
             if (isDaemon && pluginDaemonComponents[pluginId]) {
-                pluginDaemonComponents[pluginId]?.destroy()
-                var newDaemons = Object.assign({}, pluginDaemonComponents)
+                const newDaemons = Object.assign({}, pluginDaemonComponents)
                 delete newDaemons[pluginId]
                 pluginDaemonComponents = newDaemons
             } else if (pluginWidgetComponents[pluginId]) {
-                pluginWidgetComponents[pluginId]?.destroy()
-                var newComponents = Object.assign({}, pluginWidgetComponents)
+                const newComponents = Object.assign({}, pluginWidgetComponents)
                 delete newComponents[pluginId]
                 pluginWidgetComponents = newComponents
             }
@@ -326,30 +323,30 @@ Singleton {
     }
 
     function getAvailablePlugins() {
-        var result = []
-        for (var key in availablePlugins) {
+        const result = []
+        for (const key in availablePlugins) {
             result.push(availablePlugins[key])
         }
         return result
     }
 
     function getPluginVariants(pluginId) {
-        var plugin = availablePlugins[pluginId]
+        const plugin = availablePlugins[pluginId]
         if (!plugin) {
             return []
         }
-        var variants = SettingsData.getPluginSetting(pluginId, "variants", [])
+        const variants = SettingsData.getPluginSetting(pluginId, "variants", [])
         return variants
     }
 
     function getAllPluginVariants() {
-        var result = []
-        for (var pluginId in availablePlugins) {
-            var plugin = availablePlugins[pluginId]
+        const result = []
+        for (const pluginId in availablePlugins) {
+            const plugin = availablePlugins[pluginId]
             if (plugin.type !== "widget") {
                 continue
             }
-            var variants = getPluginVariants(pluginId)
+            const variants = getPluginVariants(pluginId)
             if (variants.length === 0) {
                 result.push({
                     pluginId: pluginId,
@@ -361,8 +358,8 @@ Singleton {
                     loaded: plugin.loaded
                 })
             } else {
-                for (var i = 0; i < variants.length; i++) {
-                    var variant = variants[i]
+                for (let i = 0; i < variants.length; i++) {
+                    const variant = variants[i]
                     result.push({
                         pluginId: pluginId,
                         variantId: variant.id,
@@ -379,9 +376,9 @@ Singleton {
     }
 
     function createPluginVariant(pluginId, variantName, variantConfig) {
-        var variants = getPluginVariants(pluginId)
-        var variantId = "variant_" + Date.now()
-        var newVariant = Object.assign({}, variantConfig, {
+        const variants = getPluginVariants(pluginId)
+        const variantId = "variant_" + Date.now()
+        const newVariant = Object.assign({}, variantConfig, {
             id: variantId,
             name: variantName
         })
@@ -392,15 +389,15 @@ Singleton {
     }
 
     function removePluginVariant(pluginId, variantId) {
-        var variants = getPluginVariants(pluginId)
-        var newVariants = variants.filter(function(v) { return v.id !== variantId })
+        const variants = getPluginVariants(pluginId)
+        const newVariants = variants.filter(function(v) { return v.id !== variantId })
         SettingsData.setPluginSetting(pluginId, "variants", newVariants)
         pluginDataChanged(pluginId)
     }
 
     function updatePluginVariant(pluginId, variantId, variantConfig) {
-        var variants = getPluginVariants(pluginId)
-        for (var i = 0; i < variants.length; i++) {
+        const variants = getPluginVariants(pluginId)
+        for (let i = 0; i < variants.length; i++) {
             if (variants[i].id === variantId) {
                 variants[i] = Object.assign({}, variants[i], variantConfig)
                 break
@@ -411,8 +408,8 @@ Singleton {
     }
 
     function getPluginVariantData(pluginId, variantId) {
-        var variants = getPluginVariants(pluginId)
-        for (var i = 0; i < variants.length; i++) {
+        const variants = getPluginVariants(pluginId)
+        for (let i = 0; i < variants.length; i++) {
             if (variants[i].id === variantId) {
                 return variants[i]
             }
@@ -421,8 +418,8 @@ Singleton {
     }
 
     function getLoadedPlugins() {
-        var result = []
-        for (var key in loadedPlugins) {
+        const result = []
+        for (const key in loadedPlugins) {
             result.push(loadedPlugins[key])
         }
         return result
@@ -463,10 +460,14 @@ Singleton {
         SettingsData.savePluginSettings()
     }
 
+    function scanPlugins() {
+        resyncDebounce.restart()
+    }
+
     function createPluginDirectory() {
-        var mkdirProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { }")
+        const mkdirProcess = Qt.createComponent("data:text/plain,import Quickshell.Io; Process { }")
         if (mkdirProcess.status === Component.Ready) {
-            var process = mkdirProcess.createObject(root)
+            const process = mkdirProcess.createObject(root)
             process.command = ["mkdir", "-p", pluginDirectory]
             process.exited.connect(function(exitCode) {
                 if (exitCode !== 0) {
