@@ -159,6 +159,16 @@ Singleton {
 
         const info = {}
         for (const k in manifest) info[k] = manifest[k]
+
+        let perms = manifest.permissions
+        if (typeof perms === "string") {
+            perms = perms.split(/\s*,\s*/)
+        }
+        if (!Array.isArray(perms)) {
+            perms = []
+        }
+        info.permissions = perms.map(p => String(p).trim())
+
         info.manifestPath = absPath
         info.pluginDirectory = dir
         info.componentPath = dir + "/" + comp
