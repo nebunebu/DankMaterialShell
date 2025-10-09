@@ -74,7 +74,6 @@ Singleton {
     property bool qtThemingEnabled: typeof SettingsData !== "undefined" ? (SettingsData.qt5ctAvailable || SettingsData.qt6ctAvailable) : false
     property var workerRunning: false
     property var matugenColors: ({})
-    property int colorUpdateTrigger: 0
     property var customThemeData: null
 
     readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.CacheLocation).toString()) + "/dankshell"
@@ -84,7 +83,6 @@ Singleton {
         matugenCheck.running = true
         if (typeof SessionData !== "undefined") {
             SessionData.isLightModeChanged.connect(root.onLightModeChanged)
-            isLightMode = SessionData.isLightMode
         }
 
         if (typeof SettingsData !== "undefined" && SettingsData.currentThemeName) {
@@ -100,7 +98,6 @@ Singleton {
     }
 
     function getMatugenColor(path, fallback) {
-        colorUpdateTrigger
         const colorMode = (typeof SessionData !== "undefined" && SessionData.isLightMode) ? "light" : "dark"
         let cur = matugenColors && matugenColors.colors && matugenColors.colors[colorMode]
         for (const part of path.split(".")) {
@@ -578,10 +575,6 @@ Singleton {
 
 
     function onLightModeChanged() {
-        if (matugenColors && Object.keys(matugenColors).length > 0) {
-            colorUpdateTrigger++
-        }
-
         if (currentTheme === "custom" && customThemeFileView.path) {
             customThemeFileView.reload()
         }
@@ -905,7 +898,6 @@ Singleton {
                 const colorsText = dynamicColorsFileView.text()
                 if (colorsText) {
                     root.matugenColors = JSON.parse(colorsText)
-                    root.colorUpdateTrigger++
                     if (typeof ToastService !== "undefined") {
                         ToastService.clearWallpaperError()
                     }
