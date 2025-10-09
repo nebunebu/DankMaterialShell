@@ -11,33 +11,24 @@ Singleton {
     property var translations: ({})
     property bool translationsLoaded: false
 
-    Component.onCompleted: {
-        translationLoader.running = true
-    }
-
-    Process {
+    FileView {
         id: translationLoader
-        command: ["cat", Qt.resolvedUrl(`../translations/${currentLocale}.json`).toString().replace("file://", "")]
-        running: false
+        path: root.currentLocale === "en" ? "" : Qt.resolvedUrl(`../translations/${root.currentLocale}.json`)
 
-        stdout: StdioCollector {
-            onStreamFinished: () => {
-                try {
-                    root.translations = JSON.parse(data)
-                    root.translationsLoaded = true
-                    console.log(`I18n: Loaded translations for locale '${currentLocale}' (${Object.keys(root.translations).length} contexts)`)
-                } catch (e) {
-                    console.warn(`I18n: Error parsing translations for locale '${currentLocale}':`, e, "- falling back to English")
-                    root.translationsLoaded = false
-                }
+        onLoaded: {
+            try {
+                root.translations = JSON.parse(text())
+                root.translationsLoaded = true
+                console.log(`I18n: Loaded translations for locale '${root.currentLocale}' (${Object.keys(root.translations).length} contexts)`)
+            } catch (e) {
+                console.warn(`I18n: Error parsing translations for locale '${root.currentLocale}':`, e, "- falling back to English")
+                root.translationsLoaded = false
             }
         }
 
-        onExited: (code, status) => {
-            if (code !== 0) {
-                console.warn(`I18n: Failed to load translations for locale '${currentLocale}' (exit code ${code}), falling back to English`)
-                root.translationsLoaded = false
-            }
+        onLoadFailed: (error) => {
+            console.warn(`I18n: Failed to load translations for locale '${root.currentLocale}' (${error}), falling back to English`)
+            root.translationsLoaded = false
         }
     }
 
