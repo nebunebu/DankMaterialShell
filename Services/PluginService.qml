@@ -54,6 +54,7 @@ Singleton {
         showDirs: true
         showFiles: false
         showDotAndDotDot: false
+        nameFilters: ["plugin.json"]
 
         onCountChanged: resyncDebounce.restart()
         onStatusChanged: if (status === FolderListModel.Ready) resyncDebounce.restart()
@@ -64,6 +65,7 @@ Singleton {
         showDirs: true
         showFiles: false
         showDotAndDotDot: false
+        nameFilters: ["plugin.json"]
 
         onCountChanged: resyncDebounce.restart()
         onStatusChanged: if (status === FolderListModel.Ready) resyncDebounce.restart()
@@ -72,8 +74,15 @@ Singleton {
     function snapshotModel(model, sourceTag) {
         const out = []
         const n = model.count
+        const baseDir = sourceTag === "user" ? pluginDirectory : systemPluginDirectory
         for (let i = 0; i < n; i++) {
-            const dirPath = model.get(i, "filePath")
+            let dirPath = model.get(i, "filePath")
+            if (dirPath.startsWith("file://")) {
+                dirPath = dirPath.substring(7)
+            }
+            if (!dirPath.startsWith(baseDir)) {
+                continue
+            }
             const manifestPath = dirPath + "/plugin.json"
             out.push({ path: manifestPath, source: sourceTag })
         }
