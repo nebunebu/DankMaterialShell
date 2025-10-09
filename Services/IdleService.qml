@@ -136,6 +136,15 @@ Singleton {
         }
     }
 
+    Connections {
+        target: SessionService
+        function onPrepareForSleep() {
+            if (SessionData.lockBeforeSuspend) {
+                root.lockRequested()
+            }
+        }
+    }
+
     Component.onCompleted: {
         if (!idleMonitorAvailable) {
             console.warn("IdleService: IdleMonitor not available - power management disabled. This requires a newer version of Quickshell.")
