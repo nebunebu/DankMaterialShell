@@ -491,7 +491,6 @@ Item {
                                     }
                                 }
                                 
-                                Behavior on color { ColorAnimation { duration: Anims.durShort } }
                                 Behavior on border.color { ColorAnimation { duration: Anims.durShort } }
                             }
                         }
@@ -675,14 +674,6 @@ Item {
                                     }
                                 }
 
-                                Behavior on color {
-                                    ColorAnimation { 
-                                        duration: Anims.durShort
-                                        easing.type: Easing.BezierSpline
-                                        easing.bezierCurve: Anims.standard
-                                    }
-                                }
-
                                 Behavior on border.color {
                                     ColorAnimation { 
                                         duration: Anims.durShort
@@ -858,14 +849,6 @@ Item {
                                         }
                                     }
                                 }
-
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: Anims.durShort
-                                        easing.type: Easing.BezierSpline
-                                        easing.bezierCurve: Anims.standard
-                                    }
-                                }
                             }
                         }
 
@@ -1022,14 +1005,6 @@ Item {
                                                     break
                                             }
                                         }
-                                    }
-                                }
-
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: Anims.durShort
-                                        easing.type: Easing.BezierSpline
-                                        easing.bezierCurve: Anims.standard
                                     }
                                 }
                             }

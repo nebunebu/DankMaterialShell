@@ -18,45 +18,42 @@ The easiest thing is to run `dms greeter install` or `dms` for interactive insta
 
 ### Manual
 
-1. Install `greetd` (in most distro's standard repositories)
-2. Create the `dms-greeter` group and add necessary users:
+1. Install `greetd` (in most distro's standard repositories) and `quickshell`
+2. Clone the dms project to `/etc/xdg/quickshell/dms-greeter`
 ```bash
-sudo groupadd dms-greeter
-sudo usermod -aG dms-greeter greeter
-sudo usermod -aG dms-greeter $USER
+sudo git clone https://github.com/AvengeMedia/DankMaterialShell.git /etc/xdg/quickshell/dms-greeter
 ```
-3. Set group permissions on DMS directories:
+3. Copy `assets/dms-greeter` to `/usr/local/bin/dms-greeter`:
 ```bash
-sudo chgrp -R dms-greeter ~/.config/DankMaterialShell
-sudo chmod -R g+rX ~/.config/DankMaterialShell
-sudo chgrp -R dms-greeter ~/.local/state/DankMaterialShell
-sudo chmod -R g+rX ~/.local/state/DankMaterialShell
-sudo chgrp -R dms-greeter ~/.cache/quickshell
-sudo chmod -R g+rX ~/.cache/quickshell
-sudo chgrp -R dms-greeter ~/.config/quickshell
-sudo chmod -R g+rX ~/.config/quickshell
+sudo cp assets/dms-greeter /usr/local/bin/dms-greeter
+sudo chmod +x /usr/local/bin/dms-greeter
 ```
-4. Copy `assets/dms-niri.kdl` or `assets/dms-hypr.conf` to `/etc/greetd`
-  - niri if you want to run the greeter under niri, hypr if you want to run the greeter under Hyprland
-5. Copy `assets/greet-niri.sh` or `assets/greet-hyprland.sh` to `/usr/local/bin/start-dms-greetd.sh`
-6. Edit `/etc/greetd/dms-niri.kdl` or `/etc/greetd/dms-hypr.conf` and replace `_DMS_PATH_` with the absolute path to dms, e.g. `/home/joecool/.config/quickshell/dms`
-7. Edit or create `/etc/greetd/config.toml`:
+4. Create greeter cache directory with proper permissions:
+```bash
+sudo mkdir -p /var/cache/dmsgreeter
+sudo chown greeter:greeter /var/cache/dmsgreeter
+sudo chmod 770 /var/cache/dmsgreeter
+```
+6. Edit or create `/etc/greetd/config.toml`:
 ```toml
 [terminal]
 vt = 1
 
 [default_session]
 user = "greeter"
-command = "/usr/local/bin/start-dms-greetd.sh"
-```
-8. Create greeter config directory with proper permissions:
-```bash
-sudo mkdir -p /etc/greetd/.dms
-sudo chown greeter:dms-greeter /etc/greetd/.dms
-sudo chmod 770 /etc/greetd/.dms
+# Change compositor to sway or hyprland if preferred
+command = "/usr/local/bin/dms-greeter --command niri"
 ```
 
 Enable the greeter with `sudo systemctl enable greetd`
+
+#### Legacy installation (deprecated)
+
+If you prefer the old method with separate shell scripts and config files:
+1. Copy `assets/dms-niri.kdl` or `assets/dms-hypr.conf` to `/etc/greetd`
+2. Copy `assets/greet-niri.sh` or `assets/greet-hyprland.sh` to `/usr/local/bin/start-dms-greetd.sh`
+3. Edit the config file and replace `_DMS_PATH_` with your DMS installation path
+4. Configure greetd to use `/usr/local/bin/start-dms-greetd.sh`
 
 ### NixOS
 
@@ -78,7 +75,30 @@ programs.dankMaterialShell.greeter = {
 
 ## Usage
 
-To run dms in greeter mode you just need to set `DMS_RUN_GREETER=1` in the environment.
+### Using dms-greeter wrapper (recommended)
+
+The `dms-greeter` wrapper simplifies running the greeter with any compositor:
+
+```bash
+dms-greeter --command niri
+dms-greeter --command hyprland
+dms-greeter --command sway
+dms-greeter --command niri -C /path/to/custom-niri.kdl
+```
+
+Configure greetd to use it in `/etc/greetd/config.toml`:
+```toml
+[terminal]
+vt = 1
+
+[default_session]
+user = "greeter"
+command = "/usr/local/bin/dms-greeter --command niri"
+```
+
+### Manual usage
+
+To run dms in greeter mode you can also manually set environment variables:
 
 ```bash
 DMS_RUN_GREETER=1 qs -p /path/to/dms
@@ -102,13 +122,13 @@ The greeter uses the `dms-greeter` group for file access permissions, so ensure 
 
 ```bash
 # For core settings (theme, clock formats, etc)
-sudo ln -sf ~/.config/DankMaterialShell/settings.json /etc/greetd/.dms/settings.json
+sudo ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
 # For state (mainly you would configure wallpaper in this file)
-sudo ln -sf ~/.local/state/DankMaterialShell/session.json /etc/greetd/.dms/session.json
+sudo ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
 # For wallpaper based theming
-sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /etc/greetd/.dms/dms-colors.json
+sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/dms-colors.json
 ```
 
-You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable, the default is `/etc/greetd/.dms`
+You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable or the `--cache-dir` flag when using `dms-greeter`. The default is `/var/cache/dmsgreeter`.
 
-The `/etc/greetd/.dms` directory should be owned by `greeter:dms-greeter` with `770` permissions.
+The cache directory should be owned by `greeter:greeter` with `770` permissions.
