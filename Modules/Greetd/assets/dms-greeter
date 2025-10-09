@@ -5,7 +5,7 @@ set -e
 COMPOSITOR=""
 COMPOSITOR_CONFIG=""
 DMS_PATH="dms-greeter"
-CACHE_DIR="/var/cache/dmsgreeter"
+CACHE_DIR="/var/cache/dms-greeter"
 
 show_help() {
     cat << EOF
@@ -21,7 +21,7 @@ Options:
     -p, --path PATH         DMS path (config name or absolute path)
                            (default: dms-greeter)
     --cache-dir PATH        Cache directory for greeter data
-                           (default: /var/cache/dmsgreeter)
+                           (default: /var/cache/dms-greeter)
     -h, --help             Show this help message
 
 Examples:

@@ -30,9 +30,9 @@ sudo chmod +x /usr/local/bin/dms-greeter
 ```
 4. Create greeter cache directory with proper permissions:
 ```bash
-sudo mkdir -p /var/cache/dmsgreeter
-sudo chown greeter:greeter /var/cache/dmsgreeter
-sudo chmod 770 /var/cache/dmsgreeter
+sudo mkdir -p /var/cache/dms-greeter
+sudo chown greeter:greeter /var/cache/dms-greeter
+sudo chmod 770 /var/cache/dms-greeter
 ```
 6. Edit or create `/etc/greetd/config.toml`:
 ```toml
@@ -129,6 +129,6 @@ sudo ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter
 sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/dms-colors.json
 ```
 
-You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable or the `--cache-dir` flag when using `dms-greeter`. The default is `/var/cache/dmsgreeter`.
+You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable or the `--cache-dir` flag when using `dms-greeter`. The default is `/var/cache/dms-greeter`.
 
 The cache directory should be owned by `greeter:greeter` with `770` permissions.
