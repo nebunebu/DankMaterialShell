@@ -17,7 +17,14 @@ Item {
     implicitHeight: hasPermission ? settingsColumn.implicitHeight : errorText.implicitHeight
     height: implicitHeight
 
-    readonly property bool hasPermission: pluginService && pluginService.hasPermission ? pluginService.hasPermission(pluginId, "settings_write") : true
+    readonly property bool hasPermission: {
+        if (!pluginService || !pluginId) return true
+        const plugin = pluginService.availablePlugins[pluginId]
+        if (!plugin) return false
+        const permissions = plugin.permissions || []
+        console.log("PluginSettings: Plugin", pluginId, "permissions:", permissions)
+        return permissions.indexOf("settings_write") !== -1
+    }
 
     Component.onCompleted: {
         loadVariants()

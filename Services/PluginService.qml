@@ -200,15 +200,6 @@ Singleton {
         }
     }
 
-    function hasPermission(pluginId, permission) {
-        const plugin = availablePlugins[pluginId]
-        if (!plugin) {
-            return false
-        }
-        const permissions = plugin.permissions || []
-        return permissions.indexOf(permission) !== -1
-    }
-
     function loadPlugin(pluginId) {
         const plugin = availablePlugins[pluginId]
         if (!plugin) {
