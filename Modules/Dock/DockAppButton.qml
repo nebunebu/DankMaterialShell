@@ -322,7 +322,21 @@ Item {
                                }
                            }
                        } else if (mouse.button === Qt.MiddleButton) {
-                           if (appData && appData.appId) {
+                           if (appData && appData.type === "window") {
+                               const sortedToplevels = CompositorService.sortedToplevels
+                               for (var i = 0; i < sortedToplevels.length; i++) {
+                                   const toplevel = sortedToplevels[i]
+                                   const checkId = toplevel.title + "|" + (toplevel.appId || "") + "|" + i
+                                   if (checkId === appData.uniqueId) {
+                                       toplevel.close()
+                                       break
+                                   }
+                               }
+                           } else if (appData && appData.type === "grouped") {
+                               if (contextMenu) {
+                                   contextMenu.showForButton(root, appData, 40, false, cachedDesktopEntry)
+                               }
+                           } else if (appData && appData.appId) {
                                const desktopEntry = cachedDesktopEntry
                                if (desktopEntry) {
                                    AppUsageHistoryData.addAppUsage({
@@ -333,7 +347,7 @@ Item {
                                                                        "comment": desktopEntry.comment || ""
                                                                    })
                                }
-                             SessionService.launchDesktopEntry(desktopEntry)
+                               SessionService.launchDesktopEntry(desktopEntry)
                            }
                        } else if (mouse.button === Qt.RightButton) {
                            if (contextMenu && appData) {
