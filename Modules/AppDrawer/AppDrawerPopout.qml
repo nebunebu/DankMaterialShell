@@ -800,12 +800,13 @@ DankPopout {
                 model: contextMenu.currentApp && contextMenu.currentApp.desktopEntry && contextMenu.currentApp.desktopEntry.actions ? contextMenu.currentApp.desktopEntry.actions : []
 
                 Rectangle {
-                    width: parent.width
+                    width: Math.max(parent.width, actionRow.implicitWidth + Theme.spacingS * 2)
                     height: 32
                     radius: Theme.cornerRadius
                     color: actionMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
                     Row {
+                        id: actionRow
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.spacingS
                         anchors.verticalCenter: parent.verticalCenter

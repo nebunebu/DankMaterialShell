@@ -77,12 +77,14 @@ Popup {
         spacing: 1
 
         Rectangle {
-            width: parent.width
+            implicitWidth: pinRow.implicitWidth + Theme.spacingS * 2
+            width: implicitWidth
             height: 32
             radius: Theme.cornerRadius
             color: pinMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
             Row {
+                id: pinRow
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.spacingS
                 anchors.verticalCenter: parent.verticalCenter
@@ -155,16 +157,16 @@ Popup {
             model: contextMenu.currentApp && contextMenu.currentApp.desktopEntry && contextMenu.currentApp.desktopEntry.actions ? contextMenu.currentApp.desktopEntry.actions : []
 
             Rectangle {
-                width: parent.width
+                implicitWidth: actionRow.implicitWidth + Theme.spacingS * 2
+                width: implicitWidth
                 height: 32
                 radius: Theme.cornerRadius
                 color: actionMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
                 Row {
+                    id: actionRow
                     anchors.left: parent.left
                     anchors.leftMargin: Theme.spacingS
-                    anchors.right: parent.right
-                    anchors.rightMargin: Theme.spacingS
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: Theme.spacingS
 
@@ -189,8 +191,6 @@ Popup {
                         color: Theme.surfaceText
                         font.weight: Font.Normal
                         anchors.verticalCenter: parent.verticalCenter
-                        elide: Text.ElideRight
-                        width: parent.width - (modelData.icon && modelData.icon !== "" ? (Theme.iconSize - 2 + Theme.spacingS) : 0)
                     }
                 }
 
@@ -228,12 +228,14 @@ Popup {
         }
 
         Rectangle {
-            width: parent.width
+            implicitWidth: launchRow.implicitWidth + Theme.spacingS * 2
+            width: implicitWidth
             height: 32
             radius: Theme.cornerRadius
             color: launchMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
             Row {
+                id: launchRow
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.spacingS
                 anchors.verticalCenter: parent.verticalCenter
@@ -288,12 +290,14 @@ Popup {
 
         Rectangle {
             visible: SessionService.hasPrimeRun
-            width: parent.width
+            implicitWidth: primeRunRow.implicitWidth + Theme.spacingS * 2
+            width: implicitWidth
             height: 32
             radius: Theme.cornerRadius
             color: primeRunMouseArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
 
             Row {
+                id: primeRunRow
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.spacingS
                 anchors.verticalCenter: parent.verticalCenter
