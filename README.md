@@ -21,7 +21,7 @@ Features notifications, app launcher, wallpaper customization, and fully customi
 <div align="center">
 <div style="max-width: 700px; margin: 0 auto;">
 
-https://github.com/user-attachments/assets/9b99dbbf-42d3-44ab-83b6-fae6c2aa3cc0
+https://github.com/user-attachments/assets/40d2c56e-c1c9-4671-b04f-8f8b7b83b9ec
 
 </div>
 </div>
