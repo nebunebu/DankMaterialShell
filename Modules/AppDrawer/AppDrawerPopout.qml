@@ -112,6 +112,8 @@ DankPopout {
                     mappings[Qt.Key_Up] = () => appLauncher.selectPrevious()
                     mappings[Qt.Key_Return] = () => appLauncher.launchSelected()
                     mappings[Qt.Key_Enter] = () => appLauncher.launchSelected()
+                    mappings[Qt.Key_Tab] = () => appLauncher.viewMode === "grid" ? appLauncher.selectNextInRow() : appLauncher.selectNext()
+                    mappings[Qt.Key_Backtab] = () => appLauncher.viewMode === "grid" ? appLauncher.selectPreviousInRow() : appLauncher.selectPrevious()
 
                     if (appLauncher.viewMode === "grid") {
                         mappings[Qt.Key_Right] = () => appLauncher.selectNextInRow()
@@ -217,6 +219,7 @@ DankPopout {
                         font.pixelSize: Theme.fontSizeLarge
                         enabled: appDrawerPopout.shouldBeVisible
                         ignoreLeftRightKeys: appLauncher.viewMode !== "list"
+                        ignoreTabKeys: true
                         keyForwardTargets: [keyHandler]
                         onTextEdited: {
                             appLauncher.searchQuery = text
@@ -241,7 +244,7 @@ DankPopout {
                                 return
                             }
 
-                            const navigationKeys = [Qt.Key_Down, Qt.Key_Up, Qt.Key_Left, Qt.Key_Right]
+                            const navigationKeys = [Qt.Key_Down, Qt.Key_Up, Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab, Qt.Key_Backtab]
                             const isNavigationKey = navigationKeys.includes(event.key)
                             const isEmptyEnter = isEnterKey && !hasText
 

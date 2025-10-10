@@ -42,6 +42,7 @@ StyledRect {
     property real topPadding: Theme.spacingM
     property real bottomPadding: Theme.spacingM
     property bool ignoreLeftRightKeys: false
+    property bool ignoreTabKeys: false
     property var keyForwardTargets: []
     property Item keyNavigationTab: null
     property Item keyNavigationBacktab: null
@@ -122,10 +123,19 @@ StyledRect {
                                  if (root.ignoreLeftRightKeys) {
                                      event.accepted = true
                                  } else {
-                                     // Allow normal TextInput cursor movement
                                      event.accepted = false
                                  }
                              }
+        Keys.onPressed: event => {
+                            if (root.ignoreTabKeys && (event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab)) {
+                                event.accepted = false
+                                for (var i = 0; i < root.keyForwardTargets.length; i++) {
+                                    if (root.keyForwardTargets[i]) {
+                                        root.keyForwardTargets[i].Keys.pressed(event)
+                                    }
+                                }
+                            }
+                        }
 
         MouseArea {
             anchors.fill: parent

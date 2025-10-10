@@ -128,6 +128,7 @@ Item {
                 enabled: parentModal ? parentModal.spotlightOpen : true
                 placeholderText: ""
                 ignoreLeftRightKeys: appLauncher.viewMode !== "list"
+                ignoreTabKeys: true
                 keyForwardTargets: [spotlightKeyHandler]
                 text: appLauncher.searchQuery
                 onTextEdited: () => {
