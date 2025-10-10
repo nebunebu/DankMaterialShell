@@ -992,6 +992,7 @@ Item {
                         }
 
                         DankDropdown {
+                            width: parent.width - Theme.iconSize - Theme.spacingXS
                             anchors.verticalCenter: parent.verticalCenter
                             text: I18n.tr("Icon Theme")
                             description: "DankShell & System Icons\n(requires restart)"

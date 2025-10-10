@@ -983,7 +983,7 @@ Singleton {
         updateQtIconTheme(themeName)
         saveSettings()
         if (typeof Theme !== "undefined" && Theme.currentTheme === Theme.dynamic)
-            Theme.generateSystemThemes()
+            Theme.generateSystemThemesFromCurrentTheme()
     }
 
     function updateGtkIconTheme(themeName) {
