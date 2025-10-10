@@ -22,9 +22,11 @@ BuildRequires:  golang >= 1.21
 BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
-# Requires:       (quickshell or quickshell-git) # Will unlock stable on the next release
-Requires:       dms-cli = %{version}-%{release} # DMS DankLinux CLI tool
-Requires:       dgop            # Stateless CLI system monitor
+# Requires:     (quickshell or quickshell-git)
+# DMS DankLinux CLI tool
+Requires:       dms-cli = %{version}-%{release}
+# Stateless CLI system monitor
+Requires:       dgop
 Requires:       fira-code-fonts
 Requires:       material-symbols-fonts
 Requires:       rsms-inter-fonts
