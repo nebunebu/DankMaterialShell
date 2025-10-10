@@ -22,6 +22,22 @@ paru -S greetd-dms-greeter-git
 yay -S greetd-dms-greeter-git
 ```
 
+Then in your `/etc/greetd/config.toml` enable dms-greeter by replacing the greeter command with dms-greeter.
+
+```bash
+# hyprland and sway are also supported as compositors
+command = "/usr/bin/dms-greeter --command niri"
+```
+
+See `dms-greeter --help` for full options including custom compositor configurations.
+
+Once installed, you should disable any existing greeter (such as gdm, sddm, lightdm), and you can configure the greeter to run at boot with:
+
+```bash
+sudo systemctl enable greetd
+```
+#### Syncing themes
+
 To sync wallpapers, colors, and other settings from the logged in user, you can add your user to the `greeter` group and symlink the shell configurations.
 
 ```bash
@@ -32,7 +48,6 @@ sudo usermod -aG greeter <username>
 ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
 
 ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-: 1760127136:0
 
 ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
 ```
