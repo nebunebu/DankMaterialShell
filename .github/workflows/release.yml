@@ -137,14 +137,15 @@ jobs:
           # Create full packages for each architecture
           for arch in amd64 arm64; do
             mkdir -p _temp_full/dms
+            mkdir -p _temp_full/bin
 
             # Extract QML source to temp directory
             tar -xzf _release_assets/dms-qml.tar.gz -C _temp_full/dms
 
             # Copy CLI binary if it exists
             if [ -f "_dms_assets/dms-${arch}.gz" ]; then
-              gunzip -c "_dms_assets/dms-${arch}.gz" > _temp_full/dms
-              chmod +x _temp_full/dms
+              gunzip -c "_dms_assets/dms-${arch}.gz" > _temp_full/bin/dms
+              chmod +x _temp_full/bin/dms
             fi
 
             # Create INSTALL.md
@@ -167,10 +168,10 @@ jobs:
 
           2. **Install the DMS CLI binary:**
              ```bash
-             sudo install -m 755 dms /usr/local/bin/dms
+             sudo install -m 755 bin/dms /usr/local/bin/dms
              # or install to a local directory:
              mkdir -p ~/.local/bin
-             install -m 755 dms ~/.local/bin/dms
+             install -m 755 bin/dms ~/.local/bin/dms
              ```
 
           3. **Start the shell:**
