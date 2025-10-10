@@ -78,7 +78,7 @@ DankModal {
     }
     onOpened: () => {
         selectedIndex = 0;
-        modalFocusScope.forceActiveFocus();
+        Qt.callLater(() => modalFocusScope.forceActiveFocus());
     }
     modalFocusScope.Keys.onPressed: (event) => {
         switch (event.key) {
