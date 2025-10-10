@@ -1,7 +1,9 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.Common
+import qs.Services
 
 PanelWindow {
     id: root
@@ -14,14 +16,16 @@ PanelWindow {
     property real height: 300
     readonly property real screenWidth: screen ? screen.width : 1920
     readonly property real screenHeight: screen ? screen.height : 1080
-    readonly property real dpr: (screen && screen.devicePixelRatio) || 1
-
-    function snap(v) {
-        return Math.round(v * dpr) / dpr
-    }
-
-    function px(v) {
-        return Math.round(v)
+    readonly property real dpr: {
+        if (CompositorService.isNiri && screen) {
+            const niriScale = NiriService.displayScales[screen.name]
+            if (niriScale !== undefined) return niriScale
+        }
+        if (CompositorService.isHyprland && screen) {
+            const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === screen.name)
+            if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
+        }
+        return (screen?.devicePixelRatio) || 1
     }
     property bool showBackground: true
     property real backgroundOpacity: 0.5
@@ -142,26 +146,26 @@ PanelWindow {
     Rectangle {
         id: contentContainer
 
-        width: px(root.width)
-        height: px(root.height)
+        width: Theme.px(root.width, dpr)
+        height: Theme.px(root.height, dpr)
         anchors.centerIn: undefined
         x: {
             if (positioning === "center") {
-                return snap((root.screenWidth - width) / 2)
+                return Theme.snap((root.screenWidth - width) / 2, dpr)
             } else if (positioning === "top-right") {
-                return px(Math.max(Theme.spacingL, root.screenWidth - width - Theme.spacingL))
+                return Theme.px(Math.max(Theme.spacingL, root.screenWidth - width - Theme.spacingL), dpr)
             } else if (positioning === "custom") {
-                return snap(root.customPosition.x)
+                return Theme.snap(root.customPosition.x, dpr)
             }
             return 0
         }
         y: {
             if (positioning === "center") {
-                return snap((root.screenHeight - height) / 2)
+                return Theme.snap((root.screenHeight - height) / 2, dpr)
             } else if (positioning === "top-right") {
-                return px(Theme.barHeight + Theme.spacingXS)
+                return Theme.px(Theme.barHeight + Theme.spacingXS, dpr)
             } else if (positioning === "custom") {
-                return snap(root.customPosition.y)
+                return Theme.snap(root.customPosition.y, dpr)
             }
             return 0
         }
@@ -170,6 +174,7 @@ PanelWindow {
         border.color: root.borderColor
         border.width: root.borderWidth
         clip: false
+        layer.enabled: true
         opacity: root.shouldBeVisible ? 1 : 0
         transform: root.animationType === "slide" ? slideTransform : null
 
@@ -179,8 +184,8 @@ PanelWindow {
             readonly property real rawX: root.shouldBeVisible ? 0 : 15
             readonly property real rawY: root.shouldBeVisible ? 0 : -30
 
-            x: snap(rawX)
-            y: snap(rawY)
+            x: Theme.snap(rawX, root.dpr)
+            y: Theme.snap(rawY, root.dpr)
         }
 
         Behavior on opacity {

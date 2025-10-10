@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Shapes
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.Mpris
 import Quickshell.Services.Notifications
@@ -61,8 +62,17 @@ Item {
             property real wingtipsRadius: Theme.cornerRadius
             readonly property real _wingR: Math.max(0, wingtipsRadius)
             readonly property color _bgColor: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency)
-            readonly property real _dpr: (barWindow.screen && barWindow.screen.devicePixelRatio) ? barWindow.screen.devicePixelRatio : 1
-            function px(v) { return Math.round(v * _dpr) / _dpr }
+            readonly property real _dpr: {
+                if (CompositorService.isNiri && barWindow.screen) {
+                    const niriScale = NiriService.displayScales[barWindow.screen.name]
+                    if (niriScale !== undefined) return niriScale
+                }
+                if (CompositorService.isHyprland && barWindow.screen) {
+                    const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === barWindow.screen.name)
+                    if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
+                }
+                return (barWindow.screen?.devicePixelRatio) || 1
+            }
 
             property string screenName: modelData.name
             readonly property int notificationCount: NotificationService.notifications.length
@@ -70,8 +80,8 @@ Item {
             readonly property real widgetThickness: Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
 
             screen: modelData
-            implicitHeight: !isVertical ? px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0)) : 0
-            implicitWidth: isVertical ? px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0)) : 0
+            implicitHeight: !isVertical ? Theme.px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
+            implicitWidth: isVertical ? Theme.px(effectiveBarThickness + SettingsData.dankBarSpacing + (SettingsData.dankBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
             color: "transparent"
 
             property var nativeInhibitor: null
@@ -234,7 +244,7 @@ Item {
             Item {
                 id: inputMask
 
-                readonly property int barThickness: px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing)
+                readonly property int barThickness: Theme.px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing, barWindow._dpr)
 
                 readonly property bool inOverviewWithShow: CompositorService.isNiri && NiriService.inOverview && SettingsData.dankBarOpenOnOverview
                 readonly property bool effectiveVisible: SettingsData.dankBarVisible || inOverviewWithShow
@@ -367,8 +377,8 @@ Item {
             id: topBarMouseArea
             y: !barWindow.isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Bottom ? parent.height - height : 0) : 0
             x: barWindow.isVertical ? (SettingsData.dankBarPosition === SettingsData.Position.Right ? parent.width - width : 0) : 0
-            height: !barWindow.isVertical ? px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing) : undefined
-            width: barWindow.isVertical ? px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing) : undefined
+            height: !barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing, barWindow._dpr) : undefined
+            width: barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.dankBarSpacing, barWindow._dpr) : undefined
             anchors {
                 left: !barWindow.isVertical ? parent.left : (SettingsData.dankBarPosition === SettingsData.Position.Left ? parent.left : undefined)
                 right: !barWindow.isVertical ? parent.right : (SettingsData.dankBarPosition === SettingsData.Position.Right ? parent.right : undefined)
@@ -387,8 +397,8 @@ Item {
 
                 transform: Translate {
                     id: topBarSlide
-                    x: barWindow.isVertical ? px(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Right ? barWindow.implicitWidth : -barWindow.implicitWidth)) : 0
-                    y: !barWindow.isVertical ? px(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Bottom ? barWindow.implicitHeight : -barWindow.implicitHeight)) : 0
+                    x: barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Right ? barWindow.implicitWidth : -barWindow.implicitWidth), barWindow._dpr) : 0
+                    y: !barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.dankBarPosition === SettingsData.Position.Bottom ? barWindow.implicitHeight : -barWindow.implicitHeight), barWindow._dpr) : 0
 
                     Behavior on x {
                         NumberAnimation {
@@ -408,10 +418,10 @@ Item {
                 Item {
                     id: barUnitInset
                     anchors.fill: parent
-                    anchors.leftMargin: !barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.edge === "left" ? px(SettingsData.dankBarSpacing) : 0)
-                    anchors.rightMargin: !barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.edge === "right" ? px(SettingsData.dankBarSpacing) : 0)
-                    anchors.topMargin: barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.outerVisualEdge() === "bottom" ? 0 : px(SettingsData.dankBarSpacing))
-                    anchors.bottomMargin: barWindow.isVertical ? px(SettingsData.dankBarSpacing) : (axis.outerVisualEdge() === "bottom" ? px(SettingsData.dankBarSpacing) : 0)
+                    anchors.leftMargin: !barWindow.isVertical ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : (axis.edge === "left" ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : 0)
+                    anchors.rightMargin: !barWindow.isVertical ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : (axis.edge === "right" ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : 0)
+                    anchors.topMargin: barWindow.isVertical ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? 0 : Theme.px(SettingsData.dankBarSpacing, barWindow._dpr))
+                    anchors.bottomMargin: barWindow.isVertical ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? Theme.px(SettingsData.dankBarSpacing, barWindow._dpr) : 0)
 
                     BarCanvas {
                         id: barBackground

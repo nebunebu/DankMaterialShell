@@ -155,6 +155,14 @@ Singleton {
     property bool dankBarNoBackground: false
     property bool dankBarGothCornersEnabled: false
     property bool dankBarBorderEnabled: false
+    property string dankBarBorderColor: "surfaceText"
+    property real dankBarBorderOpacity: 1.0
+    property real dankBarBorderThickness: 1
+
+    onDankBarBorderColorChanged: saveSettings()
+    onDankBarBorderOpacityChanged: saveSettings()
+    onDankBarBorderThicknessChanged: saveSettings()
+
     property int dankBarPosition: SettingsData.Position.Top
     property bool dankBarIsVertical: dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right
     property bool lockScreenShowPowerActions: true
@@ -407,6 +415,9 @@ Singleton {
                 dankBarNoBackground = settings.dankBarNoBackground !== undefined ? settings.dankBarNoBackground : (settings.topBarNoBackground !== undefined ? settings.topBarNoBackground : false)
                 dankBarGothCornersEnabled = settings.dankBarGothCornersEnabled !== undefined ? settings.dankBarGothCornersEnabled : (settings.topBarGothCornersEnabled !== undefined ? settings.topBarGothCornersEnabled : false)
                 dankBarBorderEnabled = settings.dankBarBorderEnabled !== undefined ? settings.dankBarBorderEnabled : false
+                dankBarBorderColor = settings.dankBarBorderColor !== undefined ? settings.dankBarBorderColor : "surfaceText"
+                dankBarBorderOpacity = settings.dankBarBorderOpacity !== undefined ? settings.dankBarBorderOpacity : 1.0
+                dankBarBorderThickness = settings.dankBarBorderThickness !== undefined ? settings.dankBarBorderThickness : 1
                 dankBarPosition = settings.dankBarPosition !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 hideBrightnessSlider = settings.hideBrightnessSlider !== undefined ? settings.hideBrightnessSlider : false
@@ -533,6 +544,9 @@ Singleton {
                                                 "dankBarNoBackground": dankBarNoBackground,
                                                 "dankBarGothCornersEnabled": dankBarGothCornersEnabled,
                                                 "dankBarBorderEnabled": dankBarBorderEnabled,
+                                                "dankBarBorderColor": dankBarBorderColor,
+                                                "dankBarBorderOpacity": dankBarBorderOpacity,
+                                                "dankBarBorderThickness": dankBarBorderThickness,
                                                 "dankBarPosition": dankBarPosition,
                                                 "lockScreenShowPowerActions": lockScreenShowPowerActions,
                                                 "hideBrightnessSlider": hideBrightnessSlider,

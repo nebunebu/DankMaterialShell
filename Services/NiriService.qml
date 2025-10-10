@@ -23,6 +23,7 @@ Singleton {
 
     property var outputs: ({})
     property var windows: []
+    property var displayScales: ({})
 
     property bool inOverview: false
 
@@ -68,6 +69,7 @@ Singleton {
                     const outputsData = JSON.parse(text)
                     outputs = outputsData
                     console.log("NiriService: Loaded", Object.keys(outputsData).length, "outputs")
+                    updateDisplayScales()
                     if (windows.length > 0) {
                         windows = sortWindowsByLayout(windows)
                     }
@@ -167,6 +169,20 @@ Singleton {
     function fetchOutputs() {
         if (!CompositorService.isNiri) return
         outputsProcess.running = true
+    }
+
+    function updateDisplayScales() {
+        if (!outputs || Object.keys(outputs).length === 0) return
+
+        const scales = {}
+        for (const outputName in outputs) {
+            const output = outputs[outputName]
+            if (output.logical && output.logical.scale !== undefined) {
+                scales[outputName] = output.logical.scale
+            }
+        }
+
+        displayScales = scales
     }
 
     function sortWindowsByLayout(windowList) {
@@ -395,6 +411,7 @@ Singleton {
     function handleOutputsChanged(data) {
         if (!data.outputs) return
         outputs = data.outputs
+        updateDisplayScales()
         windows = sortWindowsByLayout(windows)
     }
 
@@ -410,6 +427,7 @@ Singleton {
             if (ToastService.toastVisible && ToastService.currentLevel === ToastService.levelError) {
                 ToastService.hideToast()
             }
+            fetchOutputs()
             if (hasInitialConnection && !suppressConfigToast && !suppressNextConfigToast && !matugenSuppression) {
                 ToastService.showInfo("niri: config reloaded")
             } else if (suppressNextConfigToast) {

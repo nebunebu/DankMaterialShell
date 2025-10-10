@@ -942,14 +942,51 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Edge Spacing (0 = edge-to-edge)")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Edge Spacing (0 = edge-to-edge)")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - edgeSpacingText.implicitWidth - resetEdgeSpacingBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: edgeSpacingText
+                                    visible: false
+                                    text: I18n.tr("Edge Spacing (0 = edge-to-edge)")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetEdgeSpacingBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.surfaceContainerHigh
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.setDankBarSpacing(4)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
+                            id: edgeSpacingSlider
                             width: parent.width
                             height: 24
                             value: SettingsData.dankBarSpacing
@@ -963,6 +1000,13 @@ Item {
                                                       SettingsData.setDankBarSpacing(
                                                           newValue)
                                                   }
+
+                            Binding {
+                                target: edgeSpacingSlider
+                                property: "value"
+                                value: SettingsData.dankBarSpacing
+                                restoreMode: Binding.RestoreBinding
+                            }
                         }
                     }
 
@@ -970,19 +1014,56 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Exclusive Zone Offset")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Exclusive Zone Offset")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - exclusiveZoneText.implicitWidth - resetExclusiveZoneBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: exclusiveZoneText
+                                    visible: false
+                                    text: I18n.tr("Exclusive Zone Offset")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetExclusiveZoneBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.surfaceContainerHigh
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.setDankBarBottomGap(0)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
+                            id: exclusiveZoneSlider
                             width: parent.width
                             height: 24
                             value: SettingsData.dankBarBottomGap
-                            minimum: -100
-                            maximum: 100
+                            minimum: -50
+                            maximum: 50
                             unit: ""
                             showValue: true
                             wheelEnabled: false
@@ -991,6 +1072,13 @@ Item {
                                                       SettingsData.setDankBarBottomGap(
                                                           newValue)
                                                   }
+
+                            Binding {
+                                target: exclusiveZoneSlider
+                                property: "value"
+                                value: SettingsData.dankBarBottomGap
+                                restoreMode: Binding.RestoreBinding
+                            }
                         }
                     }
 
@@ -998,14 +1086,51 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Size")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Size")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - sizeText.implicitWidth - resetSizeBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: sizeText
+                                    visible: false
+                                    text: I18n.tr("Size")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetSizeBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.surfaceContainerHigh
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.setDankBarInnerPadding(4)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
+                            id: sizeSlider
                             width: parent.width
                             height: 24
                             value: SettingsData.dankBarInnerPadding
@@ -1019,6 +1144,13 @@ Item {
                                                       SettingsData.setDankBarInnerPadding(
                                                           newValue)
                                                   }
+
+                            Binding {
+                                target: sizeSlider
+                                property: "value"
+                                value: SettingsData.dankBarInnerPadding
+                                restoreMode: Binding.RestoreBinding
+                            }
                         }
                     }
 
@@ -1056,14 +1188,227 @@ Item {
                                    }
                     }
 
-                    DankToggle {
+                    Column {
                         width: parent.width
-                        text: I18n.tr("Border")
-                        description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
-                        checked: SettingsData.dankBarBorderEnabled
-                        onToggled: checked => {
-                                       SettingsData.setDankBarBorderEnabled(checked)
-                                   }
+                        spacing: Theme.spacingM
+
+                        DankToggle {
+                            width: parent.width
+                            text: I18n.tr("Border")
+                            description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
+                            checked: SettingsData.dankBarBorderEnabled
+                            onToggled: checked => {
+                                           SettingsData.setDankBarBorderEnabled(checked)
+                                       }
+                        }
+
+                        Column {
+                            width: parent.width
+                            leftPadding: Theme.spacingM
+                            spacing: Theme.spacingM
+                            visible: SettingsData.dankBarBorderEnabled
+
+                            Rectangle {
+                                width: parent.width - parent.leftPadding
+                                height: 1
+                                color: Theme.outline
+                                opacity: 0.2
+                            }
+
+                            Row {
+                                width: parent.width - parent.leftPadding
+                                spacing: Theme.spacingM
+
+                                Column {
+                                    width: parent.width - borderColorGroup.width - Theme.spacingM
+                                    spacing: Theme.spacingXS
+
+                                    StyledText {
+                                        text: I18n.tr("Border Color")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceText
+                                        font.weight: Font.Medium
+                                    }
+
+                                    StyledText {
+                                        text: I18n.tr("Choose the border accent color")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceVariantText
+                                        width: parent.width
+                                    }
+                                }
+
+                                DankButtonGroup {
+                                    id: borderColorGroup
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    model: ["Surface", "Secondary", "Primary"]
+                                    currentIndex: {
+                                        const colorOption = SettingsData.dankBarBorderColor || "surfaceText"
+                                        switch (colorOption) {
+                                            case "surfaceText": return 0
+                                            case "secondary": return 1
+                                            case "primary": return 2
+                                            default: return 0
+                                        }
+                                    }
+                                    onSelectionChanged: (index, selected) => {
+                                        if (selected) {
+                                            let newColor = "surfaceText"
+                                            switch (index) {
+                                                case 0: newColor = "surfaceText"; break
+                                                case 1: newColor = "secondary"; break
+                                                case 2: newColor = "primary"; break
+                                            }
+                                            if (SettingsData.dankBarBorderColor !== newColor) {
+                                                SettingsData.dankBarBorderColor = newColor
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: parent.width - parent.leftPadding
+                                spacing: Theme.spacingS
+
+                                Row {
+                                    width: parent.width
+                                    spacing: Theme.spacingS
+
+                                    StyledText {
+                                        text: I18n.tr("Border Opacity")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceText
+                                        font.weight: Font.Medium
+                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+
+                                    Item {
+                                        width: parent.width - borderOpacityText.implicitWidth - resetBorderOpacityBtn.width - Theme.spacingS - Theme.spacingM
+                                        height: 1
+
+                                        StyledText {
+                                            id: borderOpacityText
+                                            visible: false
+                                            text: I18n.tr("Border Opacity")
+                                            font.pixelSize: Theme.fontSizeSmall
+                                        }
+                                    }
+
+                                    DankActionButton {
+                                        id: resetBorderOpacityBtn
+                                        buttonSize: 20
+                                        iconName: "refresh"
+                                        iconSize: 12
+                                        backgroundColor: Theme.surfaceContainerHigh
+                                        iconColor: Theme.surfaceText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        onClicked: {
+                                            SettingsData.dankBarBorderOpacity = 1.0
+                                        }
+                                    }
+
+                                    Item {
+                                        width: Theme.spacingS
+                                        height: 1
+                                    }
+                                }
+
+                                DankSlider {
+                                    id: borderOpacitySlider
+                                    width: parent.width
+                                    height: 24
+                                    value: (SettingsData.dankBarBorderOpacity ?? 1.0) * 100
+                                    minimum: 0
+                                    maximum: 100
+                                    unit: "%"
+                                    showValue: true
+                                    wheelEnabled: false
+                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    onSliderValueChanged: newValue => {
+                                        SettingsData.dankBarBorderOpacity = newValue / 100
+                                    }
+
+                                    Binding {
+                                        target: borderOpacitySlider
+                                        property: "value"
+                                        value: (SettingsData.dankBarBorderOpacity ?? 1.0) * 100
+                                        restoreMode: Binding.RestoreBinding
+                                    }
+                                }
+                            }
+
+                            Column {
+                                width: parent.width - parent.leftPadding
+                                spacing: Theme.spacingS
+
+                                Row {
+                                    width: parent.width
+                                    spacing: Theme.spacingS
+
+                                    StyledText {
+                                        text: I18n.tr("Border Thickness")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceText
+                                        font.weight: Font.Medium
+                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+
+                                    Item {
+                                        width: parent.width - borderThicknessText.implicitWidth - resetBorderThicknessBtn.width - Theme.spacingS - Theme.spacingM
+                                        height: 1
+
+                                        StyledText {
+                                            id: borderThicknessText
+                                            visible: false
+                                            text: I18n.tr("Border Thickness")
+                                            font.pixelSize: Theme.fontSizeSmall
+                                        }
+                                    }
+
+                                    DankActionButton {
+                                        id: resetBorderThicknessBtn
+                                        buttonSize: 20
+                                        iconName: "refresh"
+                                        iconSize: 12
+                                        backgroundColor: Theme.surfaceContainerHigh
+                                        iconColor: Theme.surfaceText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        onClicked: {
+                                            SettingsData.dankBarBorderThickness = 1
+                                        }
+                                    }
+
+                                    Item {
+                                        width: Theme.spacingS
+                                        height: 1
+                                    }
+                                }
+
+                                DankSlider {
+                                    id: borderThicknessSlider
+                                    width: parent.width
+                                    height: 24
+                                    value: SettingsData.dankBarBorderThickness ?? 1
+                                    minimum: 1
+                                    maximum: 10
+                                    unit: "px"
+                                    showValue: true
+                                    wheelEnabled: false
+                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    onSliderValueChanged: newValue => {
+                                        SettingsData.dankBarBorderThickness = newValue
+                                    }
+
+                                    Binding {
+                                        target: borderThicknessSlider
+                                        property: "value"
+                                        value: SettingsData.dankBarBorderThickness ?? 1
+                                        restoreMode: Binding.RestoreBinding
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     Rectangle {
