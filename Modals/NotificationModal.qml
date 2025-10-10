@@ -54,6 +54,9 @@ DankModal {
     height: 700
     visible: false
     onBackgroundClicked: hide()
+    onOpened: () => {
+        Qt.callLater(() => modalFocusScope.forceActiveFocus());
+    }
     onShouldBeVisibleChanged: (shouldBeVisible) => {
         if (!shouldBeVisible) {
             notificationModalOpen = false
