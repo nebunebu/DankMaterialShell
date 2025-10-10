@@ -258,7 +258,7 @@ Item {
 
                     StyledText {
                         text: `dms is a highly customizable, modern desktop shell with a <a href="https://m3.material.io/" style="text-decoration:none; color:${Theme.primary};">material 3 inspired</a> design.
-                        <br /><br/>It is built on top of <a href="https://quickshell.org" style="text-decoration:none; color:${Theme.primary};">Quickshell</a>, a QT6 framework for building desktop shells.
+                        <br /><br/>It is built with <a href="https://quickshell.org" style="text-decoration:none; color:${Theme.primary};">Quickshell</a>, a QT6 framework for building desktop shells, and <a href="https://go.dev" style="text-decoration:none; color:${Theme.primary};">Go</a>, a statically typed, compiled programming language.
                         `
                         textFormat: Text.RichText
                         font.pixelSize: Theme.fontSizeMedium
@@ -352,7 +352,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("QML (Qt Modeling Language)")
+                            text: I18n.tr("QML, JavaScript, Go")
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceVariantText
                         }

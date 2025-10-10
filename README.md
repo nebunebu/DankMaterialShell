@@ -12,7 +12,7 @@
 
 </div>
 
-A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and optimized for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors.
+A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/). Optimized for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors.
 
 Features notifications, app launcher, wallpaper customization, and fully customizable with [plugins](https://github.com/AvengeMedia/dms-plugin-registry).
 
@@ -134,7 +134,7 @@ curl -fsSL https://install.danklinux.com | sh
 
 ### Compositor Setup
 
-DankMaterialShell supports both **niri** and **Hyprland** compositors:
+DankMaterialShell particularly aims at supporting the **niri** and **Hyprland** compositors, but it does support more wayland compositors with a diminished feature set (no monitor off, workspace switcher, overview integration, etc.):
 
 **Niri**:
 ```bash
