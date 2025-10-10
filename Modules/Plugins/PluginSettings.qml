@@ -101,6 +101,42 @@ Item {
         return defaultValue
     }
 
+    function findFlickable(item) {
+        var current = item?.parent
+        while (current) {
+            if (current.contentY !== undefined && current.contentHeight !== undefined) {
+                return current
+            }
+            current = current.parent
+        }
+        return null
+    }
+
+    function ensureItemVisible(item) {
+        if (!item) return
+
+        var flickable = findFlickable(root)
+        if (!flickable) return
+
+        var itemGlobalY = item.mapToItem(null, 0, 0).y
+        var itemHeight = item.height
+        var flickableGlobalY = flickable.mapToItem(null, 0, 0).y
+        var viewportHeight = flickable.height
+
+        var itemRelativeY = itemGlobalY - flickableGlobalY
+        var viewportTop = 0
+        var viewportBottom = viewportHeight
+
+        if (itemRelativeY < viewportTop) {
+            flickable.contentY = Math.max(0, flickable.contentY - (viewportTop - itemRelativeY) - Theme.spacingL)
+        } else if (itemRelativeY + itemHeight > viewportBottom) {
+            flickable.contentY = Math.min(
+                flickable.contentHeight - viewportHeight,
+                flickable.contentY + (itemRelativeY + itemHeight - viewportBottom) + Theme.spacingL
+            )
+        }
+    }
+
     StyledText {
         id: errorText
         visible: pluginService && !root.hasPermission
