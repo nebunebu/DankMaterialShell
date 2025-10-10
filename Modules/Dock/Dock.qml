@@ -60,14 +60,6 @@ Variants {
 
 
     property bool contextMenuOpen: (dockVariants.contextMenu && dockVariants.contextMenu.visible && dockVariants.contextMenu.screen === modelData)
-    property bool windowIsFullscreen: {
-        if (!ToplevelManager.activeToplevel) {
-            return false
-        }
-        const activeWindow = ToplevelManager.activeToplevel
-        const fullscreenApps = ["vlc", "mpv", "kodi", "steam", "lutris", "wine", "dosbox"]
-        return fullscreenApps.some(app => activeWindow.appId && activeWindow.appId.toLowerCase().includes(app))
-    }
     property bool revealSticky: false
 
     Timer {
@@ -81,7 +73,7 @@ Variants {
         if (CompositorService.isNiri && NiriService.inOverview && SettingsData.dockOpenOnOverview) {
             return true
         }
-        return (!autoHide || dockMouseArea.containsMouse || dockApps.requestDockShow || contextMenuOpen || revealSticky) && !windowIsFullscreen
+        return !autoHide || dockMouseArea.containsMouse || dockApps.requestDockShow || contextMenuOpen || revealSticky
     }
 
     onContextMenuOpenChanged: {
