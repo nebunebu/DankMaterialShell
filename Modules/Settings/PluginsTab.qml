@@ -256,11 +256,9 @@ FocusScope {
                                     anchors.bottomMargin: pluginDelegate.isExpanded ? settingsContainer.height : 0
                                     hoverEnabled: true
                                     cursorShape: pluginDelegate.hasSettings ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    enabled: !pluginDelegate.isExpanded || !pluginDelegate.hasSettings
+                                    enabled: pluginDelegate.hasSettings
                                     onClicked: {
-                                        if (pluginDelegate.hasSettings) {
-                                            pluginsTab.expandedPluginId = pluginsTab.expandedPluginId === pluginDelegate.pluginId ? "" : pluginDelegate.pluginId
-                                        }
+                                        pluginsTab.expandedPluginId = pluginsTab.expandedPluginId === pluginDelegate.pluginId ? "" : pluginDelegate.pluginId
                                     }
                                 }
 

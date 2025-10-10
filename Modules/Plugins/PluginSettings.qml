@@ -8,11 +8,12 @@ Item {
 
     required property string pluginId
     property var pluginService: null
-    default property alias content: settingsColumn.children
+    default property list<QtObject> content
 
     signal settingChanged()
 
     property var variants: []
+    property alias variantsModel: variantsListModel
 
     implicitHeight: hasPermission ? settingsColumn.implicitHeight : errorText.implicitHeight
     height: implicitHeight
@@ -33,11 +34,20 @@ Item {
     onPluginServiceChanged: {
         if (pluginService) {
             loadVariants()
-            for (let i = 0; i < settingsColumn.children.length; i++) {
-                const child = settingsColumn.children[i]
+            for (let i = 0; i < content.length; i++) {
+                const child = content[i]
                 if (child.loadValue) {
                     child.loadValue()
                 }
+            }
+        }
+    }
+
+    onContentChanged: {
+        for (let i = 0; i < content.length; i++) {
+            const item = content[i]
+            if (item instanceof Item) {
+                item.parent = settingsColumn
             }
         }
     }
@@ -57,6 +67,22 @@ Item {
             return
         }
         variants = pluginService.getPluginVariants(pluginId)
+        syncVariantsToModel()
+    }
+
+    function syncVariantsToModel() {
+        variantsListModel.clear()
+        for (let i = 0; i < variants.length; i++) {
+            variantsListModel.append(variants[i])
+        }
+    }
+
+    onVariantsChanged: {
+        syncVariantsToModel()
+    }
+
+    ListModel {
+        id: variantsListModel
     }
 
     function createVariant(variantName, variantConfig) {
