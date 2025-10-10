@@ -57,7 +57,28 @@ jobs:
             CHANGELOG=$(git log --oneline --pretty=format:"- %s (%h)" "${PREVIOUS_TAG}..${TAG}")
           fi
 
-          cat > CHANGELOG.md << EOF
+          cat > RELEASE_BODY.md << 'EOF'
+          ## Assets
+
+          ### Complete Packages
+          - **`dms-full-amd64.tar.gz`** - Complete package for x86_64 systems (CLI binary + QML source + installation guide)
+          - **`dms-full-arm64.tar.gz`** - Complete package for ARM64 systems (CLI binary + QML source + installation guide)
+
+          ### Individual Components
+          - **`dms-cli-amd64.gz`** - DMS CLI binary for x86_64 systems
+          - **`dms-cli-arm64.gz`** - DMS CLI binary for ARM64 systems
+          - **`dms-qml.tar.gz`** - QML source code only
+
+          ### Checksums
+          - **`*.sha256`** - SHA256 checksums for verifying download integrity
+
+          **Installation:** Extract the `dms-full-*.tar.gz` package for your architecture and follow the `INSTALL.md` instructions inside.
+
+          ---
+
+          EOF
+
+          cat >> RELEASE_BODY.md << EOF
           ## What's Changed
 
           $CHANGELOG
@@ -66,7 +87,7 @@ jobs:
           EOF
 
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          cat CHANGELOG.md >> $GITHUB_OUTPUT
+          cat RELEASE_BODY.md >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create/Update DankMaterialShell Release
@@ -80,18 +101,112 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download DMS release assets
+      - name: Download and prepare release assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euxo pipefail
-          # gh is preinstalled on ubuntu-24.04; auth via GH_TOKEN env
+
+          mkdir -p _release_assets
+
+          # Download DMS CLI binaries from the danklinux repo
           gh release download "${TAG}" -R "${DMS_REPO}" --dir ./_dms_assets
 
-      - name: Attach DMS assets to DankMaterialShell release
+          # Rename CLI binaries to dms-cli-* format
+          for file in _dms_assets/dms-*.gz*; do
+            if [ -f "$file" ]; then
+              basename=$(basename "$file")
+              # dms-amd64.gz -> dms-cli-amd64.gz
+              # dms-amd64.gz.sha256 -> dms-cli-amd64.gz.sha256
+              newname=$(echo "$basename" | sed 's/^dms-/dms-cli-/')
+              cp "$file" "_release_assets/$newname"
+            fi
+          done
+
+          # Create QML source package (exclude .git, .github, build artifacts)
+          tar --exclude='.git' \
+              --exclude='.github' \
+              --exclude='_dms_assets' \
+              --exclude='_release_assets' \
+              --exclude='*.tar.gz' \
+              -czf _release_assets/dms-qml.tar.gz .
+
+          # Generate checksum for QML package
+          (cd _release_assets && sha256sum dms-qml.tar.gz > dms-qml.tar.gz.sha256)
+
+          # Create full packages for each architecture
+          for arch in amd64 arm64; do
+            mkdir -p _temp_full/dms
+
+            # Extract QML source to temp directory
+            tar -xzf _release_assets/dms-qml.tar.gz -C _temp_full/dms
+
+            # Copy CLI binary if it exists
+            if [ -f "_dms_assets/dms-${arch}.gz" ]; then
+              gunzip -c "_dms_assets/dms-${arch}.gz" > _temp_full/dms
+              chmod +x _temp_full/dms
+            fi
+
+            # Create INSTALL.md
+            cat > _temp_full/INSTALL.md << 'EOF'
+          # DankMaterialShell Installation
+
+          ## Requirements
+
+          - Wayland compositor (niri or Hyprland recommended)
+          - Quickshell framework
+          - Qt6
+
+          ## Installation Steps
+
+          1. **Install quickshell assets:**
+             ```bash
+             mkdir -p ~/.config/quickshell
+             cp -r dms ~/.config/quickshell/
+             ```
+
+          2. **Install the DMS CLI binary:**
+             ```bash
+             sudo install -m 755 dms /usr/local/bin/dms
+             # or install to a local directory:
+             mkdir -p ~/.local/bin
+             install -m 755 dms ~/.local/bin/dms
+             ```
+
+          3. **Start the shell:**
+             ```bash
+             dms run
+             # or directly with quickshell (will lack some dbus integrations & plugin management):
+             quickshell -p ~/.config/quickshell/dms
+             ```
+
+          ## Configuration
+
+          - Settings are stored in `~/.config/DankMaterialShell/settings.json`
+          - Plugins go in `~/.config/DankMaterialShell/plugins/`
+          - See the documentation in the `dms/` directory for more details
+
+          ## Troubleshooting
+
+          - Run with verbose output: `quickshell -v -p ~/.config/quickshell/dms`
+          - Check logs in `~/.local/state/DankMaterialShell/`
+          - Ensure all dependencies are installed
+          EOF
+
+            # Create the full package
+            (cd _temp_full && tar -czf "../_release_assets/dms-full-${arch}.tar.gz" .)
+
+            # Generate checksum
+            (cd _release_assets && sha256sum "dms-full-${arch}.tar.gz" > "dms-full-${arch}.tar.gz.sha256")
+
+            # Cleanup
+            rm -rf _temp_full
+          done
+
+      - name: Attach all assets to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG }}
-          files: _dms_assets/**
+          files: _release_assets/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
