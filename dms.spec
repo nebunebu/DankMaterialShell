@@ -14,7 +14,7 @@ URL:            https://github.com/AvengeMedia/DankMaterialShell
 VCS:            {{{ git_dir_vcs }}}
 Source0:        {{{ git_dir_pack }}}
 
-# dms CLI tool sources - compiled from danklinux
+# DMS CLI tool sources - compiled from danklinux
 Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz#/danklinux-master.tar.gz
 
 BuildRequires:  git-core
@@ -22,31 +22,30 @@ BuildRequires:  golang >= 1.21
 BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
-Requires:       (quickshell or quickshell-git)
-Recommends:     quickshell-git
-Requires:       fira-code-fonts
-Requires:       rsms-inter-fonts
-
-# Core utilities (REQUIRED for DMS functionality)
+# Requires:     (quickshell or quickshell-git)
+Requires:       dms-cli = %{version}-%{release}
 Requires:       dgop
-Requires:       cava
-Requires:       wl-clipboard
-Requires:       brightnessctl
-Requires:       matugen
-Requires:       cliphist
+Requires:       fira-code-fonts
 Requires:       material-symbols-fonts
+Requires:       rsms-inter-fonts
+Requires:       quickshell-git
+
+# Core utilities (Highly recommended for DMS functionality)
+Recommends:     brightnessctl
+Recommends:     cava
+Recommends:     cliphist
+Recommends:     hyprpicker
+Recommends:     matugen
+Recommends:     wl-clipboard
 
 # Recommended system packages
-Recommends:     NetworkManager
 Recommends:     gammastep
+Recommends:     NetworkManager
 Recommends:     qt6ct
-
-# Auto-require the CLI sub-package
-Requires:       dms-cli = %{version}-%{release}
 
 %description
 DankMaterialShell (DMS) is a modern Wayland desktop shell built with Quickshell
-and optimized for the niri and Hyprland compositors. Features notifications,
+and optimized for the niri and hyprland compositors. Features notifications,
 app launcher, wallpaper customization, and fully customizable with plugins.
 
 Includes auto-theming for GTK/Qt apps with matugen, 20+ customizable widgets,
