@@ -46,6 +46,7 @@ Item {
             leftIconName: "search"
             showClearButton: true
             focus: true
+            ignoreTabKeys: true
             keyForwardTargets: [modal.modalFocusScope]
             onTextChanged: {
                 modal.searchText = text

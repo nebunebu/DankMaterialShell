@@ -110,7 +110,7 @@ StyledRect {
         onEditingFinished: root.editingFinished()
         onAccepted: root.accepted()
         onActiveFocusChanged: root.focusStateChanged(activeFocus)
-        Keys.forwardTo: root.ignoreLeftRightKeys ? root.keyForwardTargets : []
+        Keys.forwardTo: root.keyForwardTargets
         Keys.onLeftPressed: event => {
                                 if (root.ignoreLeftRightKeys) {
                                     event.accepted = true
