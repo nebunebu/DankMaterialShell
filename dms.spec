@@ -14,7 +14,7 @@ URL:            https://github.com/AvengeMedia/DankMaterialShell
 VCS:            {{{ git_dir_vcs }}}
 Source0:        {{{ git_dir_pack }}}
 
-# dms CLI tool sources - compiled from danklinux
+# DMS CLI tool sources - compiled from danklinux
 Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz#/danklinux-master.tar.gz
 
 BuildRequires:  git-core
@@ -23,9 +23,7 @@ BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
 # Requires:     (quickshell or quickshell-git)
-# DMS DankLinux CLI tool
 Requires:       dms-cli = %{version}-%{release}
-# Stateless CLI system monitor
 Requires:       dgop
 Requires:       fira-code-fonts
 Requires:       material-symbols-fonts
@@ -33,17 +31,17 @@ Requires:       rsms-inter-fonts
 Requires:       quickshell-git
 
 # Core utilities (Highly recommended for DMS functionality)
-Recommends:     brightnessctl   # Laptop screen brightness control
-Recommends:     cava            # Audio visualizer
-Recommends:     cliphist        # Clipboard manager
-Recommends:     hyprpicker      # Color picker
-Recommends:     matugen         # Material design color generator
-Recommends:     wl-clipboard    # wl-copy, wl-paste
+Recommends:     brightnessctl
+Recommends:     cava
+Recommends:     cliphist
+Recommends:     hyprpicker
+Recommends:     matugen
+Recommends:     wl-clipboard
 
 # Recommended system packages
-Recommends:     gammastep       # NightMode
-Recommends:     NetworkManager  # Network management
-Recommends:     qt6ct           # Qt6 application theming
+Recommends:     gammastep
+Recommends:     NetworkManager
+Recommends:     qt6ct
 
 %description
 DankMaterialShell (DMS) is a modern Wayland desktop shell built with Quickshell
