@@ -22,31 +22,30 @@ BuildRequires:  golang >= 1.21
 BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
-Requires:       (quickshell or quickshell-git)
-Recommends:     quickshell-git
+# Requires:       (quickshell or quickshell-git) # Will unlock stable on the next release
+Requires:       dms-cli = %{version}-%{release} # DMS DankLinux CLI tool
+Requires:       dgop            # Stateless CLI system monitor
 Requires:       fira-code-fonts
-Requires:       rsms-inter-fonts
-
-# Core utilities (REQUIRED for DMS functionality)
-Requires:       dgop
-Requires:       cava
-Requires:       wl-clipboard
-Requires:       brightnessctl
-Requires:       matugen
-Requires:       cliphist
 Requires:       material-symbols-fonts
+Requires:       rsms-inter-fonts
+Requires:       quickshell-git
+
+# Core utilities (Highly recommended for DMS functionality)
+Recommends:     brightnessctl   # Laptop screen brightness control
+Recommends:     cava            # Audio visualizer
+Recommends:     cliphist        # Clipboard manager
+Recommends:     hyprpicker      # Color picker
+Recommends:     matugen         # Material design color generator
+Recommends:     wl-clipboard    # wl-copy, wl-paste
 
 # Recommended system packages
-Recommends:     NetworkManager
-Recommends:     gammastep
-Recommends:     qt6ct
-
-# Auto-require the CLI sub-package
-Requires:       dms-cli = %{version}-%{release}
+Recommends:     gammastep       # NightMode
+Recommends:     NetworkManager  # Network management
+Recommends:     qt6ct           # Qt6 application theming
 
 %description
 DankMaterialShell (DMS) is a modern Wayland desktop shell built with Quickshell
-and optimized for the niri and Hyprland compositors. Features notifications,
+and optimized for the niri and hyprland compositors. Features notifications,
 app launcher, wallpaper customization, and fully customizable with plugins.
 
 Includes auto-theming for GTK/Qt apps with matugen, 20+ customizable widgets,
