@@ -998,6 +998,56 @@ Item {
                         width: parent.width
                     }
 
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "code"
+                            size: Theme.iconSize
+                            color: SettingsData.runUserMatugenTemplates ? Theme.primary : Theme.surfaceVariantText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Column {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - runUserTemplatesToggle.width - Theme.spacingM
+                            spacing: Theme.spacingXS
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            StyledText {
+                                text: I18n.tr("Run User Templates")
+                                font.pixelSize: Theme.fontSizeLarge
+                                font.weight: Font.Medium
+                                color: Theme.surfaceText
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Execute templates from ~/.config/matugen/config.toml")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                width: parent.width
+                            }
+                        }
+
+                        DankToggle {
+                            id: runUserTemplatesToggle
+
+                            anchors.verticalCenter: parent.verticalCenter
+                            checked: SettingsData.runUserMatugenTemplates
+                            enabled: Theme.matugenAvailable
+                            onToggled: checked => {
+                                SettingsData.setRunUserMatugenTemplates(checked)
+                            }
+                        }
+                    }
+
                     StyledText {
                         text: I18n.tr("matugen not detected - dynamic theming unavailable")
                         font.pixelSize: Theme.fontSizeSmall
@@ -1085,6 +1135,7 @@ Item {
                     }
 
                     DankDropdown {
+                        width: parent.width
                         text: I18n.tr("Temperature")
                         description: I18n.tr("Color temperature for night mode")
                         currentValue: SessionData.nightModeTemperature + "K"

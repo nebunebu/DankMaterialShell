@@ -596,7 +596,8 @@ Singleton {
             "mode": isLight ? "light" : "dark",
             "iconTheme": iconTheme || "System Default",
             "matugenType": matugenType || "scheme-tonal-spot",
-            "surfaceBase": (typeof SettingsData !== "undefined" && SettingsData.surfaceBase) ? SettingsData.surfaceBase : "sc"
+            "surfaceBase": (typeof SettingsData !== "undefined" && SettingsData.surfaceBase) ? SettingsData.surfaceBase : "sc",
+            "runUserTemplates": (typeof SettingsData !== "undefined") ? SettingsData.runUserMatugenTemplates : true
         }
 
         const json = JSON.stringify(desired)

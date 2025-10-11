@@ -33,6 +33,7 @@ Singleton {
     property string currentThemeName: "blue"
     property string customThemeFile: ""
     property string matugenScheme: "scheme-tonal-spot"
+    property bool runUserMatugenTemplates: true
     property real dankBarTransparency: 1.0
     property real dankBarWidgetTransparency: 1.0
     property real popupTransparency: 1.0
@@ -283,6 +284,7 @@ Singleton {
                 }
                 customThemeFile = settings.customThemeFile !== undefined ? settings.customThemeFile : ""
                 matugenScheme = settings.matugenScheme !== undefined ? settings.matugenScheme : "scheme-tonal-spot"
+                runUserMatugenTemplates = settings.runUserMatugenTemplates !== undefined ? settings.runUserMatugenTemplates : true
                 dankBarTransparency = settings.dankBarTransparency !== undefined ? (settings.dankBarTransparency > 1 ? settings.dankBarTransparency / 100 : settings.dankBarTransparency) : (settings.topBarTransparency !== undefined ? (settings.topBarTransparency > 1 ? settings.topBarTransparency / 100 : settings.topBarTransparency) : 1.0)
                 dankBarWidgetTransparency = settings.dankBarWidgetTransparency !== undefined ? (settings.dankBarWidgetTransparency > 1 ? settings.dankBarWidgetTransparency / 100 : settings.dankBarWidgetTransparency) : (settings.topBarWidgetTransparency !== undefined ? (settings.topBarWidgetTransparency > 1 ? settings.topBarWidgetTransparency / 100 : settings.topBarWidgetTransparency) : 1.0)
                 popupTransparency = settings.popupTransparency !== undefined ? (settings.popupTransparency > 1 ? settings.popupTransparency / 100 : settings.popupTransparency) : 1.0
@@ -452,6 +454,7 @@ Singleton {
                                                 "currentThemeName": currentThemeName,
                                                 "customThemeFile": customThemeFile,
                                                 "matugenScheme": matugenScheme,
+                                                "runUserMatugenTemplates": runUserMatugenTemplates,
                                                 "dankBarTransparency": dankBarTransparency,
                                                 "dankBarWidgetTransparency": dankBarWidgetTransparency,
                                                 "popupTransparency": popupTransparency,
@@ -704,6 +707,18 @@ Singleton {
             return
 
         matugenScheme = normalized
+        saveSettings()
+
+        if (typeof Theme !== "undefined") {
+            Theme.generateSystemThemesFromCurrentTheme()
+        }
+    }
+
+    function setRunUserMatugenTemplates(enabled) {
+        if (runUserMatugenTemplates === enabled)
+            return
+
+        runUserMatugenTemplates = enabled
         saveSettings()
 
         if (typeof Theme !== "undefined") {

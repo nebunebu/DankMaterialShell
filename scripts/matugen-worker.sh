@@ -54,24 +54,28 @@ key_of() {
   local icon=$(echo "$json" | sed 's/.*"iconTheme": *"\([^"]*\)".*/\1/')
   local matugen_type=$(echo "$json" | sed 's/.*"matugenType": *"\([^"]*\)".*/\1/')
   local surface_base=$(echo "$json" | sed 's/.*"surfaceBase": *"\([^"]*\)".*/\1/')
+  local run_user_templates=$(echo "$json" | sed 's/.*"runUserTemplates": *\([^,}]*\).*/\1/')
   [[ -z "$icon" ]] && icon="System Default"
   [[ -z "$matugen_type" ]] && matugen_type="scheme-tonal-spot"
   [[ -z "$surface_base" ]] && surface_base="sc"
-  echo "${kind}|${value}|${mode}|${icon}|${matugen_type}|${surface_base}" | sha256sum | cut -d' ' -f1
+  [[ -z "$run_user_templates" ]] && run_user_templates="true"
+  echo "${kind}|${value}|${mode}|${icon}|${matugen_type}|${surface_base}|${run_user_templates}" | sha256sum | cut -d' ' -f1
 }
 
 build_once() {
   local json="$1"
-  local kind value mode icon matugen_type surface_base
+  local kind value mode icon matugen_type surface_base run_user_templates
   kind=$(echo "$json" | sed 's/.*"kind": *"\([^"]*\)".*/\1/')
   value=$(echo "$json" | sed 's/.*"value": *"\([^"]*\)".*/\1/')
   mode=$(echo "$json" | sed 's/.*"mode": *"\([^"]*\)".*/\1/')
   icon=$(echo "$json" | sed 's/.*"iconTheme": *"\([^"]*\)".*/\1/')
   matugen_type=$(echo "$json" | sed 's/.*"matugenType": *"\([^"]*\)".*/\1/')
   surface_base=$(echo "$json" | sed 's/.*"surfaceBase": *"\([^"]*\)".*/\1/')
+  run_user_templates=$(echo "$json" | sed 's/.*"runUserTemplates": *\([^,}]*\).*/\1/')
   [[ -z "$icon" ]] && icon="System Default"
   [[ -z "$matugen_type" ]] && matugen_type="scheme-tonal-spot"
   [[ -z "$surface_base" ]] && surface_base="sc"
+  [[ -z "$run_user_templates" ]] && run_user_templates="true"
 
   USER_MATUGEN_DIR="$CONFIG_DIR/matugen/dms"
   
@@ -118,8 +122,12 @@ EOF
     cat "$SHELL_DIR/matugen/configs/vesktop.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
-  
-  # Load user's matugen configurations
+
+  if [[ "$run_user_templates" == "true" ]] && [[ -f "$CONFIG_DIR/matugen/config.toml" ]]; then
+    grep -v '^\[config\]' "$CONFIG_DIR/matugen/config.toml" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  fi
+
   for config in "$USER_MATUGEN_DIR/configs"/*.toml; do
     [[ -f "$config" ]] || continue
     cat "$config" >> "$TMP_CFG"
