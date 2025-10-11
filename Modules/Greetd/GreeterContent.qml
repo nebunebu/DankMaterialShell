@@ -34,28 +34,8 @@ Item {
 
     signal launchRequested
 
-    property bool powerDialogVisible: false
-    property string powerDialogTitle: ""
-    property string powerDialogMessage: ""
-    property string powerDialogConfirmText: ""
-    property color powerDialogConfirmColor: Theme.primary
-    property var powerDialogOnConfirm: function () {}
-
     function pickRandomFact() {
         randomFact = Facts.getRandomFact()
-    }
-
-    function showPowerDialog(title, message, confirmText, confirmColor, onConfirm) {
-        powerDialogTitle = title
-        powerDialogMessage = message
-        powerDialogConfirmText = confirmText
-        powerDialogConfirmColor = confirmColor
-        powerDialogOnConfirm = onConfirm
-        powerDialogVisible = true
-    }
-
-    function hidePowerDialog() {
-        powerDialogVisible = false
     }
 
     Component.onCompleted: {
@@ -373,11 +353,11 @@ Item {
                                 syncingFromState = true
                                 text = GreeterState.showPasswordInput ? GreeterState.passwordBuffer : GreeterState.usernameInput
                                 syncingFromState = false
-                                if (isPrimaryScreen)
+                                if (isPrimaryScreen && !powerMenu.isVisible)
                                     forceActiveFocus()
                             }
                             onVisibleChanged: {
-                                if (visible && isPrimaryScreen)
+                                if (visible && isPrimaryScreen && !powerMenu.isVisible)
                                     forceActiveFocus()
                             }
                         }
@@ -1073,33 +1053,15 @@ Item {
             visible: root.randomFact !== ""
         }
 
-        Row {
+        DankActionButton {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: Theme.spacingXL
-            spacing: Theme.spacingL
             visible: GreetdSettings.lockScreenShowPowerActions
-
-            DankActionButton {
-                iconName: "power_settings_new"
-                iconColor: Theme.error
-                buttonSize: 40
-                onClicked: {
-                    showPowerDialog("Power Off", "Power off this computer?", "Power Off", Theme.error, function () {
-                        SessionService.poweroff()
-                    })
-                }
-            }
-
-            DankActionButton {
-                iconName: "refresh"
-                buttonSize: 40
-                onClicked: {
-                    showPowerDialog("Restart", "Restart this computer?", "Restart", Theme.primary, function () {
-                        SessionService.reboot()
-                    })
-                }
-            }
+            iconName: "power_settings_new"
+            iconColor: Theme.error
+            buttonSize: 40
+            onClicked: powerMenu.show()
         }
 
         Item {
@@ -1314,90 +1276,12 @@ Item {
         onTriggered: GreeterState.pamState = ""
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.8)
-        visible: powerDialogVisible
-        z: 1000
-
-        Rectangle {
-            anchors.centerIn: parent
-            width: 320
-            height: 180
-            radius: Theme.cornerRadius
-            color: Theme.surfaceContainer
-            border.color: Theme.outline
-            border.width: 1
-
-            Column {
-                anchors.centerIn: parent
-                spacing: Theme.spacingXL
-
-                DankIcon {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    name: "power_settings_new"
-                    size: 32
-                    color: powerDialogConfirmColor
-                }
-
-                StyledText {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: powerDialogMessage
-                    color: Theme.surfaceText
-                    font.pixelSize: Theme.fontSizeLarge
-                    font.weight: Font.Medium
-                }
-
-                Row {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Theme.spacingM
-
-                    Rectangle {
-                        width: 100
-                        height: 40
-                        radius: Theme.cornerRadius
-                        color: Theme.surfaceVariant
-
-                        StyledText {
-                            anchors.centerIn: parent
-                            text: I18n.tr("Cancel")
-                            color: Theme.surfaceText
-                            font.pixelSize: Theme.fontSizeMedium
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: hidePowerDialog()
-                        }
-                    }
-
-                    Rectangle {
-                        width: 100
-                        height: 40
-                        radius: Theme.cornerRadius
-                        color: powerDialogConfirmColor
-
-                        StyledText {
-                            anchors.centerIn: parent
-                            text: powerDialogConfirmText
-                            color: Theme.primaryText
-                            font.pixelSize: Theme.fontSizeMedium
-                            font.weight: Font.Medium
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                hidePowerDialog()
-                                powerDialogOnConfirm()
-                            }
-                        }
-                    }
-                }
+    LockPowerMenu {
+        id: powerMenu
+        showLogout: false
+        onClosed: {
+            if (isPrimaryScreen && inputField && inputField.forceActiveFocus) {
+                Qt.callLater(() => inputField.forceActiveFocus())
             }
         }
     }

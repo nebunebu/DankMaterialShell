@@ -26,27 +26,6 @@ Item {
 
     signal unlockRequested
 
-    // Internal power dialog state
-    property bool powerDialogVisible: false
-    property string powerDialogTitle: ""
-    property string powerDialogMessage: ""
-    property string powerDialogConfirmText: ""
-    property color powerDialogConfirmColor: Theme.primary
-    property var powerDialogOnConfirm: function () {}
-
-    function showPowerDialog(title, message, confirmText, confirmColor, onConfirm) {
-        powerDialogTitle = title
-        powerDialogMessage = message
-        powerDialogConfirmText = confirmText
-        powerDialogConfirmColor = confirmColor
-        powerDialogOnConfirm = onConfirm
-        powerDialogVisible = true
-    }
-
-    function hidePowerDialog() {
-        powerDialogVisible = false
-    }
-
     function pickRandomFact() {
         randomFact = Facts.getRandomFact()
     }
@@ -336,7 +315,7 @@ Item {
                         }
 
                         onActiveFocusChanged: {
-                            if (!activeFocus && !demoMode && visible && passwordField) {
+                            if (!activeFocus && !demoMode && visible && passwordField && !powerMenu.isVisible) {
                                 Qt.callLater(() => {
                                     if (passwordField && passwordField.forceActiveFocus) {
                                         passwordField.forceActiveFocus()
@@ -346,7 +325,7 @@ Item {
                         }
 
                         onEnabledChanged: {
-                            if (enabled && !demoMode && visible && passwordField) {
+                            if (enabled && !demoMode && visible && passwordField && !powerMenu.isVisible) {
                                 Qt.callLater(() => {
                                     if (passwordField && passwordField.forceActiveFocus) {
                                         passwordField.forceActiveFocus()
@@ -1070,53 +1049,19 @@ Item {
             }
         }
 
-        Row {
+        DankActionButton {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: Theme.spacingXL
-            spacing: Theme.spacingL
             visible: SettingsData.lockScreenShowPowerActions
-
-            DankActionButton {
-                iconName: "power_settings_new"
-                iconColor: Theme.error
-                buttonSize: 40
-                onClicked: {
-                    if (demoMode) {
-                        console.log("Demo: Power")
-                    } else {
-                        showPowerDialog("Power Off", "Power off this computer?", "Power Off", Theme.error, function () {
-                            SessionService.poweroff()
-                        })
-                    }
-                }
-            }
-
-            DankActionButton {
-                iconName: "refresh"
-                buttonSize: 40
-                onClicked: {
-                    if (demoMode) {
-                        console.log("Demo: Reboot")
-                    } else {
-                        showPowerDialog("Restart", "Restart this computer?", "Restart", Theme.primary, function () {
-                            SessionService.reboot()
-                        })
-                    }
-                }
-            }
-
-            DankActionButton {
-                iconName: "logout"
-                buttonSize: 40
-                onClicked: {
-                    if (demoMode) {
-                        console.log("Demo: Logout")
-                    } else {
-                        showPowerDialog("Log Out", "End this session?", "Log Out", Theme.primary, function () {
-                            SessionService.logout()
-                        })
-                    }
+            iconName: "power_settings_new"
+            iconColor: Theme.error
+            buttonSize: 40
+            onClicked: {
+                if (demoMode) {
+                    console.log("Demo: Power Menu")
+                } else {
+                    powerMenu.show()
                 }
             }
         }
@@ -1197,91 +1142,12 @@ Item {
         onClicked: root.unlockRequested()
     }
 
-    // Internal power dialog
-    Rectangle {
-        anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.8)
-        visible: powerDialogVisible
-        z: 1000
-
-        Rectangle {
-            anchors.centerIn: parent
-            width: 320
-            height: 180
-            radius: Theme.cornerRadius
-            color: Theme.surfaceContainer
-            border.color: Theme.outline
-            border.width: 1
-
-            Column {
-                anchors.centerIn: parent
-                spacing: Theme.spacingXL
-
-                DankIcon {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    name: "power_settings_new"
-                    size: 32
-                    color: powerDialogConfirmColor
-                }
-
-                StyledText {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: powerDialogMessage
-                    color: Theme.surfaceText
-                    font.pixelSize: Theme.fontSizeLarge
-                    font.weight: Font.Medium
-                }
-
-                Row {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Theme.spacingM
-
-                    Rectangle {
-                        width: 100
-                        height: 40
-                        radius: Theme.cornerRadius
-                        color: Theme.surfaceVariant
-
-                        StyledText {
-                            anchors.centerIn: parent
-                            text: I18n.tr("Cancel")
-                            color: Theme.surfaceText
-                            font.pixelSize: Theme.fontSizeMedium
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: hidePowerDialog()
-                        }
-                    }
-
-                    Rectangle {
-                        width: 100
-                        height: 40
-                        radius: Theme.cornerRadius
-                        color: powerDialogConfirmColor
-
-                        StyledText {
-                            anchors.centerIn: parent
-                            text: powerDialogConfirmText
-                            color: Theme.primaryText
-                            font.pixelSize: Theme.fontSizeMedium
-                            font.weight: Font.Medium
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                hidePowerDialog()
-                                powerDialogOnConfirm()
-                            }
-                        }
-                    }
-                }
+    LockPowerMenu {
+        id: powerMenu
+        showLogout: true
+        onClosed: {
+            if (!demoMode && passwordField && passwordField.forceActiveFocus) {
+                Qt.callLater(() => passwordField.forceActiveFocus())
             }
         }
     }
