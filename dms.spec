@@ -23,7 +23,7 @@ BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
 # Requires:     (quickshell or quickshell-git)
-Requires:       dms = %{version}-%{release}
+Requires:       dms-cli = %{version}-%{release}
 Requires:       dgop
 Requires:       fira-code-fonts
 Requires:       material-symbols-fonts
@@ -52,12 +52,12 @@ Includes auto-theming for GTK/Qt apps with matugen, 20+ customizable widgets,
 process monitoring, notification center, clipboard history, dock, control center,
 lock screen, and comprehensive plugin system.
 
-%package -n dms
+%package -n dms-cli
 Summary:        DankMaterialShell CLI tool
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/danklinux
 
-%description -n dms
+%description -n dms-cli
 Command-line interface for DankMaterialShell configuration and management.
 Provides native DBus bindings, NetworkManager integration, and system utilities.
 
@@ -97,7 +97,7 @@ rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms/.github
 %doc README.md CONTRIBUTING.md
 %{_sysconfdir}/xdg/quickshell/dms/
 
-%files -n dms
+%files -n dms-cli
 %{_bindir}/dms
 
 %changelog
