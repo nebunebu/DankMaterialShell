@@ -16,36 +16,39 @@ Singleton {
     property bool toastVisible: false
     property var toastQueue: []
     property string currentDetails: ""
+    property string currentCommand: ""
     property bool hasDetails: false
     property string wallpaperErrorStatus: ""
 
-    function showToast(message, level = levelInfo, details = "") {
+    function showToast(message, level = levelInfo, details = "", command = "") {
         toastQueue.push({
                             "message": message,
                             "level": level,
-                            "details": details
+                            "details": details,
+                            "command": command
                         })
         if (!toastVisible) {
             processQueue()
         }
     }
 
-    function showInfo(message, details = "") {
-        showToast(message, levelInfo, details)
+    function showInfo(message, details = "", command = "") {
+        showToast(message, levelInfo, details, command)
     }
 
-    function showWarning(message, details = "") {
-        showToast(message, levelWarn, details)
+    function showWarning(message, details = "", command = "") {
+        showToast(message, levelWarn, details, command)
     }
 
-    function showError(message, details = "") {
-        showToast(message, levelError, details)
+    function showError(message, details = "", command = "") {
+        showToast(message, levelError, details, command)
     }
 
     function hideToast() {
         toastVisible = false
         currentMessage = ""
         currentDetails = ""
+        currentCommand = ""
         hasDetails = false
         currentLevel = levelInfo
         toastTimer.stop()
@@ -64,7 +67,8 @@ Singleton {
         currentMessage = toast.message
         currentLevel = toast.level
         currentDetails = toast.details || ""
-        hasDetails = currentDetails.length > 0
+        currentCommand = toast.command || ""
+        hasDetails = currentDetails.length > 0 || currentCommand.length > 0
         toastVisible = true
         resetToastState()
 

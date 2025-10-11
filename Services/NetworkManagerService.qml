@@ -76,8 +76,6 @@ Singleton {
     signal networksUpdated
     signal connectionChanged
 
-    property bool subscriptionConnected: false
-
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
     Component.onCompleted: {
@@ -87,51 +85,16 @@ Singleton {
         }
     }
 
-    DankSocket {
-        id: subscriptionSocket
-        path: root.socketPath
-        connected: networkAvailable
+    Connections {
+        target: DMSService
 
-        onConnectionStateChanged: {
-            root.subscriptionConnected = connected
-            if (connected) {
-                console.log("NetworkManagerService: Subscription socket connected")
+        function onNetworkStateUpdate(data) {
+            if (DMSService.verboseLogs) {
+                const networksCount = data.wifiNetworks?.length ?? "null"
+                console.log("NetworkManagerService: Subscription update received, networks:", networksCount)
             }
+            updateState(data)
         }
-
-        parser: SplitParser {
-            onRead: line => {
-                if (!line || line.length === 0) {
-                    return
-                }
-
-                try {
-                    const response = JSON.parse(line)
-
-                    if (response.capabilities) {
-                        console.log("NetworkManagerService: Subscription socket received capabilities")
-                        Qt.callLater(() => sendSubscribeRequest())
-                        return
-                    }
-
-                    if (response.result && response.result.type === "state_changed" && response.result.data) {
-                        const networksCount = response.result.data.wifiNetworks?.length ?? "null"
-                        console.log("NetworkManagerService: Subscription update received, networks:", networksCount)
-                        updateState(response.result.data)
-                    }
-                } catch (e) {
-                    console.warn("NetworkManagerService: Failed to parse subscription response:", line, e)
-                }
-            }
-        }
-    }
-
-    function sendSubscribeRequest() {
-        subscriptionSocket.send({
-            "id": 1,
-            "method": "network.subscribe"
-        })
-        console.log("NetworkManagerService: Sent network.subscribe request")
     }
 
     Connections {
@@ -162,15 +125,15 @@ Singleton {
             return
         }
 
-        console.log("NetworkManagerService: Capabilities:", JSON.stringify(DMSService.capabilities))
         networkAvailable = DMSService.capabilities.includes("network")
-        console.log("NetworkManagerService: Network available:", networkAvailable)
+
+        if (DMSService.verboseLogs) {
+            console.log("NetworkManagerService: Network available:", networkAvailable)
+        }
 
         if (networkAvailable && !stateInitialized) {
-            console.log("NetworkManagerService: Requesting network state and starting subscription socket...")
             stateInitialized = true
             getState()
-            subscriptionSocket.connected = true
         }
     }
 
@@ -197,7 +160,9 @@ Singleton {
             if (response.result) {
                 updateState(response.result)
                 if (!initialStateFetched && response.result.wifiEnabled && (!response.result.wifiNetworks || response.result.wifiNetworks.length === 0)) {
-                    console.log("NetworkManagerService: Initial state has no networks, triggering scan")
+                    if (DMSService.verboseLogs) {
+                        console.log("NetworkManagerService: Initial state has no networks, triggering scan")
+                    }
                     initialStateFetched = true
                     Qt.callLater(() => scanWifi())
                 }
@@ -258,14 +223,18 @@ Singleton {
     function scanWifi() {
         if (!networkAvailable || isScanning || !wifiEnabled) return
 
-        console.log("NetworkManagerService: Starting WiFi scan...")
+        if (DMSService.verboseLogs) {
+            console.log("NetworkManagerService: Starting WiFi scan...")
+        }
         isScanning = true
         DMSService.sendRequest("network.wifi.scan", null, response => {
             isScanning = false
             if (response.error) {
                 console.warn("NetworkManagerService: WiFi scan failed:", response.error)
             } else {
-                console.log("NetworkManagerService: Scan completed, requesting fresh state...")
+                if (DMSService.verboseLogs) {
+                    console.log("NetworkManagerService: Scan completed")
+                }
                 Qt.callLater(() => getState())
             }
         })

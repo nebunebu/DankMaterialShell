@@ -13,15 +13,22 @@ Singleton {
 
     property bool dmsAvailable: false
     property var capabilities: []
+    property int apiVersion: 0
+    readonly property int expectedApiVersion: 1
     property var availablePlugins: []
     property var installedPlugins: []
     property bool isConnected: false
     property bool isConnecting: false
+    property bool subscribeConnected: false
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
+    readonly property bool verboseLogs: Quickshell.env("DMS_VERBOSE_LOGS") === "1"
 
     property var pendingRequests: ({})
     property int requestIdCounter: 0
+    property bool shownOutdatedError: false
+    property string updateCommand: "dms update"
+    property bool checkingUpdateCommand: false
 
     signal pluginsListReceived(var plugins)
     signal installedPluginsReceived(var plugins)
@@ -30,9 +37,84 @@ Singleton {
     signal operationError(string error)
     signal connectionStateChanged()
 
+    signal networkStateUpdate(var data)
+    signal loginctlStateUpdate(var data)
+    signal loginctlEvent(var event)
+
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
+            detectUpdateCommand()
+        }
+    }
+
+    function detectUpdateCommand() {
+        checkingUpdateCommand = true
+        checkAurHelper.running = true
+    }
+
+    function startSocketConnection() {
+        if (socketPath && socketPath.length > 0) {
             testProcess.running = true
+        }
+    }
+
+    Process {
+        id: checkAurHelper
+        command: ["sh", "-c", "command -v paru || command -v yay"]
+        running: false
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const helper = text.trim()
+                if (helper.includes("paru")) {
+                    checkDmsPackage.helper = "paru"
+                    checkDmsPackage.running = true
+                } else if (helper.includes("yay")) {
+                    checkDmsPackage.helper = "yay"
+                    checkDmsPackage.running = true
+                } else {
+                    updateCommand = "dms update"
+                    checkingUpdateCommand = false
+                    startSocketConnection()
+                }
+            }
+        }
+
+        onExited: exitCode => {
+            if (exitCode !== 0) {
+                updateCommand = "dms update"
+                checkingUpdateCommand = false
+                startSocketConnection()
+            }
+        }
+    }
+
+    Process {
+        id: checkDmsPackage
+        property string helper: ""
+        command: ["sh", "-c", "pacman -Qi dms-shell-git 2>/dev/null || pacman -Qi dms-shell-bin 2>/dev/null"]
+        running: false
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                if (text.includes("dms-shell-git")) {
+                    updateCommand = checkDmsPackage.helper + " -S dms-shell-git"
+                } else if (text.includes("dms-shell-bin")) {
+                    updateCommand = checkDmsPackage.helper + " -S dms-shell-bin"
+                } else {
+                    updateCommand = "dms update"
+                }
+                checkingUpdateCommand = false
+                startSocketConnection()
+            }
+        }
+
+        onExited: exitCode => {
+            if (exitCode !== 0) {
+                updateCommand = "dms update"
+                checkingUpdateCommand = false
+                startSocketConnection()
+            }
         }
     }
 
@@ -56,11 +138,11 @@ Singleton {
         }
 
         isConnecting = true
-        socket.connected = true
+        requestSocket.connected = true
     }
 
     DankSocket {
-        id: socket
+        id: requestSocket
         path: root.socketPath
         connected: false
 
@@ -69,9 +151,12 @@ Singleton {
                 root.isConnected = true
                 root.isConnecting = false
                 root.connectionStateChanged()
+                subscribeSocket.connected = true
             } else {
                 root.isConnected = false
                 root.isConnecting = false
+                root.apiVersion = 0
+                root.capabilities = []
                 root.connectionStateChanged()
             }
         }
@@ -82,18 +167,102 @@ Singleton {
                     return
                 }
 
+                if (root.verboseLogs) {
+                    console.log("DMSService: Request socket <<", line)
+                }
+
                 try {
                     const response = JSON.parse(line)
-
-                    if (response.capabilities) {
-                        root.capabilities = response.capabilities
-                        return
-                    }
-
                     handleResponse(response)
                 } catch (e) {
-                    console.warn("DMSService: Failed to parse response:", line, e)
+                    console.warn("DMSService: Failed to parse request response:", line, e)
                 }
+            }
+        }
+    }
+
+    DankSocket {
+        id: subscribeSocket
+        path: root.socketPath
+        connected: false
+
+        onConnectionStateChanged: {
+            root.subscribeConnected = connected
+            if (connected) {
+                sendSubscribeRequest()
+            }
+        }
+
+        parser: SplitParser {
+            onRead: line => {
+                if (!line || line.length === 0) {
+                    return
+                }
+
+                if (root.verboseLogs) {
+                    console.log("DMSService: Subscribe socket <<", line)
+                }
+
+                try {
+                    const response = JSON.parse(line)
+                    handleSubscriptionEvent(response)
+                } catch (e) {
+                    console.warn("DMSService: Failed to parse subscription event:", line, e)
+                }
+            }
+        }
+    }
+
+    function sendSubscribeRequest() {
+        const request = {
+            "method": "subscribe"
+        }
+
+        if (verboseLogs) {
+            console.log("DMSService: Subscribing to all services")
+        }
+        subscribeSocket.send(request)
+    }
+
+    function handleSubscriptionEvent(response) {
+        if (response.error) {
+            if (response.error.includes("unknown method") && response.error.includes("subscribe")) {
+                if (!shownOutdatedError) {
+                    console.error("DMSService: Server does not support subscribe method")
+                    ToastService.showError(
+                        I18n.tr("DMS out of date"),
+                        I18n.tr("To update, run the following command:"),
+                        updateCommand
+                    )
+                    shownOutdatedError = true
+                }
+            }
+            return
+        }
+
+        if (!response.result) {
+            return
+        }
+
+        const service = response.result.service
+        const data = response.result.data
+
+        if (service === "server") {
+            apiVersion = data.apiVersion || 0
+            capabilities = data.capabilities || []
+
+            console.log("DMSService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
+
+            if (apiVersion < expectedApiVersion) {
+                ToastService.showError("DMS server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")
+            }
+        } else if (service === "network") {
+            networkStateUpdate(data)
+        } else if (service === "loginctl") {
+            if (data.event) {
+                loginctlEvent(data)
+            } else {
+                loginctlStateUpdate(data)
             }
         }
     }
@@ -102,8 +271,8 @@ Singleton {
         if (!isConnected) {
             if (callback) {
                 callback({
-                             "error": "not connected to DMS socket"
-                         })
+                    "error": "not connected to DMS socket"
+                })
             }
             return
         }
@@ -123,21 +292,10 @@ Singleton {
             pendingRequests[id] = callback
         }
 
-        socket.send(request)
+        requestSocket.send(request)
     }
 
-    property var networkUpdateCallback: null
-
     function handleResponse(response) {
-        if (response.id === undefined && response.result) {
-            if (response.result.type === "state_changed" && response.result.data) {
-                if (networkUpdateCallback) {
-                    networkUpdateCallback(response.result.data)
-                }
-            }
-            return
-        }
-
         const callback = pendingRequests[response.id]
 
         if (callback) {

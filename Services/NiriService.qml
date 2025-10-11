@@ -424,7 +424,7 @@ Singleton {
             validateProcess.running = true
         } else {
             configValidationOutput = ""
-            if (ToastService.toastVisible && ToastService.currentLevel === ToastService.levelError) {
+            if (ToastService.toastVisible && ToastService.currentLevel === ToastService.levelError && ToastService.currentMessage.startsWith("niri:")) {
                 ToastService.hideToast()
             }
             fetchOutputs()

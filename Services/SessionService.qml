@@ -46,7 +46,6 @@ Singleton {
     signal prepareForSleep()
     signal loginctlStateChanged()
 
-    property bool subscriptionConnected: false
     property bool stateInitialized: false
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
@@ -68,8 +67,7 @@ Singleton {
             if (socketPath && socketPath.length > 0) {
                 checkDMSCapabilities()
             } else {
-                console.log("SessionService: DMS_SOCKET not set, using fallback")
-                initFallbackLoginctl()
+                console.log("SessionService: DMS_SOCKET not set")
             }
         }
     }
@@ -300,60 +298,36 @@ Singleton {
 
         function onLoginctlLockIntegrationChanged() {
             if (SessionData.loginctlLockIntegration) {
-                if (socketPath && socketPath.length > 0) {
-                    checkDMSCapabilities()
-                } else {
-                    initFallbackLoginctl()
+                if (socketPath && socketPath.length > 0 && loginctlAvailable) {
+                    if (!stateInitialized) {
+                        stateInitialized = true
+                        getLoginctlState()
+                        syncLockBeforeSuspend()
+                    }
                 }
             } else {
-                subscriptionSocket.connected = false
-                lockStateMonitorFallback.running = false
-                loginctlAvailable = false
                 stateInitialized = false
             }
         }
-    }
 
-    DankSocket {
-        id: subscriptionSocket
-        path: root.socketPath
-        connected: loginctlAvailable && SessionData.loginctlLockIntegration
-
-        onConnectionStateChanged: {
-            root.subscriptionConnected = connected
-        }
-
-        parser: SplitParser {
-            onRead: line => {
-                if (!line || line.length === 0) {
-                    return
-                }
-
-                try {
-                    const response = JSON.parse(line)
-
-                    if (response.capabilities) {
-                        Qt.callLater(() => sendSubscribeRequest())
-                        return
-                    }
-
-                    if (response.result && response.result.type === "loginctl_event") {
-                        handleLoginctlEvent(response.result)
-                    } else if (response.result && response.result.type === "state_changed" && response.result.data) {
-                        updateLoginctlState(response.result.data)
-                    }
-                } catch (e) {
-                    console.warn("SessionService: Failed to parse subscription response:", line, e)
-                }
+        function onLockBeforeSuspendChanged() {
+            if (SessionData.loginctlLockIntegration) {
+                syncLockBeforeSuspend()
             }
         }
     }
 
-    function sendSubscribeRequest() {
-        subscriptionSocket.send({
-            "id": 2,
-            "method": "loginctl.subscribe"
-        })
+    Connections {
+        target: DMSService
+        enabled: SessionData.loginctlLockIntegration
+
+        function onLoginctlStateUpdate(data) {
+            updateLoginctlState(data)
+        }
+
+        function onLoginctlEvent(event) {
+            handleLoginctlEvent(event)
+        }
     }
 
     function checkDMSCapabilities() {
@@ -365,20 +339,16 @@ Singleton {
             return
         }
 
-        if (!SessionData.loginctlLockIntegration) {
-            return
-        }
-
         if (DMSService.capabilities.includes("loginctl")) {
             loginctlAvailable = true
-            if (!stateInitialized) {
+            if (SessionData.loginctlLockIntegration && !stateInitialized) {
                 stateInitialized = true
                 getLoginctlState()
-                subscriptionSocket.connected = true
+                syncLockBeforeSuspend()
             }
         } else {
-            console.log("SessionService: loginctl capability not available in DMS, using fallback")
-            initFallbackLoginctl()
+            loginctlAvailable = false
+            console.log("SessionService: loginctl capability not available in DMS")
         }
     }
 
@@ -388,6 +358,20 @@ Singleton {
         DMSService.sendRequest("loginctl.getState", null, response => {
             if (response.result) {
                 updateLoginctlState(response.result)
+            }
+        })
+    }
+
+    function syncLockBeforeSuspend() {
+        if (!loginctlAvailable) return
+
+        DMSService.sendRequest("loginctl.setLockBeforeSuspend", {
+            enabled: SessionData.lockBeforeSuspend
+        }, response => {
+            if (response.error) {
+                console.warn("SessionService: Failed to sync lock before suspend:", response.error)
+            } else {
+                console.log("SessionService: Synced lock before suspend:", SessionData.lockBeforeSuspend)
             }
         })
     }
@@ -405,13 +389,6 @@ Singleton {
         userName = state.userName || ""
         seat = state.seat || ""
         display = state.display || ""
-
-        const wasPreparing = preparingForSleep
-        preparingForSleep = state.preparingForSleep || false
-
-        if (preparingForSleep && !wasPreparing) {
-            prepareForSleep()
-        }
 
         if (locked && !wasLocked) {
             sessionLocked()
@@ -431,90 +408,6 @@ Singleton {
             locked = false
             lockedHint = false
             sessionUnlocked()
-        } else if (event.event === "PrepareForSleep") {
-            preparingForSleep = event.data?.sleeping || false
-            if (preparingForSleep) {
-                prepareForSleep()
-            }
-        }
-    }
-
-    function initFallbackLoginctl() {
-        getSessionPathFallback.running = true
-    }
-
-    Process {
-        id: getSessionPathFallback
-        command: ["gdbus", "call", "--system", "--dest", "org.freedesktop.login1", "--object-path", "/org/freedesktop/login1", "--method", "org.freedesktop.login1.Manager.GetSession", Quickshell.env("XDG_SESSION_ID") || "self"]
-        running: false
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const match = text.match(/objectpath '([^']+)'/)
-                if (match) {
-                    sessionPath = match[1]
-                    console.log("SessionService: Found session path (fallback):", sessionPath)
-                    checkCurrentLockStateFallback.running = true
-                    lockStateMonitorFallback.running = true
-                }
-            }
-        }
-    }
-
-    Process {
-        id: checkCurrentLockStateFallback
-        command: sessionPath ? ["gdbus", "call", "--system", "--dest", "org.freedesktop.login1", "--object-path", sessionPath, "--method", "org.freedesktop.DBus.Properties.Get", "org.freedesktop.login1.Session", "LockedHint"] : []
-        running: false
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                if (text.includes("true")) {
-                    locked = true
-                    lockedHint = true
-                    sessionLocked()
-                }
-            }
-        }
-    }
-
-    Process {
-        id: lockStateMonitorFallback
-        command: sessionPath ? ["gdbus", "monitor", "--system", "--dest", "org.freedesktop.login1"] : []
-        running: false
-
-        stdout: SplitParser {
-            splitMarker: "\n"
-            onRead: line => {
-                if (sessionPath && line.includes(sessionPath)) {
-                    if (line.includes("org.freedesktop.login1.Session.Lock")) {
-                        locked = true
-                        lockedHint = true
-                        sessionLocked()
-                    } else if (line.includes("org.freedesktop.login1.Session.Unlock")) {
-                        locked = false
-                        lockedHint = false
-                        sessionUnlocked()
-                    } else if (line.includes("LockedHint") && line.includes("true")) {
-                        locked = true
-                        lockedHint = true
-                        loginctlStateChanged()
-                    } else if (line.includes("LockedHint") && line.includes("false")) {
-                        locked = false
-                        lockedHint = false
-                        loginctlStateChanged()
-                    }
-                }
-                if (line.includes("PrepareForSleep") && line.includes("true") && SessionData.lockBeforeSuspend) {
-                    preparingForSleep = true
-                    prepareForSleep()
-                }
-            }
-        }
-
-        onExited: exitCode => {
-            if (exitCode !== 0) {
-                console.warn("SessionService: gdbus monitor fallback failed, exit code:", exitCode)
-            }
         }
     }
 

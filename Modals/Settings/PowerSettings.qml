@@ -67,12 +67,26 @@ Item {
                         onToggled: checked => SettingsData.setLockScreenShowPowerActions(checked)
                     }
 
+                    StyledText {
+                        text: I18n.tr("loginctl not available - lock integration requires DMS socket connection")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.warning
+                        visible: !SessionService.loginctlAvailable
+                        width: parent.width
+                        wrapMode: Text.Wrap
+                    }
+
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Enable loginctl lock integration")
                         description: "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen."
-                        checked: SessionData.loginctlLockIntegration
-                        onToggled: checked => SessionData.setLoginctlLockIntegration(checked)
+                        checked: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
+                        enabled: SessionService.loginctlAvailable
+                        onToggled: checked => {
+                            if (SessionService.loginctlAvailable) {
+                                SessionData.setLoginctlLockIntegration(checked)
+                            }
+                        }
                     }
 
                     DankToggle {
@@ -80,7 +94,7 @@ Item {
                         text: I18n.tr("Lock before suspend")
                         description: "Automatically lock the screen when the system prepares to suspend"
                         checked: SessionData.lockBeforeSuspend
-                        visible: SessionData.loginctlLockIntegration
+                        visible: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
                         onToggled: checked => SessionData.setLockBeforeSuspend(checked)
                     }
                 }
