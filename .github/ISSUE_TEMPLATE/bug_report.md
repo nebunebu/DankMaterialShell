@@ -26,6 +26,14 @@ assignees: ""
 - [ ] Hyprland
 - [ ] Other (specify)
 
+## Distribution
+
+<!-- Arch, Fedora, Debian, etc. -->
+
+## dms version
+
+<!-- Output of dms version command -->
+
 ## Description
 
 <!-- Brief description of the issue -->
