@@ -1,18 +1,7 @@
-# Spec for DMS - Produces stable and git builds
+# Spec for DMS - uses rpkg macros for both stable and git builds
 
 %global debug_package %{nil}
-
-%global version_tag %(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "0.0.0")
-%global commit_count %(git rev-list --count HEAD 2>/dev/null || echo "0")
-%global short_commit %(git rev-parse --short=8 HEAD 2>/dev/null || echo "00000000")
-%global on_tag %([ "$(git describe --exact-match --tags 2>/dev/null | sed 's/^v//')" = "%{version_tag}" ] && echo 1 || echo 0)
-
-%if 0%{?on_tag}
-%global version %{version_tag}
-%else
-%global version 0.0.git.%{commit_count}.%{short_commit}
-%endif
-
+%global version {{{ git_dir_version }}}
 %global pkg_summary DankMaterialShell - Material 3 inspired shell for Wayland compositors
 
 Name:           dms
@@ -22,14 +11,15 @@ Summary:        %{pkg_summary}
 
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/DankMaterialShell
-VCS:            git+https://github.com/AvengeMedia/DankMaterialShell.git
-Source0:        https://github.com/AvengeMedia/DankMaterialShell/archive/%{short_commit}/DankMaterialShell-%{short_commit}.tar.gz
+VCS:            {{{ git_dir_vcs }}}
+Source0:        {{{ git_dir_pack }}}
 
 # DMS CLI tool sources - compiled from danklinux
 Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz#/danklinux-master.tar.gz
 
 BuildRequires:  git-core
 BuildRequires:  golang >= 1.21
+BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
 # Requires:     (quickshell or quickshell-git)
@@ -72,7 +62,7 @@ Command-line interface for DankMaterialShell configuration and management.
 Provides native DBus bindings, NetworkManager integration, and system utilities.
 
 %prep
-%setup -q -n DankMaterialShell-%{short_commit}
+{{{ git_dir_setup_macro }}}
 
 # Extract danklinux for building dms CLI
 tar -xzf %{SOURCE1} -C %{_builddir}
@@ -111,5 +101,4 @@ rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms/.github
 %{_bindir}/dms
 
 %changelog
-* %(date "+%a %b %d %Y") AvengeMedia <noreply@avengemedia.com> - %{version}-%{release}
-- Automated build from git commit %{short_commit}
+{{{ git_dir_changelog }}}
