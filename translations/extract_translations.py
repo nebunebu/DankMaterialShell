@@ -8,7 +8,7 @@ from collections import defaultdict
 def extract_qstr_strings(root_dir):
     translations = defaultdict(list)
     qstr_pattern = re.compile(r'qsTr\(["\']([^"\']+)["\']\)')
-    i18n_pattern = re.compile(r'I18n\.tr\(["\']([^"\']+)["\'],\s*["\']([^"\']+)["\']\)')
+    i18n_pattern = re.compile(r'I18n\.tr\(["\']([^"\']+)["\']\)')
 
     for qml_file in Path(root_dir).rglob('*.qml'):
         relative_path = qml_file.relative_to(root_dir)
@@ -24,8 +24,7 @@ def extract_qstr_strings(root_dir):
 
                 i18n_matches = i18n_pattern.findall(line)
                 for match in i18n_matches:
-                    term = match[0]
-                    translations[term].append({
+                    translations[match].append({
                         'file': str(relative_path),
                         'line': line_num
                     })

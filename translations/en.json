@@ -44,7 +44,7 @@
   {
     "term": "3rd party",
     "context": "3rd party",
-    "reference": "Modules/Settings/PluginsTab.qml:992",
+    "reference": "Modules/Settings/PluginsTab.qml:998",
     "comment": ""
   },
   {
@@ -56,7 +56,7 @@
   {
     "term": "A file with this name already exists. Do you want to overwrite it?",
     "context": "A file with this name already exists. Do you want to overwrite it?",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:929",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:928",
     "comment": ""
   },
   {
@@ -104,7 +104,7 @@
   {
     "term": "Add Widget to ",
     "context": "Add Widget to ",
-    "reference": "Modules/Settings/WidgetSelectionPopup.qml:206",
+    "reference": "Modules/Settings/WidgetSelectionPopup.qml:202",
     "comment": ""
   },
   {
@@ -134,19 +134,19 @@
   {
     "term": "Always Show OSD Percentage",
     "context": "Always Show OSD Percentage",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1487",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1538",
     "comment": ""
   },
   {
     "term": "Animation Speed",
     "context": "Animation Speed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1768",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1819",
     "comment": ""
   },
   {
     "term": "Animations",
     "context": "Animations",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1755",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1806",
     "comment": ""
   },
   {
@@ -158,7 +158,7 @@
   {
     "term": "Applications",
     "context": "Applications",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:191",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:188",
     "comment": ""
   },
   {
@@ -170,13 +170,13 @@
   {
     "term": "Apply GTK Colors",
     "context": "Apply GTK Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1081",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1082",
     "comment": ""
   },
   {
     "term": "Apply Qt Colors",
     "context": "Apply Qt Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1117",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1118",
     "comment": ""
   },
   {
@@ -272,7 +272,7 @@
   {
     "term": "Auto-location",
     "context": "Auto-location",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1314",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1365",
     "comment": ""
   },
   {
@@ -284,7 +284,7 @@
   {
     "term": "Automatic Control",
     "context": "Automatic Control",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1107",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1158",
     "comment": ""
   },
   {
@@ -380,7 +380,25 @@
   {
     "term": "Border",
     "context": "Border",
-    "reference": "Modules/Settings/DankBarTab.qml:1061",
+    "reference": "Modules/Settings/DankBarTab.qml:1197",
+    "comment": ""
+  },
+  {
+    "term": "Border Color",
+    "context": "Border Color",
+    "reference": "Modules/Settings/DankBarTab.qml:1227",
+    "comment": ""
+  },
+  {
+    "term": "Border Opacity",
+    "context": "Border Opacity",
+    "reference": "Modules/Settings/DankBarTab.qml:1279, Modules/Settings/DankBarTab.qml:1293",
+    "comment": ""
+  },
+  {
+    "term": "Border Thickness",
+    "context": "Border Thickness",
+    "reference": "Modules/Settings/DankBarTab.qml:1350, Modules/Settings/DankBarTab.qml:1364",
     "comment": ""
   },
   {
@@ -398,7 +416,7 @@
   {
     "term": "Browse Plugins",
     "context": "Browse Plugins",
-    "reference": "Modules/Settings/PluginsTab.qml:785",
+    "reference": "Modules/Settings/PluginsTab.qml:791",
     "comment": ""
   },
   {
@@ -434,7 +452,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/DankColorPickerModal.qml:548, Modals/WifiPasswordModal.qml:300, Modals/FileBrowser/FileBrowserModal.qml:951, Modules/Lock/LockScreenContent.qml:1247, Modules/Greetd/GreeterContent.qml:1328, Modules/Settings/PluginsTab.qml:1214",
+    "reference": "Modals/DankColorPickerModal.qml:548, Modals/WifiPasswordModal.qml:300, Modals/FileBrowser/FileBrowserModal.qml:950, Modules/Settings/PluginsTab.qml:1220",
     "comment": ""
   },
   {
@@ -446,7 +464,7 @@
   {
     "term": "Center Section",
     "context": "Center Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1375",
+    "reference": "Modules/Settings/DankBarTab.qml:1720",
     "comment": ""
   },
   {
@@ -468,6 +486,12 @@
     "comment": ""
   },
   {
+    "term": "Choose the border accent color",
+    "context": "Choose the border accent color",
+    "reference": "Modules/Settings/DankBarTab.qml:1234",
+    "comment": ""
+  },
+  {
     "term": "Choose the logo displayed on the launcher button in DankBar",
     "context": "Choose the logo displayed on the launcher button in DankBar",
     "reference": "Modules/Settings/LauncherTab.qml:75",
@@ -476,13 +500,13 @@
   {
     "term": "Choose where notification popups appear on screen",
     "context": "Choose where notification popups appear on screen",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1437",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1488",
     "comment": ""
   },
   {
     "term": "Clear",
     "context": "Clear",
-    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:488, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
     "comment": ""
   },
   {
@@ -536,7 +560,7 @@
   {
     "term": "Color temperature for night mode",
     "context": "Color temperature for night mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1089",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1140",
     "comment": ""
   },
   {
@@ -608,7 +632,7 @@
   {
     "term": "Control the speed of animations throughout the interface",
     "context": "Control the speed of animations throughout the interface",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1775",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1826",
     "comment": ""
   },
   {
@@ -620,7 +644,7 @@
   {
     "term": "Copied!",
     "context": "Copied!",
-    "reference": "Modules/Toast.qml:283",
+    "reference": "Modules/Toast.qml:17",
     "comment": ""
   },
   {
@@ -710,7 +734,7 @@
   {
     "term": "DEMO MODE - Click anywhere to exit",
     "context": "DEMO MODE - Click anywhere to exit",
-    "reference": "Modules/Lock/LockScreenContent.qml:612",
+    "reference": "Modules/Lock/LockScreenContent.qml:591",
     "comment": ""
   },
   {
@@ -758,7 +782,7 @@
   {
     "term": "DankBar Font Scale",
     "context": "DankBar Font Scale",
-    "reference": "Modules/Settings/DankBarTab.qml:1091",
+    "reference": "Modules/Settings/DankBarTab.qml:1436",
     "comment": ""
   },
   {
@@ -818,7 +842,7 @@
   {
     "term": "Display Settings",
     "context": "Display Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1040",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1090",
     "comment": ""
   },
   {
@@ -842,7 +866,7 @@
   {
     "term": "Display volume and brightness percentage values by default in OSD popups",
     "context": "Display volume and brightness percentage values by default in OSD popups",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1488",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1539",
     "comment": ""
   },
   {
@@ -884,7 +908,7 @@
   {
     "term": "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.",
     "context": "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.",
-    "reference": "Modules/Settings/DankBarTab.qml:1273",
+    "reference": "Modules/Settings/DankBarTab.qml:1618",
     "comment": ""
   },
   {
@@ -896,7 +920,7 @@
   {
     "term": "Edge Spacing (0 = edge-to-edge)",
     "context": "Edge Spacing (0 = edge-to-edge)",
-    "reference": "Modules/Settings/DankBarTab.qml:946",
+    "reference": "Modules/Settings/DankBarTab.qml:950, Modules/Settings/DankBarTab.qml:964",
     "comment": ""
   },
   {
@@ -930,9 +954,15 @@
     "comment": ""
   },
   {
+    "term": "Enable loginctl lock integration",
+    "context": "Enable loginctl lock integration",
+    "reference": "Modals/Settings/PowerSettings.qml:224",
+    "comment": ""
+  },
+  {
     "term": "End",
     "context": "End",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1263",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1314",
     "comment": ""
   },
   {
@@ -950,13 +980,19 @@
   {
     "term": "Enter filename...",
     "context": "Enter filename...",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:784",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:783",
     "comment": ""
   },
   {
     "term": "Exclusive Zone Offset",
     "context": "Exclusive Zone Offset",
-    "reference": "Modules/Settings/DankBarTab.qml:974",
+    "reference": "Modules/Settings/DankBarTab.qml:1022, Modules/Settings/DankBarTab.qml:1036",
+    "comment": ""
+  },
+  {
+    "term": "Execute templates from ~/.config/matugen/config.toml",
+    "context": "Execute templates from ~/.config/matugen/config.toml",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1032",
     "comment": ""
   },
   {
@@ -974,7 +1010,7 @@
   {
     "term": "File Already Exists",
     "context": "File Already Exists",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:921",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:920",
     "comment": ""
   },
   {
@@ -1004,19 +1040,19 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/PersonalizationTab.qml:1534",
+    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/PersonalizationTab.qml:1585",
     "comment": ""
   },
   {
     "term": "Font Scale",
     "context": "Font Scale",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1656",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1707",
     "comment": ""
   },
   {
     "term": "Font Settings",
     "context": "Font Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1525",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1576",
     "comment": ""
   },
   {
@@ -1028,7 +1064,7 @@
   {
     "term": "Font Weight",
     "context": "Font Weight",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1555",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1606",
     "comment": ""
   },
   {
@@ -1106,7 +1142,7 @@
   {
     "term": "Goth Corners",
     "context": "Goth Corners",
-    "reference": "Modules/Settings/DankBarTab.qml:1050",
+    "reference": "Modules/Settings/DankBarTab.qml:1182",
     "comment": ""
   },
   {
@@ -1148,7 +1184,7 @@
   {
     "term": "Hibernate",
     "context": "Hibernate",
-    "reference": "Modals/PowerMenuModal.qml:43, Modals/PowerMenuModal.qml:311",
+    "reference": "Modals/PowerMenuModal.qml:43, Modals/PowerMenuModal.qml:311, Modules/Lock/LockPowerMenu.qml:310",
     "comment": ""
   },
   {
@@ -1166,7 +1202,7 @@
   {
     "term": "Hour",
     "context": "Hour",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1190",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1241",
     "comment": ""
   },
   {
@@ -1184,13 +1220,13 @@
   {
     "term": "I Understand",
     "context": "I Understand",
-    "reference": "Modules/Settings/PluginsTab.qml:1220",
+    "reference": "Modules/Settings/PluginsTab.qml:1226",
     "comment": ""
   },
   {
     "term": "Icon Theme",
     "context": "Icon Theme",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:996",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:997",
     "comment": ""
   },
   {
@@ -1208,7 +1244,7 @@
   {
     "term": "Idle monitoring not supported - requires newer Quickshell version",
     "context": "Idle monitoring not supported - requires newer Quickshell version",
-    "reference": "Modals/Settings/PowerSettings.qml:231",
+    "reference": "Modals/Settings/PowerSettings.qml:240",
     "comment": ""
   },
   {
@@ -1232,7 +1268,7 @@
   {
     "term": "Install plugins from the DMS plugin registry",
     "context": "Install plugins from the DMS plugin registry",
-    "reference": "Modules/Settings/PluginsTab.qml:834",
+    "reference": "Modules/Settings/PluginsTab.qml:840",
     "comment": ""
   },
   {
@@ -1274,13 +1310,13 @@
   {
     "term": "Latitude",
     "context": "Latitude",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1344, Modules/Settings/WeatherTab.qml:251",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1395, Modules/Settings/WeatherTab.qml:251",
     "comment": ""
   },
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:251, Modules/AppDrawer/AppDrawerPopout.qml:892",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:253, Modules/AppDrawer/AppDrawerPopout.qml:891",
     "comment": ""
   },
   {
@@ -1292,7 +1328,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:311, Modules/AppDrawer/AppDrawerPopout.qml:952, Modules/Dock/DockContextMenu.qml:426",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:315, Modules/AppDrawer/AppDrawerPopout.qml:951, Modules/Dock/DockContextMenu.qml:426",
     "comment": ""
   },
   {
@@ -1310,7 +1346,7 @@
   {
     "term": "Light Mode",
     "context": "Light Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1050",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1100",
     "comment": ""
   },
   {
@@ -1322,7 +1358,7 @@
   {
     "term": "Loading plugins...",
     "context": "Loading plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:892",
+    "reference": "Modules/Settings/PluginsTab.qml:898",
     "comment": ""
   },
   {
@@ -1334,7 +1370,7 @@
   {
     "term": "Lock Screen",
     "context": "Lock Screen",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1826",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1877",
     "comment": ""
   },
   {
@@ -1346,13 +1382,13 @@
   {
     "term": "Lock before suspend",
     "context": "Lock before suspend",
-    "reference": "Modals/Settings/PowerSettings.qml:224",
+    "reference": "Modals/Settings/PowerSettings.qml:232",
     "comment": ""
   },
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:35, Modals/PowerMenuModal.qml:204, Modules/ControlCenter/PowerMenu.qml:121",
+    "reference": "Modals/PowerMenuModal.qml:35, Modals/PowerMenuModal.qml:204, Modules/Lock/LockPowerMenu.qml:207, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -1364,7 +1400,7 @@
   {
     "term": "Longitude",
     "context": "Longitude",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1367, Modules/Settings/WeatherTab.qml:302",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1418, Modules/Settings/WeatherTab.qml:302",
     "comment": ""
   },
   {
@@ -1382,7 +1418,7 @@
   {
     "term": "Manual Coordinates",
     "context": "Manual Coordinates",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1330",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1381",
     "comment": ""
   },
   {
@@ -1430,7 +1466,7 @@
   {
     "term": "Media Players (",
     "context": "Media Players (",
-    "reference": "Modules/DankDash/MediaPlayerTab.qml:567",
+    "reference": "Modules/DankDash/MediaPlayerTab.qml:566",
     "comment": ""
   },
   {
@@ -1454,7 +1490,7 @@
   {
     "term": "Minute",
     "context": "Minute",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1199",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1250",
     "comment": ""
   },
   {
@@ -1478,7 +1514,7 @@
   {
     "term": "Monospace Font",
     "context": "Monospace Font",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1621",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1672",
     "comment": ""
   },
   {
@@ -1562,7 +1598,7 @@
   {
     "term": "Night Mode",
     "context": "Night Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1071",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1121",
     "comment": ""
   },
   {
@@ -1574,7 +1610,7 @@
   {
     "term": "No Background",
     "context": "No Background",
-    "reference": "Modules/Settings/DankBarTab.qml:1039",
+    "reference": "Modules/Settings/DankBarTab.qml:1171",
     "comment": ""
   },
   {
@@ -1622,13 +1658,13 @@
   {
     "term": "No plugins found",
     "context": "No plugins found",
-    "reference": "Modules/Settings/PluginsTab.qml:1116",
+    "reference": "Modules/Settings/PluginsTab.qml:1122",
     "comment": ""
   },
   {
     "term": "No plugins found.",
     "context": "No plugins found.",
-    "reference": "Modules/Settings/PluginsTab.qml:566",
+    "reference": "Modules/Settings/PluginsTab.qml:569",
     "comment": ""
   },
   {
@@ -1670,7 +1706,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1427",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1478",
     "comment": ""
   },
   {
@@ -1742,7 +1778,7 @@
   {
     "term": "Overwrite",
     "context": "Overwrite",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:977",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:976",
     "comment": ""
   },
   {
@@ -1784,7 +1820,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:108, Modals/Spotlight/SpotlightContextMenu.qml:111, Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:379",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:756, Modules/Dock/DockContextMenu.qml:379",
     "comment": ""
   },
   {
@@ -1796,7 +1832,7 @@
   {
     "term": "Place plugins in",
     "context": "Place plugins in",
-    "reference": "Modules/Settings/PluginsTab.qml:566",
+    "reference": "Modules/Settings/PluginsTab.qml:569",
     "comment": ""
   },
   {
@@ -1826,7 +1862,7 @@
   {
     "term": "Popup Position",
     "context": "Popup Position",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1436",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1487",
     "comment": ""
   },
   {
@@ -1850,13 +1886,13 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:51, Modals/PowerMenuModal.qml:419, Modules/ControlCenter/PowerMenu.qml:271",
+    "reference": "Modals/PowerMenuModal.qml:51, Modals/PowerMenuModal.qml:419, Modules/Lock/LockPowerMenu.qml:430, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:147, Modules/ControlCenter/PowerMenu.qml:68",
+    "reference": "Modals/PowerMenuModal.qml:147, Modules/Lock/LockPowerMenu.qml:152, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
@@ -1896,8 +1932,8 @@
     "comment": ""
   },
   {
-    "term": "QML (Qt Modeling Language)",
-    "context": "QML (Qt Modeling Language)",
+    "term": "QML, JavaScript, Go",
+    "context": "QML, JavaScript, Go",
     "reference": "Modules/Settings/AboutTab.qml:355",
     "comment": ""
   },
@@ -1928,7 +1964,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/ControlCenter/PowerMenu.qml:221",
+    "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/Lock/LockPowerMenu.qml:370, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -1958,7 +1994,13 @@
   {
     "term": "Reset",
     "context": "Reset",
-    "reference": "Modules/Settings/DankBarTab.qml:1231, Modules/ControlCenter/Components/EditControls.qml:226",
+    "reference": "Modules/Settings/DankBarTab.qml:1576, Modules/ControlCenter/Components/EditControls.qml:226",
+    "comment": ""
+  },
+  {
+    "term": "Run User Templates",
+    "context": "Run User Templates",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1025",
     "comment": ""
   },
   {
@@ -1982,7 +2024,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:817, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:476",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:816, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:476",
     "comment": ""
   },
   {
@@ -2000,13 +2042,13 @@
   {
     "term": "Scale DankBar font sizes independently",
     "context": "Scale DankBar font sizes independently",
-    "reference": "Modules/Settings/DankBarTab.qml:1098",
+    "reference": "Modules/Settings/DankBarTab.qml:1443",
     "comment": ""
   },
   {
     "term": "Scale all font sizes",
     "context": "Scale all font sizes",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1663",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1714",
     "comment": ""
   },
   {
@@ -2030,7 +2072,7 @@
   {
     "term": "Search plugins...",
     "context": "Search plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:856",
+    "reference": "Modules/Settings/PluginsTab.qml:862",
     "comment": ""
   },
   {
@@ -2054,7 +2096,7 @@
   {
     "term": "Select a widget to add to the ",
     "context": "Select a widget to add to the ",
-    "reference": "Modules/Settings/WidgetSelectionPopup.qml:215",
+    "reference": "Modules/Settings/WidgetSelectionPopup.qml:211",
     "comment": ""
   },
   {
@@ -2066,7 +2108,7 @@
   {
     "term": "Select font weight",
     "context": "Select font weight",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1556",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1607",
     "comment": ""
   },
   {
@@ -2078,13 +2120,13 @@
   {
     "term": "Select monospace font for process list and technical displays",
     "context": "Select monospace font for process list and technical displays",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1622",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1673",
     "comment": ""
   },
   {
     "term": "Select system font family",
     "context": "Select system font family",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1535",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1586",
     "comment": ""
   },
   {
@@ -2120,7 +2162,7 @@
   {
     "term": "Shift+Del: Clear All • Esc: Close",
     "context": "Shift+Del: Clear All • Esc: Close",
-    "reference": "Modals/Clipboard/ClipboardKeyboardHints.qml:29",
+    "reference": "Modals/Clipboard/ClipboardKeyboardHints.qml:9",
     "comment": ""
   },
   {
@@ -2138,7 +2180,7 @@
   {
     "term": "Show Power Actions",
     "context": "Show Power Actions",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1836",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1887",
     "comment": ""
   },
   {
@@ -2198,7 +2240,7 @@
   {
     "term": "Size",
     "context": "Size",
-    "reference": "Modules/ProcessList/SystemTab.qml:456, Modules/Settings/DankBarTab.qml:1002",
+    "reference": "Modules/ProcessList/SystemTab.qml:456, Modules/Settings/DankBarTab.qml:1094, Modules/Settings/DankBarTab.qml:1108",
     "comment": ""
   },
   {
@@ -2222,13 +2264,13 @@
   {
     "term": "Square Corners",
     "context": "Square Corners",
-    "reference": "Modules/Settings/DankBarTab.qml:1028",
+    "reference": "Modules/Settings/DankBarTab.qml:1160",
     "comment": ""
   },
   {
     "term": "Start",
     "context": "Start",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1215",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1266",
     "comment": ""
   },
   {
@@ -2258,7 +2300,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/ControlCenter/PowerMenu.qml:171",
+    "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/Lock/LockPowerMenu.qml:258, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {
@@ -2276,7 +2318,7 @@
   {
     "term": "Switch User",
     "context": "Switch User",
-    "reference": "Modules/Greetd/GreeterContent.qml:552",
+    "reference": "Modules/Greetd/GreeterContent.qml:567",
     "comment": ""
   },
   {
@@ -2288,7 +2330,7 @@
   {
     "term": "System App Theming",
     "context": "System App Theming",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1049",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1050",
     "comment": ""
   },
   {
@@ -2348,7 +2390,7 @@
   {
     "term": "Temperature",
     "context": "Temperature",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1088",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1139",
     "comment": ""
   },
   {
@@ -2384,13 +2426,13 @@
   {
     "term": "Third-Party Plugin Warning",
     "context": "Third-Party Plugin Warning",
-    "reference": "Modules/Settings/PluginsTab.qml:1165",
+    "reference": "Modules/Settings/PluginsTab.qml:1171",
     "comment": ""
   },
   {
     "term": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
     "context": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
-    "reference": "Modules/Settings/PluginsTab.qml:1175",
+    "reference": "Modules/Settings/PluginsTab.qml:1181",
     "comment": ""
   },
   {
@@ -2450,7 +2492,7 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:111, Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:379",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:756, Modules/Dock/DockContextMenu.qml:379",
     "comment": ""
   },
   {
@@ -2510,7 +2552,7 @@
   {
     "term": "Use light theme instead of dark theme",
     "context": "Use light theme instead of dark theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1051",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1101",
     "comment": ""
   },
   {
@@ -2528,7 +2570,7 @@
   {
     "term": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
     "context": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1388",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1439",
     "comment": ""
   },
   {
@@ -2606,7 +2648,7 @@
   {
     "term": "Widget Management",
     "context": "Widget Management",
-    "reference": "Modules/Settings/DankBarTab.qml:1193",
+    "reference": "Modules/Settings/DankBarTab.qml:1538",
     "comment": ""
   },
   {
@@ -2684,13 +2726,13 @@
   {
     "term": "matugen not detected - dynamic theming unavailable",
     "context": "matugen not detected - dynamic theming unavailable",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1002",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1052",
     "comment": ""
   },
   {
     "term": "official",
     "context": "official",
-    "reference": "Modules/Settings/PluginsTab.qml:972",
+    "reference": "Modules/Settings/PluginsTab.qml:978",
     "comment": ""
   },
   {
@@ -2702,7 +2744,7 @@
   {
     "term": "• Install only from trusted sources",
     "context": "• Install only from trusted sources",
-    "reference": "Modules/Settings/PluginsTab.qml:1198",
+    "reference": "Modules/Settings/PluginsTab.qml:1204",
     "comment": ""
   },
   {
@@ -2732,13 +2774,13 @@
   {
     "term": "• Plugins may contain bugs or security issues",
     "context": "• Plugins may contain bugs or security issues",
-    "reference": "Modules/Settings/PluginsTab.qml:1186",
+    "reference": "Modules/Settings/PluginsTab.qml:1192",
     "comment": ""
   },
   {
     "term": "• Review code before installation when possible",
     "context": "• Review code before installation when possible",
-    "reference": "Modules/Settings/PluginsTab.qml:1192",
+    "reference": "Modules/Settings/PluginsTab.qml:1198",
     "comment": ""
   },
   {

@@ -448,6 +448,27 @@
     "comment": ""
   },
   {
+    "term": "Border Color",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Border Opacity",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Border Thickness",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Brightness",
     "translation": "",
     "context": "",
@@ -540,6 +561,13 @@
   },
   {
     "term": "Choose icon",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Choose the border accent color",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1085,6 +1113,13 @@
     "comment": ""
   },
   {
+    "term": "Enable loginctl lock integration",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "End",
     "translation": "",
     "context": "",
@@ -1114,6 +1149,13 @@
   },
   {
     "term": "Exclusive Zone Offset",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Execute templates from ~/.config/matugen/config.toml",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2212,7 +2254,7 @@
     "comment": ""
   },
   {
-    "term": "QML (Qt Modeling Language)",
+    "term": "QML, JavaScript, Go",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2283,6 +2325,13 @@
   },
   {
     "term": "Reset",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Run User Templates",
     "translation": "",
     "context": "",
     "reference": "",
