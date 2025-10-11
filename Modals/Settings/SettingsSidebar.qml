@@ -12,11 +12,8 @@ Rectangle {
         "text": I18n.tr("Personalization"),
         "icon": "person"
     }, {
-        "text": I18n.tr("Time & Date"),
+        "text": I18n.tr("Time & Weather"),
         "icon": "schedule"
-    }, {
-        "text": I18n.tr("Weather"),
-        "icon": "cloud"
     }, {
         "text": I18n.tr("Dank Bar"),
         "icon": "toolbar"
@@ -36,8 +33,8 @@ Rectangle {
         "text": I18n.tr("Theme & Colors"),
         "icon": "palette"
     }, {
-        "text": I18n.tr("Power"),
-        "icon": "power_settings_new"
+        "text": I18n.tr("Idle & Lock Screen"),
+        "icon": "lock"
     }, {
         "text": I18n.tr("Plugins"),
         "icon": "extension"

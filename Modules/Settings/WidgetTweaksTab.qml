@@ -396,6 +396,151 @@ Item {
                     }
                 }
             }
+
+            StyledRect {
+                width: parent.width
+                height: notificationSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: notificationSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "notifications"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Notification Popups")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: 0
+                        leftPadding: Theme.spacingM
+                        rightPadding: Theme.spacingM
+
+                        DankDropdown {
+                            width: parent.width - parent.leftPadding - parent.rightPadding
+                            text: I18n.tr("Popup Position")
+                            description: I18n.tr("Choose where notification popups appear on screen")
+                            currentValue: {
+                                if (SettingsData.notificationPopupPosition === -1) {
+                                    return "Top Center"
+                                }
+                                switch (SettingsData.notificationPopupPosition) {
+                                case SettingsData.Position.Top:
+                                    return "Top Right"
+                                case SettingsData.Position.Bottom:
+                                    return "Bottom Left"
+                                case SettingsData.Position.Left:
+                                    return "Top Left"
+                                case SettingsData.Position.Right:
+                                    return "Bottom Right"
+                                default:
+                                    return "Top Right"
+                                }
+                            }
+                            options: ["Top Right", "Top Left", "Top Center", "Bottom Right", "Bottom Left"]
+                            onValueChanged: value => {
+                                switch (value) {
+                                case "Top Right":
+                                    SettingsData.setNotificationPopupPosition(SettingsData.Position.Top)
+                                    break
+                                case "Top Left":
+                                    SettingsData.setNotificationPopupPosition(SettingsData.Position.Left)
+                                    break
+                                case "Top Center":
+                                    SettingsData.setNotificationPopupPosition(-1)
+                                    break
+                                case "Bottom Right":
+                                    SettingsData.setNotificationPopupPosition(SettingsData.Position.Right)
+                                    break
+                                case "Bottom Left":
+                                    SettingsData.setNotificationPopupPosition(SettingsData.Position.Bottom)
+                                    break
+                                }
+                                SettingsData.sendTestNotifications()
+                            }
+                        }
+                    }
+                }
+            }
+
+            StyledRect {
+                width: parent.width
+                height: osdRow.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Row {
+                    id: osdRow
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    DankIcon {
+                        name: "tune"
+                        size: Theme.iconSize
+                        color: Theme.primary
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Column {
+                        width: parent.width - Theme.iconSize - Theme.spacingM - osdToggle.width - Theme.spacingM
+                        spacing: Theme.spacingXS
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        StyledText {
+                            text: I18n.tr("Always Show OSD Percentage")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Display volume and brightness percentage values by default in OSD popups")
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                            wrapMode: Text.WordWrap
+                            width: parent.width
+                        }
+                    }
+
+                    DankToggle {
+                        id: osdToggle
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        checked: SettingsData.osdAlwaysShowValue
+                        onToggleCompleted: checked => {
+                                       SettingsData.setOsdAlwaysShowValue(checked)
+                                   }
+                    }
+                }
+            }
         }
     }
 }

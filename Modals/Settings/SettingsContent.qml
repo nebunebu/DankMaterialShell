@@ -35,27 +35,14 @@ FocusScope {
         }
 
         Loader {
-            id: timeLoader
+            id: timeWeatherLoader
 
             anchors.fill: parent
             active: root.currentIndex === 1
             visible: active
             asynchronous: true
 
-            sourceComponent: TimeTab {
-            }
-
-        }
-
-        Loader {
-            id: weatherLoader
-
-            anchors.fill: parent
-            active: root.currentIndex === 2
-            visible: active
-            asynchronous: true
-
-            sourceComponent: WeatherTab {
+            sourceComponent: TimeWeatherTab {
             }
 
         }
@@ -64,7 +51,7 @@ FocusScope {
             id: topBarLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 3
+            active: root.currentIndex === 2
             visible: active
             asynchronous: true
 
@@ -78,7 +65,7 @@ FocusScope {
             id: widgetsLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 4
+            active: root.currentIndex === 3
             visible: active
             asynchronous: true
 
@@ -91,7 +78,7 @@ FocusScope {
             id: dockLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 5
+            active: root.currentIndex === 4
             visible: active
             asynchronous: true
 
@@ -107,7 +94,7 @@ FocusScope {
             id: displaysLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 6
+            active: root.currentIndex === 5
             visible: active
             asynchronous: true
 
@@ -120,7 +107,7 @@ FocusScope {
             id: launcherLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 7
+            active: root.currentIndex === 6
             visible: active
             asynchronous: true
 
@@ -133,7 +120,7 @@ FocusScope {
             id: themeColorsLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 8
+            active: root.currentIndex === 7
             visible: active
             asynchronous: true
 
@@ -146,7 +133,7 @@ FocusScope {
             id: powerLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 9
+            active: root.currentIndex === 8
             visible: active
             asynchronous: true
 
@@ -159,7 +146,7 @@ FocusScope {
             id: pluginsLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 10
+            active: root.currentIndex === 9
             visible: active
             asynchronous: true
 
@@ -173,7 +160,7 @@ FocusScope {
             id: aboutLoader
 
             anchors.fill: parent
-            active: root.currentIndex === 11
+            active: root.currentIndex === 10
             visible: active
             asynchronous: true
 

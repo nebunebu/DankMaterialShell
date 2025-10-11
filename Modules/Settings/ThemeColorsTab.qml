@@ -929,6 +929,238 @@ Item {
                 }
             }
 
+            StyledRect {
+                width: parent.width
+                height: fontSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: fontSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "font_download"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Font Settings")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    DankDropdown {
+                        text: I18n.tr("Font Family")
+                        description: I18n.tr("Select system font family")
+                        currentValue: {
+                            if (SettingsData.fontFamily === SettingsData.defaultFontFamily)
+                                return "Default"
+                            else
+                                return SettingsData.fontFamily || "Default"
+                        }
+                        enableFuzzySearch: true
+                        popupWidthOffset: 100
+                        maxPopupHeight: 400
+                        options: cachedFontFamilies
+                        onValueChanged: value => {
+                                            if (value.startsWith("Default"))
+                                            SettingsData.setFontFamily(SettingsData.defaultFontFamily)
+                                            else
+                                            SettingsData.setFontFamily(value)
+                                        }
+                    }
+
+                    DankDropdown {
+                        text: I18n.tr("Font Weight")
+                        description: I18n.tr("Select font weight")
+                        currentValue: {
+                            switch (SettingsData.fontWeight) {
+                            case Font.Thin:
+                                return "Thin"
+                            case Font.ExtraLight:
+                                return "Extra Light"
+                            case Font.Light:
+                                return "Light"
+                            case Font.Normal:
+                                return "Regular"
+                            case Font.Medium:
+                                return "Medium"
+                            case Font.DemiBold:
+                                return "Demi Bold"
+                            case Font.Bold:
+                                return "Bold"
+                            case Font.ExtraBold:
+                                return "Extra Bold"
+                            case Font.Black:
+                                return "Black"
+                            default:
+                                return "Regular"
+                            }
+                        }
+                        options: ["Thin", "Extra Light", "Light", "Regular", "Medium", "Demi Bold", "Bold", "Extra Bold", "Black"]
+                        onValueChanged: value => {
+                                            var weight
+                                            switch (value) {
+                                                case "Thin":
+                                                weight = Font.Thin
+                                                break
+                                                case "Extra Light":
+                                                weight = Font.ExtraLight
+                                                break
+                                                case "Light":
+                                                weight = Font.Light
+                                                break
+                                                case "Regular":
+                                                weight = Font.Normal
+                                                break
+                                                case "Medium":
+                                                weight = Font.Medium
+                                                break
+                                                case "Demi Bold":
+                                                weight = Font.DemiBold
+                                                break
+                                                case "Bold":
+                                                weight = Font.Bold
+                                                break
+                                                case "Extra Bold":
+                                                weight = Font.ExtraBold
+                                                break
+                                                case "Black":
+                                                weight = Font.Black
+                                                break
+                                                default:
+                                                weight = Font.Normal
+                                                break
+                                            }
+                                            SettingsData.setFontWeight(weight)
+                                        }
+                    }
+
+                    DankDropdown {
+                        text: I18n.tr("Monospace Font")
+                        description: I18n.tr("Select monospace font for process list and technical displays")
+                        currentValue: {
+                            if (SettingsData.monoFontFamily === SettingsData.defaultMonoFontFamily)
+                                return "Default"
+
+                            return SettingsData.monoFontFamily || "Default"
+                        }
+                        enableFuzzySearch: true
+                        popupWidthOffset: 100
+                        maxPopupHeight: 400
+                        options: cachedFontFamilies
+                        onValueChanged: value => {
+                                            if (value === "Default")
+                                            SettingsData.setMonoFontFamily(SettingsData.defaultMonoFontFamily)
+                                            else
+                                            SettingsData.setMonoFontFamily(value)
+                                        }
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 60
+                        radius: Theme.cornerRadius
+                        color: "transparent"
+
+                        Column {
+                            anchors.left: parent.left
+                            anchors.right: fontScaleControls.left
+                            anchors.verticalCenter: parent.verticalCenter
+                            spacing: Theme.spacingXS
+
+                            StyledText {
+                                text: I18n.tr("Font Scale")
+                                font.pixelSize: Theme.fontSizeMedium
+                                font.weight: Font.Medium
+                                color: Theme.surfaceText
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Scale all font sizes")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                width: parent.width
+                            }
+                        }
+
+                        Row {
+                            id: fontScaleControls
+
+                            width: 180
+                            height: 36
+                            anchors.right: parent.right
+                            anchors.rightMargin: 0
+                            anchors.verticalCenter: parent.verticalCenter
+                            spacing: Theme.spacingS
+
+                            DankActionButton {
+                                buttonSize: 32
+                                iconName: "remove"
+                                iconSize: Theme.iconSizeSmall
+                                enabled: SettingsData.fontScale > 1.0
+                                backgroundColor: Theme.surfaceContainerHigh
+                                iconColor: Theme.surfaceText
+                                onClicked: {
+                                    var newScale = Math.max(1.0, SettingsData.fontScale - 0.05)
+                                    SettingsData.setFontScale(newScale)
+                                }
+                            }
+
+                            StyledRect {
+                                width: 60
+                                height: 32
+                                radius: Theme.cornerRadius
+                                color: Theme.surfaceContainerHigh
+                                border.color: Qt.rgba(Theme.outline.r,
+                                                      Theme.outline.g,
+                                                      Theme.outline.b, 0.2)
+                                border.width: 0
+
+                                StyledText {
+                                    anchors.centerIn: parent
+                                    text: (SettingsData.fontScale * 100).toFixed(
+                                              0) + "%"
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    font.weight: Font.Medium
+                                    color: Theme.surfaceText
+                                }
+                            }
+
+                            DankActionButton {
+                                buttonSize: 32
+                                iconName: "add"
+                                iconSize: Theme.iconSizeSmall
+                                enabled: SettingsData.fontScale < 2.0
+                                backgroundColor: Theme.surfaceContainerHigh
+                                iconColor: Theme.surfaceText
+                                onClicked: {
+                                    var newScale = Math.min(2.0,
+                                                            SettingsData.fontScale + 0.05)
+                                    SettingsData.setFontScale(newScale)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             // System Configuration Warning
             Rectangle {
                 width: parent.width

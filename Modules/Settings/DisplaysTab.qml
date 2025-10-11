@@ -78,6 +78,378 @@ Item {
 
             StyledRect {
                 width: parent.width
+                height: gammaSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: gammaSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "brightness_6"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Gamma Control")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    DankToggle {
+                        id: nightModeToggle
+
+                        width: parent.width
+                        text: I18n.tr("Night Mode")
+                        description: "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates."
+                        checked: DisplayService.nightModeEnabled
+                        onToggled: checked => {
+                                       DisplayService.toggleNightMode()
+                                   }
+
+                        Connections {
+                            function onNightModeEnabledChanged() {
+                                nightModeToggle.checked = DisplayService.nightModeEnabled
+                            }
+
+                            target: DisplayService
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: 0
+                        leftPadding: Theme.spacingM
+                        rightPadding: Theme.spacingM
+
+                        DankDropdown {
+                            width: parent.width - parent.leftPadding - parent.rightPadding
+                            text: I18n.tr("Temperature")
+                            description: I18n.tr("Color temperature for night mode")
+                            currentValue: SessionData.nightModeTemperature + "K"
+                            options: {
+                                var temps = []
+                                for (var i = 2500; i <= 6000; i += 500) {
+                                    temps.push(i + "K")
+                                }
+                                return temps
+                            }
+                            onValueChanged: value => {
+                                                var temp = parseInt(value.replace("K", ""))
+                                                SessionData.setNightModeTemperature(temp)
+                                            }
+                        }
+                    }
+
+                    DankToggle {
+                        id: automaticToggle
+                        width: parent.width
+                        text: I18n.tr("Automatic Control")
+                        description: "Only adjust gamma based on time or location rules."
+                        checked: SessionData.nightModeAutoEnabled
+                        onToggled: checked => {
+                                       if (checked && !DisplayService.nightModeEnabled) {
+                                           DisplayService.toggleNightMode()
+                                       } else if (!checked && DisplayService.nightModeEnabled) {
+                                           DisplayService.toggleNightMode()
+                                       }
+                                       SessionData.setNightModeAutoEnabled(checked)
+                                   }
+
+                        Connections {
+                            target: SessionData
+                            function onNightModeAutoEnabledChanged() {
+                                automaticToggle.checked = SessionData.nightModeAutoEnabled
+                            }
+                        }
+                    }
+
+                    Column {
+                        id: automaticSettings
+                        width: parent.width
+                        spacing: Theme.spacingS
+                        visible: SessionData.nightModeAutoEnabled
+                        leftPadding: Theme.spacingM
+
+                        Connections {
+                            target: SessionData
+                            function onNightModeAutoEnabledChanged() {
+                                automaticSettings.visible = SessionData.nightModeAutoEnabled
+                            }
+                        }
+
+                        Item {
+                            width: 200
+                            height: 45 + Theme.spacingM
+
+                            DankTabBar {
+                                id: modeTabBarNight
+                                width: 200
+                                height: 45
+                                model: [{
+                                        "text": "Time",
+                                        "icon": "access_time"
+                                    }, {
+                                        "text": "Location",
+                                        "icon": "place"
+                                    }]
+
+                                Component.onCompleted: {
+                                    currentIndex = SessionData.nightModeAutoMode === "location" ? 1 : 0
+                                    Qt.callLater(updateIndicator)
+                                }
+
+                                onTabClicked: index => {
+                                                  console.log("Tab clicked:", index, "Setting mode to:", index === 1 ? "location" : "time")
+                                                  DisplayService.setNightModeAutomationMode(index === 1 ? "location" : "time")
+                                                  currentIndex = index
+                                              }
+
+                                Connections {
+                                    target: SessionData
+                                    function onNightModeAutoModeChanged() {
+                                        modeTabBarNight.currentIndex = SessionData.nightModeAutoMode === "location" ? 1 : 0
+                                        Qt.callLater(modeTabBarNight.updateIndicator)
+                                    }
+                                }
+                            }
+                        }
+
+                        Column {
+                            property bool isTimeMode: SessionData.nightModeAutoMode === "time"
+                            visible: isTimeMode
+                            spacing: Theme.spacingM
+
+                            Row {
+                                spacing: Theme.spacingM
+                                height: 20
+                                leftPadding: 45
+
+                                StyledText {
+                                    text: I18n.tr("Hour")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceVariantText
+                                    width: 50
+                                    horizontalAlignment: Text.AlignHCenter
+                                    anchors.bottom: parent.bottom
+                                }
+
+                                StyledText {
+                                    text: I18n.tr("Minute")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceVariantText
+                                    width: 50
+                                    horizontalAlignment: Text.AlignHCenter
+                                    anchors.bottom: parent.bottom
+                                }
+                            }
+
+                            Row {
+                                spacing: Theme.spacingM
+                                height: 32
+
+                                StyledText {
+                                    id: startLabel
+                                    text: I18n.tr("Start")
+                                    font.pixelSize: Theme.fontSizeMedium
+                                    color: Theme.surfaceText
+                                    width: 50
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+
+                                DankDropdown {
+                                    width: 60
+                                    height: 32
+                                    text: ""
+                                    currentValue: SessionData.nightModeStartHour.toString()
+                                    options: {
+                                        var hours = []
+                                        for (var i = 0; i < 24; i++) {
+                                            hours.push(i.toString())
+                                        }
+                                        return hours
+                                    }
+                                    onValueChanged: value => {
+                                                        SessionData.setNightModeStartHour(parseInt(value))
+                                                    }
+                                }
+
+                                DankDropdown {
+                                    width: 60
+                                    height: 32
+                                    text: ""
+                                    currentValue: SessionData.nightModeStartMinute.toString().padStart(2, '0')
+                                    options: {
+                                        var minutes = []
+                                        for (var i = 0; i < 60; i += 5) {
+                                            minutes.push(i.toString().padStart(2, '0'))
+                                        }
+                                        return minutes
+                                    }
+                                    onValueChanged: value => {
+                                                        SessionData.setNightModeStartMinute(parseInt(value))
+                                                    }
+                                }
+                            }
+
+                            Row {
+                                spacing: Theme.spacingM
+                                height: 32
+
+                                StyledText {
+                                    text: I18n.tr("End")
+                                    font.pixelSize: Theme.fontSizeMedium
+                                    color: Theme.surfaceText
+                                    width: startLabel.width
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+
+                                DankDropdown {
+                                    width: 60
+                                    height: 32
+                                    text: ""
+                                    currentValue: SessionData.nightModeEndHour.toString()
+                                    options: {
+                                        var hours = []
+                                        for (var i = 0; i < 24; i++) {
+                                            hours.push(i.toString())
+                                        }
+                                        return hours
+                                    }
+                                    onValueChanged: value => {
+                                                        SessionData.setNightModeEndHour(parseInt(value))
+                                                    }
+                                }
+
+                                DankDropdown {
+                                    width: 60
+                                    height: 32
+                                    text: ""
+                                    currentValue: SessionData.nightModeEndMinute.toString().padStart(2, '0')
+                                    options: {
+                                        var minutes = []
+                                        for (var i = 0; i < 60; i += 5) {
+                                            minutes.push(i.toString().padStart(2, '0'))
+                                        }
+                                        return minutes
+                                    }
+                                    onValueChanged: value => {
+                                                        SessionData.setNightModeEndMinute(parseInt(value))
+                                                    }
+                                }
+                            }
+                        }
+
+                        Column {
+                            property bool isLocationMode: SessionData.nightModeAutoMode === "location"
+                            visible: isLocationMode
+                            spacing: Theme.spacingM
+                            width: parent.width
+
+                            DankToggle {
+                                width: parent.width
+                                text: I18n.tr("Auto-location")
+                                description: DisplayService.geoclueAvailable ? "Use automatic location detection (geoclue2)" : "Geoclue service not running - cannot auto-detect location"
+                                checked: SessionData.nightModeLocationProvider === "geoclue2"
+                                enabled: DisplayService.geoclueAvailable
+                                onToggled: checked => {
+                                               if (checked && DisplayService.geoclueAvailable) {
+                                                   SessionData.setNightModeLocationProvider("geoclue2")
+                                                   SessionData.setLatitude(0.0)
+                                                   SessionData.setLongitude(0.0)
+                                               } else {
+                                                   SessionData.setNightModeLocationProvider("")
+                                               }
+                                           }
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Manual Coordinates")
+                                font.pixelSize: Theme.fontSizeMedium
+                                color: Theme.surfaceText
+                                visible: SessionData.nightModeLocationProvider !== "geoclue2"
+                            }
+
+                            Row {
+                                spacing: Theme.spacingM
+                                visible: SessionData.nightModeLocationProvider !== "geoclue2"
+
+                                Column {
+                                    spacing: Theme.spacingXS
+
+                                    StyledText {
+                                        text: I18n.tr("Latitude")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceVariantText
+                                    }
+
+                                    DankTextField {
+                                        width: 120
+                                        height: 40
+                                        text: SessionData.latitude.toString()
+                                        placeholderText: "0.0"
+                                        onTextChanged: {
+                                            const lat = parseFloat(text) || 0.0
+                                            if (lat >= -90 && lat <= 90) {
+                                                SessionData.setLatitude(lat)
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Column {
+                                    spacing: Theme.spacingXS
+
+                                    StyledText {
+                                        text: I18n.tr("Longitude")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceVariantText
+                                    }
+
+                                    DankTextField {
+                                        width: 120
+                                        height: 40
+                                        text: SessionData.longitude.toString()
+                                        placeholderText: "0.0"
+                                        onTextChanged: {
+                                            const lon = parseFloat(text) || 0.0
+                                            if (lon >= -180 && lon <= 180) {
+                                                SessionData.setLongitude(lon)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Uses sunrise/sunset times to automatically adjust night mode based on your location.")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                width: parent.width
+                                wrapMode: Text.WordWrap
+                            }
+                        }
+                    }
+                }
+            }
+
+            StyledRect {
+                width: parent.width
                 height: screensInfoSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
