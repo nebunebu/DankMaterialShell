@@ -23,7 +23,7 @@ BuildRequires:  rpkg
 
 # Core requirements - Shell and fonts
 # Requires:     (quickshell or quickshell-git)
-Requires:       dms-cli = %{version}-%{release}
+Requires:       dms = %{version}-%{release}
 Requires:       dgop
 Requires:       fira-code-fonts
 Requires:       material-symbols-fonts
@@ -41,7 +41,7 @@ Recommends:     wl-clipboard
 # Recommended system packages
 Recommends:     gammastep
 Recommends:     NetworkManager
-Recommends:     qt6ct
+Suggests:       qt6ct
 
 %description
 DankMaterialShell (DMS) is a modern Wayland desktop shell built with Quickshell
@@ -52,12 +52,12 @@ Includes auto-theming for GTK/Qt apps with matugen, 20+ customizable widgets,
 process monitoring, notification center, clipboard history, dock, control center,
 lock screen, and comprehensive plugin system.
 
-%package -n dms-cli
+%package -n dms
 Summary:        DankMaterialShell CLI tool
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/danklinux
 
-%description -n dms-cli
+%description -n dms
 Command-line interface for DankMaterialShell configuration and management.
 Provides native DBus bindings, NetworkManager integration, and system utilities.
 
@@ -81,7 +81,7 @@ popd
 
 %install
 # Install dms-cli binary
-install -Dm755 %{_builddir}/danklinux-master/dms %{buildroot}%{_bindir}/dms-cli
+install -Dm755 %{_builddir}/danklinux-master/dms %{buildroot}%{_bindir}/dms
 
 # Install shell files to XDG config location
 install -dm755 %{buildroot}%{_sysconfdir}/xdg/quickshell/dms
@@ -97,8 +97,8 @@ rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms/.github
 %doc README.md CONTRIBUTING.md
 %{_sysconfdir}/xdg/quickshell/dms/
 
-%files -n dms-cli
-%{_bindir}/dms-cli
+%files -n dms
+%{_bindir}/dms
 
 %changelog
 {{{ git_dir_changelog }}}
