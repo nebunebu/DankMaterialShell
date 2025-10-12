@@ -82,10 +82,17 @@ build_once() {
   TMP_CFG="$(mktemp)"
   trap 'rm -f "$TMP_CFG"' RETURN
 
-  cat "$SHELL_DIR/matugen/configs/base.toml" > "$TMP_CFG"
+  if [[ "$run_user_templates" == "true" ]] && [[ -f "$CONFIG_DIR/matugen/config.toml" ]]; then
+    awk '/^\[config/{p=1} /^\[templates/{p=0} p' "$CONFIG_DIR/matugen/config.toml" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  else
+    echo "[config]" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  fi
+
+  grep -v '^\[config\]' "$SHELL_DIR/matugen/configs/base.toml" >> "$TMP_CFG"
   echo "" >> "$TMP_CFG"
 
-  # Generate dank config dynamically with correct state directory
   cat >> "$TMP_CFG" << EOF
 [templates.dank]
 input_path = '$SHELL_DIR/matugen/templates/dank.json'
@@ -124,7 +131,7 @@ EOF
   fi
 
   if [[ "$run_user_templates" == "true" ]] && [[ -f "$CONFIG_DIR/matugen/config.toml" ]]; then
-    grep -v '^\[config\]' "$CONFIG_DIR/matugen/config.toml" >> "$TMP_CFG"
+    awk '/^\[templates/{p=1} p' "$CONFIG_DIR/matugen/config.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
