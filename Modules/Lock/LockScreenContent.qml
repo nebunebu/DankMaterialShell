@@ -42,6 +42,16 @@ Item {
             updateHyprlandLayout()
             hyprlandLayoutUpdateTimer.start()
         }
+
+        if (SessionService.loginctlAvailable && DMSService.apiVersion >= 2) {
+            DMSService.sendRequest("loginctl.lockerReady", null, response => {
+                if (response.error) {
+                    console.warn("LockScreenContent: Failed to signal locker ready:", response.error)
+                } else {
+                    console.log("LockScreenContent: Locker ready signaled, inhibitor released")
+                }
+            })
+        }
     }
     onDemoModeChanged: {
         if (demoMode) {
