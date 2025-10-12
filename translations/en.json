@@ -32,7 +32,7 @@
   {
     "term": "24-Hour Format",
     "context": "24-Hour Format",
-    "reference": "Modules/Settings/TimeTab.qml:57",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:59",
     "comment": ""
   },
   {
@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modals/Settings/SettingsSidebar.qml:45, Modules/Settings/AboutTab.qml:251",
+    "reference": "Modals/Settings/SettingsSidebar.qml:42, Modules/Settings/AboutTab.qml:251",
     "comment": ""
   },
   {
@@ -122,7 +122,7 @@
   {
     "term": "All displays",
     "context": "All displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:291",
+    "reference": "Modules/Settings/DisplaysTab.qml:663",
     "comment": ""
   },
   {
@@ -134,19 +134,13 @@
   {
     "term": "Always Show OSD Percentage",
     "context": "Always Show OSD Percentage",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1538",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:518",
     "comment": ""
   },
   {
     "term": "Animation Speed",
     "context": "Animation Speed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1819",
-    "comment": ""
-  },
-  {
-    "term": "Animations",
-    "context": "Animations",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1806",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1166",
     "comment": ""
   },
   {
@@ -170,13 +164,13 @@
   {
     "term": "Apply GTK Colors",
     "context": "Apply GTK Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1082",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1314",
     "comment": ""
   },
   {
     "term": "Apply Qt Colors",
     "context": "Apply Qt Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1118",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1350",
     "comment": ""
   },
   {
@@ -254,7 +248,7 @@
   {
     "term": "Auto Location",
     "context": "Auto Location",
-    "reference": "Modules/Settings/WeatherTab.qml:196",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:547",
     "comment": ""
   },
   {
@@ -272,7 +266,7 @@
   {
     "term": "Auto-location",
     "context": "Auto-location",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1365",
+    "reference": "Modules/Settings/DisplaysTab.qml:366",
     "comment": ""
   },
   {
@@ -284,7 +278,7 @@
   {
     "term": "Automatic Control",
     "context": "Automatic Control",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1158",
+    "reference": "Modules/Settings/DisplaysTab.qml:162",
     "comment": ""
   },
   {
@@ -302,13 +296,13 @@
   {
     "term": "Automatically determine your location using your IP address",
     "context": "Automatically determine your location using your IP address",
-    "reference": "Modules/Settings/WeatherTab.qml:203",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:554",
     "comment": ""
   },
   {
     "term": "Automatically extract colors from wallpaper",
     "context": "Automatically extract colors from wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:948",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1024",
     "comment": ""
   },
   {
@@ -320,7 +314,7 @@
   {
     "term": "Automatically lock after",
     "context": "Automatically lock after",
-    "reference": "Modals/Settings/PowerSettings.qml:82",
+    "reference": "Modals/Settings/PowerSettings.qml:157",
     "comment": ""
   },
   {
@@ -338,7 +332,7 @@
   {
     "term": "Available Screens (",
     "context": "Available Screens (",
-    "reference": "Modules/Settings/DisplaysTab.qml:134",
+    "reference": "Modules/Settings/DisplaysTab.qml:506",
     "comment": ""
   },
   {
@@ -500,7 +494,7 @@
   {
     "term": "Choose where notification popups appear on screen",
     "context": "Choose where notification popups appear on screen",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1488",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:445",
     "comment": ""
   },
   {
@@ -560,7 +554,7 @@
   {
     "term": "Color temperature for night mode",
     "context": "Color temperature for night mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1140",
+    "reference": "Modules/Settings/DisplaysTab.qml:143",
     "comment": ""
   },
   {
@@ -590,7 +584,7 @@
   {
     "term": "Configure which displays show shell components",
     "context": "Configure which displays show shell components",
-    "reference": "Modules/Settings/DisplaysTab.qml:118",
+    "reference": "Modules/Settings/DisplaysTab.qml:490",
     "comment": ""
   },
   {
@@ -608,7 +602,7 @@
   {
     "term": "Connected Displays",
     "context": "Connected Displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:111",
+    "reference": "Modules/Settings/DisplaysTab.qml:483",
     "comment": ""
   },
   {
@@ -627,12 +621,6 @@
     "term": "Control currently playing media",
     "context": "Control currently playing media",
     "reference": "Modules/Settings/DankBarTab.qml:62",
-    "comment": ""
-  },
-  {
-    "term": "Control the speed of animations throughout the interface",
-    "context": "Control the speed of animations throughout the interface",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1826",
     "comment": ""
   },
   {
@@ -690,6 +678,12 @@
     "comment": ""
   },
   {
+    "term": "Current Weather",
+    "context": "Current Weather",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:770",
+    "comment": ""
+  },
+  {
     "term": "Current time and date display",
     "context": "Current time and date display",
     "reference": "Modules/Settings/DankBarTab.qml:50",
@@ -710,7 +704,7 @@
   {
     "term": "Custom Location",
     "context": "Custom Location",
-    "reference": "Modules/Settings/WeatherTab.qml:236",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:587",
     "comment": ""
   },
   {
@@ -722,7 +716,7 @@
   {
     "term": "Custom: ",
     "context": "Custom: ",
-    "reference": "Modules/Settings/TimeTab.qml:161, Modules/Settings/TimeTab.qml:224",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:161, Modules/Settings/TimeWeatherTab.qml:223",
     "comment": ""
   },
   {
@@ -744,6 +738,12 @@
     "comment": ""
   },
   {
+    "term": "DMS out of date",
+    "context": "DMS out of date",
+    "reference": "Services/DMSService.qml:233",
+    "comment": ""
+  },
+  {
     "term": "DMS_SOCKET not available",
     "context": "DMS_SOCKET not available",
     "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:186",
@@ -758,7 +758,7 @@
   {
     "term": "Dank Bar",
     "context": "Dank Bar",
-    "reference": "Modals/Settings/SettingsSidebar.qml:21",
+    "reference": "Modals/Settings/SettingsSidebar.qml:18",
     "comment": ""
   },
   {
@@ -788,7 +788,7 @@
   {
     "term": "Date Format",
     "context": "Date Format",
-    "reference": "Modules/Settings/TimeTab.qml:115",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:116",
     "comment": ""
   },
   {
@@ -840,12 +840,6 @@
     "comment": ""
   },
   {
-    "term": "Display Settings",
-    "context": "Display Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1090",
-    "comment": ""
-  },
-  {
     "term": "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen",
     "context": "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen",
     "reference": "Modules/Settings/DockTab.qml:186",
@@ -866,13 +860,13 @@
   {
     "term": "Display volume and brightness percentage values by default in OSD popups",
     "context": "Display volume and brightness percentage values by default in OSD popups",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1539",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:525",
     "comment": ""
   },
   {
     "term": "Displays",
     "context": "Displays",
-    "reference": "Modals/Settings/SettingsSidebar.qml:30",
+    "reference": "Modals/Settings/SettingsSidebar.qml:27",
     "comment": ""
   },
   {
@@ -890,7 +884,7 @@
   {
     "term": "Dock",
     "context": "Dock",
-    "reference": "Modals/Settings/SettingsSidebar.qml:27",
+    "reference": "Modals/Settings/SettingsSidebar.qml:24",
     "comment": ""
   },
   {
@@ -914,7 +908,7 @@
   {
     "term": "Dynamic Theming",
     "context": "Dynamic Theming",
-    "reference": "Modules/Settings/PersonalizationTab.qml:941",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1017",
     "comment": ""
   },
   {
@@ -944,7 +938,7 @@
   {
     "term": "Enable Weather",
     "context": "Enable Weather",
-    "reference": "Modules/Settings/WeatherTab.qml:57",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:410",
     "comment": ""
   },
   {
@@ -956,25 +950,25 @@
   {
     "term": "Enable loginctl lock integration",
     "context": "Enable loginctl lock integration",
-    "reference": "Modals/Settings/PowerSettings.qml:224",
+    "reference": "Modals/Settings/PowerSettings.qml:81",
     "comment": ""
   },
   {
     "term": "End",
     "context": "End",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1314",
+    "reference": "Modules/Settings/DisplaysTab.qml:315",
     "comment": ""
   },
   {
     "term": "Enter custom lock screen format (e.g., dddd, MMMM d)",
     "context": "Enter custom lock screen format (e.g., dddd, MMMM d)",
-    "reference": "Modules/Settings/TimeTab.qml:267",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:266",
     "comment": ""
   },
   {
     "term": "Enter custom top bar format (e.g., ddd MMM d)",
     "context": "Enter custom top bar format (e.g., ddd MMM d)",
-    "reference": "Modules/Settings/TimeTab.qml:254",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:253",
     "comment": ""
   },
   {
@@ -992,7 +986,7 @@
   {
     "term": "Execute templates from ~/.config/matugen/config.toml",
     "context": "Execute templates from ~/.config/matugen/config.toml",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1032",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1108",
     "comment": ""
   },
   {
@@ -1004,7 +998,7 @@
   {
     "term": "Feels Like",
     "context": "Feels Like",
-    "reference": "Modules/DankDash/WeatherTab.qml:260",
+    "reference": "Modules/DankDash/WeatherTab.qml:260, Modules/Settings/TimeWeatherTab.qml:1024",
     "comment": ""
   },
   {
@@ -1040,19 +1034,19 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/PersonalizationTab.qml:1585",
+    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/ThemeColorsTab.qml:969",
     "comment": ""
   },
   {
     "term": "Font Scale",
     "context": "Font Scale",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1707",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1089",
     "comment": ""
   },
   {
     "term": "Font Settings",
     "context": "Font Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1576",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:960",
     "comment": ""
   },
   {
@@ -1064,7 +1058,7 @@
   {
     "term": "Font Weight",
     "context": "Font Weight",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1606",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:990",
     "comment": ""
   },
   {
@@ -1088,7 +1082,7 @@
   {
     "term": "Format Legend",
     "context": "Format Legend",
-    "reference": "Modules/Settings/TimeTab.qml:292",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:291",
     "comment": ""
   },
   {
@@ -1128,6 +1122,12 @@
     "comment": ""
   },
   {
+    "term": "Gamma Control",
+    "context": "Gamma Control",
+    "reference": "Modules/Settings/DisplaysTab.qml:106",
+    "comment": ""
+  },
+  {
     "term": "Github:",
     "context": "Github:",
     "reference": "Modules/Settings/AboutTab.qml:413",
@@ -1136,7 +1136,7 @@
   {
     "term": "Good",
     "context": "Good",
-    "reference": "Modules/DankDash/WeatherTab.qml:502",
+    "reference": "Modules/DankDash/WeatherTab.qml:502, Modules/Settings/TimeWeatherTab.qml:1266",
     "comment": ""
   },
   {
@@ -1190,7 +1190,7 @@
   {
     "term": "Hibernate system after",
     "context": "Hibernate system after",
-    "reference": "Modals/Settings/PowerSettings.qml:190",
+    "reference": "Modals/Settings/PowerSettings.qml:265",
     "comment": ""
   },
   {
@@ -1202,7 +1202,7 @@
   {
     "term": "Hour",
     "context": "Hour",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1241",
+    "reference": "Modules/Settings/DisplaysTab.qml:244",
     "comment": ""
   },
   {
@@ -1214,7 +1214,7 @@
   {
     "term": "Humidity",
     "context": "Humidity",
-    "reference": "Modules/DankDash/WeatherTab.qml:307",
+    "reference": "Modules/DankDash/WeatherTab.qml:307, Modules/Settings/TimeWeatherTab.qml:1071",
     "comment": ""
   },
   {
@@ -1226,7 +1226,13 @@
   {
     "term": "Icon Theme",
     "context": "Icon Theme",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:997",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1229",
+    "comment": ""
+  },
+  {
+    "term": "Idle & Lock Screen",
+    "context": "Idle & Lock Screen",
+    "reference": "Modals/Settings/SettingsSidebar.qml:36",
     "comment": ""
   },
   {
@@ -1238,13 +1244,13 @@
   {
     "term": "Idle Settings",
     "context": "Idle Settings",
-    "reference": "Modals/Settings/PowerSettings.qml:54",
+    "reference": "Modals/Settings/PowerSettings.qml:129",
     "comment": ""
   },
   {
     "term": "Idle monitoring not supported - requires newer Quickshell version",
     "context": "Idle monitoring not supported - requires newer Quickshell version",
-    "reference": "Modals/Settings/PowerSettings.qml:240",
+    "reference": "Modals/Settings/PowerSettings.qml:298",
     "comment": ""
   },
   {
@@ -1310,7 +1316,7 @@
   {
     "term": "Latitude",
     "context": "Latitude",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1395, Modules/Settings/WeatherTab.qml:251",
+    "reference": "Modules/Settings/DisplaysTab.qml:396, Modules/Settings/TimeWeatherTab.qml:602",
     "comment": ""
   },
   {
@@ -1334,7 +1340,7 @@
   {
     "term": "Launcher",
     "context": "Launcher",
-    "reference": "Modals/Settings/SettingsSidebar.qml:33",
+    "reference": "Modals/Settings/SettingsSidebar.qml:30",
     "comment": ""
   },
   {
@@ -1346,7 +1352,7 @@
   {
     "term": "Light Mode",
     "context": "Light Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1100",
+    "reference": "Modules/Settings/PersonalizationTab.qml:937",
     "comment": ""
   },
   {
@@ -1364,25 +1370,25 @@
   {
     "term": "Location Search",
     "context": "Location Search",
-    "reference": "Modules/Settings/WeatherTab.qml:355",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:706",
     "comment": ""
   },
   {
     "term": "Lock Screen",
     "context": "Lock Screen",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1877",
+    "reference": "Modals/Settings/PowerSettings.qml:54",
     "comment": ""
   },
   {
     "term": "Lock Screen Format",
     "context": "Lock Screen Format",
-    "reference": "Modules/Settings/TimeTab.qml:188",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:188",
     "comment": ""
   },
   {
     "term": "Lock before suspend",
     "context": "Lock before suspend",
-    "reference": "Modals/Settings/PowerSettings.qml:232",
+    "reference": "Modals/Settings/PowerSettings.qml:94",
     "comment": ""
   },
   {
@@ -1400,7 +1406,7 @@
   {
     "term": "Longitude",
     "context": "Longitude",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1418, Modules/Settings/WeatherTab.qml:302",
+    "reference": "Modules/Settings/DisplaysTab.qml:419, Modules/Settings/TimeWeatherTab.qml:653",
     "comment": ""
   },
   {
@@ -1418,7 +1424,7 @@
   {
     "term": "Manual Coordinates",
     "context": "Manual Coordinates",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1381",
+    "reference": "Modules/Settings/DisplaysTab.qml:382",
     "comment": ""
   },
   {
@@ -1436,7 +1442,13 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:654, Modules/Settings/PersonalizationTab.qml:973",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:654, Modules/Settings/PersonalizationTab.qml:1049",
+    "comment": ""
+  },
+  {
+    "term": "Matugen Settings",
+    "context": "Matugen Settings",
+    "reference": "Modules/Settings/PersonalizationTab.qml:992",
     "comment": ""
   },
   {
@@ -1490,7 +1502,7 @@
   {
     "term": "Minute",
     "context": "Minute",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1250",
+    "reference": "Modules/Settings/DisplaysTab.qml:253",
     "comment": ""
   },
   {
@@ -1514,7 +1526,7 @@
   {
     "term": "Monospace Font",
     "context": "Monospace Font",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1672",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1056",
     "comment": ""
   },
   {
@@ -1592,13 +1604,13 @@
   {
     "term": "New York, NY",
     "context": "New York, NY",
-    "reference": "Modules/Settings/WeatherTab.qml:365",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:716",
     "comment": ""
   },
   {
     "term": "Night Mode",
     "context": "Night Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1121",
+    "reference": "Modules/Settings/DisplaysTab.qml:118",
     "comment": ""
   },
   {
@@ -1634,7 +1646,7 @@
   {
     "term": "No Weather Data Available",
     "context": "No Weather Data Available",
-    "reference": "Modules/DankDash/WeatherTab.qml:27",
+    "reference": "Modules/DankDash/WeatherTab.qml:27, Modules/Settings/TimeWeatherTab.qml:791",
     "comment": ""
   },
   {
@@ -1706,7 +1718,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1478",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:428",
     "comment": ""
   },
   {
@@ -1856,13 +1868,13 @@
   {
     "term": "Plugins",
     "context": "Plugins",
-    "reference": "Modals/Settings/SettingsSidebar.qml:42",
+    "reference": "Modals/Settings/SettingsSidebar.qml:39",
     "comment": ""
   },
   {
     "term": "Popup Position",
     "context": "Popup Position",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1487",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:444",
     "comment": ""
   },
   {
@@ -1875,12 +1887,6 @@
     "term": "Position",
     "context": "Position",
     "reference": "Modules/Settings/DankBarTab.qml:698",
-    "comment": ""
-  },
-  {
-    "term": "Power",
-    "context": "Power",
-    "reference": "Modals/Settings/SettingsSidebar.qml:39",
     "comment": ""
   },
   {
@@ -1904,7 +1910,7 @@
   {
     "term": "Pressure",
     "context": "Pressure",
-    "reference": "Modules/DankDash/WeatherTab.qml:401",
+    "reference": "Modules/DankDash/WeatherTab.qml:401, Modules/Settings/TimeWeatherTab.qml:1165",
     "comment": ""
   },
   {
@@ -1958,7 +1964,7 @@
   {
     "term": "Rain Chance",
     "context": "Rain Chance",
-    "reference": "Modules/DankDash/WeatherTab.qml:448",
+    "reference": "Modules/DankDash/WeatherTab.qml:448, Modules/Settings/TimeWeatherTab.qml:1212",
     "comment": ""
   },
   {
@@ -2000,7 +2006,7 @@
   {
     "term": "Run User Templates",
     "context": "Run User Templates",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1025",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1101",
     "comment": ""
   },
   {
@@ -2048,7 +2054,7 @@
   {
     "term": "Scale all font sizes",
     "context": "Scale all font sizes",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1714",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1096",
     "comment": ""
   },
   {
@@ -2108,7 +2114,7 @@
   {
     "term": "Select font weight",
     "context": "Select font weight",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1607",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:991",
     "comment": ""
   },
   {
@@ -2120,13 +2126,13 @@
   {
     "term": "Select monospace font for process list and technical displays",
     "context": "Select monospace font for process list and technical displays",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1673",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1057",
     "comment": ""
   },
   {
     "term": "Select system font family",
     "context": "Select system font family",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1586",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:970",
     "comment": ""
   },
   {
@@ -2180,7 +2186,7 @@
   {
     "term": "Show Power Actions",
     "context": "Show Power Actions",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1887",
+    "reference": "Modals/Settings/PowerSettings.qml:64",
     "comment": ""
   },
   {
@@ -2198,13 +2204,13 @@
   {
     "term": "Show on all connected displays",
     "context": "Show on all connected displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:292",
+    "reference": "Modules/Settings/DisplaysTab.qml:664",
     "comment": ""
   },
   {
     "term": "Show on screens:",
     "context": "Show on screens:",
-    "reference": "Modules/Settings/DisplaysTab.qml:276",
+    "reference": "Modules/Settings/DisplaysTab.qml:648",
     "comment": ""
   },
   {
@@ -2216,7 +2222,7 @@
   {
     "term": "Show weather information in top bar and control center",
     "context": "Show weather information in top bar and control center",
-    "reference": "Modules/Settings/WeatherTab.qml:64",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:417",
     "comment": ""
   },
   {
@@ -2270,7 +2276,7 @@
   {
     "term": "Start",
     "context": "Start",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1266",
+    "reference": "Modules/Settings/DisplaysTab.qml:268",
     "comment": ""
   },
   {
@@ -2306,7 +2312,7 @@
   {
     "term": "Suspend system after",
     "context": "Suspend system after",
-    "reference": "Modals/Settings/PowerSettings.qml:154",
+    "reference": "Modals/Settings/PowerSettings.qml:229",
     "comment": ""
   },
   {
@@ -2330,7 +2336,7 @@
   {
     "term": "System App Theming",
     "context": "System App Theming",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1050",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1282",
     "comment": ""
   },
   {
@@ -2390,7 +2396,7 @@
   {
     "term": "Temperature",
     "context": "Temperature",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1139",
+    "reference": "Modules/Settings/DisplaysTab.qml:142",
     "comment": ""
   },
   {
@@ -2408,13 +2414,13 @@
   {
     "term": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
     "context": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:958",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1190",
     "comment": ""
   },
   {
     "term": "Theme & Colors",
     "context": "Theme & Colors",
-    "reference": "Modals/Settings/SettingsSidebar.qml:36",
+    "reference": "Modals/Settings/SettingsSidebar.qml:33",
     "comment": ""
   },
   {
@@ -2448,9 +2454,15 @@
     "comment": ""
   },
   {
-    "term": "Time & Date",
-    "context": "Time & Date",
+    "term": "Time & Weather",
+    "context": "Time & Weather",
     "reference": "Modals/Settings/SettingsSidebar.qml:15",
+    "comment": ""
+  },
+  {
+    "term": "To update, run the following command:",
+    "context": "To update, run the following command:",
+    "reference": "Services/DMSService.qml:234",
     "comment": ""
   },
   {
@@ -2474,7 +2486,7 @@
   {
     "term": "Top Bar Format",
     "context": "Top Bar Format",
-    "reference": "Modules/Settings/TimeTab.qml:125",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:126",
     "comment": ""
   },
   {
@@ -2486,7 +2498,7 @@
   {
     "term": "Turn off monitors after",
     "context": "Turn off monitors after",
-    "reference": "Modals/Settings/PowerSettings.qml:118",
+    "reference": "Modals/Settings/PowerSettings.qml:193",
     "comment": ""
   },
   {
@@ -2528,19 +2540,19 @@
   {
     "term": "Use 24-hour time format instead of 12-hour AM/PM",
     "context": "Use 24-hour time format instead of 12-hour AM/PM",
-    "reference": "Modules/Settings/TimeTab.qml:64",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:66",
     "comment": ""
   },
   {
     "term": "Use Fahrenheit",
     "context": "Use Fahrenheit",
-    "reference": "Modules/Settings/WeatherTab.qml:123",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:475",
     "comment": ""
   },
   {
     "term": "Use Fahrenheit instead of Celsius for temperature",
     "context": "Use Fahrenheit instead of Celsius for temperature",
-    "reference": "Modules/Settings/WeatherTab.qml:130",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:482",
     "comment": ""
   },
   {
@@ -2552,7 +2564,7 @@
   {
     "term": "Use light theme instead of dark theme",
     "context": "Use light theme instead of dark theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1101",
+    "reference": "Modules/Settings/PersonalizationTab.qml:944",
     "comment": ""
   },
   {
@@ -2570,7 +2582,7 @@
   {
     "term": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
     "context": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1439",
+    "reference": "Modules/Settings/DisplaysTab.qml:440",
     "comment": ""
   },
   {
@@ -2600,7 +2612,7 @@
   {
     "term": "Visibility",
     "context": "Visibility",
-    "reference": "Modules/DankDash/WeatherTab.qml:495",
+    "reference": "Modules/DankDash/WeatherTab.qml:495, Modules/Settings/TimeWeatherTab.qml:1259",
     "comment": ""
   },
   {
@@ -2630,7 +2642,7 @@
   {
     "term": "Weather",
     "context": "Weather",
-    "reference": "Modals/Settings/SettingsSidebar.qml:18, Modules/DankDash/DankDashPopout.qml:139",
+    "reference": "Modules/DankDash/DankDashPopout.qml:139",
     "comment": ""
   },
   {
@@ -2660,13 +2672,13 @@
   {
     "term": "Widgets",
     "context": "Widgets",
-    "reference": "Modals/Settings/SettingsSidebar.qml:24",
+    "reference": "Modals/Settings/SettingsSidebar.qml:21",
     "comment": ""
   },
   {
     "term": "Wind",
     "context": "Wind",
-    "reference": "Modules/DankDash/WeatherTab.qml:354",
+    "reference": "Modules/DankDash/WeatherTab.qml:354, Modules/Settings/TimeWeatherTab.qml:1118",
     "comment": ""
   },
   {
@@ -2724,9 +2736,15 @@
     "comment": ""
   },
   {
+    "term": "loginctl not available - lock integration requires DMS socket connection",
+    "context": "loginctl not available - lock integration requires DMS socket connection",
+    "reference": "Modals/Settings/PowerSettings.qml:71",
+    "comment": ""
+  },
+  {
     "term": "matugen not detected - dynamic theming unavailable",
     "context": "matugen not detected - dynamic theming unavailable",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1052",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1128",
     "comment": ""
   },
   {
@@ -2750,25 +2768,25 @@
   {
     "term": "• M - Month (1-12)",
     "context": "• M - Month (1-12)",
-    "reference": "Modules/Settings/TimeTab.qml:331",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:330",
     "comment": ""
   },
   {
     "term": "• MM - Month (01-12)",
     "context": "• MM - Month (01-12)",
-    "reference": "Modules/Settings/TimeTab.qml:342",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:341",
     "comment": ""
   },
   {
     "term": "• MMM - Month (Jan)",
     "context": "• MMM - Month (Jan)",
-    "reference": "Modules/Settings/TimeTab.qml:348",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:347",
     "comment": ""
   },
   {
     "term": "• MMMM - Month (January)",
     "context": "• MMMM - Month (January)",
-    "reference": "Modules/Settings/TimeTab.qml:354",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:353",
     "comment": ""
   },
   {
@@ -2786,37 +2804,37 @@
   {
     "term": "• d - Day (1-31)",
     "context": "• d - Day (1-31)",
-    "reference": "Modules/Settings/TimeTab.qml:307",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:306",
     "comment": ""
   },
   {
     "term": "• dd - Day (01-31)",
     "context": "• dd - Day (01-31)",
-    "reference": "Modules/Settings/TimeTab.qml:313",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:312",
     "comment": ""
   },
   {
     "term": "• ddd - Day name (Mon)",
     "context": "• ddd - Day name (Mon)",
-    "reference": "Modules/Settings/TimeTab.qml:319",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:318",
     "comment": ""
   },
   {
     "term": "• dddd - Day name (Monday)",
     "context": "• dddd - Day name (Monday)",
-    "reference": "Modules/Settings/TimeTab.qml:325",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:324",
     "comment": ""
   },
   {
     "term": "• yy - Year (24)",
     "context": "• yy - Year (24)",
-    "reference": "Modules/Settings/TimeTab.qml:360",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:359",
     "comment": ""
   },
   {
     "term": "• yyyy - Year (2024)",
     "context": "• yyyy - Year (2024)",
-    "reference": "Modules/Settings/TimeTab.qml:366",
+    "reference": "Modules/Settings/TimeWeatherTab.qml:365",
     "comment": ""
   }
 ]

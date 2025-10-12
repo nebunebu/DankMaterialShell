@@ -168,13 +168,6 @@
     "comment": ""
   },
   {
-    "term": "Animations",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "App Launcher",
     "translation": "",
     "context": "",
@@ -735,13 +728,6 @@
     "comment": ""
   },
   {
-    "term": "Control the speed of animations throughout the interface",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Copied to clipboard",
     "translation": "",
     "context": "",
@@ -805,6 +791,13 @@
     "comment": ""
   },
   {
+    "term": "Current Weather",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Current time and date display",
     "translation": "",
     "context": "",
@@ -862,6 +855,13 @@
   },
   {
     "term": "DMS Plugin Manager Unavailable",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "DMS out of date",
     "translation": "",
     "context": "",
     "reference": "",
@@ -974,13 +974,6 @@
   },
   {
     "term": "Disk Usage",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Display Settings",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1316,6 +1309,13 @@
     "comment": ""
   },
   {
+    "term": "Gamma Control",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Github:",
     "translation": "",
     "context": "",
@@ -1429,6 +1429,13 @@
   },
   {
     "term": "Icon Theme",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Idle & Lock Screen",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1674,6 +1681,13 @@
   },
   {
     "term": "Matugen Palette",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Matugen Settings",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2185,13 +2199,6 @@
   },
   {
     "term": "Position",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Power",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2856,7 +2863,14 @@
     "comment": ""
   },
   {
-    "term": "Time & Date",
+    "term": "Time & Weather",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "To update, run the following command:",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3172,6 +3186,13 @@
   },
   {
     "term": "You have unsaved changes. Save before opening a file?",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "loginctl not available - lock integration requires DMS socket connection",
     "translation": "",
     "context": "",
     "reference": "",

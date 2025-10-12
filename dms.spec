@@ -70,13 +70,20 @@ tar -xzf %{SOURCE1} -C %{_builddir}
 %build
 # Compile dms CLI from danklinux source
 pushd %{_builddir}/danklinux-master
-export CGO_CPPFLAGS="${CPPFLAGS}"
-export CGO_CFLAGS="${CFLAGS}"
-export CGO_CXXFLAGS="${CXXFLAGS}"
-export CGO_LDFLAGS="${LDFLAGS}"
-export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 
-go build -o dms ./cmd/dms
+# Use RPM version and build info
+BUILD_TIME=$(date -u '+%%Y-%%m-%%d_%%H:%%M:%%S')
+
+# Build with CGO disabled and version info
+export CGO_ENABLED=0
+export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+go build \
+    -tags distro_binary \
+    -ldflags="-s -w -X main.Version=%{version}-%{release} -X main.buildTime=${BUILD_TIME} -X main.commit=%{version}" \
+    -o dms \
+    ./cmd/dms
+
 popd
 
 %install
