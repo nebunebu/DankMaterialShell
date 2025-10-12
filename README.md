@@ -171,6 +171,9 @@ For detailed Hyprland installation instructions, see the [Hyprland wiki](https:/
 #### Arch Linux - via AUR
 
 ```bash
+# Stable release
+paru -S dms-shell-bin
+# Latest -git
 paru -S dms-shell-git
 ```
 
