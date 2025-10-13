@@ -16,6 +16,21 @@ Item {
     anchors.topMargin: -(SettingsData.dankBarGothCornersEnabled && !axis.isVertical && axis.edge === "bottom" ? barWindow._wingR : 0)
     anchors.bottomMargin: -(SettingsData.dankBarGothCornersEnabled && !axis.isVertical && axis.edge === "top" ? barWindow._wingR : 0)
 
+    function requestRepaint() {
+        debounceTimer.restart()
+    }
+
+    Timer {
+        id: debounceTimer
+        interval: 50
+        repeat: false
+        onTriggered: {
+            barShape.requestPaint()
+            barTint.requestPaint()
+            barBorder.requestPaint()
+        }
+    }
+
     Canvas {
         id: barShape
         anchors.fill: parent
@@ -30,21 +45,22 @@ Item {
         property real wing: SettingsData.dankBarGothCornersEnabled ? barWindow._wingR : 0
         property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.cornerRadius
 
-        onWingChanged: requestPaint()
-        onRtChanged: requestPaint()
-        onCorrectWidthChanged: requestPaint()
-        onCorrectHeightChanged: requestPaint()
-        onVisibleChanged: if (visible) requestPaint()
-        Component.onCompleted: requestPaint()
+        onWingChanged: root.requestRepaint()
+        onRtChanged: root.requestRepaint()
+        onCorrectWidthChanged: root.requestRepaint()
+        onCorrectHeightChanged: root.requestRepaint()
+        onVisibleChanged: if (visible) root.requestRepaint()
+        Component.onCompleted: root.requestRepaint()
 
         Connections {
             target: barWindow
-            function on_BgColorChanged() { barShape.requestPaint() }
+            function on_BgColorChanged() { root.requestRepaint() }
         }
 
         Connections {
             target: Theme
-            function onIsLightModeChanged() { barShape.requestPaint() }
+            function onIsLightModeChanged() { root.requestRepaint() }
+            function onSurfaceContainerChanged() { root.requestRepaint() }
         }
 
         onPaint: {
@@ -122,22 +138,24 @@ Item {
         property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.cornerRadius
         property real alphaTint: (barWindow._bgColor?.a ?? 1) < 0.99 ? (Theme.stateLayerOpacity ?? 0) : 0
 
-        onWingChanged: requestPaint()
-        onRtChanged: requestPaint()
-        onAlphaTintChanged: requestPaint()
-        onCorrectWidthChanged: requestPaint()
-        onCorrectHeightChanged: requestPaint()
-        onVisibleChanged: if (visible) requestPaint()
-        Component.onCompleted: requestPaint()
+        onWingChanged: root.requestRepaint()
+        onRtChanged: root.requestRepaint()
+        onAlphaTintChanged: root.requestRepaint()
+        onCorrectWidthChanged: root.requestRepaint()
+        onCorrectHeightChanged: root.requestRepaint()
+        onVisibleChanged: if (visible) root.requestRepaint()
+        Component.onCompleted: root.requestRepaint()
 
         Connections {
             target: barWindow
-            function on_BgColorChanged() { barTint.requestPaint() }
+            function on_BgColorChanged() { root.requestRepaint() }
         }
 
         Connections {
             target: Theme
-            function onIsLightModeChanged() { barTint.requestPaint() }
+            function onIsLightModeChanged() { root.requestRepaint() }
+            function onSurfaceChanged() { root.requestRepaint() }
+            function onStateLayerOpacityChanged() { root.requestRepaint() }
         }
 
         onPaint: {
@@ -216,26 +234,30 @@ Item {
         property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.cornerRadius
         property bool borderEnabled: SettingsData.dankBarBorderEnabled
 
-        onWingChanged: requestPaint()
-        onRtChanged: requestPaint()
-        onBorderEnabledChanged: requestPaint()
-        onCorrectWidthChanged: requestPaint()
-        onCorrectHeightChanged: requestPaint()
-        onVisibleChanged: if (visible) requestPaint()
-        Component.onCompleted: requestPaint()
+        onWingChanged: root.requestRepaint()
+        onRtChanged: root.requestRepaint()
+        onBorderEnabledChanged: root.requestRepaint()
+        onCorrectWidthChanged: root.requestRepaint()
+        onCorrectHeightChanged: root.requestRepaint()
+        onVisibleChanged: if (visible) root.requestRepaint()
+        Component.onCompleted: root.requestRepaint()
 
         Connections {
             target: Theme
-            function onIsLightModeChanged() { barBorder.requestPaint() }
+            function onIsLightModeChanged() { root.requestRepaint() }
+            function onSurfaceTextChanged() { root.requestRepaint() }
+            function onPrimaryChanged() { root.requestRepaint() }
+            function onSecondaryChanged() { root.requestRepaint() }
+            function onOutlineChanged() { root.requestRepaint() }
         }
 
         Connections {
             target: SettingsData
-            function onDankBarBorderColorChanged() { barBorder.requestPaint() }
-            function onDankBarBorderOpacityChanged() { barBorder.requestPaint() }
-            function onDankBarBorderThicknessChanged() { barBorder.requestPaint() }
-            function onDankBarSpacingChanged() { barBorder.requestPaint() }
-            function onDankBarSquareCornersChanged() { barBorder.requestPaint() }
+            function onDankBarBorderColorChanged() { root.requestRepaint() }
+            function onDankBarBorderOpacityChanged() { root.requestRepaint() }
+            function onDankBarBorderThicknessChanged() { root.requestRepaint() }
+            function onDankBarSpacingChanged() { root.requestRepaint() }
+            function onDankBarSquareCornersChanged() { root.requestRepaint() }
         }
 
         onPaint: {
