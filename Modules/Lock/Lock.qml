@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -5,14 +7,12 @@ import Quickshell.Wayland
 import qs.Common
 import qs.Services
 
-Item {
-    id: root
-
+Scope {
     property string sharedPasswordBuffer: ""
     property bool shouldLock: false
 
     Component.onCompleted: {
-        IdleService.lockComponent = root
+        IdleService.lockComponent = this
     }
 
     function activate() {
@@ -42,7 +42,7 @@ Item {
     WlSessionLock {
         id: sessionLock
 
-        locked: root.shouldLock
+        locked: shouldLock
 
         WlSessionLockSurface {
             color: "transparent"
@@ -50,12 +50,12 @@ Item {
             LockSurface {
                 anchors.fill: parent
                 lock: sessionLock
-                sharedPasswordBuffer: root.sharedPasswordBuffer
+                sharedPasswordBuffer: sharedPasswordBuffer
                 onUnlockRequested: {
-                    root.shouldLock = false
+                    shouldLock = false
                 }
                 onPasswordChanged: newPassword => {
-                                       root.sharedPasswordBuffer = newPassword
+                                       sharedPasswordBuffer = newPassword
                                    }
             }
         }
