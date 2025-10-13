@@ -294,6 +294,13 @@
     "comment": ""
   },
   {
+    "term": "Auto Popup Gaps",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Auto-hide",
     "translation": "",
     "context": "",
@@ -330,6 +337,13 @@
   },
   {
     "term": "Automatic Cycling",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Automatically calculate popup distance from bar edge.",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1666,6 +1680,13 @@
     "comment": ""
   },
   {
+    "term": "Manual Gap Size",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Manual Show/Hide",
     "translation": "",
     "context": "",
@@ -2765,6 +2786,13 @@
     "comment": ""
   },
   {
+    "term": "System Updater",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "System Updates",
     "translation": "",
     "context": "",
@@ -2773,6 +2801,13 @@
   },
   {
     "term": "System notification area icons",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "System update custom command",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2794,6 +2829,13 @@
   },
   {
     "term": "Temperature",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Terminal custom additional parameters",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2968,6 +3010,13 @@
     "comment": ""
   },
   {
+    "term": "Use Custom Command",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Use Fahrenheit",
     "translation": "",
     "context": "",
@@ -2983,6 +3032,13 @@
   },
   {
     "term": "Use Monospace Font",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Use custom command for update your system",
     "translation": "",
     "context": "",
     "reference": "",
