@@ -8,26 +8,59 @@ import qs.Common
 import qs.Services
 
 Scope {
+    id: root
+
     property string sharedPasswordBuffer: ""
     property bool shouldLock: false
+    property bool processingExternalEvent: false
 
     Component.onCompleted: {
         IdleService.lockComponent = this
     }
 
+    function lock() {
+        if (!processingExternalEvent && SessionData.loginctlLockIntegration && DMSService.isConnected) {
+            DMSService.lockSession(response => {
+                if (response.error) {
+                    console.warn("Lock: Failed to call loginctl.lock:", response.error)
+                    shouldLock = true
+                }
+            })
+        } else {
+            shouldLock = true
+        }
+    }
+
+    function unlock() {
+        if (!processingExternalEvent && SessionData.loginctlLockIntegration && DMSService.isConnected) {
+            DMSService.unlockSession(response => {
+                if (response.error) {
+                    console.warn("Lock: Failed to call loginctl.unlock:", response.error)
+                    shouldLock = false
+                }
+            })
+        } else {
+            shouldLock = false
+        }
+    }
+
     function activate() {
-        shouldLock = true
+        lock()
     }
 
     Connections {
         target: SessionService
 
         function onSessionLocked() {
+            processingExternalEvent = true
             shouldLock = true
+            processingExternalEvent = false
         }
 
         function onSessionUnlocked() {
+            processingExternalEvent = true
             shouldLock = false
+            processingExternalEvent = false
         }
     }
 
@@ -35,7 +68,7 @@ Scope {
         target: IdleService
 
         function onLockRequested() {
-            shouldLock = true
+            lock()
         }
     }
 
@@ -50,12 +83,12 @@ Scope {
             LockSurface {
                 anchors.fill: parent
                 lock: sessionLock
-                sharedPasswordBuffer: sharedPasswordBuffer
+                sharedPasswordBuffer: root.sharedPasswordBuffer
                 onUnlockRequested: {
-                    shouldLock = false
+                    root.unlock()
                 }
                 onPasswordChanged: newPassword => {
-                                       sharedPasswordBuffer = newPassword
+                                       root.sharedPasswordBuffer = newPassword
                                    }
             }
         }
@@ -69,7 +102,7 @@ Scope {
         target: "lock"
 
         function lock() {
-            shouldLock = true
+            root.lock()
         }
 
         function demo() {
