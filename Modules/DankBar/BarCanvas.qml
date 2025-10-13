@@ -155,7 +155,6 @@ Item {
             target: Theme
             function onIsLightModeChanged() { root.requestRepaint() }
             function onSurfaceChanged() { root.requestRepaint() }
-            function onStateLayerOpacityChanged() { root.requestRepaint() }
         }
 
         onPaint: {

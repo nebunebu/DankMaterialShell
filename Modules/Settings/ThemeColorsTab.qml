@@ -17,67 +17,37 @@ Item {
     property bool fontsEnumerated: false
 
     function enumerateFonts() {
-        var fonts = ["Default"]
+        var fonts = []
         var availableFonts = Qt.fontFamilies()
-        var rootFamilies = []
-        var seenFamilies = new Set()
+
         for (var i = 0; i < availableFonts.length; i++) {
             var fontName = availableFonts[i]
             if (fontName.startsWith("."))
                 continue
-
-            if (fontName === SettingsData.defaultFontFamily)
-                continue
-
-            var rootName = fontName.replace(
-                        / (Thin|Extra Light|Light|Regular|Medium|Semi Bold|Demi Bold|Bold|Extra Bold|Black|Heavy)$/i,
-                        "").replace(
-                        / (Italic|Oblique|Condensed|Extended|Narrow|Wide)$/i,
-                        "").replace(/ (UI|Display|Text|Mono|Sans|Serif)$/i,
-                                    function (match, suffix) {
-                                        return match
-                                    }).trim()
-            if (!seenFamilies.has(rootName) && rootName !== "") {
-                seenFamilies.add(rootName)
-                rootFamilies.push(rootName)
-            }
+            fonts.push(fontName)
         }
-        cachedFontFamilies = fonts.concat(rootFamilies.sort())
-        var monoFonts = ["Default"]
-        var monoFamilies = []
-        var seenMonoFamilies = new Set()
+        fonts.sort()
+        fonts.unshift("Default")
+        cachedFontFamilies = fonts
+
+        var monoFonts = []
         for (var j = 0; j < availableFonts.length; j++) {
             var fontName2 = availableFonts[j]
             if (fontName2.startsWith("."))
                 continue
 
-            if (fontName2 === SettingsData.defaultMonoFontFamily)
-                continue
-
             var lowerName = fontName2.toLowerCase()
-            if (lowerName.includes("mono") || lowerName.includes(
-                        "code") || lowerName.includes(
-                        "console") || lowerName.includes(
-                        "terminal") || lowerName.includes(
-                        "courier") || lowerName.includes(
-                        "dejavu sans mono") || lowerName.includes(
-                        "jetbrains") || lowerName.includes(
-                        "fira") || lowerName.includes(
-                        "hack") || lowerName.includes(
-                        "source code") || lowerName.includes(
-                        "ubuntu mono") || lowerName.includes("cascadia")) {
-                var rootName2 = fontName2.replace(
-                            / (Thin|Extra Light|Light|Regular|Medium|Semi Bold|Demi Bold|Bold|Extra Bold|Black|Heavy)$/i,
-                            "").replace(
-                            / (Italic|Oblique|Condensed|Extended|Narrow|Wide)$/i,
-                            "").trim()
-                if (!seenMonoFamilies.has(rootName2) && rootName2 !== "") {
-                    seenMonoFamilies.add(rootName2)
-                    monoFamilies.push(rootName2)
-                }
+            if (lowerName.includes("mono") || lowerName.includes("code") ||
+                lowerName.includes("console") || lowerName.includes("terminal") ||
+                lowerName.includes("courier") || lowerName.includes("jetbrains") ||
+                lowerName.includes("fira") || lowerName.includes("hack") ||
+                lowerName.includes("source code") || lowerName.includes("cascadia")) {
+                monoFonts.push(fontName2)
             }
         }
-        cachedMonoFamilies = monoFonts.concat(monoFamilies.sort())
+        monoFonts.sort()
+        monoFonts.unshift("Default")
+        cachedMonoFamilies = monoFonts
     }
 
     Component.onCompleted: {
@@ -1064,7 +1034,7 @@ Item {
                         enableFuzzySearch: true
                         popupWidthOffset: 100
                         maxPopupHeight: 400
-                        options: cachedFontFamilies
+                        options: cachedMonoFamilies
                         onValueChanged: value => {
                                             if (value === "Default")
                                             SettingsData.setMonoFontFamily(SettingsData.defaultMonoFontFamily)

@@ -143,6 +143,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 width: contentRow.width - (contentRow.children[0].visible ? contentRow.children[0].width + contentRow.spacing : 0)
                 elide: Text.ElideRight
+                wrapMode: Text.NoWrap
             }
         }
 

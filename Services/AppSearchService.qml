@@ -249,21 +249,18 @@ Singleton {
     // Plugin launcher support functions
     function getPluginCategories() {
         if (typeof PluginService === "undefined") {
-            console.log("AppSearchService: PluginService undefined")
             return []
         }
-        
+
         const categories = []
         const launchers = PluginService.getLauncherPlugins()
-        
+
         for (const pluginId in launchers) {
             const plugin = launchers[pluginId]
             const categoryName = plugin.name || pluginId
-            console.log("AppSearchService: Adding plugin category:", categoryName, "for plugin:", pluginId)
             categories.push(categoryName)
         }
-        
-        console.log("AppSearchService: Returning plugin categories:", categories)
+
         return categories
     }
 
@@ -282,23 +279,18 @@ Singleton {
 
     function getAllPluginItems() {
         if (typeof PluginService === "undefined") {
-            console.log("AppSearchService: PluginService undefined in getAllPluginItems")
             return []
         }
-        
+
         let allItems = []
         const launchers = PluginService.getLauncherPlugins()
-        console.log("AppSearchService: getAllPluginItems() processing", Object.keys(launchers).length, "launcher plugins")
-        
+
         for (const pluginId in launchers) {
             const categoryName = launchers[pluginId].name || pluginId
-            console.log("AppSearchService: Getting items for plugin:", pluginId, "category:", categoryName)
             const items = getPluginItems(categoryName, "")
-            console.log("AppSearchService: Plugin", pluginId, "returned", items.length, "items")
             allItems = allItems.concat(items)
         }
-        
-        console.log("AppSearchService: getAllPluginItems() returning", allItems.length, "total items")
+
         return allItems
     }
 
@@ -316,41 +308,31 @@ Singleton {
     }
 
     function getPluginItemsForPlugin(pluginId, query) {
-        console.log("AppSearchService: getPluginItemsForPlugin called for", pluginId, "with query:", query)
         if (typeof PluginService === "undefined") {
-            console.log("AppSearchService: PluginService undefined")
             return []
         }
-        
+
         const component = PluginService.pluginLauncherComponents[pluginId]
-        console.log("AppSearchService: Component for", pluginId, ":", component ? "found" : "not found")
         if (!component) return []
-        
+
         try {
-            console.log("AppSearchService: Creating instance for", pluginId)
             const instance = component.createObject(root, {
                 "pluginService": PluginService
             })
-            
-            console.log("AppSearchService: Instance created:", instance ? "success" : "failed")
+
             if (instance && typeof instance.getItems === "function") {
-                console.log("AppSearchService: Calling getItems on", pluginId)
                 const items = instance.getItems(query || "")
-                console.log("AppSearchService: Got", items ? items.length : 0, "items from", pluginId)
                 instance.destroy()
                 return items || []
-            } else {
-                console.log("AppSearchService: Instance has no getItems function")
             }
-            
+
             if (instance) {
                 instance.destroy()
             }
         } catch (e) {
             console.warn("AppSearchService: Error getting items from plugin", pluginId, ":", e)
         }
-        
-        console.log("AppSearchService: Returning empty array for", pluginId)
+
         return []
     }
 
