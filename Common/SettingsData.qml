@@ -159,6 +159,8 @@ Singleton {
     property string dankBarBorderColor: "surfaceText"
     property real dankBarBorderOpacity: 1.0
     property real dankBarBorderThickness: 1
+    property bool popupGapsAuto: true
+    property int popupGapsManual: 4
 
     onDankBarBorderColorChanged: saveSettings()
     onDankBarBorderOpacityChanged: saveSettings()
@@ -426,6 +428,8 @@ Singleton {
                 dankBarBorderColor = settings.dankBarBorderColor !== undefined ? settings.dankBarBorderColor : "surfaceText"
                 dankBarBorderOpacity = settings.dankBarBorderOpacity !== undefined ? settings.dankBarBorderOpacity : 1.0
                 dankBarBorderThickness = settings.dankBarBorderThickness !== undefined ? settings.dankBarBorderThickness : 1
+                popupGapsAuto = settings.popupGapsAuto !== undefined ? settings.popupGapsAuto : true
+                popupGapsManual = settings.popupGapsManual !== undefined ? settings.popupGapsManual : 4
                 dankBarPosition = settings.dankBarPosition !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 hideBrightnessSlider = settings.hideBrightnessSlider !== undefined ? settings.hideBrightnessSlider : false
@@ -556,6 +560,8 @@ Singleton {
                                                 "dankBarBorderColor": dankBarBorderColor,
                                                 "dankBarBorderOpacity": dankBarBorderOpacity,
                                                 "dankBarBorderThickness": dankBarBorderThickness,
+                                                "popupGapsAuto": popupGapsAuto,
+                                                "popupGapsManual": popupGapsManual,
                                                 "dankBarPosition": dankBarPosition,
                                                 "lockScreenShowPowerActions": lockScreenShowPowerActions,
                                                 "hideBrightnessSlider": hideBrightnessSlider,
@@ -1306,6 +1312,16 @@ Singleton {
 
     function setDankBarBorderEnabled(enabled) {
         dankBarBorderEnabled = enabled
+        saveSettings()
+    }
+
+    function setPopupGapsAuto(enabled) {
+        popupGapsAuto = enabled
+        saveSettings()
+    }
+
+    function setPopupGapsManual(value) {
+        popupGapsManual = value
         saveSettings()
     }
 
