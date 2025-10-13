@@ -273,14 +273,6 @@ EOF
       mv "$TMP" "$CONFIG_DIR/kitty/dank-theme.conf"
     fi
   fi
-  COLOR_SCHEME=$([[ "$mode" == "light" ]] && echo default || echo prefer-dark)
-  if command -v dconf >/dev/null 2>&1; then
-    dconf write /org/gnome/desktop/interface/color-scheme "\"$COLOR_SCHEME\"" 2>/dev/null || true
-    [[ "$icon" != "System Default" && -n "$icon" ]] && dconf write /org/gnome/desktop/interface/icon-theme "\"$icon\"" 2>/dev/null || true
-  elif command -v gsettings >/dev/null 2>&1; then
-    gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME" 2>/dev/null || true
-    [[ "$icon" != "System Default" && -n "$icon" ]] && gsettings set org.gnome.desktop.interface icon-theme "$icon" 2>/dev/null || true
-  fi
 }
 
 if command -v pywalfox >/dev/null 2>&1 && [[ -f "$HOME/.cache/wal/colors.json" ]]; then

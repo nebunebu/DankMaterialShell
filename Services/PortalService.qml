@@ -116,6 +116,16 @@ Singleton {
         })
     }
 
+    function setSystemIconTheme(themeName) {
+        if (!settingsPortalAvailable || !freedeskAvailable) return
+
+        DMSService.sendRequest("freedesktop.settings.setIconTheme", { iconTheme: themeName }, response => {
+            if (response.error) {
+                console.warn("PortalService: Failed to set icon theme:", response.error)
+            }
+        })
+    }
+
     function setSystemProfileImage(imagePath) {
         if (!accountsServiceAvailable || !freedeskAvailable) return
 
