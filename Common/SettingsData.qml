@@ -1283,6 +1283,9 @@ Singleton {
     function setDankBarSpacing(spacing) {
         dankBarSpacing = spacing
         saveSettings()
+        if (typeof NiriService !== "undefined" && CompositorService.isNiri) {
+            NiriService.generateNiriLayoutConfig()
+        }
     }
 
     function setDankBarBottomGap(gap) {
