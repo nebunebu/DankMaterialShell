@@ -448,10 +448,10 @@ Item {
 
                     DankTextField {
                         width: parent.width
-                        text: SessionData.launchPrefix
+                        text: SettingsData.launchPrefix
                         placeholderText: "Enter launch prefix (e.g., 'uwsm-app')"
                         onTextEdited: {
-                            SessionData.setLaunchPrefix(text)
+                            SettingsData.setLaunchPrefix(text)
                         }
                     }
                 }

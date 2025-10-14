@@ -80,11 +80,11 @@ Item {
                         width: parent.width
                         text: I18n.tr("Enable loginctl lock integration")
                         description: I18n.tr("Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen")
-                        checked: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
+                        checked: SessionService.loginctlAvailable && SettingsData.loginctlLockIntegration
                         enabled: SessionService.loginctlAvailable
                         onToggled: checked => {
                             if (SessionService.loginctlAvailable) {
-                                SessionData.setLoginctlLockIntegration(checked)
+                                SettingsData.setLoginctlLockIntegration(checked)
                             }
                         }
                     }
@@ -93,9 +93,9 @@ Item {
                         width: parent.width
                         text: I18n.tr("Lock before suspend")
                         description: I18n.tr("Automatically lock the screen when the system prepares to suspend")
-                        checked: SessionData.lockBeforeSuspend
-                        visible: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
-                        onToggled: checked => SessionData.setLockBeforeSuspend(checked)
+                        checked: SettingsData.lockBeforeSuspend
+                        visible: SessionService.loginctlAvailable && SettingsData.loginctlLockIntegration
+                        onToggled: checked => SettingsData.setLockBeforeSuspend(checked)
                     }
 
                     DankToggle {
@@ -169,14 +169,14 @@ Item {
                         Connections {
                             target: powerCategory
                             function onCurrentIndexChanged() {
-                                const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acLockTimeout : SessionData.batteryLockTimeout
+                                const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acLockTimeout : SettingsData.batteryLockTimeout
                                 const index = lockDropdown.timeoutValues.indexOf(currentTimeout)
                                 lockDropdown.currentValue = index >= 0 ? lockDropdown.timeoutOptions[index] : "Never"
                             }
                         }
 
                         Component.onCompleted: {
-                            const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acLockTimeout : SessionData.batteryLockTimeout
+                            const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acLockTimeout : SettingsData.batteryLockTimeout
                             const index = timeoutValues.indexOf(currentTimeout)
                             currentValue = index >= 0 ? timeoutOptions[index] : "Never"
                         }
@@ -186,9 +186,9 @@ Item {
                             if (index >= 0) {
                                 const timeout = timeoutValues[index]
                                 if (powerCategory.currentIndex === 0) {
-                                    SessionData.setAcLockTimeout(timeout)
+                                    SettingsData.setAcLockTimeout(timeout)
                                 } else {
-                                    SessionData.setBatteryLockTimeout(timeout)
+                                    SettingsData.setBatteryLockTimeout(timeout)
                                 }
                             }
                         }
@@ -205,14 +205,14 @@ Item {
                         Connections {
                             target: powerCategory
                             function onCurrentIndexChanged() {
-                                const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acMonitorTimeout : SessionData.batteryMonitorTimeout
+                                const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acMonitorTimeout : SettingsData.batteryMonitorTimeout
                                 const index = monitorDropdown.timeoutValues.indexOf(currentTimeout)
                                 monitorDropdown.currentValue = index >= 0 ? monitorDropdown.timeoutOptions[index] : "Never"
                             }
                         }
 
                         Component.onCompleted: {
-                            const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acMonitorTimeout : SessionData.batteryMonitorTimeout
+                            const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acMonitorTimeout : SettingsData.batteryMonitorTimeout
                             const index = timeoutValues.indexOf(currentTimeout)
                             currentValue = index >= 0 ? timeoutOptions[index] : "Never"
                         }
@@ -222,9 +222,9 @@ Item {
                             if (index >= 0) {
                                 const timeout = timeoutValues[index]
                                 if (powerCategory.currentIndex === 0) {
-                                    SessionData.setAcMonitorTimeout(timeout)
+                                    SettingsData.setAcMonitorTimeout(timeout)
                                 } else {
-                                    SessionData.setBatteryMonitorTimeout(timeout)
+                                    SettingsData.setBatteryMonitorTimeout(timeout)
                                 }
                             }
                         }
@@ -241,14 +241,14 @@ Item {
                         Connections {
                             target: powerCategory
                             function onCurrentIndexChanged() {
-                                const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acSuspendTimeout : SessionData.batterySuspendTimeout
+                                const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acSuspendTimeout : SettingsData.batterySuspendTimeout
                                 const index = suspendDropdown.timeoutValues.indexOf(currentTimeout)
                                 suspendDropdown.currentValue = index >= 0 ? suspendDropdown.timeoutOptions[index] : "Never"
                             }
                         }
 
                         Component.onCompleted: {
-                            const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acSuspendTimeout : SessionData.batterySuspendTimeout
+                            const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acSuspendTimeout : SettingsData.batterySuspendTimeout
                             const index = timeoutValues.indexOf(currentTimeout)
                             currentValue = index >= 0 ? timeoutOptions[index] : "Never"
                         }
@@ -258,9 +258,9 @@ Item {
                             if (index >= 0) {
                                 const timeout = timeoutValues[index]
                                 if (powerCategory.currentIndex === 0) {
-                                    SessionData.setAcSuspendTimeout(timeout)
+                                    SettingsData.setAcSuspendTimeout(timeout)
                                 } else {
-                                    SessionData.setBatterySuspendTimeout(timeout)
+                                    SettingsData.setBatterySuspendTimeout(timeout)
                                 }
                             }
                         }
@@ -278,14 +278,14 @@ Item {
                         Connections {
                             target: powerCategory
                             function onCurrentIndexChanged() {
-                                const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acHibernateTimeout : SessionData.batteryHibernateTimeout
+                                const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acHibernateTimeout : SettingsData.batteryHibernateTimeout
                                 const index = hibernateDropdown.timeoutValues.indexOf(currentTimeout)
                                 hibernateDropdown.currentValue = index >= 0 ? hibernateDropdown.timeoutOptions[index] : "Never"
                             }
                         }
 
                         Component.onCompleted: {
-                            const currentTimeout = powerCategory.currentIndex === 0 ? SessionData.acHibernateTimeout : SessionData.batteryHibernateTimeout
+                            const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acHibernateTimeout : SettingsData.batteryHibernateTimeout
                             const index = timeoutValues.indexOf(currentTimeout)
                             currentValue = index >= 0 ? timeoutOptions[index] : "Never"
                         }
@@ -295,9 +295,9 @@ Item {
                             if (index >= 0) {
                                 const timeout = timeoutValues[index]
                                 if (powerCategory.currentIndex === 0) {
-                                    SessionData.setAcHibernateTimeout(timeout)
+                                    SettingsData.setAcHibernateTimeout(timeout)
                                 } else {
-                                    SessionData.setBatteryHibernateTimeout(timeout)
+                                    SettingsData.setBatteryHibernateTimeout(timeout)
                                 }
                             }
                         }

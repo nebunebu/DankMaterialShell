@@ -78,7 +78,7 @@ Singleton {
     property var matugenColors: ({})
     property var customThemeData: null
 
-    readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.CacheLocation).toString()) + "/dankshell"
+    readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.CacheLocation).toString()) + "/DankMaterialShell"
 
     Component.onCompleted: {
         Quickshell.execDetached(["mkdir", "-p", stateDir])
