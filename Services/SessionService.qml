@@ -294,7 +294,7 @@ Singleton {
     }
 
     Connections {
-        target: SessionData
+        target: SettingsData
 
         function onLoginctlLockIntegrationChanged() {
             if (SettingsData.loginctlLockIntegration) {
