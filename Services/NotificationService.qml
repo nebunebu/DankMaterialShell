@@ -3,7 +3,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtMultimedia
 import Quickshell
 import Quickshell.Services.Notifications
 import Quickshell.Widgets
@@ -199,22 +198,6 @@ Singleton {
     property var expandedMessages: ({})
     property bool popupsDisabled: false
 
-    MediaPlayer {
-        id: normalNotificationSound
-        source: Qt.resolvedUrl("../assets/sounds/freedesktop/message.oga")
-        audioOutput: AudioOutput {
-            volume: 1.0
-        }
-    }
-
-    MediaPlayer {
-        id: criticalNotificationSound
-        source: Qt.resolvedUrl("../assets/sounds/freedesktop/message-new-instant.oga")
-        audioOutput: AudioOutput {
-            volume: 1.0
-        }
-    }
-
     NotificationServer {
         id: server
 
@@ -244,9 +227,9 @@ Singleton {
 
             if (SettingsData.soundsEnabled && SettingsData.soundNewNotification) {
                 if (notif.urgency === NotificationUrgency.Critical) {
-                    criticalNotificationSound.play()
+                    AudioService.playCriticalNotificationSound()
                 } else {
-                    normalNotificationSound.play()
+                    AudioService.playNormalNotificationSound()
                 }
             }
 

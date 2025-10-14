@@ -3,7 +3,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtMultimedia
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.UPower
@@ -21,22 +20,6 @@ Singleton {
         repeat: false
         running: true
         onTriggered: root.suppressSound = false
-    }
-
-    MediaPlayer {
-        id: powerPlugSound
-        source: Qt.resolvedUrl("../assets/sounds/plasma/power-plug.ogg")
-        audioOutput: AudioOutput {
-            volume: 1.0
-        }
-    }
-
-    MediaPlayer {
-        id: powerUnplugSound
-        source: Qt.resolvedUrl("../assets/sounds/plasma/power-unplug.ogg")
-        audioOutput: AudioOutput {
-            volume: 1.0
-        }
     }
 
     readonly property string preferredBatteryOverride: Quickshell.env("DMS_PREFERRED_BATTERY")
@@ -62,9 +45,9 @@ Singleton {
 
         if (SettingsData.soundsEnabled && SettingsData.soundPluggedIn) {
             if (isPluggedIn && !previousPluggedState) {
-                powerPlugSound.play()
+                AudioService.playPowerPlugSound()
             } else if (!isPluggedIn && previousPluggedState) {
-                powerUnplugSound.play()
+                AudioService.playPowerUnplugSound()
             }
         }
 

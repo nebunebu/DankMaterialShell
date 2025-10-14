@@ -3,7 +3,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtMultimedia
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
@@ -16,6 +15,13 @@ Singleton {
     readonly property PwNode source: Pipewire.defaultAudioSource
 
     property bool suppressOSD: true
+    property bool soundsAvailable: false
+
+    property var volumeChangeSound: null
+    property var powerPlugSound: null
+    property var powerUnplugSound: null
+    property var normalNotificationSound: null
+    property var criticalNotificationSound: null
 
     signal micMuteChanged
 
@@ -27,11 +33,106 @@ Singleton {
         onTriggered: root.suppressOSD = false
     }
 
-    MediaPlayer {
-        id: volumeChangeSound
-        source: Qt.resolvedUrl("../assets/sounds/freedesktop/audio-volume-change.oga")
-        audioOutput: AudioOutput {
-            volume: 1.0
+    function detectSoundsAvailability() {
+        try {
+            const testObj = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                Item {}
+            `, root, "AudioService.TestComponent")
+            if (testObj) {
+                testObj.destroy()
+            }
+            soundsAvailable = true
+            return true
+        } catch (e) {
+            soundsAvailable = false
+            return false
+        }
+    }
+
+    function createSoundPlayers() {
+        if (!soundsAvailable) {
+            return
+        }
+
+        try {
+            volumeChangeSound = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                MediaPlayer {
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/audio-volume-change.oga")
+                    audioOutput: AudioOutput { volume: 1.0 }
+                }
+            `, root, "AudioService.VolumeChangeSound")
+
+            powerPlugSound = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                MediaPlayer {
+                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-plug.ogg")
+                    audioOutput: AudioOutput { volume: 1.0 }
+                }
+            `, root, "AudioService.PowerPlugSound")
+
+            powerUnplugSound = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                MediaPlayer {
+                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-unplug.ogg")
+                    audioOutput: AudioOutput { volume: 1.0 }
+                }
+            `, root, "AudioService.PowerUnplugSound")
+
+            normalNotificationSound = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                MediaPlayer {
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message.oga")
+                    audioOutput: AudioOutput { volume: 1.0 }
+                }
+            `, root, "AudioService.NormalNotificationSound")
+
+            criticalNotificationSound = Qt.createQmlObject(`
+                import QtQuick
+                import QtMultimedia
+                MediaPlayer {
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message-new-instant.oga")
+                    audioOutput: AudioOutput { volume: 1.0 }
+                }
+            `, root, "AudioService.CriticalNotificationSound")
+        } catch (e) {
+            console.warn("AudioService: Error creating sound players:", e)
+        }
+    }
+
+    function playVolumeChangeSound() {
+        if (soundsAvailable && volumeChangeSound) {
+            volumeChangeSound.play()
+        }
+    }
+
+    function playPowerPlugSound() {
+        if (soundsAvailable && powerPlugSound) {
+            powerPlugSound.play()
+        }
+    }
+
+    function playPowerUnplugSound() {
+        if (soundsAvailable && powerUnplugSound) {
+            powerUnplugSound.play()
+        }
+    }
+
+    function playNormalNotificationSound() {
+        if (soundsAvailable && normalNotificationSound) {
+            normalNotificationSound.play()
+        }
+    }
+
+    function playCriticalNotificationSound() {
+        if (soundsAvailable && criticalNotificationSound) {
+            criticalNotificationSound.play()
         }
     }
 
@@ -40,14 +141,17 @@ Singleton {
         interval: 50
         repeat: false
         onTriggered: {
-            if (SettingsData.soundsEnabled && SettingsData.soundVolumeChanged && !root.suppressOSD) {
-                volumeChangeSound.play()
+            if (!root.suppressOSD && SettingsData.soundsEnabled && SettingsData.soundVolumeChanged) {
+                root.playVolumeChangeSound()
             }
         }
     }
 
     Connections {
         target: root.sink?.audio
+        enabled: root.sink?.audio !== null
+        ignoreUnknownSignals: true
+
         function onVolumeChanged() {
             volumeSoundDebounce.restart()
         }
@@ -238,6 +342,15 @@ Singleton {
             }
 
             return result
+        }
+    }
+
+    Component.onCompleted: {
+        if (!detectSoundsAvailability()) {
+            console.warn("AudioService: QtMultimedia not available - sound effects disabled")
+        } else {
+            console.log("AudioService: Sound effects enabled")
+            createSoundPlayers()
         }
     }
 }

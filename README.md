@@ -287,11 +287,11 @@ sudo sh -c "curl -L https://github.com/AvengeMedia/danklinux/releases/latest/dow
 **4.1 Core optional dependencies**
 ```bash
 # Arch Linux
-sudo pacman -S cava wl-clipboard cliphist brightnessctl
+sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia
 paru -S matugen-bin dgop
 
 # Fedora
-sudo dnf install cava wl-clipboard brightnessctl
+sudo dnf install cava wl-clipboard brightnessctl qt6-multimedia
 sudo dnf copr enable wef/cliphist && sudo dnf install cliphist
 sudo dnf copr enable heus-sueh/packages && sudo dnf install matugen
 ```
@@ -315,6 +315,7 @@ sudo sh -c "curl -L https://github.com/AvengeMedia/dgop/releases/latest/download
 - `cava`: Audio visualizer
 - `cliphist`: Clipboard history
 - `gammastep`: Night mode support
+- `qt6-multimedia`: System sound support
 
 ## Compositor Configuration
 
