@@ -97,6 +97,15 @@ Item {
                         visible: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
                         onToggled: checked => SessionData.setLockBeforeSuspend(checked)
                     }
+
+                    DankToggle {
+                        width: parent.width
+                        text: I18n.tr("Enable fingerprint authentication")
+                        description: "Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)"
+                        checked: SettingsData.enableFprint
+                        visible: SettingsData.fprintdAvailable
+                        onToggled: checked => SettingsData.setEnableFprint(checked)
+                    }
                 }
             }
 

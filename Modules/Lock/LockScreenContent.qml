@@ -6,7 +6,6 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
-import Quickshell.Services.Pam
 import Quickshell.Services.Mpris
 import qs.Common
 import qs.Services
@@ -253,22 +252,50 @@ Item {
                     border.color: passwordField.activeFocus ? Theme.primary : Qt.rgba(1, 1, 1, 0.3)
                     border.width: passwordField.activeFocus ? 2 : 1
 
-                    DankIcon {
-                        id: lockIcon
-
+                    Item {
+                        id: lockIconContainer
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.spacingM
                         anchors.verticalCenter: parent.verticalCenter
-                        name: "lock"
-                        size: 20
-                        color: passwordField.activeFocus ? Theme.primary : Theme.surfaceVariantText
+                        width: 20
+                        height: 20
+
+                        DankIcon {
+                            id: lockIcon
+
+                            anchors.centerIn: parent
+                            name: {
+                                if (pam.fprint.tries >= SettingsData.maxFprintTries)
+                                    return "fingerprint_off";
+                                if (pam.fprint.active)
+                                    return "fingerprint";
+                                return "lock";
+                            }
+                            size: 20
+                            color: pam.fprint.tries >= SettingsData.maxFprintTries ? Theme.error : (passwordField.activeFocus ? Theme.primary : Theme.surfaceVariantText)
+                            opacity: pam.passwd.active ? 0 : 1
+
+                            Behavior on opacity {
+                                NumberAnimation {
+                                    duration: Theme.mediumDuration
+                                    easing.type: Theme.standardEasing
+                                }
+                            }
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Theme.shortDuration
+                                    easing.type: Theme.standardEasing
+                                }
+                            }
+                        }
                     }
 
                     TextInput {
                         id: passwordField
 
                         anchors.fill: parent
-                        anchors.leftMargin: lockIcon.width + Theme.spacingM * 2
+                        anchors.leftMargin: lockIconContainer.width + Theme.spacingM * 2
                         anchors.rightMargin: {
                             let margin = Theme.spacingM
                             if (loadingSpinner.visible) {
@@ -296,9 +323,9 @@ Item {
                             }
                         }
                         onAccepted: {
-                            if (!demoMode && !pam.active) {
+                            if (!demoMode && !pam.passwd.active) {
                                 console.log("Enter pressed, starting PAM authentication")
-                                pam.start()
+                                pam.passwd.start()
                             }
                         }
                         Keys.onPressed: event => {
@@ -306,7 +333,7 @@ Item {
                                                 return
                                             }
 
-                                            if (pam.active) {
+                                            if (pam.passwd.active) {
                                                 console.log("PAM is active, ignoring input")
                                                 event.accepted = true
                                                 return
@@ -355,7 +382,7 @@ Item {
                     StyledText {
                         id: placeholder
 
-                        anchors.left: lockIcon.right
+                        anchors.left: lockIconContainer.right
                         anchors.leftMargin: Theme.spacingM
                         anchors.right: (revealButton.visible ? revealButton.left : (virtualKeyboardButton.visible ? virtualKeyboardButton.left : (enterButton.visible ? enterButton.left : (loadingSpinner.visible ? loadingSpinner.left : parent.right))))
                         anchors.rightMargin: 2
@@ -367,12 +394,12 @@ Item {
                             if (root.unlocking) {
                                 return "Unlocking..."
                             }
-                            if (pam.active) {
+                            if (pam.passwd.active) {
                                 return "Authenticating..."
                             }
                             return "Password..."
                         }
-                        color: root.unlocking ? Theme.primary : (pam.active ? Theme.primary : Theme.outline)
+                        color: root.unlocking ? Theme.primary : (pam.passwd.active ? Theme.primary : Theme.outline)
                         font.pixelSize: Theme.fontSizeMedium
                         opacity: (demoMode || root.passwordBuffer.length === 0) ? 1 : 0
 
@@ -392,7 +419,7 @@ Item {
                     }
 
                     StyledText {
-                        anchors.left: lockIcon.right
+                        anchors.left: lockIconContainer.right
                         anchors.leftMargin: Theme.spacingM
                         anchors.right: (revealButton.visible ? revealButton.left : (virtualKeyboardButton.visible ? virtualKeyboardButton.left : (enterButton.visible ? enterButton.left : (loadingSpinner.visible ? loadingSpinner.left : parent.right))))
                         anchors.rightMargin: 2
@@ -427,7 +454,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         iconName: parent.showPassword ? "visibility_off" : "visibility"
                         buttonSize: 32
-                        visible: !demoMode && root.passwordBuffer.length > 0 && !pam.active && !root.unlocking
+                        visible: !demoMode && root.passwordBuffer.length > 0 && !pam.passwd.active && !root.unlocking
                         enabled: visible
                         onClicked: parent.showPassword = !parent.showPassword
                     }
@@ -439,7 +466,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         iconName: "keyboard"
                         buttonSize: 32
-                        visible: !demoMode && !pam.active && !root.unlocking
+                        visible: !demoMode && !pam.passwd.active && !root.unlocking
                         enabled: visible
                         onClicked: {
                             if (keyboardController.isKeyboardActive) {
@@ -460,7 +487,7 @@ Item {
                         height: 24
                         radius: 12
                         color: "transparent"
-                        visible: !demoMode && (pam.active || root.unlocking)
+                        visible: !demoMode && (pam.passwd.active || root.unlocking)
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -492,7 +519,7 @@ Item {
 
                         Item {
                             anchors.fill: parent
-                            visible: pam.active && !root.unlocking
+                            visible: pam.passwd.active && !root.unlocking
 
                             Rectangle {
                                 width: 20
@@ -522,7 +549,7 @@ Item {
                                 }
 
                                 RotationAnimation on rotation {
-                                    running: pam.active && !root.unlocking
+                                    running: pam.passwd.active && !root.unlocking
                                     loops: Animation.Infinite
                                     duration: Anims.durLong
                                     from: 0
@@ -540,12 +567,12 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         iconName: "keyboard_return"
                         buttonSize: 36
-                        visible: (demoMode || (!pam.active && !root.unlocking))
+                        visible: (demoMode || (!pam.passwd.active && !root.unlocking))
                         enabled: !demoMode
                         onClicked: {
                             if (!demoMode) {
                                 console.log("Enter button clicked, starting PAM authentication")
-                                pam.start()
+                                pam.passwd.start()
                             }
                         }
 
@@ -1091,52 +1118,29 @@ Item {
         }
     }
 
-    FileView {
-        id: pamConfigWatcher
-
-        path: "/etc/pam.d/dankshell"
-        printErrors: false
+    Pam {
+        id: pam
+        lockSecured: !demoMode
+        onUnlockRequested: {
+            root.unlocking = true
+            passwordField.text = ""
+            root.passwordBuffer = ""
+            root.unlockRequested()
+        }
+        onStateChanged: {
+            root.pamState = state
+            if (state !== "") {
+                placeholderDelay.restart()
+                passwordField.text = ""
+                root.passwordBuffer = ""
+            }
+        }
     }
 
-    PamContext {
-        id: pam
-
-        config: pamConfigWatcher.loaded ? "dankshell" : "login"
-        onResponseRequiredChanged: {
-            if (demoMode)
-                return
-
-            console.log("PAM response required:", responseRequired)
-            if (!responseRequired)
-                return
-
-            console.log("Responding to PAM with password buffer length:", root.passwordBuffer.length)
-            respond(root.passwordBuffer)
-        }
-        onCompleted: res => {
-                         if (demoMode)
-                         return
-
-                         console.log("PAM authentication completed with result:", res)
-                         if (res === PamResult.Success) {
-                             console.log("Authentication successful, unlocking")
-                             root.unlocking = true
-                             passwordField.text = ""
-                             root.passwordBuffer = ""
-                             root.unlockRequested()
-                             return
-                         }
-                         console.log("Authentication failed:", res)
-                         passwordField.text = ""
-                         root.passwordBuffer = ""
-                         if (res === PamResult.Error)
-                         root.pamState = "error"
-                         else if (res === PamResult.MaxTries)
-                         root.pamState = "max"
-                         else if (res === PamResult.Failed)
-                         root.pamState = "fail"
-                         placeholderDelay.restart()
-                     }
+    Binding {
+        target: pam
+        property: "buffer"
+        value: root.passwordBuffer
     }
 
     Timer {

@@ -173,6 +173,9 @@ Singleton {
     property int dankBarPosition: SettingsData.Position.Top
     property bool dankBarIsVertical: dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right
     property bool lockScreenShowPowerActions: true
+    property bool enableFprint: false
+    property int maxFprintTries: 3
+    property bool fprintdAvailable: false
     property bool hideBrightnessSlider: false
     property string widgetBackgroundColor: "sch"
     property string surfaceBase: "s"
@@ -440,6 +443,8 @@ Singleton {
                 popupGapsManual = settings.popupGapsManual !== undefined ? settings.popupGapsManual : 4
                 dankBarPosition = settings.dankBarPosition !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
+                enableFprint = settings.enableFprint !== undefined ? settings.enableFprint : false
+                maxFprintTries = settings.maxFprintTries !== undefined ? settings.maxFprintTries : 3
                 hideBrightnessSlider = settings.hideBrightnessSlider !== undefined ? settings.hideBrightnessSlider : false
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
@@ -576,6 +581,8 @@ Singleton {
                                                 "popupGapsManual": popupGapsManual,
                                                 "dankBarPosition": dankBarPosition,
                                                 "lockScreenShowPowerActions": lockScreenShowPowerActions,
+                                                "enableFprint": enableFprint,
+                                                "maxFprintTries": maxFprintTries,
                                                 "hideBrightnessSlider": hideBrightnessSlider,
                                                 "widgetBackgroundColor": widgetBackgroundColor,
                                                 "surfaceBase": surfaceBase,
@@ -1441,6 +1448,16 @@ Singleton {
         saveSettings()
     }
 
+    function setEnableFprint(enabled) {
+        enableFprint = enabled
+        saveSettings()
+    }
+
+    function setMaxFprintTries(tries) {
+        maxFprintTries = tries
+        saveSettings()
+    }
+
     function setHideBrightnessSlider(enabled) {
         hideBrightnessSlider = enabled
         saveSettings()
@@ -1513,6 +1530,7 @@ Singleton {
             loadSettings()
             fontCheckTimer.start()
             initializeListModels()
+            fprintdDetectionProcess.running = true
         }
     }
 
@@ -1669,6 +1687,16 @@ Singleton {
                 // No default settings file found, just apply stored theme
                 applyStoredTheme()
             }
+        }
+    }
+
+    Process {
+        id: fprintdDetectionProcess
+
+        command: ["sh", "-c", "command -v fprintd-list >/dev/null 2>&1"]
+        running: false
+        onExited: exitCode => {
+            fprintdAvailable = (exitCode === 0)
         }
     }
 

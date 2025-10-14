@@ -291,7 +291,7 @@ sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia
 paru -S matugen-bin dgop
 
 # Fedora
-sudo dnf install cava wl-clipboard brightnessctl qt6-multimedia
+sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia
 sudo dnf copr enable wef/cliphist && sudo dnf install cliphist
 sudo dnf copr enable heus-sueh/packages && sudo dnf install matugen
 ```
