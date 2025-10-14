@@ -123,6 +123,10 @@ Singleton {
     property bool notepadShowLineNumbers: false
     property real notepadTransparencyOverride: -1
     property real notepadLastCustomTransparency: 0.7
+    property bool soundsEnabled: true
+    property bool soundNewNotification: true
+    property bool soundVolumeChanged: true
+    property bool soundPluggedIn: true
 
     onNotepadUseMonospaceChanged: saveSettings()
     onNotepadFontFamilyChanged: saveSettings()
@@ -396,6 +400,10 @@ Singleton {
                 notepadShowLineNumbers = settings.notepadShowLineNumbers !== undefined ? settings.notepadShowLineNumbers : false
                 notepadTransparencyOverride = settings.notepadTransparencyOverride !== undefined ? settings.notepadTransparencyOverride : -1
                 notepadLastCustomTransparency = settings.notepadLastCustomTransparency !== undefined ? settings.notepadLastCustomTransparency : 0.95
+                soundsEnabled = settings.soundsEnabled !== undefined ? settings.soundsEnabled : true
+                soundNewNotification = settings.soundNewNotification !== undefined ? settings.soundNewNotification : true
+                soundVolumeChanged = settings.soundVolumeChanged !== undefined ? settings.soundVolumeChanged : true
+                soundPluggedIn = settings.soundPluggedIn !== undefined ? settings.soundPluggedIn : true
                 gtkThemingEnabled = settings.gtkThemingEnabled !== undefined ? settings.gtkThemingEnabled : false
                 qtThemingEnabled = settings.qtThemingEnabled !== undefined ? settings.qtThemingEnabled : false
                 showDock = settings.showDock !== undefined ? settings.showDock : false
@@ -536,6 +544,10 @@ Singleton {
                                                 "notepadShowLineNumbers": notepadShowLineNumbers,
                                                 "notepadTransparencyOverride": notepadTransparencyOverride,
                                                 "notepadLastCustomTransparency": notepadLastCustomTransparency,
+                                                "soundsEnabled": soundsEnabled,
+                                                "soundNewNotification": soundNewNotification,
+                                                "soundVolumeChanged": soundVolumeChanged,
+                                                "soundPluggedIn": soundPluggedIn,
                                                 "gtkThemingEnabled": gtkThemingEnabled,
                                                 "qtThemingEnabled": qtThemingEnabled,
                                                 "showDock": showDock,
@@ -1123,6 +1135,26 @@ Singleton {
 
     function setDankBarFontScale(scale) {
         dankBarFontScale = scale
+        saveSettings()
+    }
+
+    function setSoundsEnabled(enabled) {
+        soundsEnabled = enabled
+        saveSettings()
+    }
+
+    function setSoundNewNotification(enabled) {
+        soundNewNotification = enabled
+        saveSettings()
+    }
+
+    function setSoundVolumeChanged(enabled) {
+        soundVolumeChanged = enabled
+        saveSettings()
+    }
+
+    function setSoundPluggedIn(enabled) {
+        soundPluggedIn = enabled
         saveSettings()
     }
 
