@@ -149,9 +149,9 @@ Singleton {
         }
     }
 
-    function connectToWifi(ssid, password = "", username = "") {
+    function connectToWifi(ssid, password = "", username = "", realmOrDomain = "", useAtRealm = true, anonymousIdentity = "", domainSuffixMatch = "") {
         if (activeService && activeService.connectToWifi) {
-            activeService.connectToWifi(ssid, password, username)
+            activeService.connectToWifi(ssid, password, username, realmOrDomain, useAtRealm, anonymousIdentity, domainSuffixMatch)
         }
     }
 
@@ -191,9 +191,9 @@ Singleton {
         }
     }
 
-    function connectToWifiAndSetPreference(ssid, password, username = "") {
+    function connectToWifiAndSetPreference(ssid, password, username = "", realmOrDomain = "", useAtRealm = true, anonymousIdentity = "", domainSuffixMatch = "") {
         if (activeService && activeService.connectToWifiAndSetPreference) {
-            activeService.connectToWifiAndSetPreference(ssid, password, username)
+            activeService.connectToWifiAndSetPreference(ssid, password, username, realmOrDomain, useAtRealm, anonymousIdentity, domainSuffixMatch)
         }
     }
 
