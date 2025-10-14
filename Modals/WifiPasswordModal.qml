@@ -128,7 +128,7 @@ DankModal {
                         }
 
                         StyledText {
-                            text: requiresEnterprise ? `Enter credentials for "${wifiPasswordSSID}"` : `Enter password for "${wifiPasswordSSID}"`
+                            text: requiresEnterprise ? I18n.tr("Enter credentials for ") + wifiPasswordSSID : I18n.tr("Enter password for ") + wifiPasswordSSID
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceTextMedium
                             width: parent.width
@@ -171,7 +171,7 @@ DankModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiUsernameInput
-                        placeholderText: "Username"
+                        placeholderText: I18n.tr("Username")
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -208,7 +208,7 @@ DankModal {
                         textColor: Theme.surfaceText
                         text: wifiPasswordInput
                         echoMode: showPasswordCheckbox.checked ? TextInput.Normal : TextInput.Password
-                        placeholderText: requiresEnterprise ? "Password" : ""
+                        placeholderText: requiresEnterprise ? I18n.tr("Password") : ""
                         backgroundColor: "transparent"
                         focus: !requiresEnterprise
                         enabled: root.shouldBeVisible
@@ -291,7 +291,7 @@ DankModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiRealmInput
-                        placeholderText: "Realm / Domain (optional)"
+                        placeholderText: I18n.tr("Realm / Domain (optional)")
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -385,7 +385,7 @@ DankModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiAnonymousIdentityInput
-                        placeholderText: "Anonymous Identity (optional)"
+                        placeholderText: I18n.tr("Anonymous Identity (optional)")
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -417,7 +417,7 @@ DankModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiDomainSuffixMatchInput
-                        placeholderText: "Server Domain for certificate (optional)"
+                        placeholderText: I18n.tr("Server Domain for certificate (optional)")
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {

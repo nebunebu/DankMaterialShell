@@ -34,6 +34,12 @@ PanelWindow {
         closeTimer.restart()
     }
 
+    function resetHideTimer() {
+        if (shouldBeVisible) {
+            hideTimer.restart()
+        }
+    }
+
     function updateHoverState() {
         let isHovered = (enableMouseInteraction && mouseArea.containsMouse) || osdContainer.childHovered
         if (enableMouseInteraction) {
@@ -51,7 +57,7 @@ PanelWindow {
     }
 
     screen: modelData
-    visible: shouldBeVisible
+    visible: false
     WlrLayershell.layer: WlrLayershell.Overlay
     WlrLayershell.exclusiveZone: -1
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None

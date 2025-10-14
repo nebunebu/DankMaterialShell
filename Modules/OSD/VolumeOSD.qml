@@ -107,6 +107,7 @@ DankOSD {
                                               AudioService.suppressOSD = true
                                               AudioService.sink.audio.volume = newValue / 100
                                               AudioService.suppressOSD = false
+                                              resetHideTimer()
                                           }
                                       }
 
