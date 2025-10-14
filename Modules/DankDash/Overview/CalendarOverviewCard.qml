@@ -399,7 +399,7 @@ Rectangle {
                         width: parent.width
                         text: {
                             if (!modelData || modelData.allDay) {
-                                return "All day"
+                                return I18n.tr("All day")
                             } else if (modelData.start && modelData.end) {
                                 const timeFormat = SettingsData.use24HourClock ? "HH:mm" : "h:mm AP"
                                 const startTime = Qt.formatTime(modelData.start, timeFormat)

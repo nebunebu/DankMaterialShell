@@ -30,6 +30,12 @@
     "comment": ""
   },
   {
+    "term": "1 event",
+    "context": "1 event",
+    "reference": "Modules/DankDash/Overview/CalendarOverviewCard.qml:136",
+    "comment": ""
+  },
+  {
     "term": "24-Hour Format",
     "context": "24-Hour Format",
     "reference": "Modules/Settings/TimeWeatherTab.qml:59",
@@ -120,6 +126,12 @@
     "comment": ""
   },
   {
+    "term": "All day",
+    "context": "All day",
+    "reference": "Modules/DankDash/Overview/CalendarOverviewCard.qml:402",
+    "comment": ""
+  },
+  {
     "term": "All displays",
     "context": "All displays",
     "reference": "Modules/Settings/DisplaysTab.qml:663",
@@ -164,13 +176,13 @@
   {
     "term": "Apply GTK Colors",
     "context": "Apply GTK Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1284",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1286",
     "comment": ""
   },
   {
     "term": "Apply Qt Colors",
     "context": "Apply Qt Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1320",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1322",
     "comment": ""
   },
   {
@@ -668,7 +680,7 @@
   {
     "term": "Corner Radius (0 = square corners)",
     "context": "Corner Radius (0 = square corners)",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:877",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:882",
     "comment": ""
   },
   {
@@ -740,7 +752,7 @@
   {
     "term": "DEMO MODE - Click anywhere to exit",
     "context": "DEMO MODE - Click anywhere to exit",
-    "reference": "Modules/Lock/LockScreenContent.qml:601",
+    "reference": "Modules/Lock/LockScreenContent.qml:602",
     "comment": ""
   },
   {
@@ -776,13 +788,13 @@
   {
     "term": "Dank Bar Transparency",
     "context": "Dank Bar Transparency",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:742",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:747",
     "comment": ""
   },
   {
     "term": "Dank Bar Widget Transparency",
     "context": "Dank Bar Widget Transparency",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:776",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:781",
     "comment": ""
   },
   {
@@ -1046,19 +1058,19 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/ThemeColorsTab.qml:939",
+    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/ThemeColorsTab.qml:944",
     "comment": ""
   },
   {
     "term": "Font Scale",
     "context": "Font Scale",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1059",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1064",
     "comment": ""
   },
   {
     "term": "Font Settings",
     "context": "Font Settings",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:930",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:935",
     "comment": ""
   },
   {
@@ -1070,7 +1082,7 @@
   {
     "term": "Font Weight",
     "context": "Font Weight",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:960",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:965",
     "comment": ""
   },
   {
@@ -1196,7 +1208,7 @@
   {
     "term": "Hibernate",
     "context": "Hibernate",
-    "reference": "Modals/PowerMenuModal.qml:43, Modals/PowerMenuModal.qml:311, Modules/Lock/LockPowerMenu.qml:310",
+    "reference": "Modals/PowerMenuModal.qml:43, Modals/PowerMenuModal.qml:311, Modules/Lock/LockPowerMenu.qml:312",
     "comment": ""
   },
   {
@@ -1238,7 +1250,7 @@
   {
     "term": "Icon Theme",
     "context": "Icon Theme",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1199",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1204",
     "comment": ""
   },
   {
@@ -1406,7 +1418,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:35, Modals/PowerMenuModal.qml:204, Modules/Lock/LockPowerMenu.qml:207, Modules/ControlCenter/PowerMenu.qml:14",
+    "reference": "Modals/PowerMenuModal.qml:35, Modals/PowerMenuModal.qml:204, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -1460,7 +1472,7 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:624, Modules/Settings/PersonalizationTab.qml:1049",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:629, Modules/Settings/PersonalizationTab.qml:1049",
     "comment": ""
   },
   {
@@ -1544,7 +1556,7 @@
   {
     "term": "Monospace Font",
     "context": "Monospace Font",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1026",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1031",
     "comment": ""
   },
   {
@@ -1706,7 +1718,7 @@
   {
     "term": "Notepad",
     "context": "Notepad",
-    "reference": "DMSShell.qml:412, Modules/Settings/DankBarTab.qml:175",
+    "reference": "DMSShell.qml:394, Modules/Settings/DankBarTab.qml:175",
     "comment": ""
   },
   {
@@ -1898,7 +1910,7 @@
   {
     "term": "Popup Transparency",
     "context": "Popup Transparency",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:840",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:845",
     "comment": ""
   },
   {
@@ -1910,13 +1922,13 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:51, Modals/PowerMenuModal.qml:419, Modules/Lock/LockPowerMenu.qml:430, Modules/ControlCenter/PowerMenu.qml:17",
+    "reference": "Modals/PowerMenuModal.qml:51, Modals/PowerMenuModal.qml:419, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:147, Modules/Lock/LockPowerMenu.qml:152, Modules/ControlCenter/PowerMenu.qml:13",
+    "reference": "Modals/PowerMenuModal.qml:147, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
@@ -1988,7 +2000,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/Lock/LockPowerMenu.qml:370, Modules/ControlCenter/PowerMenu.qml:16",
+    "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -2072,7 +2084,7 @@
   {
     "term": "Scale all font sizes",
     "context": "Scale all font sizes",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1066",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1071",
     "comment": ""
   },
   {
@@ -2132,7 +2144,7 @@
   {
     "term": "Select font weight",
     "context": "Select font weight",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:961",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:966",
     "comment": ""
   },
   {
@@ -2144,13 +2156,13 @@
   {
     "term": "Select monospace font for process list and technical displays",
     "context": "Select monospace font for process list and technical displays",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1027",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1032",
     "comment": ""
   },
   {
     "term": "Select system font family",
     "context": "Select system font family",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:940",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:945",
     "comment": ""
   },
   {
@@ -2324,7 +2336,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/Lock/LockPowerMenu.qml:258, Modules/ControlCenter/PowerMenu.qml:15",
+    "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {
@@ -2354,7 +2366,7 @@
   {
     "term": "System App Theming",
     "context": "System App Theming",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1252",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1254",
     "comment": ""
   },
   {
@@ -2450,7 +2462,7 @@
   {
     "term": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
     "context": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1160",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1165",
     "comment": ""
   },
   {
@@ -2462,7 +2474,7 @@
   {
     "term": "Theme Color",
     "context": "Theme Color",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:103",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:108",
     "comment": ""
   },
   {
@@ -2714,7 +2726,7 @@
   {
     "term": "Widget Styling",
     "context": "Widget Styling",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:729",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:734",
     "comment": ""
   },
   {
@@ -2781,6 +2793,12 @@
     "term": "You have unsaved changes. Save before opening a file?",
     "context": "You have unsaved changes. Save before opening a file?",
     "reference": "Modules/Notepad/Notepad.qml:396",
+    "comment": ""
+  },
+  {
+    "term": "events",
+    "context": "events",
+    "reference": "Modules/DankDash/Overview/CalendarOverviewCard.qml:136",
     "comment": ""
   },
   {

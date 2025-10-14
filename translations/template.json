@@ -35,6 +35,13 @@
     "comment": ""
   },
   {
+    "term": "1 event",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "24-Hour Format",
     "translation": "",
     "context": "",
@@ -134,6 +141,13 @@
   },
   {
     "term": "All",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "All day",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3242,6 +3256,13 @@
   },
   {
     "term": "You have unsaved changes. Save before opening a file?",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "events",
     "translation": "",
     "context": "",
     "reference": "",
