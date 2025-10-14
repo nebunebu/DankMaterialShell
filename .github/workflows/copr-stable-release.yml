@@ -40,7 +40,7 @@ jobs:
       - name: Setup build environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y rpm wget curl jq gzip rpmdevtools
+          sudo apt-get install -y rpm wget curl jq gzip
           mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
           echo "✅ RPM build environment ready"
       
