@@ -255,7 +255,7 @@ Item {
                 powerConfirmModalLoader.active = true
                 if (powerConfirmModalLoader.item) {
                     powerConfirmModalLoader.item.confirmButtonColor = action === "poweroff" ? Theme.error : action === "reboot" ? Theme.warning : Theme.primary
-                    powerConfirmModalLoader.item.show(title, message, actionApply(action), function () {})
+                    powerConfirmModalLoader.item.show(title, message, () => actionApply(action), function () {})
                 }
             } else {
                 actionApply(action)
@@ -430,12 +430,11 @@ Item {
         id: powerMenuModal
 
         onPowerActionRequested: (action, title, message) => {
-            console.log("CONFIRM: ", SettingsData.powerActionConfirm)
             if (SettingsData.powerActionConfirm) {
                 powerConfirmModalLoader.active = true
                 if (powerConfirmModalLoader.item) {
                     powerConfirmModalLoader.item.confirmButtonColor = action === "poweroff" ? Theme.error : action === "reboot" ? Theme.warning : Theme.primary
-                    powerConfirmModalLoader.item.show(title, message, actionApply(action), function () {})
+                    powerConfirmModalLoader.item.show(title, message, () => actionApply(action), function () {})
                 }
             } else {
                 actionApply(action)

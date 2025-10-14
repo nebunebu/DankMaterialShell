@@ -62,7 +62,7 @@ Item {
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Show Power Actions")
-                        description: "Show power, restart, and logout buttons on the lock screen"
+                        description: I18n.tr("Show power, restart, and logout buttons on the lock screen")
                         checked: SettingsData.lockScreenShowPowerActions
                         onToggled: checked => SettingsData.setLockScreenShowPowerActions(checked)
                     }
@@ -79,7 +79,7 @@ Item {
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Enable loginctl lock integration")
-                        description: "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen"
+                        description: I18n.tr("Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen")
                         checked: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
                         enabled: SessionService.loginctlAvailable
                         onToggled: checked => {
@@ -92,7 +92,7 @@ Item {
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Lock before suspend")
-                        description: "Automatically lock the screen when the system prepares to suspend"
+                        description: I18n.tr("Automatically lock the screen when the system prepares to suspend")
                         checked: SessionData.lockBeforeSuspend
                         visible: SessionService.loginctlAvailable && SessionData.loginctlLockIntegration
                         onToggled: checked => SessionData.setLockBeforeSuspend(checked)
@@ -101,7 +101,7 @@ Item {
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Enable fingerprint authentication")
-                        description: "Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)"
+                        description: I18n.tr("Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)")
                         checked: SettingsData.enableFprint
                         visible: SettingsData.fprintdAvailable
                         onToggled: checked => SettingsData.setEnableFprint(checked)
@@ -350,7 +350,7 @@ Item {
                     DankToggle {
                         width: parent.width
                         text: I18n.tr("Show Confirmation on Power Actions")
-                        description: "Request confirmation on power off, restart, suspend, hibernate and logout actions"
+                        description: I18n.tr("Request confirmation on power off, restart, suspend, hibernate and logout actions")
                         checked: SettingsData.powerActionConfirm
                         onToggled: checked => SettingsData.setPowerActionConfirm(checked)
                     }

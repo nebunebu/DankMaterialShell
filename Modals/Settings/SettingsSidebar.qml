@@ -33,7 +33,7 @@ Rectangle {
         "text": I18n.tr("Theme & Colors"),
         "icon": "palette"
     }, {
-        "text": I18n.tr("Power & Battery"),
+        "text": I18n.tr("Power & Security"),
         "icon": "power"
     }, {
         "text": I18n.tr("Plugins"),
