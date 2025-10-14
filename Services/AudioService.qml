@@ -148,8 +148,8 @@ Singleton {
     }
 
     Connections {
-        target: root.sink?.audio
-        enabled: root.sink?.audio !== null
+        target: root.sink && root.sink.audio ? root.sink.audio : null
+        enabled: root.sink && root.sink.audio
         ignoreUnknownSignals: true
 
         function onVolumeChanged() {
