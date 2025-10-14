@@ -693,6 +693,7 @@ Item {
                                 property var intervalOptions: ["1 minute", "5 minutes", "15 minutes", "30 minutes", "1 hour", "1.5 hours", "2 hours", "3 hours", "4 hours", "6 hours", "8 hours", "12 hours"]
                                 property var intervalValues: [60, 300, 900, 1800, 3600, 5400, 7200, 10800, 14400, 21600, 28800, 43200]
 
+                                width: parent.width - parent.leftPadding
                                 visible: {
                                     if (SessionData.perMonitorWallpaper) {
                                         return SessionData.getMonitorCyclingSettings(selectedMonitorName).mode === "interval"

@@ -184,7 +184,6 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
                         visible: SessionData.nightModeAutoEnabled
-                        leftPadding: Theme.spacingM
 
                         Connections {
                             target: SessionData
@@ -194,13 +193,14 @@ Item {
                         }
 
                         Item {
-                            width: 200
+                            width: parent.width
                             height: 45 + Theme.spacingM
 
                             DankTabBar {
                                 id: modeTabBarNight
                                 width: 200
                                 height: 45
+                                anchors.horizontalCenter: parent.horizontalCenter
                                 model: [{
                                         "text": "Time",
                                         "icon": "access_time"
@@ -231,126 +231,124 @@ Item {
                         }
 
                         Column {
-                            property bool isTimeMode: SessionData.nightModeAutoMode === "time"
-                            visible: isTimeMode
+                            width: parent.width
                             spacing: Theme.spacingM
+                            visible: SessionData.nightModeAutoMode === "time"
 
-                            Row {
-                                spacing: Theme.spacingM
-                                height: 20
-                                leftPadding: 45
+                            Column {
+                                spacing: Theme.spacingXS
+                                anchors.horizontalCenter: parent.horizontalCenter
 
-                                StyledText {
-                                    text: I18n.tr("Hour")
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    color: Theme.surfaceVariantText
-                                    width: 50
-                                    horizontalAlignment: Text.AlignHCenter
-                                    anchors.bottom: parent.bottom
-                                }
+                                Row {
+                                    spacing: Theme.spacingM
 
-                                StyledText {
-                                    text: I18n.tr("Minute")
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    color: Theme.surfaceVariantText
-                                    width: 50
-                                    horizontalAlignment: Text.AlignHCenter
-                                    anchors.bottom: parent.bottom
-                                }
-                            }
-
-                            Row {
-                                spacing: Theme.spacingM
-                                height: 32
-
-                                StyledText {
-                                    id: startLabel
-                                    text: I18n.tr("Start")
-                                    font.pixelSize: Theme.fontSizeMedium
-                                    color: Theme.surfaceText
-                                    width: 50
-                                    anchors.verticalCenter: parent.verticalCenter
-                                }
-
-                                DankDropdown {
-                                    width: 60
-                                    height: 32
-                                    text: ""
-                                    currentValue: SessionData.nightModeStartHour.toString()
-                                    options: {
-                                        var hours = []
-                                        for (var i = 0; i < 24; i++) {
-                                            hours.push(i.toString())
-                                        }
-                                        return hours
+                                    StyledText {
+                                        text: ""
+                                        width: 50
+                                        height: 20
                                     }
-                                    onValueChanged: value => {
-                                                        SessionData.setNightModeStartHour(parseInt(value))
-                                                    }
-                                }
 
-                                DankDropdown {
-                                    width: 60
-                                    height: 32
-                                    text: ""
-                                    currentValue: SessionData.nightModeStartMinute.toString().padStart(2, '0')
-                                    options: {
-                                        var minutes = []
-                                        for (var i = 0; i < 60; i += 5) {
-                                            minutes.push(i.toString().padStart(2, '0'))
-                                        }
-                                        return minutes
+                                    StyledText {
+                                        text: I18n.tr("Hour")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceVariantText
+                                        width: 70
+                                        horizontalAlignment: Text.AlignHCenter
                                     }
-                                    onValueChanged: value => {
-                                                        SessionData.setNightModeStartMinute(parseInt(value))
-                                                    }
-                                }
-                            }
 
-                            Row {
-                                spacing: Theme.spacingM
-                                height: 32
-
-                                StyledText {
-                                    text: I18n.tr("End")
-                                    font.pixelSize: Theme.fontSizeMedium
-                                    color: Theme.surfaceText
-                                    width: startLabel.width
-                                    anchors.verticalCenter: parent.verticalCenter
-                                }
-
-                                DankDropdown {
-                                    width: 60
-                                    height: 32
-                                    text: ""
-                                    currentValue: SessionData.nightModeEndHour.toString()
-                                    options: {
-                                        var hours = []
-                                        for (var i = 0; i < 24; i++) {
-                                            hours.push(i.toString())
-                                        }
-                                        return hours
+                                    StyledText {
+                                        text: I18n.tr("Minute")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                        color: Theme.surfaceVariantText
+                                        width: 70
+                                        horizontalAlignment: Text.AlignHCenter
                                     }
-                                    onValueChanged: value => {
-                                                        SessionData.setNightModeEndHour(parseInt(value))
-                                                    }
                                 }
 
-                                DankDropdown {
-                                    width: 60
-                                    height: 32
-                                    text: ""
-                                    currentValue: SessionData.nightModeEndMinute.toString().padStart(2, '0')
-                                    options: {
-                                        var minutes = []
-                                        for (var i = 0; i < 60; i += 5) {
-                                            minutes.push(i.toString().padStart(2, '0'))
-                                        }
-                                        return minutes
+                                Row {
+                                    spacing: Theme.spacingM
+
+                                    StyledText {
+                                        text: I18n.tr("Start")
+                                        font.pixelSize: Theme.fontSizeMedium
+                                        color: Theme.surfaceText
+                                        width: 50
+                                        height: 40
+                                        verticalAlignment: Text.AlignVCenter
                                     }
-                                    onValueChanged: value => {
-                                                        SessionData.setNightModeEndMinute(parseInt(value))
-                                                    }
+
+                                    DankDropdown {
+                                        dropdownWidth: 70
+                                        currentValue: SessionData.nightModeStartHour.toString()
+                                        options: {
+                                            var hours = []
+                                            for (var i = 0; i < 24; i++) {
+                                                hours.push(i.toString())
+                                            }
+                                            return hours
+                                        }
+                                        onValueChanged: value => {
+                                                            SessionData.setNightModeStartHour(parseInt(value))
+                                                        }
+                                    }
+
+                                    DankDropdown {
+                                        dropdownWidth: 70
+                                        currentValue: SessionData.nightModeStartMinute.toString().padStart(2, '0')
+                                        options: {
+                                            var minutes = []
+                                            for (var i = 0; i < 60; i += 5) {
+                                                minutes.push(i.toString().padStart(2, '0'))
+                                            }
+                                            return minutes
+                                        }
+                                        onValueChanged: value => {
+                                                            SessionData.setNightModeStartMinute(parseInt(value))
+                                                        }
+                                    }
+                                }
+
+                                Row {
+                                    spacing: Theme.spacingM
+
+                                    StyledText {
+                                        text: I18n.tr("End")
+                                        font.pixelSize: Theme.fontSizeMedium
+                                        color: Theme.surfaceText
+                                        width: 50
+                                        height: 40
+                                        verticalAlignment: Text.AlignVCenter
+                                    }
+
+                                    DankDropdown {
+                                        dropdownWidth: 70
+                                        currentValue: SessionData.nightModeEndHour.toString()
+                                        options: {
+                                            var hours = []
+                                            for (var i = 0; i < 24; i++) {
+                                                hours.push(i.toString())
+                                            }
+                                            return hours
+                                        }
+                                        onValueChanged: value => {
+                                                            SessionData.setNightModeEndHour(parseInt(value))
+                                                        }
+                                    }
+
+                                    DankDropdown {
+                                        dropdownWidth: 70
+                                        currentValue: SessionData.nightModeEndMinute.toString().padStart(2, '0')
+                                        options: {
+                                            var minutes = []
+                                            for (var i = 0; i < 60; i += 5) {
+                                                minutes.push(i.toString().padStart(2, '0'))
+                                            }
+                                            return minutes
+                                        }
+                                        onValueChanged: value => {
+                                                            SessionData.setNightModeEndMinute(parseInt(value))
+                                                        }
+                                    }
                                 }
                             }
                         }
@@ -378,70 +376,75 @@ Item {
                                            }
                             }
 
-                            StyledText {
-                                text: I18n.tr("Manual Coordinates")
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceText
-                                visible: SessionData.nightModeLocationProvider !== "geoclue2"
-                            }
-
-                            Row {
+                            Column {
+                                width: parent.width
                                 spacing: Theme.spacingM
                                 visible: SessionData.nightModeLocationProvider !== "geoclue2"
+                                leftPadding: Theme.spacingM
 
-                                Column {
-                                    spacing: Theme.spacingXS
+                                StyledText {
+                                    text: I18n.tr("Manual Coordinates")
+                                    font.pixelSize: Theme.fontSizeMedium
+                                    color: Theme.surfaceText
+                                }
 
-                                    StyledText {
-                                        text: I18n.tr("Latitude")
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        color: Theme.surfaceVariantText
+                                Row {
+                                    spacing: Theme.spacingL
+
+                                    Column {
+                                        spacing: Theme.spacingXS
+
+                                        StyledText {
+                                            text: I18n.tr("Latitude")
+                                            font.pixelSize: Theme.fontSizeSmall
+                                            color: Theme.surfaceVariantText
+                                        }
+
+                                        DankTextField {
+                                            width: 120
+                                            height: 40
+                                            text: SessionData.latitude.toString()
+                                            placeholderText: "0.0"
+                                            onTextChanged: {
+                                                const lat = parseFloat(text) || 0.0
+                                                if (lat >= -90 && lat <= 90) {
+                                                    SessionData.setLatitude(lat)
+                                                }
+                                            }
+                                        }
                                     }
 
-                                    DankTextField {
-                                        width: 120
-                                        height: 40
-                                        text: SessionData.latitude.toString()
-                                        placeholderText: "0.0"
-                                        onTextChanged: {
-                                            const lat = parseFloat(text) || 0.0
-                                            if (lat >= -90 && lat <= 90) {
-                                                SessionData.setLatitude(lat)
+                                    Column {
+                                        spacing: Theme.spacingXS
+
+                                        StyledText {
+                                            text: I18n.tr("Longitude")
+                                            font.pixelSize: Theme.fontSizeSmall
+                                            color: Theme.surfaceVariantText
+                                        }
+
+                                        DankTextField {
+                                            width: 120
+                                            height: 40
+                                            text: SessionData.longitude.toString()
+                                            placeholderText: "0.0"
+                                            onTextChanged: {
+                                                const lon = parseFloat(text) || 0.0
+                                                if (lon >= -180 && lon <= 180) {
+                                                    SessionData.setLongitude(lon)
+                                                }
                                             }
                                         }
                                     }
                                 }
 
-                                Column {
-                                    spacing: Theme.spacingXS
-
-                                    StyledText {
-                                        text: I18n.tr("Longitude")
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        color: Theme.surfaceVariantText
-                                    }
-
-                                    DankTextField {
-                                        width: 120
-                                        height: 40
-                                        text: SessionData.longitude.toString()
-                                        placeholderText: "0.0"
-                                        onTextChanged: {
-                                            const lon = parseFloat(text) || 0.0
-                                            if (lon >= -180 && lon <= 180) {
-                                                SessionData.setLongitude(lon)
-                                            }
-                                        }
-                                    }
+                                StyledText {
+                                    text: I18n.tr("Uses sunrise/sunset times to automatically adjust night mode based on your location.")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceVariantText
+                                    width: parent.width - parent.leftPadding
+                                    wrapMode: Text.WordWrap
                                 }
-                            }
-
-                            StyledText {
-                                text: I18n.tr("Uses sunrise/sunset times to automatically adjust night mode based on your location.")
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.surfaceVariantText
-                                width: parent.width
-                                wrapMode: Text.WordWrap
                             }
                         }
                     }
