@@ -1,4 +1,4 @@
-name: Build Stable DMS Release to Copr
+name: DMS Stable Release to Copr
 
 on:
   release:
@@ -147,7 +147,7 @@ jobs:
           used standalone. This package always includes the latest stable dgop release.
 
           %prep
-          %setup -q -n dms-qml
+          %setup -q -c -n dms-qml
 
           gunzip -c %{SOURCE1} > %{_builddir}/dms-cli
           chmod +x %{_builddir}/dms-cli
