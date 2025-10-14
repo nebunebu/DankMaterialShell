@@ -449,6 +449,8 @@ DankPopout {
                                             color: Theme.surfaceText
                                             font.weight: Font.Medium
                                             elide: Text.ElideRight
+                                            wrapMode: Text.NoWrap
+                                            maximumLineCount: 1
                                         }
 
                                         StyledText {
@@ -620,8 +622,8 @@ DankPopout {
                                         font.weight: Font.Medium
                                         elide: Text.ElideRight
                                         horizontalAlignment: Text.AlignHCenter
-                                        maximumLineCount: 2
-                                        wrapMode: Text.WordWrap
+                                        maximumLineCount: 1
+                                        wrapMode: Text.NoWrap
                                     }
                                 }
 

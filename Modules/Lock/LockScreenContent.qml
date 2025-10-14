@@ -761,6 +761,8 @@ Item {
                         Repeater {
                             model: 6
                             delegate: Rectangle {
+                                required property int index
+
                                 width: 2
                                 height: {
                                     if (MprisController.activePlayer?.playbackState === MprisPlaybackState.Playing && CavaService.values.length > index) {
