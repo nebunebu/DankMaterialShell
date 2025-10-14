@@ -49,6 +49,13 @@ Item {
         function onPluginListUpdated() { updateCategories() }
     }
 
+    Connections {
+        target: SettingsData
+        function onSortAppsAlphabeticallyChanged() {
+            updateFilteredModel()
+        }
+    }
+
 
 
     function updateFilteredModel() {
@@ -123,16 +130,22 @@ Item {
         }
 
         if (searchQuery.length === 0) {
-            apps = apps.sort((a, b) => {
-                                 const aId = a.id || a.execString || a.exec || ""
-                                 const bId = b.id || b.execString || b.exec || ""
-                                 const aUsage = appUsageRanking[aId] ? appUsageRanking[aId].usageCount : 0
-                                 const bUsage = appUsageRanking[bId] ? appUsageRanking[bId].usageCount : 0
-                                 if (aUsage !== bUsage) {
-                                     return bUsage - aUsage
-                                 }
-                                 return (a.name || "").localeCompare(b.name || "")
-                             })
+            if (SettingsData.sortAppsAlphabetically) {
+                apps = apps.sort((a, b) => {
+                                     return (a.name || "").localeCompare(b.name || "")
+                                 })
+            } else {
+                apps = apps.sort((a, b) => {
+                                     const aId = a.id || a.execString || a.exec || ""
+                                     const bId = b.id || b.execString || b.exec || ""
+                                     const aUsage = appUsageRanking[aId] ? appUsageRanking[aId].usageCount : 0
+                                     const bUsage = appUsageRanking[bId] ? appUsageRanking[bId].usageCount : 0
+                                     if (aUsage !== bUsage) {
+                                         return bUsage - aUsage
+                                     }
+                                     return (a.name || "").localeCompare(b.name || "")
+                                 })
+            }
         }
 
         const seenNames = new Set()

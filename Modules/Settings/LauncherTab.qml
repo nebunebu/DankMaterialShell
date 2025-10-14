@@ -459,6 +459,71 @@ Item {
 
             StyledRect {
                 width: parent.width
+                height: sortingSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: sortingSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "sort_by_alpha"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Sort Alphabetically")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Item {
+                            width: parent.width - parent.children[0].width
+                                   - parent.children[1].width
+                                   - sortToggle.width - Theme.spacingM * 3
+                            height: 1
+                        }
+
+                        DankToggle {
+                            id: sortToggle
+
+                            width: 32
+                            height: 18
+                            checked: SettingsData.sortAppsAlphabetically
+                            anchors.verticalCenter: parent.verticalCenter
+                            onToggled: checked => {
+                                SettingsData.setSortAppsAlphabetically(checked)
+                            }
+                        }
+                    }
+
+                    StyledText {
+                        width: parent.width
+                        text: I18n.tr("When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.surfaceVariantText
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
+            StyledRect {
+                width: parent.width
                 height: recentlyUsedSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh

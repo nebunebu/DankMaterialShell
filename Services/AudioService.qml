@@ -61,7 +61,7 @@ Singleton {
                 import QtQuick
                 import QtMultimedia
                 MediaPlayer {
-                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/audio-volume-change.oga")
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/audio-volume-change.wav")
                     audioOutput: AudioOutput { volume: 1.0 }
                 }
             `, root, "AudioService.VolumeChangeSound")
@@ -70,7 +70,7 @@ Singleton {
                 import QtQuick
                 import QtMultimedia
                 MediaPlayer {
-                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-plug.ogg")
+                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-plug.wav")
                     audioOutput: AudioOutput { volume: 1.0 }
                 }
             `, root, "AudioService.PowerPlugSound")
@@ -79,7 +79,7 @@ Singleton {
                 import QtQuick
                 import QtMultimedia
                 MediaPlayer {
-                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-unplug.ogg")
+                    source: Qt.resolvedUrl("../assets/sounds/plasma/power-unplug.wav")
                     audioOutput: AudioOutput { volume: 1.0 }
                 }
             `, root, "AudioService.PowerUnplugSound")
@@ -88,7 +88,7 @@ Singleton {
                 import QtQuick
                 import QtMultimedia
                 MediaPlayer {
-                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message.oga")
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message.wav")
                     audioOutput: AudioOutput { volume: 1.0 }
                 }
             `, root, "AudioService.NormalNotificationSound")
@@ -97,7 +97,7 @@ Singleton {
                 import QtQuick
                 import QtMultimedia
                 MediaPlayer {
-                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message-new-instant.oga")
+                    source: Qt.resolvedUrl("../assets/sounds/freedesktop/message-new-instant.wav")
                     audioOutput: AudioOutput { volume: 1.0 }
                 }
             `, root, "AudioService.CriticalNotificationSound")

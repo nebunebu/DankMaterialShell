@@ -97,6 +97,7 @@ Singleton {
     property alias dankBarRightWidgetsModel: rightWidgetsModel
     property string appLauncherViewMode: "list"
     property string spotlightModalViewMode: "list"
+    property bool sortAppsAlphabetically: false
     property string networkPreference: "auto"
     property string iconTheme: "System Default"
     property var availableIconThemes: ["System Default"]
@@ -376,6 +377,7 @@ Singleton {
                 }
                 appLauncherViewMode = settings.appLauncherViewMode !== undefined ? settings.appLauncherViewMode : "list"
                 spotlightModalViewMode = settings.spotlightModalViewMode !== undefined ? settings.spotlightModalViewMode : "list"
+                sortAppsAlphabetically = settings.sortAppsAlphabetically !== undefined ? settings.sortAppsAlphabetically : false
                 networkPreference = settings.networkPreference !== undefined ? settings.networkPreference : "auto"
                 iconTheme = settings.iconTheme !== undefined ? settings.iconTheme : "System Default"
                 if (settings.useOSLogo !== undefined) {
@@ -529,6 +531,7 @@ Singleton {
                                                 "dankBarRightWidgets": dankBarRightWidgets,
                                                 "appLauncherViewMode": appLauncherViewMode,
                                                 "spotlightModalViewMode": spotlightModalViewMode,
+                                                "sortAppsAlphabetically": sortAppsAlphabetically,
                                                 "networkPreference": networkPreference,
                                                 "iconTheme": iconTheme,
                                                 "launcherLogoMode": launcherLogoMode,
@@ -1006,6 +1009,11 @@ Singleton {
 
     function setSpotlightModalViewMode(mode) {
         spotlightModalViewMode = mode
+        saveSettings()
+    }
+
+    function setSortAppsAlphabetically(enabled) {
+        sortAppsAlphabetically = enabled
         saveSettings()
     }
 
