@@ -24,7 +24,7 @@ jobs:
             webhook_secret: "POEDITOR_WEBHOOK_JA"
 
           - name: zh_hans
-            po_lang: "zh-CN"
+            po_lang: "zh-Hans"
             repo_file: "translations/poexports/zh_CN.json"
             webhook_secret: "POEDITOR_WEBHOOK_ZH_HANS"
 
