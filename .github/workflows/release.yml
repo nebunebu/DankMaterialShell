@@ -29,11 +29,12 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # create/update VERSION file to match incoming tag
           echo "${TAG}" > VERSION
-          if ! git diff --quiet -- VERSION; then
-            git add VERSION
-            git commit -m "Add VERSION file for ${TAG} (from DMS)"
+
+          git add -A VERSION
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Update VERSION to ${TAG} (from DMS)"
           fi
 
           git tag -f "${TAG}"
