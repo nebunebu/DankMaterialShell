@@ -18,15 +18,15 @@ BuildRequires:  git-core
 BuildRequires:  rpkg
 
 Requires:       greetd
-Requires:       quickshell >= 0.1.0
+Requires:       (quickshell-git or quickshell)
 Requires:       material-symbols-fonts
 
 Suggests:       niri
 Suggests:       hyprland
 Suggests:       sway
 
-Provides:       greetd-dms-greeter = %{version}-%{release}
-Conflicts:      greetd-dms-greeter
+# Provides:       greetd-dms-greeter = %{version}-%{release}
+# Conflicts:      greetd-dms-greeter
 
 %description
 DankMaterialShell greeter for greetd login manager. A modern, Material Design 3
