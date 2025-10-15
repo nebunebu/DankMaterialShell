@@ -126,7 +126,10 @@ Singleton {
 
     Process {
         id: versionDetection
-        command: ["sh", "-c", "if [ -d .git ]; then echo \"(git) $(git rev-parse --short HEAD)\"; elif [ -f VERSION ]; then cat VERSION; fi"]
+        command: [
+            "sh", "-c",
+            `cd "${Quickshell.shellDir}" && if [ -f VERSION ]; then cat VERSION; elif [ -d .git ]; then echo "(git) $(git rev-parse --short HEAD)"; fi`
+        ]
 
         stdout: StdioCollector {
             onStreamFinished: {
