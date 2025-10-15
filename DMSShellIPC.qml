@@ -13,6 +13,7 @@ Item {
     required property var controlCenterLoader
     required property var dankDashPopoutLoader
     required property var notepadSlideoutVariants
+    required property var hyprKeybindsModalLoader
 
     IpcHandler {
         function open() {
@@ -305,5 +306,48 @@ Item {
         }
 
         target: "mpris"
+    }
+
+    IpcHandler {
+        function openBinds(): string {
+            if (!CompositorService.isHyprland) {
+                return "HYPR_NOT_AVAILABLE"
+            }
+            root.hyprKeybindsModalLoader.active = true
+            if (root.hyprKeybindsModalLoader.item) {
+                root.hyprKeybindsModalLoader.item.open()
+                return "HYPR_KEYBINDS_OPEN_SUCCESS"
+            }
+            return "HYPR_KEYBINDS_OPEN_FAILED"
+        }
+
+        function closeBinds(): string {
+            if (!CompositorService.isHyprland) {
+                return "HYPR_NOT_AVAILABLE"
+            }
+            if (root.hyprKeybindsModalLoader.item) {
+                root.hyprKeybindsModalLoader.item.close()
+                return "HYPR_KEYBINDS_CLOSE_SUCCESS"
+            }
+            return "HYPR_KEYBINDS_CLOSE_FAILED"
+        }
+
+        function toggleBinds(): string {
+            if (!CompositorService.isHyprland) {
+                return "HYPR_NOT_AVAILABLE"
+            }
+            root.hyprKeybindsModalLoader.active = true
+            if (root.hyprKeybindsModalLoader.item) {
+                if (root.hyprKeybindsModalLoader.item.shouldBeVisible) {
+                    root.hyprKeybindsModalLoader.item.close()
+                } else {
+                    root.hyprKeybindsModalLoader.item.open()
+                }
+                return "HYPR_KEYBINDS_TOGGLE_SUCCESS"
+            }
+            return "HYPR_KEYBINDS_TOGGLE_FAILED"
+        }
+
+        target: "hypr"
     }
 }
