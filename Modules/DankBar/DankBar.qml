@@ -97,9 +97,9 @@ Item {
                 if (SettingsData.forceStatusBarLayoutRefresh) {
                     SettingsData.forceStatusBarLayoutRefresh.connect(() => {
                         Qt.callLater(() => {
-                            stackLoader.visible = false
+                            stackContainer.visible = false
                             Qt.callLater(() => {
-                                stackLoader.visible = true
+                                stackContainer.visible = true
                             })
                         })
                     })
@@ -135,6 +135,17 @@ Item {
             }
 
             function forceWidgetRefresh() {
+                stackContainer.visible = false
+                Qt.callLater(() => {
+                    stackContainer.visible = true
+                })
+            }
+
+            Connections {
+                target: barWindow
+                function on_DprChanged() {
+                    Qt.callLater(forceWidgetRefresh)
+                }
             }
 
             function updateGpuTempConfig() {
