@@ -106,7 +106,6 @@ Item {
                 }
 
                 updateGpuTempConfig()
-                Qt.callLater(() => Qt.callLater(forceWidgetRefresh))
 
                 inhibitorInitTimer.start()
             }
@@ -131,20 +130,6 @@ Item {
                 function onPluginUnloaded(pluginId) {
                     console.log("DankBar: Plugin unloaded:", pluginId)
                     SettingsData.widgetDataChanged()
-                }
-            }
-
-            function forceWidgetRefresh() {
-                stackContainer.visible = false
-                Qt.callLater(() => {
-                    stackContainer.visible = true
-                })
-            }
-
-            Connections {
-                target: barWindow
-                function on_DprChanged() {
-                    Qt.callLater(forceWidgetRefresh)
                 }
             }
 
