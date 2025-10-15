@@ -257,6 +257,7 @@ Item {
             function onDankBarBorderThicknessChanged() { root.requestRepaint() }
             function onDankBarSpacingChanged() { root.requestRepaint() }
             function onDankBarSquareCornersChanged() { root.requestRepaint() }
+            function onDankBarTransparencyChanged() { root.requestRepaint() }
         }
 
         onPaint: {
