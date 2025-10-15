@@ -262,4 +262,48 @@ Item {
 
         target: "inhibit"
     }
+
+    IpcHandler {
+        function list(): string {
+            return MprisController.availablePlayers.map(p => p.identity).join("\n")
+        }
+
+        function play(): void {
+            if (MprisController.activePlayer && MprisController.activePlayer.canPlay) {
+                MprisController.activePlayer.play()
+            }
+        }
+
+        function pause(): void {
+            if (MprisController.activePlayer && MprisController.activePlayer.canPause) {
+                MprisController.activePlayer.pause()
+            }
+        }
+
+        function playPause(): void {
+            if (MprisController.activePlayer && MprisController.activePlayer.canTogglePlaying) {
+                MprisController.activePlayer.togglePlaying()
+            }
+        }
+
+        function previous(): void {
+            if (MprisController.activePlayer && MprisController.activePlayer.canGoPrevious) {
+                MprisController.activePlayer.previous()
+            }
+        }
+
+        function next(): void {
+            if (MprisController.activePlayer && MprisController.activePlayer.canGoNext) {
+                MprisController.activePlayer.next()
+            }
+        }
+
+        function stop(): void {
+            if (MprisController.activePlayer) {
+                MprisController.activePlayer.stop()
+            }
+        }
+
+        target: "mpris"
+    }
 }
