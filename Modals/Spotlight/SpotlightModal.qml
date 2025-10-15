@@ -26,6 +26,26 @@ DankModal {
         })
     }
 
+    function showWithQuery(query) {
+        if (spotlightContent) {
+            if (spotlightContent.appLauncher) {
+                spotlightContent.appLauncher.searchQuery = query
+            }
+            if (spotlightContent.searchField) {
+                spotlightContent.searchField.text = query
+            }
+        }
+
+        spotlightOpen = true
+        open()
+
+        Qt.callLater(() => {
+            if (spotlightContent && spotlightContent.searchField) {
+                spotlightContent.searchField.forceActiveFocus()
+            }
+        })
+    }
+
     function hide() {
         spotlightOpen = false
         close()
@@ -104,6 +124,20 @@ DankModal {
         function toggle(): string  {
             spotlightModal.toggle()
             return "SPOTLIGHT_TOGGLE_SUCCESS"
+        }
+
+        function openQuery(query: string): string {
+            spotlightModal.showWithQuery(query)
+            return "SPOTLIGHT_OPEN_QUERY_SUCCESS"
+        }
+
+        function toggleQuery(query: string): string {
+            if (spotlightModal.spotlightOpen) {
+                spotlightModal.hide()
+            } else {
+                spotlightModal.showWithQuery(query)
+            }
+            return "SPOTLIGHT_TOGGLE_QUERY_SUCCESS"
         }
 
         target: "spotlight"
