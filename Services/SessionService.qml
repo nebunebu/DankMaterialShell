@@ -302,6 +302,10 @@ Singleton {
                 checkDMSCapabilities()
             }
         }
+
+        function onCapabilitiesReceived() {
+            syncSleepInhibitor()
+        }
     }
 
     Connections {
@@ -328,6 +332,7 @@ Singleton {
             } else {
                 stateInitialized = false
             }
+            syncSleepInhibitor()
         }
 
         function onLockBeforeSuspendChanged() {
@@ -392,6 +397,22 @@ Singleton {
                 console.warn("SessionService: Failed to sync lock before suspend:", response.error)
             } else {
                 console.log("SessionService: Synced lock before suspend:", SettingsData.lockBeforeSuspend)
+            }
+        })
+    }
+
+    function syncSleepInhibitor() {
+        if (!loginctlAvailable) return
+
+        if (!DMSService.apiVersion || DMSService.apiVersion < 4) return
+
+        DMSService.sendRequest("loginctl.setSleepInhibitorEnabled", {
+            enabled: SettingsData.loginctlLockIntegration
+        }, response => {
+            if (response.error) {
+                console.warn("SessionService: Failed to sync sleep inhibitor:", response.error)
+            } else {
+                console.log("SessionService: Synced sleep inhibitor:", SettingsData.loginctlLockIntegration)
             }
         })
     }
