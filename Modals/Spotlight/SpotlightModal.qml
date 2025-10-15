@@ -13,15 +13,15 @@ DankModal {
     id: spotlightModal
 
     property bool spotlightOpen: false
-    property Component spotlightContent
+    property alias spotlightContent: spotlightContentInstance
 
     function show() {
         spotlightOpen = true
         open()
 
         Qt.callLater(() => {
-            if (contentLoader.item && contentLoader.item.searchField) {
-                contentLoader.item.searchField.forceActiveFocus()
+            if (spotlightContent && spotlightContent.searchField) {
+                spotlightContent.searchField.forceActiveFocus()
             }
         })
     }
@@ -32,17 +32,17 @@ DankModal {
     }
 
     onDialogClosed: {
-        if (contentLoader.item) {
-            if (contentLoader.item.appLauncher) {
-                contentLoader.item.appLauncher.searchQuery = ""
-                contentLoader.item.appLauncher.selectedIndex = 0
-                contentLoader.item.appLauncher.setCategory(I18n.tr("All"))
+        if (spotlightContent) {
+            if (spotlightContent.appLauncher) {
+                spotlightContent.appLauncher.searchQuery = ""
+                spotlightContent.appLauncher.selectedIndex = 0
+                spotlightContent.appLauncher.setCategory(I18n.tr("All"))
             }
-            if (contentLoader.item.resetScroll) {
-                contentLoader.item.resetScroll()
+            if (spotlightContent.resetScroll) {
+                spotlightContent.resetScroll()
             }
-            if (contentLoader.item.searchField) {
-                contentLoader.item.searchField.text = ""
+            if (spotlightContent.searchField) {
+                spotlightContent.searchField.text = ""
             }
         }
     }
@@ -68,10 +68,10 @@ DankModal {
                           if (visible && !spotlightOpen) {
                               show()
                           }
-                          if (visible && contentLoader.item) {
+                          if (visible && spotlightContent) {
                               Qt.callLater(() => {
-                                               if (contentLoader.item.searchField) {
-                                                   contentLoader.item.searchField.forceActiveFocus()
+                                               if (spotlightContent.searchField) {
+                                                   spotlightContent.searchField.forceActiveFocus()
                                                }
                                            })
                           }
@@ -79,7 +79,6 @@ DankModal {
     onBackgroundClicked: () => {
                              return hide()
                          }
-    content: spotlightContent
 
     Connections {
         function onCloseAllModalsExcept(excludedModal) {
@@ -110,9 +109,11 @@ DankModal {
         target: "spotlight"
     }
 
-    spotlightContent: Component {
-        SpotlightContent {
-            parentModal: spotlightModal
-        }
+    SpotlightContent {
+        id: spotlightContentInstance
+
+        parentModal: spotlightModal
     }
+
+    directContent: spotlightContentInstance
 }
