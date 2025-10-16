@@ -80,34 +80,6 @@ getent passwd greeter >/dev/null || \
 exit 0
 
 %post
-===============================================================================
-  DMS Greeter Installation Complete!
-===============================================================================
-Configuration status:
-  - Greeter cache directory: /var/cache/dms-greeter (created with proper permissions)
-  - SELinux contexts: Applied (if semanage available)
-  - Greetd config: $CONFIG_STATUS
-Next steps to enable the greeter:
-1. IMPORTANT: Disable any existing display managers:
-   sudo systemctl disable gdm sddm lightdm
-   (Only greetd should run as the display manager)
-2. Verify greetd configuration:
-   Check /etc/greetd/config.toml contains:
-   [default_session]
-   user = "greeter"
-   command = "/usr/bin/dms-greeter --command niri"
-   (Also supported: hyprland, sway)
-   Note: Existing config backed up to config.toml.backup-* if modified
-3. Enable greetd service:
-   sudo systemctl enable greetd
-4. (Optional) Sync your user's theme with the greeter:
-   sudo usermod -aG greeter YOUR_USERNAME
-   # Then LOGOUT and LOGIN to apply group membership
-   ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
-   ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-   ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
-Documentation: /usr/share/doc/dms-greeter/README.md
-===============================================================================
 
 # Set SELinux context for the wrapper script on Fedora systems
 if [ -x /usr/sbin/semanage ]; then
