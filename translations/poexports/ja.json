@@ -1534,5 +1534,47 @@
     },
     "Use sound theme from system settings": {
         "Use sound theme from system settings": ""
+    },
+    "Clock show seconds": {
+        "Clock show seconds": ""
+    },
+    "Command or script to run instead of the standard hibernate procedure": {
+        "Command or script to run instead of the standard hibernate procedure": ""
+    },
+    "Command or script to run instead of the standard logout procedure": {
+        "Command or script to run instead of the standard logout procedure": ""
+    },
+    "Command or script to run instead of the standard power off procedure": {
+        "Command or script to run instead of the standard power off procedure": ""
+    },
+    "Command or script to run instead of the standard reboot procedure": {
+        "Command or script to run instead of the standard reboot procedure": ""
+    },
+    "Command or script to run instead of the standard suspend procedure": {
+        "Command or script to run instead of the standard suspend procedure": ""
+    },
+    "Custom Power Actions": {
+        "Custom Power Actions": ""
+    },
+    "Icon Size": {
+        "Icon Size": ""
+    },
+    "Individual Batteries": {
+        "Individual Batteries": ""
+    },
+    "Left": {
+        "Left": ""
+    },
+    "Show seconds": {
+        "Show seconds": ""
+    },
+    "Sync Mode with Portal": {
+        "Sync Mode with Portal": ""
+    },
+    "Sync dark mode with settings portals for system-wide theme hints": {
+        "Sync dark mode with settings portals for system-wide theme hints": ""
+    },
+    "To Full": {
+        "To Full": ""
     }
 }
