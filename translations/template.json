@@ -665,6 +665,13 @@
     "comment": ""
   },
   {
+    "term": "Clock show seconds",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Close",
     "translation": "",
     "context": "",
@@ -687,6 +694,41 @@
   },
   {
     "term": "Color temperature for night mode",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard hibernate procedure",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard logout procedure",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard power off procedure",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard reboot procedure",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard suspend procedure",
     "translation": "",
     "context": "",
     "reference": "",
@@ -862,6 +904,13 @@
   },
   {
     "term": "Custom Location",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Custom Power Actions",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1498,6 +1547,13 @@
     "comment": ""
   },
   {
+    "term": "Icon Size",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Icon Theme",
     "translation": "",
     "context": "",
@@ -1534,6 +1590,13 @@
   },
   {
     "term": "Include Transitions",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Individual Batteries",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1632,6 +1695,13 @@
   },
   {
     "term": "Launcher Button Logo",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Left",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2765,6 +2835,13 @@
     "comment": ""
   },
   {
+    "term": "Show seconds",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Show weather information in top bar and control center",
     "translation": "",
     "context": "",
@@ -2899,6 +2976,20 @@
   },
   {
     "term": "Switch User",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Sync Mode with Portal",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Sync dark mode with settings portals for system-wide theme hints",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3074,6 +3165,13 @@
   },
   {
     "term": "Time & Weather",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "To Full",
     "translation": "",
     "context": "",
     "reference": "",
