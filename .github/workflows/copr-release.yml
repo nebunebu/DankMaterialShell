@@ -1,6 +1,9 @@
 name: DMS Copr Stable Release
 
 on:
+  push:
+    tags:
+      - 'v*'
   release:
     types: [published]
   workflow_dispatch:
@@ -28,6 +31,10 @@ jobs:
             VERSION="${{ github.event.release.tag_name }}"
             VERSION="${VERSION#v}"
             echo "Using release version: $VERSION"
+          elif [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION="${{ github.ref_name }}"
+            VERSION="${VERSION#v}"
+            echo "Using tag version: $VERSION"
           else
             # Fallback to latest release
             VERSION=$(curl -s https://api.github.com/repos/AvengeMedia/DankMaterialShell/releases/latest | jq -r '.tag_name' | sed 's/^v//')
