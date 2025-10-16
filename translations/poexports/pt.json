@@ -1536,22 +1536,22 @@
         "Use sound theme from system settings": "Usar tema de som das configurações do sistema"
     },
     "Clock show seconds": {
-        "Clock show seconds": ""
+        "Clock show seconds": "Relógio mostra segundos"
     },
     "Command or script to run instead of the standard hibernate procedure": {
-        "Command or script to run instead of the standard hibernate procedure": ""
+        "Command or script to run instead of the standard hibernate procedure": "Comando ou script serão executados em vez do procedimento padrão de hibernação"
     },
     "Command or script to run instead of the standard logout procedure": {
-        "Command or script to run instead of the standard logout procedure": ""
+        "Command or script to run instead of the standard logout procedure": "Comando ou script irão ser executados em vez do procedimento padrão de logout"
     },
     "Command or script to run instead of the standard power off procedure": {
-        "Command or script to run instead of the standard power off procedure": ""
+        "Command or script to run instead of the standard power off procedure": "Comando ou script irão ser executados em vez do procedimento padrão de desligamento"
     },
     "Command or script to run instead of the standard reboot procedure": {
-        "Command or script to run instead of the standard reboot procedure": ""
+        "Command or script to run instead of the standard reboot procedure": "Comando ou script irão ser executados em vez do procedimento padrão de reinicialização"
     },
     "Command or script to run instead of the standard suspend procedure": {
-        "Command or script to run instead of the standard suspend procedure": ""
+        "Command or script to run instead of the standard suspend procedure": "Comando ou script irão ser executados em vez do procedimento de suspensão padrão"
     },
     "Custom Power Actions": {
         "Custom Power Actions": ""
