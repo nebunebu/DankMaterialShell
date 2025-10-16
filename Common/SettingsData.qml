@@ -321,7 +321,7 @@ Singleton {
                 popupTransparency = settings.popupTransparency !== undefined ? (settings.popupTransparency > 1 ? settings.popupTransparency / 100 : settings.popupTransparency) : 1.0
                 dockTransparency = settings.dockTransparency !== undefined ? (settings.dockTransparency > 1 ? settings.dockTransparency / 100 : settings.dockTransparency) : 1
                 use24HourClock = settings.use24HourClock !== undefined ? settings.use24HourClock : true
-                showSeconds = settings.showSeconds !== undefined ? settings.showSeconds : true
+                showSeconds = settings.showSeconds !== undefined ? settings.showSeconds : false
                 useFahrenheit = settings.useFahrenheit !== undefined ? settings.useFahrenheit : false
                 nightModeEnabled = settings.nightModeEnabled !== undefined ? settings.nightModeEnabled : false
                 weatherLocation = settings.weatherLocation !== undefined ? settings.weatherLocation : "New York, NY"
