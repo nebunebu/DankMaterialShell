@@ -28,6 +28,11 @@ jobs:
             repo_file: "translations/poexports/zh_CN.json"
             webhook_secret: "POEDITOR_WEBHOOK_ZH_HANS"
 
+          - name: pt
+            po_lang: "pt-br"
+            repo_file: "translations/poexports/pt.json"
+            webhook_secret: "POEDITOR_WEBHOOK_PT"
+
     steps:
       - uses: actions/checkout@v4
 
