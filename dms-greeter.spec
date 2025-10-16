@@ -80,10 +80,39 @@ getent passwd greeter >/dev/null || \
 exit 0
 
 %post
+===============================================================================
+  DMS Greeter Installation Complete!
+===============================================================================
+Configuration status:
+  - Greeter cache directory: /var/cache/dms-greeter (created with proper permissions)
+  - SELinux contexts: Applied (if semanage available)
+  - Greetd config: $CONFIG_STATUS
+Next steps to enable the greeter:
+1. IMPORTANT: Disable any existing display managers:
+   sudo systemctl disable gdm sddm lightdm
+   (Only greetd should run as the display manager)
+2. Verify greetd configuration:
+   Check /etc/greetd/config.toml contains:
+   [default_session]
+   user = "greeter"
+   command = "/usr/bin/dms-greeter --command niri"
+   (Also supported: hyprland, sway)
+   Note: Existing config backed up to config.toml.backup-* if modified
+3. Enable greetd service:
+   sudo systemctl enable greetd
+4. (Optional) Sync your user's theme with the greeter:
+   sudo usermod -aG greeter YOUR_USERNAME
+   # Then LOGOUT and LOGIN to apply group membership
+   ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
+   ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
+   ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+Documentation: /usr/share/doc/dms-greeter/README.md
+===============================================================================
+
 # Set SELinux context for the wrapper script on Fedora systems
 if [ -x /usr/sbin/semanage ]; then
-    semanage fcontext -a -t bin_t %{_bindir}/dms-greeter 2>/dev/null || true
-    restorecon -v %{_bindir}/dms-greeter 2>/dev/null || true
+        semanage fcontext -a -t bin_t %{_bindir}/dms-greeter 2>/dev/null || true
+        restorecon -v %{_bindir}/dms-greeter 2>/dev/null || true
 fi
 
 # Auto-configure greetd config
@@ -93,15 +122,15 @@ CONFIG_STATUS="Not modified (already configured)"
 # Check if niri or hyprland exists
 COMPOSITOR="niri"
 if ! command -v niri >/dev/null 2>&1; then
-    if command -v Hyprland >/dev/null 2>&1; then
-        COMPOSITOR="hyprland"
-    fi
+        if command -v Hyprland >/dev/null 2>&1; then
+                COMPOSITOR="hyprland"
+        fi
 fi
 
 # If config doesn't exist, create a default one
 if [ ! -f "$GREETD_CONFIG" ]; then
-    mkdir -p /etc/greetd
-    cat > "$GREETD_CONFIG" << 'GREETD_EOF'
+        mkdir -p /etc/greetd
+        cat > "$GREETD_CONFIG" << 'GREETD_EOF'
 [terminal]
 vt = 1
 
@@ -109,61 +138,64 @@ vt = 1
 user = "greeter"
 command = "/usr/bin/dms-greeter --command COMPOSITOR_PLACEHOLDER"
 GREETD_EOF
-    sed -i "s|COMPOSITOR_PLACEHOLDER|$COMPOSITOR|" "$GREETD_CONFIG"
-    CONFIG_STATUS="Created new config with $COMPOSITOR ✓"
+        sed -i "s|COMPOSITOR_PLACEHOLDER|$COMPOSITOR|" "$GREETD_CONFIG"
+        CONFIG_STATUS="Created new config with $COMPOSITOR ✓"
 # If config exists and doesn't have dms-greeter, update it
 elif ! grep -q "dms-greeter" "$GREETD_CONFIG"; then
-    # Backup existing config
-    BACKUP_FILE="${GREETD_CONFIG}.backup-$(date +%%Y%%m%%d-%%H%%M%%S)"
-    cp "$GREETD_CONFIG" "$BACKUP_FILE" 2>/dev/null || true
+        # Backup existing config
+        BACKUP_FILE="${GREETD_CONFIG}.backup-$(date +%%Y%%m%%d-%%H%%M%%S)"
+        cp "$GREETD_CONFIG" "$BACKUP_FILE" 2>/dev/null || true
 
-    # Update command in default_session section
-    sed -i "/^\[default_session\]/,/^\[/ s|^command =.*|command = \"/usr/bin/dms-greeter --command $COMPOSITOR\"|" "$GREETD_CONFIG"
-    sed -i '/^\[default_session\]/,/^\[/ s|^user =.*|user = "greeter"|' "$GREETD_CONFIG"
-    CONFIG_STATUS="Updated existing config (backed up) with $COMPOSITOR ✓"
+        # Update command in default_session section
+        sed -i "/^\[default_session\]/,/^\[/ s|^command =.*|command = \"/usr/bin/dms-greeter --command $COMPOSITOR\"|" "$GREETD_CONFIG"
+        sed -i '/^\[default_session\]/,/^\[/ s|^user =.*|user = "greeter"|' "$GREETD_CONFIG"
+        CONFIG_STATUS="Updated existing config (backed up) with $COMPOSITOR ✓"
 fi
 
+# Only show banner on initial install
+if [ "$1" -eq 1 ]; then
 cat << EOF
 
 ===============================================================================
-  DMS Greeter Installation Complete!
+    DMS Greeter Installation Complete!
 ===============================================================================
 
 Configuration status:
-  - Greeter cache directory: /var/cache/dms-greeter (created with proper permissions)
-  - SELinux contexts: Applied (if semanage available)
-  - Greetd config: $CONFIG_STATUS
+    - Greeter cache directory: /var/cache/dms-greeter (created with proper permissions)
+    - SELinux contexts: Applied (if semanage available)
+    - Greetd config: $CONFIG_STATUS
 
 Next steps to enable the greeter:
 
 1. IMPORTANT: Disable any existing display managers:
-   sudo systemctl disable gdm sddm lightdm
-   (Only greetd should run as the display manager)
+     sudo systemctl disable gdm sddm lightdm
+     (Only greetd should run as the display manager)
 
 2. Verify greetd configuration:
-   Check /etc/greetd/config.toml contains:
+     Check /etc/greetd/config.toml contains:
 
-   [default_session]
-   user = "greeter"
-   command = "/usr/bin/dms-greeter --command niri"
+     [default_session]
+     user = "greeter"
+     command = "/usr/bin/dms-greeter --command niri"
 
-   (Also supported: hyprland, sway)
-   Note: Existing config backed up to config.toml.backup-* if modified
+     (Also supported: hyprland, sway)
+     Note: Existing config backed up to config.toml.backup-* if modified
 
 3. Enable greetd service:
-   sudo systemctl enable greetd
+     sudo systemctl enable greetd
 
 4. (Optional) Sync your user's theme with the greeter:
-   sudo usermod -aG greeter YOUR_USERNAME
-   # Then LOGOUT and LOGIN to apply group membership
-   ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
-   ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-   ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+     sudo usermod -aG greeter YOUR_USERNAME
+     # Then LOGOUT and LOGIN to apply group membership
+     ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
+     ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
+     ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
 
 Documentation: /usr/share/doc/dms-greeter/README.md
 ===============================================================================
 
 EOF
+fi
 
 %changelog
 {{{ git_dir_changelog }}}
