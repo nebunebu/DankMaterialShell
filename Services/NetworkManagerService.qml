@@ -244,10 +244,9 @@ Singleton {
         scanWifi()
     }
 
-    function connectToWifi(ssid, password = "", username = "", realmOrDomain = "", useAtRealm = true, anonymousIdentity = "", domainSuffixMatch = "") {
+    function connectToWifi(ssid, password = "", username = "", anonymousIdentity = "", domainSuffixMatch = "") {
         if (!networkAvailable || isConnecting) return
 
-        isConnecting = true
         connectingSSID = ssid
         connectionError = ""
         connectionStatus = "connecting"
@@ -255,8 +254,6 @@ Singleton {
         const params = { ssid: ssid }
         if (password) params.password = password
         if (username) params.username = username
-        if (realmOrDomain) params.realmOrDomain = realmOrDomain
-        if (username) params.useAtRealm = useAtRealm
         if (anonymousIdentity) params.anonymousIdentity = anonymousIdentity
         if (domainSuffixMatch) params.domainSuffixMatch = domainSuffixMatch
 
@@ -387,8 +384,8 @@ Singleton {
         }
     }
 
-    function connectToWifiAndSetPreference(ssid, password, username = "", realmOrDomain = "", useAtRealm = true, anonymousIdentity = "", domainSuffixMatch = "") {
-        connectToWifi(ssid, password, username, realmOrDomain, useAtRealm, anonymousIdentity, domainSuffixMatch)
+    function connectToWifiAndSetPreference(ssid, password, username = "", anonymousIdentity = "", domainSuffixMatch = "") {
+        connectToWifi(ssid, password, username, anonymousIdentity, domainSuffixMatch)
         setNetworkPreference("wifi")
     }
 
