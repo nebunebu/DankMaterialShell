@@ -18,14 +18,12 @@ Source0:        {{{ git_dir_pack }}}
 # DMS CLI from danklinux latest commit
 Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz
 
-# DGOP binary from dgop latest release
-Source2:        https://github.com/AvengeMedia/dgop/releases/latest/download/dgop-linux-amd64.gz
-
 BuildRequires:  git-core
 BuildRequires:  rpkg
 BuildRequires:  gzip
 BuildRequires:  golang >= 1.24
 BuildRequires:  make
+BuildRequires:  wget
 
 # Core requirements
 Requires:       (quickshell-git or quickshell)
@@ -85,8 +83,25 @@ used standalone. This package always includes the latest stable dgop release.
 # Extract DankLinux source
 tar -xzf %{SOURCE1} -C %{_builddir}
 
-# Extract DGOP binary
-gunzip -c %{SOURCE2} > %{_builddir}/dgop
+# Download and extract DGOP binary for target architecture
+case "%{_arch}" in
+  x86_64)
+    DGOP_ARCH="amd64"
+    ;;
+  aarch64)
+    DGOP_ARCH="arm64"
+    ;;
+  *)
+    echo "Unsupported architecture: %{_arch}"
+    exit 1
+    ;;
+esac
+
+wget -O %{_builddir}/dgop.gz "https://github.com/AvengeMedia/dgop/releases/latest/download/dgop-linux-${DGOP_ARCH}.gz" || {
+  echo "Failed to download dgop for architecture %{_arch}"
+  exit 1
+}
+gunzip -c %{_builddir}/dgop.gz > %{_builddir}/dgop
 chmod +x %{_builddir}/dgop
 
 %build
@@ -95,8 +110,21 @@ cd %{_builddir}/danklinux-master
 make dist
 
 %install
-# Install dms-cli binary (built from source)
-install -Dm755 %{_builddir}/danklinux-master/bin/dms-linux-amd64 %{buildroot}%{_bindir}/dms
+# Install dms-cli binary (built from source) - use architecture-specific path
+case "%{_arch}" in
+  x86_64)
+    DMS_BINARY="dms-linux-amd64"
+    ;;
+  aarch64)
+    DMS_BINARY="dms-linux-arm64"
+    ;;
+  *)
+    echo "Unsupported architecture: %{_arch}"
+    exit 1
+    ;;
+esac
+
+install -Dm755 %{_builddir}/danklinux-master/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
 
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop

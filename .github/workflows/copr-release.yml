@@ -56,7 +56,7 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           cd ~/rpmbuild/SOURCES
           
-          echo "📦 Downloading DMS release assets for v${VERSION}..."
+          echo "📦 Downloading DMS QML source for v${VERSION}..."
           
           # Download DMS QML source
           wget "https://github.com/AvengeMedia/DankMaterialShell/releases/download/v${VERSION}/dms-qml.tar.gz" || {
@@ -64,21 +64,8 @@ jobs:
             exit 1
           }
           
-          # Download dms-cli (always use latest)
-          echo "📦 Downloading latest dms-cli..."
-          wget "https://github.com/AvengeMedia/danklinux/releases/latest/download/dms-distropkg-amd64.gz" || {
-            echo "❌ Failed to download dms-cli"
-            exit 1
-          }
-          
-          # Download dgop (always use latest)
-          echo "📦 Downloading latest dgop..."
-          wget "https://github.com/AvengeMedia/dgop/releases/latest/download/dgop-linux-amd64.gz" || {
-            echo "❌ Failed to download dgop"
-            exit 1
-          }
-          
-          echo "✅ All sources downloaded"
+          echo "✅ Source downloaded"
+          echo "Note: dms-cli and dgop binaries will be downloaded during build based on target architecture"
           ls -lh
       
       - name: Generate stable spec file
@@ -102,10 +89,9 @@ jobs:
           URL:            https://github.com/AvengeMedia/DankMaterialShell
 
           Source0:        dms-qml.tar.gz
-          Source1:        dms-distropkg-amd64.gz
-          Source2:        dgop-linux-amd64.gz
 
           BuildRequires:  gzip
+          BuildRequires:  wget
 
           Requires:       (quickshell or quickshell-git)
           Requires:       dms-cli
@@ -157,10 +143,35 @@ jobs:
           %prep
           %setup -q -c -n dms-qml
 
-          gunzip -c %{SOURCE1} > %{_builddir}/dms-cli
+          # Download architecture-specific binaries during build
+          # This ensures the correct architecture is used for each build target
+          case "%{_arch}" in
+            x86_64)
+              ARCH_SUFFIX="amd64"
+              ;;
+            aarch64)
+              ARCH_SUFFIX="arm64"
+              ;;
+            *)
+              echo "Unsupported architecture: %{_arch}"
+              exit 1
+              ;;
+          esac
+
+          # Download dms-cli for target architecture
+          wget -O %{_builddir}/dms-cli.gz "https://github.com/AvengeMedia/danklinux/releases/latest/download/dms-distropkg-${ARCH_SUFFIX}.gz" || {
+            echo "Failed to download dms-cli for architecture %{_arch}"
+            exit 1
+          }
+          gunzip -c %{_builddir}/dms-cli.gz > %{_builddir}/dms-cli
           chmod +x %{_builddir}/dms-cli
 
-          gunzip -c %{SOURCE2} > %{_builddir}/dgop
+          # Download dgop for target architecture
+          wget -O %{_builddir}/dgop.gz "https://github.com/AvengeMedia/dgop/releases/latest/download/dgop-linux-${ARCH_SUFFIX}.gz" || {
+            echo "Failed to download dgop for architecture %{_arch}"
+            exit 1
+          }
+          gunzip -c %{_builddir}/dgop.gz > %{_builddir}/dgop
           chmod +x %{_builddir}/dgop
 
           %build
