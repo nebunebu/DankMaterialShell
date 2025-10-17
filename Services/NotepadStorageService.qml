@@ -10,6 +10,8 @@ import qs.Common
 Singleton {
     id: root
 
+    property int refCount: 0
+
     readonly property string baseDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/DankMaterialShell")
     readonly property string filesDir: baseDir + "/notepad-files"
     readonly property string metadataPath: baseDir + "/notepad-session.json"
@@ -17,10 +19,11 @@ Singleton {
     property var tabs: []
     property int currentTabIndex: 0
     property var tabsBeingCreated: ({})
+    property bool metadataLoaded: false
 
     FileView {
         id: metadataFile
-        path: root.metadataPath
+        path: root.refCount > 0 ? root.metadataPath : ""
         blockWrites: true
         atomicWrites: true
 
@@ -29,6 +32,7 @@ Singleton {
                 var data = JSON.parse(text())
                 root.tabs = data.tabs || []
                 root.currentTabIndex = data.currentTabIndex || 0
+                root.metadataLoaded = true
                 validateTabs()
             } catch(e) {
                 console.warn("Failed to parse notepad metadata:", e)
@@ -38,6 +42,13 @@ Singleton {
 
         onLoadFailed: {
             createDefaultTab()
+        }
+    }
+
+    onRefCountChanged: {
+        if (refCount === 1 && !metadataLoaded) {
+            metadataFile.path = ""
+            metadataFile.path = root.metadataPath
         }
     }
 

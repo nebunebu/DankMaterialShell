@@ -28,6 +28,10 @@ Item {
 
     signal hideRequested()
 
+    Ref {
+        service: NotepadStorageService
+    }
+
     function hasUnsavedChanges() {
         return textEditor.hasUnsavedChanges()
     }
