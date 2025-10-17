@@ -22,35 +22,99 @@ paru -S greetd-dms-greeter-git
 yay -S greetd-dms-greeter-git
 ```
 
-Then in your `/etc/greetd/config.toml` enable dms-greeter by replacing the greeter command with dms-greeter.
+Once installed, disable any existing display manager and enable greetd:
 
 ```bash
-# hyprland and sway are also supported as compositors
-command = "/usr/bin/dms-greeter --command niri"
-```
-
-See `dms-greeter --help` for full options including custom compositor configurations.
-
-Once installed, you should disable any existing greeter (such as gdm, sddm, lightdm), and you can configure the greeter to run at boot with:
-
-```bash
+sudo systemctl disable gdm sddm lightdm
 sudo systemctl enable greetd
 ```
-#### Syncing themes
 
-To sync wallpapers, colors, and other settings from the logged in user, you can add your user to the `greeter` group and symlink the shell configurations.
+#### Syncing themes (Optional)
+
+To sync your wallpaper and theme with the greeter login screen:
 
 ```bash
-sudo usermod -aG greeter <username>
-# LOGOUT and LOGIN after adding user to group
-
-
-ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
-
-ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-
-ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+dms-greeter-sync
 ```
+
+Then logout/login for changes to take effect. Your wallpaper and theme will appear on the greeter!
+
+<details>
+<summary>What does dms-greeter-sync do?</summary>
+
+The `dms-greeter-sync` helper automatically:
+- Adds you to the greeter group
+- Sets minimal ACL permissions on parent directories (traverse only)
+- Sets group ownership on your DMS config directories
+- Creates symlinks to share your theme files with the greeter
+
+This uses standard Linux ACLs (Access Control Lists) - the same security model used by GNOME, KDE, and systemd. The greeter user only gets traverse permission through your directories and can only read the specific theme files you share.
+
+</details>
+
+<details>
+<summary>Manual theme syncing (advanced)</summary>
+
+If you prefer to set up theme syncing manually:
+
+```bash
+# Add yourself to greeter group
+sudo usermod -aG greeter <username>
+
+# Set ACLs to allow greeter to traverse your directories
+setfacl -m u:greeter:x ~ ~/.config ~/.local ~/.cache ~/.local/state
+
+# Set group ownership on config directories
+sudo chgrp -R greeter ~/.config/DankMaterialShell
+sudo chgrp -R greeter ~/.local/state/DankMaterialShell  
+sudo chgrp -R greeter ~/.cache/quickshell
+sudo chmod -R g+rX ~/.config/DankMaterialShell ~/.local/state/DankMaterialShell ~/.cache/quickshell
+
+# Create symlinks
+sudo ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
+sudo ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
+sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+
+# Logout and login for group membership to take effect
+```
+
+</details>
+
+### Fedora / RHEL / Rocky / Alma
+
+Install from COPR or build the RPM:
+
+```bash
+# From COPR (when available)
+sudo dnf copr enable avenge/dms
+sudo dnf install dms-greeter
+
+# Or build locally
+cd /path/to/DankMaterialShell
+rpkg local
+sudo rpm -ivh x86_64/dms-greeter-*.rpm
+```
+
+The package automatically:
+- Creates the greeter user
+- Sets up directories and permissions
+- Configures greetd with auto-detected compositor
+- Applies SELinux contexts
+
+Then disable existing display manager and enable greetd:
+
+```bash
+sudo systemctl disable gdm sddm lightdm
+sudo systemctl enable greetd
+```
+
+**Optional:** Sync your theme with the greeter:
+
+```bash
+dms-greeter-sync
+```
+
+Then logout/login to see your wallpaper on the greeter!
 
 ### Automatic
 
@@ -59,21 +123,33 @@ The easiest thing is to run `dms greeter install` or `dms` for interactive insta
 ### Manual
 
 1. Install `greetd` (in most distro's standard repositories) and `quickshell`
-2. Clone the dms project to `/etc/xdg/quickshell/dms-greeter`
+
+2. Create the greeter user (if not already created by greetd):
+```bash
+sudo groupadd -r greeter
+sudo useradd -r -g greeter -d /var/lib/greeter -s /bin/bash -c "System Greeter" greeter
+sudo mkdir -p /var/lib/greeter
+sudo chown greeter:greeter /var/lib/greeter
+```
+
+3. Clone the dms project to `/etc/xdg/quickshell/dms-greeter`:
 ```bash
 sudo git clone https://github.com/AvengeMedia/DankMaterialShell.git /etc/xdg/quickshell/dms-greeter
 ```
-3. Copy `assets/dms-greeter` to `/usr/local/bin/dms-greeter`:
+
+4. Copy `Modules/Greetd/assets/dms-greeter` to `/usr/local/bin/dms-greeter`:
 ```bash
-sudo cp assets/dms-greeter /usr/local/bin/dms-greeter
+sudo cp /etc/xdg/quickshell/dms-greeter/Modules/Greetd/assets/dms-greeter /usr/local/bin/dms-greeter
 sudo chmod +x /usr/local/bin/dms-greeter
 ```
-4. Create greeter cache directory with proper permissions:
+
+5. Create greeter cache directory with proper permissions:
 ```bash
 sudo mkdir -p /var/cache/dms-greeter
 sudo chown greeter:greeter /var/cache/dms-greeter
 sudo chmod 750 /var/cache/dms-greeter
 ```
+
 6. Edit or create `/etc/greetd/config.toml`:
 ```toml
 [terminal]
@@ -85,7 +161,18 @@ user = "greeter"
 command = "/usr/local/bin/dms-greeter --command niri"
 ```
 
-Enable the greeter with `sudo systemctl enable greetd`
+7. Disable existing display manager and enable greetd:
+```bash
+sudo systemctl disable gdm sddm lightdm
+sudo systemctl enable greetd
+```
+
+8. (Optional) Install the `dms-greeter-sync` helper for easy theme syncing:
+```bash
+# Download or copy the dms-greeter-sync script from the spec file
+sudo cp /path/to/dms-greeter-sync /usr/local/bin/dms-greeter-sync
+sudo chmod +x /usr/local/bin/dms-greeter-sync
+```
 
 #### Legacy installation (deprecated)
 
@@ -154,21 +241,31 @@ Simply edit `/etc/greetd/dms-niri.kdl` or `/etc/greetd/dms-hypr.conf` to change 
 
 #### Personalization
 
-Wallpapers and themes and weather and clock formats and things are a TODO on the documentation, but it's configured exactly the same as dms.
+The greeter can be personalized with wallpapers, themes, weather, clock formats, and more - configured exactly the same as dms.
 
-You can synchronize those configurations with a specific user if you want greeter settings to always mirror the shell.
+**Easiest method:** Run `dms-greeter-sync` to automatically sync your DMS theme with the greeter.
 
-The greeter uses the `dms-greeter` group for file access permissions, so ensure your user and the greeter user are both members of this group.
+**Manual method:** You can manually synchronize configurations if you want greeter settings to always mirror your shell:
 
 ```bash
-# For core settings (theme, clock formats, etc)
+# Add yourself to the greeter group
+sudo usermod -aG greeter $USER
+
+# Set ACLs to allow greeter user to traverse your home directory
+setfacl -m u:greeter:x ~ ~/.config ~/.local ~/.cache ~/.local/state
+
+# Set group permissions on DMS directories
+sudo chgrp -R greeter ~/.config/DankMaterialShell ~/.local/state/DankMaterialShell ~/.cache/quickshell
+sudo chmod -R g+rX ~/.config/DankMaterialShell ~/.local/state/DankMaterialShell ~/.cache/quickshell
+
+# Create symlinks for theme files
 sudo ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
-# For state (mainly you would configure wallpaper in this file)
 sudo ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-# For wallpaper based theming
-sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/dms-colors.json
+sudo ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+
+# Logout and login for group membership to take effect
 ```
 
-You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable or the `--cache-dir` flag when using `dms-greeter`. The default is `/var/cache/dms-greeter`.
+**Advanced:** You can override the configuration path with the `DMS_GREET_CFG_DIR` environment variable or the `--cache-dir` flag when using `dms-greeter`. The default is `/var/cache/dms-greeter`.
 
 The cache directory should be owned by `greeter:greeter` with `770` permissions.

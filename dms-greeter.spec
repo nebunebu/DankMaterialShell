@@ -53,6 +53,100 @@ cp -r * %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/
 # Install launcher script
 install -Dm755 Modules/Greetd/assets/dms-greeter %{buildroot}%{_bindir}/dms-greeter
 
+# Install theme sync helper script
+cat > %{buildroot}%{_bindir}/dms-greeter-sync << 'SYNC_EOF'
+#!/bin/bash
+set -e
+
+if [ "$EUID" -eq 0 ]; then
+    echo "Error: Do not run this script as root. Run as your regular user:"
+    echo "  dms-greeter-sync"
+    exit 1
+fi
+
+CURRENT_USER=$(whoami)
+CACHE_DIR="/var/cache/dms-greeter"
+
+echo "=== DMS Greeter Theme Sync Setup ==="
+echo
+echo "This will sync your DMS theme with the greeter login screen."
+echo "User: $CURRENT_USER"
+echo
+
+# Add user to greeter group
+if ! groups "$CURRENT_USER" | grep -q greeter; then
+    echo "Adding $CURRENT_USER to greeter group..."
+    sudo usermod -aG greeter "$CURRENT_USER"
+    echo "✓ Added to greeter group (logout/login required for group membership)"
+else
+    echo "✓ Already in greeter group"
+fi
+
+# Set group permissions on config directories
+echo
+echo "Setting group permissions on config directories..."
+
+# First, ensure parent directories are traversable by greeter user (using ACLs)
+echo "Making parent directories traversable by greeter..."
+if command -v setfacl >/dev/null 2>&1; then
+    # Set ACL on home directory
+    setfacl -m u:greeter:x ~ 2>/dev/null && echo "✓ Home directory" || echo "⚠ Home directory (may need sudo)"
+    
+    # Set ACLs on parent config directories
+    setfacl -m u:greeter:x ~/.config 2>/dev/null && echo "✓ .config directory" || true
+    setfacl -m u:greeter:x ~/.local 2>/dev/null && echo "✓ .local directory" || true
+    setfacl -m u:greeter:x ~/.cache 2>/dev/null && echo "✓ .cache directory" || true
+    setfacl -m u:greeter:x ~/.local/state 2>/dev/null && echo "✓ .local/state directory" || true
+else
+    echo "⚠ setfacl not found, you need to run:"
+    echo "    setfacl -m u:greeter:x ~ ~/.config ~/.local ~/.cache ~/.local/state"
+fi
+
+# Then set permissions on target directories
+for dir in ~/.config/DankMaterialShell ~/.local/state/DankMaterialShell ~/.cache/quickshell; do
+    if [ -d "$dir" ]; then
+        sudo chgrp -R greeter "$dir"
+        sudo chmod -R g+rX "$dir"
+        echo "✓ $(basename $dir)"
+    else
+        echo "⚠ $dir not found (will be created when you run DMS)"
+    fi
+done
+
+# Set group read on parent state directory
+sudo chmod g+x ~/.local/state 2>/dev/null || true
+
+# Create symlinks
+echo
+echo "Creating symlinks to sync theme..."
+
+declare -A links=(
+    ["$HOME/.config/DankMaterialShell/settings.json"]="$CACHE_DIR/settings.json"
+    ["$HOME/.local/state/DankMaterialShell/session.json"]="$CACHE_DIR/session.json"
+    ["$HOME/.cache/quickshell/dankshell/dms-colors.json"]="$CACHE_DIR/colors.json"
+)
+
+for source in "${!links[@]}"; do
+    target="${links[$source]}"
+    target_name=$(basename "$source")
+    
+    if [ -f "$source" ]; then
+        sudo ln -sf "$source" "$target"
+        echo "✓ Synced $target_name"
+    else
+        echo "⚠ $target_name not found yet (run DMS to generate it)"
+    fi
+done
+
+echo
+echo "=== Setup Complete! ==="
+echo
+echo "IMPORTANT: You must LOGOUT and LOGIN for group membership to take effect."
+echo "After logging back in, your theme will be synced with the greeter."
+SYNC_EOF
+
+chmod 755 %{buildroot}%{_bindir}/dms-greeter-sync
+
 # Install documentation
 install -Dm644 Modules/Greetd/README.md %{buildroot}%{_docdir}/dms-greeter/README.md
 
@@ -77,6 +171,7 @@ rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/dms-greeter.spec
 %license LICENSE
 %doc %{_docdir}/dms-greeter/README.md
 %{_bindir}/dms-greeter
+%{_bindir}/dms-greeter-sync
 %{_sysconfdir}/xdg/quickshell/dms-greeter/
 %dir %attr(0750,greeter,greeter) %{_localstatedir}/cache/dms-greeter
 %dir %attr(0755,greeter,greeter) %{_sharedstatedir}/greeter
@@ -209,37 +304,26 @@ cat << EOF
     DMS Greeter Installation Complete!
 ===============================================================================
 
-Configuration status:
-    - Greeter cache directory: /var/cache/dms-greeter (created with proper permissions)
-    - SELinux contexts: Applied (if semanage available)
+Status:
+    - Greeter user: Created ✓
+    - Greeter directories: /var/cache/dms-greeter, /var/lib/greeter ✓
+    - SELinux contexts: Applied ✓
     - Greetd config: $CONFIG_STATUS
 
-Next steps to enable the greeter:
+Next steps:
 
-1. IMPORTANT: Disable any existing display managers:
+1. Disable any existing display managers (IMPORTANT):
      sudo systemctl disable gdm sddm lightdm
-     (Only greetd should run as the display manager)
 
-2. Verify greetd configuration:
-     Check /etc/greetd/config.toml contains:
-
-     [default_session]
-     user = "greeter"
-     command = "/usr/bin/dms-greeter --command niri"
-
-     (Also supported: hyprland, sway)
-     Note: Existing config backed up to config.toml.backup-* if modified
-
-3. Enable greetd service:
+2. Enable greetd service:
      sudo systemctl enable greetd
 
-4. (Optional) Sync your user's theme with the greeter:
-     sudo usermod -aG greeter YOUR_USERNAME
-     # Then LOGOUT and LOGIN to apply group membership
-     ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json
-     ln -sf ~/.local/state/DankMaterialShell/session.json /var/cache/dms-greeter/session.json
-     ln -sf ~/.cache/quickshell/dankshell/dms-colors.json /var/cache/dms-greeter/colors.json
+3. (Optional) Sync your theme with the greeter:
+     dms-greeter-sync
+     
+     Then logout/login to see your wallpaper on the greeter!
 
+Ready to test? Reboot or run: sudo systemctl start greetd
 Documentation: /usr/share/doc/dms-greeter/README.md
 ===============================================================================
 
