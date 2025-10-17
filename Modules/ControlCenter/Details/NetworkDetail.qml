@@ -30,6 +30,10 @@ Rectangle {
     }
     
     property int currentPreferenceIndex: {
+        if (DMSService.apiVersion < 5) {
+            return 1
+        }
+
         const pref = NetworkService.userPreference
         const status = NetworkService.networkStatus
         let index = 1
@@ -72,7 +76,7 @@ Rectangle {
         DankButtonGroup {
             id: preferenceControls
             anchors.verticalCenter: parent.verticalCenter
-            visible: true
+            visible: DMSService.apiVersion >= 5
 
             model: ["Ethernet", "WiFi"]
             currentIndex: currentPreferenceIndex
@@ -192,7 +196,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: currentPreferenceIndex === 0
+        visible: currentPreferenceIndex === 0 && DMSService.apiVersion >= 5
         contentHeight: wiredColumn.height
         clip: true
 
