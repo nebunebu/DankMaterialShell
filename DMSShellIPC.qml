@@ -14,6 +14,7 @@ Item {
     required property var dankDashPopoutLoader
     required property var notepadSlideoutVariants
     required property var hyprKeybindsModalLoader
+    required property var dankBarLoader
 
     IpcHandler {
         function open() {
@@ -76,9 +77,8 @@ Item {
 
     IpcHandler {
         function open(): string {
-            root.controlCenterLoader.active = true
-            if (root.controlCenterLoader.item) {
-                root.controlCenterLoader.item.open()
+            if (root.dankBarLoader.item) {
+                root.dankBarLoader.item.triggerControlCenterOnFocusedScreen()
                 return "CONTROL_CENTER_OPEN_SUCCESS"
             }
             return "CONTROL_CENTER_OPEN_FAILED"
@@ -93,9 +93,8 @@ Item {
         }
 
         function toggle(): string {
-            root.controlCenterLoader.active = true
-            if (root.controlCenterLoader.item) {
-                root.controlCenterLoader.item.toggle()
+            if (root.dankBarLoader.item) {
+                root.dankBarLoader.item.triggerControlCenterOnFocusedScreen()
                 return "CONTROL_CENTER_TOGGLE_SUCCESS"
             }
             return "CONTROL_CENTER_TOGGLE_FAILED"
