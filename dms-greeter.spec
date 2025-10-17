@@ -20,7 +20,10 @@ BuildRequires:  rpkg
 Requires:       greetd
 Requires:       (quickshell-git or quickshell)
 Requires:       material-symbols-fonts
+Requires(post): /usr/sbin/useradd
+Requires(post): /usr/sbin/groupadd
 
+Recommends:     policycoreutils-python-utils
 Suggests:       niri
 Suggests:       hyprland
 Suggests:       sway
@@ -56,6 +59,12 @@ install -Dm644 Modules/Greetd/README.md %{buildroot}%{_docdir}/dms-greeter/READM
 # Create cache directory for greeter data
 install -dm750 %{buildroot}%{_localstatedir}/cache/dms-greeter
 
+# Create greeter home directory
+install -dm755 %{buildroot}%{_sharedstatedir}/greeter
+
+# Note: We do NOT install a PAM config here to avoid conflicting with greetd package
+# Instead, we verify/fix it in %post if needed
+
 # Remove build and development files
 rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/.git*
 rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/.gitignore
@@ -70,21 +79,89 @@ rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/dms-greeter.spec
 %{_bindir}/dms-greeter
 %{_sysconfdir}/xdg/quickshell/dms-greeter/
 %dir %attr(0750,greeter,greeter) %{_localstatedir}/cache/dms-greeter
+%dir %attr(0755,greeter,greeter) %{_sharedstatedir}/greeter
 
 %pre
 # Create greeter user/group if they don't exist (greetd expects this)
 getent group greeter >/dev/null || groupadd -r greeter
 getent passwd greeter >/dev/null || \
-    useradd -r -g greeter -d /var/lib/greeter -s /sbin/nologin \
+    useradd -r -g greeter -d %{_sharedstatedir}/greeter -s /bin/bash \
     -c "System Greeter" greeter
 exit 0
 
 %post
 
-# Set SELinux context for the wrapper script on Fedora systems
-if [ -x /usr/sbin/semanage ]; then
-        semanage fcontext -a -t bin_t %{_bindir}/dms-greeter 2>/dev/null || true
-        restorecon -v %{_bindir}/dms-greeter 2>/dev/null || true
+# Set SELinux contexts for greeter files on Fedora systems
+if [ -x /usr/sbin/semanage ] && [ -x /usr/sbin/restorecon ]; then
+    # Greeter launcher binary
+    semanage fcontext -a -t bin_t '%{_bindir}/dms-greeter' 2>/dev/null || true
+    restorecon -v %{_bindir}/dms-greeter 2>/dev/null || true
+    
+    # Greeter home directory
+    semanage fcontext -a -t user_home_dir_t '%{_sharedstatedir}/greeter(/.*)?' 2>/dev/null || true
+    restorecon -Rv %{_sharedstatedir}/greeter 2>/dev/null || true
+    
+    # Cache directory for greeter data
+    semanage fcontext -a -t cache_home_t '%{_localstatedir}/cache/dms-greeter(/.*)?' 2>/dev/null || true
+    restorecon -Rv %{_localstatedir}/cache/dms-greeter 2>/dev/null || true
+    
+    # Config directory
+    semanage fcontext -a -t etc_t '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' 2>/dev/null || true
+    restorecon -Rv %{_sysconfdir}/xdg/quickshell/dms-greeter 2>/dev/null || true
+    
+    # PAM configuration
+    restorecon -v %{_sysconfdir}/pam.d/greetd 2>/dev/null || true
+fi
+
+# Ensure proper ownership of greeter directories
+chown -R greeter:greeter %{_localstatedir}/cache/dms-greeter 2>/dev/null || true
+chown -R greeter:greeter %{_sharedstatedir}/greeter 2>/dev/null || true
+
+# Verify PAM configuration - only fix if insufficient
+PAM_CONFIG="/etc/pam.d/greetd"
+if [ ! -f "$PAM_CONFIG" ]; then
+    # PAM config doesn't exist - create it
+    cat > "$PAM_CONFIG" << 'PAM_EOF'
+#%PAM-1.0
+auth       substack    system-auth
+auth       include     postlogin
+
+account    required    pam_nologin.so
+account    include     system-auth
+
+password   include     system-auth
+
+session    required    pam_selinux.so close
+session    required    pam_loginuid.so
+session    required    pam_selinux.so open
+session    optional    pam_keyinit.so force revoke
+session    include     system-auth
+session    include     postlogin
+PAM_EOF
+    chmod 644 "$PAM_CONFIG"
+    echo "Created PAM configuration for greetd"
+elif ! grep -q "pam_systemd\|system-auth" "$PAM_CONFIG"; then
+    # PAM config exists but looks insufficient - back it up and replace
+    cp "$PAM_CONFIG" "$PAM_CONFIG.backup-dms-greeter"
+    cat > "$PAM_CONFIG" << 'PAM_EOF'
+#%PAM-1.0
+auth       substack    system-auth
+auth       include     postlogin
+
+account    required    pam_nologin.so
+account    include     system-auth
+
+password   include     system-auth
+
+session    required    pam_selinux.so close
+session    required    pam_loginuid.so
+session    required    pam_selinux.so open
+session    optional    pam_keyinit.so force revoke
+session    include     system-auth
+session    include     postlogin
+PAM_EOF
+    chmod 644 "$PAM_CONFIG"
+    echo "Updated PAM configuration (old config backed up to $PAM_CONFIG.backup-dms-greeter)"
 fi
 
 # Auto-configure greetd config
@@ -167,6 +244,15 @@ Documentation: /usr/share/doc/dms-greeter/README.md
 ===============================================================================
 
 EOF
+fi
+
+%postun
+# Clean up SELinux contexts on package removal
+if [ "$1" -eq 0 ] && [ -x /usr/sbin/semanage ]; then
+    semanage fcontext -d '%{_bindir}/dms-greeter' 2>/dev/null || true
+    semanage fcontext -d '%{_sharedstatedir}/greeter(/.*)?' 2>/dev/null || true
+    semanage fcontext -d '%{_localstatedir}/cache/dms-greeter(/.*)?' 2>/dev/null || true
+    semanage fcontext -d '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' 2>/dev/null || true
 fi
 
 %changelog
