@@ -19,6 +19,10 @@ Scope {
     }
 
     function lock() {
+        if (SettingsData.customPowerActionLock && SettingsData.customPowerActionLock.length > 0) {
+            Quickshell.execDetached(SettingsData.customPowerActionLock.split(" "))
+            return
+        }
         if (!processingExternalEvent && SettingsData.loginctlLockIntegration && DMSService.isConnected) {
             DMSService.lockSession(response => {
                 if (response.error) {

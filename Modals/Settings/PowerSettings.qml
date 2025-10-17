@@ -397,6 +397,38 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
+                            text: I18n.tr("Command or script to run instead of the standard lock procedure")
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceVariantText
+                        }
+
+                        DankTextField {
+                            id: customLockCommand
+                            width: parent.width
+                            height: 48
+                            placeholderText: "/usr/bin/myLock.sh"
+                            backgroundColor: Theme.surfaceVariant
+                            normalBorderColor: Theme.primarySelected
+                            focusedBorderColor: Theme.primary
+
+                            Component.onCompleted: {
+                                if (SettingsData.customPowerActionLock) {
+                                    text = SettingsData.customPowerActionLock;
+                                }
+                            }
+
+                            onTextEdited: {
+                                SettingsData.setCustomPowerActionLock(text.trim());
+                            }
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingXS
+                        anchors.left: parent.left
+
+                        StyledText {
                             text: I18n.tr("Command or script to run instead of the standard logout procedure")
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText

@@ -238,6 +238,7 @@ Singleton {
     property bool osdAlwaysShowValue: false
 
     property bool powerActionConfirm: true
+    property string customPowerActionLock: ""
     property string customPowerActionLogout: ""
     property string customPowerActionSuspend: ""
     property string customPowerActionHibernate: ""
@@ -452,6 +453,7 @@ Singleton {
                 notificationPopupPosition = settings.notificationPopupPosition !== undefined ? settings.notificationPopupPosition : SettingsData.Position.Top
                 osdAlwaysShowValue = settings.osdAlwaysShowValue !== undefined ? settings.osdAlwaysShowValue : false
                 powerActionConfirm = settings.powerActionConfirm !== undefined ? settings.powerActionConfirm : true
+                customPowerActionLock = settings.customPowerActionLock != undefined ? settings.customPowerActionLock : ""
                 customPowerActionLogout = settings.customPowerActionLogout != undefined ? settings.customPowerActionLogout : ""
                 customPowerActionSuspend = settings.customPowerActionSuspend != undefined ? settings.customPowerActionSuspend : ""
                 customPowerActionHibernate = settings.customPowerActionHibernate != undefined ? settings.customPowerActionHibernate : ""
@@ -646,6 +648,7 @@ Singleton {
                                                 "notificationPopupPosition": notificationPopupPosition,
                                                 "osdAlwaysShowValue": osdAlwaysShowValue,
                                                 "powerActionConfirm": powerActionConfirm,
+                                                "customPowerActionLock": customPowerActionLock,
                                                 "customPowerActionLogout": customPowerActionLogout,
                                                 "customPowerActionSuspend": customPowerActionSuspend,
                                                 "customPowerActionHibernate": customPowerActionHibernate,
@@ -716,8 +719,8 @@ Singleton {
             "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase",
             "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
             "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm",
-            "customPowerActionLogout", "customPowerActionSuspend", "customPowerActionHibernate",
-            "customPowerActionReboot", "customPowerActionPowerOff",
+            "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend",
+            "customPowerActionHibernate", "customPowerActionReboot", "customPowerActionPowerOff",
             "updaterUseCustomCommand", "updaterCustomCommand", "updaterTerminalAdditionalParams",
             "screenPreferences", "animationSpeed", "acMonitorTimeout", "acLockTimeout",
             "acSuspendTimeout", "acHibernateTimeout", "batteryMonitorTimeout", "batteryLockTimeout",
@@ -1710,6 +1713,11 @@ Singleton {
 
     function setPowerActionConfirm(confirm) {
         powerActionConfirm = confirm;
+        saveSettings();
+    }
+
+    function setCustomPowerActionLock(command) {
+        customPowerActionLock = command;
         saveSettings();
     }
 
