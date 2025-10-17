@@ -342,13 +342,13 @@ Singleton {
     }
 
     function playNormalNotificationSound() {
-        if (soundsAvailable && normalNotificationSound) {
+        if (soundsAvailable && normalNotificationSound && !SessionData.doNotDisturb) {
             normalNotificationSound.play()
         }
     }
 
     function playCriticalNotificationSound() {
-        if (soundsAvailable && criticalNotificationSound) {
+        if (soundsAvailable && criticalNotificationSound && !SessionData.doNotDisturb) {
             criticalNotificationSound.play()
         }
     }
