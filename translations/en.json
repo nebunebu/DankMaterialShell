@@ -140,7 +140,7 @@
   {
     "term": "Always Show OSD Percentage",
     "context": "Always Show OSD Percentage",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:637",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:647",
     "comment": ""
   },
   {
@@ -152,7 +152,7 @@
   {
     "term": "Anonymous Identity (optional)",
     "context": "Anonymous Identity (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:388",
+    "reference": "Modals/WifiPasswordModal.qml:282",
     "comment": ""
   },
   {
@@ -368,7 +368,7 @@
   {
     "term": "Back",
     "context": "Back",
-    "reference": "Modules/DankBar/Widgets/SystemTrayBar.qml:451",
+    "reference": "Modules/DankBar/Widgets/SystemTrayBar.qml:454",
     "comment": ""
   },
   {
@@ -482,7 +482,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:491, Modals/FileBrowser/FileBrowserModal.qml:952, Modules/Settings/PluginsTab.qml:1220",
+    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:385, Modals/FileBrowser/FileBrowserModal.qml:952, Modules/Settings/PluginsTab.qml:1220",
     "comment": ""
   },
   {
@@ -530,7 +530,7 @@
   {
     "term": "Choose where notification popups appear on screen",
     "context": "Choose where notification popups appear on screen",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:564",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:574",
     "comment": ""
   },
   {
@@ -542,7 +542,7 @@
   {
     "term": "Clear All",
     "context": "Clear All",
-    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:157, Modules/Notifications/Center/NotificationHeader.qml:123",
+    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:157, Modules/Notifications/Center/NotificationHeader.qml:102",
     "comment": ""
   },
   {
@@ -578,7 +578,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modules/SystemUpdatePopout.qml:333, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:614",
+    "reference": "Modules/SystemUpdatePopout.qml:333, Modals/NetworkWiredInfoModal.qml:129, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:614",
     "comment": ""
   },
   {
@@ -602,31 +602,37 @@
   {
     "term": "Command or script to run instead of the standard hibernate procedure",
     "context": "Command or script to run instead of the standard hibernate procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:464",
+    "reference": "Modals/Settings/PowerSettings.qml:496",
+    "comment": ""
+  },
+  {
+    "term": "Command or script to run instead of the standard lock procedure",
+    "context": "Command or script to run instead of the standard lock procedure",
+    "reference": "Modals/Settings/PowerSettings.qml:400",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard logout procedure",
     "context": "Command or script to run instead of the standard logout procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:400",
+    "reference": "Modals/Settings/PowerSettings.qml:432",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard power off procedure",
     "context": "Command or script to run instead of the standard power off procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:528",
+    "reference": "Modals/Settings/PowerSettings.qml:560",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard reboot procedure",
     "context": "Command or script to run instead of the standard reboot procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:496",
+    "reference": "Modals/Settings/PowerSettings.qml:528",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard suspend procedure",
     "context": "Command or script to run instead of the standard suspend procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:432",
+    "reference": "Modals/Settings/PowerSettings.qml:464",
     "comment": ""
   },
   {
@@ -650,7 +656,7 @@
   {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "context": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:400",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:410",
     "comment": ""
   },
   {
@@ -662,13 +668,13 @@
   {
     "term": "Connect",
     "context": "Connect",
-    "reference": "Modals/WifiPasswordModal.qml:527",
+    "reference": "Modals/WifiPasswordModal.qml:419",
     "comment": ""
   },
   {
     "term": "Connect to Wi-Fi",
     "context": "Connect to Wi-Fi",
-    "reference": "Modals/WifiPasswordModal.qml:124",
+    "reference": "Modals/WifiPasswordModal.qml:114",
     "comment": ""
   },
   {
@@ -938,7 +944,7 @@
   {
     "term": "Display volume and brightness percentage values by default in OSD popups",
     "context": "Display volume and brightness percentage values by default in OSD popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:644",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:654",
     "comment": ""
   },
   {
@@ -956,7 +962,7 @@
   {
     "term": "Do Not Disturb",
     "context": "Do Not Disturb",
-    "reference": "Modules/Notifications/Center/NotificationHeader.qml:56, Modules/Notifications/Center/NotificationSettings.qml:131",
+    "reference": "Modules/Notifications/Center/NotificationHeader.qml:41, Modules/Notifications/Center/NotificationSettings.qml:131",
     "comment": ""
   },
   {
@@ -975,6 +981,12 @@
     "term": "Dock Transparency",
     "context": "Dock Transparency",
     "reference": "Modules/Settings/DockTab.qml:530",
+    "comment": ""
+  },
+  {
+    "term": "Domain (optional)",
+    "context": "Domain (optional)",
+    "reference": "Modals/WifiPasswordModal.qml:314",
     "comment": ""
   },
   {
@@ -1028,7 +1040,7 @@
   {
     "term": "Enable WiFi",
     "context": "Enable WiFi",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:169",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:173",
     "comment": ""
   },
   {
@@ -1052,7 +1064,7 @@
   {
     "term": "Enter credentials for ",
     "context": "Enter credentials for ",
-    "reference": "Modals/WifiPasswordModal.qml:131",
+    "reference": "Modals/WifiPasswordModal.qml:121",
     "comment": ""
   },
   {
@@ -1076,7 +1088,7 @@
   {
     "term": "Enter password for ",
     "context": "Enter password for ",
-    "reference": "Modals/WifiPasswordModal.qml:131",
+    "reference": "Modals/WifiPasswordModal.qml:121",
     "comment": ""
   },
   {
@@ -1178,7 +1190,7 @@
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:422",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:598",
     "comment": ""
   },
   {
@@ -1574,7 +1586,7 @@
   {
     "term": "Max apps to show",
     "context": "Max apps to show",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:104",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:114",
     "comment": ""
   },
   {
@@ -1592,7 +1604,7 @@
   {
     "term": "Media Player Settings",
     "context": "Media Player Settings",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:173",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:183",
     "comment": ""
   },
   {
@@ -1664,7 +1676,7 @@
   {
     "term": "Named Workspace Icons",
     "context": "Named Workspace Icons",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:390",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:400",
     "comment": ""
   },
   {
@@ -1688,19 +1700,19 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:399",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:340, Modules/ControlCenter/Details/NetworkDetail.qml:575",
     "comment": ""
   },
   {
     "term": "Network Information",
     "context": "Network Information",
-    "reference": "Modals/NetworkInfoModal.qml:59",
+    "reference": "Modals/NetworkWiredInfoModal.qml:59, Modals/NetworkInfoModal.qml:59",
     "comment": ""
   },
   {
     "term": "Network Settings",
     "context": "Network Settings",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:44",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:64",
     "comment": ""
   },
   {
@@ -1814,7 +1826,7 @@
   {
     "term": "Notepad",
     "context": "Notepad",
-    "reference": "DMSShell.qml:406, Modules/Settings/DankBarTab.qml:175",
+    "reference": "DMSShell.qml:407, Modules/Settings/DankBarTab.qml:175",
     "comment": ""
   },
   {
@@ -1844,7 +1856,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:547",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:557",
     "comment": ""
   },
   {
@@ -1898,7 +1910,7 @@
   {
     "term": "Open Notepad File",
     "context": "Open Notepad File",
-    "reference": "Modules/Notepad/Notepad.qml:321",
+    "reference": "Modules/Notepad/Notepad.qml:325",
     "comment": ""
   },
   {
@@ -1928,7 +1940,7 @@
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/WifiPasswordModal.qml:211",
+    "reference": "Modals/WifiPasswordModal.qml:203",
     "comment": ""
   },
   {
@@ -1946,7 +1958,7 @@
   {
     "term": "Per-Monitor Workspaces",
     "context": "Per-Monitor Workspaces",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:135",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:145",
     "comment": ""
   },
   {
@@ -2036,7 +2048,7 @@
   {
     "term": "Popup Position",
     "context": "Popup Position",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:563",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:573",
     "comment": ""
   },
   {
@@ -2142,12 +2154,6 @@
     "comment": ""
   },
   {
-    "term": "Realm / Domain (optional)",
-    "context": "Realm / Domain (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:294",
-    "comment": ""
-  },
-  {
     "term": "Reboot",
     "context": "Reboot",
     "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
@@ -2204,25 +2210,25 @@
   {
     "term": "Running Apps Only In Current Workspace",
     "context": "Running Apps Only In Current Workspace",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:350",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:360",
     "comment": ""
   },
   {
     "term": "Running Apps Settings",
     "context": "Running Apps Settings",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:340",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:350",
     "comment": ""
   },
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:818, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:476",
+    "reference": "Modals/FileBrowser/FileBrowserModal.qml:818, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
     "comment": ""
   },
   {
     "term": "Save Notepad File",
     "context": "Save Notepad File",
-    "reference": "Modules/Notepad/Notepad.qml:257",
+    "reference": "Modules/Notepad/Notepad.qml:261",
     "comment": ""
   },
   {
@@ -2340,12 +2346,6 @@
     "comment": ""
   },
   {
-    "term": "Server Domain for certificate (optional)",
-    "context": "Server Domain for certificate (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:420",
-    "comment": ""
-  },
-  {
     "term": "Set different wallpapers for each connected monitor",
     "context": "Set different wallpapers for each connected monitor",
     "reference": "Modules/Settings/PersonalizationTab.qml:508",
@@ -2396,7 +2396,7 @@
   {
     "term": "Show Workspace Apps",
     "context": "Show Workspace Apps",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:92",
     "comment": ""
   },
   {
@@ -2420,7 +2420,7 @@
   {
     "term": "Show password",
     "context": "Show password",
-    "reference": "Modals/WifiPasswordModal.qml:463",
+    "reference": "Modals/WifiPasswordModal.qml:357",
     "comment": ""
   },
   {
@@ -2612,7 +2612,7 @@
   {
     "term": "System Updater",
     "context": "System Updater",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:220",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:230",
     "comment": ""
   },
   {
@@ -2630,7 +2630,7 @@
   {
     "term": "System update custom command",
     "context": "System update custom command",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:251",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:261",
     "comment": ""
   },
   {
@@ -2654,7 +2654,7 @@
   {
     "term": "Terminal custom additional parameters",
     "context": "Terminal custom additional parameters",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:284",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:294",
     "comment": ""
   },
   {
@@ -2774,7 +2774,7 @@
   {
     "term": "Unsaved Changes",
     "context": "Unsaved Changes",
-    "reference": "Modules/Notepad/Notepad.qml:384",
+    "reference": "Modules/Notepad/Notepad.qml:388",
     "comment": ""
   },
   {
@@ -2792,7 +2792,7 @@
   {
     "term": "Untitled",
     "context": "Untitled",
-    "reference": "Services/NotepadStorageService.qml:62, Services/NotepadStorageService.qml:132, Services/NotepadStorageService.qml:173",
+    "reference": "Services/NotepadStorageService.qml:73, Services/NotepadStorageService.qml:143, Services/NotepadStorageService.qml:184",
     "comment": ""
   },
   {
@@ -2810,7 +2810,7 @@
   {
     "term": "Use Custom Command",
     "context": "Use Custom Command",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:230",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:240",
     "comment": ""
   },
   {
@@ -2840,7 +2840,7 @@
   {
     "term": "Use custom command for update your system",
     "context": "Use custom command for update your system",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:231",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:241",
     "comment": ""
   },
   {
@@ -2876,7 +2876,7 @@
   {
     "term": "Username",
     "context": "Username",
-    "reference": "Modals/WifiPasswordModal.qml:174",
+    "reference": "Modals/WifiPasswordModal.qml:166",
     "comment": ""
   },
   {
@@ -2942,7 +2942,7 @@
   {
     "term": "Wave Progress Bars",
     "context": "Wave Progress Bars",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:183",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:193",
     "comment": ""
   },
   {
@@ -2966,7 +2966,7 @@
   {
     "term": "WiFi is off",
     "context": "WiFi is off",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:151",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:155",
     "comment": ""
   },
   {
@@ -2994,6 +2994,12 @@
     "comment": ""
   },
   {
+    "term": "Window Scrolling",
+    "context": "Window Scrolling",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:70",
+    "comment": ""
+  },
+  {
     "term": "Workspace",
     "context": "Workspace",
     "reference": "Widgets/DankIconPicker.qml:28",
@@ -3008,7 +3014,7 @@
   {
     "term": "Workspace Padding",
     "context": "Workspace Padding",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:71",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:81",
     "comment": ""
   },
   {
@@ -3026,25 +3032,25 @@
   {
     "term": "You have unsaved changes. Save before closing this tab?",
     "context": "You have unsaved changes. Save before closing this tab?",
-    "reference": "Modules/Notepad/Notepad.qml:394",
+    "reference": "Modules/Notepad/Notepad.qml:398",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before continuing?",
     "context": "You have unsaved changes. Save before continuing?",
-    "reference": "Modules/Notepad/Notepad.qml:397",
+    "reference": "Modules/Notepad/Notepad.qml:401",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before creating a new file?",
     "context": "You have unsaved changes. Save before creating a new file?",
-    "reference": "Modules/Notepad/Notepad.qml:392",
+    "reference": "Modules/Notepad/Notepad.qml:396",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before opening a file?",
     "context": "You have unsaved changes. Save before opening a file?",
-    "reference": "Modules/Notepad/Notepad.qml:396",
+    "reference": "Modules/Notepad/Notepad.qml:400",
     "comment": ""
   },
   {

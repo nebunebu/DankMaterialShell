@@ -255,7 +255,7 @@ Rectangle {
                      const direction = deltaY < 0 ? 1 : -1
 
                      if (isMouseWheel) {
-                        if (!SettingsData.workspaceScrolling) {
+                        if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
                             switchWorkspace(direction)
                         }
                         else {
@@ -269,7 +269,7 @@ Rectangle {
                                 currentIndex = i;
                                 break;
                             }
-                            
+
                          }
                          let nextIndex;
                          if (deltaY < 0) {
@@ -296,7 +296,7 @@ Rectangle {
 
                          if (Math.abs(scrollAccumulator) >= touchpadThreshold) {
                              const touchDirection = scrollAccumulator < 0 ? 1 : -1
-                             if (!SettingsData.workspaceScrolling) {
+                             if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
                                 switchWorkspace(touchDirection)
                              }
                              else {
@@ -310,7 +310,7 @@ Rectangle {
                                         currentIndex = i;
                                         break;
                                     }
-                            
+
                                 }
                                 let nextIndex;
                                 if (deltaY < 0) {
