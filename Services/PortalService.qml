@@ -99,9 +99,7 @@ Singleton {
         if (typeof SettingsData !== "undefined" && SettingsData.syncModeWithPortal === false) {
             return
         }
-        if (settingsPortalAvailable) {
-            setSystemColorScheme(isLightMode)
-        }
+        setSystemColorScheme(isLightMode)
     }
 
     function setSystemColorScheme(isLightMode) {
