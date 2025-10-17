@@ -189,23 +189,23 @@ exit 0
 # Set SELinux contexts for greeter files on Fedora systems
 if [ -x /usr/sbin/semanage ] && [ -x /usr/sbin/restorecon ]; then
     # Greeter launcher binary
-    semanage fcontext -a -t bin_t '%{_bindir}/dms-greeter' 2>/dev/null || true
-    restorecon -v %{_bindir}/dms-greeter 2>/dev/null || true
+    semanage fcontext -a -t bin_t '%{_bindir}/dms-greeter' >/dev/null 2>&1 || true
+    restorecon %{_bindir}/dms-greeter >/dev/null 2>&1 || true
     
     # Greeter home directory
-    semanage fcontext -a -t user_home_dir_t '%{_sharedstatedir}/greeter(/.*)?' 2>/dev/null || true
-    restorecon -Rv %{_sharedstatedir}/greeter 2>/dev/null || true
+    semanage fcontext -a -t user_home_dir_t '%{_sharedstatedir}/greeter(/.*)?' >/dev/null 2>&1 || true
+    restorecon -R %{_sharedstatedir}/greeter >/dev/null 2>&1 || true
     
     # Cache directory for greeter data
-    semanage fcontext -a -t cache_home_t '%{_localstatedir}/cache/dms-greeter(/.*)?' 2>/dev/null || true
-    restorecon -Rv %{_localstatedir}/cache/dms-greeter 2>/dev/null || true
+    semanage fcontext -a -t cache_home_t '%{_localstatedir}/cache/dms-greeter(/.*)?' >/dev/null 2>&1 || true
+    restorecon -R %{_localstatedir}/cache/dms-greeter >/dev/null 2>&1 || true
     
     # Config directory
-    semanage fcontext -a -t etc_t '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' 2>/dev/null || true
-    restorecon -Rv %{_sysconfdir}/xdg/quickshell/dms-greeter 2>/dev/null || true
+    semanage fcontext -a -t etc_t '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' >/dev/null 2>&1 || true
+    restorecon -R %{_sysconfdir}/xdg/quickshell/dms-greeter >/dev/null 2>&1 || true
     
     # PAM configuration
-    restorecon -v %{_sysconfdir}/pam.d/greetd 2>/dev/null || true
+    restorecon %{_sysconfdir}/pam.d/greetd >/dev/null 2>&1 || true
 fi
 
 # Ensure proper ownership of greeter directories
@@ -234,7 +234,8 @@ session    include     system-auth
 session    include     postlogin
 PAM_EOF
     chmod 644 "$PAM_CONFIG"
-    echo "Created PAM configuration for greetd"
+    # Only show message on initial install
+    [ "$1" -eq 1 ] && echo "Created PAM configuration for greetd"
 elif ! grep -q "pam_systemd\|system-auth" "$PAM_CONFIG"; then
     # PAM config exists but looks insufficient - back it up and replace
     cp "$PAM_CONFIG" "$PAM_CONFIG.backup-dms-greeter"
@@ -256,7 +257,8 @@ session    include     system-auth
 session    include     postlogin
 PAM_EOF
     chmod 644 "$PAM_CONFIG"
-    echo "Updated PAM configuration (old config backed up to $PAM_CONFIG.backup-dms-greeter)"
+    # Only show message on initial install
+    [ "$1" -eq 1 ] && echo "Updated PAM configuration (old config backed up to $PAM_CONFIG.backup-dms-greeter)"
 fi
 
 # Auto-configure greetd config
