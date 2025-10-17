@@ -177,6 +177,15 @@ paru -S dms-shell-bin
 paru -S dms-shell-git
 ```
 
+#### Fedora - via COPR
+
+```bash
+# Stable release
+sudo dnf copr enable avengemedia/dms && sudo dnf install dms
+# Latest -git
+sudo dnf copr enable avengemedia/dms-git && sudo dnf install dms
+```
+
 #### nixOS - via flake
 
 ```bash
@@ -244,7 +253,7 @@ There are a lot of possible configurations that you can enable/disable in the fl
 # Arch
 paru -S quickshell-git
 # Fedora
-sudo dnf copr enable errornointernet/quickshell && sudo dnf install quickshell-git
+sudo dnf copr enable avengemedia/danklinux && sudo dnf install quickshell-git
 # ! TODO - document other distros
 ```
 
@@ -291,10 +300,10 @@ sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia
 paru -S matugen-bin dgop
 
 # Fedora
-sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia
-sudo dnf copr enable wef/cliphist && sudo dnf install cliphist
-sudo dnf copr enable heus-sueh/packages && sudo dnf install matugen
+sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia 
+sudo dnf copr enable avengemedia/danklinux && sudo dnf install cliphist ghostty hyprpicker material-symbols-fonts matugen 
 ```
+Note: by enabling and installing the avengemedia/dms copr above, these core dependencies will automatically be available for use. 
 
 *Other distros will just need to find sources for the above packages*
 
