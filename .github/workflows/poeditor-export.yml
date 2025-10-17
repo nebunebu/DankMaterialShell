@@ -2,7 +2,7 @@ name: POEditor Diff & Sync
 
 on:
   push:
-    branches: [ master ]
+    branches: [ poeditor-sucks ]
   workflow_dispatch: {}
 
 concurrency:
