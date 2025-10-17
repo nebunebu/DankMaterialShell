@@ -17,6 +17,7 @@ Singleton {
     property int systemColorScheme: 0
 
     property bool freedeskAvailable: false
+    property string colorSchemeCommand: ""
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
@@ -107,9 +108,15 @@ Singleton {
         if (typeof SettingsData !== "undefined" && SettingsData.syncModeWithPortal === false) {
             return
         }
-        if (!settingsPortalAvailable || !freedeskAvailable) return
 
-        DMSService.sendRequest("freedesktop.settings.setColorScheme", { preferDark: !isLightMode }, response => {})
+        const targetScheme = isLightMode ? "default": "prefer-dark"
+
+        if (colorSchemeCommand === "gsettings") {
+            Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", targetScheme])
+        }
+        if (colorSchemeCommand === "dconf") {
+            Quickshell.execDetached(["dconf", "write", "/org/gnome/desktop/interface/color-scheme", `'${targetScheme}'`])
+        }
     }
 
     function setSystemIconTheme(themeName) {
@@ -140,6 +147,7 @@ Singleton {
         } else {
             console.log("PortalService: DMS_SOCKET not set")
         }
+        colorSchemeDetector.running = true
     }
 
     Connections {
@@ -236,6 +244,23 @@ Singleton {
         onExited: exitCode => {
             if (exitCode !== 0) {
                 root.profileImage = ""
+            }
+        }
+    }
+
+    Process {
+        id: colorSchemeDetector
+        command: ["bash", "-c", "command -v gsettings || command -v dconf"]
+        running: false
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const cmd = text.trim()
+                if (cmd.includes("gsettings")) {
+                    root.colorSchemeCommand = "gsettings"
+                } else if (cmd.includes("dconf")) {
+                    root.colorSchemeCommand = "dconf"
+                }
             }
         }
     }
