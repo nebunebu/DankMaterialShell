@@ -109,6 +109,7 @@ Singleton {
     property bool focusedWindowCompactMode: false
     property bool runningAppsCompactMode: true
     property bool runningAppsCurrentWorkspace: false
+    property bool runningAppsGroupByApp: false
     property string clockDateFormat: ""
     property string lockDateFormat: ""
     property int mediaSize: 1
@@ -373,6 +374,7 @@ Singleton {
                 focusedWindowCompactMode = settings.focusedWindowCompactMode !== undefined ? settings.focusedWindowCompactMode : false
                 runningAppsCompactMode = settings.runningAppsCompactMode !== undefined ? settings.runningAppsCompactMode : true
                 runningAppsCurrentWorkspace = settings.runningAppsCurrentWorkspace !== undefined ? settings.runningAppsCurrentWorkspace : false
+                runningAppsGroupByApp = settings.runningAppsGroupByApp !== undefined ? settings.runningAppsGroupByApp : false
                 clockDateFormat = settings.clockDateFormat !== undefined ? settings.clockDateFormat : ""
                 lockDateFormat = settings.lockDateFormat !== undefined ? settings.lockDateFormat : ""
                 mediaSize = settings.mediaSize !== undefined ? settings.mediaSize : (settings.mediaCompactMode !== undefined ? (settings.mediaCompactMode ? 0 : 1) : 1)
@@ -576,6 +578,7 @@ Singleton {
                                                 "focusedWindowCompactMode": focusedWindowCompactMode,
                                                 "runningAppsCompactMode": runningAppsCompactMode,
                                                 "runningAppsCurrentWorkspace": runningAppsCurrentWorkspace,
+                                                "runningAppsGroupByApp": runningAppsGroupByApp,
                                                 "clockDateFormat": clockDateFormat,
                                                 "lockDateFormat": lockDateFormat,
                                                 "mediaSize": mediaSize,
@@ -701,7 +704,7 @@ Singleton {
             "controlCenterWidgets", "showWorkspaceIndex", "workspaceScrolling", "showWorkspacePadding", "showWorkspaceApps",
             "maxWorkspaceIcons", "workspacesPerMonitor", "workspaceNameIcons", "waveProgressEnabled",
             "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode",
-            "runningAppsCurrentWorkspace", "clockDateFormat", "lockDateFormat", "mediaSize",
+            "runningAppsCurrentWorkspace", "runningAppsGroupByApp", "clockDateFormat", "lockDateFormat", "mediaSize",
             "dankBarLeftWidgets", "dankBarCenterWidgets", "dankBarRightWidgets",
             "appLauncherViewMode", "spotlightModalViewMode", "sortAppsAlphabetically",
             "networkPreference", "iconTheme", "launcherLogoMode", "launcherLogoCustomPath",
@@ -1229,6 +1232,11 @@ Singleton {
 
     function setRunningAppsCurrentWorkspace(enabled) {
         runningAppsCurrentWorkspace = enabled
+        saveSettings()
+    }
+
+    function setRunningAppsGroupByApp(enabled) {
+        runningAppsGroupByApp = enabled
         saveSettings()
     }
 

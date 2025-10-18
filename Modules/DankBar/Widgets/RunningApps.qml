@@ -26,7 +26,28 @@ Rectangle {
         }
         return CompositorService.sortedToplevels;
     }
-    readonly property int windowCount: sortedToplevels.length
+    readonly property var groupedWindows: {
+        if (!SettingsData.runningAppsGroupByApp) {
+            return [];
+        }
+        const appGroups = new Map();
+        sortedToplevels.forEach((toplevel, index) => {
+            const appId = toplevel.appId || "unknown";
+            if (!appGroups.has(appId)) {
+                appGroups.set(appId, {
+                    appId: appId,
+                    windows: []
+                });
+            }
+            appGroups.get(appId).windows.push({
+                toplevel: toplevel,
+                windowId: index,
+                windowTitle: toplevel.title || "(Unnamed)"
+            });
+        });
+        return Array.from(appGroups.values());
+    }
+    readonly property int windowCount: SettingsData.runningAppsGroupByApp ? groupedWindows.length : sortedToplevels.length
     readonly property int calculatedSize: {
         if (windowCount === 0) {
             return 0;
@@ -158,21 +179,28 @@ Rectangle {
 
             Repeater {
                 id: windowRepeater
-                model: sortedToplevels
+                model: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
 
                 delegate: Item {
                 id: delegateItem
 
-                property bool isFocused: modelData.activated
-                property string appId: modelData.appId || ""
-                property string windowTitle: modelData.title || "(Unnamed)"
-                property var toplevelObject: modelData
+                property bool isGrouped: SettingsData.runningAppsGroupByApp
+                property var groupData: isGrouped ? modelData : null
+                property var toplevelData: isGrouped ? (modelData.windows.length > 0 ? modelData.windows[0].toplevel : null) : modelData
+                property bool isFocused: toplevelData ? toplevelData.activated : false
+                property string appId: isGrouped ? modelData.appId : (modelData.appId || "")
+                property string windowTitle: toplevelData ? (toplevelData.title || "(Unnamed)") : "(Unnamed)"
+                property var toplevelObject: toplevelData
+                property int windowCount: isGrouped ? modelData.windows.length : 1
                 property string tooltipText: {
                     let appName = "Unknown";
                     if (appId) {
                         const desktopEntry = DesktopEntries.heuristicLookup(appId);
                         appName = desktopEntry
                                 && desktopEntry.name ? desktopEntry.name : appId;
+                    }
+                    if (isGrouped && windowCount > 1) {
+                        return appName + " (" + windowCount + " windows)";
                     }
                     return appName + (windowTitle ? " • " + windowTitle : "")
                 }
@@ -264,6 +292,27 @@ Rectangle {
                     font.weight: Font.Medium
                 }
 
+                Rectangle {
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.rightMargin: SettingsData.runningAppsCompactMode ? -2 : 2
+                    anchors.bottomMargin: -2
+                    width: 14
+                    height: 14
+                    radius: 7
+                    color: Theme.primary
+                    visible: isGrouped && windowCount > 1
+                    z: 10
+
+                    StyledText {
+                        anchors.centerIn: parent
+                        text: windowCount > 9 ? "9+" : windowCount
+                        font.pixelSize: 9
+                        color: Theme.surface
+                        font.weight: Font.Bold
+                    }
+                }
+
                 // Window title text (only visible in expanded mode)
                 StyledText {
                     anchors.left: iconImg.right
@@ -289,7 +338,17 @@ Rectangle {
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: (mouse) => {
                         if (mouse.button === Qt.LeftButton) {
-                            if (toplevelObject) {
+                            if (isGrouped && windowCount > 1) {
+                                let currentIndex = -1;
+                                for (let i = 0; i < groupData.windows.length; i++) {
+                                    if (groupData.windows[i].toplevel.activated) {
+                                        currentIndex = i;
+                                        break;
+                                    }
+                                }
+                                const nextIndex = (currentIndex + 1) % groupData.windows.length;
+                                groupData.windows[nextIndex].toplevel.activate();
+                            } else if (toplevelObject) {
                                 toplevelObject.activate();
                             }
                         } else if (mouse.button === Qt.RightButton) {
@@ -352,21 +411,28 @@ Rectangle {
 
             Repeater {
                 id: windowRepeater
-                model: sortedToplevels
+                model: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
 
                 delegate: Item {
                 id: delegateItem
 
-                property bool isFocused: modelData.activated
-                property string appId: modelData.appId || ""
-                property string windowTitle: modelData.title || "(Unnamed)"
-                property var toplevelObject: modelData
+                property bool isGrouped: SettingsData.runningAppsGroupByApp
+                property var groupData: isGrouped ? modelData : null
+                property var toplevelData: isGrouped ? (modelData.windows.length > 0 ? modelData.windows[0].toplevel : null) : modelData
+                property bool isFocused: toplevelData ? toplevelData.activated : false
+                property string appId: isGrouped ? modelData.appId : (modelData.appId || "")
+                property string windowTitle: toplevelData ? (toplevelData.title || "(Unnamed)") : "(Unnamed)"
+                property var toplevelObject: toplevelData
+                property int windowCount: isGrouped ? modelData.windows.length : 1
                 property string tooltipText: {
                     let appName = "Unknown";
                     if (appId) {
                         const desktopEntry = DesktopEntries.heuristicLookup(appId);
                         appName = desktopEntry
                                 && desktopEntry.name ? desktopEntry.name : appId;
+                    }
+                    if (isGrouped && windowCount > 1) {
+                        return appName + " (" + windowCount + " windows)";
                     }
                     return appName + (windowTitle ? " • " + windowTitle : "")
                 }
@@ -456,6 +522,27 @@ Rectangle {
                     font.weight: Font.Medium
                 }
 
+                Rectangle {
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.rightMargin: SettingsData.runningAppsCompactMode ? -2 : 2
+                    anchors.bottomMargin: -2
+                    width: 14
+                    height: 14
+                    radius: 7
+                    color: Theme.primary
+                    visible: isGrouped && windowCount > 1
+                    z: 10
+
+                    StyledText {
+                        anchors.centerIn: parent
+                        text: windowCount > 9 ? "9+" : windowCount
+                        font.pixelSize: 9
+                        color: Theme.surface
+                        font.weight: Font.Bold
+                    }
+                }
+
                 StyledText {
                     anchors.left: iconImg.right
                     anchors.leftMargin: Theme.spacingXS
@@ -480,7 +567,17 @@ Rectangle {
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: (mouse) => {
                         if (mouse.button === Qt.LeftButton) {
-                            if (toplevelObject) {
+                            if (isGrouped && windowCount > 1) {
+                                let currentIndex = -1;
+                                for (let i = 0; i < groupData.windows.length; i++) {
+                                    if (groupData.windows[i].toplevel.activated) {
+                                        currentIndex = i;
+                                        break;
+                                    }
+                                }
+                                const nextIndex = (currentIndex + 1) % groupData.windows.length;
+                                groupData.windows[nextIndex].toplevel.activate();
+                            } else if (toplevelObject) {
                                 toplevelObject.activate();
                             }
                         } else if (mouse.button === Qt.RightButton) {

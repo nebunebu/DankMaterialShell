@@ -463,6 +463,32 @@ Column {
                                 }
                             }
 
+                            DankActionButton {
+                                id: groupByAppButton
+                                buttonSize: 28
+                                visible: modelData.id === "runningApps"
+                                iconName: "apps"
+                                iconSize: 16
+                                iconColor: SettingsData.runningAppsGroupByApp ? Theme.primary : Theme.outline
+                                onClicked: {
+                                    SettingsData.setRunningAppsGroupByApp(!SettingsData.runningAppsGroupByApp)
+                                }
+                                onEntered: {
+                                    groupByAppTooltipLoader.active = true
+                                    if (groupByAppTooltipLoader.item) {
+                                        const tooltipText = SettingsData.runningAppsGroupByApp ? "Ungroup" : "Group by App"
+                                        const p = groupByAppButton.mapToItem(null, groupByAppButton.width / 2, 0)
+                                        groupByAppTooltipLoader.item.show(tooltipText, p.x, p.y - 40, null)
+                                    }
+                                }
+                                onExited: {
+                                    if (groupByAppTooltipLoader.item) {
+                                        groupByAppTooltipLoader.item.hide()
+                                    }
+                                    groupByAppTooltipLoader.active = false
+                                }
+                            }
+
                             Rectangle {
                                 id: compactModeTooltip
                                 width: tooltipText.contentWidth + Theme.spacingM * 2
@@ -927,6 +953,12 @@ Column {
 
     Loader {
         id: minimumWidthTooltipLoader
+        active: false
+        sourceComponent: DankTooltip {}
+    }
+
+    Loader {
+        id: groupByAppTooltipLoader
         active: false
         sourceComponent: DankTooltip {}
     }
