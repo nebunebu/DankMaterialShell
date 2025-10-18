@@ -251,68 +251,96 @@ Item {
                         }
                     }
 
-                    Column {
+                    FocusScope {
                         width: parent.width - Theme.spacingM * 2
-                        spacing: Theme.spacingXS
+                        height: customCommandColumn.implicitHeight
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.spacingM
 
-                        StyledText {
-                            text: I18n.tr("System update custom command")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceVariantText
-                        }
-
-                        DankTextField {
-                            id: updaterCustomCommand
+                        Column {
+                            id: customCommandColumn
                             width: parent.width
-                            height: 48
-                            placeholderText: "myPkgMngr --sysupdate"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
-                            focusedBorderColor: Theme.primary
+                            spacing: Theme.spacingXS
 
-                            Component.onCompleted: {
-                                if (SettingsData.updaterCustomCommand) {
-                                    text = SettingsData.updaterCustomCommand;
-                                }
+                            StyledText {
+                                text: I18n.tr("System update custom command")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
                             }
 
-                            onTextEdited: {
-                                SettingsData.setUpdaterCustomCommand(text.trim());
+                            DankTextField {
+                                id: updaterCustomCommand
+                                width: parent.width
+                                height: 48
+                                placeholderText: "myPkgMngr --sysupdate"
+                                backgroundColor: Theme.surfaceVariant
+                                normalBorderColor: Theme.primarySelected
+                                focusedBorderColor: Theme.primary
+
+                                Component.onCompleted: {
+                                    if (SettingsData.updaterCustomCommand) {
+                                        text = SettingsData.updaterCustomCommand;
+                                    }
+                                }
+
+                                onTextEdited: {
+                                    SettingsData.setUpdaterCustomCommand(text.trim());
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onPressed: mouse => {
+                                        updaterCustomCommand.forceActiveFocus()
+                                        mouse.accepted = false
+                                    }
+                                }
                             }
                         }
                     }
 
-                    Column {
+                    FocusScope {
                         width: parent.width - Theme.spacingM * 2
-                        spacing: Theme.spacingXS
+                        height: terminalParamsColumn.implicitHeight
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.spacingM
 
-                        StyledText {
-                            text: I18n.tr("Terminal custom additional parameters")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceVariantText
-                        }
-
-                        DankTextField {
-                            id: updaterTerminalCustomClass
+                        Column {
+                            id: terminalParamsColumn
                             width: parent.width
-                            height: 48
-                            placeholderText: "-T udpClass"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
-                            focusedBorderColor: Theme.primary
+                            spacing: Theme.spacingXS
 
-                            Component.onCompleted: {
-                                if (SettingsData.updaterTerminalAdditionalParams) {
-                                    text = SettingsData.updaterTerminalAdditionalParams;
-                                }
+                            StyledText {
+                                text: I18n.tr("Terminal custom additional parameters")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
                             }
 
-                            onTextEdited: {
-                                SettingsData.setUpdaterTerminalAdditionalParams(text.trim());
+                            DankTextField {
+                                id: updaterTerminalCustomClass
+                                width: parent.width
+                                height: 48
+                                placeholderText: "-T udpClass"
+                                backgroundColor: Theme.surfaceVariant
+                                normalBorderColor: Theme.primarySelected
+                                focusedBorderColor: Theme.primary
+
+                                Component.onCompleted: {
+                                    if (SettingsData.updaterTerminalAdditionalParams) {
+                                        text = SettingsData.updaterTerminalAdditionalParams;
+                                    }
+                                }
+
+                                onTextEdited: {
+                                    SettingsData.setUpdaterTerminalAdditionalParams(text.trim());
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onPressed: mouse => {
+                                        updaterTerminalCustomClass.forceActiveFocus()
+                                        mouse.accepted = false
+                                    }
+                                }
                             }
                         }
                     }
