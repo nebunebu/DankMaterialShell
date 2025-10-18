@@ -41,12 +41,17 @@ Singleton {
     readonly property bool batteryAvailable: batteries.length > 0
     // Aggregated charge level (percentage)
     readonly property real batteryLevel: {
-        if (!batteryAvailable)
-        return 0
+        if (!batteryAvailable) return 0
+        if (batteryCapacity === 0) {
+            if (usePreferred && device && device.ready) return Math.round(device.percentage)
+            const validBatteries = batteries.filter(b => b.ready && b.percentage >= 0)
+            if (validBatteries.length === 0) return 0
+            const avgPercentage = validBatteries.reduce((sum, b) => sum + b.percentage, 0) / validBatteries.length
+            return Math.round(avgPercentage)
+        }
         return Math.round((batteryEnergy * 100) / batteryCapacity)
     }
-    // Is any battery charging (at least one has changeRate > 0)
-    readonly property bool isCharging: batteryAvailable && batteries.some(b => b.state === UPowerDeviceState.Charging && b.changeRate > 0)
+    readonly property bool isCharging: batteryAvailable && batteries.some(b => b.state === UPowerDeviceState.Charging || b.state === UPowerDeviceState.FullyCharged)
 
     // Is the system plugged in (none of the batteries are discharging or empty)
     readonly property bool isPluggedIn: batteryAvailable && batteries.every(b => b.state !== UPowerDeviceState.Discharging)
