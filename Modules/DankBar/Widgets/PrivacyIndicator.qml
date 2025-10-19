@@ -59,7 +59,11 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             DankIcon {
-                name: "mic"
+                name: {
+                    let muted = AudioService.source.audio.muted || AudioService.source.audio.volume === 0.0
+                    if (muted) return "mic_off"
+                    return "mic"
+                }
                 size: Theme.iconSizeSmall
                 color: Theme.error
                 filled: true
@@ -125,7 +129,11 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             DankIcon {
-                name: "mic"
+                name: {
+                    let muted = AudioService.source.audio.muted || AudioService.source.audio.volume === 0.0
+                    if (muted) return "mic_off"
+                    return "mic"
+                }
                 size: Theme.iconSizeSmall
                 color: Theme.error
                 filled: true
