@@ -13,6 +13,7 @@ DankModal {
 
     property Component settingsContent
     property alias profileBrowser: profileBrowser
+    property int currentTabIndex: 0
 
     signal closingModal()
 
@@ -40,6 +41,25 @@ DankModal {
         return hide();
     }
     content: settingsContent
+    onOpened: () => {
+        Qt.callLater(() => modalFocusScope.forceActiveFocus())
+    }
+    modalFocusScope.Keys.onPressed: event => {
+        const tabCount = 11
+        if (event.key === Qt.Key_Down) {
+            currentTabIndex = (currentTabIndex + 1) % tabCount
+            event.accepted = true
+        } else if (event.key === Qt.Key_Up) {
+            currentTabIndex = (currentTabIndex - 1 + tabCount) % tabCount
+            event.accepted = true
+        } else if (event.key === Qt.Key_Tab && !event.modifiers) {
+            currentTabIndex = (currentTabIndex + 1) % tabCount
+            event.accepted = true
+        } else if (event.key === Qt.Key_Backtab || (event.key === Qt.Key_Tab && event.modifiers & Qt.ShiftModifier)) {
+            currentTabIndex = (currentTabIndex - 1 + tabCount) % tabCount
+            event.accepted = true
+        }
+    }
 
     IpcHandler {
         function open(): string {
@@ -111,15 +131,9 @@ DankModal {
     }
 
     settingsContent: Component {
-        FocusScope {
+        Item {
             id: rootScope
             anchors.fill: parent
-            focus: true
-
-            Keys.onEscapePressed: event => {
-                settingsModal.hide()
-                event.accepted = true
-            }
 
             Column {
                 anchors.fill: parent
@@ -178,8 +192,10 @@ DankModal {
                         id: sidebar
 
                         parentModal: settingsModal
-                        focus: true
-                        onCurrentIndexChanged: content.currentIndex = currentIndex
+                        currentIndex: settingsModal.currentTabIndex
+                        onCurrentIndexChanged: {
+                            settingsModal.currentTabIndex = currentIndex
+                        }
                     }
 
                     SettingsContent {
@@ -188,7 +204,7 @@ DankModal {
                         width: parent.width - sidebar.width
                         height: parent.height
                         parentModal: settingsModal
-                        currentIndex: sidebar.currentIndex
+                        currentIndex: settingsModal.currentTabIndex
                     }
 
                 }

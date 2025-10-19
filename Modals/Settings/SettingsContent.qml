@@ -2,12 +2,11 @@ import QtQuick
 import qs.Common
 import qs.Modules.Settings
 
-FocusScope {
+Item {
     id: root
 
     property int currentIndex: 0
     property var parentModal: null
-    focus: true
 
     Rectangle {
         anchors.fill: parent
@@ -23,7 +22,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 0
             visible: active
-            asynchronous: true
 
             sourceComponent: Component {
                 PersonalizationTab {
@@ -40,7 +38,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 1
             visible: active
-            asynchronous: true
 
             sourceComponent: TimeWeatherTab {
             }
@@ -53,7 +50,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 2
             visible: active
-            asynchronous: true
 
             sourceComponent: DankBarTab {
                 parentModal: root.parentModal
@@ -67,7 +63,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 3
             visible: active
-            asynchronous: true
 
             sourceComponent: WidgetTweaksTab {
             }
@@ -80,7 +75,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 4
             visible: active
-            asynchronous: true
 
             sourceComponent: Component {
                 DockTab {
@@ -96,7 +90,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 5
             visible: active
-            asynchronous: true
 
             sourceComponent: DisplaysTab {
             }
@@ -109,7 +102,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 6
             visible: active
-            asynchronous: true
 
             sourceComponent: LauncherTab {
             }
@@ -122,7 +114,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 7
             visible: active
-            asynchronous: true
 
             sourceComponent: ThemeColorsTab {
             }
@@ -135,7 +126,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 8
             visible: active
-            asynchronous: true
 
             sourceComponent: PowerSettings {
             }
@@ -148,7 +138,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 9
             visible: active
-            asynchronous: true
 
             sourceComponent: PluginsTab {
                 parentModal: root.parentModal
@@ -162,7 +151,6 @@ FocusScope {
             anchors.fill: parent
             active: root.currentIndex === 10
             visible: active
-            asynchronous: true
 
             sourceComponent: AboutTab {
             }
