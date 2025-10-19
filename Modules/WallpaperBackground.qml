@@ -40,6 +40,7 @@ Variants {
             property bool isColorSource: source.startsWith("#")
             property string transitionType: SessionData.wallpaperTransition
             property string actualTransitionType: transitionType
+            property bool isInitialized: false
 
             Connections {
                 target: SessionData
@@ -71,7 +72,7 @@ Variants {
                 }
             }
             property real transitionProgress: 0
-            property real fillMode: 1.0
+            property real shaderFillMode: getFillMode(SettingsData.wallpaperFillMode)
             property vector4d fillColor: Qt.vector4d(0, 0, 0, 1)
             property real edgeSmoothness: 0.1
 
@@ -86,9 +87,32 @@ Variants {
             property bool hasCurrent: currentWallpaper.status === Image.Ready && !!currentWallpaper.source
             property bool booting: !hasCurrent && nextWallpaper.status === Image.Ready
 
+            function getFillMode(modeName) {
+                switch(modeName) {
+                    case "Stretch": return Image.Stretch
+                    case "Fit":
+                    case "PreserveAspectFit": return Image.PreserveAspectFit
+                    case "Fill":
+                    case "PreserveAspectCrop": return Image.PreserveAspectCrop
+                    case "Tile": return Image.Tile
+                    case "TileVertically": return Image.TileVertically
+                    case "TileHorizontally": return Image.TileHorizontally
+                    case "Pad": return Image.Pad
+                    default: return Image.PreserveAspectCrop
+                }
+            }
+
             WallpaperEngineProc {
                 id: weProc
                 monitor: modelData.name
+            }
+
+            Component.onCompleted: {
+                if (source) {
+                    const formattedSource = source.startsWith("file://") ? source : "file://" + source
+                    setWallpaperImmediate(formattedSource)
+                }
+                isInitialized = true
             }
 
             Component.onDestruction: {
@@ -109,9 +133,9 @@ Variants {
                     } else if (isColor) {
                         setWallpaperImmediate("")
                     } else {
-                        // Always set immediately if there's no current wallpaper (startup)
-                        if (!currentWallpaper.source) {
+                        if (!isInitialized || !currentWallpaper.source) {
                             setWallpaperImmediate(source.startsWith("file://") ? source : "file://" + source)
+                            isInitialized = true
                         } else {
                             changeWallpaper(source.startsWith("file://") ? source : "file://" + source)
                         }
@@ -211,7 +235,7 @@ Variants {
                 asynchronous: true
                 smooth: true
                 cache: true
-                fillMode: Image.PreserveAspectCrop
+                fillMode: root.getFillMode(SettingsData.wallpaperFillMode)
             }
 
             Image {
@@ -223,7 +247,7 @@ Variants {
                 asynchronous: true
                 smooth: true
                 cache: true
-                fillMode: Image.PreserveAspectCrop
+                fillMode: root.getFillMode(SettingsData.wallpaperFillMode)
 
                 onStatusChanged: {
                     if (status !== Image.Ready)
@@ -275,7 +299,7 @@ Variants {
                     property variant source1: root.hasCurrent ? currentWallpaper : transparentSource
                     property variant source2: nextWallpaper
                     property real progress: root.transitionProgress
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -296,7 +320,7 @@ Variants {
                     property real progress: root.transitionProgress
                     property real smoothness: root.edgeSmoothness
                     property real direction: root.wipeDirection
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -319,7 +343,7 @@ Variants {
                     property real aspectRatio: root.width / root.height
                     property real centerX: root.discCenterX
                     property real centerY: root.discCenterY
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -342,7 +366,7 @@ Variants {
                     property real aspectRatio: root.width / root.height
                     property real stripeCount: root.stripesCount
                     property real angle: root.stripesAngle
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -365,7 +389,7 @@ Variants {
                     property real centerX: 0.5
                     property real centerY: 0.5
                     property real aspectRatio: root.width / root.height
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -385,7 +409,7 @@ Variants {
                     property variant source2: nextWallpaper
                     property real progress: root.transitionProgress
                     property real smoothness: root.edgeSmoothness
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)
@@ -411,7 +435,7 @@ Variants {
                     property real aspectRatio: root.width / root.height
                     property real centerX: root.discCenterX
                     property real centerY: root.discCenterY
-                    property real fillMode: root.fillMode
+                    property real fillMode: root.shaderFillMode
                     property vector4d fillColor: root.fillColor
                     property real imageWidth1: Math.max(1, root.hasCurrent ? source1.sourceSize.width : modelData.width)
                     property real imageHeight1: Math.max(1, root.hasCurrent ? source1.sourceSize.height : modelData.height)

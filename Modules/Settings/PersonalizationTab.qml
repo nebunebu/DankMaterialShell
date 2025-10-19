@@ -410,6 +410,56 @@ Item {
                         }
                     }
 
+                    Item {
+                        width: parent.width
+                        height: fillModeGroup.height
+                        visible: {
+                            var currentWallpaper = SessionData.perMonitorWallpaper ? SessionData.getMonitorWallpaper(selectedMonitorName) : SessionData.wallpaperPath
+                            return currentWallpaper !== "" && !currentWallpaper.startsWith("#")
+                        }
+
+                        DankButtonGroup {
+                            id: fillModeGroup
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            model: ["Stretch", "Fit", "Fill", "Tile", "Tile V", "Tile H", "Pad"]
+                            selectionMode: "single"
+                            buttonHeight: 28
+                            minButtonWidth: 48
+                            buttonPadding: Theme.spacingS
+                            checkIconSize: 0
+                            textSize: Theme.fontSizeSmall
+                            checkEnabled: false
+                            currentIndex: {
+                                const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                return modes.indexOf(SettingsData.wallpaperFillMode)
+                            }
+                            onSelectionChanged: (index, selected) => {
+                                if (selected) {
+                                    const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                    SettingsData.setWallpaperFillMode(modes[index])
+                                }
+                            }
+
+                            Connections {
+                                target: SettingsData
+                                function onWallpaperFillModeChanged() {
+                                    const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                    fillModeGroup.currentIndex = modes.indexOf(SettingsData.wallpaperFillMode)
+                                }
+                            }
+
+                            Connections {
+                                target: personalizationTab
+                                function onSelectedMonitorNameChanged() {
+                                    Qt.callLater(() => {
+                                        const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                        fillModeGroup.currentIndex = modes.indexOf(SettingsData.wallpaperFillMode)
+                                    })
+                                }
+                            }
+                        }
+                    }
+
                     // Per-Mode Wallpaper Section - Full Width
                     Rectangle {
                         width: parent.width

@@ -64,6 +64,7 @@ Singleton {
     property bool useFahrenheit: false
     property bool nightModeEnabled: false
     property int animationSpeed: SettingsData.AnimationSpeed.Short
+    property string wallpaperFillMode: "Fill"
 
     property bool showLauncherButton: true
     property bool showWorkspaceSwitcher: true
@@ -486,6 +487,7 @@ Singleton {
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
+                wallpaperFillMode = settings.wallpaperFillMode !== undefined ? settings.wallpaperFillMode : "Fill"
                 animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 acMonitorTimeout = settings.acMonitorTimeout !== undefined ? settings.acMonitorTimeout : 0
                 acLockTimeout = settings.acLockTimeout !== undefined ? settings.acLockTimeout : 0
@@ -648,6 +650,7 @@ Singleton {
                                                 "hideBrightnessSlider": hideBrightnessSlider,
                                                 "widgetBackgroundColor": widgetBackgroundColor,
                                                 "surfaceBase": surfaceBase,
+                                                "wallpaperFillMode": wallpaperFillMode,
                                                 "notificationTimeoutLow": notificationTimeoutLow,
                                                 "notificationTimeoutNormal": notificationTimeoutNormal,
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
@@ -722,7 +725,7 @@ Singleton {
             "dankBarGothCornersEnabled", "dankBarBorderEnabled", "dankBarBorderColor",
             "dankBarBorderOpacity", "dankBarBorderThickness", "popupGapsAuto", "popupGapsManual",
             "dankBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries",
-            "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase",
+            "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase", "wallpaperFillMode",
             "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
             "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm",
             "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend",
@@ -1052,6 +1055,11 @@ Singleton {
 
     function setAnimationSpeed(speed) {
         animationSpeed = speed
+        saveSettings()
+    }
+
+    function setWallpaperFillMode(mode) {
+        wallpaperFillMode = mode
         saveSettings()
     }
 
