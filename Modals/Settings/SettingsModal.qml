@@ -112,8 +112,14 @@ DankModal {
 
     settingsContent: Component {
         FocusScope {
+            id: rootScope
             anchors.fill: parent
             focus: true
+
+            Keys.onEscapePressed: event => {
+                settingsModal.hide()
+                event.accepted = true
+            }
 
             Column {
                 anchors.fill: parent
@@ -172,6 +178,7 @@ DankModal {
                         id: sidebar
 
                         parentModal: settingsModal
+                        focus: true
                         onCurrentIndexChanged: content.currentIndex = currentIndex
                     }
 

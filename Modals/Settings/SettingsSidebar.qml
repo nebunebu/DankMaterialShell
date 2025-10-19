@@ -3,11 +3,13 @@ import qs.Common
 import qs.Modals.Settings
 import qs.Widgets
 
-Rectangle {
+FocusScope {
     id: sidebarContainer
 
     property int currentIndex: 0
     property var parentModal: null
+
+    activeFocusOnTab: true
     readonly property var sidebarItems: [{
         "text": I18n.tr("Personalization"),
         "icon": "person"
@@ -43,10 +45,66 @@ Rectangle {
         "icon": "info"
     }]
 
+    function navigateNext() {
+        currentIndex = (currentIndex + 1) % sidebarItems.length
+    }
+
+    function navigatePrevious() {
+        currentIndex = (currentIndex - 1 + sidebarItems.length) % sidebarItems.length
+    }
+
     width: 270
     height: parent.height
-    color: Theme.surfaceContainer
-    radius: Theme.cornerRadius
+
+    Component.onCompleted: {
+        forceActiveFocus()
+    }
+
+    Timer {
+        id: refocusTimer
+        interval: 50
+        onTriggered: sidebarContainer.forceActiveFocus()
+    }
+
+    Connections {
+        target: parentModal
+        function onOpened() {
+            refocusTimer.restart()
+        }
+    }
+
+    Keys.onPressed: event => {
+        if (event.key === Qt.Key_Down) {
+            navigateNext()
+            Qt.callLater(() => sidebarContainer.forceActiveFocus())
+            event.accepted = true
+        } else if (event.key === Qt.Key_Up) {
+            navigatePrevious()
+            Qt.callLater(() => sidebarContainer.forceActiveFocus())
+            event.accepted = true
+        } else if (event.key === Qt.Key_Tab && !event.modifiers) {
+            navigateNext()
+            Qt.callLater(() => sidebarContainer.forceActiveFocus())
+            event.accepted = true
+        } else if (event.key === Qt.Key_Backtab || (event.key === Qt.Key_Tab && event.modifiers & Qt.ShiftModifier)) {
+            navigatePrevious()
+            Qt.callLater(() => sidebarContainer.forceActiveFocus())
+            event.accepted = true
+        }
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: Theme.surfaceContainer
+        radius: Theme.cornerRadius
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: mouse => {
+                sidebarContainer.forceActiveFocus()
+                mouse.accepted = false
+            }
+        }
 
     Column {
         anchors.fill: parent
@@ -130,6 +188,8 @@ Rectangle {
             }
 
         }
+
+    }
 
     }
 
