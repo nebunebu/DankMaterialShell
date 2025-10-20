@@ -187,7 +187,7 @@ Singleton {
             // Hyprland fallback
             Hyprland.dispatch("exit")
         } else {
-            Quickshell.execDetached(SettingsData.customPowerActionLogout.split(" "))
+            Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionLogout])
         }
     }
 
@@ -195,7 +195,7 @@ Singleton {
         if (SettingsData.customPowerActionSuspend.length === 0) {
             Quickshell.execDetached([isElogind ? "loginctl" : "systemctl", "suspend"])
         } else {
-            Quickshell.execDetached(SettingsData.customPowerActionSuspend.split(" "))
+            Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionSuspend])
         }
     }
 
@@ -203,7 +203,7 @@ Singleton {
         if (SettingsData.customPowerActionHibernate.length === 0) {
             Quickshell.execDetached([isElogind ? "loginctl" : "systemctl", "hibernate"])
         } else {
-            Quickshell.execDetached(SettingsData.customPowerActionHibernate.split(" "))
+            Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionHibernate])
         }
     }
 
@@ -211,7 +211,7 @@ Singleton {
         if (SettingsData.customPowerActionReboot.length === 0) {
             Quickshell.execDetached([isElogind ? "loginctl" : "systemctl", "reboot"])
         } else {
-            Quickshell.execDetached(SettingsData.customPowerActionReboot.split(" "))
+            Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionReboot])
         }
     }
 
@@ -219,7 +219,7 @@ Singleton {
         if (SettingsData.customPowerActionPowerOff.length === 0) {
             Quickshell.execDetached([isElogind ? "loginctl" : "systemctl", "poweroff"])
         } else {
-            Quickshell.execDetached(SettingsData.customPowerActionPowerOff.split(" "))
+            Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionPowerOff])
         }
     }
 
