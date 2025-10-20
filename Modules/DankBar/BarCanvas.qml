@@ -244,7 +244,6 @@ Item {
     Canvas {
         id: barBorder
         anchors.fill: parent
-        antialiasing: false
         visible: SettingsData.dankBarBorderEnabled
         renderTarget: Canvas.FramebufferObject
         renderStrategy: Canvas.Cooperative
@@ -256,6 +255,8 @@ Item {
         property real wing: SettingsData.dankBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
         property real rt: SettingsData.dankBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
         property bool borderEnabled: SettingsData.dankBarBorderEnabled
+
+        antialiasing: rt > 0 || wing > 0
 
         onWingChanged: root.requestRepaint()
         onRtChanged: root.requestRepaint()
@@ -323,57 +324,6 @@ Item {
 
             const uiThickness = Math.max(1, SettingsData.dankBarBorderThickness ?? 1)
             const devThickness = Math.max(1, Math.round(Theme.px(uiThickness, dpr)))
-            ctx.lineWidth = devThickness
-            ctx.lineCap = "butt"
-            ctx.lineJoin = "miter"
-            ctx.miterLimit = 4
-
-            const odd = (devThickness % 2) === 1
-            const snap = odd ? 0.5 : 0.0
-
-            function drawTopBorder() {
-                ctx.beginPath()
-
-                if (!hasEdgeGap) {
-                    const y = H - devThickness / 2
-                    ctx.moveTo(0, y)
-                    ctx.lineTo(W, y)
-                } else {
-                    const half = devThickness / 2
-                    const L  = half
-                    const T  = half
-                    const Rg = W - half
-                    const Hb = H - half
-                    const B  = (R > 0) ? (H + R - half) : (H - half)
-                    const RTi = Math.max(0, RT - half)
-                    const Ri  = Math.max(0, R  - half)
-
-                    ctx.moveTo(L + RTi, T)
-                    ctx.lineTo(Rg - RTi, T)
-                    ctx.arcTo(Rg, T, Rg, T + RTi, RTi)
-
-                    ctx.lineTo(Rg, Hb)
-
-                    if (R > 0 && Ri > 0) {
-                        ctx.lineTo(Rg, B)
-                        ctx.arc(Rg - Ri, B, Ri, 0, -Math.PI/2, true)
-                        ctx.lineTo(L + Ri, Hb)
-                        ctx.arc(L + Ri, B, Ri, -Math.PI/2, -Math.PI, true)
-                        ctx.lineTo(L, B)
-                    } else {
-                        ctx.lineTo(Rg, Hb - RTi)
-                        ctx.arcTo(Rg, Hb, Rg - RTi, Hb, RTi)
-                        ctx.lineTo(L + RTi, Hb)
-                        ctx.arcTo(L, Hb, L, Hb - RTi, RTi)
-                    }
-
-                    ctx.lineTo(L, T + RTi)
-                    ctx.arcTo(L, T, L + RTi, T, RTi)
-                    ctx.closePath()
-                }
-            }
-
-            drawTopBorder()
 
             const key = SettingsData.dankBarBorderColor || "surfaceText"
             const base = (key === "surfaceText") ? Theme.surfaceText
@@ -382,8 +332,74 @@ Item {
             const color = Theme.withAlpha(base, SettingsData.dankBarBorderOpacity ?? 1.0)
 
             ctx.globalCompositeOperation = "source-over"
-            ctx.strokeStyle = color
-            ctx.stroke()
+            ctx.fillStyle = color
+
+            function drawTopBorder() {
+                if (!hasEdgeGap) {
+                    ctx.beginPath()
+                    ctx.rect(0, H - devThickness, W, devThickness)
+                    ctx.fill()
+                } else {
+                    const thk = devThickness
+                    const RTi = Math.max(0, RT - thk)
+                    const Ri = Math.max(0, R - thk)
+
+                    ctx.beginPath()
+
+                    if (R > 0 && Ri > 0) {
+                        ctx.moveTo(RT, 0)
+                        ctx.lineTo(W - RT, 0)
+                        ctx.arcTo(W, 0, W, RT, RT)
+                        ctx.lineTo(W, H)
+                        ctx.lineTo(W, H + R)
+                        ctx.arc(W - R, H + R, R, 0, -Math.PI / 2, true)
+                        ctx.lineTo(R, H)
+                        ctx.arc(R, H + R, R, -Math.PI / 2, -Math.PI, true)
+                        ctx.lineTo(0, H + R)
+                        ctx.lineTo(0, RT)
+                        ctx.arcTo(0, 0, RT, 0, RT)
+                        ctx.closePath()
+
+                        ctx.moveTo(RT, thk)
+                        ctx.arcTo(thk, thk, thk, RT, RTi)
+                        ctx.lineTo(thk, H + R)
+                        ctx.arc(R, H + R, Ri, -Math.PI, -Math.PI / 2, false)
+                        ctx.lineTo(W - R, H + thk)
+                        ctx.arc(W - R, H + R, Ri, -Math.PI / 2, 0, false)
+                        ctx.lineTo(W - thk, H + R)
+                        ctx.lineTo(W - thk, RT)
+                        ctx.arcTo(W - thk, thk, W - RT, thk, RTi)
+                        ctx.lineTo(RT, thk)
+                        ctx.closePath()
+                    } else {
+                        ctx.moveTo(RT, 0)
+                        ctx.lineTo(W - RT, 0)
+                        ctx.arcTo(W, 0, W, RT, RT)
+                        ctx.lineTo(W, H - RT)
+                        ctx.arcTo(W, H, W - RT, H, RT)
+                        ctx.lineTo(RT, H)
+                        ctx.arcTo(0, H, 0, H - RT, RT)
+                        ctx.lineTo(0, RT)
+                        ctx.arcTo(0, 0, RT, 0, RT)
+                        ctx.closePath()
+
+                        ctx.moveTo(RT, thk)
+                        ctx.arcTo(thk, thk, thk, RT, RTi)
+                        ctx.lineTo(thk, H - RT)
+                        ctx.arcTo(thk, H - thk, RT, H - thk, RTi)
+                        ctx.lineTo(W - RT, H - thk)
+                        ctx.arcTo(W - thk, H - thk, W - thk, H - RT, RTi)
+                        ctx.lineTo(W - thk, RT)
+                        ctx.arcTo(W - thk, thk, W - RT, thk, RTi)
+                        ctx.lineTo(RT, thk)
+                        ctx.closePath()
+                    }
+
+                    ctx.fill("evenodd")
+                }
+            }
+
+            drawTopBorder()
             ctx.restore()
         }
     }
