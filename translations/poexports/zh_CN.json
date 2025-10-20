@@ -71,6 +71,9 @@
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "始终显示 OSD 百分比"
   },
+  "Always show a minimum of 3 workspaces, even if fewer are available": {
+    "Always show a minimum of 3 workspaces, even if fewer are available": ""
+  },
   "Animation Speed": {
     "Animation Speed": "动画速度"
   },
@@ -79,6 +82,9 @@
   },
   "App Launcher": {
     "App Launcher": "启动器"
+  },
+  "Application Dock": {
+    "Application Dock": ""
   },
   "Applications": {
     "Applications": "应用程序"
@@ -91,6 +97,9 @@
   },
   "Apply Qt Colors": {
     "Apply Qt Colors": "应用 Qt 配色"
+  },
+  "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.": {
+    "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.": ""
   },
   "Apps Icon": {
     "Apps Icon": "应用图标"
@@ -185,6 +194,9 @@
   "Back": {
     "Back": "返回"
   },
+  "Balanced palette with focused accents (default).": {
+    "Balanced palette with focused accents (default).": ""
+  },
   "Battery": {
     "Battery": "电池"
   },
@@ -214,6 +226,15 @@
   },
   "Border Thickness": {
     "Border Thickness": "边框厚度"
+  },
+  "Bottom": {
+    "Bottom": ""
+  },
+  "Bottom Section": {
+    "Bottom Section": ""
+  },
+  "Bottom dock for pinned and running applications": {
+    "Bottom dock for pinned and running applications": ""
   },
   "Brightness": {
     "Brightness": "亮度"
@@ -298,6 +319,9 @@
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "夜间模式色温"
+  },
+  "Colorful mix of bright contrasting accents.": {
+    "Colorful mix of bright contrasting accents.": ""
   },
   "Command or script to run instead of the standard hibernate procedure": {
     "Command or script to run instead of the standard hibernate procedure": "用于替代标准休眠流程的命令或脚本"
@@ -446,6 +470,12 @@
   "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": {
     "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": "Del: 清除 • Shift+Del: 清空 • 1-9: 操作 • F10: 帮助 • Esc: 关闭"
   },
+  "Derives colors that closely match the underlying image.": {
+    "Derives colors that closely match the underlying image.": ""
+  },
+  "Desktop background images": {
+    "Desktop background images": ""
+  },
   "Development": {
     "Development": "开发"
   },
@@ -467,6 +497,9 @@
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "应用全屏时仍显示所有优先级的通知"
   },
+  "Display application icons in workspace indicators": {
+    "Display application icons in workspace indicators": ""
+  },
   "Display currently focused application title": {
     "Display currently focused application title": "显示当前聚焦应用的标题"
   },
@@ -478,6 +511,9 @@
   },
   "Displays the active keyboard layout and allows switching": {
     "Displays the active keyboard layout and allows switching": "显示当前键盘布局并支持切换"
+  },
+  "Diverse palette spanning the full spectrum.": {
+    "Diverse palette spanning the full spectrum.": ""
   },
   "Do Not Disturb": {
     "Do Not Disturb": "勿扰模式"
@@ -496,6 +532,9 @@
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖动组件以在各区块内重新排序。点击眼睛图标可隐藏/显示组件（保留间距），点击 X 可彻底移除。"
+  },
+  "Duration": {
+    "Duration": ""
   },
   "Dynamic Theming": {
     "Dynamic Theming": "动态主题"
@@ -620,6 +659,9 @@
   "Gamma Control": {
     "Gamma Control": "伽马控制"
   },
+  "Geoclue service not running - cannot auto-detect location": {
+    "Geoclue service not running - cannot auto-detect location": ""
+  },
   "Github:": {
     "Github:": "Github:"
   },
@@ -655,6 +697,12 @@
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "在未使用时隐藏程序坞，鼠标悬停到程序坞区域时显示"
+  },
+  "High-contrast palette for strong visual distinction.": {
+    "High-contrast palette for strong visual distinction.": ""
+  },
+  "High-fidelity palette that preserves source hues.": {
+    "High-fidelity palette that preserves source hues.": ""
   },
   "Hour": {
     "Hour": "小时"
@@ -716,6 +764,21 @@
   "Language:": {
     "Language:": "开发语言："
   },
+  "Last launched %1": {
+    "Last launched %1": ""
+  },
+  "Last launched %1 day%2 ago": {
+    "Last launched %1 day%2 ago": ""
+  },
+  "Last launched %1 hour%2 ago": {
+    "Last launched %1 hour%2 ago": ""
+  },
+  "Last launched %1 minute%2 ago": {
+    "Last launched %1 minute%2 ago": ""
+  },
+  "Last launched just now": {
+    "Last launched just now": ""
+  },
   "Latitude": {
     "Latitude": "纬度"
   },
@@ -737,11 +800,17 @@
   "Left": {
     "Left": "左"
   },
+  "Left Section": {
+    "Left Section": ""
+  },
   "Light Mode": {
     "Light Mode": "浅色模式"
   },
   "Lines: %1": {
     "Lines: %1": "行数: %1"
+  },
+  "Lively palette with saturated accents.": {
+    "Lively palette with saturated accents.": ""
   },
   "Loading plugins...": {
     "Loading plugins...": "正在加载插件…..."
@@ -815,6 +884,9 @@
   "Memory usage indicator": {
     "Memory usage indicator": "内存占用情况"
   },
+  "Minimal palette built around a single hue.": {
+    "Minimal palette built around a single hue.": ""
+  },
   "Minute": {
     "Minute": "分钟"
   },
@@ -832,6 +904,9 @@
   },
   "Mount": {
     "Mount": "挂载"
+  },
+  "Muted palette with subdued, calming tones.": {
+    "Muted palette with subdued, calming tones.": ""
   },
   "NM not supported": {
     "NM not supported": "不支持 NM"
@@ -917,6 +992,9 @@
   "Notepad Font Settings": {
     "Notepad Font Settings": "便签字体设置"
   },
+  "Notepad Slideout": {
+    "Notepad Slideout": ""
+  },
   "Nothing to see here": {
     "Nothing to see here": "空空如也"
   },
@@ -935,6 +1013,9 @@
   "Notification Timeouts": {
     "Notification Timeouts": "显示时长"
   },
+  "Notification toast popups": {
+    "Notification toast popups": ""
+  },
   "Notifications": {
     "Notifications": "通知"
   },
@@ -946,6 +1027,12 @@
   },
   "Office": {
     "Office": "办公"
+  },
+  "On-Screen Displays": {
+    "On-Screen Displays": ""
+  },
+  "Only adjust gamma based on time or location rules.": {
+    "Only adjust gamma based on time or location rules.": ""
   },
   "Opacity": {
     "Opacity": "不透明度"
@@ -1073,11 +1160,11 @@
   "Quick access to notepad": {
     "Quick access to notepad": "快捷访问剪切板"
   },
+  "Quick note-taking slideout panel": {
+    "Quick note-taking slideout panel": ""
+  },
   "Rain Chance": {
     "Rain Chance": "降雨概率"
-  },
-  "Realm / Domain (optional)": {
-    "Realm / Domain (optional)": "Realm /域（可选）"
   },
   "Reboot": {
     "Reboot": "重启"
@@ -1099,6 +1186,12 @@
   },
   "Reset": {
     "Reset": "重置"
+  },
+  "Right": {
+    "Right": ""
+  },
+  "Right Section": {
+    "Right Section": ""
   },
   "Run User Templates": {
     "Run User Templates": "运行用户模板"
@@ -1133,6 +1226,9 @@
   "Science": {
     "Science": "科学"
   },
+  "Scroll through windows, rather than workspaces": {
+    "Scroll through windows, rather than workspaces": ""
+  },
   "Search for a location...": {
     "Search for a location...": "搜索位置..."
   },
@@ -1147,6 +1243,9 @@
   },
   "Select a color from the palette or use custom sliders": {
     "Select a color from the palette or use custom sliders": "从调色板中选择颜色，或使用自定义滑块"
+  },
+  "Select a preset or drag the slider to customize": {
+    "Select a preset or drag the slider to customize": ""
   },
   "Select a widget to add to the ": {
     "Select a widget to add to the ": "选择一个小组件添加到 "
@@ -1169,14 +1268,14 @@
   "Select system sound theme": {
     "Select system sound theme": "选择系统声音主题"
   },
+  "Select the palette algorithm used for wallpaper-based colors": {
+    "Select the palette algorithm used for wallpaper-based colors": ""
+  },
   "Select which transitions to include in randomization": {
     "Select which transitions to include in randomization": "选择在随机轮换中使用的过渡效果"
   },
   "Separator": {
     "Separator": "分隔符"
-  },
-  "Server Domain for certificate (optional)": {
-    "Server Domain for certificate (optional)": "证书的服务器域（可选）"
   },
   "Set different wallpapers for each connected monitor": {
     "Set different wallpapers for each connected monitor": "分别为各个显示器设置壁纸"
@@ -1214,6 +1313,12 @@
   "Show on screens:": {
     "Show on screens:": "选择显示的屏幕："
   },
+  "Show only apps running in current workspace": {
+    "Show only apps running in current workspace": ""
+  },
+  "Show only workspaces belonging to each specific monitor.": {
+    "Show only workspaces belonging to each specific monitor.": ""
+  },
   "Show password": {
     "Show password": "显示密码"
   },
@@ -1225,6 +1330,9 @@
   },
   "Show weather information in top bar and control center": {
     "Show weather information in top bar and control center": "在顶栏和控制中心显示天气信息"
+  },
+  "Show workspace index numbers in the top bar workspace switcher": {
+    "Show workspace index numbers in the top bar workspace switcher": ""
   },
   "Shows all running applications with focus indication": {
     "Shows all running applications with focus indication": "显示所有正在运行应用程序，并标记焦点所在"
@@ -1316,8 +1424,17 @@
   "System Updates": {
     "System Updates": "系统更新"
   },
+  "System bar with widgets and system information": {
+    "System bar with widgets and system information": ""
+  },
   "System notification area icons": {
     "System notification area icons": "系统通知区域图标"
+  },
+  "System toast notifications": {
+    "System toast notifications": ""
+  },
+  "System tray icons": {
+    "System tray icons": ""
   },
   "System update custom command": {
     "System update custom command": "自定义系统更新命令"
@@ -1370,6 +1487,9 @@
   "To update, run the following command:": {
     "To update, run the following command:": "请运行以下命令以更新："
   },
+  "Toast Messages": {
+    "Toast Messages": ""
+  },
   "Today": {
     "Today": "今日"
   },
@@ -1379,8 +1499,14 @@
   "Tomorrow": {
     "Tomorrow": "明日"
   },
+  "Top": {
+    "Top": ""
+  },
   "Top Bar Format": {
     "Top Bar Format": "顶栏格式"
+  },
+  "Top Section": {
+    "Top Section": ""
   },
   "Transition Effect": {
     "Transition Effect": "过渡效果"
@@ -1424,6 +1550,12 @@
   "Use System Theme": {
     "Use System Theme": "使用系统主题"
   },
+  "Use animated wave progress bars for media playback": {
+    "Use animated wave progress bars for media playback": ""
+  },
+  "Use automatic location detection (geoclue2)": {
+    "Use automatic location detection (geoclue2)": ""
+  },
   "Use custom command for update your system": {
     "Use custom command for update your system": "使用自定义命令来更新系统"
   },
@@ -1460,6 +1592,9 @@
   "VPN status and quick connect": {
     "VPN status and quick connect": "VPN 状态与快速连接"
   },
+  "Vibrant palette with playful saturation.": {
+    "Vibrant palette with playful saturation.": ""
+  },
   "Visibility": {
     "Visibility": "能见度"
   },
@@ -1471,6 +1606,9 @@
   },
   "Volume Changed": {
     "Volume Changed": "音量变化"
+  },
+  "Volume, brightness, and other system OSDs": {
+    "Volume, brightness, and other system OSDs": ""
   },
   "Wallpaper": {
     "Wallpaper": "壁纸"
