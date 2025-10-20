@@ -1620,6 +1620,7 @@ Item {
             browserTitle: "Select Wallpaper"
             browserIcon: "wallpaper"
             browserType: "wallpaper"
+            showHiddenFiles: true
             fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
             onFileSelected: path => {
                                 if (SessionData.perMonitorWallpaper) {
