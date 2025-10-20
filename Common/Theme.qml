@@ -313,6 +313,61 @@ Singleton {
     property int standardEasing: Easing.OutCubic
     property int emphasizedEasing: Easing.OutQuart
 
+    readonly property var expressiveCurves: {
+        "emphasized": [0.05, 0, 2 / 15, 0.06, 1 / 6, 0.4, 5 / 24, 0.82, 0.25, 1, 1, 1],
+        "emphasizedAccel": [0.3, 0, 0.8, 0.15, 1, 1],
+        "emphasizedDecel": [0.05, 0.7, 0.1, 1, 1, 1],
+        "standard": [0.2, 0, 0, 1, 1, 1],
+        "standardAccel": [0.3, 0, 1, 1, 1, 1],
+        "standardDecel": [0, 0, 0, 1, 1, 1],
+        "expressiveFastSpatial": [0.42, 1.67, 0.21, 0.9, 1, 1],
+        "expressiveDefaultSpatial": [0.38, 1.21, 0.22, 1, 1, 1],
+        "expressiveEffects": [0.34, 0.8, 0.34, 1, 1, 1]
+    }
+
+    readonly property var animationPresetDurations: {
+        "none": 0,
+        "short": 250,
+        "medium": 500,
+        "long": 750
+    }
+
+    readonly property int currentAnimationBaseDuration: {
+        if (typeof SettingsData === "undefined") return 500
+        
+        if (SettingsData.animationSpeed === SettingsData.AnimationSpeed.Custom) {
+            return SettingsData.customAnimationDuration
+        }
+        
+        const presetMap = [0, 250, 500, 750]
+        return presetMap[SettingsData.animationSpeed] !== undefined ? presetMap[SettingsData.animationSpeed] : 500
+    }
+
+    readonly property var expressiveDurations: {
+        if (typeof SettingsData === "undefined") {
+            return {
+                "fast": 200,
+                "normal": 400,
+                "large": 600,
+                "extraLarge": 1000,
+                "expressiveFastSpatial": 350,
+                "expressiveDefaultSpatial": 500,
+                "expressiveEffects": 200
+            }
+        }
+
+        const baseDuration = currentAnimationBaseDuration
+        return {
+            "fast": baseDuration * 0.4,
+            "normal": baseDuration * 0.8,
+            "large": baseDuration * 1.2,
+            "extraLarge": baseDuration * 2.0,
+            "expressiveFastSpatial": baseDuration * 0.7,
+            "expressiveDefaultSpatial": baseDuration,
+            "expressiveEffects": baseDuration * 0.4
+        }
+    }
+
     property real cornerRadius: typeof SettingsData !== "undefined" ? SettingsData.cornerRadius : 12
     property real spacingXS: 4
     property real spacingS: 8
