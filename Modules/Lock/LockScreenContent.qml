@@ -324,9 +324,6 @@ Item {
                         onAccepted: {
                             if (!demoMode && !pam.passwd.active) {
                                 console.log("Enter pressed, starting PAM authentication")
-                                if (pam.fprint.active) {
-                                    pam.fprint.abort()
-                                }
                                 pam.passwd.start()
                             }
                         }
@@ -574,9 +571,6 @@ Item {
                         onClicked: {
                             if (!demoMode) {
                                 console.log("Enter button clicked, starting PAM authentication")
-                                if (pam.fprint.active) {
-                                    pam.fprint.abort()
-                                }
                                 pam.passwd.start()
                             }
                         }
