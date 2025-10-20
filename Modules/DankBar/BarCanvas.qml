@@ -306,38 +306,6 @@ Item {
             const spacing = SettingsData.dankBarSpacing
             const hasEdgeGap = spacing > 0 || RT > 0
 
-            function drawTopBorder() {
-                ctx.beginPath()
-
-                if (!hasEdgeGap) {
-                    ctx.moveTo(0, H)
-                    ctx.lineTo(W, H)
-                } else {
-                    ctx.moveTo(RT, 0)
-                    ctx.lineTo(W - RT, 0)
-                    ctx.arcTo(W, 0, W, RT, RT)
-                    ctx.lineTo(W, H)
-
-                    if (R > 0) {
-                        ctx.lineTo(W, H + R)
-                        ctx.arc(W - R, H + R, R, 0, -Math.PI / 2, true)
-                        ctx.lineTo(R, H)
-                        ctx.arc(R, H + R, R, -Math.PI / 2, -Math.PI, true)
-                        ctx.lineTo(0, H + R)
-                    } else {
-                        ctx.lineTo(W, H - RT)
-                        ctx.arcTo(W, H, W - RT, H, RT)
-                        ctx.lineTo(RT, H)
-                        ctx.arcTo(0, H, 0, H - RT, RT)
-                    }
-
-                    ctx.lineTo(0, RT)
-                    ctx.arcTo(0, 0, RT, 0, RT)
-                }
-
-                ctx.closePath()
-            }
-
             ctx.reset()
             ctx.clearRect(0, 0, W, H_raw)
 
@@ -353,20 +321,70 @@ Item {
                 ctx.rotate(Math.PI / 2)
             }
 
+            const uiThickness = Math.max(1, SettingsData.dankBarBorderThickness ?? 1)
+            const devThickness = Math.max(1, Math.round(Theme.px(uiThickness, dpr)))
+            ctx.lineWidth = devThickness
+            ctx.lineCap = "butt"
+            ctx.lineJoin = "miter"
+            ctx.miterLimit = 4
+
+            const odd = (devThickness % 2) === 1
+            const snap = odd ? 0.5 : 0.0
+
+            function drawTopBorder() {
+                ctx.beginPath()
+
+                if (!hasEdgeGap) {
+                    const y = H - devThickness / 2
+                    ctx.moveTo(0, y)
+                    ctx.lineTo(W, y)
+                } else {
+                    const half = devThickness / 2
+                    const L  = half
+                    const T  = half
+                    const Rg = W - half
+                    const Hb = H - half
+                    const B  = (R > 0) ? (H + R - half) : (H - half)
+                    const RTi = Math.max(0, RT - half)
+                    const Ri  = Math.max(0, R  - half)
+
+                    ctx.moveTo(L + RTi, T)
+                    ctx.lineTo(Rg - RTi, T)
+                    ctx.arcTo(Rg, T, Rg, T + RTi, RTi)
+
+                    ctx.lineTo(Rg, Hb)
+
+                    if (R > 0 && Ri > 0) {
+                        ctx.lineTo(Rg, B)
+                        ctx.arc(Rg - Ri, B, Ri, 0, -Math.PI/2, true)
+                        ctx.lineTo(L + Ri, Hb)
+                        ctx.arc(L + Ri, B, Ri, -Math.PI/2, -Math.PI, true)
+                        ctx.lineTo(L, B)
+                    } else {
+                        ctx.lineTo(Rg, Hb - RTi)
+                        ctx.arcTo(Rg, Hb, Rg - RTi, Hb, RTi)
+                        ctx.lineTo(L + RTi, Hb)
+                        ctx.arcTo(L, Hb, L, Hb - RTi, RTi)
+                    }
+
+                    ctx.lineTo(L, T + RTi)
+                    ctx.arcTo(L, T, L + RTi, T, RTi)
+                    ctx.closePath()
+                }
+            }
+
             drawTopBorder()
-            ctx.restore()
 
             const key = SettingsData.dankBarBorderColor || "surfaceText"
             const base = (key === "surfaceText") ? Theme.surfaceText
                        : (key === "primary") ? Theme.primary
                        : Theme.secondary
             const color = Theme.withAlpha(base, SettingsData.dankBarBorderOpacity ?? 1.0)
-            const thickness = Math.max(1, SettingsData.dankBarBorderThickness ?? 1)
 
             ctx.globalCompositeOperation = "source-over"
-            ctx.lineWidth = thickness
             ctx.strokeStyle = color
             ctx.stroke()
+            ctx.restore()
         }
     }
 }
