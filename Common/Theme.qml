@@ -195,14 +195,16 @@ Singleton {
     }
 
     readonly property var availableMatugenSchemes: [
-        ({ "value": "scheme-tonal-spot", "label": "Tonal Spot", "description": "Balanced palette with focused accents (default)." }),
-        ({ "value": "scheme-content", "label": "Content", "description": "Derives colors that closely match the underlying image." }),
-        ({ "value": "scheme-expressive", "label": "Expressive", "description": "Vibrant palette with playful saturation." }),
-        ({ "value": "scheme-fidelity", "label": "Fidelity", "description": "High-fidelity palette that preserves source hues." }),
-        ({ "value": "scheme-fruit-salad", "label": "Fruit Salad", "description": "Colorful mix of bright contrasting accents." }),
-        ({ "value": "scheme-monochrome", "label": "Monochrome", "description": "Minimal palette built around a single hue." }),
-        ({ "value": "scheme-neutral", "label": "Neutral", "description": "Muted palette with subdued, calming tones." }),
-        ({ "value": "scheme-rainbow", "label": "Rainbow", "description": "Diverse palette spanning the full spectrum." })
+        ({ "value": "scheme-tonal-spot", "label": "Tonal Spot", "description": I18n.tr("Balanced palette with focused accents (default).") }),
+        ({ "value": "scheme-vibrant-spot", "label": "Vibrant Spot", "description": I18n.tr("Lively palette with saturated accents.") }),
+        ({ "value": "scheme-dynamic-contrast", "label": "Dynamic Contrast", "description": I18n.tr("High-contrast palette for strong visual distinction.") }),
+        ({ "value": "scheme-content", "label": "Content", "description": I18n.tr("Derives colors that closely match the underlying image.") }),
+        ({ "value": "scheme-expressive", "label": "Expressive", "description": I18n.tr("Vibrant palette with playful saturation.") }),
+        ({ "value": "scheme-fidelity", "label": "Fidelity", "description": I18n.tr("High-fidelity palette that preserves source hues.") }),
+        ({ "value": "scheme-fruit-salad", "label": "Fruit Salad", "description": I18n.tr("Colorful mix of bright contrasting accents.") }),
+        ({ "value": "scheme-monochrome", "label": "Monochrome", "description": I18n.tr("Minimal palette built around a single hue.") }),
+        ({ "value": "scheme-neutral", "label": "Neutral", "description": I18n.tr("Muted palette with subdued, calming tones.") }),
+        ({ "value": "scheme-rainbow", "label": "Rainbow", "description": I18n.tr("Diverse palette spanning the full spectrum.") })
     ]
 
     function getMatugenScheme(value) {

@@ -144,6 +144,12 @@
     "comment": ""
   },
   {
+    "term": "Always show a minimum of 3 workspaces, even if fewer are available",
+    "context": "Always show a minimum of 3 workspaces, even if fewer are available",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
+    "comment": ""
+  },
+  {
     "term": "Animation Speed",
     "context": "Animation Speed",
     "reference": "Modules/Settings/PersonalizationTab.qml:1047",
@@ -159,6 +165,12 @@
     "term": "App Launcher",
     "context": "App Launcher",
     "reference": "Modules/Settings/DankBarTab.qml:25",
+    "comment": ""
+  },
+  {
+    "term": "Application Dock",
+    "context": "Application Dock",
+    "reference": "Modules/Settings/DisplaysTab.qml:19",
     "comment": ""
   },
   {
@@ -183,6 +195,12 @@
     "term": "Apply Qt Colors",
     "context": "Apply Qt Colors",
     "reference": "Modules/Settings/ThemeColorsTab.qml:1378",
+    "comment": ""
+  },
+  {
+    "term": "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.",
+    "context": "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.",
+    "reference": "Modules/Settings/DisplaysTab.qml:119",
     "comment": ""
   },
   {
@@ -372,6 +390,12 @@
     "comment": ""
   },
   {
+    "term": "Balanced palette with focused accents (default).",
+    "context": "Balanced palette with focused accents (default).",
+    "reference": "Common/Theme.qml:198",
+    "comment": ""
+  },
+  {
     "term": "Battery",
     "context": "Battery",
     "reference": "Modules/Settings/DankBarTab.qml:132",
@@ -429,6 +453,24 @@
     "term": "Border Thickness",
     "context": "Border Thickness",
     "reference": "Modules/Settings/DankBarTab.qml:1449, Modules/Settings/DankBarTab.qml:1463",
+    "comment": ""
+  },
+  {
+    "term": "Bottom",
+    "context": "Bottom",
+    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "comment": ""
+  },
+  {
+    "term": "Bottom Section",
+    "context": "Bottom Section",
+    "reference": "Modules/Settings/DankBarTab.qml:1895",
+    "comment": ""
+  },
+  {
+    "term": "Bottom dock for pinned and running applications",
+    "context": "Bottom dock for pinned and running applications",
+    "reference": "Modules/Settings/DisplaysTab.qml:20",
     "comment": ""
   },
   {
@@ -597,6 +639,12 @@
     "term": "Color temperature for night mode",
     "context": "Color temperature for night mode",
     "reference": "Modules/Settings/DisplaysTab.qml:143",
+    "comment": ""
+  },
+  {
+    "term": "Colorful mix of bright contrasting accents.",
+    "context": "Colorful mix of bright contrasting accents.",
+    "reference": "Common/Theme.qml:204",
     "comment": ""
   },
   {
@@ -894,6 +942,18 @@
     "comment": ""
   },
   {
+    "term": "Derives colors that closely match the underlying image.",
+    "context": "Derives colors that closely match the underlying image.",
+    "reference": "Common/Theme.qml:201",
+    "comment": ""
+  },
+  {
+    "term": "Desktop background images",
+    "context": "Desktop background images",
+    "reference": "Modules/Settings/DisplaysTab.qml:30",
+    "comment": ""
+  },
+  {
     "term": "Development",
     "context": "Development",
     "reference": "Services/AppSearchService.qml:161, Services/AppSearchService.qml:162, Services/AppSearchService.qml:163, Widgets/DankIconPicker.qml:31",
@@ -936,6 +996,12 @@
     "comment": ""
   },
   {
+    "term": "Display application icons in workspace indicators",
+    "context": "Display application icons in workspace indicators",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:93",
+    "comment": ""
+  },
+  {
     "term": "Display currently focused application title",
     "context": "Display currently focused application title",
     "reference": "Modules/Settings/DankBarTab.qml:38",
@@ -957,6 +1023,12 @@
     "term": "Displays the active keyboard layout and allows switching",
     "context": "Displays the active keyboard layout and allows switching",
     "reference": "Modules/Settings/DankBarTab.qml:171",
+    "comment": ""
+  },
+  {
+    "term": "Diverse palette spanning the full spectrum.",
+    "context": "Diverse palette spanning the full spectrum.",
+    "reference": "Common/Theme.qml:207",
     "comment": ""
   },
   {
@@ -1248,6 +1320,12 @@
     "comment": ""
   },
   {
+    "term": "Geoclue service not running - cannot auto-detect location",
+    "context": "Geoclue service not running - cannot auto-detect location",
+    "reference": "Modules/Settings/DisplaysTab.qml:365",
+    "comment": ""
+  },
+  {
     "term": "Github:",
     "context": "Github:",
     "reference": "Modules/Settings/AboutTab.qml:413",
@@ -1317,6 +1395,18 @@
     "term": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "context": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "reference": "Modules/Settings/DockTab.qml:135",
+    "comment": ""
+  },
+  {
+    "term": "High-contrast palette for strong visual distinction.",
+    "context": "High-contrast palette for strong visual distinction.",
+    "reference": "Common/Theme.qml:200",
+    "comment": ""
+  },
+  {
+    "term": "High-fidelity palette that preserves source hues.",
+    "context": "High-fidelity palette that preserves source hues.",
+    "reference": "Common/Theme.qml:203",
     "comment": ""
   },
   {
@@ -1440,6 +1530,36 @@
     "comment": ""
   },
   {
+    "term": "Last launched %1",
+    "context": "Last launched %1",
+    "reference": "Modules/Settings/LauncherTab.qml:708",
+    "comment": ""
+  },
+  {
+    "term": "Last launched %1 day%2 ago",
+    "context": "Last launched %1 day%2 ago",
+    "reference": "Modules/Settings/LauncherTab.qml:704",
+    "comment": ""
+  },
+  {
+    "term": "Last launched %1 hour%2 ago",
+    "context": "Last launched %1 hour%2 ago",
+    "reference": "Modules/Settings/LauncherTab.qml:699",
+    "comment": ""
+  },
+  {
+    "term": "Last launched %1 minute%2 ago",
+    "context": "Last launched %1 minute%2 ago",
+    "reference": "Modules/Settings/LauncherTab.qml:694",
+    "comment": ""
+  },
+  {
+    "term": "Last launched just now",
+    "context": "Last launched just now",
+    "reference": "Modules/Settings/LauncherTab.qml:691",
+    "comment": ""
+  },
+  {
     "term": "Latitude",
     "context": "Latitude",
     "reference": "Modules/Settings/DisplaysTab.qml:398, Modules/Settings/TimeWeatherTab.qml:665",
@@ -1478,7 +1598,13 @@
   {
     "term": "Left",
     "context": "Left",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:537",
+    "reference": "Modules/Settings/DankBarTab.qml:708, Modules/DankBar/Popouts/BatteryPopout.qml:537",
+    "comment": ""
+  },
+  {
+    "term": "Left Section",
+    "context": "Left Section",
+    "reference": "Modules/Settings/DankBarTab.qml:1743",
     "comment": ""
   },
   {
@@ -1491,6 +1617,12 @@
     "term": "Lines: %1",
     "context": "Lines: %1",
     "reference": "Modules/Notepad/NotepadTextEditor.qml:571",
+    "comment": ""
+  },
+  {
+    "term": "Lively palette with saturated accents.",
+    "context": "Lively palette with saturated accents.",
+    "reference": "Common/Theme.qml:199",
     "comment": ""
   },
   {
@@ -1638,6 +1770,12 @@
     "comment": ""
   },
   {
+    "term": "Minimal palette built around a single hue.",
+    "context": "Minimal palette built around a single hue.",
+    "reference": "Common/Theme.qml:205",
+    "comment": ""
+  },
+  {
     "term": "Minute",
     "context": "Minute",
     "reference": "Modules/Settings/DisplaysTab.qml:260",
@@ -1671,6 +1809,12 @@
     "term": "Mount",
     "context": "Mount",
     "reference": "Modules/ProcessList/SystemTab.qml:445",
+    "comment": ""
+  },
+  {
+    "term": "Muted palette with subdued, calming tones.",
+    "context": "Muted palette with subdued, calming tones.",
+    "reference": "Common/Theme.qml:206",
     "comment": ""
   },
   {
@@ -1842,6 +1986,12 @@
     "comment": ""
   },
   {
+    "term": "Notepad Slideout",
+    "context": "Notepad Slideout",
+    "reference": "Modules/Settings/DisplaysTab.qml:44",
+    "comment": ""
+  },
+  {
     "term": "Nothing to see here",
     "context": "Nothing to see here",
     "reference": "Modules/Notifications/Center/NotificationEmptyState.qml:27",
@@ -1862,7 +2012,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:585",
+    "reference": "Modules/Settings/DisplaysTab.qml:24, Modules/Settings/WidgetTweaksTab.qml:585",
     "comment": ""
   },
   {
@@ -1875,6 +2025,12 @@
     "term": "Notification Timeouts",
     "context": "Notification Timeouts",
     "reference": "Modules/Notifications/Center/NotificationSettings.qml:153",
+    "comment": ""
+  },
+  {
+    "term": "Notification toast popups",
+    "context": "Notification toast popups",
+    "reference": "Modules/Settings/DisplaysTab.qml:25",
     "comment": ""
   },
   {
@@ -1899,6 +2055,18 @@
     "term": "Office",
     "context": "Office",
     "reference": "Services/AppSearchService.qml:171, Services/AppSearchService.qml:172, Services/AppSearchService.qml:173, Services/AppSearchService.qml:174",
+    "comment": ""
+  },
+  {
+    "term": "On-Screen Displays",
+    "context": "On-Screen Displays",
+    "reference": "Modules/Settings/DisplaysTab.qml:34",
+    "comment": ""
+  },
+  {
+    "term": "Only adjust gamma based on time or location rules.",
+    "context": "Only adjust gamma based on time or location rules.",
+    "reference": "Modules/Settings/DisplaysTab.qml:163",
     "comment": ""
   },
   {
@@ -2154,6 +2322,12 @@
     "comment": ""
   },
   {
+    "term": "Quick note-taking slideout panel",
+    "context": "Quick note-taking slideout panel",
+    "reference": "Modules/Settings/DisplaysTab.qml:45",
+    "comment": ""
+  },
+  {
     "term": "Rain Chance",
     "context": "Rain Chance",
     "reference": "Modules/DankDash/WeatherTab.qml:448, Modules/Settings/TimeWeatherTab.qml:1275",
@@ -2199,6 +2373,18 @@
     "term": "Reset",
     "context": "Reset",
     "reference": "Modules/Settings/DankBarTab.qml:1675, Modules/ControlCenter/Components/EditControls.qml:227",
+    "comment": ""
+  },
+  {
+    "term": "Right",
+    "context": "Right",
+    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "comment": ""
+  },
+  {
+    "term": "Right Section",
+    "context": "Right Section",
+    "reference": "Modules/Settings/DankBarTab.qml:1895",
     "comment": ""
   },
   {
@@ -2265,6 +2451,12 @@
     "term": "Science",
     "context": "Science",
     "reference": "Services/AppSearchService.qml:175",
+    "comment": ""
+  },
+  {
+    "term": "Scroll through windows, rather than workspaces",
+    "context": "Scroll through windows, rather than workspaces",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:71",
     "comment": ""
   },
   {
@@ -2343,6 +2535,12 @@
     "term": "Select system sound theme",
     "context": "Select system sound theme",
     "reference": "Modules/Settings/PersonalizationTab.qml:1476",
+    "comment": ""
+  },
+  {
+    "term": "Select the palette algorithm used for wallpaper-based colors",
+    "context": "Select the palette algorithm used for wallpaper-based colors",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:630, Modules/Settings/PersonalizationTab.qml:1277",
     "comment": ""
   },
   {
@@ -2430,6 +2628,18 @@
     "comment": ""
   },
   {
+    "term": "Show only apps running in current workspace",
+    "context": "Show only apps running in current workspace",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:389",
+    "comment": ""
+  },
+  {
+    "term": "Show only workspaces belonging to each specific monitor.",
+    "context": "Show only workspaces belonging to each specific monitor.",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:146",
+    "comment": ""
+  },
+  {
     "term": "Show password",
     "context": "Show password",
     "reference": "Modals/WifiPasswordModal.qml:357",
@@ -2451,6 +2661,12 @@
     "term": "Show weather information in top bar and control center",
     "context": "Show weather information in top bar and control center",
     "reference": "Modules/Settings/TimeWeatherTab.qml:480",
+    "comment": ""
+  },
+  {
+    "term": "Show workspace index numbers in the top bar workspace switcher",
+    "context": "Show workspace index numbers in the top bar workspace switcher",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:61",
     "comment": ""
   },
   {
@@ -2612,7 +2828,7 @@
   {
     "term": "System Tray",
     "context": "System Tray",
-    "reference": "Modules/Settings/DankBarTab.qml:108",
+    "reference": "Modules/Settings/DisplaysTab.qml:49, Modules/Settings/DankBarTab.qml:108",
     "comment": ""
   },
   {
@@ -2634,9 +2850,27 @@
     "comment": ""
   },
   {
+    "term": "System bar with widgets and system information",
+    "context": "System bar with widgets and system information",
+    "reference": "Modules/Settings/DisplaysTab.qml:15",
+    "comment": ""
+  },
+  {
     "term": "System notification area icons",
     "context": "System notification area icons",
     "reference": "Modules/Settings/DankBarTab.qml:109",
+    "comment": ""
+  },
+  {
+    "term": "System toast notifications",
+    "context": "System toast notifications",
+    "reference": "Modules/Settings/DisplaysTab.qml:40",
+    "comment": ""
+  },
+  {
+    "term": "System tray icons",
+    "context": "System tray icons",
+    "reference": "Modules/Settings/DisplaysTab.qml:50",
     "comment": ""
   },
   {
@@ -2742,6 +2976,12 @@
     "comment": ""
   },
   {
+    "term": "Toast Messages",
+    "context": "Toast Messages",
+    "reference": "Modules/Settings/DisplaysTab.qml:39",
+    "comment": ""
+  },
+  {
     "term": "Today",
     "context": "Today",
     "reference": "Services/WeatherService.qml:169",
@@ -2760,9 +3000,21 @@
     "comment": ""
   },
   {
+    "term": "Top",
+    "context": "Top",
+    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "comment": ""
+  },
+  {
     "term": "Top Bar Format",
     "context": "Top Bar Format",
     "reference": "Modules/Settings/TimeWeatherTab.qml:189",
+    "comment": ""
+  },
+  {
+    "term": "Top Section",
+    "context": "Top Section",
+    "reference": "Modules/Settings/DankBarTab.qml:1743",
     "comment": ""
   },
   {
@@ -2850,6 +3102,18 @@
     "comment": ""
   },
   {
+    "term": "Use animated wave progress bars for media playback",
+    "context": "Use animated wave progress bars for media playback",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:194",
+    "comment": ""
+  },
+  {
+    "term": "Use automatic location detection (geoclue2)",
+    "context": "Use automatic location detection (geoclue2)",
+    "reference": "Modules/Settings/DisplaysTab.qml:365",
+    "comment": ""
+  },
+  {
     "term": "Use custom command for update your system",
     "context": "Use custom command for update your system",
     "reference": "Modules/Settings/WidgetTweaksTab.qml:241",
@@ -2922,6 +3186,12 @@
     "comment": ""
   },
   {
+    "term": "Vibrant palette with playful saturation.",
+    "context": "Vibrant palette with playful saturation.",
+    "reference": "Common/Theme.qml:202",
+    "comment": ""
+  },
+  {
     "term": "Visibility",
     "context": "Visibility",
     "reference": "Modules/DankDash/WeatherTab.qml:495, Modules/Settings/TimeWeatherTab.qml:1322",
@@ -2946,9 +3216,15 @@
     "comment": ""
   },
   {
+    "term": "Volume, brightness, and other system OSDs",
+    "context": "Volume, brightness, and other system OSDs",
+    "reference": "Modules/Settings/DisplaysTab.qml:35",
+    "comment": ""
+  },
+  {
     "term": "Wallpaper",
     "context": "Wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:110",
+    "reference": "Modules/Settings/DisplaysTab.qml:29, Modules/Settings/PersonalizationTab.qml:110",
     "comment": ""
   },
   {

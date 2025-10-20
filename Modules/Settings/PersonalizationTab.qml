@@ -1274,7 +1274,7 @@ Item {
                     DankDropdown {
                         id: personalizationMatugenPaletteDropdown
                         text: I18n.tr("Matugen Palette")
-                        description: "Select the palette algorithm used for wallpaper-based colors"
+                        description: I18n.tr("Select the palette algorithm used for wallpaper-based colors")
                         options: Theme.availableMatugenSchemes.map(function (option) { return option.label })
                         currentValue: Theme.getMatugenScheme(SettingsData.matugenScheme).label
                         enabled: Theme.matugenAvailable

@@ -12,42 +12,42 @@ Item {
     property var variantComponents: [{
         "id": "dankBar",
         "name": "Dank Bar",
-        "description": "System bar with widgets and system information",
+        "description": I18n.tr("System bar with widgets and system information"),
         "icon": "toolbar"
     }, {
         "id": "dock",
-        "name": "Application Dock",
-        "description": "Bottom dock for pinned and running applications",
+        "name": I18n.tr("Application Dock"),
+        "description": I18n.tr("Bottom dock for pinned and running applications"),
         "icon": "dock"
     }, {
         "id": "notifications",
-        "name": "Notification Popups",
-        "description": "Notification toast popups",
+        "name": I18n.tr("Notification Popups"),
+        "description": I18n.tr("Notification toast popups"),
         "icon": "notifications"
     }, {
         "id": "wallpaper",
-        "name": "Wallpaper",
-        "description": "Desktop background images",
+        "name": I18n.tr("Wallpaper"),
+        "description": I18n.tr("Desktop background images"),
         "icon": "wallpaper"
     }, {
         "id": "osd",
-        "name": "On-Screen Displays",
-        "description": "Volume, brightness, and other system OSDs",
+        "name": I18n.tr("On-Screen Displays"),
+        "description": I18n.tr("Volume, brightness, and other system OSDs"),
         "icon": "picture_in_picture"
     }, {
         "id": "toast",
-        "name": "Toast Messages",
-        "description": "System toast notifications",
+        "name": I18n.tr("Toast Messages"),
+        "description": I18n.tr("System toast notifications"),
         "icon": "campaign"
     }, {
         "id": "notepad",
-        "name": "Notepad Slideout",
-        "description": "Quick note-taking slideout panel",
+        "name": I18n.tr("Notepad Slideout"),
+        "description": I18n.tr("Quick note-taking slideout panel"),
         "icon": "sticky_note_2"
     }, {
         "id": "systemTray",
-        "name": "System Tray",
-        "description": "System tray icons",
+        "name": I18n.tr("System Tray"),
+        "description": I18n.tr("System tray icons"),
         "icon": "notifications"
     }]
 
@@ -116,7 +116,7 @@ Item {
 
                         width: parent.width
                         text: I18n.tr("Night Mode")
-                        description: "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates."
+                        description: I18n.tr("Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.")
                         checked: DisplayService.nightModeEnabled
                         onToggled: checked => {
                                        DisplayService.toggleNightMode()
@@ -160,7 +160,7 @@ Item {
                         id: automaticToggle
                         width: parent.width
                         text: I18n.tr("Automatic Control")
-                        description: "Only adjust gamma based on time or location rules."
+                        description: I18n.tr("Only adjust gamma based on time or location rules.")
                         checked: SessionData.nightModeAutoEnabled
                         onToggled: checked => {
                                        if (checked && !DisplayService.nightModeEnabled) {
@@ -362,7 +362,7 @@ Item {
                             DankToggle {
                                 width: parent.width
                                 text: I18n.tr("Auto-location")
-                                description: DisplayService.geoclueAvailable ? "Use automatic location detection (geoclue2)" : "Geoclue service not running - cannot auto-detect location"
+                                description: DisplayService.geoclueAvailable ? I18n.tr("Use automatic location detection (geoclue2)") : I18n.tr("Geoclue service not running - cannot auto-detect location")
                                 checked: SessionData.nightModeLocationProvider === "geoclue2"
                                 enabled: DisplayService.geoclueAvailable
                                 onToggled: checked => {
