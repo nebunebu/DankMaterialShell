@@ -816,6 +816,21 @@ Singleton {
 
     function withAlpha(c, a) { return Qt.rgba(c.r, c.g, c.b, a); }
 
+    function getFillMode(modeName) {
+        switch(modeName) {
+            case "Stretch": return Image.Stretch
+            case "Fit":
+            case "PreserveAspectFit": return Image.PreserveAspectFit
+            case "Fill":
+            case "PreserveAspectCrop": return Image.PreserveAspectCrop
+            case "Tile": return Image.Tile
+            case "TileVertically": return Image.TileVertically
+            case "TileHorizontally": return Image.TileHorizontally
+            case "Pad": return Image.Pad
+            default: return Image.PreserveAspectCrop
+        }
+    }
+
     function snap(value, dpr) {
         const s = dpr || 1
         return Math.round(value * s) / s

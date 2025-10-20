@@ -139,7 +139,7 @@ Item {
             }
             return (currentWallpaper && !currentWallpaper.startsWith("#")) ? currentWallpaper : ""
         }
-        fillMode: Image.PreserveAspectCrop
+        fillMode: Theme.getFillMode(SettingsData.wallpaperFillMode)
         smooth: true
         asynchronous: false
         cache: true
