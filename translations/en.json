@@ -38,7 +38,7 @@
   {
     "term": "24-hour format",
     "context": "24-hour format",
-    "reference": "Modules/Settings/PersonalizationTab.qml:837",
+    "reference": "Modules/Settings/PersonalizationTab.qml:887",
     "comment": ""
   },
   {
@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modals/Settings/SettingsSidebar.qml:42, Modules/Settings/AboutTab.qml:251",
+    "reference": "Modals/Settings/SettingsSidebar.qml:44, Modules/Settings/AboutTab.qml:251",
     "comment": ""
   },
   {
@@ -98,7 +98,7 @@
   {
     "term": "Add Widget",
     "context": "Add Widget",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:670, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:696, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
     "comment": ""
   },
   {
@@ -140,13 +140,13 @@
   {
     "term": "Always Show OSD Percentage",
     "context": "Always Show OSD Percentage",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:647",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:675",
     "comment": ""
   },
   {
     "term": "Animation Speed",
     "context": "Animation Speed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1170",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1047",
     "comment": ""
   },
   {
@@ -248,7 +248,7 @@
   {
     "term": "Audio Icon",
     "context": "Audio Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:861",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:887",
     "comment": ""
   },
   {
@@ -302,7 +302,7 @@
   {
     "term": "Automatic Cycling",
     "context": "Automatic Cycling",
-    "reference": "Modules/Settings/PersonalizationTab.qml:590",
+    "reference": "Modules/Settings/PersonalizationTab.qml:640",
     "comment": ""
   },
   {
@@ -314,7 +314,7 @@
   {
     "term": "Automatically cycle through wallpapers in the same folder",
     "context": "Automatically cycle through wallpapers in the same folder",
-    "reference": "Modules/Settings/PersonalizationTab.qml:597",
+    "reference": "Modules/Settings/PersonalizationTab.qml:647",
     "comment": ""
   },
   {
@@ -326,7 +326,7 @@
   {
     "term": "Automatically extract colors from wallpaper",
     "context": "Automatically extract colors from wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1028",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1251",
     "comment": ""
   },
   {
@@ -398,7 +398,7 @@
   {
     "term": "Bluetooth Icon",
     "context": "Bluetooth Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:808",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:834",
     "comment": ""
   },
   {
@@ -530,7 +530,7 @@
   {
     "term": "Choose where notification popups appear on screen",
     "context": "Choose where notification popups appear on screen",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:574",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:602",
     "comment": ""
   },
   {
@@ -578,7 +578,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modules/SystemUpdatePopout.qml:333, Modals/NetworkWiredInfoModal.qml:129, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:614",
+    "reference": "Modules/SystemUpdatePopout.qml:333, Modals/NetworkWiredInfoModal.qml:129, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:711",
     "comment": ""
   },
   {
@@ -644,7 +644,7 @@
   {
     "term": "Compact Mode",
     "context": "Compact Mode",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:483",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:509",
     "comment": ""
   },
   {
@@ -656,7 +656,7 @@
   {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "context": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:410",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:438",
     "comment": ""
   },
   {
@@ -836,13 +836,13 @@
   {
     "term": "Daily at:",
     "context": "Daily at:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:762",
+    "reference": "Modules/Settings/PersonalizationTab.qml:812",
     "comment": ""
   },
   {
     "term": "Dank Bar",
     "context": "Dank Bar",
-    "reference": "Modals/Settings/SettingsSidebar.qml:18",
+    "reference": "Modals/Settings/SettingsSidebar.qml:20",
     "comment": ""
   },
   {
@@ -944,13 +944,13 @@
   {
     "term": "Display volume and brightness percentage values by default in OSD popups",
     "context": "Display volume and brightness percentage values by default in OSD popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:654",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:682",
     "comment": ""
   },
   {
     "term": "Displays",
     "context": "Displays",
-    "reference": "Modals/Settings/SettingsSidebar.qml:27",
+    "reference": "Modals/Settings/SettingsSidebar.qml:29",
     "comment": ""
   },
   {
@@ -968,7 +968,7 @@
   {
     "term": "Dock",
     "context": "Dock",
-    "reference": "Modals/Settings/SettingsSidebar.qml:24",
+    "reference": "Modals/Settings/SettingsSidebar.qml:26",
     "comment": ""
   },
   {
@@ -996,9 +996,15 @@
     "comment": ""
   },
   {
+    "term": "Duration",
+    "context": "Duration",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1100",
+    "comment": ""
+  },
+  {
     "term": "Dynamic Theming",
     "context": "Dynamic Theming",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1021",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1244",
     "comment": ""
   },
   {
@@ -1028,7 +1034,7 @@
   {
     "term": "Enable System Sounds",
     "context": "Enable System Sounds",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1231",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1398",
     "comment": ""
   },
   {
@@ -1100,7 +1106,7 @@
   {
     "term": "Execute templates from ~/.config/matugen/config.toml",
     "context": "Execute templates from ~/.config/matugen/config.toml",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1112",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1335",
     "comment": ""
   },
   {
@@ -1322,7 +1328,7 @@
   {
     "term": "How often to change wallpaper",
     "context": "How often to change wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:708",
+    "reference": "Modules/Settings/PersonalizationTab.qml:758",
     "comment": ""
   },
   {
@@ -1376,7 +1382,7 @@
   {
     "term": "Include Transitions",
     "context": "Include Transitions",
-    "reference": "Modules/Settings/PersonalizationTab.qml:873",
+    "reference": "Modules/Settings/PersonalizationTab.qml:923",
     "comment": ""
   },
   {
@@ -1406,7 +1412,7 @@
   {
     "term": "Interval",
     "context": "Interval",
-    "reference": "Modules/Settings/PersonalizationTab.qml:707",
+    "reference": "Modules/Settings/PersonalizationTab.qml:757",
     "comment": ""
   },
   {
@@ -1460,7 +1466,7 @@
   {
     "term": "Launcher",
     "context": "Launcher",
-    "reference": "Modals/Settings/SettingsSidebar.qml:30",
+    "reference": "Modals/Settings/SettingsSidebar.qml:32",
     "comment": ""
   },
   {
@@ -1478,7 +1484,7 @@
   {
     "term": "Light Mode",
     "context": "Light Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:941",
+    "reference": "Modules/Settings/PersonalizationTab.qml:991",
     "comment": ""
   },
   {
@@ -1574,13 +1580,13 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:629, Modules/Settings/PersonalizationTab.qml:1053",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:629, Modules/Settings/PersonalizationTab.qml:1276",
     "comment": ""
   },
   {
     "term": "Matugen Settings",
     "context": "Matugen Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:996",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1219",
     "comment": ""
   },
   {
@@ -1640,19 +1646,19 @@
   {
     "term": "Mode:",
     "context": "Mode:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:639",
+    "reference": "Modules/Settings/PersonalizationTab.qml:689",
     "comment": ""
   },
   {
     "term": "Monitor",
     "context": "Monitor",
-    "reference": "Modules/Settings/PersonalizationTab.qml:542",
+    "reference": "Modules/Settings/PersonalizationTab.qml:592",
     "comment": ""
   },
   {
     "term": "Monitor Selection:",
     "context": "Monitor Selection:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:533",
+    "reference": "Modules/Settings/PersonalizationTab.qml:583",
     "comment": ""
   },
   {
@@ -1676,7 +1682,7 @@
   {
     "term": "Named Workspace Icons",
     "context": "Named Workspace Icons",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:400",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:428",
     "comment": ""
   },
   {
@@ -1694,7 +1700,7 @@
   {
     "term": "Network Icon",
     "context": "Network Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:755",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:781",
     "comment": ""
   },
   {
@@ -1736,7 +1742,7 @@
   {
     "term": "New Notification",
     "context": "New Notification",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1345",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1512",
     "comment": ""
   },
   {
@@ -1856,7 +1862,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:557",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:585",
     "comment": ""
   },
   {
@@ -1946,13 +1952,13 @@
   {
     "term": "Per-Mode Wallpapers",
     "context": "Per-Mode Wallpapers",
-    "reference": "Modules/Settings/PersonalizationTab.qml:444",
+    "reference": "Modules/Settings/PersonalizationTab.qml:494",
     "comment": ""
   },
   {
     "term": "Per-Monitor Wallpapers",
     "context": "Per-Monitor Wallpapers",
-    "reference": "Modules/Settings/PersonalizationTab.qml:501",
+    "reference": "Modules/Settings/PersonalizationTab.qml:551",
     "comment": ""
   },
   {
@@ -1970,7 +1976,7 @@
   {
     "term": "Personalization",
     "context": "Personalization",
-    "reference": "Modals/Settings/SettingsSidebar.qml:12",
+    "reference": "Modals/Settings/SettingsSidebar.qml:14",
     "comment": ""
   },
   {
@@ -1994,31 +2000,31 @@
   {
     "term": "Play sound when new notification arrives",
     "context": "Play sound when new notification arrives",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1351",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1518",
     "comment": ""
   },
   {
     "term": "Play sound when power cable is connected",
     "context": "Play sound when power cable is connected",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1420",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1587",
     "comment": ""
   },
   {
     "term": "Play sound when volume is adjusted",
     "context": "Play sound when volume is adjusted",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1385",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1552",
     "comment": ""
   },
   {
     "term": "Play sounds for system events",
     "context": "Play sounds for system events",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1238",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1405",
     "comment": ""
   },
   {
     "term": "Plugged In",
     "context": "Plugged In",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1414",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1581",
     "comment": ""
   },
   {
@@ -2042,13 +2048,13 @@
   {
     "term": "Plugins",
     "context": "Plugins",
-    "reference": "Modals/Settings/SettingsSidebar.qml:39",
+    "reference": "Modals/Settings/SettingsSidebar.qml:41",
     "comment": ""
   },
   {
     "term": "Popup Position",
     "context": "Popup Position",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:573",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:601",
     "comment": ""
   },
   {
@@ -2066,7 +2072,7 @@
   {
     "term": "Power & Security",
     "context": "Power & Security",
-    "reference": "Modals/Settings/SettingsSidebar.qml:36",
+    "reference": "Modals/Settings/SettingsSidebar.qml:38",
     "comment": ""
   },
   {
@@ -2198,7 +2204,7 @@
   {
     "term": "Run User Templates",
     "context": "Run User Templates",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1105",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1328",
     "comment": ""
   },
   {
@@ -2210,13 +2216,13 @@
   {
     "term": "Running Apps Only In Current Workspace",
     "context": "Running Apps Only In Current Workspace",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:360",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:388",
     "comment": ""
   },
   {
     "term": "Running Apps Settings",
     "context": "Running Apps Settings",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:350",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:378",
     "comment": ""
   },
   {
@@ -2292,6 +2298,12 @@
     "comment": ""
   },
   {
+    "term": "Select a preset or drag the slider to customize",
+    "context": "Select a preset or drag the slider to customize",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1181",
+    "comment": ""
+  },
+  {
     "term": "Select a widget to add to the ",
     "context": "Select a widget to add to the ",
     "reference": "Modules/Settings/WidgetSelectionPopup.qml:211",
@@ -2312,7 +2324,7 @@
   {
     "term": "Select monitor to configure wallpaper",
     "context": "Select monitor to configure wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:543",
+    "reference": "Modules/Settings/PersonalizationTab.qml:593",
     "comment": ""
   },
   {
@@ -2330,13 +2342,13 @@
   {
     "term": "Select system sound theme",
     "context": "Select system sound theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1309",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1476",
     "comment": ""
   },
   {
     "term": "Select which transitions to include in randomization",
     "context": "Select which transitions to include in randomization",
-    "reference": "Modules/Settings/PersonalizationTab.qml:880",
+    "reference": "Modules/Settings/PersonalizationTab.qml:930",
     "comment": ""
   },
   {
@@ -2348,19 +2360,19 @@
   {
     "term": "Set different wallpapers for each connected monitor",
     "context": "Set different wallpapers for each connected monitor",
-    "reference": "Modules/Settings/PersonalizationTab.qml:508",
+    "reference": "Modules/Settings/PersonalizationTab.qml:558",
     "comment": ""
   },
   {
     "term": "Set different wallpapers for light and dark mode",
     "context": "Set different wallpapers for light and dark mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:451",
+    "reference": "Modules/Settings/PersonalizationTab.qml:501",
     "comment": ""
   },
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:143, Modules/DankDash/DankDashPopout.qml:142",
+    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:165, Modules/DankDash/DankDashPopout.qml:142",
     "comment": ""
   },
   {
@@ -2480,7 +2492,7 @@
   {
     "term": "Sound Theme",
     "context": "Sound Theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1308",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1475",
     "comment": ""
   },
   {
@@ -2630,7 +2642,7 @@
   {
     "term": "System update custom command",
     "context": "System update custom command",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:261",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:266",
     "comment": ""
   },
   {
@@ -2654,7 +2666,7 @@
   {
     "term": "Terminal custom additional parameters",
     "context": "Terminal custom additional parameters",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:294",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:313",
     "comment": ""
   },
   {
@@ -2678,7 +2690,7 @@
   {
     "term": "Theme & Colors",
     "context": "Theme & Colors",
-    "reference": "Modals/Settings/SettingsSidebar.qml:33",
+    "reference": "Modals/Settings/SettingsSidebar.qml:35",
     "comment": ""
   },
   {
@@ -2714,7 +2726,7 @@
   {
     "term": "Time & Weather",
     "context": "Time & Weather",
-    "reference": "Modals/Settings/SettingsSidebar.qml:15",
+    "reference": "Modals/Settings/SettingsSidebar.qml:17",
     "comment": ""
   },
   {
@@ -2756,7 +2768,7 @@
   {
     "term": "Transition Effect",
     "context": "Transition Effect",
-    "reference": "Modules/Settings/PersonalizationTab.qml:854",
+    "reference": "Modules/Settings/PersonalizationTab.qml:904",
     "comment": ""
   },
   {
@@ -2834,7 +2846,7 @@
   {
     "term": "Use System Theme",
     "context": "Use System Theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1280",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1447",
     "comment": ""
   },
   {
@@ -2852,13 +2864,13 @@
   {
     "term": "Use light theme instead of dark theme",
     "context": "Use light theme instead of dark theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:948",
+    "reference": "Modules/Settings/PersonalizationTab.qml:998",
     "comment": ""
   },
   {
     "term": "Use sound theme from system settings",
     "context": "Use sound theme from system settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1286",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1453",
     "comment": ""
   },
   {
@@ -2924,13 +2936,13 @@
   {
     "term": "Visual effect used when wallpaper changes",
     "context": "Visual effect used when wallpaper changes",
-    "reference": "Modules/Settings/PersonalizationTab.qml:855",
+    "reference": "Modules/Settings/PersonalizationTab.qml:905",
     "comment": ""
   },
   {
     "term": "Volume Changed",
     "context": "Volume Changed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1379",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1546",
     "comment": ""
   },
   {
@@ -2984,7 +2996,7 @@
   {
     "term": "Widgets",
     "context": "Widgets",
-    "reference": "Modals/Settings/SettingsSidebar.qml:21",
+    "reference": "Modals/Settings/SettingsSidebar.qml:23",
     "comment": ""
   },
   {
@@ -3068,7 +3080,7 @@
   {
     "term": "matugen not detected - dynamic theming unavailable",
     "context": "matugen not detected - dynamic theming unavailable",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1132",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1355",
     "comment": ""
   },
   {

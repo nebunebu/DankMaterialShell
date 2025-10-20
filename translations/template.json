@@ -1162,6 +1162,13 @@
     "comment": ""
   },
   {
+    "term": "Duration",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Dynamic Theming",
     "translation": "",
     "context": "",
@@ -2668,6 +2675,13 @@
   },
   {
     "term": "Select a color from the palette or use custom sliders",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Select a preset or drag the slider to customize",
     "translation": "",
     "context": "",
     "reference": "",

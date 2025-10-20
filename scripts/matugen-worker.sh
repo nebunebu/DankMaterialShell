@@ -100,6 +100,15 @@ output_path = '$STATE_DIR/dms-colors.json'
 
 EOF
 
+  # If light mode, use gtk3 light config
+  if [[ "$mode" == "light" ]]; then
+    cat "$SHELL_DIR/matugen/configs/gtk3-light.toml" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  else
+    cat "$SHELL_DIR/matugen/configs/gtk3-dark.toml" >> "$TMP_CFG"
+    echo "" >> "$TMP_CFG"
+  fi
+
   if command -v niri >/dev/null 2>&1; then
     cat "$SHELL_DIR/matugen/configs/niri.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
