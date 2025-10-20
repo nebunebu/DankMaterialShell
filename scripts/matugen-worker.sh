@@ -141,12 +141,6 @@ EOF
     echo "" >> "$TMP_CFG"
   done
   
-  # GTK3 colors based on colloid
-  COLLOID_TEMPLATE="$SHELL_DIR/matugen/templates/gtk3-colors.css"
-  
-  sed -i "/\[templates\.gtk3\]/,/^$/ s|input_path = './matugen/templates/gtk-colors.css'|input_path = '$COLLOID_TEMPLATE'|" "$TMP_CFG"
-  sed -i "s|input_path = './matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" "$TMP_CFG"
-
   # Handle surface shifting if needed
   if [[ "$surface_base" == "s" ]]; then
     TMP_TEMPLATES_DIR="$(mktemp -d)"
@@ -170,11 +164,7 @@ EOF
     # Update config to use shifted templates
     sed -i "s|input_path = '$SHELL_DIR/matugen/templates/|input_path = '$TMP_TEMPLATES_DIR/|g" "$TMP_CFG"
     sed -i "s|input_path = '$USER_MATUGEN_DIR/templates/|input_path = '$TMP_TEMPLATES_DIR/|g" "$TMP_CFG"
-
-    # Handle the special colloid template path
-    if [[ -f "$TMP_TEMPLATES_DIR/gtk3-colors.css" ]]; then
-      sed -i "/\[templates\.gtk3\]/,/^$/ s|input_path = '$COLLOID_TEMPLATE'|input_path = '$TMP_TEMPLATES_DIR/gtk3-colors.css'|" "$TMP_CFG"
-    fi
+    sed -i "s|input_path = '\\./matugen/templates/|input_path = '$TMP_TEMPLATES_DIR/|g" "$TMP_CFG"
   fi
 
   pushd "$SHELL_DIR" >/dev/null
@@ -240,7 +230,24 @@ EOF
 
   echo "$JSON" | grep -q '"primary"' || { echo "matugen JSON missing primary" >&2; return 2; }
   printf "%s" "$JSON" > "$LAST_JSON"
-  
+
+  GTK_CSS="$CONFIG_DIR/gtk-3.0/gtk.css"
+  SHOULD_RUN_HOOK=false
+
+  if [[ -L "$GTK_CSS" ]]; then
+    LINK_TARGET=$(readlink "$GTK_CSS")
+    if [[ "$LINK_TARGET" == *"dank-colors.css"* ]]; then
+      SHOULD_RUN_HOOK=true
+    fi
+  elif [[ -f "$GTK_CSS" ]] && grep -q "dank-colors.css" "$GTK_CSS"; then
+    SHOULD_RUN_HOOK=true
+  fi
+
+  if [[ "$SHOULD_RUN_HOOK" == "true" ]]; then
+    gsettings set org.gnome.desktop.interface gtk-theme "" >/dev/null 2>&1 || true
+    gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-${mode}" >/dev/null 2>&1 || true
+  fi
+
   if [ "$mode" = "light" ]; then
     SECTION=$(echo "$JSON" | sed -n 's/.*"light":{\([^}]*\)}.*/\1/p')
   else

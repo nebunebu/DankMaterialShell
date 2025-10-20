@@ -540,23 +540,18 @@ If you do not like our theme path, you can integrate this with other GTK themes,
 
 #### GTK Apps
 
-1. Install [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme)
-
-Colloid is a hard requirement for the auto-theming because of how it integrates with colloid css files, however you can integrate auto-theming with other themes, you just have to do it manually (so leave the toggle OFF in settings)
-
-It will still create `~/.config/gtk-3.0/4.0/dank-colors.css` on theme updates, these you can import into other compatible GTK themes.
+1. Install adw-gtk3
 
 ```bash
-# Some default install settings for colloid
-./install.sh -s standard -l --tweaks normal
+# Arch
+sudo pacman -S adw-gtk-theme
+# Fedora
+sudo dnf install adw-gtk3-theme
 ```
 
-Configure in `~/.config/gtk-3.0/settings.ini` and `~/.config/gtk-4.0/settings.ini`:
+In dms settings, navigate to Theme & Colors, and "apply GTK themes"
 
-```ini
-[Settings]
-gtk-theme-name=Colloid
-```
+This will create symlinks from `~/.config/gtk-3.0/4.0/dank-colors.css` to `~/.config/gtk-3.0/4.0/gtk.css` which enables theming.
 
 #### QT: basic gtk3 based theme (Option 1)
 
