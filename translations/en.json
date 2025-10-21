@@ -116,7 +116,7 @@
   {
     "term": "All",
     "context": "All",
-    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppDrawerPopout.qml:45, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:12, Modules/AppDrawer/AppLauncher.qml:23, Modules/AppDrawer/AppLauncher.qml:24, Modules/AppDrawer/AppLauncher.qml:41, Modules/AppDrawer/AppLauncher.qml:42, Modules/AppDrawer/AppLauncher.qml:76, Modals/Spotlight/SpotlightModal.qml:59",
+    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppDrawerPopout.qml:45, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modals/Spotlight/SpotlightModal.qml:59",
     "comment": ""
   },
   {
@@ -1640,7 +1640,7 @@
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:895, Modals/Spotlight/SpotlightContextMenu.qml:251",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:923, Modals/Spotlight/SpotlightContextMenu.qml:251",
     "comment": ""
   },
   {
@@ -1652,7 +1652,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:955, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:983, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
     "comment": ""
   },
   {
@@ -2228,7 +2228,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:786, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
@@ -3128,7 +3128,7 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:786, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
