@@ -2876,7 +2876,7 @@
   {
     "term": "Switch User",
     "context": "Switch User",
-    "reference": "Modules/Greetd/GreeterContent.qml:567",
+    "reference": "Modules/Greetd/GreeterContent.qml:549",
     "comment": ""
   },
   {
