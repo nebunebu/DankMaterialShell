@@ -509,7 +509,11 @@ Rectangle {
                         onClicked: function(event) {
                             if (modelData.ssid !== NetworkService.currentWifiSSID) {
                                 if (modelData.secured && !modelData.saved) {
-                                    wifiPasswordModal.show(modelData.ssid)
+                                    if (DMSService.apiVersion >= 7) {
+                                        NetworkService.connectToWifi(modelData.ssid)
+                                    } else if (PopoutService.wifiPasswordModal) {
+                                        PopoutService.wifiPasswordModal.show(modelData.ssid)
+                                    }
                                 } else {
                                     NetworkService.connectToWifi(modelData.ssid)
                                 }
@@ -563,7 +567,11 @@ Rectangle {
                     NetworkService.disconnectWifi()
                 } else {
                     if (networkContextMenu.currentSecured && !networkContextMenu.currentSaved) {
-                        wifiPasswordModal.show(networkContextMenu.currentSSID)
+                        if (DMSService.apiVersion >= 7) {
+                            NetworkService.connectToWifi(networkContextMenu.currentSSID)
+                        } else if (PopoutService.wifiPasswordModal) {
+                            PopoutService.wifiPasswordModal.show(networkContextMenu.currentSSID)
+                        }
                     } else {
                         NetworkService.connectToWifi(networkContextMenu.currentSSID)
                     }
@@ -616,10 +624,6 @@ Rectangle {
                 NetworkService.forgetWifiNetwork(networkContextMenu.currentSSID)
             }
         }
-    }
-
-    WifiPasswordModal {
-        id: wifiPasswordModal
     }
 
     NetworkInfoModal {

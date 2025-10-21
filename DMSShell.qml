@@ -197,17 +197,19 @@ Item {
         }
     }
 
-    LazyLoader {
-        id: wifiPasswordModalLoader
+    WifiPasswordModal {
+        id: wifiPasswordModal
 
-        active: false
+        Component.onCompleted: {
+            PopoutService.wifiPasswordModal = wifiPasswordModal
+        }
+    }
 
-        WifiPasswordModal {
-            id: wifiPasswordModal
+    Connections {
+        target: NetworkService
 
-            Component.onCompleted: {
-                PopoutService.wifiPasswordModal = wifiPasswordModal
-            }
+        function onCredentialsNeeded(token, ssid, setting, fields, hints, reason) {
+            wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason)
         }
     }
 
