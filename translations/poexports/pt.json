@@ -503,6 +503,9 @@
   "Disk Usage": {
     "Disk Usage": "Uso de Disco"
   },
+  "Dismiss": {
+    "Dismiss": ""
+  },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "Exibir um dock com aplicativos que estão sendo utilizados, e que pode ser posicionada no superior, inferior, esquerda ou direita dos cantos da tela"
   },

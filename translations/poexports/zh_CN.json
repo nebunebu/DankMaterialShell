@@ -503,6 +503,9 @@
   "Disk Usage": {
     "Disk Usage": "磁盘占用"
   },
+  "Dismiss": {
+    "Dismiss": ""
+  },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "显示一个包含固定和运行中应用的程序坞，可放置在屏幕四边任意位置"
   },

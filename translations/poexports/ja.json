@@ -503,6 +503,9 @@
   "Disk Usage": {
     "Disk Usage": "ディスク使用率"
   },
+  "Dismiss": {
+    "Dismiss": ""
+  },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "画面の上、下、左、右の端に配置できる、ピン留めされた実行中のアプリケーションを含むドックを表示します"
   },
