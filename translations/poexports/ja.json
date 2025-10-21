@@ -353,6 +353,9 @@
   "Compositor:": {
     "Compositor:": "コンポジター："
   },
+  "Configuration activated": {
+    "Configuration activated": ""
+  },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "名前付きワークスペースのアイコンを設定します。両方が有効になっている場合、アイコンが数字よりも優先されます。"
   },
@@ -367,6 +370,9 @@
   },
   "Connected Displays": {
     "Connected Displays": "接続されたディスプレイ"
+  },
+  "Connection failed. Check password and try again.": {
+    "Connection failed. Check password and try again.": ""
   },
   "Contrast": {
     "Contrast": "コントラスト"
@@ -488,6 +494,9 @@
   "Disconnect": {
     "Disconnect": "切断"
   },
+  "Disconnected from WiFi": {
+    "Disconnected from WiFi": ""
+  },
   "Disk": {
     "Disk": "ディスク"
   },
@@ -596,11 +605,26 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: 切り替え • F10: ヘルプ"
   },
+  "Failed to activate configuration": {
+    "Failed to activate configuration": ""
+  },
+  "Failed to connect to ": {
+    "Failed to connect to ": ""
+  },
+  "Failed to disconnect WiFi": {
+    "Failed to disconnect WiFi": ""
+  },
+  "Failed to enable WiFi": {
+    "Failed to enable WiFi": ""
+  },
   "Failed to set profile image": {
     "Failed to set profile image": "プロフィール画像の設定に失敗しました"
   },
   "Failed to set profile image: ": {
     "Failed to set profile image: ": "プロフィール画像の設定に失敗しました: "
+  },
+  "Failed to start connection to ": {
+    "Failed to start connection to ": ""
   },
   "Feels Like": {
     "Feels Like": "どうやら"
@@ -643,6 +667,9 @@
   },
   "Forget Network": {
     "Forget Network": "ネットワークを忘れる"
+  },
+  "Forgot network ": {
+    "Forgot network ": ""
   },
   "Format Legend": {
     "Format Legend": "フォーマット凡例"
@@ -748,6 +775,9 @@
   },
   "Include Transitions": {
     "Include Transitions": "トランジションを含める"
+  },
+  "Incorrect password": {
+    "Incorrect password": ""
   },
   "Individual Batteries": {
     "Individual Batteries": "バッテリーごと"
@@ -1651,6 +1681,12 @@
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "有効にすると、アプリはアルファベット順に並べ替えられます。無効にすると、アプリは使用頻度で並べ替えられます。"
+  },
+  "WiFi disabled": {
+    "WiFi disabled": ""
+  },
+  "WiFi enabled": {
+    "WiFi enabled": ""
   },
   "WiFi is off": {
     "WiFi is off": "Wi-Fiはオフ中"

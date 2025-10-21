@@ -353,6 +353,9 @@
   "Compositor:": {
     "Compositor:": "Compositor:"
   },
+  "Configuration activated": {
+    "Configuration activated": ""
+  },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "Configurações de ícones para área de trabalho nomeadas. Ícones tem prioridade sobre números, isso quando ambos estão habilitados. "
   },
@@ -367,6 +370,9 @@
   },
   "Connected Displays": {
     "Connected Displays": "Telas Conectadas"
+  },
+  "Connection failed. Check password and try again.": {
+    "Connection failed. Check password and try again.": ""
   },
   "Contrast": {
     "Contrast": "Contraste"
@@ -488,6 +494,9 @@
   "Disconnect": {
     "Disconnect": "Desconectar"
   },
+  "Disconnected from WiFi": {
+    "Disconnected from WiFi": ""
+  },
   "Disk": {
     "Disk": "Disco"
   },
@@ -596,11 +605,26 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: Ativar • F10: Ajuda"
   },
+  "Failed to activate configuration": {
+    "Failed to activate configuration": ""
+  },
+  "Failed to connect to ": {
+    "Failed to connect to ": ""
+  },
+  "Failed to disconnect WiFi": {
+    "Failed to disconnect WiFi": ""
+  },
+  "Failed to enable WiFi": {
+    "Failed to enable WiFi": ""
+  },
   "Failed to set profile image": {
     "Failed to set profile image": ""
   },
   "Failed to set profile image: ": {
     "Failed to set profile image: ": ""
+  },
+  "Failed to start connection to ": {
+    "Failed to start connection to ": ""
   },
   "Feels Like": {
     "Feels Like": "Sensação Térmica"
@@ -643,6 +667,9 @@
   },
   "Forget Network": {
     "Forget Network": "Esquecer Internet"
+  },
+  "Forgot network ": {
+    "Forgot network ": ""
   },
   "Format Legend": {
     "Format Legend": "Formatar Legenda"
@@ -748,6 +775,9 @@
   },
   "Include Transitions": {
     "Include Transitions": "Incluir Transições"
+  },
+  "Incorrect password": {
+    "Incorrect password": ""
   },
   "Individual Batteries": {
     "Individual Batteries": "Baterias Individuais"
@@ -1651,6 +1681,12 @@
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "Quando ativado, apps são ordenados alfabeticamente. Quando desativado, apps são ordenados por frequência de uso"
+  },
+  "WiFi disabled": {
+    "WiFi disabled": ""
+  },
+  "WiFi enabled": {
+    "WiFi enabled": ""
   },
   "WiFi is off": {
     "WiFi is off": "WiFi desligado"

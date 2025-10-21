@@ -353,6 +353,9 @@
   "Compositor:": {
     "Compositor:": "合成器："
   },
+  "Configuration activated": {
+    "Configuration activated": ""
+  },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "为已命名工作区配置图标。当数字和图标同时启用时，图标优先生效。"
   },
@@ -367,6 +370,9 @@
   },
   "Connected Displays": {
     "Connected Displays": "已连接显示器"
+  },
+  "Connection failed. Check password and try again.": {
+    "Connection failed. Check password and try again.": ""
   },
   "Contrast": {
     "Contrast": "对比度"
@@ -488,6 +494,9 @@
   "Disconnect": {
     "Disconnect": "断开连接"
   },
+  "Disconnected from WiFi": {
+    "Disconnected from WiFi": ""
+  },
   "Disk": {
     "Disk": "磁盘"
   },
@@ -596,11 +605,26 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: 切换 • F10: 帮助"
   },
+  "Failed to activate configuration": {
+    "Failed to activate configuration": ""
+  },
+  "Failed to connect to ": {
+    "Failed to connect to ": ""
+  },
+  "Failed to disconnect WiFi": {
+    "Failed to disconnect WiFi": ""
+  },
+  "Failed to enable WiFi": {
+    "Failed to enable WiFi": ""
+  },
   "Failed to set profile image": {
     "Failed to set profile image": "无法设置个人资料图片"
   },
   "Failed to set profile image: ": {
     "Failed to set profile image: ": "无法设置个人资料图片："
+  },
+  "Failed to start connection to ": {
+    "Failed to start connection to ": ""
   },
   "Feels Like": {
     "Feels Like": "体感温度"
@@ -643,6 +667,9 @@
   },
   "Forget Network": {
     "Forget Network": "取消保存"
+  },
+  "Forgot network ": {
+    "Forgot network ": ""
   },
   "Format Legend": {
     "Format Legend": "参考格式"
@@ -748,6 +775,9 @@
   },
   "Include Transitions": {
     "Include Transitions": "包含过渡效果"
+  },
+  "Incorrect password": {
+    "Incorrect password": ""
   },
   "Individual Batteries": {
     "Individual Batteries": "分别显示电池"
@@ -1651,6 +1681,12 @@
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "启用后，应用按字母顺序排序；禁用则按使用频率排序"
+  },
+  "WiFi disabled": {
+    "WiFi disabled": ""
+  },
+  "WiFi enabled": {
+    "WiFi enabled": ""
   },
   "WiFi is off": {
     "WiFi is off": "Wi-Fi 已关闭"
