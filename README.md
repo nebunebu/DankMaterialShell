@@ -460,7 +460,8 @@ bind = SUPER, comma, exec, dms ipc call settings toggle
 bind = SUPER, P, exec, dms ipc call notepad toggle
 bind = SUPERALT, L, exec, dms ipc call lock lock
 bind = SUPER, X, exec, dms ipc call powermenu toggle
-bind = SUPER, C, exec, dms ipc call control-center toggle 
+bind = SUPER, C, exec, dms ipc call control-center toggle
+bind = SUPER, TAB, exec, dms ipc call hypr toggleOverview
 
 # Audio controls (function keys)
 bindl = , XF86AudioRaiseVolume, exec, dms ipc call audio increment 3

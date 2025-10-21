@@ -23,6 +23,7 @@ Item {
     signal colorPickerRequested
 
     property alias barVariants: barVariants
+    property var hyprlandOverviewLoader: null
 
     function triggerControlCenterOnFocusedScreen() {
         let focusedScreenName = ""
@@ -772,6 +773,7 @@ Item {
                                         section: topBarContent.getWidgetSection(parent)
                                         popupTarget: appDrawerLoader.item
                                         parentScreen: barWindow.screen
+                                        hyprlandOverviewLoader: root.hyprlandOverviewLoader
                                         onClicked: {
                                             appDrawerLoader.active = true
                                             appDrawerLoader.item?.toggle()
@@ -785,6 +787,7 @@ Item {
                                     WorkspaceSwitcher {
                                         screenName: barWindow.screenName
                                         widgetHeight: barWindow.widgetThickness
+                                        hyprlandOverviewLoader: root.hyprlandOverviewLoader
                                     }
                                 }
 

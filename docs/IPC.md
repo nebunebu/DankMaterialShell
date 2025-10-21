@@ -512,7 +512,7 @@ File browser controls for selecting wallpapers and profile images.
   - Both browsers support common image formats (jpg, jpeg, png, bmp, gif, webp)
 
 ### Target: `hypr`
-Hyprland keybinds cheatsheet modal control (Hyprland only).
+Hyprland-specific controls including keybinds cheatsheet and workspace overview (Hyprland only).
 
 **Functions:**
 - `openBinds` - Show Hyprland keybinds cheatsheet modal
@@ -524,12 +524,30 @@ Hyprland keybinds cheatsheet modal control (Hyprland only).
 - `toggleBinds` - Toggle Hyprland keybinds cheatsheet modal visibility
   - Returns: Success/failure message
   - Note: Returns "HYPR_NOT_AVAILABLE" if not running Hyprland
+- `openOverview` - Show Hyprland workspace overview
+  - Returns: "OVERVIEW_OPEN_SUCCESS" or "HYPR_NOT_AVAILABLE"
+  - Displays all workspaces across all monitors with live window previews
+  - Allows drag-and-drop window movement between workspaces and monitors
+- `closeOverview` - Hide Hyprland workspace overview
+  - Returns: "OVERVIEW_CLOSE_SUCCESS" or "HYPR_NOT_AVAILABLE"
+- `toggleOverview` - Toggle Hyprland workspace overview visibility
+  - Returns: "OVERVIEW_OPEN_SUCCESS", "OVERVIEW_CLOSE_SUCCESS", or "HYPR_NOT_AVAILABLE"
 
-**Description:**
+**Keybinds Cheatsheet Description:**
 Displays an auto-categorized cheatsheet of all Hyprland keybinds parsed from `~/.config/hypr`. Keybinds are organized into three columns:
 - **Window / Monitor** - Window and monitor management keybinds (sorted by dispatcher)
 - **Workspace** - Workspace switching and management (sorted by dispatcher)
 - **Execute** - Application launchers and commands (sorted by keybind)
+
+**Workspace Overview Description:**
+Displays a live overview of all workspaces across all monitors with window previews:
+- **Multi-monitor support** - Shows workspaces from all connected monitors with monitor name labels
+- **Live window previews** - Real-time screen capture of all windows on each workspace
+- **Drag-and-drop** - Move windows between workspaces and monitors by dragging
+- **Keyboard navigation** - Use Left/Right arrow keys to switch between workspaces on current monitor
+- **Visual indicators** - Active workspace highlighted when it contains windows
+- **Click to switch** - Click any workspace to switch to it
+- **Click outside or press Escape** - Close the overview
 
 ### Modal Examples
 ```bash
@@ -570,6 +588,11 @@ dms ipc call file browse profile
 # Show Hyprland keybinds cheatsheet (Hyprland only)
 dms ipc call hypr toggleBinds
 dms ipc call hypr openBinds
+
+# Show Hyprland workspace overview (Hyprland only)
+dms ipc call hypr toggleOverview
+dms ipc call hypr openOverview
+dms ipc call hypr closeOverview
 ```
 
 ## Common Usage Patterns
@@ -597,6 +620,7 @@ bind = SUPER, V, exec, qs -c dms ipc call clipboard toggle
 bind = SUPER, P, exec, qs -c dms ipc call notepad toggle
 bind = SUPER, X, exec, qs -c dms ipc call powermenu toggle
 bind = SUPER, slash, exec, qs -c dms ipc call hypr toggleBinds
+bind = SUPER, Tab, exec, qs -c dms ipc call hypr toggleOverview
 bind = , XF86AudioRaiseVolume, exec, qs -c dms ipc call audio increment 3
 bind = , XF86MonBrightnessUp, exec, qs -c dms ipc call brightness increment 5 ""
 ```
