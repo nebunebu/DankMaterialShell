@@ -168,7 +168,7 @@
     "Automatically cycle through wallpapers in the same folder": "自动轮换文件夹中的壁纸"
   },
   "Automatically detect location based on IP address": {
-    "Automatically detect location based on IP address": ""
+    "Automatically detect location based on IP address": "根据 IP 地址自动检测位置"
   },
   "Automatically determine your location using your IP address": {
     "Automatically determine your location using your IP address": "通过 IP 地址自动检测您的位置"
@@ -597,10 +597,10 @@
     "F1/I: Toggle • F10: Help": "F1/I: 切换 • F10: 帮助"
   },
   "Failed to set profile image": {
-    "Failed to set profile image": ""
+    "Failed to set profile image": "无法设置个人资料图片"
   },
   "Failed to set profile image: ": {
-    "Failed to set profile image: ": ""
+    "Failed to set profile image: ": "无法设置个人资料图片："
   },
   "Feels Like": {
     "Feels Like": "体感温度"
@@ -669,7 +669,7 @@
     "Gamma Control": "伽马控制"
   },
   "Gamma control not available. Requires DMS API v6+.": {
-    "Gamma control not available. Requires DMS API v6+.": ""
+    "Gamma control not available. Requires DMS API v6+.": "伽玛控制不可用。需要 DMS API v6+。"
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": "Geoclue 服务未运行 - 无法自动检测位置"
@@ -1083,7 +1083,7 @@
     "Percentage": "占用率"
   },
   "Permission denied to set profile image.": {
-    "Permission denied to set profile image.": ""
+    "Permission denied to set profile image.": "因权限问题，无法设置个人资料图片。"
   },
   "Personalization": {
     "Personalization": "个性化"
@@ -1164,10 +1164,10 @@
     "Process": "进程"
   },
   "Profile Image Error": {
-    "Profile Image Error": ""
+    "Profile Image Error": "个人资料图片错误"
   },
   "Profile image is too large. Please use a smaller image.": {
-    "Profile image is too large. Please use a smaller image.": ""
+    "Profile image is too large. Please use a smaller image.": "个人资料图片太大。请选择更小的图片。"
   },
   "QML, JavaScript, Go": {
     "QML, JavaScript, Go": "QML, JavaScript, Go"
@@ -1296,7 +1296,7 @@
     "Select which transitions to include in randomization": "选择在随机轮换中使用的过渡效果"
   },
   "Selected image file not found.": {
-    "Selected image file not found.": ""
+    "Selected image file not found.": "找不到选定的图片文件。"
   },
   "Separator": {
     "Separator": "分隔符"
@@ -1569,7 +1569,7 @@
     "Use Fahrenheit instead of Celsius for temperature": "使用华氏度显示温度"
   },
   "Use IP Location": {
-    "Use IP Location": ""
+    "Use IP Location": "使用IP所在位置"
   },
   "Use Monospace Font": {
     "Use Monospace Font": "使用等宽字体"
