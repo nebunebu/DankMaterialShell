@@ -167,6 +167,9 @@
   "Automatically cycle through wallpapers in the same folder": {
     "Automatically cycle through wallpapers in the same folder": "同じフォルダ内の壁紙を自動的に切り替える"
   },
+  "Automatically detect location based on IP address": {
+    "Automatically detect location based on IP address": ""
+  },
   "Automatically determine your location using your IP address": {
     "Automatically determine your location using your IP address": "IPアドレスを使用して現在地を自動的に特定します"
   },
@@ -593,6 +596,12 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: 切り替え • F10: ヘルプ"
   },
+  "Failed to set profile image": {
+    "Failed to set profile image": ""
+  },
+  "Failed to set profile image: ": {
+    "Failed to set profile image: ": ""
+  },
   "Feels Like": {
     "Feels Like": "どうやら"
   },
@@ -658,6 +667,9 @@
   },
   "Gamma Control": {
     "Gamma Control": "ガンマ設定"
+  },
+  "Gamma control not available. Requires DMS API v6+.": {
+    "Gamma control not available. Requires DMS API v6+.": ""
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": "ジオクルー サービスが実行されていない - 位置を自動検出できません"
@@ -1070,6 +1082,9 @@
   "Percentage": {
     "Percentage": "百分率"
   },
+  "Permission denied to set profile image.": {
+    "Permission denied to set profile image.": ""
+  },
   "Personalization": {
     "Personalization": "パーソナライゼーション"
   },
@@ -1147,6 +1162,12 @@
   },
   "Process": {
     "Process": "プロセス"
+  },
+  "Profile Image Error": {
+    "Profile Image Error": ""
+  },
+  "Profile image is too large. Please use a smaller image.": {
+    "Profile image is too large. Please use a smaller image.": ""
   },
   "QML, JavaScript, Go": {
     "QML, JavaScript, Go": "QML, JavaScript, Go"
@@ -1273,6 +1294,9 @@
   },
   "Select which transitions to include in randomization": {
     "Select which transitions to include in randomization": "含めたいトランジションをランダム化に選択"
+  },
+  "Selected image file not found.": {
+    "Selected image file not found.": ""
   },
   "Separator": {
     "Separator": "区切り"
@@ -1543,6 +1567,9 @@
   },
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "温度は摂氏ではなく華氏を使用"
+  },
+  "Use IP Location": {
+    "Use IP Location": ""
   },
   "Use Monospace Font": {
     "Use Monospace Font": "等幅フォントを使用"

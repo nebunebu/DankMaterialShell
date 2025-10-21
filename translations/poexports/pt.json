@@ -167,6 +167,9 @@
   "Automatically cycle through wallpapers in the same folder": {
     "Automatically cycle through wallpapers in the same folder": "Circular automaticamente dentre os papéis de parede na mesma pasta"
   },
+  "Automatically detect location based on IP address": {
+    "Automatically detect location based on IP address": ""
+  },
   "Automatically determine your location using your IP address": {
     "Automatically determine your location using your IP address": "Detectar automaticamente a sua localização usando o seu endereço de IP"
   },
@@ -593,6 +596,12 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: Ativar • F10: Ajuda"
   },
+  "Failed to set profile image": {
+    "Failed to set profile image": ""
+  },
+  "Failed to set profile image: ": {
+    "Failed to set profile image: ": ""
+  },
   "Feels Like": {
     "Feels Like": "Sensação Térmica"
   },
@@ -658,6 +667,9 @@
   },
   "Gamma Control": {
     "Gamma Control": "Controle de Gama"
+  },
+  "Gamma control not available. Requires DMS API v6+.": {
+    "Gamma control not available. Requires DMS API v6+.": ""
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": ""
@@ -1070,6 +1082,9 @@
   "Percentage": {
     "Percentage": "Porcetagem"
   },
+  "Permission denied to set profile image.": {
+    "Permission denied to set profile image.": ""
+  },
   "Personalization": {
     "Personalization": "Personalização"
   },
@@ -1147,6 +1162,12 @@
   },
   "Process": {
     "Process": "Processo"
+  },
+  "Profile Image Error": {
+    "Profile Image Error": ""
+  },
+  "Profile image is too large. Please use a smaller image.": {
+    "Profile image is too large. Please use a smaller image.": ""
   },
   "QML, JavaScript, Go": {
     "QML, JavaScript, Go": "QML, JavaScript, Go"
@@ -1273,6 +1294,9 @@
   },
   "Select which transitions to include in randomization": {
     "Select which transitions to include in randomization": "Selecionar quais transições incluir na randomização"
+  },
+  "Selected image file not found.": {
+    "Selected image file not found.": ""
   },
   "Separator": {
     "Separator": "Separador"
@@ -1543,6 +1567,9 @@
   },
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "Usar Fahrenheit em vez de Celsius para temperatura"
+  },
+  "Use IP Location": {
+    "Use IP Location": ""
   },
   "Use Monospace Font": {
     "Use Monospace Font": "Usar Fonte Monoespaçada"
