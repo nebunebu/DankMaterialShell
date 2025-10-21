@@ -578,13 +578,13 @@
   {
     "term": "Clear",
     "context": "Clear",
-    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
+    "reference": "Modules/Notifications/Center/NotificationHeader.qml:102",
     "comment": ""
   },
   {
     "term": "Clear All",
     "context": "Clear All",
-    "reference": "Modules/Notifications/Center/NotificationHeader.qml:102, Modals/Clipboard/ClipboardHistoryModal.qml:157",
+    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:157",
     "comment": ""
   },
   {
@@ -999,6 +999,12 @@
     "term": "Disk Usage",
     "context": "Disk Usage",
     "reference": "Modules/Settings/DankBarTab.qml:87",
+    "comment": ""
+  },
+  {
+    "term": "Dismiss",
+    "context": "Dismiss",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
     "comment": ""
   },
   {
