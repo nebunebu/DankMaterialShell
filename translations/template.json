@@ -819,6 +819,13 @@
     "comment": ""
   },
   {
+    "term": "Configuration activated",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "translation": "",
     "context": "",
@@ -848,6 +855,13 @@
   },
   {
     "term": "Connected Displays",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Connection failed. Check password and try again.",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1134,6 +1148,13 @@
     "comment": ""
   },
   {
+    "term": "Disconnected from WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Disk",
     "translation": "",
     "context": "",
@@ -1386,6 +1407,34 @@
     "comment": ""
   },
   {
+    "term": "Failed to activate configuration",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to connect to ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to enable WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Failed to set profile image",
     "translation": "",
     "context": "",
@@ -1394,6 +1443,13 @@
   },
   {
     "term": "Failed to set profile image: ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to start connection to ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1492,6 +1548,13 @@
   },
   {
     "term": "Forget Network",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Forgot network ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1730,6 +1793,13 @@
   },
   {
     "term": "Include Transitions",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Incorrect password",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3830,6 +3900,20 @@
   },
   {
     "term": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "WiFi disabled",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "WiFi enabled",
     "translation": "",
     "context": "",
     "reference": "",

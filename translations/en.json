@@ -158,7 +158,7 @@
   {
     "term": "Anonymous Identity (optional)",
     "context": "Anonymous Identity (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:282",
+    "reference": "Modals/WifiPasswordModal.qml:365",
     "comment": ""
   },
   {
@@ -524,7 +524,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:385, Modules/Settings/PluginsTab.qml:1220, Modals/FileBrowser/FileBrowserModal.qml:952",
+    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1220, Modals/FileBrowser/FileBrowserModal.qml:952",
     "comment": ""
   },
   {
@@ -702,6 +702,12 @@
     "comment": ""
   },
   {
+    "term": "Configuration activated",
+    "context": "Configuration activated",
+    "reference": "Services/NetworkManagerService.qml:320",
+    "comment": ""
+  },
+  {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "context": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "reference": "Modules/Settings/WidgetTweaksTab.qml:438",
@@ -716,19 +722,25 @@
   {
     "term": "Connect",
     "context": "Connect",
-    "reference": "Modals/WifiPasswordModal.qml:419",
+    "reference": "Modals/WifiPasswordModal.qml:505",
     "comment": ""
   },
   {
     "term": "Connect to Wi-Fi",
     "context": "Connect to Wi-Fi",
-    "reference": "Modals/WifiPasswordModal.qml:114",
+    "reference": "Modals/WifiPasswordModal.qml:166",
     "comment": ""
   },
   {
     "term": "Connected Displays",
     "context": "Connected Displays",
     "reference": "Modules/Settings/DisplaysTab.qml:490",
+    "comment": ""
+  },
+  {
+    "term": "Connection failed. Check password and try again.",
+    "context": "Connection failed. Check password and try again.",
+    "reference": "Services/NetworkManagerService.qml:287",
     "comment": ""
   },
   {
@@ -872,7 +884,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:234",
+    "reference": "Services/DMSService.qml:235",
     "comment": ""
   },
   {
@@ -972,6 +984,12 @@
     "comment": ""
   },
   {
+    "term": "Disconnected from WiFi",
+    "context": "Disconnected from WiFi",
+    "reference": "Services/NetworkManagerService.qml:405",
+    "comment": ""
+  },
+  {
     "term": "Disk",
     "context": "Disk",
     "reference": "Modules/ProcessList/PerformanceTab.qml:428",
@@ -1058,7 +1076,7 @@
   {
     "term": "Domain (optional)",
     "context": "Domain (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:314",
+    "reference": "Modals/WifiPasswordModal.qml:397",
     "comment": ""
   },
   {
@@ -1142,7 +1160,7 @@
   {
     "term": "Enter credentials for ",
     "context": "Enter credentials for ",
-    "reference": "Modals/WifiPasswordModal.qml:121",
+    "reference": "Modals/WifiPasswordModal.qml:178",
     "comment": ""
   },
   {
@@ -1166,7 +1184,7 @@
   {
     "term": "Enter password for ",
     "context": "Enter password for ",
-    "reference": "Modals/WifiPasswordModal.qml:121",
+    "reference": "Modals/WifiPasswordModal.qml:178",
     "comment": ""
   },
   {
@@ -1188,6 +1206,30 @@
     "comment": ""
   },
   {
+    "term": "Failed to activate configuration",
+    "context": "Failed to activate configuration",
+    "reference": "Services/NetworkManagerService.qml:316",
+    "comment": ""
+  },
+  {
+    "term": "Failed to connect to ",
+    "context": "Failed to connect to ",
+    "reference": "Services/NetworkManagerService.qml:289",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect WiFi",
+    "context": "Failed to disconnect WiFi",
+    "reference": "Services/NetworkManagerService.qml:403",
+    "comment": ""
+  },
+  {
+    "term": "Failed to enable WiFi",
+    "context": "Failed to enable WiFi",
+    "reference": "Services/NetworkManagerService.qml:508",
+    "comment": ""
+  },
+  {
     "term": "Failed to set profile image",
     "context": "Failed to set profile image",
     "reference": "Services/PortalService.qml:150",
@@ -1197,6 +1239,12 @@
     "term": "Failed to set profile image: ",
     "context": "Failed to set profile image: ",
     "reference": "Services/PortalService.qml:159",
+    "comment": ""
+  },
+  {
+    "term": "Failed to start connection to ",
+    "context": "Failed to start connection to ",
+    "reference": "Services/NetworkManagerService.qml:389",
     "comment": ""
   },
   {
@@ -1280,7 +1328,13 @@
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:598",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:606",
+    "comment": ""
+  },
+  {
+    "term": "Forgot network ",
+    "context": "Forgot network ",
+    "reference": "Services/NetworkManagerService.qml:465",
     "comment": ""
   },
   {
@@ -1485,6 +1539,12 @@
     "term": "Include Transitions",
     "context": "Include Transitions",
     "reference": "Modules/Settings/PersonalizationTab.qml:923",
+    "comment": ""
+  },
+  {
+    "term": "Incorrect password",
+    "context": "Incorrect password",
+    "reference": "Modals/WifiPasswordModal.qml:189",
     "comment": ""
   },
   {
@@ -1862,7 +1922,7 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:340, Modules/ControlCenter/Details/NetworkDetail.qml:575",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:340, Modules/ControlCenter/Details/NetworkDetail.qml:583",
     "comment": ""
   },
   {
@@ -1988,7 +2048,7 @@
   {
     "term": "Notepad",
     "context": "Notepad",
-    "reference": "DMSShell.qml:411, Modules/Settings/DankBarTab.qml:175",
+    "reference": "DMSShell.qml:413, Modules/Settings/DankBarTab.qml:175",
     "comment": ""
   },
   {
@@ -2126,7 +2186,7 @@
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/WifiPasswordModal.qml:203",
+    "reference": "Modals/WifiPasswordModal.qml:274",
     "comment": ""
   },
   {
@@ -2678,7 +2738,7 @@
   {
     "term": "Show password",
     "context": "Show password",
-    "reference": "Modals/WifiPasswordModal.qml:357",
+    "reference": "Modals/WifiPasswordModal.qml:440",
     "comment": ""
   },
   {
@@ -3008,7 +3068,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:235",
+    "reference": "Services/DMSService.qml:236",
     "comment": ""
   },
   {
@@ -3188,7 +3248,7 @@
   {
     "term": "Username",
     "context": "Username",
-    "reference": "Modals/WifiPasswordModal.qml:166",
+    "reference": "Modals/WifiPasswordModal.qml:237",
     "comment": ""
   },
   {
@@ -3285,6 +3345,18 @@
     "term": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
     "context": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
     "reference": "Modules/Settings/LauncherTab.qml:517",
+    "comment": ""
+  },
+  {
+    "term": "WiFi disabled",
+    "context": "WiFi disabled",
+    "reference": "Services/NetworkManagerService.qml:498",
+    "comment": ""
+  },
+  {
+    "term": "WiFi enabled",
+    "context": "WiFi enabled",
+    "reference": "Services/NetworkManagerService.qml:498, Services/NetworkManagerService.qml:510",
     "comment": ""
   },
   {
