@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modals/Settings/SettingsSidebar.qml:44, Modules/Settings/AboutTab.qml:251",
+    "reference": "Modules/Settings/AboutTab.qml:251, Modals/Settings/SettingsSidebar.qml:44",
     "comment": ""
   },
   {
@@ -116,7 +116,7 @@
   {
     "term": "All",
     "context": "All",
-    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modals/Spotlight/SpotlightModal.qml:59, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:12, Modules/AppDrawer/AppLauncher.qml:23, Modules/AppDrawer/AppLauncher.qml:24, Modules/AppDrawer/AppLauncher.qml:41, Modules/AppDrawer/AppLauncher.qml:42, Modules/AppDrawer/AppLauncher.qml:76, Modules/AppDrawer/AppDrawerPopout.qml:45",
+    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppDrawerPopout.qml:45, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:12, Modules/AppDrawer/AppLauncher.qml:23, Modules/AppDrawer/AppLauncher.qml:24, Modules/AppDrawer/AppLauncher.qml:41, Modules/AppDrawer/AppLauncher.qml:42, Modules/AppDrawer/AppLauncher.qml:76, Modals/Spotlight/SpotlightModal.qml:59",
     "comment": ""
   },
   {
@@ -128,7 +128,7 @@
   {
     "term": "All displays",
     "context": "All displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:666",
+    "reference": "Modules/Settings/DisplaysTab.qml:670",
     "comment": ""
   },
   {
@@ -300,12 +300,6 @@
     "comment": ""
   },
   {
-    "term": "Auto-location",
-    "context": "Auto-location",
-    "reference": "Modules/Settings/DisplaysTab.qml:364",
-    "comment": ""
-  },
-  {
     "term": "Auto-saving...",
     "context": "Auto-saving...",
     "reference": "Modules/Notepad/NotepadTextEditor.qml:581",
@@ -314,7 +308,7 @@
   {
     "term": "Automatic Control",
     "context": "Automatic Control",
-    "reference": "Modules/Settings/DisplaysTab.qml:162",
+    "reference": "Modules/Settings/DisplaysTab.qml:164",
     "comment": ""
   },
   {
@@ -333,6 +327,12 @@
     "term": "Automatically cycle through wallpapers in the same folder",
     "context": "Automatically cycle through wallpapers in the same folder",
     "reference": "Modules/Settings/PersonalizationTab.qml:647",
+    "comment": ""
+  },
+  {
+    "term": "Automatically detect location based on IP address",
+    "context": "Automatically detect location based on IP address",
+    "reference": "Modules/Settings/DisplaysTab.qml:369",
     "comment": ""
   },
   {
@@ -380,7 +380,7 @@
   {
     "term": "Available Screens (",
     "context": "Available Screens (",
-    "reference": "Modules/Settings/DisplaysTab.qml:509",
+    "reference": "Modules/Settings/DisplaysTab.qml:513",
     "comment": ""
   },
   {
@@ -524,7 +524,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:385, Modals/FileBrowser/FileBrowserModal.qml:952, Modules/Settings/PluginsTab.qml:1220",
+    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:385, Modules/Settings/PluginsTab.qml:1220, Modals/FileBrowser/FileBrowserModal.qml:952",
     "comment": ""
   },
   {
@@ -584,7 +584,7 @@
   {
     "term": "Clear All",
     "context": "Clear All",
-    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:157, Modules/Notifications/Center/NotificationHeader.qml:102",
+    "reference": "Modules/Notifications/Center/NotificationHeader.qml:102, Modals/Clipboard/ClipboardHistoryModal.qml:157",
     "comment": ""
   },
   {
@@ -620,7 +620,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modules/SystemUpdatePopout.qml:333, Modals/NetworkWiredInfoModal.qml:129, Modals/NetworkInfoModal.qml:129, Modules/DankBar/Widgets/RunningApps.qml:711",
+    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:711",
     "comment": ""
   },
   {
@@ -638,7 +638,7 @@
   {
     "term": "Color temperature for night mode",
     "context": "Color temperature for night mode",
-    "reference": "Modules/Settings/DisplaysTab.qml:143",
+    "reference": "Modules/Settings/DisplaysTab.qml:145",
     "comment": ""
   },
   {
@@ -710,7 +710,7 @@
   {
     "term": "Configure which displays show shell components",
     "context": "Configure which displays show shell components",
-    "reference": "Modules/Settings/DisplaysTab.qml:493",
+    "reference": "Modules/Settings/DisplaysTab.qml:497",
     "comment": ""
   },
   {
@@ -728,7 +728,7 @@
   {
     "term": "Connected Displays",
     "context": "Connected Displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:486",
+    "reference": "Modules/Settings/DisplaysTab.qml:490",
     "comment": ""
   },
   {
@@ -1034,7 +1034,7 @@
   {
     "term": "Do Not Disturb",
     "context": "Do Not Disturb",
-    "reference": "Modules/Notifications/Center/NotificationHeader.qml:41, Modules/Notifications/Center/NotificationSettings.qml:131",
+    "reference": "Modules/Notifications/Center/NotificationSettings.qml:131, Modules/Notifications/Center/NotificationHeader.qml:41",
     "comment": ""
   },
   {
@@ -1136,7 +1136,7 @@
   {
     "term": "End",
     "context": "End",
-    "reference": "Modules/Settings/DisplaysTab.qml:315",
+    "reference": "Modules/Settings/DisplaysTab.qml:318",
     "comment": ""
   },
   {
@@ -1238,7 +1238,7 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/ThemeColorsTab.qml:944",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:944, Modules/Notepad/NotepadSettings.qml:220",
     "comment": ""
   },
   {
@@ -1332,9 +1332,9 @@
     "comment": ""
   },
   {
-    "term": "Geoclue service not running - cannot auto-detect location",
-    "context": "Geoclue service not running - cannot auto-detect location",
-    "reference": "Modules/Settings/DisplaysTab.qml:365",
+    "term": "Gamma control not available. Requires DMS API v6+.",
+    "context": "Gamma control not available. Requires DMS API v6+.",
+    "reference": "Modules/Settings/DisplaysTab.qml:119",
     "comment": ""
   },
   {
@@ -1424,7 +1424,7 @@
   {
     "term": "Hour",
     "context": "Hour",
-    "reference": "Modules/Settings/DisplaysTab.qml:252",
+    "reference": "Modules/Settings/DisplaysTab.qml:255",
     "comment": ""
   },
   {
@@ -1574,13 +1574,13 @@
   {
     "term": "Latitude",
     "context": "Latitude",
-    "reference": "Modules/Settings/DisplaysTab.qml:398, Modules/Settings/TimeWeatherTab.qml:665",
+    "reference": "Modules/Settings/DisplaysTab.qml:402, Modules/Settings/TimeWeatherTab.qml:665",
     "comment": ""
   },
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:251, Modules/AppDrawer/AppDrawerPopout.qml:895",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:895, Modals/Spotlight/SpotlightContextMenu.qml:251",
     "comment": ""
   },
   {
@@ -1592,7 +1592,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:312, Modules/AppDrawer/AppDrawerPopout.qml:955, Modules/Dock/DockContextMenu.qml:417",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:955, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
     "comment": ""
   },
   {
@@ -1682,7 +1682,7 @@
   {
     "term": "Longitude",
     "context": "Longitude",
-    "reference": "Modules/Settings/DisplaysTab.qml:421, Modules/Settings/TimeWeatherTab.qml:716",
+    "reference": "Modules/Settings/DisplaysTab.qml:425, Modules/Settings/TimeWeatherTab.qml:716",
     "comment": ""
   },
   {
@@ -1700,7 +1700,7 @@
   {
     "term": "Manual Coordinates",
     "context": "Manual Coordinates",
-    "reference": "Modules/Settings/DisplaysTab.qml:386",
+    "reference": "Modules/Settings/DisplaysTab.qml:390",
     "comment": ""
   },
   {
@@ -1724,7 +1724,7 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:629, Modules/Settings/PersonalizationTab.qml:1276",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1276, Modules/Settings/ThemeColorsTab.qml:629",
     "comment": ""
   },
   {
@@ -1790,7 +1790,7 @@
   {
     "term": "Minute",
     "context": "Minute",
-    "reference": "Modules/Settings/DisplaysTab.qml:260",
+    "reference": "Modules/Settings/DisplaysTab.qml:263",
     "comment": ""
   },
   {
@@ -1868,7 +1868,7 @@
   {
     "term": "Network Information",
     "context": "Network Information",
-    "reference": "Modals/NetworkWiredInfoModal.qml:59, Modals/NetworkInfoModal.qml:59",
+    "reference": "Modals/NetworkInfoModal.qml:59, Modals/NetworkWiredInfoModal.qml:59",
     "comment": ""
   },
   {
@@ -2024,7 +2024,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/DisplaysTab.qml:24, Modules/Settings/WidgetTweaksTab.qml:585",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:585, Modules/Settings/DisplaysTab.qml:24",
     "comment": ""
   },
   {
@@ -2078,7 +2078,7 @@
   {
     "term": "Only adjust gamma based on time or location rules.",
     "context": "Only adjust gamma based on time or location rules.",
-    "reference": "Modules/Settings/DisplaysTab.qml:163",
+    "reference": "Modules/Settings/DisplaysTab.qml:165",
     "comment": ""
   },
   {
@@ -2168,7 +2168,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
@@ -2444,7 +2444,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:818, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
+    "reference": "Modules/Notepad/Notepad.qml:480, Modules/Notepad/NotepadTextEditor.qml:511, Modals/FileBrowser/FileBrowserModal.qml:818",
     "comment": ""
   },
   {
@@ -2570,7 +2570,7 @@
   {
     "term": "Select the palette algorithm used for wallpaper-based colors",
     "context": "Select the palette algorithm used for wallpaper-based colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:630, Modules/Settings/PersonalizationTab.qml:1277",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1277, Modules/Settings/ThemeColorsTab.qml:630",
     "comment": ""
   },
   {
@@ -2606,7 +2606,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:165, Modules/DankDash/DankDashPopout.qml:142",
+    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:142, Modals/Settings/SettingsModal.qml:165",
     "comment": ""
   },
   {
@@ -2654,13 +2654,13 @@
   {
     "term": "Show on all connected displays",
     "context": "Show on all connected displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:667",
+    "reference": "Modules/Settings/DisplaysTab.qml:671",
     "comment": ""
   },
   {
     "term": "Show on screens:",
     "context": "Show on screens:",
-    "reference": "Modules/Settings/DisplaysTab.qml:651",
+    "reference": "Modules/Settings/DisplaysTab.qml:655",
     "comment": ""
   },
   {
@@ -2768,7 +2768,7 @@
   {
     "term": "Start",
     "context": "Start",
-    "reference": "Modules/Settings/DisplaysTab.qml:272",
+    "reference": "Modules/Settings/DisplaysTab.qml:275",
     "comment": ""
   },
   {
@@ -2930,7 +2930,7 @@
   {
     "term": "Temperature",
     "context": "Temperature",
-    "reference": "Modules/Settings/DisplaysTab.qml:142",
+    "reference": "Modules/Settings/DisplaysTab.qml:144",
     "comment": ""
   },
   {
@@ -3068,7 +3068,7 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:758, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
@@ -3126,6 +3126,12 @@
     "comment": ""
   },
   {
+    "term": "Use IP Location",
+    "context": "Use IP Location",
+    "reference": "Modules/Settings/DisplaysTab.qml:368",
+    "comment": ""
+  },
+  {
     "term": "Use Monospace Font",
     "context": "Use Monospace Font",
     "reference": "Modules/Notepad/NotepadSettings.qml:139",
@@ -3141,12 +3147,6 @@
     "term": "Use animated wave progress bars for media playback",
     "context": "Use animated wave progress bars for media playback",
     "reference": "Modules/Settings/WidgetTweaksTab.qml:194",
-    "comment": ""
-  },
-  {
-    "term": "Use automatic location detection (geoclue2)",
-    "context": "Use automatic location detection (geoclue2)",
-    "reference": "Modules/Settings/DisplaysTab.qml:365",
     "comment": ""
   },
   {
@@ -3194,7 +3194,7 @@
   {
     "term": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
     "context": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
-    "reference": "Modules/Settings/DisplaysTab.qml:442",
+    "reference": "Modules/Settings/DisplaysTab.qml:446",
     "comment": ""
   },
   {
