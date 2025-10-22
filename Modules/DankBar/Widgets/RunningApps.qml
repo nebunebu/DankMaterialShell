@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Common
@@ -20,13 +21,16 @@ Item {
     property real barThickness: 48
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 2 : Theme.spacingS
     property Item windowRoot: (Window.window ? Window.window.contentItem : null)
+    property int _workspaceUpdateTrigger: 0
     readonly property var sortedToplevels: {
+        _workspaceUpdateTrigger
         const toplevels = CompositorService.sortedToplevels
-        if (!toplevels)
+        if (!toplevels || toplevels.length === 0)
             return []
 
         if (SettingsData.runningAppsCurrentWorkspace) {
-            return CompositorService.filterCurrentWorkspace(toplevels, parentScreen?.name) || []
+            const filtered = CompositorService.filterCurrentWorkspace(toplevels, parentScreen?.name)
+            return filtered || []
         }
         return toplevels
     }
@@ -76,6 +80,37 @@ Item {
     width: isVertical ? barThickness : calculatedSize
     height: isVertical ? calculatedSize : barThickness
     visible: windowCount > 0
+
+    Connections {
+        target: NiriService
+        function onAllWorkspacesChanged() {
+            _workspaceUpdateTrigger++
+        }
+        function onWindowsChanged() {
+            _workspaceUpdateTrigger++
+        }
+    }
+
+    Connections {
+        target: Hyprland
+        function onFocusedWorkspaceChanged() {
+            _workspaceUpdateTrigger++
+        }
+    }
+
+    Connections {
+        target: Hyprland.workspaces
+        function onValuesChanged() {
+            _workspaceUpdateTrigger++
+        }
+    }
+
+    Connections {
+        target: Hyprland.toplevels
+        function onValuesChanged() {
+            _workspaceUpdateTrigger++
+        }
+    }
 
     Rectangle {
         id: visualBackground

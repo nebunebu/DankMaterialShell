@@ -10,6 +10,7 @@ Item {
     property string expandedSection: ""
     property var expandedWidgetData: null
     property var bluetoothCodecSelector: null
+    property string screenName: ""
 
     property var pluginDetailInstance: null
     property var widgetModel: null
@@ -205,8 +206,9 @@ Item {
     Component {
         id: brightnessDetailComponent
         BrightnessDetail {
-            currentDeviceName: root.expandedWidgetData?.deviceName || ""
+            initialDeviceName: root.expandedWidgetData?.deviceName || ""
             instanceId: root.expandedWidgetData?.instanceId || ""
+            screenName: root.screenName
         }
     }
 }

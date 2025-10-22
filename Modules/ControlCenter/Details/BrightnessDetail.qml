@@ -8,10 +8,75 @@ import qs.Widgets
 Rectangle {
     id: root
 
-    property string currentDeviceName: ""
+    property string initialDeviceName: ""
     property string instanceId: ""
+    property string screenName: ""
 
     signal deviceNameChanged(string newDeviceName)
+
+    property string currentDeviceName: ""
+
+    function resolveDeviceName() {
+        if (!DisplayService.brightnessAvailable || !DisplayService.devices || DisplayService.devices.length === 0) {
+            return ""
+        }
+
+        if (screenName && screenName.length > 0) {
+            const pins = SettingsData.brightnessDevicePins || {}
+            const pinnedDevice = pins[screenName]
+            if (pinnedDevice && pinnedDevice.length > 0) {
+                const found = DisplayService.devices.find(dev => dev.name === pinnedDevice)
+                if (found) {
+                    return found.name
+                }
+            }
+        }
+
+        if (initialDeviceName && initialDeviceName.length > 0) {
+            const found = DisplayService.devices.find(dev => dev.name === initialDeviceName)
+            if (found) {
+                return found.name
+            }
+        }
+
+        const currentDeviceNameFromService = DisplayService.currentDevice
+        if (currentDeviceNameFromService) {
+            const found = DisplayService.devices.find(dev => dev.name === currentDeviceNameFromService)
+            if (found) {
+                return found.name
+            }
+        }
+
+        return DisplayService.devices.length > 0 ? DisplayService.devices[0].name : ""
+    }
+
+    Component.onCompleted: {
+        currentDeviceName = resolveDeviceName()
+    }
+
+    property bool isPinnedToScreen: {
+        if (!screenName || screenName.length === 0) {
+            return false
+        }
+        const pins = SettingsData.brightnessDevicePins || {}
+        return pins[screenName] === currentDeviceName
+    }
+
+    function togglePinToScreen() {
+        if (!screenName || screenName.length === 0 || !currentDeviceName || currentDeviceName.length === 0) {
+            return
+        }
+
+        const pins = JSON.parse(JSON.stringify(SettingsData.brightnessDevicePins || {}))
+
+        if (isPinnedToScreen) {
+            delete pins[screenName]
+        } else {
+            pins[screenName] = currentDeviceName
+        }
+
+        SettingsData.setBrightnessDevicePins(pins)
+    }
 
     implicitHeight: brightnessContent.height + Theme.spacingM
     radius: Theme.cornerRadius
@@ -61,6 +126,74 @@ Rectangle {
                 }
             }
 
+            Rectangle {
+                width: parent.width
+                height: 40
+                visible: screenName && screenName.length > 0 && DisplayService.devices && DisplayService.devices.length > 1
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHighest
+
+                Item {
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingM
+
+                    Row {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "monitor"
+                            size: Theme.iconSize
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: screenName || "Unknown Monitor"
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    Rectangle {
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: pinRow.width + Theme.spacingS * 2
+                        height: 28
+                        radius: height / 2
+                        color: isPinnedToScreen ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.surfaceText, 0.05)
+
+                        Row {
+                            id: pinRow
+                            anchors.centerIn: parent
+                            spacing: 4
+
+                            DankIcon {
+                                name: isPinnedToScreen ? "push_pin" : "push_pin"
+                                size: 16
+                                color: isPinnedToScreen ? Theme.primary : Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            StyledText {
+                                text: isPinnedToScreen ? "Pinned" : "Pin"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: isPinnedToScreen ? Theme.primary : Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: root.togglePinToScreen()
+                        }
+                    }
+                }
+            }
+
             Repeater {
                 model: DisplayService.devices || []
                 delegate: Rectangle {
@@ -90,7 +223,7 @@ Rectangle {
                                     const deviceName = modelData.name || ""
 
                                     if (deviceClass === "backlight" || deviceClass === "ddc") {
-                                        const brightness = modelData.percentage || 50
+                                        const brightness = DisplayService.getDeviceBrightness(modelData.name)
                                         if (brightness <= 33) return "brightness_low"
                                         if (brightness <= 66) return "brightness_medium"
                                         return "brightness_high"
@@ -106,7 +239,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: (modelData.percentage || 50) + "%"
+                                text: Math.round(DisplayService.getDeviceBrightness(modelData.name)) + "%"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 anchors.horizontalCenter: parent.horizontalCenter

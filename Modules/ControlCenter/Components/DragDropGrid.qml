@@ -15,6 +15,8 @@ Column {
     property var expandedWidgetData: null
     property var bluetoothCodecSelector: null
     property bool darkModeTransitionPending: false
+    property string screenName: ""
+    property var parentScreen: null
 
     signal expandClicked(var widgetData, int globalIndex)
     signal removeWidget(int index)
@@ -182,6 +184,7 @@ Column {
                 bluetoothCodecSelector: root.bluetoothCodecSelector
                 widgetModel: root.model
                 collapseCallback: root.requestCollapse
+                screenName: root.screenName
             }
         }
     }
@@ -472,6 +475,8 @@ Column {
                 height: 14
                 deviceName: widgetData.deviceName || ""
                 instanceId: widgetData.instanceId || ""
+                screenName: root.screenName
+                parentScreen: root.parentScreen
                 property color sliderTrackColor: Theme.surfaceContainerHigh
 
                 onIconClicked: {

@@ -10,6 +10,8 @@ Row {
 
     property string deviceName: ""
     property string instanceId: ""
+    property string screenName: ""
+    property var parentScreen: null
 
     signal iconClicked()
 
@@ -19,6 +21,17 @@ Row {
     property string targetDeviceName: {
         if (!DisplayService.brightnessAvailable || !DisplayService.devices || DisplayService.devices.length === 0) {
             return ""
+        }
+
+        if (screenName && screenName.length > 0) {
+            const pins = SettingsData.brightnessDevicePins || {}
+            const pinnedDevice = pins[screenName]
+            if (pinnedDevice && pinnedDevice.length > 0) {
+                const found = DisplayService.devices.find(dev => dev.name === pinnedDevice)
+                if (found) {
+                    return found.name
+                }
+            }
         }
 
         if (deviceName && deviceName.length > 0) {
@@ -76,8 +89,10 @@ Row {
                 tooltipLoader.active = true
                 if (tooltipLoader.item) {
                     const tooltipText = targetDevice ? "bl device: " + targetDevice.name : "Backlight Control"
-                    const p = iconArea.mapToItem(null, iconArea.width / 2, 0)
-                    tooltipLoader.item.show(tooltipText, p.x, p.y - 40, null)
+                    const globalPos = iconArea.mapToGlobal(iconArea.width / 2, iconArea.height / 2)
+                    const screenY = root.parentScreen?.y ?? 0
+                    const relativeY = globalPos.y - screenY - 55
+                    tooltipLoader.item.show(tooltipText, globalPos.x, relativeY, root.parentScreen)
                 }
             }
 

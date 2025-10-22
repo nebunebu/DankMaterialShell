@@ -189,6 +189,7 @@ Singleton {
     property bool lockBeforeSuspend: false
     property bool loginctlLockIntegration: true
     property string launchPrefix: ""
+    property var brightnessDevicePins: ({})
 
     property bool gtkThemingEnabled: false
     property bool qtThemingEnabled: false
@@ -507,6 +508,7 @@ Singleton {
                 lockBeforeSuspend = settings.lockBeforeSuspend !== undefined ? settings.lockBeforeSuspend : false
                 loginctlLockIntegration = settings.loginctlLockIntegration !== undefined ? settings.loginctlLockIntegration : true
                 launchPrefix = settings.launchPrefix !== undefined ? settings.launchPrefix : ""
+                brightnessDevicePins = settings.brightnessDevicePins !== undefined ? settings.brightnessDevicePins : ({})
 
                 if (settings.configVersion === undefined) {
                     migrateFromUndefinedToV1(settings)
@@ -688,6 +690,7 @@ Singleton {
                                                 "lockBeforeSuspend": lockBeforeSuspend,
                                                 "loginctlLockIntegration": loginctlLockIntegration,
                                                 "launchPrefix": launchPrefix,
+                                                "brightnessDevicePins": brightnessDevicePins,
                                                 "configVersion": settingsConfigVersion
                                             }, null, 2))
     }
@@ -743,7 +746,7 @@ Singleton {
             "screenPreferences", "animationSpeed", "customAnimationDuration", "acMonitorTimeout", "acLockTimeout",
             "acSuspendTimeout", "acHibernateTimeout", "batteryMonitorTimeout", "batteryLockTimeout",
             "batterySuspendTimeout", "batteryHibernateTimeout", "lockBeforeSuspend",
-            "loginctlLockIntegration", "launchPrefix", "configVersion"
+            "loginctlLockIntegration", "launchPrefix", "brightnessDevicePins", "configVersion"
         ]
 
         try {
@@ -1806,6 +1809,11 @@ Singleton {
 
     function setScreenPreferences(prefs) {
         screenPreferences = prefs
+        saveSettings()
+    }
+
+    function setBrightnessDevicePins(pins) {
+        brightnessDevicePins = pins
         saveSettings()
     }
 

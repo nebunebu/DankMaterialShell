@@ -154,6 +154,8 @@ DankPopout {
                     model: widgetModel
                     bluetoothCodecSelector: bluetoothCodecSelector
                     colorPickerModal: root.colorPickerModal
+                    screenName: root.triggerScreen?.name || ""
+                    parentScreen: root.triggerScreen
                     onExpandClicked: (widgetData, globalIndex) => {
                                          root.expandedWidgetIndex = globalIndex
                                          root.expandedWidgetData = widgetData
