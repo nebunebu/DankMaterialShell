@@ -49,6 +49,30 @@ Item {
         return false
     }
 
+    function triggerWallpaperBrowserOnFocusedScreen() {
+        let focusedScreenName = ""
+        if (CompositorService.isHyprland && Hyprland.focusedWorkspace && Hyprland.focusedWorkspace.monitor) {
+            focusedScreenName = Hyprland.focusedWorkspace.monitor.name
+        } else if (CompositorService.isNiri && NiriService.currentOutput) {
+            focusedScreenName = NiriService.currentOutput
+        }
+
+        if (!focusedScreenName && barVariants.instances.length > 0) {
+            const firstBar = barVariants.instances[0]
+            firstBar.triggerWallpaperBrowser()
+            return true
+        }
+
+        for (var i = 0; i < barVariants.instances.length; i++) {
+            const barInstance = barVariants.instances[i]
+            if (barInstance.modelData && barInstance.modelData.name === focusedScreenName) {
+                barInstance.triggerWallpaperBrowser()
+                return true
+            }
+        }
+        return false
+    }
+
     Variants {
         id: barVariants
         model: SettingsData.getFilteredScreens("dankBar")
@@ -57,6 +81,7 @@ Item {
             id: barWindow
 
             property var controlCenterButtonRef: null
+            property var clockButtonRef: null
 
             function triggerControlCenter() {
                 controlCenterLoader.active = true
@@ -77,6 +102,27 @@ Item {
                 if (controlCenterLoader.item.shouldBeVisible && NetworkService.wifiEnabled) {
                     NetworkService.scanWifi()
                 }
+            }
+
+            function triggerWallpaperBrowser() {
+                dankDashPopoutLoader.active = true
+                if (!dankDashPopoutLoader.item) {
+                    return
+                }
+
+                if (clockButtonRef && dankDashPopoutLoader.item.setTriggerPosition) {
+                    const globalPos = clockButtonRef.mapToGlobal(0, 0)
+                    const pos = SettingsData.getPopupTriggerPosition(globalPos, barWindow.screen, barWindow.effectiveBarThickness, clockButtonRef.width)
+                    const section = clockButtonRef.section || "center"
+                    dankDashPopoutLoader.item.setTriggerPosition(pos.x, pos.y, pos.width, section, barWindow.screen)
+                } else {
+                    dankDashPopoutLoader.item.triggerScreen = barWindow.screen
+                }
+
+                if (!dankDashPopoutLoader.item.dashVisible) {
+                    dankDashPopoutLoader.item.currentTabIndex = 2
+                }
+                dankDashPopoutLoader.item.dashVisible = !dankDashPopoutLoader.item.dashVisible
             }
 
             readonly property var dBarLayer: {
@@ -825,6 +871,17 @@ Item {
                                             return dankDashPopoutLoader.item
                                         }
                                         parentScreen: barWindow.screen
+
+                                        Component.onCompleted: {
+                                            barWindow.clockButtonRef = this
+                                        }
+
+                                        Component.onDestruction: {
+                                            if (barWindow.clockButtonRef === this) {
+                                                barWindow.clockButtonRef = null
+                                            }
+                                        }
+
                                         onClockClicked: {
                                             dankDashPopoutLoader.active = true
                                             if (dankDashPopoutLoader.item) {
@@ -874,7 +931,7 @@ Item {
                                             dankDashPopoutLoader.active = true
                                             if (dankDashPopoutLoader.item) {
                                                 dankDashPopoutLoader.item.dashVisible = !dankDashPopoutLoader.item.dashVisible
-                                                dankDashPopoutLoader.item.currentTabIndex = 2
+                                                dankDashPopoutLoader.item.currentTabIndex = 3
                                             }
                                         }
                                     }
@@ -1206,6 +1263,17 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    IpcHandler {
+        target: "dankdash"
+
+        function wallpaper(): string {
+            if (root.triggerWallpaperBrowserOnFocusedScreen()) {
+                return "SUCCESS: Toggled wallpaper browser"
+            }
+            return "ERROR: Failed to toggle wallpaper browser"
         }
     }
 }

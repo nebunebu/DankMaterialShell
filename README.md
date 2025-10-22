@@ -411,6 +411,9 @@ binds {
    Mod+C hotkey-overlay-title="Control Center" {
       spawn "dms" "ipc" "call" "control-center" "toggle";
    }
+   Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+      spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+   }
    XF86AudioRaiseVolume allow-when-locked=true {
       spawn "dms" "ipc" "call" "audio" "increment" "3";
    }
@@ -478,6 +481,7 @@ bind = SUPER, comma, exec, dms ipc call settings toggle
 bind = SUPER, P, exec, dms ipc call notepad toggle
 bind = SUPERALT, L, exec, dms ipc call lock lock
 bind = SUPER, X, exec, dms ipc call powermenu toggle
+bind = SUPER, Y, exec, dms ipc call dankdash wallpaper
 bind = SUPER, C, exec, dms ipc call control-center toggle
 bind = SUPER, TAB, exec, dms ipc call hypr toggleOverview
 
