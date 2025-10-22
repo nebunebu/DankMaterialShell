@@ -2863,6 +2863,13 @@
     "comment": ""
   },
   {
+    "term": "Reload Plugin",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Remove",
     "translation": "",
     "context": "",
@@ -3654,6 +3661,13 @@
     "comment": ""
   },
   {
+    "term": "Uninstall Plugin",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Unpin from Dock",
     "translation": "",
     "context": "",
@@ -3690,6 +3704,13 @@
   },
   {
     "term": "Update All",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Update Plugin",
     "translation": "",
     "context": "",
     "reference": "",
