@@ -15,6 +15,7 @@ BasePill {
             implicitHeight: root.widgetThickness - root.horizontalPadding * 2
 
             DankIcon {
+                id: notifIcon
                 anchors.centerIn: parent
                 name: SessionData.doNotDisturb ? "notifications_off" : "notifications"
                 size: Theme.barIconSize(root.barThickness, -4)
@@ -22,14 +23,12 @@ BasePill {
             }
 
             Rectangle {
-                width: 8
-                height: 8
-                radius: 4
+                width: 6
+                height: 6
+                radius: 3
                 color: Theme.error
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.rightMargin: SettingsData.dankBarNoBackground ? 0 : 6
-                anchors.topMargin: SettingsData.dankBarNoBackground ? 0 : 6
+                anchors.right: notifIcon.right
+                anchors.top: notifIcon.top
                 visible: root.hasUnread
             }
         }
