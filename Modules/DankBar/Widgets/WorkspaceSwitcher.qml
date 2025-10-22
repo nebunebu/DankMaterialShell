@@ -18,7 +18,7 @@ Item {
     property var hyprlandOverviewLoader: null
     property var parentScreen: null
     readonly property var sortedToplevels: {
-        return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, parentScreen?.name);
+        return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, screenName);
     }
     property int currentWorkspace: {
         if (CompositorService.isNiri) {
