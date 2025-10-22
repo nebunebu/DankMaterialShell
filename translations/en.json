@@ -386,7 +386,7 @@
   {
     "term": "Back",
     "context": "Back",
-    "reference": "Modules/DankBar/Widgets/SystemTrayBar.qml:467",
+    "reference": "Modules/DankBar/Widgets/SystemTrayBar.qml:479",
     "comment": ""
   },
   {
@@ -620,7 +620,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:717",
+    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:728",
     "comment": ""
   },
   {
