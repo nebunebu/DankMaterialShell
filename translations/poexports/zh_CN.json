@@ -1233,7 +1233,7 @@
     "Refresh": "刷新"
   },
   "Reload Plugin": {
-    "Reload Plugin": ""
+    "Reload Plugin": "重载插件"
   },
   "Remove": {
     "Remove": "移除"
@@ -1575,7 +1575,7 @@
     "Turn off monitors after": "在此时间后关闭显示器"
   },
   "Uninstall Plugin": {
-    "Uninstall Plugin": ""
+    "Uninstall Plugin": "卸载插件"
   },
   "Unpin from Dock": {
     "Unpin from Dock": "从程序坞取消固定"
@@ -1596,7 +1596,7 @@
     "Update All": "更新所有"
   },
   "Update Plugin": {
-    "Update Plugin": ""
+    "Update Plugin": "更新插件"
   },
   "Use 24-hour time format instead of 12-hour AM/PM": {
     "Use 24-hour time format instead of 12-hour AM/PM": "改用24小时制显示时间"

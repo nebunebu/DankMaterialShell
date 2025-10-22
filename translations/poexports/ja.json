@@ -1233,7 +1233,7 @@
     "Refresh": "リフレッシュ"
   },
   "Reload Plugin": {
-    "Reload Plugin": ""
+    "Reload Plugin": "プラグインをリロード"
   },
   "Remove": {
     "Remove": "削除"
@@ -1575,7 +1575,7 @@
     "Turn off monitors after": "後にモニターの電源を切る"
   },
   "Uninstall Plugin": {
-    "Uninstall Plugin": ""
+    "Uninstall Plugin": "プラグインをアンインストール"
   },
   "Unpin from Dock": {
     "Unpin from Dock": "ドックから固定を解除"
@@ -1596,7 +1596,7 @@
     "Update All": "すべて更新"
   },
   "Update Plugin": {
-    "Update Plugin": ""
+    "Update Plugin": "プラグインを更新"
   },
   "Use 24-hour time format instead of 12-hour AM/PM": {
     "Use 24-hour time format instead of 12-hour AM/PM": "12時間制のAM/PMではなく、24時間表記を使用"
