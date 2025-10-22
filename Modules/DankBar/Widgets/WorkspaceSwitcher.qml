@@ -15,6 +15,7 @@ Rectangle {
     property string screenName: ""
     property real widgetHeight: 30
     property real barThickness: 48
+    property var hyprlandOverviewLoader: null
     readonly property var sortedToplevels: {
         return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, parentScreen?.name);
     }
@@ -244,10 +245,16 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        acceptedButtons: Qt.NoButton
+        acceptedButtons: Qt.RightButton
 
         property real scrollAccumulator: 0
         property real touchpadThreshold: 500
+
+        onClicked: mouse => {
+            if (mouse.button === Qt.RightButton && CompositorService.isHyprland && root.hyprlandOverviewLoader?.item) {
+                root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
+            }
+        }
 
         onWheel: wheel => {
                      const deltaY = wheel.angleDelta.y

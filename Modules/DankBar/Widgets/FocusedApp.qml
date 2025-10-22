@@ -74,14 +74,20 @@ Rectangle {
                 return false
             }
 
-            const hyprlandToplevels = Array.from(Hyprland.toplevels.values)
-            const activeHyprToplevel = hyprlandToplevels.find(t => t.wayland === activeWindow)
+            try {
+                if (!Hyprland.toplevels) return false
+                const hyprlandToplevels = Array.from(Hyprland.toplevels.values)
+                const activeHyprToplevel = hyprlandToplevels.find(t => t?.wayland === activeWindow)
 
-            if (!activeHyprToplevel || !activeHyprToplevel.workspace) {
+                if (!activeHyprToplevel || !activeHyprToplevel.workspace) {
+                    return false
+                }
+
+                return activeHyprToplevel.workspace.id === Hyprland.focusedWorkspace.id
+            } catch (e) {
+                console.error("FocusedApp: hasWindowsOnCurrentWorkspace error:", e)
                 return false
             }
-
-            return activeHyprToplevel.workspace.id === Hyprland.focusedWorkspace.id
         }
 
         return activeWindow && activeWindow.title

@@ -30,22 +30,28 @@ Rectangle {
         if (!SettingsData.runningAppsGroupByApp) {
             return [];
         }
-        const appGroups = new Map();
-        sortedToplevels.forEach((toplevel, index) => {
-            const appId = toplevel.appId || "unknown";
-            if (!appGroups.has(appId)) {
-                appGroups.set(appId, {
-                    appId: appId,
-                    windows: []
+        try {
+            const appGroups = new Map();
+            sortedToplevels.forEach((toplevel, index) => {
+                if (!toplevel) return;
+                const appId = toplevel?.appId || "unknown";
+                if (!appGroups.has(appId)) {
+                    appGroups.set(appId, {
+                        appId: appId,
+                        windows: []
+                    });
+                }
+                appGroups.get(appId).windows.push({
+                    toplevel: toplevel,
+                    windowId: index,
+                    windowTitle: toplevel?.title || "(Unnamed)"
                 });
-            }
-            appGroups.get(appId).windows.push({
-                toplevel: toplevel,
-                windowId: index,
-                windowTitle: toplevel.title || "(Unnamed)"
             });
-        });
-        return Array.from(appGroups.values());
+            return Array.from(appGroups.values());
+        } catch (e) {
+            console.error("RunningApps: groupedWindows error:", e);
+            return [];
+        }
     }
     readonly property int windowCount: SettingsData.runningAppsGroupByApp ? groupedWindows.length : sortedToplevels.length
     readonly property int calculatedSize: {

@@ -350,13 +350,6 @@
     "comment": ""
   },
   {
-    "term": "Auto-location",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Auto-saving...",
     "translation": "",
     "context": "",
@@ -386,6 +379,13 @@
   },
   {
     "term": "Automatically cycle through wallpapers in the same folder",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Automatically detect location based on IP address",
     "translation": "",
     "context": "",
     "reference": "",
@@ -819,6 +819,13 @@
     "comment": ""
   },
   {
+    "term": "Configuration activated",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "translation": "",
     "context": "",
@@ -848,6 +855,13 @@
   },
   {
     "term": "Connected Displays",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Connection failed. Check password and try again.",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1134,6 +1148,13 @@
     "comment": ""
   },
   {
+    "term": "Disconnected from WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Disk",
     "translation": "",
     "context": "",
@@ -1142,6 +1163,13 @@
   },
   {
     "term": "Disk Usage",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Dismiss",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1386,6 +1414,34 @@
     "comment": ""
   },
   {
+    "term": "Failed to activate configuration",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to connect to ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to enable WiFi",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Failed to set profile image",
     "translation": "",
     "context": "",
@@ -1394,6 +1450,13 @@
   },
   {
     "term": "Failed to set profile image: ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to start connection to ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1498,6 +1561,13 @@
     "comment": ""
   },
   {
+    "term": "Forgot network ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Format Legend",
     "translation": "",
     "context": "",
@@ -1554,7 +1624,7 @@
     "comment": ""
   },
   {
-    "term": "Geoclue service not running - cannot auto-detect location",
+    "term": "Gamma control not available. Requires DMS API v6+.",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1730,6 +1800,13 @@
   },
   {
     "term": "Include Transitions",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Incorrect password",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3647,6 +3724,13 @@
     "comment": ""
   },
   {
+    "term": "Use IP Location",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Use Monospace Font",
     "translation": "",
     "context": "",
@@ -3662,13 +3746,6 @@
   },
   {
     "term": "Use animated wave progress bars for media playback",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Use automatic location detection (geoclue2)",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3830,6 +3907,20 @@
   },
   {
     "term": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "WiFi disabled",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "WiFi enabled",
     "translation": "",
     "context": "",
     "reference": "",

@@ -441,7 +441,10 @@ Singleton {
         if (savePrefs && typeof SessionData !== "undefined" && !isGreeterMode)
             SessionData.setLightMode(light)
         if (!isGreeterMode) {
-            PortalService.setLightMode(light)
+            // Skip with matugen becuase, our script runner will do it.
+            if (!matugenAvailable) {
+                PortalService.setLightMode(light)
+            }
             generateSystemThemesFromCurrentTheme()
         }
     }
@@ -719,15 +722,16 @@ Singleton {
 
         Quickshell.execDetached(["sh", "-c", `mkdir -p '${stateDir}' && cat > '${desiredPath}' << 'EOF'\n${json}\nEOF`])
         workerRunning = true
+        const syncModeWithPortal = (typeof SettingsData !== "undefined" && SettingsData.syncModeWithPortal) ? "true" : "false"
         if (rawWallpaperPath.startsWith("we:")) {
             console.log("Theme: Starting matugen worker (WE wallpaper)")
             systemThemeGenerator.command = [
                 "sh", "-c",
-                `sleep 1 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' '${configDir}' --run`
+                `sleep 1 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' '${configDir}' '${syncModeWithPortal}' --run`
             ]
         } else {
             console.log("Theme: Starting matugen worker")
-            systemThemeGenerator.command = [shellDir + "/scripts/matugen-worker.sh", stateDir, shellDir, configDir, "--run"]
+            systemThemeGenerator.command = [shellDir + "/scripts/matugen-worker.sh", stateDir, shellDir, configDir, syncModeWithPortal, "--run"]
         }
         systemThemeGenerator.running = true
     }
