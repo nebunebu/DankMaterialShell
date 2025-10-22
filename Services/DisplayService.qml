@@ -66,9 +66,11 @@ Singleton {
         }
     }
 
-    function setBrightness(percentage, device) {
+    function setBrightness(percentage, device, suppressOsd) {
         setBrightnessInternal(percentage, device)
-        brightnessChanged()
+        if (!suppressOsd) {
+            brightnessChanged()
+        }
     }
 
     function setCurrentDevice(deviceName, saveToSession = false) {

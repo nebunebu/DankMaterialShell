@@ -136,7 +136,7 @@ Row {
         value: targetBrightness
         onSliderValueChanged: function(newValue) {
             if (DisplayService.brightnessAvailable && targetDeviceName) {
-                DisplayService.setBrightness(newValue, targetDeviceName)
+                DisplayService.setBrightness(newValue, targetDeviceName, true)
             }
         }
         thumbOutlineColor: Theme.surfaceContainer
