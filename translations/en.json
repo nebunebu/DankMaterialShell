@@ -620,7 +620,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:745",
+    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:780",
     "comment": ""
   },
   {
@@ -890,7 +890,7 @@
   {
     "term": "DMS_SOCKET not available",
     "context": "DMS_SOCKET not available",
-    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:197",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:200",
     "comment": ""
   },
   {
@@ -1904,7 +1904,7 @@
   {
     "term": "NM not supported",
     "context": "NM not supported",
-    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:199",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:202",
     "comment": ""
   },
   {
@@ -3512,7 +3512,7 @@
   {
     "term": "update dms for NM integration.",
     "context": "update dms for NM integration.",
-    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:201",
+    "reference": "Modules/ControlCenter/Components/DragDropGrid.qml:204",
     "comment": ""
   },
   {
