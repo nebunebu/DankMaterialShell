@@ -7,7 +7,7 @@ import qs.Common
 import qs.Services
 import qs.Widgets
 
-Rectangle {
+Item {
     id: root
 
     property bool isVertical: axis?.isVertical ?? false
@@ -66,22 +66,29 @@ Rectangle {
         }
     }
 
-    width: isVertical ? widgetThickness : calculatedSize
-    height: isVertical ? calculatedSize : widgetThickness
-    radius: SettingsData.dankBarNoBackground ? 0 : Theme.cornerRadius
+    width: isVertical ? barThickness : calculatedSize
+    height: isVertical ? calculatedSize : barThickness
     visible: windowCount > 0
-    clip: false
-    color: {
-        if (windowCount === 0) {
-            return "transparent";
-        }
 
-        if (SettingsData.dankBarNoBackground) {
-            return "transparent";
-        }
+    Rectangle {
+        id: visualBackground
+        width: root.isVertical ? root.widgetThickness : root.calculatedSize
+        height: root.isVertical ? root.calculatedSize : root.widgetThickness
+        anchors.centerIn: parent
+        radius: SettingsData.dankBarNoBackground ? 0 : Theme.cornerRadius
+        clip: false
+        color: {
+            if (windowCount === 0) {
+                return "transparent";
+            }
 
-        const baseColor = Theme.widgetBaseBackgroundColor;
-        return Qt.rgba(baseColor.r, baseColor.g, baseColor.b, baseColor.a * Theme.widgetTransparency);
+            if (SettingsData.dankBarNoBackground) {
+                return "transparent";
+            }
+
+            const baseColor = Theme.widgetBaseBackgroundColor;
+            return Qt.rgba(baseColor.r, baseColor.g, baseColor.b, baseColor.a * Theme.widgetTransparency);
+        }
     }
 
     MouseArea {
@@ -210,12 +217,16 @@ Rectangle {
                     }
                     return appName + (windowTitle ? " • " + windowTitle : "")
                 }
+                readonly property real visualWidth: SettingsData.runningAppsCompactMode ? 24 : (24 + Theme.spacingXS + 120)
 
-                width: SettingsData.runningAppsCompactMode ? 24 : (24 + Theme.spacingXS + 120)
-                height: 24
+                width: visualWidth
+                height: root.barThickness
 
                 Rectangle {
-                    anchors.fill: parent
+                    id: visualContent
+                    width: delegateItem.visualWidth
+                    height: 24
+                    anchors.centerIn: parent
                     radius: Theme.cornerRadius
                     color: {
                         if (isFocused) {
@@ -236,8 +247,6 @@ Rectangle {
                                                                  0.1) : "transparent";
                         }
                     }
-
-                }
 
                 // App icon
                 IconImage {
@@ -334,10 +343,10 @@ Rectangle {
                     elide: Text.ElideRight
                     maximumLineCount: 1
                 }
+                }
 
                 MouseArea {
                     id: mouseArea
-
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
@@ -442,12 +451,16 @@ Rectangle {
                     }
                     return appName + (windowTitle ? " • " + windowTitle : "")
                 }
+                readonly property real visualWidth: SettingsData.runningAppsCompactMode ? 24 : (24 + Theme.spacingXS + 120)
 
-                width: SettingsData.runningAppsCompactMode ? 24 : (24 + Theme.spacingXS + 120)
+                width: root.barThickness
                 height: 24
 
                 Rectangle {
-                    anchors.fill: parent
+                    id: visualContent
+                    width: delegateItem.visualWidth
+                    height: 24
+                    anchors.centerIn: parent
                     radius: Theme.cornerRadius
                     color: {
                         if (isFocused) {
@@ -468,8 +481,6 @@ Rectangle {
                                                                  0.1) : "transparent";
                         }
                     }
-
-                }
 
                 IconImage {
                     id: iconImg
@@ -563,10 +574,10 @@ Rectangle {
                     elide: Text.ElideRight
                     maximumLineCount: 1
                 }
+                }
 
                 MouseArea {
                     id: mouseArea
-
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor

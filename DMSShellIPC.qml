@@ -374,4 +374,15 @@ Item {
 
         target: "hypr"
     }
+
+    IpcHandler {
+        function wallpaper(): string {
+            if (root.dankBarLoader.item && root.dankBarLoader.item.triggerWallpaperBrowserOnFocusedScreen()) {
+                return "SUCCESS: Toggled wallpaper browser"
+            }
+            return "ERROR: Failed to toggle wallpaper browser"
+        }
+
+        target: "dankdash"
+    }
 }
