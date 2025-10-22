@@ -15,7 +15,6 @@ Item {
     required property var notepadSlideoutVariants
     required property var hyprKeybindsModalLoader
     required property var dankBarLoader
-    required property var hyprlandOverviewLoader
 
     IpcHandler {
         function open() {
@@ -346,30 +345,6 @@ Item {
                 return "HYPR_KEYBINDS_TOGGLE_SUCCESS"
             }
             return "HYPR_KEYBINDS_TOGGLE_FAILED"
-        }
-
-        function toggleOverview(): string {
-            if (!CompositorService.isHyprland || !root.hyprlandOverviewLoader.item) {
-                return "HYPR_NOT_AVAILABLE"
-            }
-            root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
-            return root.hyprlandOverviewLoader.item.overviewOpen ? "OVERVIEW_OPEN_SUCCESS" : "OVERVIEW_CLOSE_SUCCESS"
-        }
-
-        function closeOverview(): string {
-            if (!CompositorService.isHyprland || !root.hyprlandOverviewLoader.item) {
-                return "HYPR_NOT_AVAILABLE"
-            }
-            root.hyprlandOverviewLoader.item.overviewOpen = false
-            return "OVERVIEW_CLOSE_SUCCESS"
-        }
-
-        function openOverview(): string {
-            if (!CompositorService.isHyprland || !root.hyprlandOverviewLoader.item) {
-                return "HYPR_NOT_AVAILABLE"
-            }
-            root.hyprlandOverviewLoader.item.overviewOpen = true
-            return "OVERVIEW_OPEN_SUCCESS"
         }
 
         target: "hypr"

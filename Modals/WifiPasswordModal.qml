@@ -15,23 +15,12 @@ DankModal {
     property string wifiAnonymousIdentityInput: ""
     property string wifiDomainInput: ""
 
-    property bool isPromptMode: false
-    property string promptToken: ""
-    property string promptReason: ""
-    property var promptFields: []
-    property string promptSetting: ""
-
     function show(ssid) {
         wifiPasswordSSID = ssid
         wifiPasswordInput = ""
         wifiUsernameInput = ""
         wifiAnonymousIdentityInput = ""
         wifiDomainInput = ""
-        isPromptMode = false
-        promptToken = ""
-        promptReason = ""
-        promptFields = []
-        promptSetting = ""
 
         const network = NetworkService.wifiNetworks.find(n => n.ssid === ssid)
         requiresEnterprise = network?.enterprise || false
@@ -40,41 +29,6 @@ DankModal {
         Qt.callLater(() => {
                          if (contentLoader.item) {
                              if (requiresEnterprise && contentLoader.item.usernameInput) {
-                                 contentLoader.item.usernameInput.forceActiveFocus()
-                             } else if (contentLoader.item.passwordInput) {
-                                 contentLoader.item.passwordInput.forceActiveFocus()
-                             }
-                         }
-                     })
-    }
-
-    function showFromPrompt(token, ssid, setting, fields, hints, reason) {
-        wifiPasswordSSID = ssid
-        isPromptMode = true
-        promptToken = token
-        promptReason = reason
-        promptFields = fields || []
-        promptSetting = setting || "802-11-wireless-security"
-
-        requiresEnterprise = setting === "802-1x"
-
-        if (reason === "wrong-password") {
-            wifiPasswordInput = ""
-            wifiUsernameInput = ""
-        } else {
-            wifiPasswordInput = ""
-            wifiUsernameInput = ""
-            wifiAnonymousIdentityInput = ""
-            wifiDomainInput = ""
-        }
-
-        open()
-        Qt.callLater(() => {
-                         if (contentLoader.item) {
-                             if (reason === "wrong-password" && contentLoader.item.passwordInput) {
-                                 contentLoader.item.passwordInput.text = ""
-                                 contentLoader.item.passwordInput.forceActiveFocus()
-                             } else if (requiresEnterprise && contentLoader.item.usernameInput) {
                                  contentLoader.item.usernameInput.forceActiveFocus()
                              } else if (contentLoader.item.passwordInput) {
                                  contentLoader.item.passwordInput.forceActiveFocus()
@@ -106,9 +60,6 @@ DankModal {
                      })
     }
     onBackgroundClicked: () => {
-                             if (isPromptMode) {
-                                 NetworkService.cancelCredentials(promptToken)
-                             }
                              close()
                              wifiPasswordInput = ""
                              wifiUsernameInput = ""
@@ -139,9 +90,6 @@ DankModal {
             anchors.fill: parent
             focus: true
             Keys.onEscapePressed: event => {
-                                      if (isPromptMode) {
-                                          NetworkService.cancelCredentials(promptToken)
-                                      }
                                       close()
                                       wifiPasswordInput = ""
                                       wifiUsernameInput = ""
@@ -169,28 +117,12 @@ DankModal {
                             font.weight: Font.Medium
                         }
 
-                        Column {
+                        StyledText {
+                            text: requiresEnterprise ? I18n.tr("Enter credentials for ") + wifiPasswordSSID : I18n.tr("Enter password for ") + wifiPasswordSSID
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceTextMedium
                             width: parent.width
-                            spacing: Theme.spacingXS
-
-                            StyledText {
-                                text: {
-                                    const prefix = requiresEnterprise ? I18n.tr("Enter credentials for ") : I18n.tr("Enter password for ")
-                                    return prefix + wifiPasswordSSID
-                                }
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceTextMedium
-                                width: parent.width
-                                elide: Text.ElideRight
-                            }
-
-                            StyledText {
-                                visible: isPromptMode && promptReason === "wrong-password"
-                                text: I18n.tr("Incorrect password")
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.error
-                                width: parent.width
-                            }
+                            elide: Text.ElideRight
                         }
                     }
 
@@ -199,9 +131,6 @@ DankModal {
                         iconSize: Theme.iconSize - 4
                         iconColor: Theme.surfaceText
                         onClicked: () => {
-                                       if (isPromptMode) {
-                                           NetworkService.cancelCredentials(promptToken)
-                                       }
                                        close()
                                        wifiPasswordInput = ""
                                        wifiUsernameInput = ""
@@ -279,26 +208,14 @@ DankModal {
                                           wifiPasswordInput = text
                                       }
                         onAccepted: () => {
-                                        if (isPromptMode) {
-                                            const secrets = {}
-                                            if (promptSetting === "802-11-wireless-security") {
-                                                secrets["psk"] = passwordInput.text
-                                            } else if (promptSetting === "802-1x") {
-                                                if (usernameInput.text) secrets["identity"] = usernameInput.text
-                                                if (passwordInput.text) secrets["password"] = passwordInput.text
-                                                if (wifiAnonymousIdentityInput) secrets["anonymous-identity"] = wifiAnonymousIdentityInput
-                                            }
-                                            NetworkService.submitCredentials(promptToken, secrets, true)
-                                        } else {
-                                            const username = requiresEnterprise ? usernameInput.text : ""
-                                            NetworkService.connectToWifi(
-                                                wifiPasswordSSID,
-                                                passwordInput.text,
-                                                username,
-                                                wifiAnonymousIdentityInput,
-                                                wifiDomainInput
-                                            )
-                                        }
+                                        const username = requiresEnterprise ? usernameInput.text : ""
+                                        NetworkService.connectToWifi(
+                                            wifiPasswordSSID,
+                                            passwordInput.text,
+                                            username,
+                                            wifiAnonymousIdentityInput,
+                                            wifiDomainInput
+                                        )
                                         close()
                                         wifiPasswordInput = ""
                                         wifiUsernameInput = ""
@@ -478,9 +395,6 @@ DankModal {
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: () => {
-                                               if (isPromptMode) {
-                                                   NetworkService.cancelCredentials(promptToken)
-                                               }
                                                close()
                                                wifiPasswordInput = ""
                                                wifiUsernameInput = ""
@@ -516,26 +430,14 @@ DankModal {
                                 cursorShape: Qt.PointingHandCursor
                                 enabled: parent.enabled
                                 onClicked: () => {
-                                               if (isPromptMode) {
-                                                   const secrets = {}
-                                                   if (promptSetting === "802-11-wireless-security") {
-                                                       secrets["psk"] = passwordInput.text
-                                                   } else if (promptSetting === "802-1x") {
-                                                       if (usernameInput.text) secrets["identity"] = usernameInput.text
-                                                       if (passwordInput.text) secrets["password"] = passwordInput.text
-                                                       if (wifiAnonymousIdentityInput) secrets["anonymous-identity"] = wifiAnonymousIdentityInput
-                                                   }
-                                                   NetworkService.submitCredentials(promptToken, secrets, true)
-                                               } else {
-                                                   const username = requiresEnterprise ? usernameInput.text : ""
-                                                   NetworkService.connectToWifi(
-                                                       wifiPasswordSSID,
-                                                       passwordInput.text,
-                                                       username,
-                                                       wifiAnonymousIdentityInput,
-                                                       wifiDomainInput
-                                                   )
-                                               }
+                                               const username = requiresEnterprise ? usernameInput.text : ""
+                                               NetworkService.connectToWifi(
+                                                   wifiPasswordSSID,
+                                                   passwordInput.text,
+                                                   username,
+                                                   wifiAnonymousIdentityInput,
+                                                   wifiDomainInput
+                                               )
                                                close()
                                                wifiPasswordInput = ""
                                                wifiUsernameInput = ""

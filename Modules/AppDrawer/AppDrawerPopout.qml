@@ -404,29 +404,16 @@ DankPopout {
                                         width: appList.iconSize
                                         height: appList.iconSize
                                         anchors.verticalCenter: parent.verticalCenter
-                                        visible: model.icon !== undefined && model.icon !== ""
-
-                                        property string iconValue: model.icon || ""
-                                        property bool isMaterial: iconValue.indexOf("material:") === 0
-                                        property string materialName: isMaterial ? iconValue.substring(9) : ""
-
-                                        DankIcon {
-                                            anchors.centerIn: parent
-                                            name: parent.materialName
-                                            size: appList.iconSize - Theme.spacingM
-                                            color: Theme.surfaceText
-                                            visible: parent.isMaterial
-                                        }
 
                                         IconImage {
                                             id: listIconImg
 
                                             anchors.fill: parent
                                             anchors.margins: Theme.spacingXS
-                                            source: parent.isMaterial ? "" : Quickshell.iconPath(parent.iconValue, true)
+                                            source: Quickshell.iconPath(model.icon, true)
                                             smooth: true
                                             asynchronous: true
-                                            visible: !parent.isMaterial && status === Image.Ready
+                                            visible: status === Image.Ready
                                         }
 
                                         Rectangle {
@@ -434,7 +421,7 @@ DankPopout {
                                             anchors.leftMargin: Theme.spacingS
                                             anchors.rightMargin: Theme.spacingS
                                             anchors.bottomMargin: Theme.spacingM
-                                            visible: !parent.isMaterial && listIconImg.status !== Image.Ready
+                                            visible: !listIconImg.visible
                                             color: Theme.surfaceLight
                                             radius: Theme.cornerRadius
                                             border.width: 0
@@ -448,12 +435,11 @@ DankPopout {
                                                 font.weight: Font.Bold
                                             }
                                         }
-
                                     }
 
                                     Column {
                                         anchors.verticalCenter: parent.verticalCenter
-                                        width: (model.icon !== undefined && model.icon !== "") ? (parent.width - appList.iconSize - Theme.spacingL) : parent.width
+                                        width: parent.width - appList.iconSize - Theme.spacingL
                                         spacing: Theme.spacingXS
 
                                         StyledText {
@@ -527,7 +513,6 @@ DankPopout {
                             property int baseCellWidth: adaptiveColumns ? Math.max(minCellWidth, Math.min(maxCellWidth, width / columns)) : (width - Theme.spacingS * 2) / columns
                             property int baseCellHeight: baseCellWidth + 20
                             property int actualColumns: adaptiveColumns ? Math.floor(width / cellWidth) : columns
-
                             property int remainingSpace: width - (actualColumns * cellWidth)
 
                             signal keyboardNavigationReset
@@ -593,19 +578,6 @@ DankPopout {
                                         width: iconSize
                                         height: iconSize
                                         anchors.horizontalCenter: parent.horizontalCenter
-                                        visible: model.icon !== undefined && model.icon !== ""
-
-                                        property string iconValue: model.icon || ""
-                                        property bool isMaterial: iconValue.indexOf("material:") === 0
-                                        property string materialName: isMaterial ? iconValue.substring(9) : ""
-
-                                        DankIcon {
-                                            anchors.centerIn: parent
-                                            name: parent.materialName
-                                            size: parent.iconSize - Theme.spacingL
-                                            color: Theme.surfaceText
-                                            visible: parent.isMaterial
-                                        }
 
                                         IconImage {
                                             id: gridIconImg
@@ -614,10 +586,10 @@ DankPopout {
                             anchors.leftMargin: Theme.spacingS
                             anchors.rightMargin: Theme.spacingS
                             anchors.bottomMargin: Theme.spacingS
-                                            source: parent.isMaterial ? "" : Quickshell.iconPath(parent.iconValue, true)
+                                            source: Quickshell.iconPath(model.icon, true)
                                             smooth: true
                                             asynchronous: true
-                                            visible: !parent.isMaterial && status === Image.Ready
+                                            visible: status === Image.Ready
                                         }
 
                                         Rectangle {
@@ -625,7 +597,7 @@ DankPopout {
                             anchors.leftMargin: Theme.spacingS
                             anchors.rightMargin: Theme.spacingS
                             anchors.bottomMargin: Theme.spacingS
-                                            visible: !parent.isMaterial && gridIconImg.status !== Image.Ready
+                                            visible: !gridIconImg.visible
                                             color: Theme.surfaceLight
                                             radius: Theme.cornerRadius
                                             border.width: 0

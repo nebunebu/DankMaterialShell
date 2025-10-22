@@ -7,10 +7,6 @@ import qs.Widgets
 Rectangle {
     id: resultsContainer
 
-    // DEVELOPER NOTE: This component renders the Spotlight launcher (accessed via Mod+Space).
-    // Changes to launcher behavior, especially item rendering, filtering, or model structure,
-    // likely require corresponding updates in Modules/AppDrawer/AppLauncher.qml and vice versa.
-
     property var appLauncher: null
     property var contextMenu: null
 
@@ -94,32 +90,19 @@ Rectangle {
                     width: resultsList.iconSize
                     height: resultsList.iconSize
                     anchors.verticalCenter: parent.verticalCenter
-                    visible: model.icon !== undefined && model.icon !== ""
-
-                    property string iconValue: model.icon || ""
-                    property bool isMaterial: iconValue.indexOf("material:") === 0
-                    property string materialName: isMaterial ? iconValue.substring(9) : ""
-
-                    DankIcon {
-                        anchors.centerIn: parent
-                        name: parent.materialName
-                        size: resultsList.iconSize
-                        color: Theme.surfaceText
-                        visible: parent.isMaterial
-                    }
 
                     IconImage {
                         id: listIconImg
 
                         anchors.fill: parent
-                        source: parent.isMaterial ? "" : Quickshell.iconPath(parent.iconValue, true)
+                        source: Quickshell.iconPath(model.icon, true)
                         asynchronous: true
-                        visible: !parent.isMaterial && status === Image.Ready
+                        visible: status === Image.Ready
                     }
 
                     Rectangle {
                         anchors.fill: parent
-                        visible: !parent.isMaterial && !listIconImg.visible
+                        visible: !listIconImg.visible
                         color: Theme.surfaceLight
                         radius: Theme.cornerRadius
                         border.width: 1
@@ -137,7 +120,7 @@ Rectangle {
 
                 Column {
                     anchors.verticalCenter: parent.verticalCenter
-                    width: (model.icon !== undefined && model.icon !== "") ? (parent.width - resultsList.iconSize - Theme.spacingL) : parent.width
+                    width: parent.width - resultsList.iconSize - Theme.spacingL
                     spacing: Theme.spacingXS
 
                     StyledText {
@@ -272,33 +255,20 @@ Rectangle {
                     width: iconSize
                     height: iconSize
                     anchors.horizontalCenter: parent.horizontalCenter
-                    visible: model.icon !== undefined && model.icon !== ""
-
-                    property string iconValue: model.icon || ""
-                    property bool isMaterial: iconValue.indexOf("material:") === 0
-                    property string materialName: isMaterial ? iconValue.substring(9) : ""
-
-                    DankIcon {
-                        anchors.centerIn: parent
-                        name: parent.materialName
-                        size: parent.iconSize
-                        color: Theme.surfaceText
-                        visible: parent.isMaterial
-                    }
 
                     IconImage {
                         id: gridIconImg
 
                         anchors.fill: parent
-                        source: parent.isMaterial ? "" : Quickshell.iconPath(parent.iconValue, true)
+                        source: Quickshell.iconPath(model.icon, true)
                         smooth: true
                         asynchronous: true
-                        visible: !parent.isMaterial && status === Image.Ready
+                        visible: status === Image.Ready
                     }
 
                     Rectangle {
                         anchors.fill: parent
-                        visible: !parent.isMaterial && !gridIconImg.visible
+                        visible: !gridIconImg.visible
                         color: Theme.surfaceLight
                         radius: Theme.cornerRadius
                         border.width: 1

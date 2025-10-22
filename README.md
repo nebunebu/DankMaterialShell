@@ -258,7 +258,7 @@ There are a lot of possible configurations that you can enable/disable in the fl
 
 #### Other Distributions - via manual installation
 
-#### 1. Install Quickshell (Varies by Distribution)
+**1. Install Quickshell (Varies by Distribution)**
 ```bash
 # Arch
 paru -S quickshell-git
@@ -267,61 +267,43 @@ sudo dnf copr enable avengemedia/danklinux && sudo dnf install quickshell-git
 # ! TODO - document other distros
 ```
 
-#### 2. Install fonts
+**2. Install fonts**
 *Inter Variable* and *Fira Code* are not strictly required, but they are the default fonts of dms.
 
-#### 2.1 Install Material Symbols
+**2.1 Install Material Symbols**
 ```bash
 sudo curl -L "https://github.com/google/material-design-icons/raw/master/variablefont/MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D.ttf" -o /usr/share/fonts/MaterialSymbolsRounded.ttf
 ```
-#### 2.2 Install Inter Variable
+**2.2 Install Inter Variable**
 ```bash
 sudo curl -L "https://github.com/rsms/inter/raw/refs/tags/v4.1/docs/font-files/InterVariable.ttf" -o /usr/share/fonts/InterVariable.ttf
 ```
 
-#### 2.3 Install Fira Code (monospace font)
+**2.3 Install Fira Code (monospace font)**
 ```bash
 sudo curl -L "https://github.com/tonsky/FiraCode/releases/latest/download/FiraCode-Regular.ttf" -o /usr/share/fonts/FiraCode-Regular.ttf
 ```
 
-#### 2.4 Refresh font cache
+**2.4 Refresh font cache**
 ```bash
 fc-cache -fv
 ```
 
-#### 3. Install the shell
+**3. Install the shell**
 
-#### 3.1. Clone latest QML
-
+**3.1. Clone latest master**
 ```bash
 mkdir ~/.config/quickshell && git clone https://github.com/AvengeMedia/DankMaterialShell.git ~/.config/quickshell/dms
 ```
 
-**FOR Stable Version, Checkout the latest tag**
-
-```bash
-cd ~/.config/quickshell/dms
-# You'll have to re-run this, to update to the latest version.
-git checkout $(git describe --tags --abbrev=0)
-```
-
-#### 3.2. Install latest dms CLI
-
+**3.2. Install latest dms CLI**
 ```bash
 sudo sh -c "curl -L https://github.com/AvengeMedia/danklinux/releases/latest/download/dms-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').gz | gunzip | tee /usr/local/bin/dms > /dev/null && chmod +x /usr/local/bin/dms"
 ```
-**Note:** this is the latest *stable* dms CLI. If you are using QML/master (not pinned to a tag), then you may  periodically be missing features, etc.
 
-If preferred, you can build the dms-cli yourself (requires GO 1.24+)
+**4. Optional Features (system monitoring, clipboard history, brightness controls, etc.)**
 
-```bash
-git clone https://github.com/AvengeMedia/danklinux.git && cd danklinux
-make && sudo make install
-```
-
-#### 4. Optional Features (system monitoring, clipboard history, brightness controls, etc.)
-
-#### 4.1 Core optional dependencies
+**4.1 Core optional dependencies**
 ```bash
 # Arch Linux
 sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia
@@ -335,7 +317,7 @@ Note: by enabling and installing the avengemedia/dms copr above, these core depe
 
 *Other distros will just need to find sources for the above packages*
 
-#### 4.2 - dgop manual installation
+**4.2 - dgop manual installation**
 
 `dgop` is available via AUR and a nix flake, other distributions can install it manually.
 
@@ -411,6 +393,9 @@ binds {
    Mod+C hotkey-overlay-title="Control Center" {
       spawn "dms" "ipc" "call" "control-center" "toggle";
    }
+   Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+      spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+   }
    XF86AudioRaiseVolume allow-when-locked=true {
       spawn "dms" "ipc" "call" "audio" "increment" "3";
    }
@@ -478,8 +463,8 @@ bind = SUPER, comma, exec, dms ipc call settings toggle
 bind = SUPER, P, exec, dms ipc call notepad toggle
 bind = SUPERALT, L, exec, dms ipc call lock lock
 bind = SUPER, X, exec, dms ipc call powermenu toggle
-bind = SUPER, C, exec, dms ipc call control-center toggle
-bind = SUPER, TAB, exec, dms ipc call hypr toggleOverview
+bind = SUPER, C, exec, dms ipc call control-center toggle 
+bind = SUPER, Y, exec, dms ipc call dankdash wallpaper
 
 # Audio controls (function keys)
 bindl = , XF86AudioRaiseVolume, exec, dms ipc call audio increment 3

@@ -99,7 +99,7 @@ Item {
                 }
 
                 StyledText {
-                    text: I18n.tr("Clear")
+                    text: I18n.tr("Clear All")
                     font.pixelSize: Theme.fontSizeSmall
                     color: clearArea.containsMouse ? Theme.primary : Theme.surfaceText
                     font.weight: Font.Medium

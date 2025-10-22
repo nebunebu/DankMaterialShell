@@ -17,7 +17,6 @@ Item {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
-    property var hyprlandOverviewLoader: null
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
 
     signal clicked()
@@ -36,8 +35,6 @@ Item {
             if (mouse.button === Qt.RightButton) {
                 if (CompositorService.isNiri) {
                     NiriService.toggleOverview()
-                } else if (CompositorService.isHyprland && root.hyprlandOverviewLoader?.item) {
-                    root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
                 }
                 return
             }

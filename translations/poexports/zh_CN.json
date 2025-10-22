@@ -167,9 +167,6 @@
   "Automatically cycle through wallpapers in the same folder": {
     "Automatically cycle through wallpapers in the same folder": "自动轮换文件夹中的壁纸"
   },
-  "Automatically detect location based on IP address": {
-    "Automatically detect location based on IP address": "根据 IP 地址自动检测位置"
-  },
   "Automatically determine your location using your IP address": {
     "Automatically determine your location using your IP address": "通过 IP 地址自动检测您的位置"
   },
@@ -353,9 +350,6 @@
   "Compositor:": {
     "Compositor:": "合成器："
   },
-  "Configuration activated": {
-    "Configuration activated": ""
-  },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "为已命名工作区配置图标。当数字和图标同时启用时，图标优先生效。"
   },
@@ -370,9 +364,6 @@
   },
   "Connected Displays": {
     "Connected Displays": "已连接显示器"
-  },
-  "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": ""
   },
   "Contrast": {
     "Contrast": "对比度"
@@ -494,17 +485,11 @@
   "Disconnect": {
     "Disconnect": "断开连接"
   },
-  "Disconnected from WiFi": {
-    "Disconnected from WiFi": ""
-  },
   "Disk": {
     "Disk": "磁盘"
   },
   "Disk Usage": {
     "Disk Usage": "磁盘占用"
-  },
-  "Dismiss": {
-    "Dismiss": ""
   },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "显示一个包含固定和运行中应用的程序坞，可放置在屏幕四边任意位置"
@@ -608,27 +593,6 @@
   "F1/I: Toggle • F10: Help": {
     "F1/I: Toggle • F10: Help": "F1/I: 切换 • F10: 帮助"
   },
-  "Failed to activate configuration": {
-    "Failed to activate configuration": ""
-  },
-  "Failed to connect to ": {
-    "Failed to connect to ": ""
-  },
-  "Failed to disconnect WiFi": {
-    "Failed to disconnect WiFi": ""
-  },
-  "Failed to enable WiFi": {
-    "Failed to enable WiFi": ""
-  },
-  "Failed to set profile image": {
-    "Failed to set profile image": "无法设置个人资料图片"
-  },
-  "Failed to set profile image: ": {
-    "Failed to set profile image: ": "无法设置个人资料图片："
-  },
-  "Failed to start connection to ": {
-    "Failed to start connection to ": ""
-  },
   "Feels Like": {
     "Feels Like": "体感温度"
   },
@@ -671,9 +635,6 @@
   "Forget Network": {
     "Forget Network": "取消保存"
   },
-  "Forgot network ": {
-    "Forgot network ": ""
-  },
   "Format Legend": {
     "Format Legend": "参考格式"
   },
@@ -697,9 +658,6 @@
   },
   "Gamma Control": {
     "Gamma Control": "伽马控制"
-  },
-  "Gamma control not available. Requires DMS API v6+.": {
-    "Gamma control not available. Requires DMS API v6+.": "伽玛控制不可用。需要 DMS API v6+。"
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": "Geoclue 服务未运行 - 无法自动检测位置"
@@ -778,9 +736,6 @@
   },
   "Include Transitions": {
     "Include Transitions": "包含过渡效果"
-  },
-  "Incorrect password": {
-    "Incorrect password": ""
   },
   "Individual Batteries": {
     "Individual Batteries": "分别显示电池"
@@ -1115,9 +1070,6 @@
   "Percentage": {
     "Percentage": "占用率"
   },
-  "Permission denied to set profile image.": {
-    "Permission denied to set profile image.": "因权限问题，无法设置个人资料图片。"
-  },
   "Personalization": {
     "Personalization": "个性化"
   },
@@ -1195,12 +1147,6 @@
   },
   "Process": {
     "Process": "进程"
-  },
-  "Profile Image Error": {
-    "Profile Image Error": "个人资料图片错误"
-  },
-  "Profile image is too large. Please use a smaller image.": {
-    "Profile image is too large. Please use a smaller image.": "个人资料图片太大。请选择更小的图片。"
   },
   "QML, JavaScript, Go": {
     "QML, JavaScript, Go": "QML, JavaScript, Go"
@@ -1327,9 +1273,6 @@
   },
   "Select which transitions to include in randomization": {
     "Select which transitions to include in randomization": "选择在随机轮换中使用的过渡效果"
-  },
-  "Selected image file not found.": {
-    "Selected image file not found.": "找不到选定的图片文件。"
   },
   "Separator": {
     "Separator": "分隔符"
@@ -1601,9 +1544,6 @@
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "使用华氏度显示温度"
   },
-  "Use IP Location": {
-    "Use IP Location": "使用IP所在位置"
-  },
   "Use Monospace Font": {
     "Use Monospace Font": "使用等宽字体"
   },
@@ -1684,12 +1624,6 @@
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "启用后，应用按字母顺序排序；禁用则按使用频率排序"
-  },
-  "WiFi disabled": {
-    "WiFi disabled": ""
-  },
-  "WiFi enabled": {
-    "WiFi enabled": ""
   },
   "WiFi is off": {
     "WiFi is off": "Wi-Fi 已关闭"

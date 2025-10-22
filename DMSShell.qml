@@ -22,7 +22,6 @@ import qs.Modules.ProcessList
 import qs.Modules.Settings
 import qs.Modules.DankBar
 import qs.Modules.DankBar.Popouts
-import qs.Modules.HyprWorkspaces
 import qs.Modules.Plugins
 import qs.Services
 
@@ -64,11 +63,8 @@ Item {
 
         property var currentPosition: SettingsData.dankBarPosition
         property bool initialized: false
-        property var hyprlandOverviewLoaderRef: hyprlandOverviewLoader
 
         sourceComponent: DankBar {
-            hyprlandOverviewLoader: dankBarLoader.hyprlandOverviewLoaderRef
-
             onColorPickerRequested: {
                 if (colorPickerModal.shouldBeVisible) {
                     colorPickerModal.close()
@@ -197,19 +193,17 @@ Item {
         }
     }
 
-    WifiPasswordModal {
-        id: wifiPasswordModal
+    LazyLoader {
+        id: wifiPasswordModalLoader
 
-        Component.onCompleted: {
-            PopoutService.wifiPasswordModal = wifiPasswordModal
-        }
-    }
+        active: false
 
-    Connections {
-        target: NetworkService
+        WifiPasswordModal {
+            id: wifiPasswordModal
 
-        function onCredentialsNeeded(token, ssid, setting, fields, hints, reason) {
-            wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason)
+            Component.onCompleted: {
+                PopoutService.wifiPasswordModal = wifiPasswordModal
+            }
         }
     }
 
@@ -502,7 +496,6 @@ Item {
         notepadSlideoutVariants: notepadSlideoutVariants
         hyprKeybindsModalLoader: hyprKeybindsModalLoader
         dankBarLoader: dankBarLoader
-        hyprlandOverviewLoader: hyprlandOverviewLoader
     }
 
     Variants {
@@ -543,14 +536,6 @@ Item {
 
         delegate: IdleInhibitorOSD {
             modelData: item
-        }
-    }
-
-    LazyLoader {
-        id: hyprlandOverviewLoader
-        active: CompositorService.isHyprland
-        component: HyprlandOverview {
-            id: hyprlandOverview
         }
     }
 }

@@ -207,9 +207,6 @@ Singleton {
     property bool dankBarAutoHide: false
     property bool dankBarOpenOnOverview: false
     property bool dankBarVisible: true
-    property int overviewRows: 2
-    property int overviewColumns: 5
-    property real overviewScale: 0.16
     property real dankBarSpacing: 4
     property real dankBarBottomGap: 0
     property real dankBarInnerPadding: 4
