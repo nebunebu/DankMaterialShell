@@ -354,7 +354,7 @@
     "Compositor:": "コンポジター："
   },
   "Configuration activated": {
-    "Configuration activated": ""
+    "Configuration activated": "設定が適用されました"
   },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "名前付きワークスペースのアイコンを設定します。両方が有効になっている場合、アイコンが数字よりも優先されます。"
@@ -372,7 +372,7 @@
     "Connected Displays": "接続されたディスプレイ"
   },
   "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": ""
+    "Connection failed. Check password and try again.": "接続に失敗しました。パスワードを確認して、もう一度やり直してください。"
   },
   "Contrast": {
     "Contrast": "コントラスト"
@@ -495,7 +495,7 @@
     "Disconnect": "切断"
   },
   "Disconnected from WiFi": {
-    "Disconnected from WiFi": ""
+    "Disconnected from WiFi": "WiFiから切断されました"
   },
   "Disk": {
     "Disk": "ディスク"
@@ -504,7 +504,7 @@
     "Disk Usage": "ディスク使用率"
   },
   "Dismiss": {
-    "Dismiss": ""
+    "Dismiss": "解除"
   },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "画面の上、下、左、右の端に配置できる、ピン留めされた実行中のアプリケーションを含むドックを表示します"
@@ -609,16 +609,16 @@
     "F1/I: Toggle • F10: Help": "F1/I: 切り替え • F10: ヘルプ"
   },
   "Failed to activate configuration": {
-    "Failed to activate configuration": ""
+    "Failed to activate configuration": "設定が適用できませんでした"
   },
   "Failed to connect to ": {
-    "Failed to connect to ": ""
+    "Failed to connect to ": "接続ができませんでした "
   },
   "Failed to disconnect WiFi": {
-    "Failed to disconnect WiFi": ""
+    "Failed to disconnect WiFi": "WiFiの切断ができませんでした"
   },
   "Failed to enable WiFi": {
-    "Failed to enable WiFi": ""
+    "Failed to enable WiFi": "WiFiを有効化にできませんでした"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "プロフィール画像の設定に失敗しました"
@@ -627,7 +627,7 @@
     "Failed to set profile image: ": "プロフィール画像の設定に失敗しました: "
   },
   "Failed to start connection to ": {
-    "Failed to start connection to ": ""
+    "Failed to start connection to ": "接続ができませんでした "
   },
   "Feels Like": {
     "Feels Like": "どうやら"
@@ -672,7 +672,7 @@
     "Forget Network": "ネットワークを忘れる"
   },
   "Forgot network ": {
-    "Forgot network ": ""
+    "Forgot network ": "ネットワークを削除しました "
   },
   "Format Legend": {
     "Format Legend": "フォーマット凡例"
@@ -780,7 +780,7 @@
     "Include Transitions": "トランジションを含める"
   },
   "Incorrect password": {
-    "Incorrect password": ""
+    "Incorrect password": "パスワードが間違っています"
   },
   "Individual Batteries": {
     "Individual Batteries": "バッテリーごと"
@@ -1232,6 +1232,9 @@
   "Refresh": {
     "Refresh": "リフレッシュ"
   },
+  "Reload Plugin": {
+    "Reload Plugin": ""
+  },
   "Remove": {
     "Remove": "削除"
   },
@@ -1571,6 +1574,9 @@
   "Turn off monitors after": {
     "Turn off monitors after": "後にモニターの電源を切る"
   },
+  "Uninstall Plugin": {
+    "Uninstall Plugin": ""
+  },
   "Unpin from Dock": {
     "Unpin from Dock": "ドックから固定を解除"
   },
@@ -1588,6 +1594,9 @@
   },
   "Update All": {
     "Update All": "すべて更新"
+  },
+  "Update Plugin": {
+    "Update Plugin": ""
   },
   "Use 24-hour time format instead of 12-hour AM/PM": {
     "Use 24-hour time format instead of 12-hour AM/PM": "12時間制のAM/PMではなく、24時間表記を使用"
@@ -1674,7 +1683,7 @@
     "Wallpaper": "壁紙"
   },
   "Wallpapers": {
-    "Wallpapers": ""
+    "Wallpapers": "壁紙"
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "ウェーブプログレスバー"
@@ -1689,10 +1698,10 @@
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "有効にすると、アプリはアルファベット順に並べ替えられます。無効にすると、アプリは使用頻度で並べ替えられます。"
   },
   "WiFi disabled": {
-    "WiFi disabled": ""
+    "WiFi disabled": "WiFiを無効化にしました"
   },
   "WiFi enabled": {
-    "WiFi enabled": ""
+    "WiFi enabled": "WiFiを有効化にしました"
   },
   "WiFi is off": {
     "WiFi is off": "Wi-Fiはオフ中"

@@ -1232,6 +1232,9 @@
   "Refresh": {
     "Refresh": "Recarregar"
   },
+  "Reload Plugin": {
+    "Reload Plugin": ""
+  },
   "Remove": {
     "Remove": "Remover"
   },
@@ -1571,6 +1574,9 @@
   "Turn off monitors after": {
     "Turn off monitors after": "Desligar monitores depois de"
   },
+  "Uninstall Plugin": {
+    "Uninstall Plugin": ""
+  },
   "Unpin from Dock": {
     "Unpin from Dock": "Desafixar do Dock"
   },
@@ -1588,6 +1594,9 @@
   },
   "Update All": {
     "Update All": "Atualizar Tudo"
+  },
+  "Update Plugin": {
+    "Update Plugin": ""
   },
   "Use 24-hour time format instead of 12-hour AM/PM": {
     "Use 24-hour time format instead of 12-hour AM/PM": "Usar relógio de 24 horas em vez de 12 horas com AM/PM"

@@ -354,7 +354,7 @@
     "Compositor:": "合成器："
   },
   "Configuration activated": {
-    "Configuration activated": ""
+    "Configuration activated": "已应用配置"
   },
   "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": {
     "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.": "为已命名工作区配置图标。当数字和图标同时启用时，图标优先生效。"
@@ -372,7 +372,7 @@
     "Connected Displays": "已连接显示器"
   },
   "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": ""
+    "Connection failed. Check password and try again.": "连接失败，请检查密码后重试。"
   },
   "Contrast": {
     "Contrast": "对比度"
@@ -495,7 +495,7 @@
     "Disconnect": "断开连接"
   },
   "Disconnected from WiFi": {
-    "Disconnected from WiFi": ""
+    "Disconnected from WiFi": "Wi-Fi 已断开"
   },
   "Disk": {
     "Disk": "磁盘"
@@ -504,7 +504,7 @@
     "Disk Usage": "磁盘占用"
   },
   "Dismiss": {
-    "Dismiss": ""
+    "Dismiss": "忽略"
   },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "显示一个包含固定和运行中应用的程序坞，可放置在屏幕四边任意位置"
@@ -609,16 +609,16 @@
     "F1/I: Toggle • F10: Help": "F1/I: 切换 • F10: 帮助"
   },
   "Failed to activate configuration": {
-    "Failed to activate configuration": ""
+    "Failed to activate configuration": "无法应用配置"
   },
   "Failed to connect to ": {
-    "Failed to connect to ": ""
+    "Failed to connect to ": "无法连接至 "
   },
   "Failed to disconnect WiFi": {
-    "Failed to disconnect WiFi": ""
+    "Failed to disconnect WiFi": "无法断开 Wi-Fi 连接"
   },
   "Failed to enable WiFi": {
-    "Failed to enable WiFi": ""
+    "Failed to enable WiFi": "无法启用 Wi-Fi"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "无法设置个人资料图片"
@@ -627,7 +627,7 @@
     "Failed to set profile image: ": "无法设置个人资料图片："
   },
   "Failed to start connection to ": {
-    "Failed to start connection to ": ""
+    "Failed to start connection to ": "无法启动连接至 "
   },
   "Feels Like": {
     "Feels Like": "体感温度"
@@ -672,7 +672,7 @@
     "Forget Network": "取消保存"
   },
   "Forgot network ": {
-    "Forgot network ": ""
+    "Forgot network ": "取消保存网络 "
   },
   "Format Legend": {
     "Format Legend": "参考格式"
@@ -699,7 +699,7 @@
     "Gamma Control": "伽马控制"
   },
   "Gamma control not available. Requires DMS API v6+.": {
-    "Gamma control not available. Requires DMS API v6+.": "伽玛控制不可用。需要 DMS API v6+。"
+    "Gamma control not available. Requires DMS API v6+.": "伽玛控制不可用，需要 DMS API v6+。"
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": "Geoclue 服务未运行 - 无法自动检测位置"
@@ -780,7 +780,7 @@
     "Include Transitions": "包含过渡效果"
   },
   "Incorrect password": {
-    "Incorrect password": ""
+    "Incorrect password": "密码错误"
   },
   "Individual Batteries": {
     "Individual Batteries": "分别显示电池"
@@ -1200,7 +1200,7 @@
     "Profile Image Error": "个人资料图片错误"
   },
   "Profile image is too large. Please use a smaller image.": {
-    "Profile image is too large. Please use a smaller image.": "个人资料图片太大。请选择更小的图片。"
+    "Profile image is too large. Please use a smaller image.": "个人资料图片过大，请选择更小的图片。"
   },
   "QML, JavaScript, Go": {
     "QML, JavaScript, Go": "QML, JavaScript, Go"
@@ -1231,6 +1231,9 @@
   },
   "Refresh": {
     "Refresh": "刷新"
+  },
+  "Reload Plugin": {
+    "Reload Plugin": ""
   },
   "Remove": {
     "Remove": "移除"
@@ -1329,7 +1332,7 @@
     "Select which transitions to include in randomization": "选择在随机轮换中使用的过渡效果"
   },
   "Selected image file not found.": {
-    "Selected image file not found.": "找不到选定的图片文件。"
+    "Selected image file not found.": "未找到所选图像文件。"
   },
   "Separator": {
     "Separator": "分隔符"
@@ -1571,6 +1574,9 @@
   "Turn off monitors after": {
     "Turn off monitors after": "在此时间后关闭显示器"
   },
+  "Uninstall Plugin": {
+    "Uninstall Plugin": ""
+  },
   "Unpin from Dock": {
     "Unpin from Dock": "从程序坞取消固定"
   },
@@ -1589,6 +1595,9 @@
   "Update All": {
     "Update All": "更新所有"
   },
+  "Update Plugin": {
+    "Update Plugin": ""
+  },
   "Use 24-hour time format instead of 12-hour AM/PM": {
     "Use 24-hour time format instead of 12-hour AM/PM": "改用24小时制显示时间"
   },
@@ -1602,7 +1611,7 @@
     "Use Fahrenheit instead of Celsius for temperature": "使用华氏度显示温度"
   },
   "Use IP Location": {
-    "Use IP Location": "使用IP所在位置"
+    "Use IP Location": "使用 IP 定位"
   },
   "Use Monospace Font": {
     "Use Monospace Font": "使用等宽字体"
@@ -1674,7 +1683,7 @@
     "Wallpaper": "壁纸"
   },
   "Wallpapers": {
-    "Wallpapers": ""
+    "Wallpapers": "壁纸"
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "波形进度条"
@@ -1689,10 +1698,10 @@
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "启用后，应用按字母顺序排序；禁用则按使用频率排序"
   },
   "WiFi disabled": {
-    "WiFi disabled": ""
+    "WiFi disabled": "Wi-Fi 已停用"
   },
   "WiFi enabled": {
-    "WiFi enabled": ""
+    "WiFi enabled": "Wi-Fi 已启用"
   },
   "WiFi is off": {
     "WiFi is off": "Wi-Fi 已关闭"
