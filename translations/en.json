@@ -1808,7 +1808,7 @@
   {
     "term": "Media",
     "context": "Media",
-    "reference": "Services/AppSearchService.qml:158, Services/AppSearchService.qml:159, Services/AppSearchService.qml:160, Widgets/DankIconPicker.qml:37, Modules/DankDash/DankDashPopout.qml:135",
+    "reference": "Services/AppSearchService.qml:158, Services/AppSearchService.qml:159, Services/AppSearchService.qml:160, Widgets/DankIconPicker.qml:37, Modules/DankDash/DankDashPopout.qml:221",
     "comment": ""
   },
   {
@@ -2174,7 +2174,7 @@
   {
     "term": "Overview",
     "context": "Overview",
-    "reference": "Modules/DankDash/DankDashPopout.qml:134",
+    "reference": "Modules/DankDash/DankDashPopout.qml:220",
     "comment": ""
   },
   {
@@ -2672,7 +2672,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:142, Modals/Settings/SettingsModal.qml:165",
+    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:229, Modals/Settings/SettingsModal.qml:165",
     "comment": ""
   },
   {
@@ -3330,6 +3330,12 @@
     "comment": ""
   },
   {
+    "term": "Wallpapers",
+    "context": "Wallpapers",
+    "reference": "Modules/DankDash/DankDashPopout.qml:222",
+    "comment": ""
+  },
+  {
     "term": "Wave Progress Bars",
     "context": "Wave Progress Bars",
     "reference": "Modules/Settings/WidgetTweaksTab.qml:193",
@@ -3338,7 +3344,7 @@
   {
     "term": "Weather",
     "context": "Weather",
-    "reference": "Modules/DankDash/DankDashPopout.qml:139",
+    "reference": "Modules/DankDash/DankDashPopout.qml:226",
     "comment": ""
   },
   {
