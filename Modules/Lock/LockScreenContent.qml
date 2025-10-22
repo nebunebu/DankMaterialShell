@@ -4,6 +4,7 @@ import QtCore
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
+import QtQuick.Window
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Mpris
@@ -23,6 +24,8 @@ Item {
     property string hyprlandCurrentLayout: ""
     property string hyprlandKeyboard: ""
     property int hyprlandLayoutCount: 0
+    property bool lockerReadySent: false
+    property bool lockerReadyArmed: false
 
     signal unlockRequested
 
@@ -43,15 +46,7 @@ Item {
             hyprlandLayoutUpdateTimer.start()
         }
 
-        if (SessionService.loginctlAvailable && DMSService.apiVersion >= 2) {
-            DMSService.sendRequest("loginctl.lockerReady", null, response => {
-                if (response.error) {
-                    console.warn("LockScreenContent: Failed to signal locker ready:", response.error)
-                } else {
-                    console.log("LockScreenContent: Locker ready signaled, inhibitor released")
-                }
-            })
-        }
+        lockerReadyArmed = true
     }
     onDemoModeChanged: {
         if (demoMode) {
@@ -64,6 +59,37 @@ Item {
             hyprlandLayoutUpdateTimer.stop()
         }
     }
+
+    function sendLockerReadyOnce() {
+        if (lockerReadySent) return;
+        lockerReadySent = true;
+        if (SessionService.loginctlAvailable && DMSService.apiVersion >= 2) {
+            DMSService.sendRequest("loginctl.lockerReady", null, resp => {
+                if (resp?.error) console.warn("lockerReady failed:", resp.error)
+                else console.log("lockerReady sent (afterAnimating/afterRendering)");
+            });
+        }
+    }
+
+    function maybeSend() {
+        if (!lockerReadyArmed) return;
+        if (!root.visible || root.opacity <= 0) return;
+        Qt.callLater(() => {
+            if (root.visible && root.opacity > 0)
+                sendLockerReadyOnce();
+        });
+    }
+
+    Connections {
+        target: root.Window.window
+        enabled: target !== null
+
+        function onAfterAnimating() { maybeSend(); }
+        function onAfterRendering() { maybeSend(); }
+    }
+
+    onVisibleChanged: maybeSend()
+    onOpacityChanged: maybeSend()
 
     function updateHyprlandLayout() {
         if (CompositorService.isHyprland) {
