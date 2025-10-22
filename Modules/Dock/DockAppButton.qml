@@ -452,10 +452,10 @@ Item {
             anchors.top: SettingsData.dockPosition === SettingsData.Position.Top ? parent.top : undefined
             anchors.left: SettingsData.dockPosition === SettingsData.Position.Left ? parent.left : undefined
             anchors.right: SettingsData.dockPosition === SettingsData.Position.Right ? parent.right : undefined
-            anchors.bottomMargin: SettingsData.dockPosition === SettingsData.Position.Bottom ? -2 : 0
-            anchors.topMargin: SettingsData.dockPosition === SettingsData.Position.Top ? -2 : 0
-            anchors.leftMargin: SettingsData.dockPosition === SettingsData.Position.Left ? -2 : 0
-            anchors.rightMargin: SettingsData.dockPosition === SettingsData.Position.Right ? -2 : 0
+            anchors.bottomMargin: SettingsData.dockPosition === SettingsData.Position.Bottom ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
+            anchors.topMargin: SettingsData.dockPosition === SettingsData.Position.Top ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
+            anchors.leftMargin: SettingsData.dockPosition === SettingsData.Position.Left ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
+            anchors.rightMargin: SettingsData.dockPosition === SettingsData.Position.Right ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
 
             sourceComponent: SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right ? columnIndicator : rowIndicator
 
@@ -486,9 +486,19 @@ Item {
                 }
 
                 Rectangle {
-                    width: appData && appData.type === "grouped" && appData.windowCount > 1 ? Math.max(3, actualIconSize * 0.1) : Math.max(6, actualIconSize * 0.2)
-                    height: Math.max(2, actualIconSize * 0.05)
-                    radius: Theme.cornerRadius
+                    width: {
+                        if (SettingsData.dockIndicatorStyle === "circle") {
+                            return Math.max(4, actualIconSize * 0.1)
+                        }
+                        return appData && appData.type === "grouped" && appData.windowCount > 1 ? Math.max(3, actualIconSize * 0.1) : Math.max(6, actualIconSize * 0.2)
+                    }
+                    height: {
+                        if (SettingsData.dockIndicatorStyle === "circle") {
+                            return Math.max(4, actualIconSize * 0.1)
+                        }
+                        return Math.max(2, actualIconSize * 0.05)
+                    }
+                    radius: SettingsData.dockIndicatorStyle === "circle" ? width / 2 : Theme.cornerRadius
                     color: {
                         if (!appData) {
                             return "transparent"
@@ -533,9 +543,19 @@ Item {
                 }
 
                 Rectangle {
-                    width: Math.max(2, actualIconSize * 0.05)
-                    height: appData && appData.type === "grouped" && appData.windowCount > 1 ? Math.max(3, actualIconSize * 0.1) : Math.max(6, actualIconSize * 0.2)
-                    radius: Theme.cornerRadius
+                    width: {
+                        if (SettingsData.dockIndicatorStyle === "circle") {
+                            return Math.max(4, actualIconSize * 0.1)
+                        }
+                        return Math.max(2, actualIconSize * 0.05)
+                    }
+                    height: {
+                        if (SettingsData.dockIndicatorStyle === "circle") {
+                            return Math.max(4, actualIconSize * 0.1)
+                        }
+                        return appData && appData.type === "grouped" && appData.windowCount > 1 ? Math.max(3, actualIconSize * 0.1) : Math.max(6, actualIconSize * 0.2)
+                    }
+                    radius: SettingsData.dockIndicatorStyle === "circle" ? width / 2 : Theme.cornerRadius
                     color: {
                         if (!appData) {
                             return "transparent"

@@ -329,6 +329,72 @@ Item {
                 }
             }
 
+            // Indicator Style Section
+            StyledRect {
+                width: parent.width
+                height: indicatorStyleSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+                visible: SettingsData.showDock
+                opacity: visible ? 1 : 0
+
+                Column {
+                    id: indicatorStyleSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "fiber_manual_record"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            id: indicatorStyleText
+                            text: I18n.tr("Indicator Style")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Item {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - indicatorStyleText.width - indicatorStyleButtonGroup.width - Theme.spacingM * 2
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        DankButtonGroup {
+                            id: indicatorStyleButtonGroup
+                            anchors.verticalCenter: parent.verticalCenter
+                            model: ["Circle", "Line"]
+                            currentIndex: SettingsData.dockIndicatorStyle === "circle" ? 0 : 1
+                            onSelectionChanged: (index, selected) => {
+                                if (selected) {
+                                    SettingsData.setDockIndicatorStyle(index === 0 ? "circle" : "line")
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Theme.mediumDuration
+                        easing.type: Theme.emphasizedEasing
+                    }
+                }
+            }
+
             // Icon Size Section
             StyledRect {
                 width: parent.width

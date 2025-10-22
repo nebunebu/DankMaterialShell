@@ -202,6 +202,7 @@ Singleton {
     property real dockSpacing: 4
     property real dockBottomGap: 0
     property real dockIconSize: 40
+    property string dockIndicatorStyle: "circle"
 
     property bool notificationOverlayEnabled: false
     property bool dankBarAutoHide: false
@@ -450,6 +451,7 @@ Singleton {
                 dockSpacing = settings.dockSpacing !== undefined ? settings.dockSpacing : 4
                 dockBottomGap = settings.dockBottomGap !== undefined ? settings.dockBottomGap : 0
                 dockIconSize = settings.dockIconSize !== undefined ? settings.dockIconSize : 40
+                dockIndicatorStyle = settings.dockIndicatorStyle !== undefined ? settings.dockIndicatorStyle : "circle"
                 cornerRadius = settings.cornerRadius !== undefined ? settings.cornerRadius : 12
                 notificationOverlayEnabled = settings.notificationOverlayEnabled !== undefined ? settings.notificationOverlayEnabled : false
                 dankBarAutoHide = settings.dankBarAutoHide !== undefined ? settings.dankBarAutoHide : (settings.topBarAutoHide !== undefined ? settings.topBarAutoHide : false)
@@ -631,6 +633,7 @@ Singleton {
                                                 "dockSpacing": dockSpacing,
                                                 "dockBottomGap": dockBottomGap,
                                                 "dockIconSize": dockIconSize,
+                                                "dockIndicatorStyle": dockIndicatorStyle,
                                                 "cornerRadius": cornerRadius,
                                                 "notificationOverlayEnabled": notificationOverlayEnabled,
                                                 "dankBarAutoHide": dankBarAutoHide,
@@ -724,7 +727,7 @@ Singleton {
             "notepadTransparencyOverride", "notepadLastCustomTransparency", "soundsEnabled",
             "useSystemSoundTheme", "soundNewNotification", "soundVolumeChanged", "soundPluggedIn", "gtkThemingEnabled",
             "qtThemingEnabled", "syncModeWithPortal", "showDock", "dockAutoHide", "dockGroupByApp",
-            "dockOpenOnOverview", "dockPosition", "dockSpacing", "dockBottomGap", "dockIconSize",
+            "dockOpenOnOverview", "dockPosition", "dockSpacing", "dockBottomGap", "dockIconSize", "dockIndicatorStyle",
             "cornerRadius", "notificationOverlayEnabled", "dankBarAutoHide",
             "dankBarOpenOnOverview", "dankBarVisible", "dankBarSpacing", "dankBarBottomGap",
             "dankBarInnerPadding", "dankBarSquareCorners", "dankBarNoBackground",
@@ -1604,6 +1607,11 @@ Singleton {
 
     function setDockOpenOnOverview(enabled) {
         dockOpenOnOverview = enabled
+        saveSettings()
+    }
+
+    function setDockIndicatorStyle(style) {
+        dockIndicatorStyle = style
         saveSettings()
     }
 
