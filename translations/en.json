@@ -872,7 +872,7 @@
   {
     "term": "DEMO MODE - Click anywhere to exit",
     "context": "DEMO MODE - Click anywhere to exit",
-    "reference": "Modules/Lock/LockScreenContent.qml:628",
+    "reference": "Modules/Lock/LockScreenContent.qml:654",
     "comment": ""
   },
   {
