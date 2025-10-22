@@ -452,10 +452,10 @@ Item {
             anchors.top: SettingsData.dockPosition === SettingsData.Position.Top ? parent.top : undefined
             anchors.left: SettingsData.dockPosition === SettingsData.Position.Left ? parent.left : undefined
             anchors.right: SettingsData.dockPosition === SettingsData.Position.Right ? parent.right : undefined
-            anchors.bottomMargin: SettingsData.dockPosition === SettingsData.Position.Bottom ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
-            anchors.topMargin: SettingsData.dockPosition === SettingsData.Position.Top ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
-            anchors.leftMargin: SettingsData.dockPosition === SettingsData.Position.Left ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
-            anchors.rightMargin: SettingsData.dockPosition === SettingsData.Position.Right ? (SettingsData.dockIndicatorStyle === "circle" ? -4 : -2) : 0
+            anchors.bottomMargin: SettingsData.dockPosition === SettingsData.Position.Bottom ? -2 : 0
+            anchors.topMargin: SettingsData.dockPosition === SettingsData.Position.Top ? -2 : 0
+            anchors.leftMargin: SettingsData.dockPosition === SettingsData.Position.Left ? -2 : 0
+            anchors.rightMargin: SettingsData.dockPosition === SettingsData.Position.Right ? -2 : 0
 
             sourceComponent: SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right ? columnIndicator : rowIndicator
 
