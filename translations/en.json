@@ -1076,7 +1076,7 @@
   {
     "term": "Dock Transparency",
     "context": "Dock Transparency",
-    "reference": "Modules/Settings/DockTab.qml:530",
+    "reference": "Modules/Settings/DockTab.qml:596",
     "comment": ""
   },
   {
@@ -1442,7 +1442,7 @@
   {
     "term": "Height to Edge Gap (Exclusive Zone)",
     "context": "Height to Edge Gap (Exclusive Zone)",
-    "reference": "Modules/Settings/DockTab.qml:467",
+    "reference": "Modules/Settings/DockTab.qml:533",
     "comment": ""
   },
   {
@@ -1508,7 +1508,7 @@
   {
     "term": "Icon Size",
     "context": "Icon Size",
-    "reference": "Modules/Settings/DockTab.qml:363",
+    "reference": "Modules/Settings/DockTab.qml:429",
     "comment": ""
   },
   {
@@ -1551,6 +1551,12 @@
     "term": "Incorrect password",
     "context": "Incorrect password",
     "reference": "Modals/WifiPasswordModal.qml:189",
+    "comment": ""
+  },
+  {
+    "term": "Indicator Style",
+    "context": "Indicator Style",
+    "reference": "Modules/Settings/DockTab.qml:364",
     "comment": ""
   },
   {
@@ -2186,7 +2192,7 @@
   {
     "term": "Padding",
     "context": "Padding",
-    "reference": "Modules/Settings/DockTab.qml:439",
+    "reference": "Modules/Settings/DockTab.qml:505",
     "comment": ""
   },
   {
@@ -2828,7 +2834,7 @@
   {
     "term": "Spacing",
     "context": "Spacing",
-    "reference": "Modules/Settings/DockTab.qml:426, Modules/Settings/DankBarTab.qml:933",
+    "reference": "Modules/Settings/DockTab.qml:492, Modules/Settings/DankBarTab.qml:933",
     "comment": ""
   },
   {
