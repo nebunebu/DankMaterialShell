@@ -681,10 +681,14 @@ Item {
                                         description: I18n.tr("Show on all connected displays")
                                         checked: displaysTab.getScreenPreferences(parent.componentId).includes("all")
                                         onToggled: (checked) => {
-                                            if (checked)
+                                            if (checked) {
                                                 displaysTab.setScreenPreferences(parent.componentId, ["all"]);
-                                            else
+                                            } else {
                                                 displaysTab.setScreenPreferences(parent.componentId, []);
+                                                if (["dankBar", "dock", "notifications", "osd", "toast"].includes(parent.componentId)) {
+                                                    displaysTab.setShowOnLastDisplay(parent.componentId, true);
+                                                }
+                                            }
                                         }
                                     }
 
