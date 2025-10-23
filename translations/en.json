@@ -548,7 +548,7 @@
   {
     "term": "Capacity",
     "context": "Capacity",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:349, Modules/DankBar/Popouts/BatteryPopout.qml:505",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:350, Modules/DankBar/Popouts/BatteryPopout.qml:506",
     "comment": ""
   },
   {
@@ -1496,7 +1496,7 @@
   {
     "term": "Health",
     "context": "Health",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:314, Modules/DankBar/Popouts/BatteryPopout.qml:468",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:315, Modules/DankBar/Popouts/BatteryPopout.qml:469",
     "comment": ""
   },
   {
@@ -1622,7 +1622,7 @@
   {
     "term": "Individual Batteries",
     "context": "Individual Batteries",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:374",
+    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:375",
     "comment": ""
   },
   {
@@ -1742,7 +1742,7 @@
   {
     "term": "Left",
     "context": "Left",
-    "reference": "Modules/Settings/DankBarTab.qml:708, Modules/DankBar/Popouts/BatteryPopout.qml:537",
+    "reference": "Modules/Settings/DankBarTab.qml:708, Modules/DankBar/Popouts/BatteryPopout.qml:538",
     "comment": ""
   },
   {
@@ -2438,7 +2438,7 @@
   {
     "term": "Power Profile Degradation",
     "context": "Power Profile Degradation",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:622",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:623",
     "comment": ""
   },
   {
@@ -3170,7 +3170,7 @@
   {
     "term": "To Full",
     "context": "To Full",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:535",
+    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:536",
     "comment": ""
   },
   {
