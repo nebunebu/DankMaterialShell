@@ -22,7 +22,6 @@ Singleton {
     property bool subscribeConnected: false
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
-    readonly property bool verboseLogs: Quickshell.env("DMS_VERBOSE_LOGS") === "1"
 
     property var pendingRequests: ({})
     property int requestIdCounter: 0
@@ -170,9 +169,7 @@ Singleton {
                     return
                 }
 
-                if (root.verboseLogs) {
-                    console.log("DMSService: Request socket <<", line)
-                }
+                console.log("DMSService: Request socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
@@ -202,9 +199,7 @@ Singleton {
                     return
                 }
 
-                if (root.verboseLogs) {
-                    console.log("DMSService: Subscribe socket <<", line)
-                }
+                console.log("DMSService: Subscribe socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
@@ -221,9 +216,7 @@ Singleton {
             "method": "subscribe"
         }
 
-        if (verboseLogs) {
-            console.log("DMSService: Subscribing to all services")
-        }
+        console.log("DMSService: Subscribing to all services")
         subscribeSocket.send(request)
     }
 
@@ -254,7 +247,7 @@ Singleton {
             apiVersion = data.apiVersion || 0
             capabilities = data.capabilities || []
 
-            console.log("DMSService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
+            console.info("DMSService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
 
             if (apiVersion < expectedApiVersion) {
                 ToastService.showError("DMS server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")

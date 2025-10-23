@@ -573,7 +573,7 @@ Singleton {
         if (!detectSoundsAvailability()) {
             console.warn("AudioService: QtMultimedia not available - sound effects disabled")
         } else {
-            console.log("AudioService: Sound effects enabled")
+            console.info("AudioService: Sound effects enabled")
             checkGsettings()
             Qt.callLater(createSoundPlayers)
         }

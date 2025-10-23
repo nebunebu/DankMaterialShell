@@ -174,7 +174,7 @@ Singleton {
         if (socketPath && socketPath.length > 0) {
             checkDMSCapabilities()
         } else {
-            console.log("PortalService: DMS_SOCKET not set")
+            console.info("PortalService: DMS_SOCKET not set")
         }
         colorSchemeDetector.running = true
     }
@@ -212,7 +212,7 @@ Singleton {
             checkAccountsService()
             checkSettingsPortal()
         } else {
-            console.log("PortalService: freedesktop capability not available in DMS")
+            console.info("PortalService: freedesktop capability not available in DMS")
         }
     }
 

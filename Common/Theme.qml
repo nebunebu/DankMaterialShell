@@ -92,7 +92,7 @@ Singleton {
             }
 
             if (colorsFileLoadFailed && currentTheme === dynamic && wallpaperPath) {
-                console.log("Theme: Matugen now available, regenerating colors for dynamic theme")
+                console.info("Theme: Matugen now available, regenerating colors for dynamic theme")
                 const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode)
                 const iconTheme = (typeof SettingsData !== "undefined" && SettingsData.iconTheme) ? SettingsData.iconTheme : "System Default"
                 Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
@@ -701,7 +701,7 @@ Singleton {
             return
         }
 
-        console.log("Theme: Setting desired theme -", kind, "mode:", isLight ? "light" : "dark", "type:", matugenType)
+        console.info("Theme: Setting desired theme -", kind, "mode:", isLight ? "light" : "dark", "type:", matugenType)
 
         if (typeof NiriService !== "undefined" && CompositorService.isNiri) {
             NiriService.suppressNextToast()
@@ -908,7 +908,7 @@ Singleton {
             workerRunning = false
 
             if (exitCode === 0) {
-                console.log("Theme: Matugen worker completed successfully")
+                console.info("Theme: Matugen worker completed successfully")
                 if (currentTheme === dynamic) {
                     console.log("Theme: Reloading dynamic colors file")
                     dynamicColorsFileView.reload()
@@ -983,7 +983,7 @@ Singleton {
 
         onLoaded: {
             if (currentTheme === dynamic) {
-                console.log("Theme: Dynamic colors file loaded successfully")
+                console.info("Theme: Dynamic colors file loaded successfully")
                 colorsFileLoadFailed = false
                 parseAndLoadColors()
             }
@@ -997,7 +997,7 @@ Singleton {
 
         onLoadFailed: function (error) {
             if (currentTheme === dynamic) {
-                console.log("Theme: Dynamic colors file load failed, marking for regeneration")
+                console.warn("Theme: Dynamic colors file load failed, marking for regeneration")
                 colorsFileLoadFailed = true
                 const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
                 if (!isGreeterMode && matugenAvailable && wallpaperPath) {

@@ -328,7 +328,7 @@ Singleton {
             isHyprland = true
             isNiri = false
             compositor = "hyprland"
-            console.log("CompositorService: Detected Hyprland")
+            console.info("CompositorService: Detected Hyprland")
             try {
                 Hyprland.refreshToplevels()
             } catch(e) {}
@@ -341,7 +341,7 @@ Singleton {
                     isNiri = true
                     isHyprland = false
                     compositor = "niri"
-                    console.log("CompositorService: Detected Niri with socket:", niriSocket)
+                    console.info("CompositorService: Detected Niri with socket:", niriSocket)
                     NiriService.generateNiriBinds()
                 } else {
                     isHyprland = false

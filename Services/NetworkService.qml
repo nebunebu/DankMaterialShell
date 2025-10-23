@@ -87,9 +87,9 @@ Singleton {
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
     Component.onCompleted: {
-        console.log("NetworkService: Initializing...")
+        console.info("NetworkService: Initializing...")
         if (!socketPath || socketPath.length === 0) {
-            console.log("NetworkService: DMS_SOCKET not set, using LegacyNetworkService")
+            console.info("NetworkService: DMS_SOCKET not set, using LegacyNetworkService")
             useLegacyService()
         } else {
             console.log("NetworkService: DMS_SOCKET found, waiting for capabilities...")
@@ -101,13 +101,13 @@ Singleton {
 
         function onNetworkAvailableChanged() {
             if (!activeService && NetworkManagerService.networkAvailable) {
-                console.log("NetworkService: Network capability detected, using NetworkManagerService")
+                console.info("NetworkService: Network capability detected, using NetworkManagerService")
                 activeService = NetworkManagerService
                 usingLegacy = false
-                console.log("NetworkService: Switched to NetworkManagerService, networkAvailable:", networkAvailable)
+                console.info("NetworkService: Switched to NetworkManagerService, networkAvailable:", networkAvailable)
                 connectSignals()
             } else if (!activeService && !NetworkManagerService.networkAvailable && socketPath && socketPath.length > 0) {
-                console.log("NetworkService: Network capability not available in DMS, using LegacyNetworkService")
+                console.info("NetworkService: Network capability not available in DMS, using LegacyNetworkService")
                 useLegacyService()
             }
         }
@@ -116,7 +116,7 @@ Singleton {
     function useLegacyService() {
         activeService = LegacyNetworkService
         usingLegacy = true
-        console.log("NetworkService: Switched to LegacyNetworkService, networkAvailable:", networkAvailable)
+        console.info("NetworkService: Switched to LegacyNetworkService, networkAvailable:", networkAvailable)
         if (LegacyNetworkService.activate) {
             LegacyNetworkService.activate()
         }

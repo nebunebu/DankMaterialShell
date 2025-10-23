@@ -196,7 +196,7 @@ Singleton {
     }
 
     function migrateFromUndefinedToV1(settings) {
-        console.log("SessionData: Migrating configuration from undefined to version 1")
+        console.info("SessionData: Migrating configuration from undefined to version 1")
         if (typeof SettingsData !== "undefined") {
             if (settings.acMonitorTimeout !== undefined) {
                 SettingsData.setAcMonitorTimeout(settings.acMonitorTimeout)
@@ -707,7 +707,7 @@ Singleton {
         running: false
         onExited: exitCode => {
             if (exitCode === 0) {
-                console.log("Copied default-session.json to session.json")
+                console.info("Copied default-session.json to session.json")
                 settingsFile.reload()
             }
         }

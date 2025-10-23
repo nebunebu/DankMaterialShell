@@ -321,7 +321,7 @@ Singleton {
                     } else if (settings.themeIndex >= 0 && settings.themeIndex < themeNames.length) {
                         currentThemeName = themeNames[settings.themeIndex]
                     }
-                    console.log("Auto-migrated theme from index", settings.themeIndex, "to", currentThemeName)
+                    console.info("Auto-migrated theme from index", settings.themeIndex, "to", currentThemeName)
                 } else {
                     currentThemeName = settings.currentThemeName !== undefined ? settings.currentThemeName : "blue"
                 }
@@ -705,7 +705,7 @@ Singleton {
     }
 
     function migrateFromUndefinedToV1(settings) {
-        console.log("SettingsData: Migrating configuration from undefined to version 1")
+        console.info("SettingsData: Migrating configuration from undefined to version 1")
     }
 
     function cleanupUnusedKeys() {
@@ -2024,7 +2024,7 @@ Singleton {
         running: false
         onExited: exitCode => {
             if (exitCode === 0) {
-                console.log("Copied default-settings.json to settings.json")
+                console.info("Copied default-settings.json to settings.json")
                 settingsFile.reload()
             } else {
                 applyStoredTheme()

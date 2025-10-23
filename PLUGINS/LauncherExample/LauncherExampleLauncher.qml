@@ -13,7 +13,7 @@ Item {
     signal itemsChanged()
 
     Component.onCompleted: {
-        console.log("LauncherExample: Plugin loaded")
+        console.info("LauncherExample: Plugin loaded")
 
         // Load custom trigger from settings
         if (pluginService) {

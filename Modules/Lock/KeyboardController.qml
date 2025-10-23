@@ -18,7 +18,7 @@ Item {
             keyboard.target = keyboard_controller.target;
             isKeyboardActive = true;
         } else
-            console.info("The keyboard is already shown");
+            console.log("The keyboard is already shown");
     }
 
     function hide() {
@@ -26,7 +26,7 @@ Item {
             keyboard.destroy();
             isKeyboardActive = false;
         } else
-            console.info("The keyboard is already hidden");
+            console.log("The keyboard is already hidden");
     }
 
     // private

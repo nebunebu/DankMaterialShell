@@ -116,7 +116,7 @@ Singleton {
     function activate() {
         if (!isActive) {
             isActive = true
-            console.log("LegacyNetworkService: Activating...")
+            console.info("LegacyNetworkService: Activating...")
             initializeDBusMonitors()
         }
     }

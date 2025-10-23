@@ -59,7 +59,7 @@ Singleton {
             detectElogindProcess.running = true
             detectHibernateProcess.running = true
             detectPrimeRunProcess.running = true
-            console.log("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
+            console.info("SessionService: Native inhibitor available:", nativeInhibitorAvailable)
             if (!SettingsData.loginctlLockIntegration) {
                 console.log("SessionService: loginctl lock integration disabled by user")
                 return

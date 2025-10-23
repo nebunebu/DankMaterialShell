@@ -67,7 +67,7 @@ Singleton {
     }
 
     function migrateFromUndefinedToV1(cache) {
-        console.log("CacheData: Migrating configuration from undefined to version 1")
+        console.info("CacheData: Migrating configuration from undefined to version 1")
     }
 
     function cleanupUnusedKeys() {
@@ -115,7 +115,7 @@ Singleton {
         }
         onLoadFailed: error => {
             if (!isGreeterMode) {
-                console.log("CacheData: No cache file found, starting fresh")
+                console.info("CacheData: No cache file found, starting fresh")
             }
         }
     }

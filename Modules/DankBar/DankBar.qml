@@ -235,11 +235,11 @@ Item {
             Connections {
                 target: PluginService
                 function onPluginLoaded(pluginId) {
-                    console.log("DankBar: Plugin loaded:", pluginId)
+                    console.info("DankBar: Plugin loaded:", pluginId)
                     SettingsData.widgetDataChanged()
                 }
                 function onPluginUnloaded(pluginId) {
-                    console.log("DankBar: Plugin unloaded:", pluginId)
+                    console.info("DankBar: Plugin unloaded:", pluginId)
                     SettingsData.widgetDataChanged()
                 }
             }

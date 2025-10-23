@@ -43,7 +43,7 @@ Singleton {
             try {
                 root.translations = JSON.parse(text())
                 root.translationsLoaded = true
-                console.log(`I18n: Loaded translations for '${root.currentLocale}' ` +
+                console.info(`I18n: Loaded translations for '${root.currentLocale}' ` +
                             `(${Object.keys(root.translations).length} contexts)`)
             } catch (e) {
                 console.warn(`I18n: Error parsing '${root.currentLocale}':`, e,
@@ -84,7 +84,7 @@ Singleton {
         _selectedPath = fileUrl
         translationsLoaded = false
         translations = ({})
-        console.log(`I18n: Using locale '${localeTag}' from ${fileUrl}`)
+        console.info(`I18n: Using locale '${localeTag}' from ${fileUrl}`)
     }
 
     function _fallbackToEnglish() {

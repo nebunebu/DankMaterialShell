@@ -89,7 +89,7 @@ Singleton {
 
         onExited: exitCode => {
             if (exitCode === 0) {
-                console.log("NiriService: Generated layout config at", configPath)
+                console.info("NiriService: Generated layout config at", configPath)
                 return
             }
             console.warn("NiriService: Failed to write layout config, exit code:", exitCode)
@@ -102,7 +102,7 @@ Singleton {
 
         onExited: exitCode => {
             if (exitCode === 0) {
-                console.log("NiriService: Generated binds config at", bindsPath)
+                console.info("NiriService: Generated binds config at", bindsPath)
                 return
             }
             console.warn("NiriService: Failed to write binds config, exit code:", exitCode)
@@ -150,7 +150,7 @@ Singleton {
                             try {
                                 const outputsData = JSON.parse(output)
                                 outputs = outputsData
-                                console.log("NiriService: Loaded", Object.keys(outputsData).length, "outputs")
+                                console.info("NiriService: Loaded", Object.keys(outputsData).length, "outputs")
                                 updateDisplayScales()
                                 if (windows.length > 0) {
                                     windows = sortWindowsByLayout(windows)

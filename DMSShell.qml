@@ -46,7 +46,7 @@ Item {
                         item.popoutService = PopoutService
                     }
                     item.pluginId = pluginId
-                    console.log("Daemon plugin loaded:", pluginId)
+                    console.info("Daemon plugin loaded:", pluginId)
                 }
             }
         }
