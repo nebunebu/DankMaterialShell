@@ -13,8 +13,10 @@ Item {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
+    property bool overrideAxisLayout: false
+    property bool forceVerticalLayout: false
 
-    readonly property bool isVertical: axis?.isVertical ?? false
+    readonly property bool isVertical: overrideAxisLayout ? forceVerticalLayout : (axis?.isVertical ?? false)
     readonly property real spacing: noBackground ? 2 : Theme.spacingXS
 
     property var centerWidgets: []

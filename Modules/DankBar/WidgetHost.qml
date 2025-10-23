@@ -18,7 +18,10 @@ Loader {
 
     asynchronous: false
 
-    active: getWidgetVisible(widgetId, DgopService.dgopAvailable) &&
+    readonly property bool orientationMatches: (axis?.isVertical ?? false) === isInColumn
+
+    active: orientationMatches &&
+            getWidgetVisible(widgetId, DgopService.dgopAvailable) &&
             (widgetId !== "music" || MprisController.activePlayer !== null)
     sourceComponent: getWidgetComponent(widgetId, components)
     opacity: getWidgetEnabled(widgetData?.enabled) ? 1 : 0

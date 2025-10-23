@@ -585,18 +585,18 @@ Item {
                                 function getWidgetSection(parentItem) {
                                     let current = parentItem
                                     while (current) {
-                                        if (current.objectName === "leftSection" || current === hLeftSection || current === vLeftSection) {
+                                        if (current.objectName === "leftSection") {
                                             return "left"
                                         }
-                                        if (current.objectName === "centerSection" || current === hCenterSection || current === vCenterSection) {
+                                        if (current.objectName === "centerSection") {
                                             return "center"
                                         }
-                                        if (current.objectName === "rightSection" || current === hRightSection || current === vRightSection) {
+                                        if (current.objectName === "rightSection") {
                                             return "right"
                                         }
                                         current = current.parent
                                     }
-                                    return "left" // fallback
+                                    return "left"
                                 }
 
                                 readonly property var widgetVisibility: ({
@@ -695,6 +695,9 @@ Item {
 
                                         LeftSection {
                                             id: hLeftSection
+                                            objectName: "leftSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: false
                                             anchors {
                                                 left: parent.left
                                                 verticalCenter: parent.verticalCenter
@@ -710,6 +713,9 @@ Item {
 
                                         RightSection {
                                             id: hRightSection
+                                            objectName: "rightSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: false
                                             anchors {
                                                 right: parent.right
                                                 verticalCenter: parent.verticalCenter
@@ -725,6 +731,9 @@ Item {
 
                                         CenterSection {
                                             id: hCenterSection
+                                            objectName: "centerSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: false
                                             anchors {
                                                 verticalCenter: parent.verticalCenter
                                                 horizontalCenter: parent.horizontalCenter
@@ -746,6 +755,9 @@ Item {
 
                                         LeftSection {
                                             id: vLeftSection
+                                            objectName: "leftSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: true
                                             width: parent.width
                                             anchors {
                                                 top: parent.top
@@ -762,6 +774,9 @@ Item {
 
                                         CenterSection {
                                             id: vCenterSection
+                                            objectName: "centerSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: true
                                             width: parent.width
                                             anchors {
                                                 verticalCenter: parent.verticalCenter
@@ -778,6 +793,9 @@ Item {
 
                                         RightSection {
                                             id: vRightSection
+                                            objectName: "rightSection"
+                                            overrideAxisLayout: true
+                                            forceVerticalLayout: true
                                             width: parent.width
                                             height: implicitHeight
                                             anchors {

@@ -11,8 +11,10 @@ Item {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
+    property bool overrideAxisLayout: false
+    property bool forceVerticalLayout: false
 
-    readonly property bool isVertical: axis?.isVertical ?? false
+    readonly property bool isVertical: overrideAxisLayout ? forceVerticalLayout : (axis?.isVertical ?? false)
 
     implicitHeight: layoutLoader.item ? (layoutLoader.item.implicitHeight || layoutLoader.item.height) : 0
     implicitWidth: layoutLoader.item ? (layoutLoader.item.implicitWidth || layoutLoader.item.width) : 0
