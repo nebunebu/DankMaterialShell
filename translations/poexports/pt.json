@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "Dispositivos de Saída de Áudio ("
   },
+  "Authorize": {
+    "Authorize": ""
+  },
+  "Authorize pairing with ": {
+    "Authorize pairing with ": ""
+  },
+  "Authorize service for ": {
+    "Authorize service for ": ""
+  },
   "Auto Location": {
     "Auto Location": "Localização Automática"
   },
@@ -362,6 +371,12 @@
   "Configure which displays show shell components": {
     "Configure which displays show shell components": "Configurar em quais telas serão mostrados os componentes do shell"
   },
+  "Confirm": {
+    "Confirm": ""
+  },
+  "Confirm passkey for ": {
+    "Confirm passkey for ": ""
+  },
   "Connect": {
     "Connect": "Conectar"
   },
@@ -491,6 +506,9 @@
   "Device": {
     "Device": "Dispositivo"
   },
+  "Device paired": {
+    "Device paired": ""
+  },
   "Disconnect": {
     "Disconnect": "Desconectar"
   },
@@ -584,6 +602,15 @@
   "End": {
     "End": "Fim"
   },
+  "Enter 6-digit passkey": {
+    "Enter 6-digit passkey": ""
+  },
+  "Enter PIN": {
+    "Enter PIN": ""
+  },
+  "Enter PIN for ": {
+    "Enter PIN for ": ""
+  },
   "Enter credentials for ": {
     "Enter credentials for ": "Insira as credenciais para "
   },
@@ -595,6 +622,9 @@
   },
   "Enter filename...": {
     "Enter filename...": "Insira nome do arquivo..."
+  },
+  "Enter passkey for ": {
+    "Enter passkey for ": ""
   },
   "Enter password for ": {
     "Enter password for ": "Insira senha para "
@@ -1102,6 +1132,18 @@
   },
   "Padding": {
     "Padding": "Preenchimento"
+  },
+  "Pair": {
+    "Pair": ""
+  },
+  "Pair Bluetooth Device": {
+    "Pair Bluetooth Device": ""
+  },
+  "Pairing failed": {
+    "Pairing failed": ""
+  },
+  "Passkey:": {
+    "Passkey:": ""
   },
   "Password": {
     "Password": "Senha"

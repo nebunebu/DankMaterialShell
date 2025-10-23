@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "音频输出设备 ("
   },
+  "Authorize": {
+    "Authorize": ""
+  },
+  "Authorize pairing with ": {
+    "Authorize pairing with ": ""
+  },
+  "Authorize service for ": {
+    "Authorize service for ": ""
+  },
   "Auto Location": {
     "Auto Location": "自动定位"
   },
@@ -362,6 +371,12 @@
   "Configure which displays show shell components": {
     "Configure which displays show shell components": "配置哪些显示器显示各类组件"
   },
+  "Confirm": {
+    "Confirm": ""
+  },
+  "Confirm passkey for ": {
+    "Confirm passkey for ": ""
+  },
   "Connect": {
     "Connect": "连接"
   },
@@ -491,6 +506,9 @@
   "Device": {
     "Device": "设备"
   },
+  "Device paired": {
+    "Device paired": ""
+  },
   "Disconnect": {
     "Disconnect": "断开连接"
   },
@@ -584,6 +602,15 @@
   "End": {
     "End": "结束"
   },
+  "Enter 6-digit passkey": {
+    "Enter 6-digit passkey": ""
+  },
+  "Enter PIN": {
+    "Enter PIN": ""
+  },
+  "Enter PIN for ": {
+    "Enter PIN for ": ""
+  },
   "Enter credentials for ": {
     "Enter credentials for ": "输入凭据 "
   },
@@ -595,6 +622,9 @@
   },
   "Enter filename...": {
     "Enter filename...": "输入文件名..."
+  },
+  "Enter passkey for ": {
+    "Enter passkey for ": ""
   },
   "Enter password for ": {
     "Enter password for ": "输入密码"
@@ -1102,6 +1132,18 @@
   },
   "Padding": {
     "Padding": "内边距"
+  },
+  "Pair": {
+    "Pair": ""
+  },
+  "Pair Bluetooth Device": {
+    "Pair Bluetooth Device": ""
+  },
+  "Pairing failed": {
+    "Pairing failed": ""
+  },
+  "Passkey:": {
+    "Passkey:": ""
   },
   "Password": {
     "Password": "密码"

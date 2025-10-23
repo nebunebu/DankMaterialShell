@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "オーディオ出力デバイス（"
   },
+  "Authorize": {
+    "Authorize": ""
+  },
+  "Authorize pairing with ": {
+    "Authorize pairing with ": ""
+  },
+  "Authorize service for ": {
+    "Authorize service for ": ""
+  },
   "Auto Location": {
     "Auto Location": "自動位置検出"
   },
@@ -362,6 +371,12 @@
   "Configure which displays show shell components": {
     "Configure which displays show shell components": "シェルコンポーネントを表示するディスプレイを配置"
   },
+  "Confirm": {
+    "Confirm": ""
+  },
+  "Confirm passkey for ": {
+    "Confirm passkey for ": ""
+  },
   "Connect": {
     "Connect": "接続"
   },
@@ -491,6 +506,9 @@
   "Device": {
     "Device": "デバイス"
   },
+  "Device paired": {
+    "Device paired": ""
+  },
   "Disconnect": {
     "Disconnect": "切断"
   },
@@ -584,6 +602,15 @@
   "End": {
     "End": "終わり"
   },
+  "Enter 6-digit passkey": {
+    "Enter 6-digit passkey": ""
+  },
+  "Enter PIN": {
+    "Enter PIN": ""
+  },
+  "Enter PIN for ": {
+    "Enter PIN for ": ""
+  },
   "Enter credentials for ": {
     "Enter credentials for ": "資格情報を入力"
   },
@@ -595,6 +622,9 @@
   },
   "Enter filename...": {
     "Enter filename...": "ファイル名を入力してください..."
+  },
+  "Enter passkey for ": {
+    "Enter passkey for ": ""
   },
   "Enter password for ": {
     "Enter password for ": "パスワードを入力"
@@ -1102,6 +1132,18 @@
   },
   "Padding": {
     "Padding": "パディング"
+  },
+  "Pair": {
+    "Pair": ""
+  },
+  "Pair Bluetooth Device": {
+    "Pair Bluetooth Device": ""
+  },
+  "Pairing failed": {
+    "Pairing failed": ""
+  },
+  "Passkey:": {
+    "Passkey:": ""
   },
   "Password": {
     "Password": "パスワード"
