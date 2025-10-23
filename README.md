@@ -324,11 +324,11 @@ make && sudo make install
 #### 4.1 Core optional dependencies
 ```bash
 # Arch Linux
-sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia
+sudo pacman -S cava wl-clipboard cliphist brightnessctl qt6-multimedia accountsservice
 paru -S matugen-bin dgop
 
 # Fedora
-sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia 
+sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia accountsservice
 sudo dnf copr enable avengemedia/danklinux && sudo dnf install cliphist ghostty hyprpicker material-symbols-fonts matugen 
 ```
 Note: by enabling and installing the avengemedia/dms copr above, these core dependencies will automatically be available for use. 
@@ -352,6 +352,7 @@ sudo sh -c "curl -L https://github.com/AvengeMedia/dgop/releases/latest/download
 - `cava`: Audio visualizer
 - `cliphist`: Clipboard history
 - `qt6-multimedia`: System sound support
+- `accountsservice`: Ability to sync 
 
 ## Compositor Configuration
 
