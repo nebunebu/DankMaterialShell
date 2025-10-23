@@ -38,11 +38,7 @@ DankModal {
 
     shouldBeVisible: false
     width: 420
-    height: {
-        if (requestType === "confirm" || requestType === "authorize" || requestType.startsWith("authorize-service"))
-            return 200
-        return 230
-    }
+    height: contentLoader.item ? contentLoader.item.implicitHeight + Theme.spacingM * 2 : 240
 
     onShouldBeVisibleChanged: () => {
         if (!shouldBeVisible) {
@@ -79,6 +75,7 @@ DankModal {
 
             anchors.fill: parent
             focus: true
+            implicitHeight: mainColumn.implicitHeight
 
             Keys.onEscapePressed: event => {
                 DMSService.bluetoothCancelPairing(token)
@@ -89,55 +86,44 @@ DankModal {
             }
 
             Column {
-                anchors.centerIn: parent
-                width: parent.width - Theme.spacingM * 2
-                spacing: Theme.spacingM
+                id: mainColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: Theme.spacingM
+                anchors.rightMargin: Theme.spacingM
+                anchors.topMargin: Theme.spacingM
+                spacing: requestType === "pin" || requestType === "passkey" ? Theme.spacingM : Theme.spacingS
 
-                Row {
+                Column {
                     width: parent.width
+                    spacing: Theme.spacingXS
 
-                    Column {
-                        width: parent.width - 40
-                        spacing: Theme.spacingXS
-
-                        StyledText {
-                            text: I18n.tr("Pair Bluetooth Device")
-                            font.pixelSize: Theme.fontSizeLarge
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
-                        }
-
-                        StyledText {
-                            text: {
-                                if (requestType === "confirm")
-                                    return I18n.tr("Confirm passkey for ") + deviceName
-                                if (requestType === "authorize")
-                                    return I18n.tr("Authorize pairing with ") + deviceName
-                                if (requestType.startsWith("authorize-service"))
-                                    return I18n.tr("Authorize service for ") + deviceName
-                                if (requestType === "pin")
-                                    return I18n.tr("Enter PIN for ") + deviceName
-                                if (requestType === "passkey")
-                                    return I18n.tr("Enter passkey for ") + deviceName
-                                return deviceName
-                            }
-                            font.pixelSize: Theme.fontSizeMedium
-                            color: Theme.surfaceTextMedium
-                            width: parent.width
-                            elide: Text.ElideRight
-                        }
+                    StyledText {
+                        text: I18n.tr("Pair Bluetooth Device")
+                        font.pixelSize: Theme.fontSizeLarge
+                        color: Theme.surfaceText
+                        font.weight: Font.Medium
                     }
 
-                    DankActionButton {
-                        iconName: "close"
-                        iconSize: Theme.iconSize - 4
-                        iconColor: Theme.surfaceText
-                        onClicked: () => {
-                            DMSService.bluetoothCancelPairing(token)
-                            close()
-                            pinInput = ""
-                            passkeyInput = ""
+                    StyledText {
+                        text: {
+                            if (requestType === "confirm")
+                                return I18n.tr("Confirm passkey for ") + deviceName
+                            if (requestType === "authorize")
+                                return I18n.tr("Authorize pairing with ") + deviceName
+                            if (requestType.startsWith("authorize-service"))
+                                return I18n.tr("Authorize service for ") + deviceName
+                            if (requestType === "pin")
+                                return I18n.tr("Enter PIN for ") + deviceName
+                            if (requestType === "passkey")
+                                return I18n.tr("Enter passkey for ") + deviceName
+                            return deviceName
                         }
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.surfaceTextMedium
+                        width: parent.width - 40
+                        elide: Text.ElideRight
                     }
                 }
 
@@ -213,14 +199,14 @@ DankModal {
 
                 Rectangle {
                     width: parent.width
-                    height: 60
+                    height: 56
                     radius: Theme.cornerRadius
                     color: Theme.surfaceContainerHighest
                     visible: requestType === "confirm"
 
                     Column {
                         anchors.centerIn: parent
-                        spacing: Theme.spacingXS
+                        spacing: 2
 
                         StyledText {
                             text: I18n.tr("Passkey:")
@@ -241,12 +227,12 @@ DankModal {
 
                 Item {
                     width: parent.width
-                    height: 40
+                    height: 36
 
                     Row {
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        spacing: Theme.spacingM
+                        spacing: Theme.spacingS
 
                         Rectangle {
                             width: Math.max(70, cancelText.contentWidth + Theme.spacingM * 2)
@@ -331,6 +317,22 @@ DankModal {
                             }
                         }
                     }
+                }
+            }
+
+            DankActionButton {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.topMargin: Theme.spacingM
+                anchors.rightMargin: Theme.spacingM
+                iconName: "close"
+                iconSize: Theme.iconSize - 4
+                iconColor: Theme.surfaceText
+                onClicked: () => {
+                    DMSService.bluetoothCancelPairing(token)
+                    close()
+                    pinInput = ""
+                    passkeyInput = ""
                 }
             }
         }

@@ -247,8 +247,8 @@ FocusScope {
                                 property bool hasSettings: pluginData && pluginData.settings !== undefined && pluginData.settings !== ""
                                 property bool isExpanded: pluginsTab.expandedPluginId === pluginId
                                 property bool hasUpdate: {
-                                    if (DMSService.apiVersion < 8) return true
-                                    return pluginsTab.installedPluginsData[pluginDirectoryName] || pluginsTab.installedPluginsData[pluginId] || pluginsTab.installedPluginsData[pluginName] || false
+                                    if (DMSService.apiVersion < 8) return false
+                                    return pluginsTab.installedPluginsData[pluginId] || pluginsTab.installedPluginsData[pluginName] || false
                                 }
 
 
@@ -346,10 +346,9 @@ FocusScope {
                                                     hoverEnabled: true
                                                     cursorShape: Qt.PointingHandCursor
                                                     onClicked: {
-                                                        const currentPluginDirName = pluginDelegate.pluginDirectoryName
                                                         const currentPluginName = pluginDelegate.pluginName
                                                         const currentPluginId = pluginDelegate.pluginId
-                                                        DMSService.update(currentPluginDirName, response => {
+                                                        DMSService.update(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Update failed: " + response.error)
                                                             } else {
@@ -397,9 +396,8 @@ FocusScope {
                                                     hoverEnabled: true
                                                     cursorShape: Qt.PointingHandCursor
                                                     onClicked: {
-                                                        const currentPluginDirName = pluginDelegate.pluginDirectoryName
                                                         const currentPluginName = pluginDelegate.pluginName
-                                                        DMSService.uninstall(currentPluginDirName, response => {
+                                                        DMSService.uninstall(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Uninstall failed: " + response.error)
                                                             } else {
@@ -677,8 +675,8 @@ FocusScope {
             for (var i = 0; i < plugins.length; i++) {
                 var plugin = plugins[i]
                 var hasUpdate = plugin.hasUpdate || false
-                if (plugin.path) {
-                    pluginMap[plugin.path] = hasUpdate
+                if (plugin.id) {
+                    pluginMap[plugin.id] = hasUpdate
                 }
                 if (plugin.name) {
                     pluginMap[plugin.name] = hasUpdate

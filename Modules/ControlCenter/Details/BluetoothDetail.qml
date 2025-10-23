@@ -8,6 +8,8 @@ import qs.Widgets
 import qs.Modals
 
 Rectangle {
+    id: root
+
     implicitHeight: BluetoothService.adapter && BluetoothService.adapter.enabled ? headerRow.height + bluetoothContent.height + Theme.spacingM : headerRow.height
     radius: Theme.cornerRadius
     color: Theme.surfaceContainerHigh
@@ -21,6 +23,25 @@ Rectangle {
 
     function isDeviceBeingPaired(deviceAddress) {
         return devicesBeingPaired.has(deviceAddress)
+    }
+
+    function handlePairDevice(device) {
+        if (!device) return
+
+        const deviceAddr = device.address
+        devicesBeingPaired.add(deviceAddr)
+        devicesBeingPairedChanged()
+
+        BluetoothService.pairDevice(device, function(response) {
+            devicesBeingPaired.delete(deviceAddr)
+            devicesBeingPairedChanged()
+
+            if (response.error) {
+                ToastService.showError(I18n.tr("Pairing failed"), response.error)
+            } else if (!BluetoothService.enhancedPairingAvailable) {
+                ToastService.showSuccess(I18n.tr("Device paired"))
+            }
+        })
     }
 
     function updateDeviceCodecDisplay(deviceAddress, codecName) {
@@ -412,22 +433,7 @@ Rectangle {
                         cursorShape: canConnect && !isBusy ? Qt.PointingHandCursor : Qt.ArrowCursor
                         enabled: canConnect && !isBusy
                         onClicked: {
-                            if (modelData) {
-                                const deviceAddr = modelData.address
-                                devicesBeingPaired.add(deviceAddr)
-                                devicesBeingPairedChanged()
-
-                                BluetoothService.pairDevice(modelData, response => {
-                                    devicesBeingPaired.delete(deviceAddr)
-                                    devicesBeingPairedChanged()
-
-                                    if (response.error) {
-                                        ToastService.showError(I18n.tr("Pairing failed"), response.error)
-                                    } else if (!BluetoothService.enhancedPairingAvailable) {
-                                        ToastService.showSuccess(I18n.tr("Device paired"))
-                                    }
-                                })
-                            }
+                            root.handlePairDevice(modelData)
                         }
                     }
 
@@ -535,7 +541,16 @@ Rectangle {
 
             onTriggered: {
                 if (bluetoothContextMenu.currentDevice) {
-                    bluetoothContextMenu.currentDevice.forget()
+                    if (BluetoothService.enhancedPairingAvailable) {
+                        const devicePath = BluetoothService.getDevicePath(bluetoothContextMenu.currentDevice)
+                        DMSService.bluetoothRemove(devicePath, response => {
+                            if (response.error) {
+                                ToastService.showError(I18n.tr("Failed to remove device"), response.error)
+                            }
+                        })
+                    } else {
+                        bluetoothContextMenu.currentDevice.forget()
+                    }
                 }
             }
         }
