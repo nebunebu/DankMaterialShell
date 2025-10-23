@@ -27,6 +27,7 @@ BuildRequires:  wget
 
 # Core requirements
 Requires:       (quickshell-git or quickshell)
+Requires:       accountsservice
 Requires:       dms-cli
 Requires:       dgop
 Requires:       fira-code-fonts

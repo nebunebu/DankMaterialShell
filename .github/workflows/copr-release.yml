@@ -88,6 +88,7 @@ jobs:
           BuildRequires:  wget
 
           Requires:       (quickshell or quickshell-git)
+          Requires:       accountsservice
           Requires:       dms-cli
           Requires:       dgop
           Requires:       fira-code-fonts
