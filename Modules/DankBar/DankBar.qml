@@ -832,6 +832,7 @@ Item {
                                     id: launcherButtonComponent
 
                                     LauncherButton {
+                                        id: launcherButton
                                         isActive: false
                                         widgetThickness: barWindow.widgetThickness
                                         barThickness: barWindow.effectiveBarThickness
@@ -841,6 +842,12 @@ Item {
                                         hyprlandOverviewLoader: root.hyprlandOverviewLoader
                                         onClicked: {
                                             appDrawerLoader.active = true
+                                            if (appDrawerLoader.item && appDrawerLoader.item.setTriggerPosition) {
+                                                const globalPos = launcherButton.visualContent.mapToGlobal(0, 0)
+                                                const currentScreen = barWindow.screen
+                                                const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barWindow.effectiveBarThickness, launcherButton.visualWidth)
+                                                appDrawerLoader.item.setTriggerPosition(pos.x, pos.y, pos.width, launcherButton.section, currentScreen)
+                                            }
                                             appDrawerLoader.item?.toggle()
                                         }
                                     }

@@ -29,11 +29,14 @@ Item {
     Component {
         id: rowComp
         Row {
-            spacing: noBackground ? 2 : Theme.spacingXS
+            readonly property real widgetSpacing: noBackground ? 2 : Theme.spacingXS
+            spacing: widgetSpacing
             anchors.right: parent ? parent.right : undefined
             Repeater {
+                id: rowRepeater
                 model: root.widgetsModel
                 Item {
+                    readonly property real rowSpacing: parent.widgetSpacing
                     width: widgetLoader.item ? widgetLoader.item.width : 0
                     height: widgetLoader.item ? widgetLoader.item.height : 0
                     WidgetHost {
@@ -49,6 +52,11 @@ Item {
                         parentScreen: root.parentScreen
                         widgetThickness: root.widgetThickness
                         barThickness: root.barThickness
+                        isFirst: model.index === 0
+                        isLast: model.index === rowRepeater.count - 1
+                        sectionSpacing: parent.rowSpacing
+                        isLeftBarEdge: false
+                        isRightBarEdge: true
                     }
                 }
             }
@@ -59,10 +67,13 @@ Item {
         id: columnComp
         Column {
             width: parent ? parent.width : 0
-            spacing: noBackground ? 2 : Theme.spacingXS
+            readonly property real widgetSpacing: noBackground ? 2 : Theme.spacingXS
+            spacing: widgetSpacing
             Repeater {
+                id: columnRepeater
                 model: root.widgetsModel
                 Item {
+                    readonly property real columnSpacing: parent.widgetSpacing
                     width: parent.width
                     height: widgetLoader.item ? widgetLoader.item.height : 0
                     WidgetHost {
@@ -78,6 +89,11 @@ Item {
                         parentScreen: root.parentScreen
                         widgetThickness: root.widgetThickness
                         barThickness: root.barThickness
+                        isFirst: model.index === 0
+                        isLast: model.index === columnRepeater.count - 1
+                        sectionSpacing: parent.columnSpacing
+                        isTopBarEdge: false
+                        isBottomBarEdge: true
                     }
                 }
             }

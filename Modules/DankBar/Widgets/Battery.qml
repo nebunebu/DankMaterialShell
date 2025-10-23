@@ -97,7 +97,10 @@ BasePill {
     }
 
     MouseArea {
-        anchors.fill: parent
+        x: -battery.leftMargin
+        y: -battery.topMargin
+        width: battery.width + battery.leftMargin + battery.rightMargin
+        height: battery.height + battery.topMargin + battery.bottomMargin
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton
@@ -108,7 +111,7 @@ BasePill {
                 const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, battery.visualWidth)
                 popoutTarget.setTriggerPosition(pos.x, pos.y, pos.width, section, currentScreen)
             }
-            toggleBatteryPopup();
+            toggleBatteryPopup()
         }
     }
 }

@@ -237,15 +237,17 @@ BasePill {
     }
 
     MouseArea {
-        id: clockMouseArea
-        anchors.fill: parent
+        x: -root.leftMargin
+        y: -root.topMargin
+        width: root.width + root.leftMargin + root.rightMargin
+        height: root.height + root.topMargin + root.bottomMargin
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onPressed: {
             if (root.popoutTarget && root.popoutTarget.setTriggerPosition) {
-                const globalPos = mapToGlobal(0, 0)
+                const globalPos = root.visualContent.mapToGlobal(0, 0)
                 const currentScreen = root.parentScreen || Screen
-                const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, root.barThickness, width)
+                const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, root.barThickness, root.visualWidth)
                 root.popoutTarget.setTriggerPosition(pos.x, pos.y, pos.width, root.section, currentScreen)
             }
             root.clockClicked()

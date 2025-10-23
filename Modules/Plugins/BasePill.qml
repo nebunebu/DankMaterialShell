@@ -14,10 +14,23 @@ Item {
     property real barThickness: 48
     property alias content: contentLoader.sourceComponent
     property bool isVerticalOrientation: axis?.isVertical ?? false
+    property bool isFirst: false
+    property bool isLast: false
+    property real sectionSpacing: 0
+    property bool isLeftBarEdge: false
+    property bool isRightBarEdge: false
+    property bool isTopBarEdge: false
+    property bool isBottomBarEdge: false
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 0 : Math.max(Theme.spacingXS, Theme.spacingS * (widgetThickness / 30))
     readonly property real visualWidth: isVerticalOrientation ? widgetThickness : (contentLoader.item ? (contentLoader.item.implicitWidth + horizontalPadding * 2) : 0)
     readonly property real visualHeight: isVerticalOrientation ? (contentLoader.item ? (contentLoader.item.implicitHeight + horizontalPadding * 2) : 0) : widgetThickness
     readonly property alias visualContent: visualContent
+    readonly property real barEdgeExtension: 1000
+    readonly property real gapExtension: sectionSpacing
+    readonly property real leftMargin: !isVerticalOrientation ? (isLeftBarEdge && isFirst ? barEdgeExtension : (isFirst ? gapExtension : gapExtension / 2)) : 0
+    readonly property real rightMargin: !isVerticalOrientation ? (isRightBarEdge && isLast ? barEdgeExtension : (isLast ? gapExtension : gapExtension / 2)) : 0
+    readonly property real topMargin: isVerticalOrientation ? (isTopBarEdge && isFirst ? barEdgeExtension : (isFirst ? gapExtension : gapExtension / 2)) : 0
+    readonly property real bottomMargin: isVerticalOrientation ? (isBottomBarEdge && isLast ? barEdgeExtension : (isLast ? gapExtension : gapExtension / 2)) : 0
 
     signal clicked()
 
@@ -49,17 +62,21 @@ Item {
     MouseArea {
         id: mouseArea
         z: -1
-        anchors.fill: parent
+        x: -root.leftMargin
+        y: -root.topMargin
+        width: root.width + root.leftMargin + root.rightMargin
+        height: root.height + root.topMargin + root.bottomMargin
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            root.clicked()
+        acceptedButtons: Qt.LeftButton
+        onPressed: {
             if (popoutTarget && popoutTarget.setTriggerPosition) {
-                const globalPos = mapToGlobal(0, 0)
+                const globalPos = root.visualContent.mapToGlobal(0, 0)
                 const currentScreen = parentScreen || Screen
                 const pos = SettingsData.getPopupTriggerPosition(globalPos, currentScreen, barThickness, root.visualWidth)
                 popoutTarget.setTriggerPosition(pos.x, pos.y, pos.width, section, currentScreen)
             }
+            root.clicked()
         }
     }
 }
