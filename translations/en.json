@@ -722,7 +722,7 @@
   {
     "term": "Configuration activated",
     "context": "Configuration activated",
-    "reference": "Services/NetworkManagerService.qml:320",
+    "reference": "Services/NetworkManagerService.qml:308",
     "comment": ""
   },
   {
@@ -770,7 +770,7 @@
   {
     "term": "Connection failed. Check password and try again.",
     "context": "Connection failed. Check password and try again.",
-    "reference": "Services/NetworkManagerService.qml:287",
+    "reference": "Services/NetworkManagerService.qml:275",
     "comment": ""
   },
   {
@@ -914,7 +914,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:236",
+    "reference": "Services/DMSService.qml:229",
     "comment": ""
   },
   {
@@ -1022,7 +1022,7 @@
   {
     "term": "Disconnected from WiFi",
     "context": "Disconnected from WiFi",
-    "reference": "Services/NetworkManagerService.qml:405",
+    "reference": "Services/NetworkManagerService.qml:385",
     "comment": ""
   },
   {
@@ -1274,25 +1274,25 @@
   {
     "term": "Failed to activate configuration",
     "context": "Failed to activate configuration",
-    "reference": "Services/NetworkManagerService.qml:316",
+    "reference": "Services/NetworkManagerService.qml:304",
     "comment": ""
   },
   {
     "term": "Failed to connect to ",
     "context": "Failed to connect to ",
-    "reference": "Services/NetworkManagerService.qml:289",
+    "reference": "Services/NetworkManagerService.qml:277",
     "comment": ""
   },
   {
     "term": "Failed to disconnect WiFi",
     "context": "Failed to disconnect WiFi",
-    "reference": "Services/NetworkManagerService.qml:403",
+    "reference": "Services/NetworkManagerService.qml:383",
     "comment": ""
   },
   {
     "term": "Failed to enable WiFi",
     "context": "Failed to enable WiFi",
-    "reference": "Services/NetworkManagerService.qml:508",
+    "reference": "Services/NetworkManagerService.qml:484",
     "comment": ""
   },
   {
@@ -1316,7 +1316,7 @@
   {
     "term": "Failed to start connection to ",
     "context": "Failed to start connection to ",
-    "reference": "Services/NetworkManagerService.qml:389",
+    "reference": "Services/NetworkManagerService.qml:371",
     "comment": ""
   },
   {
@@ -1406,7 +1406,7 @@
   {
     "term": "Forgot network ",
     "context": "Forgot network ",
-    "reference": "Services/NetworkManagerService.qml:465",
+    "reference": "Services/NetworkManagerService.qml:441",
     "comment": ""
   },
   {
@@ -3182,7 +3182,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:237",
+    "reference": "Services/DMSService.qml:230",
     "comment": ""
   },
   {
@@ -3482,13 +3482,13 @@
   {
     "term": "WiFi disabled",
     "context": "WiFi disabled",
-    "reference": "Services/NetworkManagerService.qml:498",
+    "reference": "Services/NetworkManagerService.qml:474",
     "comment": ""
   },
   {
     "term": "WiFi enabled",
     "context": "WiFi enabled",
-    "reference": "Services/NetworkManagerService.qml:498, Services/NetworkManagerService.qml:510",
+    "reference": "Services/NetworkManagerService.qml:474, Services/NetworkManagerService.qml:486",
     "comment": ""
   },
   {
