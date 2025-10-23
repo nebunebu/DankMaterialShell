@@ -1,11 +1,10 @@
 name: DMS Copr Stable Release
 
 on:
-  push:
-    tags:
-      - 'v*'
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ["Create Release from DMS"]
+    types: [completed]
+    branches: [master]
   workflow_dispatch:
     inputs:
       version:
@@ -16,7 +15,8 @@ on:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
-    
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,20 +27,14 @@ jobs:
           if [ -n "${{ github.event.inputs.version }}" ]; then
             VERSION="${{ github.event.inputs.version }}"
             echo "Using manual version: $VERSION"
-          elif [ "${{ github.event_name }}" = "release" ]; then
-            VERSION="${{ github.event.release.tag_name }}"
-            VERSION="${VERSION#v}"
-            echo "Using release version: $VERSION"
-          elif [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            VERSION="${{ github.ref_name }}"
-            VERSION="${VERSION#v}"
-            echo "Using tag version: $VERSION"
+          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
+            VERSION=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name' | sed 's/^v//')
+            echo "Using latest release version from workflow_run: $VERSION"
           else
-            # Fallback to latest release
-            VERSION=$(curl -s https://api.github.com/repos/AvengeMedia/DankMaterialShell/releases/latest | jq -r '.tag_name' | sed 's/^v//')
+            VERSION=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name' | sed 's/^v//')
             echo "Using latest release version: $VERSION"
           fi
-          
+
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "✅ Building DMS stable version: $VERSION"
       
