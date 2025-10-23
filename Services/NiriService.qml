@@ -37,7 +37,7 @@ Singleton {
     property bool matugenSuppression: false
     property bool configGenerationPending: false
 
-    signal windowUrgentChanged()
+    signal windowUrgentChanged
 
     Component.onCompleted: fetchOutputs()
 
@@ -140,28 +140,30 @@ Singleton {
     }
 
     function fetchOutputs() {
-        if (!CompositorService.isNiri) return
+        if (!CompositorService.isNiri)
+            return
         Proc.runCommand("niri-fetch-outputs", ["niri", "msg", "-j", "outputs"], (output, exitCode) => {
-            if (exitCode !== 0) {
-                console.warn("NiriService: Failed to fetch outputs, exit code:", exitCode)
-                return
-            }
-            try {
-                const outputsData = JSON.parse(output)
-                outputs = outputsData
-                console.log("NiriService: Loaded", Object.keys(outputsData).length, "outputs")
-                updateDisplayScales()
-                if (windows.length > 0) {
-                    windows = sortWindowsByLayout(windows)
-                }
-            } catch (e) {
-                console.warn("NiriService: Failed to parse outputs:", e)
-            }
-        })
+                            if (exitCode !== 0) {
+                                console.warn("NiriService: Failed to fetch outputs, exit code:", exitCode)
+                                return
+                            }
+                            try {
+                                const outputsData = JSON.parse(output)
+                                outputs = outputsData
+                                console.log("NiriService: Loaded", Object.keys(outputsData).length, "outputs")
+                                updateDisplayScales()
+                                if (windows.length > 0) {
+                                    windows = sortWindowsByLayout(windows)
+                                }
+                            } catch (e) {
+                                console.warn("NiriService: Failed to parse outputs:", e)
+                            }
+                        })
     }
 
     function updateDisplayScales() {
-        if (!outputs || Object.keys(outputs).length === 0) return
+        if (!outputs || Object.keys(outputs).length === 0)
+            return
 
         const scales = {}
         for (const outputName in outputs) {
@@ -176,48 +178,48 @@ Singleton {
 
     function sortWindowsByLayout(windowList) {
         return [...windowList].sort((a, b) => {
-            const aWorkspace = workspaces[a.workspace_id]
-            const bWorkspace = workspaces[b.workspace_id]
+                                        const aWorkspace = workspaces[a.workspace_id]
+                                        const bWorkspace = workspaces[b.workspace_id]
 
-            if (aWorkspace && bWorkspace) {
-                const aOutput = aWorkspace.output
-                const bOutput = bWorkspace.output
+                                        if (aWorkspace && bWorkspace) {
+                                            const aOutput = aWorkspace.output
+                                            const bOutput = bWorkspace.output
 
-                const aOutputInfo = outputs[aOutput]
-                const bOutputInfo = outputs[bOutput]
+                                            const aOutputInfo = outputs[aOutput]
+                                            const bOutputInfo = outputs[bOutput]
 
-                if (aOutputInfo && bOutputInfo && aOutputInfo.logical && bOutputInfo.logical) {
-                    if (aOutputInfo.logical.x !== bOutputInfo.logical.x) {
-                        return aOutputInfo.logical.x - bOutputInfo.logical.x
-                    }
-                    if (aOutputInfo.logical.y !== bOutputInfo.logical.y) {
-                        return aOutputInfo.logical.y - bOutputInfo.logical.y
-                    }
-                }
+                                            if (aOutputInfo && bOutputInfo && aOutputInfo.logical && bOutputInfo.logical) {
+                                                if (aOutputInfo.logical.x !== bOutputInfo.logical.x) {
+                                                    return aOutputInfo.logical.x - bOutputInfo.logical.x
+                                                }
+                                                if (aOutputInfo.logical.y !== bOutputInfo.logical.y) {
+                                                    return aOutputInfo.logical.y - bOutputInfo.logical.y
+                                                }
+                                            }
 
-                if (aOutput === bOutput && aWorkspace.idx !== bWorkspace.idx) {
-                    return aWorkspace.idx - bWorkspace.idx
-                }
-            }
+                                            if (aOutput === bOutput && aWorkspace.idx !== bWorkspace.idx) {
+                                                return aWorkspace.idx - bWorkspace.idx
+                                            }
+                                        }
 
-            if (a.workspace_id === b.workspace_id && a.layout && b.layout) {
-                if (a.layout.pos_in_scrolling_layout && b.layout.pos_in_scrolling_layout) {
-                    const aPos = a.layout.pos_in_scrolling_layout
-                    const bPos = b.layout.pos_in_scrolling_layout
+                                        if (a.workspace_id === b.workspace_id && a.layout && b.layout) {
+                                            if (a.layout.pos_in_scrolling_layout && b.layout.pos_in_scrolling_layout) {
+                                                const aPos = a.layout.pos_in_scrolling_layout
+                                                const bPos = b.layout.pos_in_scrolling_layout
 
-                    if (aPos.length > 1 && bPos.length > 1) {
-                        if (aPos[0] !== bPos[0]) {
-                            return aPos[0] - bPos[0]
-                        }
-                        if (aPos[1] !== bPos[1]) {
-                            return aPos[1] - bPos[1]
-                        }
-                    }
-                }
-            }
+                                                if (aPos.length > 1 && bPos.length > 1) {
+                                                    if (aPos[0] !== bPos[0]) {
+                                                        return aPos[0] - bPos[0]
+                                                    }
+                                                    if (aPos[1] !== bPos[1]) {
+                                                        return aPos[1] - bPos[1]
+                                                    }
+                                                }
+                                            }
+                                        }
 
-            return a.id - b.id
-        })
+                                        return a.id - b.id
+                                    })
     }
 
     function handleNiriEvent(event) {
@@ -354,7 +356,8 @@ Singleton {
     }
 
     function handleWindowOpenedOrChanged(data) {
-        if (!data.window) return
+        if (!data.window)
+            return
 
         const window = data.window
         const existingIndex = windows.findIndex(w => w.id === window.id)
@@ -370,7 +373,8 @@ Singleton {
     }
 
     function handleWindowLayoutsChanged(data) {
-        if (!data.changes) return
+        if (!data.changes)
+            return
 
         const updatedWindows = [...windows]
         let hasChanges = false
@@ -380,7 +384,8 @@ Singleton {
             const layoutData = change[1]
 
             const windowIndex = updatedWindows.findIndex(w => w.id === windowId)
-            if (windowIndex < 0) continue
+            if (windowIndex < 0)
+                continue
 
             const updatedWindow = {}
             for (var prop in updatedWindows[windowIndex]) {
@@ -391,14 +396,16 @@ Singleton {
             hasChanges = true
         }
 
-        if (!hasChanges) return
+        if (!hasChanges)
+            return
 
         windows = sortWindowsByLayout(updatedWindows)
         windowsChanged()
     }
 
     function handleOutputsChanged(data) {
-        if (!data.outputs) return
+        if (!data.outputs)
+            return
         outputs = data.outputs
         updateDisplayScales()
         windows = sortWindowsByLayout(windows)
@@ -442,7 +449,8 @@ Singleton {
 
     function handleWorkspaceUrgencyChanged(data) {
         const ws = root.workspaces[data.id]
-        if (!ws) return
+        if (!ws)
+            return
 
         ws.is_urgent = data.urgent
 
@@ -465,41 +473,86 @@ Singleton {
     }
 
     function send(request) {
-        if (!CompositorService.isNiri || !requestSocket.connected) return false
+        if (!CompositorService.isNiri || !requestSocket.connected)
+            return false
         requestSocket.send(request)
         return true
     }
 
     function doScreenTransition() {
-        return send({"Action": {"DoScreenTransition": {"delay_ms": 0}}})
+        return send({
+                        "Action": {
+                            "DoScreenTransition": {
+                                "delay_ms": 0
+                            }
+                        }
+                    })
     }
 
     function toggleOverview() {
-        return send({"Action": {"ToggleOverview": {}}})
+        return send({
+                        "Action": {
+                            "ToggleOverview": {}
+                        }
+                    })
     }
 
     function switchToWorkspace(workspaceIndex) {
-        return send({"Action": {"FocusWorkspace": {"reference": {"Index": workspaceIndex}}}})
+        return send({
+                        "Action": {
+                            "FocusWorkspace": {
+                                "reference": {
+                                    "Index": workspaceIndex
+                                }
+                            }
+                        }
+                    })
     }
 
     function focusWindow(windowId) {
-        return send({"Action": {"FocusWindow": {"id": windowId}}})
+        return send({
+                        "Action": {
+                            "FocusWindow": {
+                                "id": windowId
+                            }
+                        }
+                    })
     }
 
     function powerOffMonitors() {
-        return send({"Action": {"PowerOffMonitors": {}}})
+        return send({
+                        "Action": {
+                            "PowerOffMonitors": {}
+                        }
+                    })
     }
 
     function powerOnMonitors() {
-        return send({"Action": {"PowerOnMonitors": {}}})
+        return send({
+                        "Action": {
+                            "PowerOnMonitors": {}
+                        }
+                    })
     }
 
     function cycleKeyboardLayout() {
-        return send({"Action": {"SwitchLayout": {"layout": "Next"}}})
+        return send({
+                        "Action": {
+                            "SwitchLayout": {
+                                "layout": "Next"
+                            }
+                        }
+                    })
     }
 
     function quit() {
-        return send({"Action": {"Quit": {"skip_confirmation": true}}})
+        return send({
+                        "Action": {
+                            "Quit": {
+                                "skip_confirmation": true
+                            }
+                        }
+                    })
     }
 
     function getCurrentOutputWorkspaceNumbers() {
@@ -526,13 +579,17 @@ Singleton {
     }
 
     function findNiriWindow(toplevel) {
-        if (!toplevel.appId) return null
+        if (!toplevel.appId)
+            return null
 
         for (var j = 0; j < windows.length; j++) {
             const niriWindow = windows[j]
             if (niriWindow.app_id === toplevel.appId) {
                 if (!niriWindow.title || niriWindow.title === toplevel.title) {
-                    return {"niriIndex": j, "niriWindow": niriWindow}
+                    return {
+                        "niriIndex": j,
+                        "niriWindow": niriWindow
+                    }
                 }
             }
         }
@@ -549,35 +606,47 @@ Singleton {
 
         for (const niriWindow of sortWindowsByLayout(windows)) {
             let bestMatch = null
+            let bestScore = -1
 
             for (const toplevel of toplevels) {
-                if (usedToplevels.has(toplevel)) continue
+                if (usedToplevels.has(toplevel))
+                    continue
 
                 if (toplevel.appId === niriWindow.app_id) {
-                    if (niriWindow.title && toplevel.title === niriWindow.title) {
-                        bestMatch = toplevel
-                        break
+                    let score = 1
+
+                    if (niriWindow.title && toplevel.title) {
+                        if (toplevel.title === niriWindow.title) {
+                            score = 3
+                        } else if (toplevel.title.includes(niriWindow.title) || niriWindow.title.includes(toplevel.title)) {
+                            score = 2
+                        }
                     }
-                    if (!niriWindow.title && !bestMatch) {
+
+                    if (score > bestScore) {
+                        bestScore = score
                         bestMatch = toplevel
+                        if (score === 3)
+                            break
                     }
                 }
             }
 
-            if (!bestMatch) continue
+            if (!bestMatch)
+                continue
 
             usedToplevels.add(bestMatch)
 
             const enrichedToplevel = {
-                appId: bestMatch.appId,
-                title: bestMatch.title,
-                activated: bestMatch.activated,
-                niriWindowId: niriWindow.id,
-                niriWorkspaceId: niriWindow.workspace_id,
-                activate: function() {
+                "appId": bestMatch.appId,
+                "title": bestMatch.title,
+                "activated": bestMatch.activated,
+                "niriWindowId": niriWindow.id,
+                "niriWorkspaceId": niriWindow.workspace_id,
+                "activate": function () {
                     return NiriService.focusWindow(niriWindow.id)
                 },
-                close: function() {
+                "close": function () {
                     if (bestMatch.close) {
                         return bestMatch.close()
                     }
@@ -614,7 +683,8 @@ Singleton {
             }
         }
 
-        if (currentWorkspaceId === null) return toplevels
+        if (currentWorkspaceId === null)
+            return toplevels
 
         const workspaceWindows = windows.filter(niriWindow => niriWindow.workspace_id === currentWorkspaceId)
         const usedToplevels = new Set()
@@ -622,35 +692,47 @@ Singleton {
 
         for (const niriWindow of workspaceWindows) {
             let bestMatch = null
+            let bestScore = -1
 
             for (const toplevel of toplevels) {
-                if (usedToplevels.has(toplevel)) continue
+                if (usedToplevels.has(toplevel))
+                    continue
 
                 if (toplevel.appId === niriWindow.app_id) {
-                    if (niriWindow.title && toplevel.title === niriWindow.title) {
-                        bestMatch = toplevel
-                        break
+                    let score = 1
+
+                    if (niriWindow.title && toplevel.title) {
+                        if (toplevel.title === niriWindow.title) {
+                            score = 3
+                        } else if (toplevel.title.includes(niriWindow.title) || niriWindow.title.includes(toplevel.title)) {
+                            score = 2
+                        }
                     }
-                    if (!niriWindow.title && !bestMatch) {
+
+                    if (score > bestScore) {
+                        bestScore = score
                         bestMatch = toplevel
+                        if (score === 3)
+                            break
                     }
                 }
             }
 
-            if (!bestMatch) continue
+            if (!bestMatch)
+                continue
 
             usedToplevels.add(bestMatch)
 
             const enrichedToplevel = {
-                appId: bestMatch.appId,
-                title: bestMatch.title,
-                activated: bestMatch.activated,
-                niriWindowId: niriWindow.id,
-                niriWorkspaceId: niriWindow.workspace_id,
-                activate: function() {
+                "appId": bestMatch.appId,
+                "title": bestMatch.title,
+                "activated": bestMatch.activated,
+                "niriWindowId": niriWindow.id,
+                "niriWorkspaceId": niriWindow.workspace_id,
+                "activate": function () {
                     return NiriService.focusWindow(niriWindow.id)
                 },
-                close: function() {
+                "close": function () {
                     if (bestMatch.close) {
                         return bestMatch.close()
                     }
@@ -672,8 +754,10 @@ Singleton {
 
     function generateNiriLayoutConfig() {
         const niriSocket = Quickshell.env("NIRI_SOCKET")
-        if (!niriSocket || niriSocket.length === 0) return
-        if (configGenerationPending) return
+        if (!niriSocket || niriSocket.length === 0)
+            return
+        if (configGenerationPending)
+            return
 
         configGenerationPending = true
         configGenerationDebounce.restart()
@@ -696,7 +780,6 @@ Singleton {
         width 2
     }
 }
-
 window-rule {
     geometry-corner-radius ${cornerRadius}
     clip-to-geometry true
