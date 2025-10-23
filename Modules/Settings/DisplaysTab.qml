@@ -56,10 +56,21 @@ Item {
     }
 
     function setScreenPreferences(componentId, screenNames) {
-        var prefs = SettingsData.screenPreferences || {
-        };
-        prefs[componentId] = screenNames;
-        SettingsData.setScreenPreferences(prefs);
+        var prefs = SettingsData.screenPreferences || {};
+        var newPrefs = Object.assign({}, prefs);
+        newPrefs[componentId] = screenNames;
+        SettingsData.setScreenPreferences(newPrefs);
+    }
+
+    function getShowOnLastDisplay(componentId) {
+        return SettingsData.showOnLastDisplay && SettingsData.showOnLastDisplay[componentId] || false;
+    }
+
+    function setShowOnLastDisplay(componentId, enabled) {
+        var prefs = SettingsData.showOnLastDisplay || {};
+        var newPrefs = Object.assign({}, prefs);
+        newPrefs[componentId] = enabled;
+        SettingsData.setShowOnLastDisplay(newPrefs);
     }
 
     DankFlickable {
@@ -660,7 +671,6 @@ Item {
 
                                 Column {
                                     property string componentId: modelData.id
-                                    property var selectedScreens: displaysTab.getScreenPreferences(componentId)
 
                                     width: parent.width
                                     spacing: Theme.spacingXS
@@ -669,7 +679,7 @@ Item {
                                         width: parent.width
                                         text: I18n.tr("All displays")
                                         description: I18n.tr("Show on all connected displays")
-                                        checked: parent.selectedScreens.includes("all")
+                                        checked: displaysTab.getScreenPreferences(parent.componentId).includes("all")
                                         onToggled: (checked) => {
                                             if (checked)
                                                 displaysTab.setScreenPreferences(parent.componentId, ["all"]);
@@ -678,18 +688,29 @@ Item {
                                         }
                                     }
 
+                                    DankToggle {
+                                        width: parent.width
+                                        text: I18n.tr("Show on Last Display")
+                                        description: I18n.tr("Always show when there's only one connected display")
+                                        checked: displaysTab.getShowOnLastDisplay(parent.componentId)
+                                        visible: !displaysTab.getScreenPreferences(parent.componentId).includes("all") && ["dankBar", "dock", "notifications", "osd", "toast"].includes(parent.componentId)
+                                        onToggled: (checked) => {
+                                            displaysTab.setShowOnLastDisplay(parent.componentId, checked);
+                                        }
+                                    }
+
                                     Rectangle {
                                         width: parent.width
                                         height: 1
                                         color: Theme.outline
                                         opacity: 0.2
-                                        visible: !parent.selectedScreens.includes("all")
+                                        visible: !displaysTab.getScreenPreferences(parent.componentId).includes("all")
                                     }
 
                                     Column {
                                         width: parent.width
                                         spacing: Theme.spacingXS
-                                        visible: !parent.selectedScreens.includes("all")
+                                        visible: !displaysTab.getScreenPreferences(parent.componentId).includes("all")
 
                                         Repeater {
                                             model: Quickshell.screens

@@ -259,6 +259,7 @@ Singleton {
     property string updaterTerminalAdditionalParams: ""
 
     property var screenPreferences: ({})
+    property var showOnLastDisplay: ({})
 
     signal forceDankBarLayoutRefresh
     signal forceDockLayoutRefresh
@@ -494,6 +495,7 @@ Singleton {
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
                 surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
+                showOnLastDisplay = settings.showOnLastDisplay !== undefined ? settings.showOnLastDisplay : ({})
                 wallpaperFillMode = settings.wallpaperFillMode !== undefined ? settings.wallpaperFillMode : "Fill"
                 animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 customAnimationDuration = settings.customAnimationDuration !== undefined ? settings.customAnimationDuration : 500
@@ -677,6 +679,7 @@ Singleton {
                                                 "updaterCustomCommand": updaterCustomCommand,
                                                 "updaterTerminalAdditionalParams": updaterTerminalAdditionalParams,
                                                 "screenPreferences": screenPreferences,
+                                                "showOnLastDisplay": showOnLastDisplay,
                                                 "animationSpeed": animationSpeed,
                                                 "customAnimationDuration": customAnimationDuration,
                                                 "acMonitorTimeout": acMonitorTimeout,
@@ -743,7 +746,7 @@ Singleton {
             "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend",
             "customPowerActionHibernate", "customPowerActionReboot", "customPowerActionPowerOff",
             "updaterUseCustomCommand", "updaterCustomCommand", "updaterTerminalAdditionalParams",
-            "screenPreferences", "animationSpeed", "customAnimationDuration", "acMonitorTimeout", "acLockTimeout",
+            "screenPreferences", "showOnLastDisplay", "animationSpeed", "customAnimationDuration", "acMonitorTimeout", "acLockTimeout",
             "acSuspendTimeout", "acHibernateTimeout", "batteryMonitorTimeout", "batteryLockTimeout",
             "batterySuspendTimeout", "batteryHibernateTimeout", "lockBeforeSuspend",
             "loginctlLockIntegration", "launchPrefix", "brightnessDevicePins", "configVersion"
@@ -943,7 +946,11 @@ Singleton {
         if (prefs.includes("all")) {
             return Quickshell.screens
         }
-        return Quickshell.screens.filter(screen => prefs.includes(screen.name))
+        var filtered = Quickshell.screens.filter(screen => prefs.includes(screen.name))
+        if (filtered.length === 0 && showOnLastDisplay && showOnLastDisplay[componentId] && Quickshell.screens.length === 1) {
+            return Quickshell.screens
+        }
+        return filtered
     }
 
     function sendTestNotifications() {
@@ -1809,6 +1816,11 @@ Singleton {
 
     function setScreenPreferences(prefs) {
         screenPreferences = prefs
+        saveSettings()
+    }
+
+    function setShowOnLastDisplay(prefs) {
+        showOnLastDisplay = prefs
         saveSettings()
     }
 
