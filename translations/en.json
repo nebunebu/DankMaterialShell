@@ -2726,7 +2726,7 @@
   {
     "term": "Show on Last Display",
     "context": "Show on Last Display",
-    "reference": "Modules/Settings/DisplaysTab.qml:693",
+    "reference": "Modules/Settings/DisplaysTab.qml:697",
     "comment": ""
   },
   {
