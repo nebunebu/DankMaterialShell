@@ -563,6 +563,9 @@
   "Domain (optional)": {
     "Domain (optional)": ""
   },
+  "Donate on Ko-fi": {
+    "Donate on Ko-fi": ""
+  },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "Arraste Widgets para reordená-los nas seções. Use o ícone de olho para esconder ou mostrá-los (manter o espaçamento), ou clique no X para removê-los por completo."
   },
@@ -1205,6 +1208,9 @@
   "Plugins": {
     "Plugins": "Plugins"
   },
+  "Plugins:": {
+    "Plugins:": ""
+  },
   "Popup Position": {
     "Popup Position": "Posição do Popup"
   },
@@ -1291,6 +1297,9 @@
   },
   "Reset": {
     "Reset": "Resetar"
+  },
+  "Resources": {
+    "Resources": ""
   },
   "Right": {
     "Right": ""
@@ -1486,6 +1495,9 @@
   },
   "Storage & Disks": {
     "Storage & Disks": "Armazenamento & Discos"
+  },
+  "Support Development": {
+    "Support Development": ""
   },
   "Surface": {
     "Surface": "Superfície"
@@ -1744,6 +1756,9 @@
   },
   "Weather Widget": {
     "Weather Widget": "Widget de Clima"
+  },
+  "Website:": {
+    "Website:": ""
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "Quando ativado, apps são ordenados alfabeticamente. Quando desativado, apps são ordenados por frequência de uso"

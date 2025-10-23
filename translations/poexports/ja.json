@@ -563,6 +563,9 @@
   "Domain (optional)": {
     "Domain (optional)": "ドメイン (オプション)"
   },
+  "Donate on Ko-fi": {
+    "Donate on Ko-fi": ""
+  },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "ウィジェットをドラッグしてセクション内で順序を変更できます。目のアイコンでウィジェットを表示/非表示に（スペースは維持）、Xで完全に削除できます。"
   },
@@ -1205,6 +1208,9 @@
   "Plugins": {
     "Plugins": "プラグイン"
   },
+  "Plugins:": {
+    "Plugins:": ""
+  },
   "Popup Position": {
     "Popup Position": "ポップアップの位置"
   },
@@ -1291,6 +1297,9 @@
   },
   "Reset": {
     "Reset": "リセット"
+  },
+  "Resources": {
+    "Resources": ""
   },
   "Right": {
     "Right": "右"
@@ -1486,6 +1495,9 @@
   },
   "Storage & Disks": {
     "Storage & Disks": "ストレージとディスク"
+  },
+  "Support Development": {
+    "Support Development": ""
   },
   "Surface": {
     "Surface": "表面"
@@ -1744,6 +1756,9 @@
   },
   "Weather Widget": {
     "Weather Widget": "天気ウィジェット"
+  },
+  "Website:": {
+    "Website:": ""
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "有効にすると、アプリはアルファベット順に並べ替えられます。無効にすると、アプリは使用頻度で並べ替えられます。"

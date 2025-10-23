@@ -563,6 +563,9 @@
   "Domain (optional)": {
     "Domain (optional)": "域（可选）"
   },
+  "Donate on Ko-fi": {
+    "Donate on Ko-fi": ""
+  },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖动组件以在各区块内重新排序。点击眼睛图标可隐藏/显示组件（保留间距），点击 X 可彻底移除。"
   },
@@ -1205,6 +1208,9 @@
   "Plugins": {
     "Plugins": "插件"
   },
+  "Plugins:": {
+    "Plugins:": ""
+  },
   "Popup Position": {
     "Popup Position": "弹出位置"
   },
@@ -1291,6 +1297,9 @@
   },
   "Reset": {
     "Reset": "重置"
+  },
+  "Resources": {
+    "Resources": ""
   },
   "Right": {
     "Right": "右侧"
@@ -1486,6 +1495,9 @@
   },
   "Storage & Disks": {
     "Storage & Disks": "存储与磁盘"
+  },
+  "Support Development": {
+    "Support Development": ""
   },
   "Surface": {
     "Surface": "表面色"
@@ -1744,6 +1756,9 @@
   },
   "Weather Widget": {
     "Weather Widget": "天气小组件"
+  },
+  "Website:": {
+    "Website:": ""
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "启用后，应用按字母顺序排序；禁用则按使用频率排序"
