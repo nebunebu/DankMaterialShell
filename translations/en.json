@@ -44,7 +44,7 @@
   {
     "term": "3rd party",
     "context": "3rd party",
-    "reference": "Modules/Settings/PluginsTab.qml:1076",
+    "reference": "Modules/Settings/PluginsTab.qml:1074",
     "comment": ""
   },
   {
@@ -248,7 +248,7 @@
   {
     "term": "Audio Codec",
     "context": "Audio Codec",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:495",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:501",
     "comment": ""
   },
   {
@@ -278,19 +278,19 @@
   {
     "term": "Authorize",
     "context": "Authorize",
-    "reference": "Modals/BluetoothPairingModal.qml:306",
+    "reference": "Modals/BluetoothPairingModal.qml:292",
     "comment": ""
   },
   {
     "term": "Authorize pairing with ",
     "context": "Authorize pairing with ",
-    "reference": "Modals/BluetoothPairingModal.qml:115",
+    "reference": "Modals/BluetoothPairingModal.qml:114",
     "comment": ""
   },
   {
     "term": "Authorize service for ",
     "context": "Authorize service for ",
-    "reference": "Modals/BluetoothPairingModal.qml:117",
+    "reference": "Modals/BluetoothPairingModal.qml:116",
     "comment": ""
   },
   {
@@ -446,7 +446,7 @@
   {
     "term": "Bluetooth Settings",
     "context": "Bluetooth Settings",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:48",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:69",
     "comment": ""
   },
   {
@@ -506,7 +506,7 @@
   {
     "term": "Browse Plugins",
     "context": "Browse Plugins",
-    "reference": "Modules/Settings/PluginsTab.qml:869",
+    "reference": "Modules/Settings/PluginsTab.qml:867",
     "comment": ""
   },
   {
@@ -542,7 +542,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:263, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1298, Modals/FileBrowser/FileBrowserModal.qml:952",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserModal.qml:952",
     "comment": ""
   },
   {
@@ -740,13 +740,13 @@
   {
     "term": "Confirm",
     "context": "Confirm",
-    "reference": "Modals/BluetoothPairingModal.qml:304",
+    "reference": "Modals/BluetoothPairingModal.qml:290",
     "comment": ""
   },
   {
     "term": "Confirm passkey for ",
     "context": "Confirm passkey for ",
-    "reference": "Modals/BluetoothPairingModal.qml:113",
+    "reference": "Modals/BluetoothPairingModal.qml:112",
     "comment": ""
   },
   {
@@ -1010,7 +1010,7 @@
   {
     "term": "Device paired",
     "context": "Device paired",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:427",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:42",
     "comment": ""
   },
   {
@@ -1202,19 +1202,19 @@
   {
     "term": "Enter 6-digit passkey",
     "context": "Enter 6-digit passkey",
-    "reference": "Modals/BluetoothPairingModal.qml:202",
+    "reference": "Modals/BluetoothPairingModal.qml:188",
     "comment": ""
   },
   {
     "term": "Enter PIN",
     "context": "Enter PIN",
-    "reference": "Modals/BluetoothPairingModal.qml:167",
+    "reference": "Modals/BluetoothPairingModal.qml:153",
     "comment": ""
   },
   {
     "term": "Enter PIN for ",
     "context": "Enter PIN for ",
-    "reference": "Modals/BluetoothPairingModal.qml:119",
+    "reference": "Modals/BluetoothPairingModal.qml:118",
     "comment": ""
   },
   {
@@ -1244,7 +1244,7 @@
   {
     "term": "Enter passkey for ",
     "context": "Enter passkey for ",
-    "reference": "Modals/BluetoothPairingModal.qml:121",
+    "reference": "Modals/BluetoothPairingModal.qml:120",
     "comment": ""
   },
   {
@@ -1293,6 +1293,12 @@
     "term": "Failed to enable WiFi",
     "context": "Failed to enable WiFi",
     "reference": "Services/NetworkManagerService.qml:508",
+    "comment": ""
+  },
+  {
+    "term": "Failed to remove device",
+    "context": "Failed to remove device",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:548",
     "comment": ""
   },
   {
@@ -1388,7 +1394,7 @@
   {
     "term": "Forget Device",
     "context": "Forget Device",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:520",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:526",
     "comment": ""
   },
   {
@@ -1562,7 +1568,7 @@
   {
     "term": "I Understand",
     "context": "I Understand",
-    "reference": "Modules/Settings/PluginsTab.qml:1304",
+    "reference": "Modules/Settings/PluginsTab.qml:1302",
     "comment": ""
   },
   {
@@ -1634,7 +1640,7 @@
   {
     "term": "Install plugins from the DMS plugin registry",
     "context": "Install plugins from the DMS plugin registry",
-    "reference": "Modules/Settings/PluginsTab.qml:918",
+    "reference": "Modules/Settings/PluginsTab.qml:916",
     "comment": ""
   },
   {
@@ -1772,7 +1778,7 @@
   {
     "term": "Loading plugins...",
     "context": "Loading plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:976",
+    "reference": "Modules/Settings/PluginsTab.qml:974",
     "comment": ""
   },
   {
@@ -2060,7 +2066,7 @@
   {
     "term": "No Bluetooth adapter found",
     "context": "No Bluetooth adapter found",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:444",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:450",
     "comment": ""
   },
   {
@@ -2102,13 +2108,13 @@
   {
     "term": "No plugins found",
     "context": "No plugins found",
-    "reference": "Modules/Settings/PluginsTab.qml:1200",
+    "reference": "Modules/Settings/PluginsTab.qml:1198",
     "comment": ""
   },
   {
     "term": "No plugins found.",
     "context": "No plugins found.",
-    "reference": "Modules/Settings/PluginsTab.qml:623",
+    "reference": "Modules/Settings/PluginsTab.qml:621",
     "comment": ""
   },
   {
@@ -2258,25 +2264,25 @@
   {
     "term": "Pair",
     "context": "Pair",
-    "reference": "Modals/BluetoothPairingModal.qml:307",
+    "reference": "Modals/BluetoothPairingModal.qml:293",
     "comment": ""
   },
   {
     "term": "Pair Bluetooth Device",
     "context": "Pair Bluetooth Device",
-    "reference": "Modals/BluetoothPairingModal.qml:104",
+    "reference": "Modals/BluetoothPairingModal.qml:103",
     "comment": ""
   },
   {
     "term": "Pairing failed",
     "context": "Pairing failed",
-    "reference": "Modals/BluetoothPairingModal.qml:352, Modules/ControlCenter/Details/BluetoothDetail.qml:425",
+    "reference": "Modals/BluetoothPairingModal.qml:354, Modules/ControlCenter/Details/BluetoothDetail.qml:40",
     "comment": ""
   },
   {
     "term": "Passkey:",
     "context": "Passkey:",
-    "reference": "Modals/BluetoothPairingModal.qml:226",
+    "reference": "Modals/BluetoothPairingModal.qml:212",
     "comment": ""
   },
   {
@@ -2336,7 +2342,7 @@
   {
     "term": "Place plugins in",
     "context": "Place plugins in",
-    "reference": "Modules/Settings/PluginsTab.qml:623",
+    "reference": "Modules/Settings/PluginsTab.qml:621",
     "comment": ""
   },
   {
@@ -2546,7 +2552,7 @@
   {
     "term": "Reload Plugin",
     "context": "Reload Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:464",
+    "reference": "Modules/Settings/PluginsTab.qml:462",
     "comment": ""
   },
   {
@@ -2660,7 +2666,7 @@
   {
     "term": "Search plugins...",
     "context": "Search plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:940",
+    "reference": "Modules/Settings/PluginsTab.qml:938",
     "comment": ""
   },
   {
@@ -3140,13 +3146,13 @@
   {
     "term": "Third-Party Plugin Warning",
     "context": "Third-Party Plugin Warning",
-    "reference": "Modules/Settings/PluginsTab.qml:1249",
+    "reference": "Modules/Settings/PluginsTab.qml:1247",
     "comment": ""
   },
   {
     "term": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
     "context": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
-    "reference": "Modules/Settings/PluginsTab.qml:1259",
+    "reference": "Modules/Settings/PluginsTab.qml:1257",
     "comment": ""
   },
   {
@@ -3236,7 +3242,7 @@
   {
     "term": "Uninstall Plugin",
     "context": "Uninstall Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:418",
+    "reference": "Modules/Settings/PluginsTab.qml:416",
     "comment": ""
   },
   {
@@ -3278,7 +3284,7 @@
   {
     "term": "Update Plugin",
     "context": "Update Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:368",
+    "reference": "Modules/Settings/PluginsTab.qml:367",
     "comment": ""
   },
   {
@@ -3596,7 +3602,7 @@
   {
     "term": "official",
     "context": "official",
-    "reference": "Modules/Settings/PluginsTab.qml:1056",
+    "reference": "Modules/Settings/PluginsTab.qml:1054",
     "comment": ""
   },
   {
@@ -3608,7 +3614,7 @@
   {
     "term": "• Install only from trusted sources",
     "context": "• Install only from trusted sources",
-    "reference": "Modules/Settings/PluginsTab.qml:1282",
+    "reference": "Modules/Settings/PluginsTab.qml:1280",
     "comment": ""
   },
   {
@@ -3638,13 +3644,13 @@
   {
     "term": "• Plugins may contain bugs or security issues",
     "context": "• Plugins may contain bugs or security issues",
-    "reference": "Modules/Settings/PluginsTab.qml:1270",
+    "reference": "Modules/Settings/PluginsTab.qml:1268",
     "comment": ""
   },
   {
     "term": "• Review code before installation when possible",
     "context": "• Review code before installation when possible",
-    "reference": "Modules/Settings/PluginsTab.qml:1276",
+    "reference": "Modules/Settings/PluginsTab.qml:1274",
     "comment": ""
   },
   {
