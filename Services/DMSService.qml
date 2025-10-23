@@ -218,10 +218,7 @@ Singleton {
 
     function sendSubscribeRequest() {
         const request = {
-            "method": "subscribe",
-            "params": {
-                "services": ["bluetooth", "bluetooth.pairing"]
-            }
+            "method": "subscribe"
         }
 
         if (verboseLogs) {
