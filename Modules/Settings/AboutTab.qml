@@ -278,7 +278,6 @@ Item {
                 }
             }
 
-            // Technical Details
             StyledRect {
                 width: parent.width
                 height: techSection.implicitHeight + Theme.spacingL * 2
@@ -307,7 +306,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Technical Details")
+                            text: I18n.tr("Resources")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -322,14 +321,14 @@ Item {
                         rowSpacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Framework:")
+                            text: I18n.tr("Website:")
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
-                            text: `<a href="https://quickshell.org" style="text-decoration:none; color:${Theme.primary};">Quickshell</a>`
+                            text: `<a href="https://danklinux.com" style="text-decoration:none; color:${Theme.primary};">danklinux.com</a>`
                             linkColor: Theme.primary
                             textFormat: Text.RichText
                             onLinkActivated: url => Qt.openUrlExternally(url)
@@ -345,67 +344,25 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Language:")
+                            text: I18n.tr("Plugins:")
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
-                            text: I18n.tr("QML, JavaScript, Go")
+                            text: `<a href="https://plugins.danklinux.com" style="text-decoration:none; color:${Theme.primary};">plugins.danklinux.com</a>`
+                            linkColor: Theme.primary
+                            textFormat: Text.RichText
+                            onLinkActivated: url => Qt.openUrlExternally(url)
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceVariantText
-                        }
 
-                        StyledText {
-                            text: I18n.tr("Compositor:")
-                            font.pixelSize: Theme.fontSizeMedium
-                            font.weight: Font.Medium
-                            color: Theme.surfaceText
-                        }
-
-                        Row {
-                            spacing: 4
-
-                            StyledText {
-                                text: `<a href="https://github.com/YaLTeR/niri" style="text-decoration:none; color:${Theme.primary};">niri</a>`
-                                font.pixelSize: Theme.fontSizeMedium
-                                linkColor: Theme.primary
-                                textFormat: Text.RichText
-                                color: Theme.surfaceVariantText
-                                onLinkActivated: url => Qt.openUrlExternally(url)
-                                anchors.verticalCenter: parent.verticalCenter
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    acceptedButtons: Qt.NoButton
-                                    propagateComposedEvents: true
-                                }
-                            }
-
-                            StyledText {
-                                text: "&"
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceVariantText
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-
-                            StyledText {
-                                text: `<a href="https://github.com/hyprwm/Hyprland" style="text-decoration:none; color:${Theme.primary};">hyprland</a>`
-                                font.pixelSize: Theme.fontSizeMedium
-                                linkColor: Theme.primary
-                                textFormat: Text.RichText
-                                color: Theme.surfaceVariantText
-                                onLinkActivated: url => Qt.openUrlExternally(url)
-                                anchors.verticalCenter: parent.verticalCenter
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    acceptedButtons: Qt.NoButton
-                                    propagateComposedEvents: true
-                                }
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                acceptedButtons: Qt.NoButton
+                                propagateComposedEvents: true
                             }
                         }
 
@@ -478,34 +435,61 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
+                    }
+                }
+            }
+
+            // Support Section
+            StyledRect {
+                width: parent.width
+                height: supportSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Row {
+                    id: supportSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        spacing: Theme.spacingM
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        DankIcon {
+                            name: "volunteer_activism"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
 
                         StyledText {
-                            text: I18n.tr("Dank Suite:")
-                            font.pixelSize: Theme.fontSizeMedium
+                            text: I18n.tr("Support Development")
+                            font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
                         }
+                    }
 
-                        Row {
-                            spacing: 4
+                    Item {
+                        width: parent.width - parent.spacing - kofiButton.width - supportSection.children[0].width
+                        height: 1
+                    }
 
-                            StyledText {
-                                text: `<a href="https://danklinux.com" style="text-decoration:none; color:${Theme.primary};">danklinux.com</a>`
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceVariantText
-                                linkColor: Theme.primary
-                                textFormat: Text.RichText
-                                onLinkActivated: url => Qt.openUrlExternally(url)
-                                anchors.verticalCenter: parent.verticalCenter
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    acceptedButtons: Qt.NoButton
-                                    propagateComposedEvents: true
-                                }
-                            }
-                        }
+                    DankButton {
+                        id: kofiButton
+                        text: I18n.tr("Donate on Ko-fi")
+                        iconName: "favorite"
+                        iconSize: 20
+                        backgroundColor: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
+                        textColor: Theme.primary
+                        anchors.verticalCenter: parent.verticalCenter
+                        onClicked: Qt.openUrlExternally("https://ko-fi.com/danklinux")
                     }
                 }
             }
