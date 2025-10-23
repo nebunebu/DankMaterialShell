@@ -564,7 +564,7 @@
     "Domain (optional)": "域（可选）"
   },
   "Donate on Ko-fi": {
-    "Donate on Ko-fi": ""
+    "Donate on Ko-fi": "在Ko-fi上赞助"
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖动组件以在各区块内重新排序。点击眼睛图标可隐藏/显示组件（保留间距），点击 X 可彻底移除。"
@@ -654,7 +654,7 @@
     "Failed to enable WiFi": "无法启用 Wi-Fi"
   },
   "Failed to remove device": {
-    "Failed to remove device": ""
+    "Failed to remove device": "删除设备失败"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "无法设置个人资料图片"
@@ -1209,7 +1209,7 @@
     "Plugins": "插件"
   },
   "Plugins:": {
-    "Plugins:": ""
+    "Plugins:": "插件："
   },
   "Popup Position": {
     "Popup Position": "弹出位置"
@@ -1299,7 +1299,7 @@
     "Reset": "重置"
   },
   "Resources": {
-    "Resources": ""
+    "Resources": "资源"
   },
   "Right": {
     "Right": "右侧"
@@ -1497,7 +1497,7 @@
     "Storage & Disks": "存储与磁盘"
   },
   "Support Development": {
-    "Support Development": ""
+    "Support Development": "支持开发"
   },
   "Surface": {
     "Surface": "表面色"
@@ -1758,7 +1758,7 @@
     "Weather Widget": "天气小组件"
   },
   "Website:": {
-    "Website:": ""
+    "Website:": "网站："
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
     "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "启用后，应用按字母顺序排序；禁用则按使用频率排序"
