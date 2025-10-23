@@ -783,7 +783,7 @@
     "Incorrect password": "密码错误"
   },
   "Indicator Style": {
-    "Indicator Style": ""
+    "Indicator Style": "指示样式"
   },
   "Individual Batteries": {
     "Individual Batteries": "分别显示电池"
@@ -1368,7 +1368,7 @@
     "Show Workspace Apps": "显示工作区内应用"
   },
   "Show on Last Display": {
-    "Show on Last Display": ""
+    "Show on Last Display": "上一个显示器"
   },
   "Show on Overview": {
     "Show on Overview": "概览中显示"
