@@ -235,7 +235,7 @@ DankPopout {
                             }
 
                             StyledText {
-                                text: BatteryService.batteryAvailable ? BatteryService.batteryStatus : "Management"
+                                text: BatteryService.batteryStatus
                                 font.pixelSize: Theme.fontSizeLarge
                                 color: {
                                     if (BatteryService.isLowBattery && !BatteryService.isCharging) {
@@ -247,6 +247,7 @@ DankPopout {
                                     return Theme.surfaceText;
                                 }
                                 font.weight: Font.Medium
+                                visible: BatteryService.batteryAvailable
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
