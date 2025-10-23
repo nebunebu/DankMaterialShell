@@ -423,6 +423,26 @@ Item {
                         return SettingsData.showWorkspaceApps ? widgetHeight * 0.7 : widgetHeight * 0.5
                     }
                 }
+		
+		//DO NOT move this MouseArea. It should be on this level in order for the appMouseArea to work
+		MouseArea {
+                    id: mouseArea
+                    anchors.fill: parent
+                    hoverEnabled: !isPlaceholder
+                    cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
+                    enabled: !isPlaceholder
+                    onClicked: {
+                        if (isPlaceholder) {
+                            return
+                        }
+
+                        if (CompositorService.isNiri) {
+                            NiriService.switchToWorkspace(modelData - 1)
+                        } else if (CompositorService.isHyprland && modelData?.id) {
+                            Hyprland.dispatch(`workspace ${modelData.id}`)
+                        }
+                    }
+                }
 
                 Timer {
                     id: dataUpdateTimer
@@ -715,25 +735,6 @@ Item {
                 }
                 }
 
-                MouseArea {
-                    id: mouseArea
-                    anchors.fill: parent
-                    hoverEnabled: !isPlaceholder
-                    cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
-                    enabled: !isPlaceholder
-                    onClicked: {
-                        if (isPlaceholder) {
-                            return
-                        }
-
-                        if (CompositorService.isNiri) {
-                            NiriService.switchToWorkspace(modelData - 1)
-                        } else if (CompositorService.isHyprland && modelData?.id) {
-                            Hyprland.dispatch(`workspace ${modelData.id}`)
-                        }
-                    }
-                }
-
                 Component.onCompleted: updateAllData()
 
                 Connections {
@@ -745,6 +746,7 @@ Item {
                     enabled: CompositorService.isNiri
                     function onAllWorkspacesChanged() { delegateRoot.updateAllData() }
                     function onWindowUrgentChanged() { delegateRoot.updateAllData() }
+		    function onWindowsChanged() { delegateRoot.updateAllData() }
                 }
                 Connections {
                     target: SettingsData
