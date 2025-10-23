@@ -322,6 +322,27 @@
     "comment": ""
   },
   {
+    "term": "Authorize",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Authorize pairing with ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Authorize service for ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Auto Location",
     "translation": "",
     "context": "",
@@ -840,6 +861,20 @@
     "comment": ""
   },
   {
+    "term": "Confirm",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Confirm passkey for ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Connect",
     "translation": "",
     "context": "",
@@ -1141,6 +1176,13 @@
     "comment": ""
   },
   {
+    "term": "Device paired",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Disconnect",
     "translation": "",
     "context": "",
@@ -1358,6 +1400,27 @@
     "comment": ""
   },
   {
+    "term": "Enter 6-digit passkey",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enter PIN",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enter PIN for ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Enter credentials for ",
     "translation": "",
     "context": "",
@@ -1380,6 +1443,13 @@
   },
   {
     "term": "Enter filename...",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enter passkey for ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2556,6 +2626,34 @@
   },
   {
     "term": "Padding",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Pair",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Pair Bluetooth Device",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Pairing failed",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Passkey:",
     "translation": "",
     "context": "",
     "reference": "",

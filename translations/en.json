@@ -248,7 +248,7 @@
   {
     "term": "Audio Codec",
     "context": "Audio Codec",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:476",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:495",
     "comment": ""
   },
   {
@@ -273,6 +273,24 @@
     "term": "Audio Output Devices (",
     "context": "Audio Output Devices (",
     "reference": "Modules/DankDash/MediaPlayerTab.qml:409",
+    "comment": ""
+  },
+  {
+    "term": "Authorize",
+    "context": "Authorize",
+    "reference": "Modals/BluetoothPairingModal.qml:306",
+    "comment": ""
+  },
+  {
+    "term": "Authorize pairing with ",
+    "context": "Authorize pairing with ",
+    "reference": "Modals/BluetoothPairingModal.qml:115",
+    "comment": ""
+  },
+  {
+    "term": "Authorize service for ",
+    "context": "Authorize service for ",
+    "reference": "Modals/BluetoothPairingModal.qml:117",
     "comment": ""
   },
   {
@@ -428,7 +446,7 @@
   {
     "term": "Bluetooth Settings",
     "context": "Bluetooth Settings",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:42",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:48",
     "comment": ""
   },
   {
@@ -524,7 +542,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1298, Modals/FileBrowser/FileBrowserModal.qml:952",
+    "reference": "Modals/BluetoothPairingModal.qml:263, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1298, Modals/FileBrowser/FileBrowserModal.qml:952",
     "comment": ""
   },
   {
@@ -720,6 +738,18 @@
     "comment": ""
   },
   {
+    "term": "Confirm",
+    "context": "Confirm",
+    "reference": "Modals/BluetoothPairingModal.qml:304",
+    "comment": ""
+  },
+  {
+    "term": "Confirm passkey for ",
+    "context": "Confirm passkey for ",
+    "reference": "Modals/BluetoothPairingModal.qml:113",
+    "comment": ""
+  },
+  {
     "term": "Connect",
     "context": "Connect",
     "reference": "Modals/WifiPasswordModal.qml:505",
@@ -884,7 +914,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:235",
+    "reference": "Services/DMSService.qml:239",
     "comment": ""
   },
   {
@@ -975,6 +1005,12 @@
     "term": "Device",
     "context": "Device",
     "reference": "Modules/ProcessList/SystemTab.qml:434",
+    "comment": ""
+  },
+  {
+    "term": "Device paired",
+    "context": "Device paired",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:427",
     "comment": ""
   },
   {
@@ -1164,6 +1200,24 @@
     "comment": ""
   },
   {
+    "term": "Enter 6-digit passkey",
+    "context": "Enter 6-digit passkey",
+    "reference": "Modals/BluetoothPairingModal.qml:202",
+    "comment": ""
+  },
+  {
+    "term": "Enter PIN",
+    "context": "Enter PIN",
+    "reference": "Modals/BluetoothPairingModal.qml:167",
+    "comment": ""
+  },
+  {
+    "term": "Enter PIN for ",
+    "context": "Enter PIN for ",
+    "reference": "Modals/BluetoothPairingModal.qml:119",
+    "comment": ""
+  },
+  {
     "term": "Enter credentials for ",
     "context": "Enter credentials for ",
     "reference": "Modals/WifiPasswordModal.qml:178",
@@ -1185,6 +1239,12 @@
     "term": "Enter filename...",
     "context": "Enter filename...",
     "reference": "Modals/FileBrowser/FileBrowserModal.qml:785",
+    "comment": ""
+  },
+  {
+    "term": "Enter passkey for ",
+    "context": "Enter passkey for ",
+    "reference": "Modals/BluetoothPairingModal.qml:121",
     "comment": ""
   },
   {
@@ -1328,7 +1388,7 @@
   {
     "term": "Forget Device",
     "context": "Forget Device",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:501",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:520",
     "comment": ""
   },
   {
@@ -2000,7 +2060,7 @@
   {
     "term": "No Bluetooth adapter found",
     "context": "No Bluetooth adapter found",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:425",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:444",
     "comment": ""
   },
   {
@@ -2193,6 +2253,30 @@
     "term": "Padding",
     "context": "Padding",
     "reference": "Modules/Settings/DockTab.qml:505",
+    "comment": ""
+  },
+  {
+    "term": "Pair",
+    "context": "Pair",
+    "reference": "Modals/BluetoothPairingModal.qml:307",
+    "comment": ""
+  },
+  {
+    "term": "Pair Bluetooth Device",
+    "context": "Pair Bluetooth Device",
+    "reference": "Modals/BluetoothPairingModal.qml:104",
+    "comment": ""
+  },
+  {
+    "term": "Pairing failed",
+    "context": "Pairing failed",
+    "reference": "Modals/BluetoothPairingModal.qml:352, Modules/ControlCenter/Details/BluetoothDetail.qml:425",
+    "comment": ""
+  },
+  {
+    "term": "Passkey:",
+    "context": "Passkey:",
+    "reference": "Modals/BluetoothPairingModal.qml:226",
     "comment": ""
   },
   {
@@ -3092,7 +3176,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:236",
+    "reference": "Services/DMSService.qml:240",
     "comment": ""
   },
   {
