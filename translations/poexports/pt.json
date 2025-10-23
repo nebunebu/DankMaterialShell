@@ -650,6 +650,9 @@
   "Failed to enable WiFi": {
     "Failed to enable WiFi": ""
   },
+  "Failed to remove device": {
+    "Failed to remove device": ""
+  },
   "Failed to set profile image": {
     "Failed to set profile image": ""
   },

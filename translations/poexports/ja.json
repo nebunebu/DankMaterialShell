@@ -138,13 +138,13 @@
     "Audio Output Devices (": "オーディオ出力デバイス（"
   },
   "Authorize": {
-    "Authorize": ""
+    "Authorize": "許可"
   },
   "Authorize pairing with ": {
-    "Authorize pairing with ": ""
+    "Authorize pairing with ": "ペアリングを許可 "
   },
   "Authorize service for ": {
-    "Authorize service for ": ""
+    "Authorize service for ": "サービスを許可 "
   },
   "Auto Location": {
     "Auto Location": "自動位置検出"
@@ -372,10 +372,10 @@
     "Configure which displays show shell components": "シェルコンポーネントを表示するディスプレイを配置"
   },
   "Confirm": {
-    "Confirm": ""
+    "Confirm": "確認"
   },
   "Confirm passkey for ": {
-    "Confirm passkey for ": ""
+    "Confirm passkey for ": "パスキーを確認 "
   },
   "Connect": {
     "Connect": "接続"
@@ -507,7 +507,7 @@
     "Device": "デバイス"
   },
   "Device paired": {
-    "Device paired": ""
+    "Device paired": "デバイスがペアリングされました"
   },
   "Disconnect": {
     "Disconnect": "切断"
@@ -603,13 +603,13 @@
     "End": "終わり"
   },
   "Enter 6-digit passkey": {
-    "Enter 6-digit passkey": ""
+    "Enter 6-digit passkey": "6桁のパスキーを入力してください"
   },
   "Enter PIN": {
-    "Enter PIN": ""
+    "Enter PIN": "PINを入力してください"
   },
   "Enter PIN for ": {
-    "Enter PIN for ": ""
+    "Enter PIN for ": "PINを入力してください "
   },
   "Enter credentials for ": {
     "Enter credentials for ": "資格情報を入力"
@@ -624,7 +624,7 @@
     "Enter filename...": "ファイル名を入力してください..."
   },
   "Enter passkey for ": {
-    "Enter passkey for ": ""
+    "Enter passkey for ": "パスキーを入力してください "
   },
   "Enter password for ": {
     "Enter password for ": "パスワードを入力"
@@ -649,6 +649,9 @@
   },
   "Failed to enable WiFi": {
     "Failed to enable WiFi": "WiFiを有効化にできませんでした"
+  },
+  "Failed to remove device": {
+    "Failed to remove device": ""
   },
   "Failed to set profile image": {
     "Failed to set profile image": "プロフィール画像の設定に失敗しました"
@@ -1134,16 +1137,16 @@
     "Padding": "パディング"
   },
   "Pair": {
-    "Pair": ""
+    "Pair": "ペアリング"
   },
   "Pair Bluetooth Device": {
-    "Pair Bluetooth Device": ""
+    "Pair Bluetooth Device": "Bluetoothデバイスのペアリング"
   },
   "Pairing failed": {
-    "Pairing failed": ""
+    "Pairing failed": "ペアリングが失敗しました"
   },
   "Passkey:": {
-    "Passkey:": ""
+    "Passkey:": "パスキー："
   },
   "Password": {
     "Password": "パスワード"

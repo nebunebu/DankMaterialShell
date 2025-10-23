@@ -138,13 +138,13 @@
     "Audio Output Devices (": "音频输出设备 ("
   },
   "Authorize": {
-    "Authorize": ""
+    "Authorize": "授权"
   },
   "Authorize pairing with ": {
-    "Authorize pairing with ": ""
+    "Authorize pairing with ": "授权配对 "
   },
   "Authorize service for ": {
-    "Authorize service for ": ""
+    "Authorize service for ": "授权服务 "
   },
   "Auto Location": {
     "Auto Location": "自动定位"
@@ -372,10 +372,10 @@
     "Configure which displays show shell components": "配置哪些显示器显示各类组件"
   },
   "Confirm": {
-    "Confirm": ""
+    "Confirm": "确认"
   },
   "Confirm passkey for ": {
-    "Confirm passkey for ": ""
+    "Confirm passkey for ": "确认密钥 "
   },
   "Connect": {
     "Connect": "连接"
@@ -507,7 +507,7 @@
     "Device": "设备"
   },
   "Device paired": {
-    "Device paired": ""
+    "Device paired": "设备已配对"
   },
   "Disconnect": {
     "Disconnect": "断开连接"
@@ -603,13 +603,13 @@
     "End": "结束"
   },
   "Enter 6-digit passkey": {
-    "Enter 6-digit passkey": ""
+    "Enter 6-digit passkey": "输入六位数密钥"
   },
   "Enter PIN": {
-    "Enter PIN": ""
+    "Enter PIN": "输入PIN"
   },
   "Enter PIN for ": {
-    "Enter PIN for ": ""
+    "Enter PIN for ": "输入PIN "
   },
   "Enter credentials for ": {
     "Enter credentials for ": "输入凭据 "
@@ -624,7 +624,7 @@
     "Enter filename...": "输入文件名..."
   },
   "Enter passkey for ": {
-    "Enter passkey for ": ""
+    "Enter passkey for ": "输入密钥 "
   },
   "Enter password for ": {
     "Enter password for ": "输入密码"
@@ -649,6 +649,9 @@
   },
   "Failed to enable WiFi": {
     "Failed to enable WiFi": "无法启用 Wi-Fi"
+  },
+  "Failed to remove device": {
+    "Failed to remove device": ""
   },
   "Failed to set profile image": {
     "Failed to set profile image": "无法设置个人资料图片"
@@ -1134,16 +1137,16 @@
     "Padding": "内边距"
   },
   "Pair": {
-    "Pair": ""
+    "Pair": "配对"
   },
   "Pair Bluetooth Device": {
-    "Pair Bluetooth Device": ""
+    "Pair Bluetooth Device": "配对蓝牙设备"
   },
   "Pairing failed": {
-    "Pairing failed": ""
+    "Pairing failed": "配对失败"
   },
   "Passkey:": {
-    "Passkey:": ""
+    "Passkey:": "密钥："
   },
   "Password": {
     "Password": "密码"
