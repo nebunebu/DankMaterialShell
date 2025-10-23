@@ -128,7 +128,7 @@
   {
     "term": "All displays",
     "context": "All displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:670",
+    "reference": "Modules/Settings/DisplaysTab.qml:680",
     "comment": ""
   },
   {
@@ -200,7 +200,7 @@
   {
     "term": "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.",
     "context": "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.",
-    "reference": "Modules/Settings/DisplaysTab.qml:119",
+    "reference": "Modules/Settings/DisplaysTab.qml:130",
     "comment": ""
   },
   {
@@ -308,7 +308,7 @@
   {
     "term": "Automatic Control",
     "context": "Automatic Control",
-    "reference": "Modules/Settings/DisplaysTab.qml:164",
+    "reference": "Modules/Settings/DisplaysTab.qml:175",
     "comment": ""
   },
   {
@@ -332,7 +332,7 @@
   {
     "term": "Automatically detect location based on IP address",
     "context": "Automatically detect location based on IP address",
-    "reference": "Modules/Settings/DisplaysTab.qml:369",
+    "reference": "Modules/Settings/DisplaysTab.qml:380",
     "comment": ""
   },
   {
@@ -380,7 +380,7 @@
   {
     "term": "Available Screens (",
     "context": "Available Screens (",
-    "reference": "Modules/Settings/DisplaysTab.qml:513",
+    "reference": "Modules/Settings/DisplaysTab.qml:524",
     "comment": ""
   },
   {
@@ -638,7 +638,7 @@
   {
     "term": "Color temperature for night mode",
     "context": "Color temperature for night mode",
-    "reference": "Modules/Settings/DisplaysTab.qml:145",
+    "reference": "Modules/Settings/DisplaysTab.qml:156",
     "comment": ""
   },
   {
@@ -716,7 +716,7 @@
   {
     "term": "Configure which displays show shell components",
     "context": "Configure which displays show shell components",
-    "reference": "Modules/Settings/DisplaysTab.qml:497",
+    "reference": "Modules/Settings/DisplaysTab.qml:508",
     "comment": ""
   },
   {
@@ -734,7 +734,7 @@
   {
     "term": "Connected Displays",
     "context": "Connected Displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:490",
+    "reference": "Modules/Settings/DisplaysTab.qml:501",
     "comment": ""
   },
   {
@@ -1160,7 +1160,7 @@
   {
     "term": "End",
     "context": "End",
-    "reference": "Modules/Settings/DisplaysTab.qml:318",
+    "reference": "Modules/Settings/DisplaysTab.qml:329",
     "comment": ""
   },
   {
@@ -1388,13 +1388,13 @@
   {
     "term": "Gamma Control",
     "context": "Gamma Control",
-    "reference": "Modules/Settings/DisplaysTab.qml:106",
+    "reference": "Modules/Settings/DisplaysTab.qml:117",
     "comment": ""
   },
   {
     "term": "Gamma control not available. Requires DMS API v6+.",
     "context": "Gamma control not available. Requires DMS API v6+.",
-    "reference": "Modules/Settings/DisplaysTab.qml:119",
+    "reference": "Modules/Settings/DisplaysTab.qml:130",
     "comment": ""
   },
   {
@@ -1484,7 +1484,7 @@
   {
     "term": "Hour",
     "context": "Hour",
-    "reference": "Modules/Settings/DisplaysTab.qml:255",
+    "reference": "Modules/Settings/DisplaysTab.qml:266",
     "comment": ""
   },
   {
@@ -1646,7 +1646,7 @@
   {
     "term": "Latitude",
     "context": "Latitude",
-    "reference": "Modules/Settings/DisplaysTab.qml:402, Modules/Settings/TimeWeatherTab.qml:665",
+    "reference": "Modules/Settings/DisplaysTab.qml:413, Modules/Settings/TimeWeatherTab.qml:665",
     "comment": ""
   },
   {
@@ -1754,7 +1754,7 @@
   {
     "term": "Longitude",
     "context": "Longitude",
-    "reference": "Modules/Settings/DisplaysTab.qml:425, Modules/Settings/TimeWeatherTab.qml:716",
+    "reference": "Modules/Settings/DisplaysTab.qml:436, Modules/Settings/TimeWeatherTab.qml:716",
     "comment": ""
   },
   {
@@ -1772,7 +1772,7 @@
   {
     "term": "Manual Coordinates",
     "context": "Manual Coordinates",
-    "reference": "Modules/Settings/DisplaysTab.qml:390",
+    "reference": "Modules/Settings/DisplaysTab.qml:401",
     "comment": ""
   },
   {
@@ -1862,7 +1862,7 @@
   {
     "term": "Minute",
     "context": "Minute",
-    "reference": "Modules/Settings/DisplaysTab.qml:263",
+    "reference": "Modules/Settings/DisplaysTab.qml:274",
     "comment": ""
   },
   {
@@ -1982,7 +1982,7 @@
   {
     "term": "Night Mode",
     "context": "Night Mode",
-    "reference": "Modules/Settings/DisplaysTab.qml:118",
+    "reference": "Modules/Settings/DisplaysTab.qml:129",
     "comment": ""
   },
   {
@@ -2150,7 +2150,7 @@
   {
     "term": "Only adjust gamma based on time or location rules.",
     "context": "Only adjust gamma based on time or location rules.",
-    "reference": "Modules/Settings/DisplaysTab.qml:165",
+    "reference": "Modules/Settings/DisplaysTab.qml:176",
     "comment": ""
   },
   {
@@ -2724,6 +2724,12 @@
     "comment": ""
   },
   {
+    "term": "Show on Last Display",
+    "context": "Show on Last Display",
+    "reference": "Modules/Settings/DisplaysTab.qml:693",
+    "comment": ""
+  },
+  {
     "term": "Show on Overview",
     "context": "Show on Overview",
     "reference": "Modules/Settings/DockTab.qml:232, Modules/Settings/DankBarTab.qml:874",
@@ -2732,13 +2738,13 @@
   {
     "term": "Show on all connected displays",
     "context": "Show on all connected displays",
-    "reference": "Modules/Settings/DisplaysTab.qml:671",
+    "reference": "Modules/Settings/DisplaysTab.qml:681",
     "comment": ""
   },
   {
     "term": "Show on screens:",
     "context": "Show on screens:",
-    "reference": "Modules/Settings/DisplaysTab.qml:655",
+    "reference": "Modules/Settings/DisplaysTab.qml:666",
     "comment": ""
   },
   {
@@ -2846,7 +2852,7 @@
   {
     "term": "Start",
     "context": "Start",
-    "reference": "Modules/Settings/DisplaysTab.qml:275",
+    "reference": "Modules/Settings/DisplaysTab.qml:286",
     "comment": ""
   },
   {
@@ -3008,7 +3014,7 @@
   {
     "term": "Temperature",
     "context": "Temperature",
-    "reference": "Modules/Settings/DisplaysTab.qml:144",
+    "reference": "Modules/Settings/DisplaysTab.qml:155",
     "comment": ""
   },
   {
@@ -3218,7 +3224,7 @@
   {
     "term": "Use IP Location",
     "context": "Use IP Location",
-    "reference": "Modules/Settings/DisplaysTab.qml:368",
+    "reference": "Modules/Settings/DisplaysTab.qml:379",
     "comment": ""
   },
   {
@@ -3284,7 +3290,7 @@
   {
     "term": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
     "context": "Uses sunrise/sunset times to automatically adjust night mode based on your location.",
-    "reference": "Modules/Settings/DisplaysTab.qml:446",
+    "reference": "Modules/Settings/DisplaysTab.qml:457",
     "comment": ""
   },
   {
