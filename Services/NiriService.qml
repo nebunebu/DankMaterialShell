@@ -1,6 +1,6 @@
 pragma Singleton
 
-pragma ComponentBehavior: Bound
+pragma ComponentBehavior
 
 import QtCore
 import QtQuick
@@ -640,7 +640,7 @@ Singleton {
             const enrichedToplevel = {
                 "appId": bestMatch.appId,
                 "title": bestMatch.title,
-                "activated": bestMatch.activated,
+                "activated": niriWindow.is_focused ?? false,
                 "niriWindowId": niriWindow.id,
                 "niriWorkspaceId": niriWindow.workspace_id,
                 "activate": function () {
@@ -726,7 +726,7 @@ Singleton {
             const enrichedToplevel = {
                 "appId": bestMatch.appId,
                 "title": bestMatch.title,
-                "activated": bestMatch.activated,
+                "activated": niriWindow.is_focused ?? false,
                 "niriWindowId": niriWindow.id,
                 "niriWorkspaceId": niriWindow.workspace_id,
                 "activate": function () {
@@ -753,12 +753,10 @@ Singleton {
     }
 
     function generateNiriLayoutConfig() {
-        const niriSocket = Quickshell.env("NIRI_SOCKET")
-        if (!niriSocket || niriSocket.length === 0)
-            return
-        if (configGenerationPending)
+        if (!CompositorService.isNiri || configGenerationPending)
             return
 
+        suppressNextToast()
         configGenerationPending = true
         configGenerationDebounce.restart()
     }

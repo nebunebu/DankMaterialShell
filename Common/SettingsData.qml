@@ -1050,6 +1050,7 @@ Singleton {
     function setCornerRadius(radius) {
         cornerRadius = radius
         saveSettings()
+        NiriService.generateNiriLayoutConfig()
     }
 
     function setClockFormat(use24Hour) {

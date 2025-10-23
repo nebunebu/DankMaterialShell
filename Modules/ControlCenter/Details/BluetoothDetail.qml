@@ -5,6 +5,7 @@ import Quickshell.Bluetooth
 import qs.Common
 import qs.Services
 import qs.Widgets
+import qs.Modals
 
 Rectangle {
     implicitHeight: BluetoothService.adapter && BluetoothService.adapter.enabled ? headerRow.height + bluetoothContent.height + Theme.spacingM : headerRow.height
@@ -14,8 +15,13 @@ Rectangle {
     border.width: 0
 
     property var bluetoothCodecModalRef: null
+    property var devicesBeingPaired: new Set()
 
     signal showCodecSelector(var device)
+
+    function isDeviceBeingPaired(deviceAddress) {
+        return devicesBeingPaired.has(deviceAddress)
+    }
 
     function updateDeviceCodecDisplay(deviceAddress, codecName) {
         for (let i = 0; i < pairedRepeater.count; i++) {
@@ -327,7 +333,7 @@ Rectangle {
                     required property int index
 
                     property bool canConnect: BluetoothService.canConnect(modelData)
-                    property bool isBusy: BluetoothService.isDeviceBusy(modelData)
+                    property bool isBusy: BluetoothService.isDeviceBusy(modelData) || isDeviceBeingPaired(modelData.address)
 
                     width: parent.width
                     height: 50
@@ -335,7 +341,7 @@ Rectangle {
                     color: availableMouseArea.containsMouse && !isBusy ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08) : Theme.surfaceContainerHighest
                     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.12)
                     border.width: 0
-                    opacity: canConnect ? 1 : 0.6
+                    opacity: (canConnect && !isBusy) ? 1 : 0.6
 
                     Row {
                         anchors.left: parent.left
@@ -367,7 +373,7 @@ Rectangle {
 
                                 StyledText {
                                     text: {
-                                        if (modelData.pairing) return "Pairing..."
+                                        if (modelData.pairing || isBusy) return "Pairing..."
                                         if (modelData.blocked) return "Blocked"
                                         return BluetoothService.getSignalStrength(modelData)
                                     }
@@ -390,12 +396,12 @@ Rectangle {
                         anchors.rightMargin: Theme.spacingM
                         anchors.verticalCenter: parent.verticalCenter
                         text: {
-                            if (modelData.pairing) return "Pairing..."
+                            if (isBusy) return "Pairing..."
                             if (!canConnect) return "Cannot pair"
                             return "Pair"
                         }
                         font.pixelSize: Theme.fontSizeSmall
-                        color: canConnect ? Theme.primary : Theme.surfaceVariantText
+                        color: (canConnect && !isBusy) ? Theme.primary : Theme.surfaceVariantText
                         font.weight: Font.Medium
                     }
 
@@ -407,7 +413,20 @@ Rectangle {
                         enabled: canConnect && !isBusy
                         onClicked: {
                             if (modelData) {
-                                BluetoothService.connectDeviceWithTrust(modelData)
+                                const deviceAddr = modelData.address
+                                devicesBeingPaired.add(deviceAddr)
+                                devicesBeingPairedChanged()
+
+                                BluetoothService.pairDevice(modelData, response => {
+                                    devicesBeingPaired.delete(deviceAddr)
+                                    devicesBeingPairedChanged()
+
+                                    if (response.error) {
+                                        ToastService.showError(I18n.tr("Pairing failed"), response.error)
+                                    } else if (!BluetoothService.enhancedPairingAvailable) {
+                                        ToastService.showSuccess(I18n.tr("Device paired"))
+                                    }
+                                })
                             }
                         }
                     }
@@ -522,4 +541,15 @@ Rectangle {
         }
     }
 
+    BluetoothPairingModal {
+        id: bluetoothPairingModal
+    }
+
+    Connections {
+        target: DMSService
+
+        function onBluetoothPairingRequest(data) {
+            bluetoothPairingModal.show(data)
+        }
+    }
 }

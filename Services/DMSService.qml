@@ -42,6 +42,7 @@ Singleton {
     signal loginctlEvent(var event)
     signal capabilitiesReceived()
     signal credentialsRequest(var data)
+    signal bluetoothPairingRequest(var data)
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
@@ -217,7 +218,10 @@ Singleton {
 
     function sendSubscribeRequest() {
         const request = {
-            "method": "subscribe"
+            "method": "subscribe",
+            "params": {
+                "services": ["bluetooth", "bluetooth.pairing"]
+            }
         }
 
         if (verboseLogs) {
@@ -270,6 +274,8 @@ Singleton {
             } else {
                 loginctlStateUpdate(data)
             }
+        } else if (service === "bluetooth.pairing") {
+            bluetoothPairingRequest(data)
         }
     }
 
@@ -407,5 +413,49 @@ Singleton {
 
     function unlockSession(callback) {
         sendRequest("loginctl.unlock", null, callback)
+    }
+
+    function bluetoothPair(devicePath, callback) {
+        sendRequest("bluetooth.pair", {
+                        "device": devicePath
+                    }, callback)
+    }
+
+    function bluetoothConnect(devicePath, callback) {
+        sendRequest("bluetooth.connect", {
+                        "device": devicePath
+                    }, callback)
+    }
+
+    function bluetoothDisconnect(devicePath, callback) {
+        sendRequest("bluetooth.disconnect", {
+                        "device": devicePath
+                    }, callback)
+    }
+
+    function bluetoothRemove(devicePath, callback) {
+        sendRequest("bluetooth.remove", {
+                        "device": devicePath
+                    }, callback)
+    }
+
+    function bluetoothTrust(devicePath, callback) {
+        sendRequest("bluetooth.trust", {
+                        "device": devicePath
+                    }, callback)
+    }
+
+    function bluetoothSubmitPairing(token, secrets, accept, callback) {
+        sendRequest("bluetooth.pairing.submit", {
+                        "token": token,
+                        "secrets": secrets,
+                        "accept": accept
+                    }, callback)
+    }
+
+    function bluetoothCancelPairing(token, callback) {
+        sendRequest("bluetooth.pairing.cancel", {
+                        "token": token
+                    }, callback)
     }
 }
