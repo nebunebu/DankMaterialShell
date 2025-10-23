@@ -833,13 +833,6 @@
     "comment": ""
   },
   {
-    "term": "Compositor:",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Configuration activated",
     "translation": "",
     "context": "",
@@ -1106,13 +1099,6 @@
     "comment": ""
   },
   {
-    "term": "Dank Suite:",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "DankBar Font Scale",
     "translation": "",
     "context": "",
@@ -1303,6 +1289,13 @@
   },
   {
     "term": "Domain (optional)",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Donate on Ko-fi",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1652,13 +1645,6 @@
     "comment": ""
   },
   {
-    "term": "Framework:",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Fun",
     "translation": "",
     "context": "",
@@ -1947,13 +1933,6 @@
   },
   {
     "term": "Kill Process",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Language:",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2800,6 +2779,13 @@
     "comment": ""
   },
   {
+    "term": "Plugins:",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Popup Position",
     "translation": "",
     "context": "",
@@ -2905,13 +2891,6 @@
     "comment": ""
   },
   {
-    "term": "QML, JavaScript, Go",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Quick access to application launcher",
     "translation": "",
     "context": "",
@@ -2997,6 +2976,13 @@
   },
   {
     "term": "Reset",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Resources",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3458,6 +3444,13 @@
     "comment": ""
   },
   {
+    "term": "Support Development",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Surface",
     "translation": "",
     "context": "",
@@ -3606,13 +3599,6 @@
   },
   {
     "term": "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Technical Details",
     "translation": "",
     "context": "",
     "reference": "",
@@ -4047,6 +4033,13 @@
   },
   {
     "term": "Weather Widget",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Website:",
     "translation": "",
     "context": "",
     "reference": "",

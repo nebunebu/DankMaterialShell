@@ -14,13 +14,13 @@
   {
     "term": "- Stateless System Monitoring",
     "context": "- Stateless System Monitoring",
-    "reference": "Modules/Settings/AboutTab.qml:475",
+    "reference": "Modules/Settings/AboutTab.qml:432",
     "comment": ""
   },
   {
     "term": "- Support Us With a Star ⭐",
     "context": "- Support Us With a Star ⭐",
-    "reference": "Modules/Settings/AboutTab.qml:440",
+    "reference": "Modules/Settings/AboutTab.qml:397",
     "comment": ""
   },
   {
@@ -714,12 +714,6 @@
     "comment": ""
   },
   {
-    "term": "Compositor:",
-    "context": "Compositor:",
-    "reference": "Modules/Settings/AboutTab.qml:361",
-    "comment": ""
-  },
-  {
     "term": "Configuration activated",
     "context": "Configuration activated",
     "reference": "Services/NetworkManagerService.qml:308",
@@ -948,12 +942,6 @@
     "comment": ""
   },
   {
-    "term": "Dank Suite:",
-    "context": "Dank Suite:",
-    "reference": "Modules/Settings/AboutTab.qml:483",
-    "comment": ""
-  },
-  {
     "term": "DankBar Font Scale",
     "context": "DankBar Font Scale",
     "reference": "Modules/Settings/DankBarTab.qml:1535",
@@ -1119,6 +1107,12 @@
     "term": "Domain (optional)",
     "context": "Domain (optional)",
     "reference": "Modals/WifiPasswordModal.qml:397",
+    "comment": ""
+  },
+  {
+    "term": "Donate on Ko-fi",
+    "context": "Donate on Ko-fi",
+    "reference": "Modules/Settings/AboutTab.qml:486",
     "comment": ""
   },
   {
@@ -1416,12 +1410,6 @@
     "comment": ""
   },
   {
-    "term": "Framework:",
-    "context": "Framework:",
-    "reference": "Modules/Settings/AboutTab.qml:325",
-    "comment": ""
-  },
-  {
     "term": "Fun",
     "context": "Fun",
     "reference": "Widgets/DankIconPicker.qml:52",
@@ -1466,7 +1454,7 @@
   {
     "term": "Github:",
     "context": "Github:",
-    "reference": "Modules/Settings/AboutTab.qml:413",
+    "reference": "Modules/Settings/AboutTab.qml:370",
     "comment": ""
   },
   {
@@ -1671,12 +1659,6 @@
     "term": "Kill Process",
     "context": "Kill Process",
     "reference": "Modules/ProcessList/ProcessContextMenu.qml:171",
-    "comment": ""
-  },
-  {
-    "term": "Language:",
-    "context": "Language:",
-    "reference": "Modules/Settings/AboutTab.qml:348",
     "comment": ""
   },
   {
@@ -2400,6 +2382,12 @@
     "comment": ""
   },
   {
+    "term": "Plugins:",
+    "context": "Plugins:",
+    "reference": "Modules/Settings/AboutTab.qml:347",
+    "comment": ""
+  },
+  {
     "term": "Popup Position",
     "context": "Popup Position",
     "reference": "Modules/Settings/WidgetTweaksTab.qml:601",
@@ -2490,12 +2478,6 @@
     "comment": ""
   },
   {
-    "term": "QML, JavaScript, Go",
-    "context": "QML, JavaScript, Go",
-    "reference": "Modules/Settings/AboutTab.qml:355",
-    "comment": ""
-  },
-  {
     "term": "Quick access to application launcher",
     "context": "Quick access to application launcher",
     "reference": "Modules/Settings/DankBarTab.qml:26",
@@ -2571,6 +2553,12 @@
     "term": "Reset",
     "context": "Reset",
     "reference": "Modules/Settings/DankBarTab.qml:1675, Modules/ControlCenter/Components/EditControls.qml:227",
+    "comment": ""
+  },
+  {
+    "term": "Resources",
+    "context": "Resources",
+    "reference": "Modules/Settings/AboutTab.qml:309",
     "comment": ""
   },
   {
@@ -2964,6 +2952,12 @@
     "comment": ""
   },
   {
+    "term": "Support Development",
+    "context": "Support Development",
+    "reference": "Modules/Settings/AboutTab.qml:471",
+    "comment": ""
+  },
+  {
     "term": "Surface",
     "context": "Surface",
     "reference": "Modules/Settings/LauncherTab.qml:200",
@@ -3032,7 +3026,7 @@
   {
     "term": "System Monitoring:",
     "context": "System Monitoring:",
-    "reference": "Modules/Settings/AboutTab.qml:448",
+    "reference": "Modules/Settings/AboutTab.qml:405",
     "comment": ""
   },
   {
@@ -3093,12 +3087,6 @@
     "term": "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select",
     "context": "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select",
     "reference": "Modals/FileBrowser/KeyboardHints.qml:26",
-    "comment": ""
-  },
-  {
-    "term": "Technical Details",
-    "context": "Technical Details",
-    "reference": "Modules/Settings/AboutTab.qml:310",
     "comment": ""
   },
   {
@@ -3471,6 +3459,12 @@
     "term": "Weather Widget",
     "context": "Weather Widget",
     "reference": "Modules/Settings/DankBarTab.qml:55",
+    "comment": ""
+  },
+  {
+    "term": "Website:",
+    "context": "Website:",
+    "reference": "Modules/Settings/AboutTab.qml:324",
     "comment": ""
   },
   {
