@@ -162,7 +162,7 @@ BasePill {
 
                         anchors.verticalCenter: parent.verticalCenter
                         width: textWidth
-                        height: 20
+                        height: root.widgetThickness
                         visible: SettingsData.mediaSize > 0
                         clip: true
                         color: "transparent"

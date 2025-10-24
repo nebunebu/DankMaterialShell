@@ -98,7 +98,7 @@ BasePill {
                 return compactMode ? Math.min(baseWidth, maxCompactWidth - root.horizontalPadding * 2) : Math.min(baseWidth, maxNormalWidth - root.horizontalPadding * 2)
             }
             implicitHeight: root.widgetThickness - root.horizontalPadding * 2
-            clip: true
+            clip: false
 
             IconImage {
                 id: appIcon
