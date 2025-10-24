@@ -179,7 +179,7 @@ if [ "$1" -ge 2 ]; then
         break
     done < <(pgrep -a -f 'quickshell.*dms' 2>/dev/null)
     
-    echo -e "\033[1;34mDMS has been upgraded...\033[0m"
+    printf '\033[1;34mDMS has been upgraded...\033[0m\n'
 fi
 
 %files
