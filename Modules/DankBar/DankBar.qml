@@ -1239,13 +1239,19 @@ Item {
                                 Component {
                                     id: separatorComponent
 
-                                    Rectangle {
-                                        width: barWindow.isVertical ? barWindow.widgetThickness * 0.67 : 1
-                                        height: barWindow.isVertical ? 1 : barWindow.widgetThickness * 0.67
+                                    Item {
+                                        width: barWindow.isVertical ? parent.barThickness : 1
+                                        height: barWindow.isVertical ? 1 : parent.barThickness
                                         implicitWidth: width
                                         implicitHeight: height
-                                        color: Theme.outline
-                                        opacity: 0.3
+
+                                        Rectangle {
+                                            width: barWindow.isVertical ? parent.width * 0.6 : 1
+                                            height: barWindow.isVertical ? 1 : parent.height * 0.6
+                                            anchors.centerIn: parent
+                                            color: Theme.outline
+                                            opacity: 0.3
+                                        }
                                     }
                                 }
 
