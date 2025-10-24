@@ -193,9 +193,8 @@ jobs:
 
           # Restart DMS for active users after upgrade
           if [ "$1" -ge 2 ]; then
-              dms_restarted=0
               # Find all quickshell DMS processes (PID and username)
-              pgrep -a -f 'quickshell.*dms' 2>/dev/null | while read pid cmd; do
+              while read pid cmd; do
                   username=$(ps -o user= -p "$pid" 2>/dev/null)
                   
                   [ "$username" = "root" ] && continue
@@ -212,21 +211,18 @@ jobs:
                   echo "Restarting DMS for user: $username"
                   
                   # Run as user with full Wayland session environment
-                  runuser -u "$username" -- /bin/sh -c "
+                  if runuser -u "$username" -- /bin/sh -c "
                       export XDG_RUNTIME_DIR=/run/user/$user_uid
                       export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$user_uid/bus
                       export WAYLAND_DISPLAY=$wayland_display
                       export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:\$PATH
                       dms restart >/dev/null 2>&1
-                  " 2>/dev/null && dms_restarted=1 || true
+                  " 2>/dev/null; then
+                      echo -e "\033[1;34mDMS has been upgraded...\033[0m"
+                  fi
                   
                   break
-              done
-              
-              # Show success message if DMS was restarted
-              if [ $dms_restarted -eq 1 ]; then
-                  echo -e "\033[1;34mDMS has been upgraded...\033[0m"
-              fi
+              done < <(pgrep -a -f 'quickshell.*dms' 2>/dev/null)
           fi
 
           %files
