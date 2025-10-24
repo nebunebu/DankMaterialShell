@@ -39,6 +39,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
 
                     StyledText {
@@ -55,6 +56,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
                 }
 
@@ -68,6 +70,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
 
                     StyledText {
@@ -76,6 +79,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
                 }
 
@@ -90,6 +94,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
 
                     StyledText {
@@ -98,6 +103,7 @@ BasePill {
                         color: Theme.surfaceText
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
                 }
 
@@ -130,6 +136,7 @@ BasePill {
                         color: Theme.primary
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
 
                     StyledText {
@@ -144,6 +151,7 @@ BasePill {
                         color: Theme.primary
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
                 }
 
@@ -163,6 +171,7 @@ BasePill {
                         color: Theme.primary
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
 
                     StyledText {
@@ -177,6 +186,7 @@ BasePill {
                         color: Theme.primary
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignBottom
                     }
                 }
             }
@@ -188,28 +198,30 @@ BasePill {
                 spacing: Theme.spacingS
 
                 StyledText {
+                    id: timeText
                     text: {
                         return systemClock?.date?.toLocaleTimeString(Qt.locale(), SettingsData.getEffectiveTimeFormat())
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
                     color: Theme.surfaceText
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.baseline: dateText.baseline
                 }
 
                 StyledText {
+                    id: middleDot
                     text: "•"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.outlineButton
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.baseline: dateText.baseline
                     visible: !SettingsData.clockCompactMode
                 }
 
                 StyledText {
+                    id: dateText
                     text: {
                         if (SettingsData.clockDateFormat && SettingsData.clockDateFormat.length > 0) {
                             return systemClock?.date?.toLocaleDateString(Qt.locale(), SettingsData.clockDateFormat)
                         }
-
                         return systemClock?.date?.toLocaleDateString(Qt.locale(), "ddd d")
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
