@@ -228,13 +228,13 @@
     "Bluetooth Settings": "Bluetooth設定"
   },
   "Blur Layer": {
-    "Blur Layer": ""
+    "Blur Layer": "ぼかしレイヤー"
   },
   "Blur on Overview": {
-    "Blur on Overview": ""
+    "Blur on Overview": "概要でぼかす"
   },
   "Blur wallpaper when niri overview is open": {
-    "Blur wallpaper when niri overview is open": ""
+    "Blur wallpaper when niri overview is open": "Niri概要が開いているときに壁紙をぼかす"
   },
   "Border": {
     "Border": "ボーダー"
@@ -606,7 +606,7 @@
     "Enable WiFi": "WiFiを有効にする"
   },
   "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": {
-    "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": ""
+    "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": "コンポジターをターゲットに設定できるぼかしレイヤー(名前空間：dms:blurwallpaper)を有効にします。Niri を手動で設定する必要があります。"
   },
   "Enable fingerprint authentication": {
     "Enable fingerprint authentication": "指紋認証を有効に"
