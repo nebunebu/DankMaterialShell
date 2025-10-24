@@ -224,12 +224,28 @@ Item {
 
             const currentIndex = realWorkspaces.findIndex(ws => ws === root.currentWorkspace)
             const validIndex = currentIndex === -1 ? 0 : currentIndex
-            const nextIndex = direction > 0 ? (validIndex + 1) % realWorkspaces.length : (validIndex - 1 + realWorkspaces.length) % realWorkspaces.length
+            const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+            if (nextIndex === validIndex) {
+                return
+            }
 
             NiriService.switchToWorkspace(realWorkspaces[nextIndex] - 1)
         } else if (CompositorService.isHyprland) {
-            const command = direction > 0 ? "workspace r+1" : "workspace r-1"
-            Hyprland.dispatch(command)
+            const realWorkspaces = getRealWorkspaces()
+            if (realWorkspaces.length < 2) {
+                return
+            }
+
+            const currentIndex = realWorkspaces.findIndex(ws => ws.id === root.currentWorkspace)
+            const validIndex = currentIndex === -1 ? 0 : currentIndex
+            const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+            if (nextIndex === validIndex) {
+                return
+            }
+
+            Hyprland.dispatch(`workspace ${realWorkspaces[nextIndex].id}`)
         }
     }
 
