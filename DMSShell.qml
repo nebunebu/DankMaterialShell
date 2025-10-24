@@ -52,6 +52,14 @@ Item {
         }
     }
 
+    Loader {
+        id: blurredWallpaperBackgroundLoader
+        active: SettingsData.blurredWallpaperLayer
+        asynchronous: false
+
+        sourceComponent: BlurredWallpaperBackground {}
+    }
+
     WallpaperBackground {}
 
     Lock {

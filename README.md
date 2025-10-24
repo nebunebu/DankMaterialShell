@@ -439,6 +439,37 @@ binds {
       spawn "dms" "ipc" "call" "night" "toggle";
    }
 }
+
+// You probably want this too
+debug {
+   honor-xdg-activation-with-invalid-serial
+}
+```
+
+#### niri - place wallpaper on overview (blurred or non-blurred)
+
+Place the wallpaper on backdrop using a layer-rule for a contiguous surface.
+
+```kdl
+layer-rule {
+    match namespace="quickshell"
+    place-within-backdrop true
+}
+```
+
+If using "Blur Layer" option, you may want the blurred layer to appear on overview only, that can be done with some layer rules:
+
+```kdl
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    opacity 0.0
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+    opacity 1.0
+}
 ```
 
 #### niri theming

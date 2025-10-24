@@ -66,6 +66,8 @@ Singleton {
     property int animationSpeed: SettingsData.AnimationSpeed.Short
     property int customAnimationDuration: 500
     property string wallpaperFillMode: "Fill"
+    property bool blurredWallpaperLayer: false
+    property bool blurWallpaperOnOverview: false
 
     property bool showLauncherButton: true
     property bool showWorkspaceSwitcher: true
@@ -497,6 +499,8 @@ Singleton {
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})
                 showOnLastDisplay = settings.showOnLastDisplay !== undefined ? settings.showOnLastDisplay : ({})
                 wallpaperFillMode = settings.wallpaperFillMode !== undefined ? settings.wallpaperFillMode : "Fill"
+                blurredWallpaperLayer = settings.blurredWallpaperLayer !== undefined ? settings.blurredWallpaperLayer : false
+                blurWallpaperOnOverview = settings.blurWallpaperOnOverview !== undefined ? settings.blurWallpaperOnOverview : false
                 animationSpeed = settings.animationSpeed !== undefined ? settings.animationSpeed : SettingsData.AnimationSpeed.Short
                 customAnimationDuration = settings.customAnimationDuration !== undefined ? settings.customAnimationDuration : 500
                 acMonitorTimeout = settings.acMonitorTimeout !== undefined ? settings.acMonitorTimeout : 0
@@ -663,6 +667,8 @@ Singleton {
                                                 "widgetBackgroundColor": widgetBackgroundColor,
                                                 "surfaceBase": surfaceBase,
                                                 "wallpaperFillMode": wallpaperFillMode,
+                                                "blurredWallpaperLayer": blurredWallpaperLayer,
+                                                "blurWallpaperOnOverview": blurWallpaperOnOverview,
                                                 "notificationTimeoutLow": notificationTimeoutLow,
                                                 "notificationTimeoutNormal": notificationTimeoutNormal,
                                                 "notificationTimeoutCritical": notificationTimeoutCritical,
@@ -741,7 +747,7 @@ Singleton {
             "dankBarBorderOpacity", "dankBarBorderThickness", "popupGapsAuto", "popupGapsManual",
             "dankBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries",
             "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase", "wallpaperFillMode",
-            "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
+            "blurredWallpaperLayer", "blurWallpaperOnOverview", "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
             "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm",
             "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend",
             "customPowerActionHibernate", "customPowerActionReboot", "customPowerActionPowerOff",
@@ -1085,6 +1091,16 @@ Singleton {
 
     function setWallpaperFillMode(mode) {
         wallpaperFillMode = mode
+        saveSettings()
+    }
+
+    function setBlurredWallpaperLayer(enabled) {
+        blurredWallpaperLayer = enabled
+        saveSettings()
+    }
+
+    function setBlurWallpaperOnOverview(enabled) {
+        blurWallpaperOnOverview = enabled
         saveSettings()
     }
 

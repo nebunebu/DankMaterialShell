@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -6,6 +7,7 @@ import Quickshell.Io
 import qs.Common
 import qs.Widgets
 import qs.Modules
+import qs.Services
 
 Variants {
     model: {
@@ -466,6 +468,15 @@ Variants {
                                         root.transitionProgress = 0.0
                                     })
                 }
+            }
+
+            MultiEffect {
+                anchors.fill: parent
+                source: effectLoader.active ? effectLoader.item : (root.actualTransitionType === "none" ? currentWallpaper : null)
+                visible: CompositorService.isNiri && SettingsData.blurWallpaperOnOverview && NiriService.inOverview
+                blurEnabled: true
+                blur: 0.8
+                blurMax: 48
             }
         }
     }

@@ -460,6 +460,58 @@ Item {
                         }
                     }
 
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                        visible: CompositorService.isNiri
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+                        visible: CompositorService.isNiri
+
+                        DankIcon {
+                            name: "blur_on"
+                            size: Theme.iconSize
+                            color: SettingsData.blurWallpaperOnOverview ? Theme.primary : Theme.surfaceVariantText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Column {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - blurOverviewToggle.width - Theme.spacingM
+                            spacing: Theme.spacingXS
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            StyledText {
+                                text: I18n.tr("Blur on Overview")
+                                font.pixelSize: Theme.fontSizeLarge
+                                font.weight: Font.Medium
+                                color: Theme.surfaceText
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Blur wallpaper when niri overview is open")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                wrapMode: Text.WordWrap
+                                width: parent.width
+                            }
+                        }
+
+                        DankToggle {
+                            id: blurOverviewToggle
+
+                            anchors.verticalCenter: parent.verticalCenter
+                            checked: SettingsData.blurWallpaperOnOverview
+                            onToggled: checked => {
+                                SettingsData.setBlurWallpaperOnOverview(checked)
+                            }
+                        }
+                    }
+
                     // Per-Mode Wallpaper Section - Full Width
                     Rectangle {
                         width: parent.width
@@ -953,6 +1005,67 @@ Item {
                                 }
 
                                 SessionData.includedTransitions = newIncluded
+                            }
+                        }
+                    }
+                }
+            }
+
+            StyledRect {
+                width: parent.width
+                height: blurLayerColumn.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.surfaceContainerHigh
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
+                border.width: 0
+                visible: CompositorService.isNiri
+
+                Column {
+                    id: blurLayerColumn
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "blur_on"
+                            size: Theme.iconSize
+                            color: SettingsData.blurredWallpaperLayer ? Theme.primary : Theme.surfaceVariantText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Column {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - blurLayerToggle.width - Theme.spacingM
+                            spacing: Theme.spacingXS
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            StyledText {
+                                text: I18n.tr("Blur Layer")
+                                font.pixelSize: Theme.fontSizeLarge
+                                font.weight: Font.Medium
+                                color: Theme.surfaceText
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                wrapMode: Text.WordWrap
+                                width: parent.width
+                            }
+                        }
+
+                        DankToggle {
+                            id: blurLayerToggle
+
+                            anchors.verticalCenter: parent.verticalCenter
+                            checked: SettingsData.blurredWallpaperLayer
+                            onToggled: checked => {
+                                SettingsData.setBlurredWallpaperLayer(checked)
                             }
                         }
                     }

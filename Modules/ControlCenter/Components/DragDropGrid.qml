@@ -332,7 +332,10 @@ Column {
                         return "Select device"
                     if (AudioService.sink.audio.muted)
                         return "Muted"
-                    return Math.round(AudioService.sink.audio.volume * 100) + "%"
+                    const volume = AudioService.sink.audio.volume
+                    if (typeof volume !== "number" || isNaN(volume))
+                        return "0%"
+                    return Math.round(volume * 100) + "%"
                 }
                 case "audioInput":
                 {
@@ -340,7 +343,10 @@ Column {
                         return "Select device"
                     if (AudioService.source.audio.muted)
                         return "Muted"
-                    return Math.round(AudioService.source.audio.volume * 100) + "%"
+                    const volume = AudioService.source.audio.volume
+                    if (typeof volume !== "number" || isNaN(volume))
+                        return "0%"
+                    return Math.round(volume * 100) + "%"
                 }
                 default:
                     return widgetDef?.description || ""
