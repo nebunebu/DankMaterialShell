@@ -68,6 +68,33 @@ if [[ -z "$COMPOSITOR" ]]; then
     exit 1
 fi
 
+locate_dms_config() {
+    local config_name="$1"
+    local search_paths=()
+
+    local config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+    search_paths+=("$config_home/quickshell/$config_name")
+
+    search_paths+=("/usr/share/quickshell/$config_name")
+
+    local config_dirs="${XDG_CONFIG_DIRS:-/etc/xdg}"
+    IFS=':' read -ra dirs <<< "$config_dirs"
+    for dir in "${dirs[@]}"; do
+        if [[ -n "$dir" ]]; then
+            search_paths+=("$dir/quickshell/$config_name")
+        fi
+    done
+
+    for path in "${search_paths[@]}"; do
+        if [[ -f "$path/shell.qml" ]]; then
+            echo "$path"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 export XDG_SESSION_TYPE=wayland
 export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
@@ -81,7 +108,14 @@ QS_CMD="qs"
 if [[ "$DMS_PATH" == /* ]]; then
     QS_CMD="qs -p $DMS_PATH"
 else
-    QS_CMD="qs -c $DMS_PATH"
+    RESOLVED_PATH=$(locate_dms_config "$DMS_PATH")
+    if [[ $? -eq 0 && -n "$RESOLVED_PATH" ]]; then
+        echo "Located DMS config at: $RESOLVED_PATH" >&2
+        QS_CMD="qs -p $RESOLVED_PATH"
+    else
+        echo "Error: Could not find DMS config '$DMS_PATH' (shell.qml) in any valid config path" >&2
+        exit 1
+    fi
 fi
 
 case "$COMPOSITOR" in
