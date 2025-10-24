@@ -227,6 +227,15 @@
   "Bluetooth Settings": {
     "Bluetooth Settings": "Bluetooth設定"
   },
+  "Blur Layer": {
+    "Blur Layer": ""
+  },
+  "Blur on Overview": {
+    "Blur on Overview": ""
+  },
+  "Blur wallpaper when niri overview is open": {
+    "Blur wallpaper when niri overview is open": ""
+  },
   "Border": {
     "Border": "ボーダー"
   },
@@ -595,6 +604,9 @@
   },
   "Enable WiFi": {
     "Enable WiFi": "WiFiを有効にする"
+  },
+  "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": {
+    "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": ""
   },
   "Enable fingerprint authentication": {
     "Enable fingerprint authentication": "指紋認証を有効に"
