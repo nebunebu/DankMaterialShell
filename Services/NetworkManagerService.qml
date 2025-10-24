@@ -684,26 +684,4 @@ Singleton {
             getState()
         }
     }
-
-    function splitNmcliFields(line) {
-        const parts = []
-        let cur = ""
-        let escape = false
-        for (var i = 0; i < line.length; i++) {
-            const ch = line[i]
-            if (escape) {
-                cur += ch
-                escape = false
-            } else if (ch === '\\') {
-                escape = true
-            } else if (ch === ':') {
-                parts.push(cur)
-                cur = ""
-            } else {
-                cur += ch
-            }
-        }
-        parts.push(cur)
-        return parts
-    }
 }
