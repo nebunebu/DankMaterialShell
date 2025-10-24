@@ -1,10 +1,10 @@
 import Qt.labs.folderlistmodel
+import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
 import qs.Common
 import qs.Modals.FileBrowser
 import qs.Services
@@ -16,11 +16,10 @@ Item {
     implicitWidth: 700
     implicitHeight: 410
 
-    property var wallpaperList: []
     property string wallpaperDir: ""
     property int currentPage: 0
     property int itemsPerPage: 16
-    property int totalPages: Math.max(1, Math.ceil(wallpaperList.length / itemsPerPage))
+    property int totalPages: Math.max(1, Math.ceil(wallpaperFolderModel.count / itemsPerPage))
     property bool active: false
     property Item focusTarget: wallpaperGrid
     property Item tabBarItem: null
@@ -28,6 +27,8 @@ Item {
     property Item keyForwardTarget: null
     property int lastPage: 0
     property bool enableAnimation: false
+    property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+    property string selectedFileName: ""
 
     signal requestTabChange(int newIndex)
 
@@ -36,6 +37,11 @@ Item {
             enableAnimation = false
             lastPage = currentPage
         }
+        updateSelectedFileName()
+    }
+
+    onGridIndexChanged: {
+        updateSelectedFileName()
     }
 
     onVisibleChanged: {
@@ -45,10 +51,7 @@ Item {
     }
 
     Component.onCompleted: {
-        loadWallpapers()
-        if (visible && active) {
-            setInitialSelection()
-        }
+        loadWallpaperDirectory()
     }
 
     onActiveChanged: {
@@ -59,16 +62,17 @@ Item {
 
     function handleKeyEvent(event) {
         const columns = 4
-        const rows = 4
-        const currentRow = Math.floor(gridIndex / columns)
         const currentCol = gridIndex % columns
-        const visibleCount = wallpaperGrid.model.length
+        const visibleCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
 
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            if (gridIndex >= 0) {
-                const item = wallpaperGrid.currentItem
-                if (item && item.wallpaperPath) {
-                    SessionData.setWallpaper(item.wallpaperPath)
+            if (gridIndex >= 0 && gridIndex < visibleCount) {
+                const absoluteIndex = currentPage * itemsPerPage + gridIndex
+                if (absoluteIndex < wallpaperFolderModel.count) {
+                    const filePath = wallpaperFolderModel.get(absoluteIndex, "filePath")
+                    if (filePath) {
+                        SessionData.setWallpaper(filePath.toString().replace(/^file:\/\//, ''))
+                    }
                 }
             }
             return true
@@ -76,10 +80,8 @@ Item {
 
         if (event.key === Qt.Key_Right) {
             if (gridIndex + 1 < visibleCount) {
-                // Move right within current page
                 gridIndex++
-            } else if (gridIndex === visibleCount - 1 && currentPage < totalPages - 1) {
-                // At last item in page, go to next page
+            } else if (currentPage < totalPages - 1) {
                 gridIndex = 0
                 currentPage++
             }
@@ -88,22 +90,19 @@ Item {
 
         if (event.key === Qt.Key_Left) {
             if (gridIndex > 0) {
-                // Move left within current page
                 gridIndex--
-            } else if (gridIndex === 0 && currentPage > 0) {
-                // At first item in page, go to previous page (last item)
+            } else if (currentPage > 0) {
                 currentPage--
-                gridIndex = Math.min(itemsPerPage - 1, wallpaperList.length - currentPage * itemsPerPage - 1)
+                const prevPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+                gridIndex = prevPageCount - 1
             }
             return true
         }
 
         if (event.key === Qt.Key_Down) {
             if (gridIndex + columns < visibleCount) {
-                // Move down within current page
                 gridIndex += columns
-            } else if (gridIndex >= visibleCount - columns && currentPage < totalPages - 1) {
-                // In last row, go to next page
+            } else if (currentPage < totalPages - 1) {
                 gridIndex = currentCol
                 currentPage++
             }
@@ -112,12 +111,10 @@ Item {
 
         if (event.key === Qt.Key_Up) {
             if (gridIndex >= columns) {
-                // Move up within current page
                 gridIndex -= columns
-            } else if (gridIndex < columns && currentPage > 0) {
-                // In first row, go to previous page (last row)
+            } else if (currentPage > 0) {
                 currentPage--
-                const prevPageCount = Math.min(itemsPerPage, wallpaperList.length - currentPage * itemsPerPage)
+                const prevPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
                 const prevPageRows = Math.ceil(prevPageCount / columns)
                 gridIndex = (prevPageRows - 1) * columns + currentCol
                 gridIndex = Math.min(gridIndex, prevPageCount - 1)
@@ -144,8 +141,9 @@ Item {
         }
 
         if (event.key === Qt.Key_End && event.modifiers & Qt.ControlModifier) {
-            gridIndex = 0
             currentPage = totalPages - 1
+            const lastPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+            gridIndex = Math.max(0, lastPageCount - 1)
             return true
         }
 
@@ -153,40 +151,38 @@ Item {
     }
 
     function setInitialSelection() {
-        if (!SessionData.wallpaperPath) {
+        if (!SessionData.wallpaperPath || wallpaperFolderModel.count === 0) {
             gridIndex = 0
+            updateSelectedFileName()
+            Qt.callLater(() => { enableAnimation = true })
             return
         }
 
-        const startIndex = currentPage * itemsPerPage
-        const endIndex = Math.min(startIndex + itemsPerPage, wallpaperList.length)
-        const pageWallpapers = wallpaperList.slice(startIndex, endIndex)
-
-        for (let i = 0; i < pageWallpapers.length; i++) {
-            if (pageWallpapers[i] === SessionData.wallpaperPath) {
-                gridIndex = i
+        for (let i = 0; i < wallpaperFolderModel.count; i++) {
+            const filePath = wallpaperFolderModel.get(i, "filePath")
+            if (filePath && filePath.toString().replace(/^file:\/\//, '') === SessionData.wallpaperPath) {
+                const targetPage = Math.floor(i / itemsPerPage)
+                const targetIndex = i % itemsPerPage
+                currentPage = targetPage
+                gridIndex = targetIndex
+                updateSelectedFileName()
+                Qt.callLater(() => { enableAnimation = true })
                 return
             }
         }
         gridIndex = 0
+        updateSelectedFileName()
+        Qt.callLater(() => { enableAnimation = true })
     }
 
-    onWallpaperListChanged: {
-        if (visible && active) {
-            setInitialSelection()
-        }
-    }
-
-    function loadWallpapers() {
+    function loadWallpaperDirectory() {
         const currentWallpaper = SessionData.wallpaperPath
-        
-        // Try current wallpaper path / fallback to wallpaperLastPath
+
         if (!currentWallpaper || currentWallpaper.startsWith("#") || currentWallpaper.startsWith("we:")) {
             if (CacheData.wallpaperLastPath && CacheData.wallpaperLastPath !== "") {
                 wallpaperDir = CacheData.wallpaperLastPath
             } else {
                 wallpaperDir = ""
-                wallpaperList = []
             }
             return
         }
@@ -194,44 +190,51 @@ Item {
         wallpaperDir = currentWallpaper.substring(0, currentWallpaper.lastIndexOf('/'))
     }
 
-    function updateWallpaperList() {
-        if (!wallpaperFolderModel || wallpaperFolderModel.count === 0) {
-            wallpaperList = []
-            currentPage = 0
-            gridIndex = 0
+    function updateSelectedFileName() {
+        if (wallpaperFolderModel.count === 0) {
+            selectedFileName = ""
             return
         }
 
-        // Build list from FolderListModel
-        const files = []
-        for (let i = 0; i < wallpaperFolderModel.count; i++) {
-            const filePath = wallpaperFolderModel.get(i, "filePath")
+        const absoluteIndex = currentPage * itemsPerPage + gridIndex
+        if (absoluteIndex < wallpaperFolderModel.count) {
+            const filePath = wallpaperFolderModel.get(absoluteIndex, "filePath")
             if (filePath) {
-                // Remove file:// prefix if present
-                const cleanPath = filePath.toString().replace(/^file:\/\//, '')
-                files.push(cleanPath)
+                const pathStr = filePath.toString().replace(/^file:\/\//, '')
+                selectedFileName = pathStr.substring(pathStr.lastIndexOf('/') + 1)
+                return
             }
         }
-
-        wallpaperList = files
-
-        const currentPath = SessionData.wallpaperPath
-        const selectedIndex = currentPath ? wallpaperList.indexOf(currentPath) : -1
-
-        if (selectedIndex >= 0) {
-            currentPage = Math.floor(selectedIndex / itemsPerPage)
-            gridIndex = selectedIndex % itemsPerPage
-        } else {
-            const maxPage = Math.max(0, Math.ceil(files.length / itemsPerPage) - 1)
-            currentPage = Math.min(Math.max(0, currentPage), maxPage)
-            gridIndex = 0
-        }
+        selectedFileName = ""
     }
 
     Connections {
         target: SessionData
         function onWallpaperPathChanged() {
-            loadWallpapers()
+            loadWallpaperDirectory()
+            if (visible && active) {
+                setInitialSelection()
+            }
+        }
+    }
+
+    Connections {
+        target: wallpaperFolderModel
+        function onCountChanged() {
+            if (wallpaperFolderModel.status === FolderListModel.Ready) {
+                if (visible && active) {
+                    setInitialSelection()
+                }
+                updateSelectedFileName()
+            }
+        }
+        function onStatusChanged() {
+            if (wallpaperFolderModel.status === FolderListModel.Ready && wallpaperFolderModel.count > 0) {
+                if (visible && active) {
+                    setInitialSelection()
+                }
+                updateSelectedFileName()
+            }
         }
     }
 
@@ -246,18 +249,6 @@ Item {
         showDirs: false
         sortField: FolderListModel.Name
         folder: wallpaperDir ? "file://" + wallpaperDir : ""
-
-        onStatusChanged: {
-            if (status === FolderListModel.Ready) {
-                updateWallpaperList()
-            }
-        }
-
-        onCountChanged: {
-            if (status === FolderListModel.Ready) {
-                updateWallpaperList()
-            }
-        }
     }
 
     Loader {
@@ -275,13 +266,11 @@ Item {
             showHiddenFiles: false
             fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
             allowStacking: true
-            
+
             onFileSelected: (path) => {
-                // Set the selected wallpaper
                 const cleanPath = path.replace(/^file:\/\//, '')
                 SessionData.setWallpaper(cleanPath)
-                
-                // Extract directory from the selected file and load all wallpapers
+
                 const dirPath = cleanPath.substring(0, cleanPath.lastIndexOf('/'))
                 if (dirPath) {
                     wallpaperDir = dirPath
@@ -290,7 +279,7 @@ Item {
                 }
                 close()
             }
-            
+
             onDialogClosed: {
                 Qt.callLater(() => wallpaperBrowserLoader.active = false)
             }
@@ -336,8 +325,15 @@ Item {
 
                 model: {
                     const startIndex = currentPage * itemsPerPage
-                    const endIndex = Math.min(startIndex + itemsPerPage, wallpaperList.length)
-                    return wallpaperList.slice(startIndex, endIndex)
+                    const endIndex = Math.min(startIndex + itemsPerPage, wallpaperFolderModel.count)
+                    const items = []
+                    for (let i = startIndex; i < endIndex; i++) {
+                        const filePath = wallpaperFolderModel.get(i, "filePath")
+                        if (filePath) {
+                            items.push(filePath.toString().replace(/^file:\/\//, ''))
+                        }
+                    }
+                    return items
                 }
 
                 onModelChanged: {
@@ -359,8 +355,11 @@ Item {
                 Connections {
                     target: root
                     function onGridIndexChanged() {
-                        if (enableAnimation && wallpaperGrid.count > 0) {
+                        if (wallpaperGrid.count > 0) {
                             wallpaperGrid.currentIndex = gridIndex
+                            if (!enableAnimation) {
+                                wallpaperGrid.positionViewAtIndex(gridIndex, GridView.Contain)
+                            }
                         }
                     }
                 }
@@ -440,7 +439,6 @@ Item {
                                 if (modelData) {
                                     SessionData.setWallpaper(modelData)
                                 }
-                                // Don't steal focus - let mainContainer keep it for keyboard nav
                             }
                         }
                     }
@@ -449,7 +447,7 @@ Item {
 
             StyledText {
                 anchors.centerIn: parent
-                visible: wallpaperList.length === 0
+                visible: wallpaperFolderModel.count === 0
                 text: "No wallpapers found\n\nClick the folder icon below to browse"
                 font.pixelSize: 14
                 color: Theme.outline
@@ -457,66 +455,83 @@ Item {
             }
         }
 
-        Row {
+        Column {
             width: parent.width
             height: 50
-            spacing: Theme.spacingS
-
-            Item {
-                width: (parent.width - controlsRow.width - browseButton.width - Theme.spacingS) / 2
-                height: parent.height
-            }
 
             Row {
-                id: controlsRow
-                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width
+                height: 32
                 spacing: Theme.spacingS
 
-                DankActionButton {
+                Item {
+                    width: (parent.width - controlsRow.width - browseButton.width - Theme.spacingS) / 2
+                    height: parent.height
+                }
+
+                Row {
+                    id: controlsRow
                     anchors.verticalCenter: parent.verticalCenter
-                    iconName: "skip_previous"
-                    iconSize: 20
-                    buttonSize: 32
-                    enabled: currentPage > 0
-                    opacity: enabled ? 1.0 : 0.3
-                    onClicked: {
-                        if (currentPage > 0) {
-                            currentPage--
+                    spacing: Theme.spacingS
+
+                    DankActionButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        iconName: "skip_previous"
+                        iconSize: 20
+                        buttonSize: 32
+                        enabled: currentPage > 0
+                        opacity: enabled ? 1.0 : 0.3
+                        onClicked: {
+                            if (currentPage > 0) {
+                                currentPage--
+                            }
+                        }
+                    }
+
+                    StyledText {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: wallpaperFolderModel.count > 0 ? `${wallpaperFolderModel.count} wallpapers  •  ${currentPage + 1} / ${totalPages}` : "No wallpapers"
+                        font.pixelSize: 14
+                        color: Theme.surfaceText
+                        opacity: 0.7
+                    }
+
+                    DankActionButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        iconName: "skip_next"
+                        iconSize: 20
+                        buttonSize: 32
+                        enabled: currentPage < totalPages - 1
+                        opacity: enabled ? 1.0 : 0.3
+                        onClicked: {
+                            if (currentPage < totalPages - 1) {
+                                currentPage++
+                            }
                         }
                     }
                 }
 
-                StyledText {
+                DankActionButton {
+                    id: browseButton
                     anchors.verticalCenter: parent.verticalCenter
-                    text: wallpaperList.length > 0 ? `${wallpaperList.length} wallpapers  •  ${currentPage + 1} / ${totalPages}` : "No wallpapers"
-                    font.pixelSize: 14
-                    color: Theme.surfaceText
+                    iconName: "folder_open"
+                    iconSize: 20
+                    buttonSize: 32
                     opacity: 0.7
-                }
-
-                DankActionButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    iconName: "skip_next"
-                    iconSize: 20
-                    buttonSize: 32
-                    enabled: currentPage < totalPages - 1
-                    opacity: enabled ? 1.0 : 0.3
-                    onClicked: {
-                        if (currentPage < totalPages - 1) {
-                            currentPage++
-                        }
-                    }
+                    onClicked: wallpaperBrowserLoader.active = true
                 }
             }
 
-            DankActionButton {
-                id: browseButton
-                anchors.verticalCenter: parent.verticalCenter
-                iconName: "folder_open"
-                iconSize: 20
-                buttonSize: 32
-                opacity: 0.7
-                onClicked: wallpaperBrowserLoader.active = true
+            StyledText {
+                width: parent.width
+                height: 18
+                text: selectedFileName
+                font.pixelSize: 12
+                color: Theme.surfaceText
+                opacity: 0.5
+                visible: selectedFileName !== ""
+                elide: Text.ElideMiddle
+                horizontalAlignment: Text.AlignHCenter
             }
         }
     }
