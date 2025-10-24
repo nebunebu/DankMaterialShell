@@ -50,7 +50,6 @@ BasePill {
                 StyledText {
                     text: BatteryService.batteryLevel.toString()
                     font.pixelSize: Theme.barTextSize(battery.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.horizontalCenter: parent.horizontalCenter
                     visible: BatteryService.batteryAvailable
@@ -87,7 +86,6 @@ BasePill {
                 StyledText {
                     text: `${BatteryService.batteryLevel}%`
                     font.pixelSize: Theme.barTextSize(battery.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.verticalCenter: parent.verticalCenter
                     visible: BatteryService.batteryAvailable

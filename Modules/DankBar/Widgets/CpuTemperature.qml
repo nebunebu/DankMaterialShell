@@ -59,7 +59,6 @@ BasePill {
                         return Math.round(DgopService.cpuTemperature).toString();
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -97,7 +96,6 @@ BasePill {
                         return Math.round(DgopService.cpuTemperature) + "°";
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.verticalCenter: parent.verticalCenter
                     horizontalAlignment: Text.AlignLeft
@@ -106,7 +104,6 @@ BasePill {
                     StyledTextMetrics {
                         id: tempBaseline
                         font.pixelSize: Theme.barTextSize(root.barThickness)
-                        font.weight: Font.Medium
                         text: "100°"
                     }
 

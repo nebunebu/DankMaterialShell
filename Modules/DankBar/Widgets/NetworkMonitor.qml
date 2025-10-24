@@ -54,7 +54,6 @@ BasePill {
                         return (rate / (1024 * 1024)).toFixed(0) + "M"
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.info
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -67,7 +66,6 @@ BasePill {
                         return (rate / (1024 * 1024)).toFixed(0) + "M"
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.error
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -99,7 +97,6 @@ BasePill {
                     StyledText {
                         text: DgopService.networkRxRate > 0 ? root.formatNetworkSpeed(DgopService.networkRxRate) : "0 B/s"
                         font.pixelSize: Theme.barTextSize(root.barThickness)
-                        font.weight: Font.Medium
                         color: Theme.surfaceText
                         anchors.verticalCenter: parent.verticalCenter
                         horizontalAlignment: Text.AlignLeft
@@ -109,7 +106,6 @@ BasePill {
                         StyledTextMetrics {
                             id: rxBaseline
                             font.pixelSize: Theme.barTextSize(root.barThickness)
-                            font.weight: Font.Medium
                             text: "88.8 MB/s"
                         }
 
@@ -137,7 +133,6 @@ BasePill {
                     StyledText {
                         text: DgopService.networkTxRate > 0 ? root.formatNetworkSpeed(DgopService.networkTxRate) : "0 B/s"
                         font.pixelSize: Theme.barTextSize(root.barThickness)
-                        font.weight: Font.Medium
                         color: Theme.surfaceText
                         anchors.verticalCenter: parent.verticalCenter
                         horizontalAlignment: Text.AlignLeft
@@ -147,7 +142,6 @@ BasePill {
                         StyledTextMetrics {
                             id: txBaseline
                             font.pixelSize: Theme.barTextSize(root.barThickness)
-                            font.weight: Font.Medium
                             text: "88.8 MB/s"
                         }
 

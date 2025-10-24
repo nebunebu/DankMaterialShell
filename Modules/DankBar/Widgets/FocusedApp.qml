@@ -146,7 +146,6 @@ BasePill {
                 }
                 font.pixelSize: 10
                 color: Theme.surfaceText
-                font.weight: Font.Medium
             }
 
             Row {
@@ -166,7 +165,6 @@ BasePill {
                         return desktopEntry && desktopEntry.name ? desktopEntry.name : activeWindow.appId;
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideRight
@@ -203,7 +201,6 @@ BasePill {
                         return title;
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideRight

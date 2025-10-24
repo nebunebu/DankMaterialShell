@@ -332,7 +332,6 @@ Item {
                             }
                             font.pixelSize: 10
                             color: Theme.surfaceText
-                            font.weight: Font.Medium
                         }
 
                         Rectangle {
@@ -352,7 +351,6 @@ Item {
                                 text: windowCount > 9 ? "9+" : windowCount
                                 font.pixelSize: 9
                                 color: Theme.surface
-                                font.weight: Font.Bold
                             }
                         }
 
@@ -367,7 +365,6 @@ Item {
                             text: windowTitle
                             font.pixelSize: Theme.barTextSize(barThickness)
                             color: Theme.surfaceText
-                            font.weight: Font.Medium
                             elide: Text.ElideRight
                             maximumLineCount: 1
                         }
@@ -559,7 +556,6 @@ Item {
                             }
                             font.pixelSize: 10
                             color: Theme.surfaceText
-                            font.weight: Font.Medium
                         }
 
                         Rectangle {
@@ -579,7 +575,6 @@ Item {
                                 text: windowCount > 9 ? "9+" : windowCount
                                 font.pixelSize: 9
                                 color: Theme.surface
-                                font.weight: Font.Bold
                             }
                         }
 
@@ -593,7 +588,6 @@ Item {
                             text: windowTitle
                             font.pixelSize: Theme.barTextSize(barThickness)
                             color: Theme.surfaceText
-                            font.weight: Font.Medium
                             elide: Text.ElideRight
                             maximumLineCount: 1
                         }
@@ -780,7 +774,6 @@ Item {
                     text: I18n.tr("Close")
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
-                    font.weight: Font.Normal
                 }
 
                 MouseArea {

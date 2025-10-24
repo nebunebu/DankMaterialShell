@@ -42,7 +42,6 @@ BasePill {
                         return root.currentLayout.substring(0, 2).toUpperCase()
                     }
                     font.pixelSize: Theme.barTextSize(root.barThickness)
-                    font.weight: Font.Medium
                     color: Theme.surfaceText
                     anchors.horizontalCenter: parent.horizontalCenter
                 }

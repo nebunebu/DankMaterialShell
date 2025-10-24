@@ -37,7 +37,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -54,7 +53,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -68,7 +66,6 @@ BasePill {
                         text: String(systemClock?.date?.getMinutes()).padStart(2, '0').charAt(0)
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -77,7 +74,6 @@ BasePill {
                         text: String(systemClock?.date?.getMinutes()).padStart(2, '0').charAt(1)
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -92,7 +88,6 @@ BasePill {
                         text: String(systemClock?.date?.getSeconds()).padStart(2, '0').charAt(0)
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -101,7 +96,6 @@ BasePill {
                         text: String(systemClock?.date?.getSeconds()).padStart(2, '0').charAt(1)
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.surfaceText
-                        font.weight: Font.Normal
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -134,7 +128,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.primary
-                        font.weight: Font.Light
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -149,7 +142,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.primary
-                        font.weight: Font.Light
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -169,7 +161,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.primary
-                        font.weight: Font.Light
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -184,7 +175,6 @@ BasePill {
                         }
                         font.pixelSize: Theme.barTextSize(root.barThickness)
                         color: Theme.primary
-                        font.weight: Font.Light
                         width: 9
                         horizontalAlignment: Text.AlignHCenter
                     }

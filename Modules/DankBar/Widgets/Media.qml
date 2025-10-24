@@ -176,7 +176,6 @@ BasePill {
                             text: textContainer.displayText
                             font.pixelSize: Theme.barTextSize(root.barThickness)
                             color: Theme.surfaceText
-                            font.weight: Font.Medium
                             wrapMode: Text.NoWrap
                             x: needsScrolling ? -scrollOffset : 0
                             onTextChanged: {
