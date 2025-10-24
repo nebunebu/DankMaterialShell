@@ -149,21 +149,41 @@ if [ -d "%{_sysconfdir}/xdg/quickshell/dms" ]; then
 fi
 
 # Restart DMS for active users after upgrade
-if [ "$1" -ge 2 ] && [ -x /usr/bin/dms ]; then
-    # Find users running quickshell with DMS
-    for username in $(ps aux | grep -E '[q]uickshell.*dms' | awk '{print $1}' | sort -u); do
-        if [ "$username" = "root" ]; then
-            continue
-        fi
+if [ "$1" -ge 2 ]; then
+    dms_restarted=0
+    # Find all quickshell DMS processes (PID and username)
+    pgrep -a -f 'quickshell.*dms' 2>/dev/null | while read pid cmd; do
+        username=$(ps -o user= -p "$pid" 2>/dev/null)
         
-        # Get user's UID for DBus path
+        [ "$username" = "root" ] && continue
+        [ -z "$username" ] && continue
+        
+        # Get user's UID and validate session
         user_uid=$(id -u "$username" 2>/dev/null)
-        if [ -n "$user_uid" ] && [ -d "/run/user/$user_uid" ]; then
-            echo "Restarting DMS for user: $username"
-            # Run as user with proper DBus session
-            runuser -u "$username" -- /bin/sh -c "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$user_uid/bus /usr/bin/dms restart >/dev/null 2>&1 || true" 2>/dev/null || true
-        fi
+        [ -z "$user_uid" ] && continue
+        [ ! -d "/run/user/$user_uid" ] && continue
+        
+        wayland_display=$(tr '\0' '\n' < /proc/$pid/environ 2>/dev/null | grep '^WAYLAND_DISPLAY=' | cut -d= -f2)
+        [ -z "$wayland_display" ] && continue
+        
+        echo "Restarting DMS for user: $username"
+        
+        # Run as user with full Wayland session environment
+        runuser -u "$username" -- /bin/sh -c "
+            export XDG_RUNTIME_DIR=/run/user/$user_uid
+            export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$user_uid/bus
+            export WAYLAND_DISPLAY=$wayland_display
+            export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:\$PATH
+            dms restart >/dev/null 2>&1
+        " 2>/dev/null && dms_restarted=1 || true
+        
+        break
     done
+    
+    # Show success message if DMS was restarted
+    if [ $dms_restarted -eq 1 ]; then
+        echo -e "\033[1;34mDMS has been upgraded...\033[0m"
+    fi
 fi
 
 %files
