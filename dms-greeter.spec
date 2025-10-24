@@ -123,7 +123,7 @@ echo "Creating symlinks to sync theme..."
 declare -A links=(
     ["$HOME/.config/DankMaterialShell/settings.json"]="$CACHE_DIR/settings.json"
     ["$HOME/.local/state/DankMaterialShell/session.json"]="$CACHE_DIR/session.json"
-    ["$HOME/.cache/quickshell/dankshell/dms-colors.json"]="$CACHE_DIR/colors.json"
+    ["$HOME/.cache/DankMaterialShell/dms-colors.json"]="$CACHE_DIR/colors.json"
 )
 
 for source in "${!links[@]}"; do
@@ -311,34 +311,34 @@ fi
 if [ "$1" -eq 1 ]; then
 cat << 'EOF'
 
-[1;36m===============================================================================[0m
-[1;35m    🎨 DMS Greeter Installation Complete![0m
-[1;36m===============================================================================[0m
+===============================================================================
+    🎨 DMS Greeter Installation Complete!
+===============================================================================
 
-[1;37mStatus:[0m
-    [1;32m✓[0m Greeter user: Created
-    [1;32m✓[0m Greeter directories: /var/cache/dms-greeter, /var/lib/greeter
-    [1;32m✓[0m SELinux contexts: Applied
+Status:
+    ✓ Greeter user: Created
+    ✓ Greeter directories: /var/cache/dms-greeter, /var/lib/greeter
+    ✓ SELinux contexts: Applied
 EOF
-echo "    [1;32m✓[0m Greetd config: $CONFIG_STATUS"
+echo "    ✓ Greetd config: $CONFIG_STATUS"
 cat << 'EOF'
 
-[1;33m⚡ Next steps:[0m
+⚡ Next steps:
 
-[1;37m1.[0m [1;31mDisable any existing display managers (IMPORTANT):[0m
-     [1;36msudo systemctl disable gdm sddm lightdm[0m
+1. Disable any existing display managers (IMPORTANT):
+     sudo systemctl disable gdm sddm lightdm
 
-[1;37m2.[0m [1;32mEnable greetd service:[0m
-     [1;36msudo systemctl enable greetd[0m
+2. Enable greetd service:
+     sudo systemctl enable greetd
 
-[1;37m3.[0m [1;33m(Optional) Sync your theme with the greeter:[0m
-     [1;36mdms-greeter-sync[0m
+3. (Optional) Sync your theme with the greeter:
+     dms-greeter-sync
      
      Then logout/login to see your wallpaper on the greeter!
 
-[1;35m🚀 Ready to test?[0m Reboot or run: [1;36msudo systemctl start greetd[0m
-[1;37m📖 Documentation:[0m /usr/share/doc/dms-greeter/README.md
-[1;36m===============================================================================[0m
+🚀 Ready to test? Reboot or run: sudo systemctl start greetd
+📖 Documentation: /usr/share/doc/dms-greeter/README.md
+===============================================================================
 
 EOF
 fi
