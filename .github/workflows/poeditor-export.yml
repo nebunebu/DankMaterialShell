@@ -113,6 +113,7 @@ jobs:
             "ja:translations/poexports/ja.json"
             "zh-Hans:translations/poexports/zh_CN.json"
             "pt-br:translations/poexports/pt.json"
+            "tr:translations/poexports/tr.json"
           )
 
           ANY_CHANGED=false
