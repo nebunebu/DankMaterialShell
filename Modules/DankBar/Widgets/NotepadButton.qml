@@ -47,19 +47,6 @@ BasePill {
                 size: Theme.barIconSize(root.barThickness, -4)
                 color: root.isActive ? Theme.primary : Theme.surfaceText
             }
-
-            Rectangle {
-                width: 6
-                height: 6
-                radius: 3
-                color: Theme.primary
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.rightMargin: SettingsData.dankBarNoBackground ? 0 : 4
-                anchors.topMargin: SettingsData.dankBarNoBackground ? 0 : 4
-                visible: NotepadStorageService.tabs && NotepadStorageService.tabs.length > 0
-                opacity: 0.8
-            }
         }
     }
 
