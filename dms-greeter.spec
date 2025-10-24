@@ -46,9 +46,9 @@ authentication, and dynamic theming.
 # QML-based application
 
 %install
-# Install greeter files to XDG config location
-install -dm755 %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter
-cp -r * %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/
+# Install greeter files to shared data location
+install -dm755 %{buildroot}%{_datadir}/quickshell/dms-greeter
+cp -r * %{buildroot}%{_datadir}/quickshell/dms-greeter/
 
 # Install launcher script
 install -Dm755 Modules/Greetd/assets/dms-greeter %{buildroot}%{_bindir}/dms-greeter
@@ -160,19 +160,28 @@ install -dm755 %{buildroot}%{_sharedstatedir}/greeter
 # Instead, we verify/fix it in %post if needed
 
 # Remove build and development files
-rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/.git*
-rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/.gitignore
-rm -rf %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/.github
-rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/*.spec
-rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/dms.spec
-rm -f %{buildroot}%{_sysconfdir}/xdg/quickshell/dms-greeter/dms-greeter.spec
+rm -rf %{buildroot}%{_datadir}/quickshell/dms-greeter/.git*
+rm -f %{buildroot}%{_datadir}/quickshell/dms-greeter/.gitignore
+rm -rf %{buildroot}%{_datadir}/quickshell/dms-greeter/.github
+rm -f %{buildroot}%{_datadir}/quickshell/dms-greeter/*.spec
+rm -f %{buildroot}%{_datadir}/quickshell/dms-greeter/dms.spec
+rm -f %{buildroot}%{_datadir}/quickshell/dms-greeter/dms-greeter.spec
+
+%posttrans
+# Clean up old installation path from previous versions (only if empty)
+if [ -d "%{_sysconfdir}/xdg/quickshell/dms-greeter" ]; then
+    # Remove directories only if empty (preserves any user-added files)
+    rmdir "%{_sysconfdir}/xdg/quickshell/dms-greeter" 2>/dev/null || true
+    rmdir "%{_sysconfdir}/xdg/quickshell" 2>/dev/null || true
+    rmdir "%{_sysconfdir}/xdg" 2>/dev/null || true
+fi
 
 %files
 %license LICENSE
 %doc %{_docdir}/dms-greeter/README.md
 %{_bindir}/dms-greeter
 %{_bindir}/dms-greeter-sync
-%{_sysconfdir}/xdg/quickshell/dms-greeter/
+%{_datadir}/quickshell/dms-greeter/
 %dir %attr(0750,greeter,greeter) %{_localstatedir}/cache/dms-greeter
 %dir %attr(0755,greeter,greeter) %{_sharedstatedir}/greeter
 
@@ -200,9 +209,9 @@ if [ -x /usr/sbin/semanage ] && [ -x /usr/sbin/restorecon ]; then
     semanage fcontext -a -t cache_home_t '%{_localstatedir}/cache/dms-greeter(/.*)?' >/dev/null 2>&1 || true
     restorecon -R %{_localstatedir}/cache/dms-greeter >/dev/null 2>&1 || true
     
-    # Config directory
-    semanage fcontext -a -t etc_t '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' >/dev/null 2>&1 || true
-    restorecon -R %{_sysconfdir}/xdg/quickshell/dms-greeter >/dev/null 2>&1 || true
+    # Shared data directory
+    semanage fcontext -a -t usr_t '%{_datadir}/quickshell/dms-greeter(/.*)?' >/dev/null 2>&1 || true
+    restorecon -R %{_datadir}/quickshell/dms-greeter >/dev/null 2>&1 || true
     
     # PAM configuration
     restorecon %{_sysconfdir}/pam.d/greetd >/dev/null 2>&1 || true
@@ -300,34 +309,36 @@ fi
 
 # Only show banner on initial install
 if [ "$1" -eq 1 ]; then
-cat << EOF
+cat << 'EOF'
 
-===============================================================================
-    DMS Greeter Installation Complete!
-===============================================================================
+[1;36m===============================================================================[0m
+[1;35m    🎨 DMS Greeter Installation Complete![0m
+[1;36m===============================================================================[0m
 
-Status:
-    - Greeter user: Created ✓
-    - Greeter directories: /var/cache/dms-greeter, /var/lib/greeter ✓
-    - SELinux contexts: Applied ✓
-    - Greetd config: $CONFIG_STATUS
+[1;37mStatus:[0m
+    [1;32m✓[0m Greeter user: Created
+    [1;32m✓[0m Greeter directories: /var/cache/dms-greeter, /var/lib/greeter
+    [1;32m✓[0m SELinux contexts: Applied
+EOF
+echo "    [1;32m✓[0m Greetd config: $CONFIG_STATUS"
+cat << 'EOF'
 
-Next steps:
+[1;33m⚡ Next steps:[0m
 
-1. Disable any existing display managers (IMPORTANT):
-     sudo systemctl disable gdm sddm lightdm
+[1;37m1.[0m [1;31mDisable any existing display managers (IMPORTANT):[0m
+     [1;36msudo systemctl disable gdm sddm lightdm[0m
 
-2. Enable greetd service:
-     sudo systemctl enable greetd
+[1;37m2.[0m [1;32mEnable greetd service:[0m
+     [1;36msudo systemctl enable greetd[0m
 
-3. (Optional) Sync your theme with the greeter:
-     dms-greeter-sync
+[1;37m3.[0m [1;33m(Optional) Sync your theme with the greeter:[0m
+     [1;36mdms-greeter-sync[0m
      
      Then logout/login to see your wallpaper on the greeter!
 
-Ready to test? Reboot or run: sudo systemctl start greetd
-Documentation: /usr/share/doc/dms-greeter/README.md
-===============================================================================
+[1;35m🚀 Ready to test?[0m Reboot or run: [1;36msudo systemctl start greetd[0m
+[1;37m📖 Documentation:[0m /usr/share/doc/dms-greeter/README.md
+[1;36m===============================================================================[0m
 
 EOF
 fi
@@ -338,7 +349,7 @@ if [ "$1" -eq 0 ] && [ -x /usr/sbin/semanage ]; then
     semanage fcontext -d '%{_bindir}/dms-greeter' 2>/dev/null || true
     semanage fcontext -d '%{_sharedstatedir}/greeter(/.*)?' 2>/dev/null || true
     semanage fcontext -d '%{_localstatedir}/cache/dms-greeter(/.*)?' 2>/dev/null || true
-    semanage fcontext -d '%{_sysconfdir}/xdg/quickshell/dms-greeter(/.*)?' 2>/dev/null || true
+    semanage fcontext -d '%{_datadir}/quickshell/dms-greeter(/.*)?' 2>/dev/null || true
 fi
 
 %changelog
