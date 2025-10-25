@@ -270,21 +270,17 @@ sudo dnf copr enable avengemedia/danklinux && sudo dnf install quickshell-git
 #### 2. Install fonts
 *Inter Variable* and *Fira Code* are not strictly required, but they are the default fonts of dms.
 
-#### 2.1 Install Material Symbols
-```bash
-sudo curl -L "https://github.com/google/material-design-icons/raw/master/variablefont/MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D.ttf" -o /usr/share/fonts/MaterialSymbolsRounded.ttf
-```
-#### 2.2 Install Inter Variable
+#### 2.1 Install Inter Variable
 ```bash
 sudo curl -L "https://github.com/rsms/inter/raw/refs/tags/v4.1/docs/font-files/InterVariable.ttf" -o /usr/share/fonts/InterVariable.ttf
 ```
 
-#### 2.3 Install Fira Code (monospace font)
+#### 2.2 Install Fira Code (monospace font)
 ```bash
 sudo curl -L "https://github.com/tonsky/FiraCode/releases/latest/download/FiraCode-Regular.ttf" -o /usr/share/fonts/FiraCode-Regular.ttf
 ```
 
-#### 2.4 Refresh font cache
+#### 2.3 Refresh font cache
 ```bash
 fc-cache -fv
 ```
@@ -329,7 +325,7 @@ paru -S matugen-bin dgop
 
 # Fedora
 sudo dnf install cava wl-clipboard brightnessctl qt6-qtmultimedia accountsservice
-sudo dnf copr enable avengemedia/danklinux && sudo dnf install cliphist ghostty hyprpicker material-symbols-fonts matugen 
+sudo dnf copr enable avengemedia/danklinux && sudo dnf install cliphist ghostty hyprpicker matugen 
 ```
 Note: by enabling and installing the avengemedia/dms copr above, these core dependencies will automatically be available for use. 
 
@@ -821,7 +817,6 @@ All settings are configurable in
 
 **Common issues:**
 
-- **Missing icons:** Verify Material Symbols font installation with `fc-list | grep Material`
 - **No dynamic theming:** Install matugen and enable in settings
 - **Qt apps not themed:** Configure qt5ct/qt6ct and set QT_QPA_PLATFORMTHEME
 - **Calendar not syncing:** Check vdirsyncer credentials and network connectivity

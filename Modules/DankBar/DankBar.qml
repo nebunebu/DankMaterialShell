@@ -200,11 +200,6 @@ Item {
             property var nativeInhibitor: null
 
             Component.onCompleted: {
-                const fonts = Qt.fontFamilies()
-                if (fonts.indexOf("Material Symbols Rounded") === -1) {
-                    ToastService.showError("Please install Material Symbols Rounded and Restart your Shell. See README.md for instructions")
-                }
-
                 if (SettingsData.forceStatusBarLayoutRefresh) {
                     SettingsData.forceStatusBarLayoutRefresh.connect(() => {
                                                                          Qt.callLater(() => {
