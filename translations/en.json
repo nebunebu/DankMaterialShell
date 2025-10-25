@@ -1190,7 +1190,7 @@
   {
     "term": "Enable WiFi",
     "context": "Enable WiFi",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:173",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:177",
     "comment": ""
   },
   {
@@ -1436,7 +1436,7 @@
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:606",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:610",
     "comment": ""
   },
   {
@@ -2024,7 +2024,7 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:340, Modules/ControlCenter/Details/NetworkDetail.qml:583",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:344, Modules/ControlCenter/Details/NetworkDetail.qml:587",
     "comment": ""
   },
   {
@@ -2036,7 +2036,7 @@
   {
     "term": "Network Settings",
     "context": "Network Settings",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:64",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:68",
     "comment": ""
   },
   {
@@ -3530,7 +3530,7 @@
   {
     "term": "WiFi is off",
     "context": "WiFi is off",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:155",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:159",
     "comment": ""
   },
   {
