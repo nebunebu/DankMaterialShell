@@ -389,6 +389,9 @@
   "Connect": {
     "Connect": "Bağlan"
   },
+  "Connect to VPN": {
+    "Connect to VPN": ""
+  },
   "Connect to Wi-Fi": {
     "Connect to Wi-Fi": "Wi-Fi'ye Bağlan"
   },
@@ -656,8 +659,17 @@
   "Failed to activate configuration": {
     "Failed to activate configuration": "Yapılandırma etkinleştirilemedi"
   },
+  "Failed to connect VPN": {
+    "Failed to connect VPN": ""
+  },
   "Failed to connect to ": {
     "Failed to connect to ": "Bağlanılamadı "
+  },
+  "Failed to disconnect VPN": {
+    "Failed to disconnect VPN": ""
+  },
+  "Failed to disconnect VPNs": {
+    "Failed to disconnect VPNs": ""
   },
   "Failed to disconnect WiFi": {
     "Failed to disconnect WiFi": "WiFi bağlantısı kesilemedi"
