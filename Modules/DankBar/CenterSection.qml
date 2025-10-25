@@ -372,9 +372,6 @@ Item {
                 }
                 item.widthChanged.connect(() => layoutTimer.restart())
                 item.heightChanged.connect(() => layoutTimer.restart())
-                if (model.widgetId === "spacer") {
-                    item.spacerSize = Qt.binding(() => model.size || 20)
-                }
                 if (root.axis && "axis" in item) {
                     item.axis = Qt.binding(() => root.axis)
                 }
