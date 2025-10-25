@@ -34,6 +34,10 @@ Rectangle {
             return 1
         }
 
+        if (NetworkService.backend !== "networkmanager" || DMSService.apiVersion <= 10) {
+            return 1
+        }
+
         const pref = NetworkService.userPreference
         const status = NetworkService.networkStatus
         let index = 1
@@ -76,7 +80,7 @@ Rectangle {
         DankButtonGroup {
             id: preferenceControls
             anchors.verticalCenter: parent.verticalCenter
-            visible: DMSService.apiVersion >= 5 && NetworkService.backend !== "iwd"
+            visible: NetworkService.backend === "networkmanager" && DMSService.apiVersion > 10
 
             model: ["Ethernet", "WiFi"]
             currentIndex: currentPreferenceIndex
@@ -196,7 +200,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: currentPreferenceIndex === 0 && DMSService.apiVersion >= 5
+        visible: currentPreferenceIndex === 0 && NetworkService.backend === "networkmanager" && DMSService.apiVersion > 10
         contentHeight: wiredColumn.height
         clip: true
 
