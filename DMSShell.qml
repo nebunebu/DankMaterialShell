@@ -216,8 +216,8 @@ Item {
     Connections {
         target: NetworkService
 
-        function onCredentialsNeeded(token, ssid, setting, fields, hints, reason) {
-            wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason)
+        function onCredentialsNeeded(token, ssid, setting, fields, hints, reason, connType, connName, vpnService) {
+            wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason, connType, connName, vpnService)
         }
     }
 

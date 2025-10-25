@@ -14,7 +14,7 @@ DankPopout {
     id: root
 
     Ref {
-        service: VpnService
+        service: DMSNetworkService
     }
 
     property var triggerScreen: null
@@ -161,11 +161,11 @@ DankPopout {
 
                             StyledText {
                                 text: {
-                                    if (!VpnService.connected) {
+                                    if (!DMSNetworkService.connected) {
                                         return "Active: None";
                                     }
 
-                                    const names = VpnService.activeNames || [];
+                                    const names = DMSNetworkService.activeNames || [];
                                     if (names.length <= 1) {
                                         return "Active: " + (names[0] || "VPN");
                                     }
@@ -193,7 +193,7 @@ DankPopout {
                                 height: 28
                                 radius: 14
                                 color: discAllArea.containsMouse ? Theme.errorHover : Theme.surfaceLight
-                                visible: VpnService.connected
+                                visible: DMSNetworkService.connected
                                 width: 130
                                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                                 border.width: 0
@@ -224,7 +224,7 @@ DankPopout {
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: VpnService.disconnectAllActive()
+                                    onClicked: DMSNetworkService.disconnectAllActive()
                                 }
 
                             }
@@ -251,7 +251,7 @@ DankPopout {
 
                                 Item {
                                     width: parent.width
-                                    height: VpnService.profiles.length === 0 ? 120 : 0
+                                    height: DMSNetworkService.profiles.length === 0 ? 120 : 0
                                     visible: height > 0
 
                                     Column {
@@ -284,7 +284,7 @@ DankPopout {
                                 }
 
                                 Repeater {
-                                    model: VpnService.profiles
+                                    model: DMSNetworkService.profiles
 
                                     delegate: Rectangle {
                                         required property var modelData
@@ -292,9 +292,9 @@ DankPopout {
                                         width: parent ? parent.width : 300
                                         height: 50
                                         radius: Theme.cornerRadius
-                                        color: rowArea.containsMouse ? Theme.primaryHoverLight : (VpnService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
-                                        border.width: VpnService.isActiveUuid(modelData.uuid) ? 2 : 1
-                                        border.color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
+                                        color: rowArea.containsMouse ? Theme.primaryHoverLight : (DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
+                                        border.width: DMSNetworkService.isActiveUuid(modelData.uuid) ? 2 : 1
+                                        border.color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
 
                                         RowLayout {
                                             anchors.left: parent.left
@@ -304,9 +304,9 @@ DankPopout {
                                             spacing: Theme.spacingS
 
                                             DankIcon {
-                                                name: VpnService.isActiveUuid(modelData.uuid) ? "vpn_lock" : "vpn_key_off"
+                                                name: DMSNetworkService.isActiveUuid(modelData.uuid) ? "vpn_lock" : "vpn_key_off"
                                                 size: Theme.iconSize - 4
-                                                color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                                color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
                                                 Layout.alignment: Qt.AlignVCenter
                                             }
 
@@ -317,7 +317,7 @@ DankPopout {
                                                 StyledText {
                                                     text: modelData.name
                                                     font.pixelSize: Theme.fontSizeMedium
-                                                    color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                                    color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
                                                 }
 
                                                 StyledText {
@@ -392,7 +392,7 @@ DankPopout {
                                             anchors.fill: parent
                                             hoverEnabled: true
                                             cursorShape: Qt.PointingHandCursor
-                                            onClicked: VpnService.toggle(modelData.uuid)
+                                            onClicked: DMSNetworkService.toggle(modelData.uuid)
                                         }
 
                                     }

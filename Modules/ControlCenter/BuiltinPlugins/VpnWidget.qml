@@ -10,26 +10,26 @@ PluginComponent {
     id: root
 
     Ref {
-        service: VpnService
+        service: DMSNetworkService
     }
 
-    ccWidgetIcon: VpnService.isBusy ? "sync" : (VpnService.connected ? "vpn_lock" : "vpn_key_off")
+    ccWidgetIcon: DMSNetworkService.isBusy ? "sync" : (DMSNetworkService.connected ? "vpn_lock" : "vpn_key_off")
     ccWidgetPrimaryText: "VPN"
     ccWidgetSecondaryText: {
-        if (!VpnService.connected)
+        if (!DMSNetworkService.connected)
             return "Disconnected"
-        const names = VpnService.activeNames || []
+        const names = DMSNetworkService.activeNames || []
         if (names.length <= 1)
             return names[0] || "Connected"
         return names[0] + " +" + (names.length - 1)
     }
-    ccWidgetIsActive: VpnService.connected
+    ccWidgetIsActive: DMSNetworkService.connected
 
     onCcWidgetToggled: {
-        if (VpnService.connected) {
-            VpnService.disconnectAllActive()
-        } else if (VpnService.profiles.length > 0) {
-            VpnService.connect(VpnService.profiles[0].uuid)
+        if (DMSNetworkService.connected) {
+            DMSNetworkService.disconnectAllActive()
+        } else if (DMSNetworkService.profiles.length > 0) {
+            DMSNetworkService.connect(DMSNetworkService.profiles[0].uuid)
         }
     }
 
@@ -52,9 +52,9 @@ PluginComponent {
 
                     StyledText {
                         text: {
-                            if (!VpnService.connected)
+                            if (!DMSNetworkService.connected)
                                 return "Active: None"
-                            const names = VpnService.activeNames || []
+                            const names = DMSNetworkService.activeNames || []
                             if (names.length <= 1)
                                 return "Active: " + (names[0] || "VPN")
                             return "Active: " + names[0] + " +" + (names.length - 1)
@@ -72,7 +72,7 @@ PluginComponent {
                         height: 28
                         radius: 14
                         color: discAllArea.containsMouse ? Theme.errorHover : Theme.surfaceLight
-                        visible: VpnService.connected
+                        visible: DMSNetworkService.connected
                         width: 110
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
@@ -99,7 +99,7 @@ PluginComponent {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: VpnService.disconnectAllActive()
+                            onClicked: DMSNetworkService.disconnectAllActive()
                         }
                     }
                 }
@@ -123,7 +123,7 @@ PluginComponent {
 
                         Item {
                             width: parent.width
-                            height: VpnService.profiles.length === 0 ? 120 : 0
+                            height: DMSNetworkService.profiles.length === 0 ? 120 : 0
                             visible: height > 0
 
                             Column {
@@ -154,7 +154,7 @@ PluginComponent {
                         }
 
                         Repeater {
-                            model: VpnService.profiles
+                            model: DMSNetworkService.profiles
 
                             delegate: Rectangle {
                                 required property var modelData
@@ -162,9 +162,9 @@ PluginComponent {
                                 width: parent ? parent.width : 300
                                 height: 50
                                 radius: Theme.cornerRadius
-                                color: rowArea.containsMouse ? Theme.primaryHoverLight : (VpnService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
-                                border.width: VpnService.isActiveUuid(modelData.uuid) ? 2 : 1
-                                border.color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
+                                color: rowArea.containsMouse ? Theme.primaryHoverLight : (DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
+                                border.width: DMSNetworkService.isActiveUuid(modelData.uuid) ? 2 : 1
+                                border.color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
 
                                 RowLayout {
                                     anchors.left: parent.left
@@ -174,9 +174,9 @@ PluginComponent {
                                     spacing: Theme.spacingS
 
                                     DankIcon {
-                                        name: VpnService.isActiveUuid(modelData.uuid) ? "vpn_lock" : "vpn_key_off"
+                                        name: DMSNetworkService.isActiveUuid(modelData.uuid) ? "vpn_lock" : "vpn_key_off"
                                         size: Theme.iconSize - 4
-                                        color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                        color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
                                         Layout.alignment: Qt.AlignVCenter
                                     }
 
@@ -187,7 +187,7 @@ PluginComponent {
                                         StyledText {
                                             text: modelData.name
                                             font.pixelSize: Theme.fontSizeMedium
-                                            color: VpnService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                            color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
                                         }
 
                                         StyledText {
@@ -234,7 +234,7 @@ PluginComponent {
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: VpnService.toggle(modelData.uuid)
+                                    onClicked: DMSNetworkService.toggle(modelData.uuid)
                                 }
                             }
                         }

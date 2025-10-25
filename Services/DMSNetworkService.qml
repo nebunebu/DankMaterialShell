@@ -69,6 +69,24 @@ Singleton {
     property string wifiPassword: ""
     property string forgetSSID: ""
 
+    property var vpnProfiles: []
+    property var vpnActive: []
+    property bool vpnAvailable: false
+    property bool vpnIsBusy: false
+
+    property alias profiles: root.vpnProfiles
+    property alias activeConnections: root.vpnActive
+    property var activeUuids: vpnActive.map(v => v.uuid).filter(u => !!u)
+    property var activeNames: vpnActive.map(v => v.name).filter(n => !!n)
+    property string activeUuid: activeUuids.length > 0 ? activeUuids[0] : ""
+    property string activeName: activeNames.length > 0 ? activeNames[0] : ""
+    property string activeDevice: vpnActive.length > 0 ? (vpnActive[0].device || "") : ""
+    property string activeState: vpnActive.length > 0 ? (vpnActive[0].state || "") : ""
+    property bool vpnConnected: activeUuids.length > 0
+    property alias available: root.vpnAvailable
+    property alias isBusy: root.vpnIsBusy
+    property alias connected: root.vpnConnected
+
     property string networkInfoSSID: ""
     property string networkInfoDetails: ""
     property bool networkInfoLoading: false
@@ -94,7 +112,7 @@ Singleton {
 
     signal networksUpdated
     signal connectionChanged
-    signal credentialsNeeded(string token, string ssid, string setting, var fields, var hints, string reason)
+    signal credentialsNeeded(string token, string ssid, string setting, var fields, var hints, string reason, string connType, string connName, string vpnService)
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
@@ -164,7 +182,11 @@ Singleton {
         credentialsReason = data.reason || "Credentials required"
         credentialsRequested = true
 
-        credentialsNeeded(credentialsToken, credentialsSSID, credentialsSetting, credentialsFields, credentialsHints, credentialsReason)
+        const connType = data.connType || ""
+        const connName = data.name || data.connectionId || ""
+        const vpnService = data.vpnService || ""
+
+        credentialsNeeded(credentialsToken, credentialsSSID, credentialsSetting, credentialsFields, credentialsHints, credentialsReason, connType, connName, vpnService)
     }
 
     function addRef() {
@@ -202,6 +224,7 @@ Singleton {
         const previousConnectingSSID = connectingSSID
 
         backend = state.backend || ""
+        vpnAvailable = networkAvailable && backend === "networkmanager"
         networkStatus = state.networkStatus || "disconnected"
         primaryConnection = state.primaryConnection || ""
 
@@ -243,6 +266,12 @@ Singleton {
 
             networksUpdated()
         }
+
+        if (state.vpnProfiles) {
+            vpnProfiles = state.vpnProfiles
+        }
+
+        vpnActive = state.vpnActive || []
 
         userPreference = state.preference || "auto"
         isConnecting = state.isConnecting || false
@@ -675,6 +704,122 @@ Singleton {
         return {
             "uuid": uuid,
         }
+    }
+
+    function refreshVpnProfiles() {
+        if (!vpnAvailable) return
+
+        DMSService.sendRequest("network.vpn.profiles", null, response => {
+            if (response.result) {
+                vpnProfiles = response.result
+            }
+        })
+    }
+
+    function refreshVpnActive() {
+        if (!vpnAvailable) return
+
+        DMSService.sendRequest("network.vpn.active", null, response => {
+            if (response.result) {
+                vpnActive = response.result
+            }
+        })
+    }
+
+    function connectVpn(uuidOrName, singleActive = false) {
+        if (!vpnAvailable || vpnIsBusy) return
+
+        vpnIsBusy = true
+
+        const params = {
+            uuidOrName: uuidOrName,
+            singleActive: singleActive
+        }
+
+        DMSService.sendRequest("network.vpn.connect", params, response => {
+            vpnIsBusy = false
+
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to connect VPN"))
+            } else {
+                Qt.callLater(() => getState())
+            }
+        })
+    }
+
+    function connect(uuidOrName, singleActive = false) {
+        connectVpn(uuidOrName, singleActive)
+    }
+
+    function disconnectVpn(uuidOrName) {
+        if (!vpnAvailable || vpnIsBusy) return
+
+        vpnIsBusy = true
+
+        const params = {
+            uuidOrName: uuidOrName
+        }
+
+        DMSService.sendRequest("network.vpn.disconnect", params, response => {
+            vpnIsBusy = false
+
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to disconnect VPN"))
+            } else {
+                Qt.callLater(() => getState())
+            }
+        })
+    }
+
+    function disconnect(uuidOrName) {
+        disconnectVpn(uuidOrName)
+    }
+
+    function disconnectAllVpns() {
+        if (!vpnAvailable || vpnIsBusy) return
+
+        vpnIsBusy = true
+
+        DMSService.sendRequest("network.vpn.disconnectAll", null, response => {
+            vpnIsBusy = false
+
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to disconnect VPNs"))
+            } else {
+                Qt.callLater(() => getState())
+            }
+        })
+    }
+
+    function disconnectAllActive() {
+        disconnectAllVpns()
+    }
+
+    function toggleVpn(uuid) {
+        if (uuid) {
+            if (isActiveVpnUuid(uuid)) {
+                disconnectVpn(uuid)
+            } else {
+                connectVpn(uuid)
+            }
+            return
+        }
+
+        if (vpnProfiles.length > 0) {
+            connectVpn(vpnProfiles[0].uuid)
+        }
+    }
+
+    function toggle(uuid) {
+        toggleVpn(uuid)
+    }
+
+    function isActiveVpnUuid(uuid) {
+        return activeUuids && activeUuids.indexOf(uuid) !== -1
+    }
+
+    function isActiveUuid(uuid) {
+        return isActiveVpnUuid(uuid)
     }
 
     function refreshNetworkState() {

@@ -9,7 +9,7 @@ BasePill {
     id: root
 
     Ref {
-        service: VpnService
+        service: DMSNetworkService
     }
 
     property var popoutTarget: null
@@ -24,9 +24,9 @@ BasePill {
             DankIcon {
                 id: icon
 
-                name: VpnService.isBusy ? "sync" : (VpnService.connected ? "vpn_lock" : "vpn_key_off")
+                name: DMSNetworkService.isBusy ? "sync" : (DMSNetworkService.connected ? "vpn_lock" : "vpn_key_off")
                 size: Theme.barIconSize(root.barThickness, -4)
-                color: VpnService.connected ? Theme.primary : Theme.surfaceText
+                color: DMSNetworkService.connected ? Theme.primary : Theme.surfaceText
                 anchors.centerIn: parent
             }
         }
@@ -59,10 +59,10 @@ BasePill {
                 tooltipLoader.active = true
                 if (tooltipLoader.item) {
                     let tooltipText = ""
-                    if (!VpnService.connected) {
+                    if (!DMSNetworkService.connected) {
                         tooltipText = "VPN Disconnected"
                     } else {
-                        const names = VpnService.activeNames || []
+                        const names = DMSNetworkService.activeNames || []
                         if (names.length <= 1) {
                             tooltipText = "VPN Connected • " + (names[0] || "")
                         } else {

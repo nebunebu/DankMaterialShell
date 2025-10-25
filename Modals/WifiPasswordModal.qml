@@ -21,6 +21,11 @@ DankModal {
     property var promptFields: []
     property string promptSetting: ""
 
+    property bool isVpnPrompt: false
+    property string connectionName: ""
+    property string vpnServiceType: ""
+    property string connectionType: ""
+
     function show(ssid) {
         wifiPasswordSSID = ssid
         wifiPasswordInput = ""
@@ -32,6 +37,10 @@ DankModal {
         promptReason = ""
         promptFields = []
         promptSetting = ""
+        isVpnPrompt = false
+        connectionName = ""
+        vpnServiceType = ""
+        connectionType = ""
 
         const network = NetworkService.wifiNetworks.find(n => n.ssid === ssid)
         requiresEnterprise = network?.enterprise || false
@@ -48,13 +57,18 @@ DankModal {
                      })
     }
 
-    function showFromPrompt(token, ssid, setting, fields, hints, reason) {
-        wifiPasswordSSID = ssid
+    function showFromPrompt(token, ssid, setting, fields, hints, reason, connType, connName, vpnService) {
         isPromptMode = true
         promptToken = token
         promptReason = reason
         promptFields = fields || []
         promptSetting = setting || "802-11-wireless-security"
+        connectionType = connType || "802-11-wireless"
+        connectionName = connName || ssid || ""
+        vpnServiceType = vpnService || ""
+
+        isVpnPrompt = (connectionType === "vpn" || connectionType === "wireguard")
+        wifiPasswordSSID = isVpnPrompt ? connectionName : ssid
 
         requiresEnterprise = setting === "802-1x"
 
@@ -163,7 +177,12 @@ DankModal {
                         spacing: Theme.spacingXS
 
                         StyledText {
-                            text: I18n.tr("Connect to Wi-Fi")
+                            text: {
+                                if (isVpnPrompt) {
+                                    return I18n.tr("Connect to VPN")
+                                }
+                                return I18n.tr("Connect to Wi-Fi")
+                            }
                             font.pixelSize: Theme.fontSizeLarge
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -175,6 +194,9 @@ DankModal {
 
                             StyledText {
                                 text: {
+                                    if (isVpnPrompt) {
+                                        return I18n.tr("Enter password for ") + wifiPasswordSSID
+                                    }
                                     const prefix = requiresEnterprise ? I18n.tr("Enter credentials for ") : I18n.tr("Enter password for ")
                                     return prefix + wifiPasswordSSID
                                 }
@@ -218,7 +240,7 @@ DankModal {
                     color: Theme.surfaceHover
                     border.color: usernameInput.activeFocus ? Theme.primary : Theme.outlineStrong
                     border.width: usernameInput.activeFocus ? 2 : 1
-                    visible: requiresEnterprise
+                    visible: requiresEnterprise && !isVpnPrompt
 
                     MouseArea {
                         anchors.fill: parent
@@ -271,7 +293,7 @@ DankModal {
                         textColor: Theme.surfaceText
                         text: wifiPasswordInput
                         echoMode: showPasswordCheckbox.checked ? TextInput.Normal : TextInput.Password
-                        placeholderText: requiresEnterprise ? I18n.tr("Password") : ""
+                        placeholderText: (requiresEnterprise && !isVpnPrompt) ? I18n.tr("Password") : ""
                         backgroundColor: "transparent"
                         focus: !requiresEnterprise
                         enabled: root.shouldBeVisible
@@ -281,7 +303,9 @@ DankModal {
                         onAccepted: () => {
                                         if (isPromptMode) {
                                             const secrets = {}
-                                            if (promptSetting === "802-11-wireless-security") {
+                                            if (isVpnPrompt) {
+                                                if (passwordInput.text) secrets["password"] = passwordInput.text
+                                            } else if (promptSetting === "802-11-wireless-security") {
                                                 secrets["psk"] = passwordInput.text
                                             } else if (promptSetting === "802-1x") {
                                                 if (usernameInput.text) secrets["identity"] = usernameInput.text
@@ -340,7 +364,7 @@ DankModal {
                 }
 
                 Rectangle {
-                    visible: requiresEnterprise
+                    visible: requiresEnterprise && !isVpnPrompt
                     width: parent.width
                     height: 50
                     radius: Theme.cornerRadius
@@ -372,7 +396,7 @@ DankModal {
                 }
 
                 Rectangle {
-                    visible: requiresEnterprise
+                    visible: requiresEnterprise && !isVpnPrompt
                     width: parent.width
                     height: 50
                     radius: Theme.cornerRadius
@@ -495,7 +519,12 @@ DankModal {
                             height: 36
                             radius: Theme.cornerRadius
                             color: connectArea.containsMouse ? Qt.darker(Theme.primary, 1.1) : Theme.primary
-                            enabled: requiresEnterprise ? (usernameInput.text.length > 0 && passwordInput.text.length > 0) : passwordInput.text.length > 0
+                            enabled: {
+                                if (isVpnPrompt) {
+                                    return passwordInput.text.length > 0
+                                }
+                                return requiresEnterprise ? (usernameInput.text.length > 0 && passwordInput.text.length > 0) : passwordInput.text.length > 0
+                            }
                             opacity: enabled ? 1 : 0.5
 
                             StyledText {
@@ -518,7 +547,9 @@ DankModal {
                                 onClicked: () => {
                                                if (isPromptMode) {
                                                    const secrets = {}
-                                                   if (promptSetting === "802-11-wireless-security") {
+                                                   if (isVpnPrompt) {
+                                                       if (passwordInput.text) secrets["password"] = passwordInput.text
+                                                   } else if (promptSetting === "802-11-wireless-security") {
                                                        secrets["psk"] = passwordInput.text
                                                    } else if (promptSetting === "802-1x") {
                                                        if (usernameInput.text) secrets["identity"] = usernameInput.text

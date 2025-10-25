@@ -80,7 +80,7 @@ Singleton {
 
     signal networksUpdated
     signal connectionChanged
-    signal credentialsNeeded(string token, string ssid, string setting, var fields, var hints, string reason)
+    signal credentialsNeeded(string token, string ssid, string setting, var fields, var hints, string reason, string connType, string connName, string vpnService)
 
     property bool usingLegacy: false
     property var activeService: null
