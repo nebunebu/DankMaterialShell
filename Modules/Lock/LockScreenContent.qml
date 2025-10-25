@@ -233,7 +233,7 @@ Item {
 
                 StyledText {
                     width: 75
-                    text: clockText.hours.length > 0 ? clockText.hours[0] : ""
+                    text: clockText.hours.length > 1 ? clockText.hours[0] : ""
                     font.pixelSize: 120
                     font.weight: Font.Light
                     color: "white"
@@ -242,7 +242,7 @@ Item {
 
                 StyledText {
                     width: 75
-                    text: clockText.hours.length > 1 ? clockText.hours[1] : (clockText.hours.length > 0 ? clockText.hours[0] : "")
+                    text: clockText.hours.length > 1 ? clockText.hours[1] : clockText.hours.length > 0 ? clockText.hours[0] : ""
                     font.pixelSize: 120
                     font.weight: Font.Light
                     color: "white"
