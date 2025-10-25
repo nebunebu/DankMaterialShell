@@ -270,12 +270,8 @@ Singleton {
                     connectionStatus = "cancelled"
                     pendingConnectionSSID = ""
                 } else if (isBadCredentials) {
-                    const failedSSID = pendingConnectionSSID
                     connectionStatus = "invalid_password"
                     pendingConnectionSSID = ""
-                    Qt.callLater(() => {
-                        connectToWifi(failedSSID)
-                    })
                 } else {
                     if (connectionError) {
                         ToastService.showError(I18n.tr("Failed to connect to ") + pendingConnectionSSID)
