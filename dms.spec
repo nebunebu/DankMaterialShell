@@ -30,9 +30,6 @@ Requires:       (quickshell-git or quickshell)
 Requires:       accountsservice
 Requires:       dms-cli
 Requires:       dgop
-Requires:       fira-code-fonts
-Requires:       material-symbols-fonts
-Requires:       rsms-inter-fonts
 
 # Core utilities (Highly recommended for DMS functionality)
 Recommends:     brightnessctl

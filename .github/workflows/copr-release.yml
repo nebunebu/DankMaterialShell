@@ -91,9 +91,6 @@ jobs:
           Requires:       accountsservice
           Requires:       dms-cli
           Requires:       dgop
-          Requires:       fira-code-fonts
-          Requires:       material-symbols-fonts
-          Requires:       rsms-inter-fonts
 
           Recommends:     brightnessctl
           Recommends:     cava

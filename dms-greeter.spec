@@ -19,7 +19,6 @@ BuildRequires:  rpkg
 
 Requires:       greetd
 Requires:       (quickshell-git or quickshell)
-Requires:       material-symbols-fonts
 Requires(post): /usr/sbin/useradd
 Requires(post): /usr/sbin/groupadd
 
