@@ -165,7 +165,10 @@ NIRI_EOF
             TEMP_CONFIG=$(mktemp)
             cat > "$TEMP_CONFIG" << HYPRLAND_EOF
 env = DMS_RUN_GREETER,1
-disable_hyprland_logo = true
+
+misc {
+    disable_hyprland_logo = true
+}
 
 exec = sh -c "$QS_CMD; hyprctl dispatch exit"
 HYPRLAND_EOF
