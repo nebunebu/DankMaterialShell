@@ -26,7 +26,6 @@ BasePill {
     MouseArea {
         z: 1
         anchors.fill: parent
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: {
             SessionService.toggleIdleInhibit()

@@ -99,7 +99,6 @@ BasePill {
         y: -battery.topMargin
         width: battery.width + battery.leftMargin + battery.rightMargin
         height: battery.height + battery.topMargin + battery.bottomMargin
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton
         onPressed: {

@@ -122,7 +122,6 @@ BasePill {
     MouseArea {
         z: 1
         anchors.fill: parent
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onPressed: {
             if (popoutTarget && popoutTarget.setTriggerPosition) {

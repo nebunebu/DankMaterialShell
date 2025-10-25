@@ -131,7 +131,6 @@ Item {
 
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
-                        hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: (mouse) => {
                             if (!delegateRoot.trayItem) {
@@ -218,7 +217,6 @@ Item {
 
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
-                        hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: (mouse) => {
                             if (!delegateRoot.trayItem) {
@@ -486,7 +484,6 @@ Item {
                             MouseArea {
                                 id: backArea
                                 anchors.fill: parent
-                                hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: menuRoot.goBack()
                             }
@@ -522,7 +519,6 @@ Item {
                                     id: itemArea
                                     anchors.fill: parent
                                     enabled: !menuEntry?.isSeparator && (menuEntry?.enabled !== false)
-                                    hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
 
                                     onClicked: {

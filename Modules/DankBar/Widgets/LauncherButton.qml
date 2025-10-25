@@ -84,7 +84,6 @@ BasePill {
     MouseArea {
         id: customMouseArea
         anchors.fill: parent
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.RightButton
         onPressed: function (mouse){

@@ -86,7 +86,6 @@ BasePill {
 
                     MouseArea {
                         anchors.fill: parent
-                        hoverEnabled: true
                         acceptedButtons: Qt.NoButton
                         onWheel: function(wheelEvent) {
                             let delta = wheelEvent.angleDelta.y
@@ -188,7 +187,6 @@ BasePill {
                         id: audioWheelArea
 
                         anchors.fill: parent
-                        hoverEnabled: true
                         acceptedButtons: Qt.NoButton
                         onWheel: function(wheelEvent) {
                             let delta = wheelEvent.angleDelta.y;
@@ -232,7 +230,6 @@ BasePill {
         y: -root.topMargin
         width: root.width + root.leftMargin + root.rightMargin
         height: root.height + root.topMargin + root.bottomMargin
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton
         onPressed: {

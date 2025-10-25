@@ -13,6 +13,7 @@ BasePill {
     }
 
     property var popoutTarget: null
+    property bool isHovered: clickArea.containsMouse
 
     signal toggleVpnPopup()
 

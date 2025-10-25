@@ -588,7 +588,6 @@ Item {
 
                                         MouseArea {
                                             id: appMouseArea
-                                            hoverEnabled: true
                                             anchors.fill: parent
                                             enabled: isActive
                                             cursorShape: Qt.PointingHandCursor
@@ -657,7 +656,6 @@ Item {
 
                                         MouseArea {
                                             id: appMouseArea
-                                            hoverEnabled: true
                                             anchors.fill: parent
                                             enabled: isActive
                                             cursorShape: Qt.PointingHandCursor

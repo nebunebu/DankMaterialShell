@@ -256,7 +256,6 @@ BasePill {
                             id: prevArea
                             anchors.fill: parent
                             enabled: root.playerAvailable
-                            hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
                                 if (activePlayer) {
@@ -314,7 +313,6 @@ BasePill {
                             id: nextArea
                             anchors.fill: parent
                             enabled: root.playerAvailable
-                            hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
                                 if (activePlayer) {

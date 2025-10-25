@@ -243,7 +243,6 @@ BasePill {
         y: -root.topMargin
         width: root.width + root.leftMargin + root.rightMargin
         height: root.height + root.topMargin + root.bottomMargin
-        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onPressed: {
             if (root.popoutTarget && root.popoutTarget.setTriggerPosition) {

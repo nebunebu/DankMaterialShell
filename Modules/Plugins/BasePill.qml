@@ -48,7 +48,8 @@ Item {
                 return "transparent"
             }
 
-            const baseColor = mouseArea.containsMouse ? Theme.widgetBaseHoverColor : Theme.widgetBaseBackgroundColor
+            const isHovered = mouseArea.containsMouse || (root.isHovered ?? false)
+            const baseColor = isHovered ? Theme.widgetBaseHoverColor : Theme.widgetBaseBackgroundColor
             return Qt.rgba(baseColor.r, baseColor.g, baseColor.b, baseColor.a * Theme.widgetTransparency)
         }
 

@@ -17,6 +17,7 @@ BasePill {
     readonly property int maxCompactWidth: 288
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
     property var activeDesktopEntry: null
+    property bool isHovered: mouseArea.containsMouse
 
     Component.onCompleted: {
         updateDesktopEntry()

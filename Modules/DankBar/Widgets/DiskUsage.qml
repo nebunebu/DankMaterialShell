@@ -10,6 +10,7 @@ BasePill {
 
     property var widgetData: null
     property string mountPath: (widgetData && widgetData.mountPath !== undefined) ? widgetData.mountPath : "/"
+    property bool isHovered: mouseArea.containsMouse
 
     property var selectedMount: {
         if (!DgopService.diskMounts || DgopService.diskMounts.length === 0) {
@@ -193,6 +194,7 @@ BasePill {
     }
 
     MouseArea {
+        id: mouseArea
         z: 1
         anchors.fill: parent
         hoverEnabled: root.isVerticalOrientation
