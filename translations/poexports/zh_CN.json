@@ -390,7 +390,7 @@
     "Connect": "连接"
   },
   "Connect to VPN": {
-    "Connect to VPN": ""
+    "Connect to VPN": "连接到 VPN"
   },
   "Connect to Wi-Fi": {
     "Connect to Wi-Fi": "连接到Wi-Fi"
@@ -660,16 +660,16 @@
     "Failed to activate configuration": "无法应用配置"
   },
   "Failed to connect VPN": {
-    "Failed to connect VPN": ""
+    "Failed to connect VPN": "连接 VPN 失败"
   },
   "Failed to connect to ": {
     "Failed to connect to ": "无法连接至 "
   },
   "Failed to disconnect VPN": {
-    "Failed to disconnect VPN": ""
+    "Failed to disconnect VPN": "断开 VPN 失败"
   },
   "Failed to disconnect VPNs": {
-    "Failed to disconnect VPNs": ""
+    "Failed to disconnect VPNs": "断开 VPNs 失败"
   },
   "Failed to disconnect WiFi": {
     "Failed to disconnect WiFi": "无法断开 Wi-Fi 连接"
