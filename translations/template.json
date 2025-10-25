@@ -896,6 +896,13 @@
     "comment": ""
   },
   {
+    "term": "Connect to VPN",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Connect to Wi-Fi",
     "translation": "",
     "context": "",
@@ -1505,7 +1512,28 @@
     "comment": ""
   },
   {
+    "term": "Failed to connect VPN",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Failed to connect to ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect VPN",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect VPNs",
     "translation": "",
     "context": "",
     "reference": "",

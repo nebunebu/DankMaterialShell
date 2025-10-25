@@ -158,7 +158,7 @@
   {
     "term": "Anonymous Identity (optional)",
     "context": "Anonymous Identity (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:365",
+    "reference": "Modals/WifiPasswordModal.qml:389",
     "comment": ""
   },
   {
@@ -560,7 +560,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:468, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserModal.qml:952",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserModal.qml:952",
     "comment": ""
   },
   {
@@ -734,7 +734,7 @@
   {
     "term": "Configuration activated",
     "context": "Configuration activated",
-    "reference": "Services/DMSNetworkService.qml:308",
+    "reference": "Services/DMSNetworkService.qml:337",
     "comment": ""
   },
   {
@@ -764,13 +764,19 @@
   {
     "term": "Connect",
     "context": "Connect",
-    "reference": "Modals/WifiPasswordModal.qml:505",
+    "reference": "Modals/WifiPasswordModal.qml:534",
+    "comment": ""
+  },
+  {
+    "term": "Connect to VPN",
+    "context": "Connect to VPN",
+    "reference": "Modals/WifiPasswordModal.qml:182",
     "comment": ""
   },
   {
     "term": "Connect to Wi-Fi",
     "context": "Connect to Wi-Fi",
-    "reference": "Modals/WifiPasswordModal.qml:166",
+    "reference": "Modals/WifiPasswordModal.qml:184",
     "comment": ""
   },
   {
@@ -1022,7 +1028,7 @@
   {
     "term": "Disconnected from WiFi",
     "context": "Disconnected from WiFi",
-    "reference": "Services/DMSNetworkService.qml:383",
+    "reference": "Services/DMSNetworkService.qml:412",
     "comment": ""
   },
   {
@@ -1118,7 +1124,7 @@
   {
     "term": "Domain (optional)",
     "context": "Domain (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:397",
+    "reference": "Modals/WifiPasswordModal.qml:421",
     "comment": ""
   },
   {
@@ -1232,7 +1238,7 @@
   {
     "term": "Enter credentials for ",
     "context": "Enter credentials for ",
-    "reference": "Modals/WifiPasswordModal.qml:178",
+    "reference": "Modals/WifiPasswordModal.qml:200",
     "comment": ""
   },
   {
@@ -1262,7 +1268,7 @@
   {
     "term": "Enter password for ",
     "context": "Enter password for ",
-    "reference": "Modals/WifiPasswordModal.qml:178",
+    "reference": "Modals/WifiPasswordModal.qml:198, Modals/WifiPasswordModal.qml:200",
     "comment": ""
   },
   {
@@ -1286,25 +1292,43 @@
   {
     "term": "Failed to activate configuration",
     "context": "Failed to activate configuration",
-    "reference": "Services/DMSNetworkService.qml:304",
+    "reference": "Services/DMSNetworkService.qml:333",
+    "comment": ""
+  },
+  {
+    "term": "Failed to connect VPN",
+    "context": "Failed to connect VPN",
+    "reference": "Services/DMSNetworkService.qml:743",
     "comment": ""
   },
   {
     "term": "Failed to connect to ",
     "context": "Failed to connect to ",
-    "reference": "Services/DMSNetworkService.qml:277",
+    "reference": "Services/DMSNetworkService.qml:306",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect VPN",
+    "context": "Failed to disconnect VPN",
+    "reference": "Services/DMSNetworkService.qml:767",
+    "comment": ""
+  },
+  {
+    "term": "Failed to disconnect VPNs",
+    "context": "Failed to disconnect VPNs",
+    "reference": "Services/DMSNetworkService.qml:787",
     "comment": ""
   },
   {
     "term": "Failed to disconnect WiFi",
     "context": "Failed to disconnect WiFi",
-    "reference": "Services/DMSNetworkService.qml:381",
+    "reference": "Services/DMSNetworkService.qml:410",
     "comment": ""
   },
   {
     "term": "Failed to enable WiFi",
     "context": "Failed to enable WiFi",
-    "reference": "Services/DMSNetworkService.qml:482",
+    "reference": "Services/DMSNetworkService.qml:511",
     "comment": ""
   },
   {
@@ -1328,7 +1352,7 @@
   {
     "term": "Failed to start connection to ",
     "context": "Failed to start connection to ",
-    "reference": "Services/DMSNetworkService.qml:371",
+    "reference": "Services/DMSNetworkService.qml:400",
     "comment": ""
   },
   {
@@ -1418,7 +1442,7 @@
   {
     "term": "Forgot network ",
     "context": "Forgot network ",
-    "reference": "Services/DMSNetworkService.qml:439",
+    "reference": "Services/DMSNetworkService.qml:468",
     "comment": ""
   },
   {
@@ -1622,7 +1646,7 @@
   {
     "term": "Incorrect password",
     "context": "Incorrect password",
-    "reference": "Modals/WifiPasswordModal.qml:189",
+    "reference": "Modals/WifiPasswordModal.qml:211",
     "comment": ""
   },
   {
@@ -2288,7 +2312,7 @@
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/WifiPasswordModal.qml:274",
+    "reference": "Modals/WifiPasswordModal.qml:296",
     "comment": ""
   },
   {
@@ -2858,7 +2882,7 @@
   {
     "term": "Show password",
     "context": "Show password",
-    "reference": "Modals/WifiPasswordModal.qml:440",
+    "reference": "Modals/WifiPasswordModal.qml:464",
     "comment": ""
   },
   {
@@ -3380,7 +3404,7 @@
   {
     "term": "Username",
     "context": "Username",
-    "reference": "Modals/WifiPasswordModal.qml:237",
+    "reference": "Modals/WifiPasswordModal.qml:259",
     "comment": ""
   },
   {
@@ -3494,13 +3518,13 @@
   {
     "term": "WiFi disabled",
     "context": "WiFi disabled",
-    "reference": "Services/DMSNetworkService.qml:472",
+    "reference": "Services/DMSNetworkService.qml:501",
     "comment": ""
   },
   {
     "term": "WiFi enabled",
     "context": "WiFi enabled",
-    "reference": "Services/DMSNetworkService.qml:472, Services/DMSNetworkService.qml:484",
+    "reference": "Services/DMSNetworkService.qml:501, Services/DMSNetworkService.qml:513",
     "comment": ""
   },
   {
