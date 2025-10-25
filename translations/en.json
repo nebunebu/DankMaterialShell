@@ -914,7 +914,7 @@
   {
     "term": "DEMO MODE - Click anywhere to exit",
     "context": "DEMO MODE - Click anywhere to exit",
-    "reference": "Modules/Lock/LockScreenContent.qml:654",
+    "reference": "Modules/Lock/LockScreenContent.qml:749",
     "comment": ""
   },
   {
@@ -3026,7 +3026,7 @@
   {
     "term": "Switch User",
     "context": "Switch User",
-    "reference": "Modules/Greetd/GreeterContent.qml:549",
+    "reference": "Modules/Greetd/GreeterContent.qml:645",
     "comment": ""
   },
   {
