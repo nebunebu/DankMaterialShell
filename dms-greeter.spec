@@ -311,9 +311,9 @@ fi
 if [ "$1" -eq 1 ]; then
 cat << 'EOF'
 
-===============================================================================
-    🎨 DMS Greeter Installation Complete!
-===============================================================================
+=========================================================================
+        DMS Greeter Installation Complete!
+=========================================================================
 
 Status:
     ✓ Greeter user: Created
@@ -323,7 +323,7 @@ EOF
 echo "    ✓ Greetd config: $CONFIG_STATUS"
 cat << 'EOF'
 
-⚡ Next steps:
+Next steps:
 
 1. Disable any existing display managers (IMPORTANT):
      sudo systemctl disable gdm sddm lightdm
@@ -336,9 +336,9 @@ cat << 'EOF'
      
      Then logout/login to see your wallpaper on the greeter!
 
-🚀 Ready to test? Reboot or run: sudo systemctl start greetd
-📖 Documentation: /usr/share/doc/dms-greeter/README.md
-===============================================================================
+Ready to test? Reboot or run: sudo systemctl start greetd
+Documentation: /usr/share/doc/dms-greeter/README.md
+=========================================================================
 
 EOF
 fi
