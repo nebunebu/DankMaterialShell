@@ -76,7 +76,7 @@ Rectangle {
         DankButtonGroup {
             id: preferenceControls
             anchors.verticalCenter: parent.verticalCenter
-            visible: DMSService.apiVersion >= 5
+            visible: DMSService.apiVersion >= 5 && NetworkService.backend !== "iwd"
 
             model: ["Ethernet", "WiFi"]
             currentIndex: currentPreferenceIndex

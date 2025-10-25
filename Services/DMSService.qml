@@ -271,6 +271,7 @@ Singleton {
 
     function sendRequest(method, params, callback) {
         if (!isConnected) {
+            console.warn("DMSService.sendRequest: Not connected, method:", method)
             if (callback) {
                 callback({
                     "error": "not connected to DMS socket"
@@ -294,6 +295,7 @@ Singleton {
             pendingRequests[id] = callback
         }
 
+        console.log("DMSService.sendRequest: Sending request id=" + id + " method=" + method)
         requestSocket.send(request)
     }
 

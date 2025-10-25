@@ -11,6 +11,7 @@ Singleton {
     id: root
 
     property bool networkAvailable: activeService !== null
+    property string backend: activeService?.backend ?? ""
     property string networkStatus: activeService?.networkStatus ?? "disconnected"
     property string primaryConnection: activeService?.primaryConnection ?? ""
 
@@ -97,16 +98,16 @@ Singleton {
     }
 
     Connections {
-        target: NetworkManagerService
+        target: DMSNetworkService
 
         function onNetworkAvailableChanged() {
-            if (!activeService && NetworkManagerService.networkAvailable) {
-                console.info("NetworkService: Network capability detected, using NetworkManagerService")
-                activeService = NetworkManagerService
+            if (!activeService && DMSNetworkService.networkAvailable) {
+                console.info("NetworkService: Network capability detected, using DMSNetworkService")
+                activeService = DMSNetworkService
                 usingLegacy = false
-                console.info("NetworkService: Switched to NetworkManagerService, networkAvailable:", networkAvailable)
+                console.info("NetworkService: Switched to DMSNetworkService, networkAvailable:", networkAvailable)
                 connectSignals()
-            } else if (!activeService && !NetworkManagerService.networkAvailable && socketPath && socketPath.length > 0) {
+            } else if (!activeService && !DMSNetworkService.networkAvailable && socketPath && socketPath.length > 0) {
                 console.info("NetworkService: Network capability not available in DMS, using LegacyNetworkService")
                 useLegacyService()
             }

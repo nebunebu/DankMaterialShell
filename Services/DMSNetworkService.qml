@@ -11,6 +11,7 @@ Singleton {
     id: root
 
     property bool networkAvailable: false
+    property string backend: ""
 
     property string networkStatus: "disconnected"
     property string primaryConnection: ""
@@ -109,7 +110,7 @@ Singleton {
 
         function onNetworkStateUpdate(data) {
             const networksCount = data.wifiNetworks?.length ?? "null"
-            console.log("NetworkManagerService: Subscription update received, networks:", networksCount)
+            console.log("DMSNetworkService: Subscription update received, networks:", networksCount)
             updateState(data)
         }
     }
@@ -147,8 +148,6 @@ Singleton {
         }
 
         networkAvailable = DMSService.capabilities.includes("network")
-
-        console.log("NetworkManagerService: Network available:", networkAvailable)
 
         if (networkAvailable && !stateInitialized) {
             stateInitialized = true
@@ -191,7 +190,6 @@ Singleton {
             if (response.result) {
                 updateState(response.result)
                 if (!initialStateFetched && response.result.wifiEnabled && (!response.result.wifiNetworks || response.result.wifiNetworks.length === 0)) {
-                    console.log("NetworkManagerService: Initial state has no networks, triggering scan")
                     initialStateFetched = true
                     Qt.callLater(() => scanWifi())
                 }
@@ -203,6 +201,7 @@ Singleton {
         const previousConnecting = isConnecting
         const previousConnectingSSID = connectingSSID
 
+        backend = state.backend || ""
         networkStatus = state.networkStatus || "disconnected"
         primaryConnection = state.primaryConnection || ""
 
@@ -254,7 +253,7 @@ Singleton {
         if (pendingConnectionSSID) {
             if (wifiConnected && currentWifiSSID === pendingConnectionSSID && wifiIP) {
                 const elapsed = Date.now() - pendingConnectionStartTime
-                console.info("NetworkManagerService: Successfully connected to", pendingConnectionSSID, "in", elapsed, "ms")
+                console.info("DMSNetworkService: Successfully connected to", pendingConnectionSSID, "in", elapsed, "ms")
                 ToastService.showInfo(`Connected to ${pendingConnectionSSID}`)
 
                 if (userPreference === "wifi" || userPreference === "auto") {
@@ -264,16 +263,21 @@ Singleton {
                 pendingConnectionSSID = ""
                 connectionStatus = "connected"
             } else if (previousConnecting && !isConnecting && !wifiConnected) {
-                const elapsed = Date.now() - pendingConnectionStartTime
+                const isCancellationError = connectionError === "user-canceled"
+                const isBadCredentials = connectionError === "bad-credentials"
 
-                if (elapsed < 5000) {
-                    console.log("NetworkManagerService: Quick connection failure, likely authentication error")
+                if (isCancellationError) {
+                    connectionStatus = "cancelled"
+                    pendingConnectionSSID = ""
+                } else if (isBadCredentials) {
+                    const failedSSID = pendingConnectionSSID
                     connectionStatus = "invalid_password"
+                    pendingConnectionSSID = ""
+                    Qt.callLater(() => {
+                        connectToWifi(failedSSID)
+                    })
                 } else {
-                    console.log("NetworkManagerService: Connection failed for", pendingConnectionSSID)
-                    if (connectionError === "connection-failed") {
-                        ToastService.showError(I18n.tr("Connection failed. Check password and try again."))
-                    } else if (connectionError) {
+                    if (connectionError) {
                         ToastService.showError(I18n.tr("Failed to connect to ") + pendingConnectionSSID)
                     }
                     connectionStatus = "failed"
@@ -315,14 +319,12 @@ Singleton {
     function scanWifi() {
         if (!networkAvailable || isScanning || !wifiEnabled) return
 
-        console.log("NetworkManagerService: Starting WiFi scan...")
         isScanning = true
         DMSService.sendRequest("network.wifi.scan", null, response => {
             isScanning = false
             if (response.error) {
-                console.warn("NetworkManagerService: WiFi scan failed:", response.error)
+                console.warn("DMSNetworkService: WiFi scan failed:", response.error)
             } else {
-                console.info("NetworkManagerService: Scan completed")
                 Qt.callLater(() => getState())
             }
         })
@@ -362,15 +364,15 @@ Singleton {
 
         DMSService.sendRequest("network.wifi.connect", params, response => {
             if (response.error) {
-                console.log("NetworkManagerService: Connection request failed:", response.error)
+                if (connectionStatus === "cancelled") {
+                    return
+                }
 
                 connectionError = response.error
                 lastConnectionError = response.error
                 pendingConnectionSSID = ""
                 connectionStatus = "failed"
                 ToastService.showError(I18n.tr("Failed to start connection to ") + ssid)
-            } else {
-                console.log("NetworkManagerService: Connection request sent for", ssid)
             }
         })
     }
@@ -390,7 +392,12 @@ Singleton {
     }
 
     function submitCredentials(token, secrets, save) {
-        if (!networkAvailable || DMSService.apiVersion < 7) return
+        console.log("submitCredentials: networkAvailable=" + networkAvailable + " apiVersion=" + DMSService.apiVersion)
+
+        if (!networkAvailable || DMSService.apiVersion < 7) {
+            console.warn("submitCredentials: Aborting - networkAvailable=" + networkAvailable + " apiVersion=" + DMSService.apiVersion)
+            return
+        }
 
         const params = {
             token: token,
@@ -398,13 +405,11 @@ Singleton {
             save: save || false
         }
 
-        console.log("NetworkManagerService: Submitting credentials for token", token)
-
         credentialsRequested = false
 
         DMSService.sendRequest("network.credentials.submit", params, response => {
             if (response.error) {
-                console.warn("NetworkManagerService: Failed to submit credentials:", response.error)
+                console.warn("DMSNetworkService: Failed to submit credentials:", response.error)
             }
         })
     }
@@ -413,19 +418,16 @@ Singleton {
         if (!networkAvailable || DMSService.apiVersion < 7) return
 
         const params = {
-            token: token,
-            cancel: true
+            token: token
         }
-
-        console.log("NetworkManagerService: Cancelling credentials for token", token)
 
         credentialsRequested = false
         pendingConnectionSSID = ""
         connectionStatus = "cancelled"
 
-        DMSService.sendRequest("network.credentials.submit", params, response => {
+        DMSService.sendRequest("network.credentials.cancel", params, response => {
             if (response.error) {
-                console.warn("NetworkManagerService: Failed to cancel credentials:", response.error)
+                console.warn("DMSNetworkService: Failed to cancel credentials:", response.error)
             }
         })
     }
