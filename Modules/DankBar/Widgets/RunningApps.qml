@@ -22,6 +22,7 @@ Item {
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 2 : Theme.spacingS
     property Item windowRoot: (Window.window ? Window.window.contentItem : null)
     property int _workspaceUpdateTrigger: 0
+    property int _desktopEntriesUpdateTrigger: 0
     readonly property var sortedToplevels: {
         _workspaceUpdateTrigger
         const toplevels = CompositorService.sortedToplevels
@@ -33,6 +34,13 @@ Item {
             return filtered || []
         }
         return toplevels
+    }
+
+    Connections {
+        target: DesktopEntries
+        function onApplicationsChanged() {
+            _desktopEntriesUpdateTrigger++
+        }
     }
     readonly property var groupedWindows: {
         if (!SettingsData.runningAppsGroupByApp) {
@@ -247,6 +255,7 @@ Item {
                     property var toplevelObject: toplevelData
                     property int windowCount: isGrouped ? modelData.windows.length : 1
                     property string tooltipText: {
+                        root._desktopEntriesUpdateTrigger
                         let appName = "Unknown"
                         if (appId) {
                             const desktopEntry = DesktopEntries.heuristicLookup(appId)
@@ -285,6 +294,7 @@ Item {
                             width: 18
                             height: 18
                             source: {
+                                root._desktopEntriesUpdateTrigger
                                 const moddedId = Paths.moddedAppId(appId)
                                 if (moddedId.toLowerCase().includes("steam_app")) {
                                     return ""
@@ -319,6 +329,7 @@ Item {
                                 return !iconImg.visible && !isSteamApp
                             }
                             text: {
+                                root._desktopEntriesUpdateTrigger
                                 if (!appId) {
                                     return "?"
                                 }
@@ -473,6 +484,7 @@ Item {
                     property var toplevelObject: toplevelData
                     property int windowCount: isGrouped ? modelData.windows.length : 1
                     property string tooltipText: {
+                        root._desktopEntriesUpdateTrigger
                         let appName = "Unknown"
                         if (appId) {
                             const desktopEntry = DesktopEntries.heuristicLookup(appId)
@@ -510,6 +522,7 @@ Item {
                             width: 18
                             height: 18
                             source: {
+                                root._desktopEntriesUpdateTrigger
                                 const moddedId = Paths.moddedAppId(appId)
                                 if (moddedId.toLowerCase().includes("steam_app")) {
                                     return ""
@@ -543,6 +556,7 @@ Item {
                                 return !iconImg.visible && !isSteamApp
                             }
                             text: {
+                                root._desktopEntriesUpdateTrigger
                                 if (!appId) {
                                     return "?"
                                 }

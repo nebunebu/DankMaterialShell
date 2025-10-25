@@ -76,6 +76,10 @@ Singleton {
         target: Hyprland
         function onFocusedWorkspaceChanged() { root.scheduleSort() }
     }
+    Connections {
+        target: NiriService
+        function onWindowsChanged() { root.scheduleSort() }
+    }
 
     Component.onCompleted: {
         detectCompositor()

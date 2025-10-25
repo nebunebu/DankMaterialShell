@@ -177,49 +177,47 @@ Singleton {
     }
 
     function sortWindowsByLayout(windowList) {
-        return [...windowList].sort((a, b) => {
-                                        const aWorkspace = workspaces[a.workspace_id]
-                                        const bWorkspace = workspaces[b.workspace_id]
+        const enriched = windowList.map(w => {
+            const ws = workspaces[w.workspace_id]
+            if (!ws) {
+                return {
+                    window: w,
+                    outputX: 999999,
+                    outputY: 999999,
+                    wsIdx: 999999,
+                    col: 999999,
+                    row: 999999
+                }
+            }
 
-                                        if (aWorkspace && bWorkspace) {
-                                            const aOutput = aWorkspace.output
-                                            const bOutput = bWorkspace.output
+            const outputInfo = outputs[ws.output]
+            const outputX = (outputInfo && outputInfo.logical) ? outputInfo.logical.x : 999999
+            const outputY = (outputInfo && outputInfo.logical) ? outputInfo.logical.y : 999999
 
-                                            const aOutputInfo = outputs[aOutput]
-                                            const bOutputInfo = outputs[bOutput]
+            const pos = w.layout?.pos_in_scrolling_layout
+            const col = (pos && pos.length >= 2) ? pos[0] : 999999
+            const row = (pos && pos.length >= 2) ? pos[1] : 999999
 
-                                            if (aOutputInfo && bOutputInfo && aOutputInfo.logical && bOutputInfo.logical) {
-                                                if (aOutputInfo.logical.x !== bOutputInfo.logical.x) {
-                                                    return aOutputInfo.logical.x - bOutputInfo.logical.x
-                                                }
-                                                if (aOutputInfo.logical.y !== bOutputInfo.logical.y) {
-                                                    return aOutputInfo.logical.y - bOutputInfo.logical.y
-                                                }
-                                            }
+            return {
+                window: w,
+                outputX: outputX,
+                outputY: outputY,
+                wsIdx: ws.idx,
+                col: col,
+                row: row
+            }
+        })
 
-                                            if (aOutput === bOutput && aWorkspace.idx !== bWorkspace.idx) {
-                                                return aWorkspace.idx - bWorkspace.idx
-                                            }
-                                        }
+        enriched.sort((a, b) => {
+            if (a.outputX !== b.outputX) return a.outputX - b.outputX
+            if (a.outputY !== b.outputY) return a.outputY - b.outputY
+            if (a.wsIdx !== b.wsIdx) return a.wsIdx - b.wsIdx
+            if (a.col !== b.col) return a.col - b.col
+            if (a.row !== b.row) return a.row - b.row
+            return a.window.id - b.window.id
+        })
 
-                                        if (a.workspace_id === b.workspace_id && a.layout && b.layout) {
-                                            if (a.layout.pos_in_scrolling_layout && b.layout.pos_in_scrolling_layout) {
-                                                const aPos = a.layout.pos_in_scrolling_layout
-                                                const bPos = b.layout.pos_in_scrolling_layout
-
-                                                if (aPos.length > 1 && bPos.length > 1) {
-                                                    if (aPos[0] !== bPos[0]) {
-                                                        return aPos[0] - bPos[0]
-                                                    }
-                                                    if (aPos[1] !== bPos[1]) {
-                                                        return aPos[1] - bPos[1]
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        return a.id - b.id
-                                    })
+        return enriched.map(e => e.window)
     }
 
     function handleNiriEvent(event) {
@@ -234,6 +232,9 @@ Singleton {
             break
         case 'WorkspaceActiveWindowChanged':
             handleWorkspaceActiveWindowChanged(event.WorkspaceActiveWindowChanged)
+            break
+        case 'WindowFocusChanged':
+            handleWindowFocusChanged(event.WindowFocusChanged)
             break
         case 'WindowsChanged':
             handleWindowsChanged(event.WindowsChanged)
@@ -269,14 +270,18 @@ Singleton {
     }
 
     function handleWorkspacesChanged(data) {
-        const workspaces = {}
+        const newWorkspaces = {}
 
         for (const ws of data.workspaces) {
-            workspaces[ws.id] = ws
+            const oldWs = root.workspaces[ws.id]
+            newWorkspaces[ws.id] = ws
+            if (oldWs && oldWs.active_window_id !== undefined) {
+                newWorkspaces[ws.id].active_window_id = oldWs.active_window_id
+            }
         }
 
-        root.workspaces = workspaces
-        allWorkspaces = [...data.workspaces].sort((a, b) => a.idx - b.idx)
+        root.workspaces = newWorkspaces
+        allWorkspaces = Object.values(newWorkspaces).sort((a, b) => a.idx - b.idx)
 
         focusedWorkspaceIndex = allWorkspaces.findIndex(w => w.is_focused)
         if (focusedWorkspaceIndex >= 0) {
@@ -298,33 +303,101 @@ Singleton {
         }
         const output = ws.output
 
+        const updatedWorkspaces = {}
+
         for (const id in root.workspaces) {
             const workspace = root.workspaces[id]
             const got_activated = workspace.id === data.id
 
+            const updatedWs = {}
+            for (let prop in workspace) {
+                updatedWs[prop] = workspace[prop]
+            }
+
             if (workspace.output === output) {
-                workspace.is_active = got_activated
+                updatedWs.is_active = got_activated
             }
 
             if (data.focused) {
-                workspace.is_focused = got_activated
+                updatedWs.is_focused = got_activated
             }
+
+            updatedWorkspaces[id] = updatedWs
         }
+
+        root.workspaces = updatedWorkspaces
 
         focusedWorkspaceId = data.id
-        focusedWorkspaceIndex = allWorkspaces.findIndex(w => w.id === data.id)
+        focusedWorkspaceIndex = Object.values(updatedWorkspaces).findIndex(w => w.id === data.id)
 
         if (focusedWorkspaceIndex >= 0) {
-            currentOutput = allWorkspaces[focusedWorkspaceIndex].output || ""
+            const ws = Object.values(updatedWorkspaces)[focusedWorkspaceIndex]
+            currentOutput = ws.output || ""
         }
 
-        allWorkspaces = Object.values(root.workspaces).sort((a, b) => a.idx - b.idx)
+        allWorkspaces = Object.values(updatedWorkspaces).sort((a, b) => a.idx - b.idx)
 
         updateCurrentOutputWorkspaces()
-        workspacesChanged()
+    }
+
+    function handleWindowFocusChanged(data) {
+        const focusedWindowId = data.id
+
+        let focusedWindow = null
+        const updatedWindows = []
+
+        for (var i = 0; i < windows.length; i++) {
+            const w = windows[i]
+            const updatedWindow = {}
+
+            for (let prop in w) {
+                updatedWindow[prop] = w[prop]
+            }
+
+            updatedWindow.is_focused = (w.id === focusedWindowId)
+            if (updatedWindow.is_focused) {
+                focusedWindow = updatedWindow
+            }
+
+            updatedWindows.push(updatedWindow)
+        }
+
+        windows = updatedWindows
+
+        if (focusedWindow) {
+            const ws = root.workspaces[focusedWindow.workspace_id]
+            if (ws && ws.active_window_id !== focusedWindowId) {
+                const updatedWs = {}
+                for (let prop in ws) {
+                    updatedWs[prop] = ws[prop]
+                }
+                updatedWs.active_window_id = focusedWindowId
+
+                const updatedWorkspaces = {}
+                for (const id in root.workspaces) {
+                    updatedWorkspaces[id] = id === focusedWindow.workspace_id ? updatedWs : root.workspaces[id]
+                }
+                root.workspaces = updatedWorkspaces
+            }
+        }
     }
 
     function handleWorkspaceActiveWindowChanged(data) {
+        const ws = root.workspaces[data.workspace_id]
+        if (ws) {
+            const updatedWs = {}
+            for (let prop in ws) {
+                updatedWs[prop] = ws[prop]
+            }
+            updatedWs.active_window_id = data.active_window_id
+
+            const updatedWorkspaces = {}
+            for (const id in root.workspaces) {
+                updatedWorkspaces[id] = id === data.workspace_id ? updatedWs : root.workspaces[id]
+            }
+            root.workspaces = updatedWorkspaces
+        }
+
         const updatedWindows = []
 
         for (var i = 0; i < windows.length; i++) {
@@ -366,10 +439,9 @@ Singleton {
             const updatedWindows = [...windows]
             updatedWindows[existingIndex] = window
             windows = sortWindowsByLayout(updatedWindows)
-            return
+        } else {
+            windows = sortWindowsByLayout([...windows, window])
         }
-
-        windows = sortWindowsByLayout([...windows, window])
     }
 
     function handleWindowLayoutsChanged(data) {
@@ -400,7 +472,6 @@ Singleton {
             return
 
         windows = sortWindowsByLayout(updatedWindows)
-        windowsChanged()
     }
 
     function handleOutputsChanged(data) {
@@ -452,12 +523,19 @@ Singleton {
         if (!ws)
             return
 
-        ws.is_urgent = data.urgent
-
-        const idx = allWorkspaces.findIndex(w => w.id === data.id)
-        if (idx >= 0) {
-            allWorkspaces[idx].is_urgent = data.urgent
+        const updatedWs = {}
+        for (let prop in ws) {
+            updatedWs[prop] = ws[prop]
         }
+        updatedWs.is_urgent = data.urgent
+
+        const updatedWorkspaces = {}
+        for (const id in root.workspaces) {
+            updatedWorkspaces[id] = id === data.id ? updatedWs : root.workspaces[id]
+        }
+        root.workspaces = updatedWorkspaces
+
+        allWorkspaces = Object.values(updatedWorkspaces).sort((a, b) => a.idx - b.idx)
 
         windowUrgentChanged()
     }
@@ -637,10 +715,13 @@ Singleton {
 
             usedToplevels.add(bestMatch)
 
+            const workspace = workspaces[niriWindow.workspace_id]
+            const isFocused = niriWindow.is_focused ?? (workspace && workspace.active_window_id === niriWindow.id) ?? false
+
             const enrichedToplevel = {
                 "appId": bestMatch.appId,
                 "title": bestMatch.title,
-                "activated": niriWindow.is_focused ?? false,
+                "activated": isFocused,
                 "niriWindowId": niriWindow.id,
                 "niriWorkspaceId": niriWindow.workspace_id,
                 "activate": function () {
@@ -723,10 +804,13 @@ Singleton {
 
             usedToplevels.add(bestMatch)
 
+            const workspace = workspaces[niriWindow.workspace_id]
+            const isFocused = niriWindow.is_focused ?? (workspace && workspace.active_window_id === niriWindow.id) ?? false
+
             const enrichedToplevel = {
                 "appId": bestMatch.appId,
                 "title": bestMatch.title,
-                "activated": niriWindow.is_focused ?? false,
+                "activated": isFocused,
                 "niriWindowId": niriWindow.id,
                 "niriWorkspaceId": niriWindow.workspace_id,
                 "activate": function () {
