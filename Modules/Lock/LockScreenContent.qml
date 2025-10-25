@@ -207,37 +207,132 @@ Item {
         Item {
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -100
-            width: 400
+            width: parent.width
             height: 140
 
-            StyledText {
+            Row {
                 id: clockText
-
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                text: {
-                    return systemClock.date.toLocaleTimeString(Qt.locale(), SettingsData.getEffectiveTimeFormat())
-                }
-                font.pixelSize: 120
-                font.weight: Font.Light
-                color: "white"
-                lineHeight: 0.8
-            }
+                spacing: 0
 
-            StyledText {
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: clockText.bottom
-                anchors.topMargin: -20
-                text: {
-                    if (SettingsData.lockDateFormat && SettingsData.lockDateFormat.length > 0) {
-                        return systemClock.date.toLocaleDateString(Qt.locale(), SettingsData.lockDateFormat)
-                    }
-                    return systemClock.date.toLocaleDateString(Qt.locale(), Locale.LongFormat)
+                property string fullTimeStr: {
+                    const format = SettingsData.getEffectiveTimeFormat()
+                    return systemClock.date.toLocaleTimeString(Qt.locale(), format)
                 }
-                font.pixelSize: Theme.fontSizeXLarge
-                color: "white"
-                opacity: 0.9
+                property var timeParts: fullTimeStr.split(':')
+                property string hours: timeParts[0] || ""
+                property string minutes: timeParts[1] || ""
+                property string secondsWithAmPm: timeParts.length > 2 ? timeParts[2] : ""
+                property string seconds: secondsWithAmPm.replace(/\s*(AM|PM|am|pm)$/i, '')
+                property string ampm: {
+                    const match = fullTimeStr.match(/\s*(AM|PM|am|pm)$/i)
+                    return match ? match[0].trim() : ""
+                }
+                property bool hasSeconds: timeParts.length > 2
+
+                StyledText {
+                    width: 75
+                    text: clockText.hours.length > 0 ? clockText.hours[0] : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                StyledText {
+                    width: 75
+                    text: clockText.hours.length > 1 ? clockText.hours[1] : (clockText.hours.length > 0 ? clockText.hours[0] : "")
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                StyledText {
+                    text: ":"
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                }
+
+                StyledText {
+                    width: 75
+                    text: clockText.minutes.length > 0 ? clockText.minutes[0] : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                StyledText {
+                    width: 75
+                    text: clockText.minutes.length > 1 ? clockText.minutes[1] : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                StyledText {
+                    text: clockText.hasSeconds ? ":" : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    visible: clockText.hasSeconds
+                }
+
+                StyledText {
+                    width: 75
+                    text: clockText.hasSeconds && clockText.seconds.length > 0 ? clockText.seconds[0] : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    visible: clockText.hasSeconds
+                }
+
+                StyledText {
+                    width: 75
+                    text: clockText.hasSeconds && clockText.seconds.length > 1 ? clockText.seconds[1] : ""
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    visible: clockText.hasSeconds
+                }
+
+                StyledText {
+                    width: 20
+                    text: " "
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    visible: clockText.ampm !== ""
+                }
+
+                StyledText {
+                    text: clockText.ampm
+                    font.pixelSize: 120
+                    font.weight: Font.Light
+                    color: "white"
+                    visible: clockText.ampm !== ""
+                }
             }
+        }
+
+        StyledText {
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset: -25
+            text: {
+                if (SettingsData.lockDateFormat && SettingsData.lockDateFormat.length > 0) {
+                    return systemClock.date.toLocaleDateString(Qt.locale(), SettingsData.lockDateFormat)
+                }
+                return systemClock.date.toLocaleDateString(Qt.locale(), Locale.LongFormat)
+            }
+            font.pixelSize: Theme.fontSizeXLarge
+            color: "white"
+            opacity: 0.9
         }
 
         ColumnLayout {
