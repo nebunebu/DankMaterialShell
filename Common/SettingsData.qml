@@ -271,7 +271,6 @@ Singleton {
     Component.onCompleted: {
         if (!isGreeterMode) {
             loadSettings()
-            fontCheckTimer.start()
             initializeListModels()
             fprintdDetectionProcess.running = true
         }
@@ -1882,27 +1881,6 @@ Singleton {
 
     ListModel {
         id: rightWidgetsModel
-    }
-
-    Timer {
-        id: fontCheckTimer
-
-        interval: 3000
-        repeat: false
-        onTriggered: {
-            var availableFonts = Qt.fontFamilies()
-            var missingFonts = []
-            if (fontFamily === defaultFontFamily && !availableFonts.includes(defaultFontFamily))
-            missingFonts.push(defaultFontFamily)
-
-            if (monoFontFamily === defaultMonoFontFamily && !availableFonts.includes(defaultMonoFontFamily))
-            missingFonts.push(defaultMonoFontFamily)
-
-            if (missingFonts.length > 0) {
-                var message = "Missing fonts: " + missingFonts.join(", ") + ". Using system defaults."
-                ToastService.showWarning(message)
-            }
-        }
     }
 
     property Process testNotificationProcess
