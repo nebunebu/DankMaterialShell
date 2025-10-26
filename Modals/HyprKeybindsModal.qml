@@ -144,7 +144,7 @@ DankModal {
                                         width: Math.min(140, parent.width * 0.42)
                                         height: 22
                                         radius: 4
-                                        opacity: 0.3
+                                        opacity: 0.9
 
                                         StyledText {
                                             anchors.centerIn: parent
@@ -161,6 +161,7 @@ DankModal {
                                             isMonospace: true
                                             elide: Text.ElideRight
                                             horizontalAlignment: Text.AlignHCenter
+                                            color: Theme.secondary
                                         }
                                     }
 
@@ -195,6 +196,7 @@ DankModal {
                                 text: modelData
                                 font.pixelSize: Theme.fontSizeMedium
                                 font.weight: Font.Bold
+                                // color: Theme.primary
                                 color: Theme.primary
                             }
 
@@ -222,7 +224,7 @@ DankModal {
                                             width: Math.min(140, parent.width * 0.42)
                                             height: 22
                                             radius: 4
-                                            opacity: 0.3
+                                            opacity: 0.9
 
                                             StyledText {
                                                 anchors.centerIn: parent
@@ -239,6 +241,7 @@ DankModal {
                                                 isMonospace: true
                                                 elide: Text.ElideRight
                                                 horizontalAlignment: Text.AlignHCenter
+                                                color: Theme.secondary
                                             }
                                         }
 
