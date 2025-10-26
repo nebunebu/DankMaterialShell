@@ -390,7 +390,7 @@
     "Connect": "接続"
   },
   "Connect to VPN": {
-    "Connect to VPN": ""
+    "Connect to VPN": "VPNに接続"
   },
   "Connect to Wi-Fi": {
     "Connect to Wi-Fi": "Wi-Fiに接続"
@@ -660,16 +660,16 @@
     "Failed to activate configuration": "設定が適用できませんでした"
   },
   "Failed to connect VPN": {
-    "Failed to connect VPN": ""
+    "Failed to connect VPN": "VPNへの接続が失敗しました"
   },
   "Failed to connect to ": {
     "Failed to connect to ": "接続ができませんでした "
   },
   "Failed to disconnect VPN": {
-    "Failed to disconnect VPN": ""
+    "Failed to disconnect VPN": "VPNへの切断が失敗しました"
   },
   "Failed to disconnect VPNs": {
-    "Failed to disconnect VPNs": ""
+    "Failed to disconnect VPNs": "VPNへの切断が失敗しました"
   },
   "Failed to disconnect WiFi": {
     "Failed to disconnect WiFi": "WiFiの切断ができませんでした"
