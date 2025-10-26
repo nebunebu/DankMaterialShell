@@ -112,6 +112,7 @@ Singleton {
     property bool clockCompactMode: false
     property bool focusedWindowCompactMode: false
     property bool runningAppsCompactMode: true
+    property bool keyboardLayoutNameCompactMode: false
     property bool runningAppsCurrentWorkspace: false
     property bool runningAppsGroupByApp: false
     property string clockDateFormat: ""
@@ -382,6 +383,7 @@ Singleton {
                 clockCompactMode = settings.clockCompactMode !== undefined ? settings.clockCompactMode : false
                 focusedWindowCompactMode = settings.focusedWindowCompactMode !== undefined ? settings.focusedWindowCompactMode : false
                 runningAppsCompactMode = settings.runningAppsCompactMode !== undefined ? settings.runningAppsCompactMode : true
+                keyboardLayoutNameCompactMode = settings.keyboardLayoutNameCompactMode !== undefined ? settings.keyboardLayoutNameCompactMode : true
                 runningAppsCurrentWorkspace = settings.runningAppsCurrentWorkspace !== undefined ? settings.runningAppsCurrentWorkspace : false
                 runningAppsGroupByApp = settings.runningAppsGroupByApp !== undefined ? settings.runningAppsGroupByApp : false
                 clockDateFormat = settings.clockDateFormat !== undefined ? settings.clockDateFormat : ""
@@ -593,6 +595,7 @@ Singleton {
                                                 "clockCompactMode": clockCompactMode,
                                                 "focusedWindowCompactMode": focusedWindowCompactMode,
                                                 "runningAppsCompactMode": runningAppsCompactMode,
+                                                "keyboardLayoutNameCompactMode": keyboardLayoutNameCompactMode,
                                                 "runningAppsCurrentWorkspace": runningAppsCurrentWorkspace,
                                                 "runningAppsGroupByApp": runningAppsGroupByApp,
                                                 "clockDateFormat": clockDateFormat,
@@ -726,7 +729,7 @@ Singleton {
             "controlCenterShowNetworkIcon", "controlCenterShowBluetoothIcon", "controlCenterShowAudioIcon",
             "controlCenterWidgets", "showWorkspaceIndex", "workspaceScrolling", "showWorkspacePadding", "showWorkspaceApps",
             "maxWorkspaceIcons", "workspacesPerMonitor", "workspaceNameIcons", "waveProgressEnabled",
-            "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode",
+            "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode", "keyboardLayoutNameCompactMode",
             "runningAppsCurrentWorkspace", "runningAppsGroupByApp", "clockDateFormat", "lockDateFormat", "mediaSize",
             "dankBarLeftWidgets", "dankBarCenterWidgets", "dankBarRightWidgets",
             "appLauncherViewMode", "spotlightModalViewMode", "sortAppsAlphabetically",
@@ -1275,6 +1278,11 @@ Singleton {
 
     function setRunningAppsCompactMode(enabled) {
         runningAppsCompactMode = enabled
+        saveSettings()
+    }
+
+    function setKeyboardLayoutNameCompactMode(enabled) {
+        keyboardLayoutNameCompactMode = enabled
         saveSettings()
     }
 
