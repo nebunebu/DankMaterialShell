@@ -56,7 +56,7 @@
   {
     "term": "A file with this name already exists. Do you want to overwrite it?",
     "context": "A file with this name already exists. Do you want to overwrite it?",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:930",
+    "reference": "Modals/FileBrowser/FileBrowserOverwriteDialog.qml:61",
     "comment": ""
   },
   {
@@ -560,7 +560,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserModal.qml:952",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
@@ -1256,7 +1256,7 @@
   {
     "term": "Enter filename...",
     "context": "Enter filename...",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:785",
+    "reference": "Modals/FileBrowser/FileBrowserSaveRow.qml:24",
     "comment": ""
   },
   {
@@ -1364,7 +1364,7 @@
   {
     "term": "File Already Exists",
     "context": "File Already Exists",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:922",
+    "reference": "Modals/FileBrowser/FileBrowserOverwriteDialog.qml:53",
     "comment": ""
   },
   {
@@ -2276,7 +2276,7 @@
   {
     "term": "Overwrite",
     "context": "Overwrite",
-    "reference": "Modals/FileBrowser/FileBrowserModal.qml:978",
+    "reference": "Modals/FileBrowser/FileBrowserOverwriteDialog.qml:108",
     "comment": ""
   },
   {
@@ -2642,7 +2642,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modules/Notepad/Notepad.qml:480, Modules/Notepad/NotepadTextEditor.qml:511, Modals/FileBrowser/FileBrowserModal.qml:818",
+    "reference": "Modules/Notepad/Notepad.qml:480, Modules/Notepad/NotepadTextEditor.qml:511, Modals/FileBrowser/FileBrowserSaveRow.qml:55",
     "comment": ""
   },
   {
