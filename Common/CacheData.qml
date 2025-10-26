@@ -22,6 +22,57 @@ Singleton {
     property string wallpaperLastPath: ""
     property string profileLastPath: ""
 
+    property var fileBrowserSettings: ({
+        "wallpaper": {
+            "lastPath": "",
+            "viewMode": "grid",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        },
+        "profile": {
+            "lastPath": "",
+            "viewMode": "grid",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        },
+        "notepad_save": {
+            "lastPath": "",
+            "viewMode": "list",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        },
+        "notepad_load": {
+            "lastPath": "",
+            "viewMode": "list",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        },
+        "generic": {
+            "lastPath": "",
+            "viewMode": "list",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        },
+        "default": {
+            "lastPath": "",
+            "viewMode": "list",
+            "sortBy": "name",
+            "sortAscending": true,
+            "iconSizeIndex": 1,
+            "showSidebar": true
+        }
+    })
+
     Component.onCompleted: {
         if (!isGreeterMode) {
             loadCache()
@@ -43,6 +94,37 @@ Singleton {
                 wallpaperLastPath = cache.wallpaperLastPath !== undefined ? cache.wallpaperLastPath : ""
                 profileLastPath = cache.profileLastPath !== undefined ? cache.profileLastPath : ""
 
+                if (cache.fileBrowserSettings !== undefined) {
+                    fileBrowserSettings = cache.fileBrowserSettings
+                } else if (cache.fileBrowserViewMode !== undefined) {
+                    fileBrowserSettings = {
+                        "wallpaper": {
+                            "lastPath": cache.wallpaperLastPath || "",
+                            "viewMode": cache.fileBrowserViewMode || "grid",
+                            "sortBy": cache.fileBrowserSortBy || "name",
+                            "sortAscending": cache.fileBrowserSortAscending !== undefined ? cache.fileBrowserSortAscending : true,
+                            "iconSizeIndex": cache.fileBrowserIconSizeIndex !== undefined ? cache.fileBrowserIconSizeIndex : 1,
+                            "showSidebar": cache.fileBrowserShowSidebar !== undefined ? cache.fileBrowserShowSidebar : true
+                        },
+                        "profile": {
+                            "lastPath": cache.profileLastPath || "",
+                            "viewMode": cache.fileBrowserViewMode || "grid",
+                            "sortBy": cache.fileBrowserSortBy || "name",
+                            "sortAscending": cache.fileBrowserSortAscending !== undefined ? cache.fileBrowserSortAscending : true,
+                            "iconSizeIndex": cache.fileBrowserIconSizeIndex !== undefined ? cache.fileBrowserIconSizeIndex : 1,
+                            "showSidebar": cache.fileBrowserShowSidebar !== undefined ? cache.fileBrowserShowSidebar : true
+                        },
+                        "file": {
+                            "lastPath": "",
+                            "viewMode": "list",
+                            "sortBy": "name",
+                            "sortAscending": true,
+                            "iconSizeIndex": 1,
+                            "showSidebar": true
+                        }
+                    }
+                }
+
                 if (cache.configVersion === undefined) {
                     migrateFromUndefinedToV1(cache)
                     cleanupUnusedKeys()
@@ -62,6 +144,7 @@ Singleton {
         cacheFile.setText(JSON.stringify({
                                              "wallpaperLastPath": wallpaperLastPath,
                                              "profileLastPath": profileLastPath,
+                                             "fileBrowserSettings": fileBrowserSettings,
                                              "configVersion": cacheConfigVersion
                                          }, null, 2))
     }
@@ -74,6 +157,7 @@ Singleton {
         const validKeys = [
             "wallpaperLastPath",
             "profileLastPath",
+            "fileBrowserSettings",
             "configVersion"
         ]
 
