@@ -98,7 +98,7 @@
   {
     "term": "Add Widget",
     "context": "Add Widget",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:696, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:708, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
     "comment": ""
   },
   {
@@ -266,7 +266,7 @@
   {
     "term": "Audio Icon",
     "context": "Audio Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:887",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:899",
     "comment": ""
   },
   {
@@ -440,7 +440,7 @@
   {
     "term": "Bluetooth Icon",
     "context": "Bluetooth Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:834",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:846",
     "comment": ""
   },
   {
@@ -500,7 +500,7 @@
   {
     "term": "Bottom Section",
     "context": "Bottom Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1895",
+    "reference": "Modules/Settings/DankBarTab.qml:1901",
     "comment": ""
   },
   {
@@ -572,7 +572,7 @@
   {
     "term": "Center Section",
     "context": "Center Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1819",
+    "reference": "Modules/Settings/DankBarTab.qml:1822",
     "comment": ""
   },
   {
@@ -728,7 +728,7 @@
   {
     "term": "Compact Mode",
     "context": "Compact Mode",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:509",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:521",
     "comment": ""
   },
   {
@@ -2018,7 +2018,7 @@
   {
     "term": "Network Icon",
     "context": "Network Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:781",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:793",
     "comment": ""
   },
   {
@@ -2612,7 +2612,7 @@
   {
     "term": "Right Section",
     "context": "Right Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1895",
+    "reference": "Modules/Settings/DankBarTab.qml:1901",
     "comment": ""
   },
   {
