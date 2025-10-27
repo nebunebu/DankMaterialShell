@@ -12,7 +12,7 @@ Singleton {
     id: root
 
     property bool dsearchAvailable: false
-    property int requestIdCounter: 0
+    property int searchIdCounter: 0
 
     signal searchResultsReceived(var results)
     signal statsReceived(var stats)
@@ -121,6 +121,12 @@ Singleton {
                         callback({ "error": error })
                     }
                 }
+            } else if (exitCode === 124) {
+                const error = "search timed out"
+                errorOccurred(error)
+                if (callback) {
+                    callback({ "error": error })
+                }
             } else {
                 const error = "search failed"
                 errorOccurred(error)
@@ -128,160 +134,7 @@ Singleton {
                     callback({ "error": error })
                 }
             }
-        }, 100)
-    }
-
-    function getStats(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-stats", ["dsearch", "stats", "--json"], (stdout, exitCode) => {
-            if (exitCode === 0) {
-                try {
-                    const response = JSON.parse(stdout)
-                    statsReceived(response)
-                    if (callback) {
-                        callback({ "result": response })
-                    }
-                } catch (e) {
-                    const error = "failed to parse stats response"
-                    errorOccurred(error)
-                    if (callback) {
-                        callback({ "error": error })
-                    }
-                }
-            } else {
-                const error = "stats failed"
-                errorOccurred(error)
-                if (callback) {
-                    callback({ "error": error })
-                }
-            }
-        })
-    }
-
-    function sync(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-sync", ["dsearch", "sync", "--json"], (stdout, exitCode) => {
-            if (callback) {
-                if (exitCode === 0) {
-                    try {
-                        const response = JSON.parse(stdout)
-                        callback({ "result": response })
-                    } catch (e) {
-                        callback({ "error": "failed to parse sync response" })
-                    }
-                } else {
-                    callback({ "error": "sync failed" })
-                }
-            }
-        })
-    }
-
-    function reindex(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-reindex", ["dsearch", "reindex", "--json"], (stdout, exitCode) => {
-            if (callback) {
-                if (exitCode === 0) {
-                    try {
-                        const response = JSON.parse(stdout)
-                        callback({ "result": response })
-                    } catch (e) {
-                        callback({ "error": "failed to parse reindex response" })
-                    }
-                } else {
-                    callback({ "error": "reindex failed" })
-                }
-            }
-        })
-    }
-
-    function watchStart(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-watch-start", ["dsearch", "watch", "start", "--json"], (stdout, exitCode) => {
-            if (callback) {
-                if (exitCode === 0) {
-                    try {
-                        const response = JSON.parse(stdout)
-                        callback({ "result": response })
-                    } catch (e) {
-                        callback({ "error": "failed to parse watch start response" })
-                    }
-                } else {
-                    callback({ "error": "watch start failed" })
-                }
-            }
-        })
-    }
-
-    function watchStop(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-watch-stop", ["dsearch", "watch", "stop", "--json"], (stdout, exitCode) => {
-            if (callback) {
-                if (exitCode === 0) {
-                    try {
-                        const response = JSON.parse(stdout)
-                        callback({ "result": response })
-                    } catch (e) {
-                        callback({ "error": "failed to parse watch stop response" })
-                    }
-                } else {
-                    callback({ "error": "watch stop failed" })
-                }
-            }
-        })
-    }
-
-    function watchStatus(callback) {
-        if (!dsearchAvailable) {
-            if (callback) {
-                callback({ "error": "dsearch not available" })
-            }
-            return
-        }
-
-        Proc.runCommand("dsearch-watch-status", ["dsearch", "watch", "status", "--json"], (stdout, exitCode) => {
-            if (callback) {
-                if (exitCode === 0) {
-                    try {
-                        const response = JSON.parse(stdout)
-                        callback({ "result": response })
-                    } catch (e) {
-                        callback({ "error": "failed to parse watch status response" })
-                    }
-                } else {
-                    callback({ "error": "watch status failed" })
-                }
-            }
-        })
+        }, 100, 5000)
     }
 
     function rediscover() {
