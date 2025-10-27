@@ -88,11 +88,11 @@ Item {
         "mov":                  "\u{F0228}",
 
         // --- archives / packages ---
-        "zip":                  "\u{F03d}",
-        "tar":                  "\u{F03d}",
-        "gz":                   "\u{F03d}",
-        "bz2":                  "\u{F03d}",
-        "7z":                   "\u{F03d}",
+        "zip":                  "\u{e6aa}",
+        "tar":                  "\u{f003c}",
+        "gz":                   "\u{f003c}",
+        "bz2":                  "\u{f003c}",
+        "7z":                   "\u{f003c}",
 
         // --- containers / infra / cloud ---
         "dockerfile":           "\u{F0868}",
