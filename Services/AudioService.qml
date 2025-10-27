@@ -69,7 +69,7 @@ Singleton {
         const xdgDataDirs = Quickshell.env("XDG_DATA_DIRS")
         const searchPaths = xdgDataDirs && xdgDataDirs.trim() !== ""
             ? xdgDataDirs.split(":")
-            : ["/usr/share", "/usr/local/share", StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share"]
+            : ["/usr/share", "/usr/local/share", Paths.strip(StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share")]
 
         const basePaths = searchPaths.map(p => p + "/sounds").join(" ")
         const script = `
