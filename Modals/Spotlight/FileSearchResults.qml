@@ -21,7 +21,12 @@ Rectangle {
 
         property int itemHeight: 60
         property int itemSpacing: Theme.spacingS
+        property bool hoverUpdatesSelection: false
         property bool keyboardNavigationActive: fileSearchController ? fileSearchController.keyboardNavigationActive : false
+
+        signal keyboardNavigationReset
+        signal itemClicked(int index)
+        signal itemRightClicked(int index)
 
         function ensureVisible(index) {
             if (index < 0 || index >= count)
@@ -49,6 +54,25 @@ Rectangle {
         onCurrentIndexChanged: {
             if (keyboardNavigationActive)
                 ensureVisible(currentIndex)
+        }
+
+        onItemClicked: function (index) {
+            if (fileSearchController) {
+                const item = fileSearchController.model.get(index)
+                fileSearchController.openFile(item.filePath)
+            }
+        }
+
+        onItemRightClicked: function (index) {
+            if (fileSearchController) {
+                const item = fileSearchController.model.get(index)
+                fileSearchController.openFolder(item.filePath)
+            }
+        }
+
+        onKeyboardNavigationReset: {
+            if (fileSearchController)
+                fileSearchController.keyboardNavigationActive = false
         }
 
         delegate: Rectangle {
@@ -161,19 +185,18 @@ Rectangle {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 z: 10
-                onEntered: () => {
-                               if (fileSearchController && filesList.keyboardNavigationActive) {
-                                   fileSearchController.keyboardNavigationActive = false
-                               }
-                               filesList.currentIndex = index
-                           }
+                onEntered: {
+                    if (filesList.hoverUpdatesSelection && !filesList.keyboardNavigationActive)
+                        filesList.currentIndex = index
+                }
+                onPositionChanged: {
+                    filesList.keyboardNavigationReset()
+                }
                 onClicked: mouse => {
                                if (mouse.button === Qt.LeftButton) {
-                                   if (fileSearchController)
-                                   fileSearchController.openFile(filePath)
+                                   filesList.itemClicked(index)
                                } else if (mouse.button === Qt.RightButton) {
-                                   if (fileSearchController)
-                                   fileSearchController.openFolder(filePath)
+                                   filesList.itemRightClicked(index)
                                }
                            }
             }
