@@ -10,14 +10,113 @@ Item {
 
     implicitWidth: icon.implicitWidth
     implicitHeight: icon.implicitHeight
+    visible: text.length > 0
 
+    // This is for file browser, particularly - might want another map later for app IDs
     readonly property var iconMap: ({
-                                        "docker": "\uf21f"
-                                    })
+        // --- special filenames (no extension) ---
+        "docker":               "\u{F0868}",
+        "makefile":             "\u{F09EE}",
+        "license":              "\u{F09EE}",
+        "readme":               "\u{F0354}",
+
+        // --- programming languages ---
+        "rs":                   "\u{F1617}",
+        "go":                   "\u{F07D3}",
+        "py":                   "\u{F0320}",
+        "js":                   "\u{F031E}",
+        "jsx":                  "\u{F031E}",
+        "ts":                   "\u{F06E6}",
+        "tsx":                  "\u{F06E6}",
+        "java":                 "\u{F0B37}",
+        "c":                    "\u{F0671}",
+        "cpp":                  "\u{F0672}",
+        "cxx":                  "\u{F0672}",
+        "h":                    "\u{F0672}",
+        "hpp":                  "\u{F0672}",
+        "cs":                   "\u{F031B}",
+        "html":                 "\u{F031D}",
+        "htm":                  "\u{F031D}",
+        "css":                  "\u{E6b8}",
+        "scss":                 "\u{F031C}",
+        "less":                 "\u{F031C}",
+        "md":                   "\u{F0354}",
+        "markdown":             "\u{F0354}",
+        "json":                 "\u{F0626}",
+        "jsonc":                "\u{F0626}",
+        "yaml":                 "\u{F09EE}",
+        "yml":                  "\u{F09EE}",
+        "xml":                  "\u{F09EE}",
+
+        // --- scripts / shells ---
+        "sh":                   "\u{F08A9}",
+        "bash":                 "\u{F08A9}",
+        "zsh":                  "\u{F08A9}",
+        "fish":                 "\u{F08A9}",
+        "ps1":                  "\u{F08A9}",
+        "bat":                  "\u{F08A9}",
+
+        // --- data / config ---
+        "toml":                 "\u{F09EE}",
+        "ini":                  "\u{F09EE}",
+        "conf":                 "\u{F09EE}",
+        "cfg":                  "\u{F09EE}",
+        "csv":                  "\u{F021C}",
+        "tsv":                  "\u{F021C}",
+
+        // --- docs / office ---
+        "pdf":                  "\u{F0226}",
+        "doc":                  "\u{F09EE}",
+        "docx":                 "\u{F09EE}",
+        "rtf":                  "\u{F09EE}",
+        "ppt":                  "\u{F09EE}",
+        "pptx":                 "\u{F09EE}",
+        "xls":                  "\u{F021C}",
+        "xlsx":                 "\u{F021C}",
+
+        // --- images ---
+        "ico":                  "\u{F021F}",
+
+        // --- audio / video ---
+        "mp3":                  "\u{F0225}",
+        "wav":                  "\u{F0225}",
+        "flac":                 "\u{F0225}",
+        "ogg":                  "\u{F0225}",
+        "mp4":                  "\u{F0228}",
+        "mkv":                  "\u{F0228}",
+        "webm":                 "\u{F0228}",
+        "mov":                  "\u{F0228}",
+
+        // --- archives / packages ---
+        "zip":                  "\u{F03d}",
+        "tar":                  "\u{F03d}",
+        "gz":                   "\u{F03d}",
+        "bz2":                  "\u{F03d}",
+        "7z":                   "\u{F03d}",
+
+        // --- containers / infra / cloud ---
+        "dockerfile":           "\u{F0868}",
+        "yml.k8s":              "\u{F09EE}",
+        "yaml.k8s":             "\u{F09EE}",
+        "tf":                   "\u{F09EE}",
+        "tfvars":               "\u{F09EE}"
+    })
+
+
+    readonly property string text: iconMap[name] || ""
+
+    function getIconForFile(fileName) {
+        const lowerName = fileName.toLowerCase()
+        if (lowerName.startsWith("dockerfile")) {
+            return "docker"
+        }
+        const ext = fileName.split('.').pop()
+        return ext || ""
+    }
 
     FontLoader {
         id: firaCodeFont
-        source: Qt.resolvedUrl("../assets/fonts/nerd-fonts/FiraCodeNerdFont-Regular.ttf")
+        source: Qt.resolvedUrl("../assets/fonts/nerd-fonts/SymbolsNerdFont-Regular.ttf")
     }
 
     StyledText {
@@ -28,7 +127,7 @@ Item {
         font.family: firaCodeFont.name
         font.pixelSize: Theme.fontSizeMedium
         color: Theme.surfaceText
-        text: root.iconMap[root.name] || ""
+        text: root.text
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         renderType: Text.NativeRendering

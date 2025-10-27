@@ -105,14 +105,23 @@ Rectangle {
                         color: Theme.surfaceLight
                         visible: fileType !== "image"
 
-                        Loader {
+                        DankNFIcon {
+                            id: nerdIcon
                             anchors.centerIn: parent
-                            active: fileName.toLowerCase().startsWith("dockerfile")
-                            sourceComponent: DankNFIcon {
-                                name: "docker"
-                                size: Theme.fontSizeLarge
-                                color: Theme.surfaceText
+                            name: {
+                                const lowerName = fileName.toLowerCase()
+                                if (lowerName.startsWith("dockerfile"))
+                                    return "docker"
+                                if (lowerName.startsWith("makefile"))
+                                    return "makefile"
+                                if (lowerName.startsWith("license"))
+                                    return "license"
+                                if (lowerName.startsWith("readme"))
+                                    return "readme"
+                                return fileExtension.toLowerCase()
                             }
+                            size: Theme.fontSizeXLarge
+                            color: Theme.surfaceText
                         }
 
                         StyledText {
@@ -121,7 +130,7 @@ Rectangle {
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Bold
-                            visible: !fileName.toLowerCase().startsWith("dockerfile")
+                            visible: !nerdIcon.visible
                         }
                     }
 
