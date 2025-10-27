@@ -968,7 +968,7 @@
   {
     "term": "DankSearch not available",
     "context": "DankSearch not available",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:216",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:225",
     "comment": ""
   },
   {
@@ -1244,7 +1244,7 @@
   {
     "term": "Enter a search query",
     "context": "Enter a search query",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:222",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:231",
     "comment": ""
   },
   {
@@ -2132,7 +2132,7 @@
   {
     "term": "No files found",
     "context": "No files found",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:225",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:234",
     "comment": ""
   },
   {
@@ -2738,7 +2738,7 @@
   {
     "term": "Searching...",
     "context": "Searching...",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:219",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:228",
     "comment": ""
   },
   {
