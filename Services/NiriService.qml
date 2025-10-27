@@ -892,4 +892,17 @@ window-rule {
         writeBindsProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cp --no-preserve=mode "${sourceBindsPath}" "${bindsPath}"`]
         writeBindsProcess.running = true
     }
+
+    function generateNiriBlurrule() {
+        console.log("NiriService: Generating wpblur config...")
+
+        const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
+        const niriDmsDir = configDir + "/niri/dms"
+        const blurrulePath = niriDmsDir + "/wpblur.kdl"
+        const sourceBlurrulePath = Paths.strip(Qt.resolvedUrl("niri-wpblur.kdl"))
+
+        writeBindsProcess.bindsPath = blurrulePath
+        writeBindsProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cp --no-preserve=mode "${sourceBlurrulePath}" "${blurrulePath}"`]
+        writeBindsProcess.running = true
+    }
 }

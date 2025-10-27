@@ -347,6 +347,7 @@ Singleton {
                     compositor = "niri"
                     console.info("CompositorService: Detected Niri with socket:", niriSocket)
                     NiriService.generateNiriBinds()
+                    NiriService.generateNiriBlurrule()
                 } else {
                     isHyprland = false
                     isNiri = true
