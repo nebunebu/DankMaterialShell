@@ -20,7 +20,7 @@ Item {
     }
 
     function performSearch() {
-        if (!DSearchService.isConnected) {
+        if (!DSearchService.dsearchAvailable) {
             model.clear()
             totalResults = 0
             isSearching = false
@@ -38,8 +38,8 @@ Item {
         const params = {
             "limit": 50,
             "fuzzy": true,
-            "sort_by": "score",
-            "sort_desc": true
+            "sort": "score",
+            "desc": true
         }
 
         if (searchField && searchField !== "all") {

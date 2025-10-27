@@ -221,7 +221,7 @@ Rectangle {
                 if (!fileSearchController) {
                     return ""
                 }
-                if (!DSearchService.isConnected) {
+                if (!DSearchService.dsearchAvailable) {
                     return I18n.tr("DankSearch not available")
                 }
                 if (fileSearchController.isSearching) {

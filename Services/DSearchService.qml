@@ -12,77 +12,21 @@ Singleton {
     id: root
 
     property bool dsearchAvailable: false
-    property bool isConnected: false
-    property bool isConnecting: false
-    property int apiVersion: 0
-    readonly property int expectedApiVersion: 1
-    property bool handshakeReceived: false
-
-    property var pendingRequests: ({})
     property int requestIdCounter: 0
 
-    signal connectionStateChanged
     signal searchResultsReceived(var results)
     signal statsReceived(var stats)
     signal errorOccurred(string error)
-    signal apiVersionReceived(int version)
-
-    Component.onCompleted: {
-        discoverAndConnect()
-    }
-
-    function discoverAndConnect() {
-        if (requestSocket.connected) {
-            requestSocket.connected = false
-            Qt.callLater(() => {
-                             performDiscovery()
-                         })
-            return
-        }
-
-        performDiscovery()
-    }
-
-    function performDiscovery() {
-        dsearchAvailable = false
-        isConnecting = false
-        isConnected = false
-
-        requestSocket.connected = false
-        requestSocket.path = ""
-
-        const xdgRuntimeDir = Quickshell.env("XDG_RUNTIME_DIR")
-        if (xdgRuntimeDir && xdgRuntimeDir.length > 0) {
-            findSocketProcess.searchPath = xdgRuntimeDir
-            findSocketProcess.running = true
-        } else {
-            findSocketProcess.searchPath = "/tmp"
-            findSocketProcess.running = true
-        }
-    }
 
     Process {
-        id: findSocketProcess
-        property string searchPath: ""
+        id: checkProcess
+        command: ["sh", "-c", "command -v dsearch"]
+        running: true
 
-        command: ["find", searchPath, "-maxdepth", "1", "-type", "s", "-name", "danksearch-*.sock"]
-        running: false
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const lines = text.trim().split('\n').filter(line => line.length > 0)
-
-                if (lines.length > 0) {
-                    const socketPath = lines[0]
-                    testSocketProcess.socketPath = socketPath
-                    testSocketProcess.running = true
-                } else {
-                    if (findSocketProcess.searchPath !== "/tmp") {
-                        findSocketProcess.searchPath = "/tmp"
-                        findSocketProcess.running = true
-                    } else {
-                        root.dsearchAvailable = false
-                    }
+        stdout: SplitParser {
+            onRead: line => {
+                if (line && line.trim().length > 0) {
+                    root.dsearchAvailable = true
                 }
             }
         }
@@ -94,218 +38,253 @@ Singleton {
         }
     }
 
-    Process {
-        id: testSocketProcess
-        property string socketPath: ""
-
-        command: ["test", "-S", socketPath]
-        running: false
-
-        onExited: exitCode => {
-            if (exitCode === 0) {
-                root.dsearchAvailable = true
-                requestSocket.path = socketPath
-                connectSocket()
-            } else {
-                root.dsearchAvailable = false
-            }
-        }
-    }
-
-    function connectSocket() {
-        if (!dsearchAvailable || isConnected || isConnecting) {
-            return
-        }
-
-        if (!requestSocket.path || requestSocket.path.length === 0) {
-            return
-        }
-
-        isConnecting = true
-        handshakeReceived = false
-        requestSocket.connected = true
-    }
-
-    DankSocket {
-        id: requestSocket
-        path: ""
-        connected: false
-
-        onConnectionStateChanged: {
-            if (!connected) {
-                root.isConnected = false
-                root.isConnecting = false
-                root.apiVersion = 0
-                root.handshakeReceived = false
-                root.dsearchAvailable = false
-                root.pendingRequests = {}
-
-                requestSocket.connected = false
-                requestSocket.path = ""
-
-                root.connectionStateChanged()
-            }
-        }
-
-        parser: SplitParser {
-            onRead: line => {
-                if (!line || line.length === 0) {
-                    return
-                }
-
-                try {
-                    const message = JSON.parse(line)
-
-                    if (!root.handshakeReceived && message.apiVersion !== undefined) {
-                        handleHandshake(message)
-                    } else {
-                        handleResponse(message)
-                    }
-                } catch (e) {
-                    console.warn("DSearchService: Failed to parse message:", e)
-                }
-            }
-        }
-    }
-
-    function handleHandshake(message) {
-        handshakeReceived = true
-        apiVersion = message.apiVersion || 0
-
-        isConnected = true
-        isConnecting = false
-        connectionStateChanged()
-        apiVersionReceived(apiVersion)
-    }
-
-    function sendRequest(method, params, callback) {
-        if (!isConnected) {
-            if (callback) {
-                callback({
-                             "error": "not connected to dsearch socket"
-                         })
-            }
-            return
-        }
-
-        requestIdCounter++
-        const id = Date.now() + requestIdCounter
-
-        const request = {
-            "id": id,
-            "method": method
-        }
-
-        if (params && Object.keys(params).length > 0) {
-            request.params = params
-        }
-
-        if (callback) {
-            pendingRequests[id] = callback
-        }
-
-        requestSocket.send(request)
-    }
-
-    function handleResponse(response) {
-        const callback = pendingRequests[response.id]
-
-        if (callback) {
-            delete pendingRequests[response.id]
-
-            if (response.error) {
-                errorOccurred(response.error)
-            }
-
-            callback(response)
-        }
-    }
-
     function ping(callback) {
-        sendRequest("ping", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-ping", ["dsearch", "ping", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse ping response" })
+                    }
+                } else {
+                    callback({ "error": "ping failed" })
+                }
+            }
+        })
     }
 
     function search(query, params, callback) {
         if (!query || query.length === 0) {
             if (callback) {
-                callback({
-                             "error": "query is required"
-                         })
+                callback({ "error": "query is required" })
             }
             return
         }
 
-        if (!isConnected) {
-            discoverAndConnect()
+        if (!dsearchAvailable) {
             if (callback) {
-                callback({
-                             "error": "not connected - attempting reconnection"
-                         })
+                callback({ "error": "dsearch not available" })
             }
             return
         }
 
-        const searchParams = {
-            "query": query
-        }
+        const args = ["dsearch", "search", query, "--json"]
 
         if (params) {
-            for (const key in params) {
-                searchParams[key] = params[key]
+            if (params.limit !== undefined) {
+                args.push("-n", String(params.limit))
+            }
+            if (params.ext) {
+                args.push("-e", params.ext)
+            }
+            if (params.field) {
+                args.push("-f", params.field)
+            }
+            if (params.fuzzy) {
+                args.push("--fuzzy")
+            }
+            if (params.sort) {
+                args.push("--sort", params.sort)
+            }
+            if (params.desc !== undefined) {
+                args.push("--desc=" + (params.desc ? "true" : "false"))
+            }
+            if (params.minSize !== undefined) {
+                args.push("--min-size", String(params.minSize))
+            }
+            if (params.maxSize !== undefined) {
+                args.push("--max-size", String(params.maxSize))
             }
         }
 
-        sendRequest("search", searchParams, response => {
-                        if (response.result) {
-                            searchResultsReceived(response.result)
-                        }
-                        if (callback) {
-                            callback(response)
-                        }
-                    })
+        Proc.runCommand("dsearch-search", args, (stdout, exitCode) => {
+            if (exitCode === 0) {
+                try {
+                    const response = JSON.parse(stdout)
+                    searchResultsReceived(response)
+                    if (callback) {
+                        callback({ "result": response })
+                    }
+                } catch (e) {
+                    const error = "failed to parse search response"
+                    errorOccurred(error)
+                    if (callback) {
+                        callback({ "error": error })
+                    }
+                }
+            } else {
+                const error = "search failed"
+                errorOccurred(error)
+                if (callback) {
+                    callback({ "error": error })
+                }
+            }
+        }, 100)
     }
 
     function getStats(callback) {
-        sendRequest("stats", null, response => {
-                        if (response.result) {
-                            statsReceived(response.result)
-                        }
-                        if (callback) {
-                            callback(response)
-                        }
-                    })
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-stats", ["dsearch", "stats", "--json"], (stdout, exitCode) => {
+            if (exitCode === 0) {
+                try {
+                    const response = JSON.parse(stdout)
+                    statsReceived(response)
+                    if (callback) {
+                        callback({ "result": response })
+                    }
+                } catch (e) {
+                    const error = "failed to parse stats response"
+                    errorOccurred(error)
+                    if (callback) {
+                        callback({ "error": error })
+                    }
+                }
+            } else {
+                const error = "stats failed"
+                errorOccurred(error)
+                if (callback) {
+                    callback({ "error": error })
+                }
+            }
+        })
     }
 
     function sync(callback) {
-        sendRequest("sync", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-sync", ["dsearch", "sync", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse sync response" })
+                    }
+                } else {
+                    callback({ "error": "sync failed" })
+                }
+            }
+        })
     }
 
     function reindex(callback) {
-        sendRequest("reindex", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-reindex", ["dsearch", "reindex", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse reindex response" })
+                    }
+                } else {
+                    callback({ "error": "reindex failed" })
+                }
+            }
+        })
     }
 
     function watchStart(callback) {
-        sendRequest("watch.start", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-watch-start", ["dsearch", "watch", "start", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse watch start response" })
+                    }
+                } else {
+                    callback({ "error": "watch start failed" })
+                }
+            }
+        })
     }
 
     function watchStop(callback) {
-        sendRequest("watch.stop", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-watch-stop", ["dsearch", "watch", "stop", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse watch stop response" })
+                    }
+                } else {
+                    callback({ "error": "watch stop failed" })
+                }
+            }
+        })
     }
 
     function watchStatus(callback) {
-        sendRequest("watch.status", null, callback)
+        if (!dsearchAvailable) {
+            if (callback) {
+                callback({ "error": "dsearch not available" })
+            }
+            return
+        }
+
+        Proc.runCommand("dsearch-watch-status", ["dsearch", "watch", "status", "--json"], (stdout, exitCode) => {
+            if (callback) {
+                if (exitCode === 0) {
+                    try {
+                        const response = JSON.parse(stdout)
+                        callback({ "result": response })
+                    } catch (e) {
+                        callback({ "error": "failed to parse watch status response" })
+                    }
+                } else {
+                    callback({ "error": "watch status failed" })
+                }
+            }
+        })
     }
 
     function rediscover() {
-        if (isConnected) {
-            requestSocket.connected = false
-        }
-        discoverAndConnect()
-    }
-
-    function disconnect() {
-        if (isConnected || isConnecting) {
-            requestSocket.connected = false
-        }
+        checkProcess.running = true
     }
 }
