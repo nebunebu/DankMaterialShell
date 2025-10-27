@@ -11,7 +11,7 @@ Singleton {
     id: root
 
     readonly property string shellDir: Paths.strip(Qt.resolvedUrl(".").toString()).replace("/Services/", "")
-    property string scriptPath: `${shellDir}/scripts/hyprland_keybinds.py`
+    property string scriptPath: `${shellDir}/scripts/hyprland_keybinds.sh`
     readonly property string _configUrl: StandardPaths.writableLocation(StandardPaths.ConfigLocation)
     readonly property string _configDir: Paths.strip(_configUrl)
     property string hyprConfigPath: `${_configDir}/hypr`
