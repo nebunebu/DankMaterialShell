@@ -114,6 +114,7 @@ jobs:
             "zh-Hans:translations/poexports/zh_CN.json"
             "pt-br:translations/poexports/pt.json"
             "tr:translations/poexports/tr.json"
+            "it:translations/poexports/it.json"
           )
 
           ANY_CHANGED=false
