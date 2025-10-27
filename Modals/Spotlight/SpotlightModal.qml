@@ -20,10 +20,10 @@ DankModal {
         open()
 
         Qt.callLater(() => {
-            if (spotlightContent && spotlightContent.searchField) {
-                spotlightContent.searchField.forceActiveFocus()
-            }
-        })
+                         if (spotlightContent && spotlightContent.searchField) {
+                             spotlightContent.searchField.forceActiveFocus()
+                         }
+                     })
     }
 
     function showWithQuery(query) {
@@ -40,10 +40,10 @@ DankModal {
         open()
 
         Qt.callLater(() => {
-            if (spotlightContent && spotlightContent.searchField) {
-                spotlightContent.searchField.forceActiveFocus()
-            }
-        })
+                         if (spotlightContent && spotlightContent.searchField) {
+                             spotlightContent.searchField.forceActiveFocus()
+                         }
+                     })
     }
 
     function hide() {
@@ -57,6 +57,9 @@ DankModal {
                 spotlightContent.appLauncher.searchQuery = ""
                 spotlightContent.appLauncher.selectedIndex = 0
                 spotlightContent.appLauncher.setCategory(I18n.tr("All"))
+            }
+            if (spotlightContent.fileSearchController) {
+                spotlightContent.fileSearchController.reset()
             }
             if (spotlightContent.resetScroll) {
                 spotlightContent.resetScroll()
@@ -111,17 +114,17 @@ DankModal {
     }
 
     IpcHandler {
-        function open(): string  {
+        function open(): string {
             spotlightModal.show()
             return "SPOTLIGHT_OPEN_SUCCESS"
         }
 
-        function close(): string  {
+        function close(): string {
             spotlightModal.hide()
             return "SPOTLIGHT_CLOSE_SUCCESS"
         }
 
-        function toggle(): string  {
+        function toggle(): string {
             spotlightModal.toggle()
             return "SPOTLIGHT_TOGGLE_SUCCESS"
         }

@@ -1,0 +1,214 @@
+import QtQuick
+import QtQuick.Effects
+import qs.Common
+import qs.Services
+import qs.Widgets
+
+Rectangle {
+    id: resultsContainer
+
+    property var fileSearchController: null
+
+    function resetScroll() {
+        filesList.contentY = 0
+    }
+
+    color: "transparent"
+    clip: true
+
+    DankListView {
+        id: filesList
+
+        property int itemHeight: 60
+        property int itemSpacing: Theme.spacingS
+        property bool keyboardNavigationActive: fileSearchController ? fileSearchController.keyboardNavigationActive : false
+
+        function ensureVisible(index) {
+            if (index < 0 || index >= count)
+                return
+
+            const itemY = index * (itemHeight + itemSpacing)
+            const itemBottom = itemY + itemHeight
+            if (itemY < contentY)
+                contentY = itemY
+            else if (itemBottom > contentY + height)
+                contentY = itemBottom - height
+        }
+
+        anchors.fill: parent
+        anchors.margins: Theme.spacingS
+        model: fileSearchController ? fileSearchController.model : null
+        currentIndex: fileSearchController ? fileSearchController.selectedIndex : -1
+        clip: true
+        spacing: itemSpacing
+        focus: true
+        interactive: true
+        cacheBuffer: Math.max(0, Math.min(height * 2, 1000))
+        reuseItems: true
+
+        onCurrentIndexChanged: {
+            if (keyboardNavigationActive)
+                ensureVisible(currentIndex)
+        }
+
+        delegate: Rectangle {
+            required property int index
+            required property string filePath
+            required property string fileName
+            required property string fileExtension
+            required property string fileType
+            required property string dirPath
+
+            width: ListView.view.width
+            height: filesList.itemHeight
+            radius: Theme.cornerRadius
+            color: ListView.isCurrentItem ? Theme.primaryPressed : fileMouseArea.containsMouse ? Theme.primaryHoverLight : Theme.surfaceContainerHigh
+
+            Row {
+                anchors.fill: parent
+                anchors.margins: Theme.spacingM
+                spacing: Theme.spacingL
+
+                Item {
+                    width: 40
+                    height: 40
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Rectangle {
+                        id: iconBackground
+                        anchors.fill: parent
+                        radius: width / 2
+                        color: Theme.surfaceLight
+                        visible: fileType !== "image"
+
+                        Loader {
+                            anchors.centerIn: parent
+                            active: fileName.toLowerCase().startsWith("dockerfile")
+                            sourceComponent: DankNFIcon {
+                                name: "docker"
+                                size: Theme.fontSizeLarge
+                                color: Theme.surfaceText
+                            }
+                        }
+
+                        StyledText {
+                            anchors.centerIn: parent
+                            text: fileExtension ? (fileExtension.length > 4 ? fileExtension.substring(0, 4) : fileExtension) : "?"
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceText
+                            font.weight: Font.Bold
+                            visible: !fileName.toLowerCase().startsWith("dockerfile")
+                        }
+                    }
+
+                    Loader {
+                        anchors.fill: parent
+                        active: fileType === "image"
+                        sourceComponent: Image {
+                            anchors.fill: parent
+                            source: "file://" + filePath
+                            fillMode: Image.PreserveAspectCrop
+                            asynchronous: true
+                            cache: false
+                            layer.enabled: true
+                            layer.effect: MultiEffect {
+                                maskEnabled: true
+                                maskThresholdMin: 0.5
+                                maskSpreadAtMin: 1.0
+                                maskSource: ShaderEffectSource {
+                                    sourceItem: Rectangle {
+                                        width: 40
+                                        height: 40
+                                        radius: 20
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width - 40 - Theme.spacingL
+                    spacing: Theme.spacingXS
+
+                    StyledText {
+                        width: parent.width
+                        text: fileName || ""
+                        font.pixelSize: Theme.fontSizeLarge
+                        color: Theme.surfaceText
+                        font.weight: Font.Medium
+                        elide: Text.ElideMiddle
+                        maximumLineCount: 1
+                    }
+
+                    StyledText {
+                        width: parent.width
+                        text: dirPath || ""
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.surfaceVariantText
+                        elide: Text.ElideMiddle
+                        maximumLineCount: 1
+                    }
+                }
+            }
+
+            MouseArea {
+                id: fileMouseArea
+
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                z: 10
+                onEntered: () => {
+                               if (fileSearchController && filesList.keyboardNavigationActive) {
+                                   fileSearchController.keyboardNavigationActive = false
+                               }
+                               filesList.currentIndex = index
+                           }
+                onClicked: mouse => {
+                               if (mouse.button === Qt.LeftButton) {
+                                   if (fileSearchController)
+                                   fileSearchController.openFile(filePath)
+                               } else if (mouse.button === Qt.RightButton) {
+                                   if (fileSearchController)
+                                   fileSearchController.openFolder(filePath)
+                               }
+                           }
+            }
+        }
+    }
+
+    Item {
+        anchors.fill: parent
+        visible: !fileSearchController || !fileSearchController.model || fileSearchController.model.count === 0
+
+        StyledText {
+            property string displayText: {
+                if (!fileSearchController) {
+                    return ""
+                }
+                if (!DSearchService.isConnected) {
+                    return I18n.tr("DankSearch not available")
+                }
+                if (fileSearchController.isSearching) {
+                    return I18n.tr("Searching...")
+                }
+                if (fileSearchController.searchQuery.length === 0) {
+                    return I18n.tr("Enter a search query")
+                }
+                if (!fileSearchController.model || fileSearchController.model.count === 0) {
+                    return I18n.tr("No files found")
+                }
+                return ""
+            }
+
+            text: displayText
+            anchors.centerIn: parent
+            font.pixelSize: Theme.fontSizeMedium
+            color: Theme.surfaceVariantText
+            visible: displayText.length > 0
+        }
+    }
+}
