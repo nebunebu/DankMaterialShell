@@ -78,14 +78,14 @@ Item {
         "ico":                  "\u{F021F}",
 
         // --- audio / video ---
-        "mp3":                  "\u{F0225}",
-        "wav":                  "\u{F0225}",
-        "flac":                 "\u{F0225}",
-        "ogg":                  "\u{F0225}",
-        "mp4":                  "\u{F0228}",
-        "mkv":                  "\u{F0228}",
-        "webm":                 "\u{F0228}",
-        "mov":                  "\u{F0228}",
+        "mp3":                  "\u{e638}",
+        "wav":                  "\u{e638}",
+        "flac":                 "\u{e638}",
+        "ogg":                  "\u{e638}",
+        "mp4":                  "\u{f0567}",
+        "mkv":                  "\u{f0567}",
+        "webm":                 "\u{f0567}",
+        "mov":                  "\u{f0567}",
 
         // --- archives / packages ---
         "zip":                  "\u{e6aa}",
