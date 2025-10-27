@@ -44,7 +44,7 @@
   {
     "term": "3rd party",
     "context": "3rd party",
-    "reference": "Modules/Settings/PluginsTab.qml:1074",
+    "reference": "Modules/Settings/PluginBrowser.qml:405",
     "comment": ""
   },
   {
@@ -392,7 +392,7 @@
   {
     "term": "Available Plugins",
     "context": "Available Plugins",
-    "reference": "Modules/Settings/PluginsTab.qml:211",
+    "reference": "Modules/Settings/PluginsTab.qml:212",
     "comment": ""
   },
   {
@@ -518,13 +518,13 @@
   {
     "term": "Browse",
     "context": "Browse",
-    "reference": "Modules/Settings/PluginsTab.qml:125",
+    "reference": "Modules/Settings/PluginsTab.qml:126",
     "comment": ""
   },
   {
     "term": "Browse Plugins",
     "context": "Browse Plugins",
-    "reference": "Modules/Settings/PluginsTab.qml:867",
+    "reference": "Modules/Settings/PluginBrowser.qml:176",
     "comment": ""
   },
   {
@@ -560,7 +560,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginsTab.qml:1296, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
@@ -842,7 +842,7 @@
   {
     "term": "Create Dir",
     "context": "Create Dir",
-    "reference": "Modules/Settings/PluginsTab.qml:147",
+    "reference": "Modules/Settings/PluginsTab.qml:148",
     "comment": ""
   },
   {
@@ -920,7 +920,7 @@
   {
     "term": "DMS Plugin Manager Unavailable",
     "context": "DMS Plugin Manager Unavailable",
-    "reference": "Modules/Settings/PluginsTab.qml:102",
+    "reference": "Modules/Settings/PluginsTab.qml:103",
     "comment": ""
   },
   {
@@ -968,7 +968,7 @@
   {
     "term": "DankSearch not available",
     "context": "DankSearch not available",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:193",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:216",
     "comment": ""
   },
   {
@@ -1244,7 +1244,7 @@
   {
     "term": "Enter a search query",
     "context": "Enter a search query",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:199",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:222",
     "comment": ""
   },
   {
@@ -1610,7 +1610,7 @@
   {
     "term": "I Understand",
     "context": "I Understand",
-    "reference": "Modules/Settings/PluginsTab.qml:1302",
+    "reference": "Modules/Settings/PluginBrowser.qml:633",
     "comment": ""
   },
   {
@@ -1682,7 +1682,7 @@
   {
     "term": "Install plugins from the DMS plugin registry",
     "context": "Install plugins from the DMS plugin registry",
-    "reference": "Modules/Settings/PluginsTab.qml:916",
+    "reference": "Modules/Settings/PluginBrowser.qml:230",
     "comment": ""
   },
   {
@@ -1814,7 +1814,7 @@
   {
     "term": "Loading plugins...",
     "context": "Loading plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:974",
+    "reference": "Modules/Settings/PluginBrowser.qml:298",
     "comment": ""
   },
   {
@@ -1868,7 +1868,7 @@
   {
     "term": "Manage and configure plugins for extending DMS functionality",
     "context": "Manage and configure plugins for extending DMS functionality",
-    "reference": "Modules/Settings/PluginsTab.qml:69",
+    "reference": "Modules/Settings/PluginsTab.qml:70",
     "comment": ""
   },
   {
@@ -2132,7 +2132,7 @@
   {
     "term": "No files found",
     "context": "No files found",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:202",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:225",
     "comment": ""
   },
   {
@@ -2150,13 +2150,13 @@
   {
     "term": "No plugins found",
     "context": "No plugins found",
-    "reference": "Modules/Settings/PluginsTab.qml:1198",
+    "reference": "Modules/Settings/PluginBrowser.qml:530",
     "comment": ""
   },
   {
     "term": "No plugins found.",
     "context": "No plugins found.",
-    "reference": "Modules/Settings/PluginsTab.qml:621",
+    "reference": "Modules/Settings/PluginsTab.qml:245",
     "comment": ""
   },
   {
@@ -2378,13 +2378,13 @@
   {
     "term": "Place plugin directories here. Each plugin should have a plugin.json manifest file.",
     "context": "Place plugin directories here. Each plugin should have a plugin.json manifest file.",
-    "reference": "Modules/Settings/PluginsTab.qml:187",
+    "reference": "Modules/Settings/PluginsTab.qml:188",
     "comment": ""
   },
   {
     "term": "Place plugins in",
     "context": "Place plugins in",
-    "reference": "Modules/Settings/PluginsTab.qml:621",
+    "reference": "Modules/Settings/PluginsTab.qml:245",
     "comment": ""
   },
   {
@@ -2420,13 +2420,13 @@
   {
     "term": "Plugin Directory",
     "context": "Plugin Directory",
-    "reference": "Modules/Settings/PluginsTab.qml:173",
+    "reference": "Modules/Settings/PluginsTab.qml:174",
     "comment": ""
   },
   {
     "term": "Plugin Management",
     "context": "Plugin Management",
-    "reference": "Modules/Settings/PluginsTab.qml:62",
+    "reference": "Modules/Settings/PluginsTab.qml:63",
     "comment": ""
   },
   {
@@ -2594,7 +2594,7 @@
   {
     "term": "Reload Plugin",
     "context": "Reload Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:462",
+    "reference": "Modules/Settings/PluginListItem.qml:243",
     "comment": ""
   },
   {
@@ -2690,7 +2690,7 @@
   {
     "term": "Scan",
     "context": "Scan",
-    "reference": "Modules/Settings/PluginsTab.qml:134",
+    "reference": "Modules/Settings/PluginsTab.qml:135",
     "comment": ""
   },
   {
@@ -2726,7 +2726,7 @@
   {
     "term": "Search plugins...",
     "context": "Search plugins...",
-    "reference": "Modules/Settings/PluginsTab.qml:938",
+    "reference": "Modules/Settings/PluginBrowser.qml:254",
     "comment": ""
   },
   {
@@ -2738,7 +2738,7 @@
   {
     "term": "Searching...",
     "context": "Searching...",
-    "reference": "Modals/Spotlight/FileSearchResults.qml:196",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:219",
     "comment": ""
   },
   {
@@ -3188,7 +3188,7 @@
   {
     "term": "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.",
     "context": "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.",
-    "reference": "Modules/Settings/PluginsTab.qml:111",
+    "reference": "Modules/Settings/PluginsTab.qml:112",
     "comment": ""
   },
   {
@@ -3212,13 +3212,13 @@
   {
     "term": "Third-Party Plugin Warning",
     "context": "Third-Party Plugin Warning",
-    "reference": "Modules/Settings/PluginsTab.qml:1247",
+    "reference": "Modules/Settings/PluginBrowser.qml:578",
     "comment": ""
   },
   {
     "term": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
     "context": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
-    "reference": "Modules/Settings/PluginsTab.qml:1257",
+    "reference": "Modules/Settings/PluginBrowser.qml:588",
     "comment": ""
   },
   {
@@ -3308,7 +3308,7 @@
   {
     "term": "Uninstall Plugin",
     "context": "Uninstall Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:416",
+    "reference": "Modules/Settings/PluginListItem.qml:197",
     "comment": ""
   },
   {
@@ -3350,7 +3350,7 @@
   {
     "term": "Update Plugin",
     "context": "Update Plugin",
-    "reference": "Modules/Settings/PluginsTab.qml:367",
+    "reference": "Modules/Settings/PluginListItem.qml:148",
     "comment": ""
   },
   {
@@ -3674,7 +3674,7 @@
   {
     "term": "official",
     "context": "official",
-    "reference": "Modules/Settings/PluginsTab.qml:1054",
+    "reference": "Modules/Settings/PluginBrowser.qml:385",
     "comment": ""
   },
   {
@@ -3686,7 +3686,7 @@
   {
     "term": "• Install only from trusted sources",
     "context": "• Install only from trusted sources",
-    "reference": "Modules/Settings/PluginsTab.qml:1280",
+    "reference": "Modules/Settings/PluginBrowser.qml:611",
     "comment": ""
   },
   {
@@ -3716,13 +3716,13 @@
   {
     "term": "• Plugins may contain bugs or security issues",
     "context": "• Plugins may contain bugs or security issues",
-    "reference": "Modules/Settings/PluginsTab.qml:1268",
+    "reference": "Modules/Settings/PluginBrowser.qml:599",
     "comment": ""
   },
   {
     "term": "• Review code before installation when possible",
     "context": "• Review code before installation when possible",
-    "reference": "Modules/Settings/PluginsTab.qml:1274",
+    "reference": "Modules/Settings/PluginBrowser.qml:605",
     "comment": ""
   },
   {
