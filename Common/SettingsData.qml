@@ -51,6 +51,7 @@ Singleton {
     property string customThemeFile: ""
     property string matugenScheme: "scheme-tonal-spot"
     property bool runUserMatugenTemplates: true
+    property string matugenTargetMonitor: ""
     property real dankBarTransparency: 1.0
     property real dankBarWidgetTransparency: 1.0
     property real popupTransparency: 1.0
@@ -90,16 +91,39 @@ Singleton {
     property bool controlCenterShowNetworkIcon: true
     property bool controlCenterShowBluetoothIcon: true
     property bool controlCenterShowAudioIcon: true
-    property var controlCenterWidgets: [
-        {"id": "volumeSlider", "enabled": true, "width": 50},
-        {"id": "brightnessSlider", "enabled": true, "width": 50},
-        {"id": "wifi", "enabled": true, "width": 50},
-        {"id": "bluetooth", "enabled": true, "width": 50},
-        {"id": "audioOutput", "enabled": true, "width": 50},
-        {"id": "audioInput", "enabled": true, "width": 50},
-        {"id": "nightMode", "enabled": true, "width": 50},
-        {"id": "darkMode", "enabled": true, "width": 50}
-    ]
+    property var controlCenterWidgets: [{
+            "id": "volumeSlider",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "brightnessSlider",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "wifi",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "bluetooth",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "audioOutput",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "audioInput",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "nightMode",
+            "enabled": true,
+            "width": 50
+        }, {
+            "id": "darkMode",
+            "enabled": true,
+            "width": 50
+        }]
 
     property bool showWorkspaceIndex: false
     property bool showWorkspacePadding: false
@@ -331,8 +355,14 @@ Singleton {
                 customThemeFile = settings.customThemeFile !== undefined ? settings.customThemeFile : ""
                 matugenScheme = settings.matugenScheme !== undefined ? settings.matugenScheme : "scheme-tonal-spot"
                 runUserMatugenTemplates = settings.runUserMatugenTemplates !== undefined ? settings.runUserMatugenTemplates : true
-                dankBarTransparency = settings.dankBarTransparency !== undefined ? (settings.dankBarTransparency > 1 ? settings.dankBarTransparency / 100 : settings.dankBarTransparency) : (settings.topBarTransparency !== undefined ? (settings.topBarTransparency > 1 ? settings.topBarTransparency / 100 : settings.topBarTransparency) : 1.0)
-                dankBarWidgetTransparency = settings.dankBarWidgetTransparency !== undefined ? (settings.dankBarWidgetTransparency > 1 ? settings.dankBarWidgetTransparency / 100 : settings.dankBarWidgetTransparency) : (settings.topBarWidgetTransparency !== undefined ? (settings.topBarWidgetTransparency > 1 ? settings.topBarWidgetTransparency / 100 : settings.topBarWidgetTransparency) : 1.0)
+                matugenTargetMonitor = settings.matugenTargetMonitor !== undefined ? settings.matugenTargetMonitor : ""
+                dankBarTransparency = settings.dankBarTransparency
+                        !== undefined ? (settings.dankBarTransparency > 1 ? settings.dankBarTransparency
+                                                                            / 100 : settings.dankBarTransparency) : (settings.topBarTransparency !== undefined ? (settings.topBarTransparency > 1 ? settings.topBarTransparency / 100 : settings.topBarTransparency) : 1.0)
+                dankBarWidgetTransparency = settings.dankBarWidgetTransparency
+                        !== undefined ? (settings.dankBarWidgetTransparency
+                                         > 1 ? settings.dankBarWidgetTransparency
+                                               / 100 : settings.dankBarWidgetTransparency) : (settings.topBarWidgetTransparency !== undefined ? (settings.topBarWidgetTransparency > 1 ? settings.topBarWidgetTransparency / 100 : settings.topBarWidgetTransparency) : 1.0)
                 popupTransparency = settings.popupTransparency !== undefined ? (settings.popupTransparency > 1 ? settings.popupTransparency / 100 : settings.popupTransparency) : 1.0
                 dockTransparency = settings.dockTransparency !== undefined ? (settings.dockTransparency > 1 ? settings.dockTransparency / 100 : settings.dockTransparency) : 1
                 use24HourClock = settings.use24HourClock !== undefined ? settings.use24HourClock : true
@@ -363,16 +393,39 @@ Singleton {
                 controlCenterShowNetworkIcon = settings.controlCenterShowNetworkIcon !== undefined ? settings.controlCenterShowNetworkIcon : true
                 controlCenterShowBluetoothIcon = settings.controlCenterShowBluetoothIcon !== undefined ? settings.controlCenterShowBluetoothIcon : true
                 controlCenterShowAudioIcon = settings.controlCenterShowAudioIcon !== undefined ? settings.controlCenterShowAudioIcon : true
-                controlCenterWidgets = settings.controlCenterWidgets !== undefined ? settings.controlCenterWidgets : [
-                    {"id": "volumeSlider", "enabled": true, "width": 50},
-                    {"id": "brightnessSlider", "enabled": true, "width": 50},
-                    {"id": "wifi", "enabled": true, "width": 50},
-                    {"id": "bluetooth", "enabled": true, "width": 50},
-                    {"id": "audioOutput", "enabled": true, "width": 50},
-                    {"id": "audioInput", "enabled": true, "width": 50},
-                    {"id": "nightMode", "enabled": true, "width": 50},
-                    {"id": "darkMode", "enabled": true, "width": 50}
-                ]
+                controlCenterWidgets = settings.controlCenterWidgets !== undefined ? settings.controlCenterWidgets : [{
+                                                                                                                          "id": "volumeSlider",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "brightnessSlider",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "wifi",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "bluetooth",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "audioOutput",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "audioInput",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "nightMode",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }, {
+                                                                                                                          "id": "darkMode",
+                                                                                                                          "enabled": true,
+                                                                                                                          "width": 50
+                                                                                                                      }]
                 showWorkspaceIndex = settings.showWorkspaceIndex !== undefined ? settings.showWorkspaceIndex : false
                 showWorkspacePadding = settings.showWorkspacePadding !== undefined ? settings.showWorkspacePadding : false
                 workspaceScrolling = settings.workspaceScrolling !== undefined ? settings.workspaceScrolling : false
@@ -393,18 +446,19 @@ Singleton {
                 if (settings.dankBarWidgetOrder || settings.topBarWidgetOrder) {
                     var widgetOrder = settings.dankBarWidgetOrder || settings.topBarWidgetOrder
                     dankBarLeftWidgets = widgetOrder.filter(w => {
-                                                                              return ["launcherButton", "workspaceSwitcher", "focusedWindow"].includes(w)
-                                                                          })
+                                                                return ["launcherButton", "workspaceSwitcher", "focusedWindow"].includes(w)
+                                                            })
                     dankBarCenterWidgets = widgetOrder.filter(w => {
-                                                                                return ["clock", "music", "weather"].includes(w)
-                                                                            })
+                                                                  return ["clock", "music", "weather"].includes(w)
+                                                              })
                     dankBarRightWidgets = widgetOrder.filter(w => {
-                                                                               return ["systemTray", "clipboard", "systemResources", "notificationButton", "battery", "controlCenterButton"].includes(w)
-                                                                           })
+                                                                 return ["systemTray", "clipboard", "systemResources", "notificationButton", "battery", "controlCenterButton"].includes(w)
+                                                             })
                 } else {
                     var leftWidgets = settings.dankBarLeftWidgets !== undefined ? settings.dankBarLeftWidgets : (settings.topBarLeftWidgets !== undefined ? settings.topBarLeftWidgets : ["launcherButton", "workspaceSwitcher", "focusedWindow"])
                     var centerWidgets = settings.dankBarCenterWidgets !== undefined ? settings.dankBarCenterWidgets : (settings.topBarCenterWidgets !== undefined ? settings.topBarCenterWidgets : ["music", "clock", "weather"])
-                    var rightWidgets = settings.dankBarRightWidgets !== undefined ? settings.dankBarRightWidgets : (settings.topBarRightWidgets !== undefined ? settings.topBarRightWidgets : ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"])
+                    var rightWidgets = settings.dankBarRightWidgets
+                            !== undefined ? settings.dankBarRightWidgets : (settings.topBarRightWidgets !== undefined ? settings.topBarRightWidgets : ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"])
                     dankBarLeftWidgets = leftWidgets
                     dankBarCenterWidgets = centerWidgets
                     dankBarRightWidgets = rightWidgets
@@ -476,9 +530,9 @@ Singleton {
                 customPowerActionHibernate = settings.customPowerActionHibernate != undefined ? settings.customPowerActionHibernate : ""
                 customPowerActionReboot = settings.customPowerActionReboot != undefined ? settings.customPowerActionReboot : ""
                 customPowerActionPowerOff = settings.customPowerActionPowerOff != undefined ? settings.customPowerActionPowerOff : ""
-                updaterUseCustomCommand = settings.updaterUseCustomCommand !== undefined ? settings.updaterUseCustomCommand : false;
-                updaterCustomCommand = settings.updaterCustomCommand !== undefined ? settings.updaterCustomCommand : "";
-                updaterTerminalAdditionalParams = settings.updaterTerminalAdditionalParams !== undefined ? settings.updaterTerminalAdditionalParams : "";
+                updaterUseCustomCommand = settings.updaterUseCustomCommand !== undefined ? settings.updaterUseCustomCommand : false
+                updaterCustomCommand = settings.updaterCustomCommand !== undefined ? settings.updaterCustomCommand : ""
+                updaterTerminalAdditionalParams = settings.updaterTerminalAdditionalParams !== undefined ? settings.updaterTerminalAdditionalParams : ""
                 dankBarSpacing = settings.dankBarSpacing !== undefined ? settings.dankBarSpacing : (settings.topBarSpacing !== undefined ? settings.topBarSpacing : 4)
                 dankBarBottomGap = settings.dankBarBottomGap !== undefined ? settings.dankBarBottomGap : (settings.topBarBottomGap !== undefined ? settings.topBarBottomGap : 0)
                 dankBarInnerPadding = settings.dankBarInnerPadding !== undefined ? settings.dankBarInnerPadding : (settings.topBarInnerPadding !== undefined ? settings.topBarInnerPadding : 4)
@@ -491,7 +545,8 @@ Singleton {
                 dankBarBorderThickness = settings.dankBarBorderThickness !== undefined ? settings.dankBarBorderThickness : 1
                 popupGapsAuto = settings.popupGapsAuto !== undefined ? settings.popupGapsAuto : true
                 popupGapsManual = settings.popupGapsManual !== undefined ? settings.popupGapsManual : 4
-                dankBarPosition = settings.dankBarPosition !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
+                dankBarPosition = settings.dankBarPosition
+                        !== undefined ? settings.dankBarPosition : (settings.dankBarAtBottom !== undefined ? (settings.dankBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 enableFprint = settings.enableFprint !== undefined ? settings.enableFprint : false
                 maxFprintTries = settings.maxFprintTries !== undefined ? settings.maxFprintTries : 3
@@ -552,6 +607,7 @@ Singleton {
                                                 "customThemeFile": customThemeFile,
                                                 "matugenScheme": matugenScheme,
                                                 "runUserMatugenTemplates": runUserMatugenTemplates,
+                                                "matugenTargetMonitor": matugenTargetMonitor,
                                                 "dankBarTransparency": dankBarTransparency,
                                                 "dankBarWidgetTransparency": dankBarWidgetTransparency,
                                                 "popupTransparency": popupTransparency,
@@ -718,52 +774,12 @@ Singleton {
     }
 
     function cleanupUnusedKeys() {
-        const validKeys = [
-            "currentThemeName", "customThemeFile", "matugenScheme", "runUserMatugenTemplates",
-            "dankBarTransparency", "dankBarWidgetTransparency", "popupTransparency", "dockTransparency",
-            "use24HourClock", "showSeconds", "useFahrenheit", "nightModeEnabled", "weatherLocation",
-            "weatherCoordinates", "useAutoLocation", "weatherEnabled", "showLauncherButton",
-            "showWorkspaceSwitcher", "showFocusedWindow", "showWeather", "showMusic",
-            "showClipboard", "showCpuUsage", "showMemUsage", "showCpuTemp", "showGpuTemp",
-            "selectedGpuIndex", "enabledGpuPciIds", "showSystemTray", "showClock",
-            "showNotificationButton", "showBattery", "showControlCenterButton",
-            "controlCenterShowNetworkIcon", "controlCenterShowBluetoothIcon", "controlCenterShowAudioIcon",
-            "controlCenterWidgets", "showWorkspaceIndex", "workspaceScrolling", "showWorkspacePadding", "showWorkspaceApps",
-            "maxWorkspaceIcons", "workspacesPerMonitor", "workspaceNameIcons", "waveProgressEnabled",
-            "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode", "keyboardLayoutNameCompactMode",
-            "runningAppsCurrentWorkspace", "runningAppsGroupByApp", "clockDateFormat", "lockDateFormat", "mediaSize",
-            "dankBarLeftWidgets", "dankBarCenterWidgets", "dankBarRightWidgets",
-            "appLauncherViewMode", "spotlightModalViewMode", "sortAppsAlphabetically",
-            "networkPreference", "iconTheme", "launcherLogoMode", "launcherLogoCustomPath",
-            "launcherLogoColorOverride", "launcherLogoColorInvertOnMode", "launcherLogoBrightness",
-            "launcherLogoContrast", "launcherLogoSizeOffset", "fontFamily", "monoFontFamily",
-            "fontWeight", "fontScale", "dankBarFontScale", "notepadUseMonospace",
-            "notepadFontFamily", "notepadFontSize", "notepadShowLineNumbers",
-            "notepadTransparencyOverride", "notepadLastCustomTransparency", "soundsEnabled",
-            "useSystemSoundTheme", "soundNewNotification", "soundVolumeChanged", "soundPluggedIn", "gtkThemingEnabled",
-            "qtThemingEnabled", "syncModeWithPortal", "showDock", "dockAutoHide", "dockGroupByApp",
-            "dockOpenOnOverview", "dockPosition", "dockSpacing", "dockBottomGap", "dockIconSize", "dockIndicatorStyle",
-            "cornerRadius", "notificationOverlayEnabled", "dankBarAutoHide",
-            "dankBarOpenOnOverview", "dankBarVisible", "dankBarSpacing", "dankBarBottomGap",
-            "dankBarInnerPadding", "dankBarSquareCorners", "dankBarNoBackground",
-            "dankBarGothCornersEnabled", "dankBarBorderEnabled", "dankBarBorderColor",
-            "dankBarBorderOpacity", "dankBarBorderThickness", "popupGapsAuto", "popupGapsManual",
-            "dankBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries",
-            "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase", "wallpaperFillMode",
-            "blurredWallpaperLayer", "blurWallpaperOnOverview", "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
-            "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm",
-            "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend",
-            "customPowerActionHibernate", "customPowerActionReboot", "customPowerActionPowerOff",
-            "updaterUseCustomCommand", "updaterCustomCommand", "updaterTerminalAdditionalParams",
-            "screenPreferences", "showOnLastDisplay", "animationSpeed", "customAnimationDuration", "acMonitorTimeout", "acLockTimeout",
-            "acSuspendTimeout", "acHibernateTimeout", "batteryMonitorTimeout", "batteryLockTimeout",
-            "batterySuspendTimeout", "batteryHibernateTimeout", "lockBeforeSuspend",
-            "loginctlLockIntegration", "launchPrefix", "brightnessDevicePins", "configVersion"
-        ]
+        const validKeys = ["currentThemeName", "customThemeFile", "matugenScheme", "runUserMatugenTemplates", "matugenTargetMonitor", "dankBarTransparency", "dankBarWidgetTransparency", "popupTransparency", "dockTransparency", "use24HourClock", "showSeconds", "useFahrenheit", "nightModeEnabled", "weatherLocation", "weatherCoordinates", "useAutoLocation", "weatherEnabled", "showLauncherButton", "showWorkspaceSwitcher", "showFocusedWindow", "showWeather", "showMusic", "showClipboard", "showCpuUsage", "showMemUsage", "showCpuTemp", "showGpuTemp", "selectedGpuIndex", "enabledGpuPciIds", "showSystemTray", "showClock", "showNotificationButton", "showBattery", "showControlCenterButton", "controlCenterShowNetworkIcon", "controlCenterShowBluetoothIcon", "controlCenterShowAudioIcon", "controlCenterWidgets", "showWorkspaceIndex", "workspaceScrolling", "showWorkspacePadding", "showWorkspaceApps", "maxWorkspaceIcons", "workspacesPerMonitor", "workspaceNameIcons", "waveProgressEnabled", "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode", "keyboardLayoutNameCompactMode", "runningAppsCurrentWorkspace", "runningAppsGroupByApp", "clockDateFormat", "lockDateFormat", "mediaSize", "dankBarLeftWidgets", "dankBarCenterWidgets", "dankBarRightWidgets", "appLauncherViewMode", "spotlightModalViewMode", "sortAppsAlphabetically", "networkPreference", "iconTheme", "launcherLogoMode", "launcherLogoCustomPath", "launcherLogoColorOverride", "launcherLogoColorInvertOnMode", "launcherLogoBrightness", "launcherLogoContrast", "launcherLogoSizeOffset", "fontFamily", "monoFontFamily", "fontWeight", "fontScale", "dankBarFontScale", "notepadUseMonospace", "notepadFontFamily", "notepadFontSize", "notepadShowLineNumbers", "notepadTransparencyOverride", "notepadLastCustomTransparency", "soundsEnabled", "useSystemSoundTheme", "soundNewNotification", "soundVolumeChanged", "soundPluggedIn", "gtkThemingEnabled", "qtThemingEnabled", "syncModeWithPortal", "showDock", "dockAutoHide", "dockGroupByApp", "dockOpenOnOverview", "dockPosition", "dockSpacing", "dockBottomGap", "dockIconSize", "dockIndicatorStyle", "cornerRadius", "notificationOverlayEnabled", "dankBarAutoHide", "dankBarOpenOnOverview", "dankBarVisible", "dankBarSpacing", "dankBarBottomGap", "dankBarInnerPadding", "dankBarSquareCorners", "dankBarNoBackground", "dankBarGothCornersEnabled", "dankBarBorderEnabled", "dankBarBorderColor", "dankBarBorderOpacity", "dankBarBorderThickness", "popupGapsAuto", "popupGapsManual", "dankBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries", "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase", "wallpaperFillMode", "blurredWallpaperLayer", "blurWallpaperOnOverview", "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical", "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm", "customPowerActionLock", "customPowerActionLogout", "customPowerActionSuspend", "customPowerActionHibernate", "customPowerActionReboot", "customPowerActionPowerOff", "updaterUseCustomCommand", "updaterCustomCommand", "updaterTerminalAdditionalParams", "screenPreferences", "showOnLastDisplay", "animationSpeed", "customAnimationDuration", "acMonitorTimeout", "acLockTimeout", "acSuspendTimeout", "acHibernateTimeout", "batteryMonitorTimeout", "batteryLockTimeout", "batterySuspendTimeout", "batteryHibernateTimeout", "lockBeforeSuspend", "loginctlLockIntegration", "launchPrefix", "brightnessDevicePins", "configVersion"]
 
         try {
             const content = settingsFile.text()
-            if (!content || !content.trim()) return
+            if (!content || !content.trim())
+                return
 
             const settings = JSON.parse(content)
             let needsSave = false
@@ -788,7 +804,7 @@ Singleton {
         if (use24HourClock) {
             return showSeconds ? "hh:mm:ss" : "hh:mm"
         } else {
-            return showSeconds ? "h:mm:ss AP": "h:mm AP"
+            return showSeconds ? "h:mm:ss AP" : "h:mm AP"
         }
     }
 
@@ -899,10 +915,12 @@ Singleton {
                 PortalService.setSystemIconTheme(gtkThemeName)
             }
 
-            var configScript = "mkdir -p " + _configDir + "/gtk-3.0 " + _configDir + "/gtk-4.0\n" + "\n" + "for config_dir in " + _configDir + "/gtk-3.0 " + _configDir + "/gtk-4.0; do\n"
-                    + "    settings_file=\"$config_dir/settings.ini\"\n" + "    if [ -f \"$settings_file\" ]; then\n" + "        if grep -q '^gtk-icon-theme-name=' \"$settings_file\"; then\n" + "            sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=" + gtkThemeName + "/' \"$settings_file\"\n" + "        else\n"
-                    + "            if grep -q '\\[Settings\\]' \"$settings_file\"; then\n" + "                sed -i '/\\[Settings\\]/a gtk-icon-theme-name=" + gtkThemeName + "' \"$settings_file\"\n" + "            else\n" + "                echo -e '\\n[Settings]\\ngtk-icon-theme-name=" + gtkThemeName + "' >> \"$settings_file\"\n" + "            fi\n"
-                    + "        fi\n" + "    else\n" + "        echo -e '[Settings]\\ngtk-icon-theme-name=" + gtkThemeName + "' > \"$settings_file\"\n" + "    fi\n" + "done\n" + "\n" + "rm -rf ~/.cache/icon-cache ~/.cache/thumbnails 2>/dev/null || true\n" + "pkill -HUP -f 'gtk' 2>/dev/null || true\n"
+            var configScript = "mkdir -p " + _configDir + "/gtk-3.0 " + _configDir + "/gtk-4.0\n" + "\n" + "for config_dir in " + _configDir + "/gtk-3.0 "
+                    + _configDir + "/gtk-4.0; do\n" + "    settings_file=\"$config_dir/settings.ini\"\n" + "    if [ -f \"$settings_file\" ]; then\n"
+                    + "        if grep -q '^gtk-icon-theme-name=' \"$settings_file\"; then\n" + "            sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=" + gtkThemeName + "/' \"$settings_file\"\n"
+                    + "        else\n" + "            if grep -q '\\[Settings\\]' \"$settings_file\"; then\n" + "                sed -i '/\\[Settings\\]/a gtk-icon-theme-name=" + gtkThemeName
+                    + "' \"$settings_file\"\n" + "            else\n" + "                echo -e '\\n[Settings]\\ngtk-icon-theme-name=" + gtkThemeName + "' >> \"$settings_file\"\n" + "            fi\n" + "        fi\n" + "    else\n"
+                    + "        echo -e '[Settings]\\ngtk-icon-theme-name=" + gtkThemeName + "' > \"$settings_file\"\n" + "    fi\n" + "done\n" + "\n" + "rm -rf ~/.cache/icon-cache ~/.cache/thumbnails 2>/dev/null || true\n" + "pkill -HUP -f 'gtk' 2>/dev/null || true\n"
             Quickshell.execDetached(["sh", "-lc", configScript])
         }
     }
@@ -914,9 +932,11 @@ Singleton {
             return
         }
         var script = "mkdir -p " + _configDir + "/qt5ct " + _configDir + "/qt6ct " + _configDir + "/environment.d 2>/dev/null || true\n" + "update_qt_icon_theme() {\n" + "  local config_file=\"$1\"\n"
-                + "  local theme_name=\"$2\"\n" + "  if [ -f \"$config_file\" ]; then\n" + "    if grep -q '^\\[Appearance\\]' \"$config_file\"; then\n" + "      if grep -q '^icon_theme=' \"$config_file\"; then\n" + "        sed -i \"s/^icon_theme=.*/icon_theme=$theme_name/\" \"$config_file\"\n" + "      else\n" + "        sed -i \"/^\\[Appearance\\]/a icon_theme=$theme_name\" \"$config_file\"\n" + "      fi\n"
-                + "    else\n" + "      printf '\\n[Appearance]\\nicon_theme=%s\\n' \"$theme_name\" >> \"$config_file\"\n" + "    fi\n" + "  else\n" + "    printf '[Appearance]\\nicon_theme=%s\\n' \"$theme_name\" > \"$config_file\"\n" + "  fi\n" + "}\n" + "update_qt_icon_theme " + _configDir + "/qt5ct/qt5ct.conf " + _shq(
-                    qtThemeName) + "\n" + "update_qt_icon_theme " + _configDir + "/qt6ct/qt6ct.conf " + _shq(qtThemeName) + "\n" + "rm -rf " + home + "/.cache/icon-cache " + home + "/.cache/thumbnails 2>/dev/null || true\n"
+                + "  local theme_name=\"$2\"\n" + "  if [ -f \"$config_file\" ]; then\n" + "    if grep -q '^\\[Appearance\\]' \"$config_file\"; then\n" + "      if grep -q '^icon_theme=' \"$config_file\"; then\n"
+                + "        sed -i \"s/^icon_theme=.*/icon_theme=$theme_name/\" \"$config_file\"\n" + "      else\n" + "        sed -i \"/^\\[Appearance\\]/a icon_theme=$theme_name\" \"$config_file\"\n" + "      fi\n"
+                + "    else\n" + "      printf '\\n[Appearance]\\nicon_theme=%s\\n' \"$theme_name\" >> \"$config_file\"\n" + "    fi\n" + "  else\n"
+                + "    printf '[Appearance]\\nicon_theme=%s\\n' \"$theme_name\" > \"$config_file\"\n" + "  fi\n" + "}\n" + "update_qt_icon_theme " + _configDir + "/qt5ct/qt5ct.conf " + _shq(qtThemeName)
+                + "\n" + "update_qt_icon_theme " + _configDir + "/qt6ct/qt6ct.conf " + _shq(qtThemeName) + "\n" + "rm -rf " + home + "/.cache/icon-cache " + home + "/.cache/thumbnails 2>/dev/null || true\n"
         Quickshell.execDetached(["sh", "-lc", script])
     }
 
@@ -938,15 +958,15 @@ Singleton {
 
         if (dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right) {
             return {
-                x: relativeY,
-                y: barThickness + dankBarSpacing + Theme.popupDistance,
-                width: widgetWidth
+                "x": relativeY,
+                "y": barThickness + dankBarSpacing + Theme.popupDistance,
+                "width": widgetWidth
             }
         }
         return {
-            x: relativeX,
-            y: barThickness + dankBarSpacing + dankBarBottomGap + Theme.popupDistance,
-            width: widgetWidth
+            "x": relativeX,
+            "y": barThickness + dankBarSpacing + dankBarBottomGap + Theme.popupDistance,
+            "width": widgetWidth
         }
     }
 
@@ -969,11 +989,7 @@ Singleton {
     }
 
     function sendTestNotification(index) {
-        const notifications = [
-            ["Notification Position Test", "DMS test notification 1 of 3 ~ Hi there!", "preferences-system"],
-            ["Second Test", "DMS Notification 2 of 3 ~ Check it out!", "applications-graphics"],
-            ["Third Test", "DMS notification 3 of 3 ~ Enjoy!", "face-smile"]
-        ]
+        const notifications = [["Notification Position Test", "DMS test notification 1 of 3 ~ Hi there!", "preferences-system"], ["Second Test", "DMS Notification 2 of 3 ~ Check it out!", "applications-graphics"], ["Third Test", "DMS notification 3 of 3 ~ Enjoy!", "face-smile"]]
 
         if (index < 0 || index >= notifications.length) {
             return
@@ -1016,6 +1032,18 @@ Singleton {
             return
 
         runUserMatugenTemplates = enabled
+        saveSettings()
+
+        if (typeof Theme !== "undefined") {
+            Theme.generateSystemThemesFromCurrentTheme()
+        }
+    }
+
+    function setMatugenTargetMonitor(monitorName) {
+        if (matugenTargetMonitor === monitorName)
+            return
+
+        matugenTargetMonitor = monitorName
         saveSettings()
 
         if (typeof Theme !== "undefined") {
@@ -1795,53 +1823,53 @@ Singleton {
     }
 
     function setPowerActionConfirm(confirm) {
-        powerActionConfirm = confirm;
-        saveSettings();
+        powerActionConfirm = confirm
+        saveSettings()
     }
 
     function setCustomPowerActionLock(command) {
-        customPowerActionLock = command;
-        saveSettings();
+        customPowerActionLock = command
+        saveSettings()
     }
 
     function setCustomPowerActionLogout(command) {
-        customPowerActionLogout = command;
-        saveSettings();
+        customPowerActionLogout = command
+        saveSettings()
     }
 
     function setCustomPowerActionSuspend(command) {
-        customPowerActionSuspend = command;
-        saveSettings();
+        customPowerActionSuspend = command
+        saveSettings()
     }
 
     function setCustomPowerActionHibernate(command) {
-        customPowerActionHibernate = command;
-        saveSettings();
+        customPowerActionHibernate = command
+        saveSettings()
     }
 
     function setCustomPowerActionReboot(command) {
-        customPowerActionReboot = command;
-        saveSettings();
+        customPowerActionReboot = command
+        saveSettings()
     }
 
     function setCustomPowerActionPowerOff(command) {
-        customPowerActionPowerOff = command;
-        saveSettings();
+        customPowerActionPowerOff = command
+        saveSettings()
     }
 
     function setUpdaterUseCustomCommandEnabled(enabled) {
-        updaterUseCustomCommand = enabled;
-        saveSettings();
+        updaterUseCustomCommand = enabled
+        saveSettings()
     }
 
     function setUpdaterCustomCommand(command) {
-        updaterCustomCommand = command;
-        saveSettings();
+        updaterCustomCommand = command
+        saveSettings()
     }
 
     function setUpdaterTerminalAdditionalParams(customArgs) {
-        updaterTerminalAdditionalParams = customArgs;
-        saveSettings();
+        updaterTerminalAdditionalParams = customArgs
+        saveSettings()
     }
 
     function setScreenPreferences(prefs) {
