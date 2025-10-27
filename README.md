@@ -101,7 +101,7 @@ curl -fsSL https://install.danklinux.com | sh
   - **Control Center** High-level view of network, bluetooth, and audio status
   - **Privacy Indicator** Attempts to reveal if a microphone or screen recording session is active, relying on Pipewire data sources
   - **Idle Inhibitor** Creates a systemd idle inhibitor to prevent sleep/locking from occuring.
-- **Spotlight Launcher** A central app launcher/search that can be triggered via an IPC keybinding.
+- **Spotlight Launcher** A central search/launcher - apps, files, emojis, running apps, calculator, command running - and basically anything since it can be enriched with plugins.
 - **Central Command** A combined music, weather, calendar, and events PopUp.
 - **Process List** A process list, with system metrics and information. More detailed modal available via IPC.
 - **Notification Center** A center for notifications that has support for grouping.

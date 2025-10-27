@@ -116,7 +116,7 @@ Item {
 
     FontLoader {
         id: firaCodeFont
-        source: Qt.resolvedUrl("../assets/fonts/nerd-fonts/SymbolsNerdFont-Regular.ttf")
+        source: Qt.resolvedUrl("../assets/fonts/nerd-fonts/FiraCodeNerdFont-Regular.ttf")
     }
 
     StyledText {
