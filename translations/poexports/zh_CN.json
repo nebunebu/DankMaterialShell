@@ -495,7 +495,7 @@
     "DankBar Font Scale": "Dank Bar 字体缩放"
   },
   "DankSearch not available": {
-    "DankSearch not available": ""
+    "DankSearch not available": "DankSearch不可用"
   },
   "Date Format": {
     "Date Format": "日期格式"
@@ -633,7 +633,7 @@
     "Enter PIN for ": "输入PIN "
   },
   "Enter a search query": {
-    "Enter a search query": ""
+    "Enter a search query": "输入检索内容"
   },
   "Enter credentials for ": {
     "Enter credentials for ": "输入凭据 "
@@ -1086,7 +1086,7 @@
     "No clipboard entries found": "无可用记录"
   },
   "No files found": {
-    "No files found": ""
+    "No files found": "未找到文件"
   },
   "No items added yet": {
     "No items added yet": "暂未添加任何项目"
@@ -1377,10 +1377,10 @@
     "Scroll through windows, rather than workspaces": "滚动窗口，而非工作区"
   },
   "Search file contents": {
-    "Search file contents": ""
+    "Search file contents": "检索文件内容"
   },
   "Search filenames": {
-    "Search filenames": ""
+    "Search filenames": "检索文件名"
   },
   "Search for a location...": {
     "Search for a location...": "搜索位置..."
@@ -1392,7 +1392,7 @@
     "Search...": "搜索中..."
   },
   "Searching...": {
-    "Searching...": ""
+    "Searching...": "检索中..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "选择启动器Logo"

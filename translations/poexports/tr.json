@@ -495,7 +495,7 @@
     "DankBar Font Scale": "DankBar Yazı Tipi Ölçeği"
   },
   "DankSearch not available": {
-    "DankSearch not available": ""
+    "DankSearch not available": "DankSearch kullanılamıyor"
   },
   "Date Format": {
     "Date Format": "Tarih Biçimi"
@@ -633,7 +633,7 @@
     "Enter PIN for ": "Şunun için PIN gir: "
   },
   "Enter a search query": {
-    "Enter a search query": ""
+    "Enter a search query": "Arama sorgusu girin"
   },
   "Enter credentials for ": {
     "Enter credentials for ": "Kimlik bilgilerini girin "
@@ -1086,7 +1086,7 @@
     "No clipboard entries found": "Pano girişleri bulunamadı"
   },
   "No files found": {
-    "No files found": ""
+    "No files found": "Dosya bulunamadı"
   },
   "No items added yet": {
     "No items added yet": "Henüz eklenen öğe yok"
@@ -1377,10 +1377,10 @@
     "Scroll through windows, rather than workspaces": "Çalışma alanları yerine pencereler arasında gezin"
   },
   "Search file contents": {
-    "Search file contents": ""
+    "Search file contents": "Dosya içeriklerini ara"
   },
   "Search filenames": {
-    "Search filenames": ""
+    "Search filenames": "Dosya adlarını ar"
   },
   "Search for a location...": {
     "Search for a location...": "Bir konum ara..."
@@ -1392,7 +1392,7 @@
     "Search...": "Ara..."
   },
   "Searching...": {
-    "Searching...": ""
+    "Searching...": "Arıyor..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "Başlatıcı Logosu Seç"
