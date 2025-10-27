@@ -2,25 +2,6 @@
   children: [],
   keybinds: [
     .[]
-    | select(.dispatcher | IN(
-        "exec",
-        "execr",
-        "pass",
-        "sendshortcut",
-        "centerwindow",
-        "fullscreen",
-        "killactive",
-        "layoutmsg",
-        "mouse",
-        "moveactive",
-        "movefocus",
-        "movewindow",
-        "resizeactive",
-        "submap",
-        "togglefloating",
-        "movetoworkspace",
-        "workspace"
-      ))
     | {
         mods: [
           (if .modmask == 64 then "MainMod"
