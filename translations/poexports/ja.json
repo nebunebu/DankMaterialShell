@@ -494,6 +494,9 @@
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar フォントスケール"
   },
+  "DankSearch not available": {
+    "DankSearch not available": ""
+  },
   "Date Format": {
     "Date Format": "日付形式"
   },
@@ -628,6 +631,9 @@
   },
   "Enter PIN for ": {
     "Enter PIN for ": "PINを入力してください "
+  },
+  "Enter a search query": {
+    "Enter a search query": ""
   },
   "Enter credentials for ": {
     "Enter credentials for ": "資格情報を入力"
@@ -1079,6 +1085,9 @@
   "No clipboard entries found": {
     "No clipboard entries found": "クリップボードのエントリが見つかりませんでした"
   },
+  "No files found": {
+    "No files found": ""
+  },
   "No items added yet": {
     "No items added yet": "まだアイテムが追加されていません"
   },
@@ -1367,6 +1376,12 @@
   "Scroll through windows, rather than workspaces": {
     "Scroll through windows, rather than workspaces": "ワークスペースではなくウィンドウをスクロール"
   },
+  "Search file contents": {
+    "Search file contents": ""
+  },
+  "Search filenames": {
+    "Search filenames": ""
+  },
   "Search for a location...": {
     "Search for a location...": "ロケーションを検索..."
   },
@@ -1375,6 +1390,9 @@
   },
   "Search...": {
     "Search...": "検索..."
+  },
+  "Searching...": {
+    "Searching...": ""
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "ランチャーロゴを選ぶ"
