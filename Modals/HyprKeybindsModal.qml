@@ -8,7 +8,7 @@ import qs.Widgets
 
 DankModal {
     id: root
-   property real _maxW: Math.min(Screen.width  * 0.92, 1200)
+    property real _maxW: Math.min(Screen.width  * 0.92, 1200)
     property real _maxH: Math.min(Screen.height * 0.92, 900)
     width:  _maxW
     height: _maxH
