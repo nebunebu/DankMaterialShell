@@ -31,7 +31,7 @@ BasePill {
                             return "sync"
                         }
 
-                        if (NetworkService.networkStatus === "ethernet") {
+                        if (NetworkService.networkStatus === "ethernet" || (NetworkService.networkStatus === "vpn" && NetworkService.ethernetConnected)) {
                             return "lan"
                         }
 
@@ -128,7 +128,7 @@ BasePill {
                             return "sync";
                         }
 
-                        if (NetworkService.networkStatus === "ethernet") {
+                        if (NetworkService.networkStatus === "ethernet" || (NetworkService.networkStatus === "vpn" && NetworkService.ethernetConnected)) {
                             return "lan";
                         }
 

@@ -25,10 +25,18 @@ BasePill {
             DankIcon {
                 id: icon
 
-                name: DMSNetworkService.isBusy ? "sync" : (DMSNetworkService.connected ? "vpn_lock" : "vpn_key_off")
+                name: DMSNetworkService.connected ? "vpn_lock" : "vpn_key_off"
                 size: Theme.barIconSize(root.barThickness, -4)
                 color: DMSNetworkService.connected ? Theme.primary : Theme.surfaceText
+                opacity: DMSNetworkService.isBusy ? 0.5 : 1.0
                 anchors.centerIn: parent
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Theme.shortDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
         }
     }
@@ -44,8 +52,9 @@ BasePill {
 
         anchors.fill: parent
         hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: DMSNetworkService.isBusy ? Qt.BusyCursor : Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton
+        enabled: !DMSNetworkService.isBusy
         onPressed: {
             if (popoutTarget && popoutTarget.setTriggerPosition) {
                 const globalPos = root.visualContent.mapToGlobal(0, 0)
@@ -65,9 +74,15 @@ BasePill {
                     } else {
                         const names = DMSNetworkService.activeNames || []
                         if (names.length <= 1) {
-                            tooltipText = "VPN Connected • " + (names[0] || "")
+                            const name = names[0] || ""
+                            const maxLength = 25
+                            const displayName = name.length > maxLength ? name.substring(0, maxLength) + "..." : name
+                            tooltipText = "VPN Connected • " + displayName
                         } else {
-                            tooltipText = "VPN Connected • " + names[0] + " +" + (names.length - 1)
+                            const name = names[0]
+                            const maxLength = 20
+                            const displayName = name.length > maxLength ? name.substring(0, maxLength) + "..." : name
+                            tooltipText = "VPN Connected • " + displayName + " +" + (names.length - 1)
                         }
                     }
 

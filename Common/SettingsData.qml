@@ -134,6 +134,7 @@ Singleton {
     property bool weatherEnabled: true
 
     property string networkPreference: "auto"
+    property string vpnLastConnected: ""
 
     property string iconTheme: "System Default"
     property var availableIconThemes: ["System Default"]
@@ -1395,6 +1396,11 @@ Singleton {
 
     function setNetworkPreference(preference) {
         networkPreference = preference
+        saveSettings()
+    }
+
+    function setVpnLastConnected(uuid) {
+        vpnLastConnected = uuid
         saveSettings()
     }
 

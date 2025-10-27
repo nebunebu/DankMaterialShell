@@ -47,6 +47,7 @@ Item {
         "yaml":                 "\u{e8eb}",
         "yml":                  "\u{e8eb}",
         "xml":                  "\u{F09EE}",
+        "sql":                  "\u{f1c0}",
 
         // --- scripts / shells ---
         "sh":                   "\u{F08A9}",

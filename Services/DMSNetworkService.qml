@@ -73,6 +73,9 @@ Singleton {
     property var vpnActive: []
     property bool vpnAvailable: false
     property bool vpnIsBusy: false
+    property string lastConnectedVpnUuid: ""
+    property string pendingVpnUuid: ""
+    property var vpnBusyStartTime: 0
 
     property alias profiles: root.vpnProfiles
     property alias activeConnections: root.vpnActive
@@ -118,6 +121,7 @@ Singleton {
 
     Component.onCompleted: {
         root.userPreference = SettingsData.networkPreference
+        lastConnectedVpnUuid = SettingsData.vpnLastConnected || ""
         if (socketPath && socketPath.length > 0) {
             checkDMSCapabilities()
         }
@@ -271,7 +275,40 @@ Singleton {
             vpnProfiles = state.vpnProfiles
         }
 
+        const previousVpnActive = vpnActive
         vpnActive = state.vpnActive || []
+
+        if (vpnConnected && activeUuid) {
+            lastConnectedVpnUuid = activeUuid
+            SettingsData.setVpnLastConnected(activeUuid)
+        }
+
+        if (vpnIsBusy) {
+            const busyDuration = Date.now() - vpnBusyStartTime
+            const timeout = 30000
+
+            if (busyDuration > timeout) {
+                console.warn("DMSNetworkService: VPN operation timed out after", timeout, "ms")
+                vpnIsBusy = false
+                pendingVpnUuid = ""
+                vpnBusyStartTime = 0
+            } else if (pendingVpnUuid) {
+                const isPendingVpnActive = activeUuids.includes(pendingVpnUuid)
+                if (isPendingVpnActive) {
+                    vpnIsBusy = false
+                    pendingVpnUuid = ""
+                    vpnBusyStartTime = 0
+                }
+            } else {
+                const previousCount = previousVpnActive ? previousVpnActive.length : 0
+                const currentCount = vpnActive ? vpnActive.length : 0
+
+                if (previousCount !== currentCount) {
+                    vpnIsBusy = false
+                    vpnBusyStartTime = 0
+                }
+            }
+        }
 
         userPreference = state.preference || "auto"
         isConnecting = state.isConnecting || false
@@ -726,10 +763,12 @@ Singleton {
         })
     }
 
-    function connectVpn(uuidOrName, singleActive = false) {
+    function connectVpn(uuidOrName, singleActive = true) {
         if (!vpnAvailable || vpnIsBusy) return
 
         vpnIsBusy = true
+        pendingVpnUuid = uuidOrName
+        vpnBusyStartTime = Date.now()
 
         const params = {
             uuidOrName: uuidOrName,
@@ -737,12 +776,11 @@ Singleton {
         }
 
         DMSService.sendRequest("network.vpn.connect", params, response => {
-            vpnIsBusy = false
-
             if (response.error) {
+                vpnIsBusy = false
+                pendingVpnUuid = ""
+                vpnBusyStartTime = 0
                 ToastService.showError(I18n.tr("Failed to connect VPN"))
-            } else {
-                Qt.callLater(() => getState())
             }
         })
     }
@@ -755,18 +793,18 @@ Singleton {
         if (!vpnAvailable || vpnIsBusy) return
 
         vpnIsBusy = true
+        pendingVpnUuid = ""
+        vpnBusyStartTime = Date.now()
 
         const params = {
             uuidOrName: uuidOrName
         }
 
         DMSService.sendRequest("network.vpn.disconnect", params, response => {
-            vpnIsBusy = false
-
             if (response.error) {
+                vpnIsBusy = false
+                vpnBusyStartTime = 0
                 ToastService.showError(I18n.tr("Failed to disconnect VPN"))
-            } else {
-                Qt.callLater(() => getState())
             }
         })
     }
@@ -779,14 +817,12 @@ Singleton {
         if (!vpnAvailable || vpnIsBusy) return
 
         vpnIsBusy = true
+        pendingVpnUuid = ""
 
         DMSService.sendRequest("network.vpn.disconnectAll", null, response => {
-            vpnIsBusy = false
-
             if (response.error) {
+                vpnIsBusy = false
                 ToastService.showError(I18n.tr("Failed to disconnect VPNs"))
-            } else {
-                Qt.callLater(() => getState())
             }
         })
     }
@@ -805,8 +841,14 @@ Singleton {
             return
         }
 
-        if (vpnProfiles.length > 0) {
-            connectVpn(vpnProfiles[0].uuid)
+        if (vpnConnected) {
+            disconnectAllVpns()
+            return
+        }
+
+        const targetUuid = lastConnectedVpnUuid || (vpnProfiles.length > 0 ? vpnProfiles[0].uuid : "")
+        if (targetUuid) {
+            connectVpn(targetUuid)
         }
     }
 
