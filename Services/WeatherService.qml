@@ -322,7 +322,7 @@ Singleton {
 
     Process {
         id: ipLocationFetcher
-        command: lowPriorityCmd.concat(curlBaseCmd).concat(["http://ipinfo.io/json"])
+        command: lowPriorityCmd.concat(curlBaseCmd).concat(["http://ip-api.com/json/"])
         running: false
 
         stdout: StdioCollector {
@@ -335,23 +335,17 @@ Singleton {
 
                 try {
                     const data = JSON.parse(raw)
-                    const coords = data.loc
+
+                    if (data.status === "fail") {
+                        throw new Error("IP location lookup failed")
+                    }
+
+                    const lat = parseFloat(data.lat)
+                    const lon = parseFloat(data.lon)
                     const city = data.city
 
-                    if (!coords || !city) {
-                        throw new Error("Missing location data")
-                    }
-
-                    const coordsParts = coords.split(",")
-                    if (coordsParts.length !== 2) {
-                        throw new Error("Invalid coordinates format")
-                    }
-
-                    const lat = parseFloat(coordsParts[0])
-                    const lon = parseFloat(coordsParts[1])
-
-                    if (isNaN(lat) || isNaN(lon)) {
-                        throw new Error("Invalid coordinate values")
+                    if (!city || isNaN(lat) || isNaN(lon)) {
+                        throw new Error("Missing or invalid location data")
                     }
 
                     root.location = {
