@@ -974,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Matugen Ayarları"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": ""
+  },
   "Max apps to show": {
     "Max apps to show": "Gösterilecek maks uygulama"
   },
@@ -1012,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Monitör Seçimi:"
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": ""
   },
   "Monospace Font": {
     "Monospace Font": "Sabit Aralıklı Yazı Tipi"
@@ -1786,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "Duvar Kağıdı"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": ""
   },
   "Wallpapers": {
     "Wallpapers": "Duvar Kağıtları"

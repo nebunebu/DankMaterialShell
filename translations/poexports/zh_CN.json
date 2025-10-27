@@ -974,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Matugen 设置"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": ""
+  },
   "Max apps to show": {
     "Max apps to show": "应用显示上限"
   },
@@ -1012,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "选择显示器："
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": ""
   },
   "Monospace Font": {
     "Monospace Font": "等宽字体"
@@ -1786,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "壁纸"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": ""
   },
   "Wallpapers": {
     "Wallpapers": "壁纸"

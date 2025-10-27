@@ -974,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Configurações do Matugen"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": ""
+  },
   "Max apps to show": {
     "Max apps to show": "Máximo de apps para mostrar"
   },
@@ -1012,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Seleção de Monitor:"
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": ""
   },
   "Monospace Font": {
     "Monospace Font": "Fonte Mono espaço"
@@ -1786,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "Papel de parede"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": ""
   },
   "Wallpapers": {
     "Wallpapers": ""
