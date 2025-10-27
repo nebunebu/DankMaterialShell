@@ -966,6 +966,12 @@
     "comment": ""
   },
   {
+    "term": "DankSearch not available",
+    "context": "DankSearch not available",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:193",
+    "comment": ""
+  },
+  {
     "term": "Date Format",
     "context": "Date Format",
     "reference": "Modules/Settings/TimeWeatherTab.qml:179",
@@ -1233,6 +1239,12 @@
     "term": "Enter PIN for ",
     "context": "Enter PIN for ",
     "reference": "Modals/BluetoothPairingModal.qml:118",
+    "comment": ""
+  },
+  {
+    "term": "Enter a search query",
+    "context": "Enter a search query",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:199",
     "comment": ""
   },
   {
@@ -2118,6 +2130,12 @@
     "comment": ""
   },
   {
+    "term": "No files found",
+    "context": "No files found",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:202",
+    "comment": ""
+  },
+  {
     "term": "No items added yet",
     "context": "No items added yet",
     "reference": "Modules/Plugins/ListSetting.qml:79, Modules/Plugins/ListSettingWithInput.qml:250",
@@ -2688,6 +2706,18 @@
     "comment": ""
   },
   {
+    "term": "Search file contents",
+    "context": "Search file contents",
+    "reference": "Modals/Spotlight/SpotlightContent.qml:372",
+    "comment": ""
+  },
+  {
+    "term": "Search filenames",
+    "context": "Search filenames",
+    "reference": "Modals/Spotlight/SpotlightContent.qml:330",
+    "comment": ""
+  },
+  {
     "term": "Search for a location...",
     "context": "Search for a location...",
     "reference": "Widgets/DankLocationSearch.qml:21",
@@ -2703,6 +2733,12 @@
     "term": "Search...",
     "context": "Search...",
     "reference": "Widgets/DankDropdown.qml:264",
+    "comment": ""
+  },
+  {
+    "term": "Searching...",
+    "context": "Searching...",
+    "reference": "Modals/Spotlight/FileSearchResults.qml:196",
     "comment": ""
   },
   {
