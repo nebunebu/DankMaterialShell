@@ -8,7 +8,7 @@ import qs.Widgets
 
 DankModal {
     id: root
-    property real _maxW: Math.min(Screen.width  * 0.92, 1200)
+   property real _maxW: Math.min(Screen.width  * 0.92, 1200)
     property real _maxH: Math.min(Screen.height * 0.92, 900)
     width:  _maxW
     height: _maxH
@@ -107,7 +107,7 @@ DankModal {
                     spacing: Theme.spacingM
 
                     property var categories: root.categorizeKeybinds()
-                    property real columnWidth: (mainFlickable.width - spacing * 2) / 3
+                    property real columnWidth: Math.max(250, (mainFlickable.width - spacing * 4) / 5)
 
                     Column {
                         width: rowLayout.columnWidth
@@ -186,11 +186,12 @@ DankModal {
                     }
 
                     Repeater {
-                        model: ["Workspace", "Execute"]
+                        model: ["Workspace", "Execute", "System", "Other"]
 
                         Column {
                             width: rowLayout.columnWidth
                             spacing: Theme.spacingXS
+                            visible: (rowLayout.categories[modelData] || []).length > 0
 
                             StyledText {
                                 text: modelData
