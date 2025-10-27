@@ -4,9 +4,12 @@
     .[]
     | {
         mods: [
-          (if .modmask == 64 then "MainMod"
-           elif .modmask == 65 then "ShiftMod"
-           elif .modmask == 0 then empty
+          (if .modmask == 0 then empty
+           elif .modmask == 1 then "Shift"
+           elif .modmask == 4 then "Ctrl"
+           elif .modmask == 8 then "Alt_L"
+           elif .modmask == 64 then "Super"
+           elif .modmask == 65 then "SuperShift"
            else (.modmask | tostring)
            end)
         ],
