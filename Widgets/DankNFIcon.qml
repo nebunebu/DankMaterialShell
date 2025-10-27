@@ -50,19 +50,19 @@ Item {
         "sql":                  "\u{f1c0}",
 
         // --- scripts / shells ---
-        "sh":                   "\u{F08A9}",
-        "bash":                 "\u{F08A9}",
-        "zsh":                  "\u{F08A9}",
-        "fish":                 "\u{F08A9}",
-        "ps1":                  "\u{F08A9}",
-        "bat":                  "\u{F08A9}",
+        "sh":                   "\u{f0bc1}",
+        "bash":                 "\u{f0bc1}",
+        "zsh":                  "\u{f0bc1}",
+        "fish":                 "\u{f0bc1}",
+        "ps1":                  "\u{f0bc1}",
+        "bat":                  "\u{f0bc1}",
 
         // --- data / config ---
-        "toml":                 "\u{F09EE}",
+        "toml":                 "\u{e6b2}",
         "ini":                  "\u{F09EE}",
         "conf":                 "\u{F09EE}",
         "cfg":                  "\u{F09EE}",
-        "csv":                  "\u{F021C}",
+        "csv":                  "\u{eefc}",
         "tsv":                  "\u{F021C}",
 
         // --- docs / office ---
