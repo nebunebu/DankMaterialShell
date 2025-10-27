@@ -10,7 +10,7 @@
            else (.modmask | tostring)
            end)
         ],
-        key: .key,
+        key: (.key | sub("^XF86"; "")),
         dispatcher: .dispatcher,
         params: (.arg // .params // ""),
         comment: (
