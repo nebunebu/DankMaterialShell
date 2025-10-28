@@ -219,9 +219,13 @@ Column {
                 {
                     if (NetworkService.wifiToggling)
                         return "sync"
-                    if (NetworkService.networkStatus === "ethernet")
+
+                    const status = NetworkService.networkStatus
+                    if (status === "ethernet")
                         return "settings_ethernet"
-                    if (NetworkService.networkStatus === "wifi")
+                    if (status === "vpn")
+                        return NetworkService.ethernetConnected ? "settings_ethernet" : NetworkService.wifiSignalIcon
+                    if (status === "wifi")
                         return NetworkService.wifiSignalIcon
                     if (NetworkService.wifiEnabled)
                         return "wifi_off"
@@ -266,9 +270,17 @@ Column {
                 {
                     if (NetworkService.wifiToggling)
                         return NetworkService.wifiEnabled ? "Disabling WiFi..." : "Enabling WiFi..."
-                    if (NetworkService.networkStatus === "ethernet")
+
+                    const status = NetworkService.networkStatus
+                    if (status === "ethernet")
                         return "Ethernet"
-                    if (NetworkService.networkStatus === "wifi" && NetworkService.currentWifiSSID)
+                    if (status === "vpn") {
+                        if (NetworkService.ethernetConnected)
+                            return "Ethernet"
+                        if (NetworkService.wifiConnected && NetworkService.currentWifiSSID)
+                            return NetworkService.currentWifiSSID
+                    }
+                    if (status === "wifi" && NetworkService.currentWifiSSID)
                         return NetworkService.currentWifiSSID
                     if (NetworkService.wifiEnabled)
                         return "Not connected"
@@ -298,9 +310,17 @@ Column {
                 {
                     if (NetworkService.wifiToggling)
                         return "Please wait..."
-                    if (NetworkService.networkStatus === "ethernet")
+
+                    const status = NetworkService.networkStatus
+                    if (status === "ethernet")
                         return "Connected"
-                    if (NetworkService.networkStatus === "wifi")
+                    if (status === "vpn") {
+                        if (NetworkService.ethernetConnected)
+                            return "Connected"
+                        if (NetworkService.wifiConnected)
+                            return NetworkService.wifiSignalStrength > 0 ? NetworkService.wifiSignalStrength + "%" : "Connected"
+                    }
+                    if (status === "wifi")
                         return NetworkService.wifiSignalStrength > 0 ? NetworkService.wifiSignalStrength + "%" : "Connected"
                     if (NetworkService.wifiEnabled)
                         return "Select network"
@@ -358,9 +378,13 @@ Column {
                 {
                     if (NetworkService.wifiToggling)
                         return false
-                    if (NetworkService.networkStatus === "ethernet")
+
+                    const status = NetworkService.networkStatus
+                    if (status === "ethernet")
                         return true
-                    if (NetworkService.networkStatus === "wifi")
+                    if (status === "vpn")
+                        return NetworkService.ethernetConnected || NetworkService.wifiConnected
+                    if (status === "wifi")
                         return true
                     return NetworkService.wifiEnabled
                 }

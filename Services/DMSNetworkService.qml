@@ -37,7 +37,7 @@ Singleton {
     property var savedConnections: []
     property var ssidToConnectionName: ({})
     property var wifiSignalIcon: {
-        if (!wifiConnected || networkStatus !== "wifi") {
+        if (!wifiConnected) {
             return "wifi_off"
         }
         if (wifiSignalStrength >= 50) {
@@ -763,7 +763,7 @@ Singleton {
         })
     }
 
-    function connectVpn(uuidOrName, singleActive = true) {
+    function connectVpn(uuidOrName, singleActive = false) {
         if (!vpnAvailable || vpnIsBusy) return
 
         vpnIsBusy = true
