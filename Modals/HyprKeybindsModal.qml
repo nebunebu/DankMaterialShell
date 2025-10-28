@@ -16,6 +16,34 @@ DankModal {
 
     Shortcut { sequence: "Esc"; onActivated: root.close() }
 
+    property real scrollStep: 60 // Amount to scroll in pixels
+    property var activeFlickable: null // <-- ADD THIS
+
+    Shortcut {
+        sequence: "Ctrl+j"
+        onActivated: {
+          if (!root.activeFlickable) return
+
+            let newY = root.activeFlickable.contentY + scrollStep
+            // ... (math is the same) ...
+            newY = Math.min(newY, root.activeFlickable.contentHeight - root.activeFlickable.height)
+            root.activeFlickable.contentY = newY
+        }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+k"
+        onActivated: {
+            // Check if the flickable has been loaded yet
+            if (!root.activeFlickable) return
+
+            let newY = root.activeFlickable.contentY - root.scrollStep // <-- CORRECT (subtract)
+            // Ensure we don't scroll past the top
+            newY = Math.max(0, newY) // <-- CORRECT CHECK
+            root.activeFlickable.contentY = newY
+        }
+    }
+
     // Add this property to DankModal
     property var groupedKeybinds: {
         const groups = {}
@@ -54,6 +82,8 @@ DankModal {
         }
         return result;
     }
+
+
 content: Component {
         Item {
             anchors.fill: parent
@@ -62,6 +92,9 @@ content: Component {
                 id: mainFlickable
                 anchors.fill: parent
                 anchors.margins: Theme.spacingL
+
+                Component.onCompleted: root.activeFlickable = mainFlickable
+                Component.onDestruction: root.activeFlickable = null
 
                 contentWidth: mainFlickable.width
                 // Bind height to the new Row layout
@@ -174,5 +207,4 @@ content: Component {
             }
         }
     }
-
 }
