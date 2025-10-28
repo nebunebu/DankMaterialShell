@@ -48,7 +48,7 @@ PanelWindow {
     anchors.bottom: true
     anchors.right: true
 
-    implicitWidth: expandable && expandedWidth ? expandedWidthValue : slideoutWidth
+    implicitWidth: expandable ? expandedWidthValue : slideoutWidth
     implicitHeight: modelData ? modelData.height : 800
 
     color: "transparent"
@@ -56,6 +56,15 @@ PanelWindow {
     WlrLayershell.layer: WlrLayershell.Top
     WlrLayershell.exclusiveZone: 0
     WlrLayershell.keyboardFocus: isVisible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+
+    mask: Region {
+        item: Rectangle {
+            x: root.width - contentRect.width
+            y: 0
+            width: contentRect.width
+            height: root.height
+        }
+    }
 
     StyledRect {
         id: contentRect
