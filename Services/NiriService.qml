@@ -39,6 +39,11 @@ Singleton {
 
     signal windowUrgentChanged
 
+    function setWorkspaces(newMap) {
+        root.workspaces = newMap
+        allWorkspaces = Object.values(newMap).sort((a, b) => a.idx - b.idx)
+    }
+
     Component.onCompleted: fetchOutputs()
 
     Timer {
@@ -280,8 +285,7 @@ Singleton {
             }
         }
 
-        root.workspaces = newWorkspaces
-        allWorkspaces = Object.values(newWorkspaces).sort((a, b) => a.idx - b.idx)
+        setWorkspaces(newWorkspaces)
 
         focusedWorkspaceIndex = allWorkspaces.findIndex(w => w.is_focused)
         if (focusedWorkspaceIndex >= 0) {
@@ -325,17 +329,14 @@ Singleton {
             updatedWorkspaces[id] = updatedWs
         }
 
-        root.workspaces = updatedWorkspaces
+        setWorkspaces(updatedWorkspaces)
 
         focusedWorkspaceId = data.id
-        focusedWorkspaceIndex = Object.values(updatedWorkspaces).findIndex(w => w.id === data.id)
+        focusedWorkspaceIndex = allWorkspaces.findIndex(w => w.id === data.id)
 
         if (focusedWorkspaceIndex >= 0) {
-            const ws = Object.values(updatedWorkspaces)[focusedWorkspaceIndex]
-            currentOutput = ws.output || ""
+            currentOutput = allWorkspaces[focusedWorkspaceIndex].output || ""
         }
-
-        allWorkspaces = Object.values(updatedWorkspaces).sort((a, b) => a.idx - b.idx)
 
         updateCurrentOutputWorkspaces()
     }
@@ -377,7 +378,7 @@ Singleton {
                 for (const id in root.workspaces) {
                     updatedWorkspaces[id] = id === focusedWindow.workspace_id ? updatedWs : root.workspaces[id]
                 }
-                root.workspaces = updatedWorkspaces
+                setWorkspaces(updatedWorkspaces)
             }
         }
     }
@@ -395,7 +396,7 @@ Singleton {
             for (const id in root.workspaces) {
                 updatedWorkspaces[id] = id === data.workspace_id ? updatedWs : root.workspaces[id]
             }
-            root.workspaces = updatedWorkspaces
+            setWorkspaces(updatedWorkspaces)
         }
 
         const updatedWindows = []
@@ -533,9 +534,7 @@ Singleton {
         for (const id in root.workspaces) {
             updatedWorkspaces[id] = id === data.id ? updatedWs : root.workspaces[id]
         }
-        root.workspaces = updatedWorkspaces
-
-        allWorkspaces = Object.values(updatedWorkspaces).sort((a, b) => a.idx - b.idx)
+        setWorkspaces(updatedWorkspaces)
 
         windowUrgentChanged()
     }
