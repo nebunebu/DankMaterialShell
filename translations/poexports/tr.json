@@ -494,6 +494,9 @@
   "DankBar Font Scale": {
     "DankBar Font Scale": "DankBar Yazı Tipi Ölçeği"
   },
+  "DankSearch not available": {
+    "DankSearch not available": "DankSearch kullanılamıyor"
+  },
   "Date Format": {
     "Date Format": "Tarih Biçimi"
   },
@@ -628,6 +631,9 @@
   },
   "Enter PIN for ": {
     "Enter PIN for ": "Şunun için PIN gir: "
+  },
+  "Enter a search query": {
+    "Enter a search query": "Arama sorgusu girin"
   },
   "Enter credentials for ": {
     "Enter credentials for ": "Kimlik bilgilerini girin "
@@ -968,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Matugen Ayarları"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": "Matugen Hedef Monitör"
+  },
   "Max apps to show": {
     "Max apps to show": "Gösterilecek maks uygulama"
   },
@@ -1006,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Monitör Seçimi:"
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": "Duvar kağıdı dinamik tema renklerini yönlendiren monitör"
   },
   "Monospace Font": {
     "Monospace Font": "Sabit Aralıklı Yazı Tipi"
@@ -1078,6 +1090,9 @@
   },
   "No clipboard entries found": {
     "No clipboard entries found": "Pano girişleri bulunamadı"
+  },
+  "No files found": {
+    "No files found": "Dosya bulunamadı"
   },
   "No items added yet": {
     "No items added yet": "Henüz eklenen öğe yok"
@@ -1367,6 +1382,12 @@
   "Scroll through windows, rather than workspaces": {
     "Scroll through windows, rather than workspaces": "Çalışma alanları yerine pencereler arasında gezin"
   },
+  "Search file contents": {
+    "Search file contents": "Dosya içeriklerini ara"
+  },
+  "Search filenames": {
+    "Search filenames": "Dosya adlarını ar"
+  },
   "Search for a location...": {
     "Search for a location...": "Bir konum ara..."
   },
@@ -1375,6 +1396,9 @@
   },
   "Search...": {
     "Search...": "Ara..."
+  },
+  "Searching...": {
+    "Searching...": "Arıyor..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "Başlatıcı Logosu Seç"
@@ -1768,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "Duvar Kağıdı"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": "Duvar Kağıdı Monitörü"
   },
   "Wallpapers": {
     "Wallpapers": "Duvar Kağıtları"

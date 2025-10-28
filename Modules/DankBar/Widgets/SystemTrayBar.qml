@@ -117,8 +117,8 @@ Item {
 
                         IconImage {
                             anchors.centerIn: parent
-                            width: 16
-                            height: 16
+                            width: Theme.barIconSize(root.barThickness)
+                            height: Theme.barIconSize(root.barThickness)
                             source: delegateRoot.iconSource
                             asynchronous: true
                             smooth: true
@@ -130,6 +130,7 @@ Item {
                         id: trayItemArea
 
                         anchors.fill: parent
+                        hoverEnabled: true
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         cursorShape: Qt.PointingHandCursor
                         onClicked: (mouse) => {
@@ -203,8 +204,8 @@ Item {
 
                         IconImage {
                             anchors.centerIn: parent
-                            width: 16
-                            height: 16
+                            width: Theme.barIconSize(root.barThickness)
+                            height: Theme.barIconSize(root.barThickness)
                             source: delegateRoot.iconSource
                             asynchronous: true
                             smooth: true
@@ -216,6 +217,7 @@ Item {
                         id: trayItemArea
 
                         anchors.fill: parent
+                        hoverEnabled: true
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         cursorShape: Qt.PointingHandCursor
                         onClicked: (mouse) => {

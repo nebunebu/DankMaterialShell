@@ -494,6 +494,9 @@
   "DankBar Font Scale": {
     "DankBar Font Scale": "Escala das fontes no Dank Bar"
   },
+  "DankSearch not available": {
+    "DankSearch not available": ""
+  },
   "Date Format": {
     "Date Format": "Formatação de Data"
   },
@@ -628,6 +631,9 @@
   },
   "Enter PIN for ": {
     "Enter PIN for ": ""
+  },
+  "Enter a search query": {
+    "Enter a search query": ""
   },
   "Enter credentials for ": {
     "Enter credentials for ": "Insira as credenciais para "
@@ -968,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Configurações do Matugen"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": ""
+  },
   "Max apps to show": {
     "Max apps to show": "Máximo de apps para mostrar"
   },
@@ -1006,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Seleção de Monitor:"
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": ""
   },
   "Monospace Font": {
     "Monospace Font": "Fonte Mono espaço"
@@ -1078,6 +1090,9 @@
   },
   "No clipboard entries found": {
     "No clipboard entries found": "Área de transferência vazia"
+  },
+  "No files found": {
+    "No files found": ""
   },
   "No items added yet": {
     "No items added yet": "Nenhum item adicionado"
@@ -1367,6 +1382,12 @@
   "Scroll through windows, rather than workspaces": {
     "Scroll through windows, rather than workspaces": ""
   },
+  "Search file contents": {
+    "Search file contents": ""
+  },
+  "Search filenames": {
+    "Search filenames": ""
+  },
   "Search for a location...": {
     "Search for a location...": "Procurar um local..."
   },
@@ -1375,6 +1396,9 @@
   },
   "Search...": {
     "Search...": "Buscar..."
+  },
+  "Searching...": {
+    "Searching...": ""
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "Selecionar Logo do Lançador"
@@ -1768,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "Papel de parede"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": ""
   },
   "Wallpapers": {
     "Wallpapers": ""

@@ -7,10 +7,6 @@ import qs.Widgets
 Rectangle {
     id: resultsContainer
 
-    // DEVELOPER NOTE: This component renders the Spotlight launcher (accessed via Mod+Space).
-    // Changes to launcher behavior, especially item rendering, filtering, or model structure,
-    // likely require corresponding updates in Modules/AppDrawer/AppLauncher.qml and vice versa.
-
     property var appLauncher: null
     property var contextMenu: null
 
@@ -19,8 +15,6 @@ Rectangle {
         resultsGrid.contentY = 0
     }
 
-    width: parent.width
-    height: parent.height - y
     radius: Theme.cornerRadius
     color: "transparent"
     clip: true

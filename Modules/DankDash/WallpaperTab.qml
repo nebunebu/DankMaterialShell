@@ -29,8 +29,25 @@ Item {
     property bool enableAnimation: false
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     property string selectedFileName: ""
+    property var targetScreen: null
+    property string targetScreenName: targetScreen ? targetScreen.name : ""
 
     signal requestTabChange(int newIndex)
+
+    function getCurrentWallpaper() {
+        if (SessionData.perMonitorWallpaper && targetScreenName) {
+            return SessionData.getMonitorWallpaper(targetScreenName)
+        }
+        return SessionData.wallpaperPath
+    }
+
+    function setCurrentWallpaper(path) {
+        if (SessionData.perMonitorWallpaper && targetScreenName) {
+            SessionData.setMonitorWallpaper(targetScreenName, path)
+        } else {
+            SessionData.setWallpaper(path)
+        }
+    }
 
     onCurrentPageChanged: {
         if (currentPage !== lastPage) {
@@ -71,7 +88,7 @@ Item {
                 if (absoluteIndex < wallpaperFolderModel.count) {
                     const filePath = wallpaperFolderModel.get(absoluteIndex, "filePath")
                     if (filePath) {
-                        SessionData.setWallpaper(filePath.toString().replace(/^file:\/\//, ''))
+                        setCurrentWallpaper(filePath.toString().replace(/^file:\/\//, ''))
                     }
                 }
             }
@@ -151,32 +168,39 @@ Item {
     }
 
     function setInitialSelection() {
-        if (!SessionData.wallpaperPath || wallpaperFolderModel.count === 0) {
+        const currentWallpaper = getCurrentWallpaper()
+        if (!currentWallpaper || wallpaperFolderModel.count === 0) {
             gridIndex = 0
             updateSelectedFileName()
-            Qt.callLater(() => { enableAnimation = true })
+            Qt.callLater(() => {
+                             enableAnimation = true
+                         })
             return
         }
 
-        for (let i = 0; i < wallpaperFolderModel.count; i++) {
+        for (var i = 0; i < wallpaperFolderModel.count; i++) {
             const filePath = wallpaperFolderModel.get(i, "filePath")
-            if (filePath && filePath.toString().replace(/^file:\/\//, '') === SessionData.wallpaperPath) {
+            if (filePath && filePath.toString().replace(/^file:\/\//, '') === currentWallpaper) {
                 const targetPage = Math.floor(i / itemsPerPage)
                 const targetIndex = i % itemsPerPage
                 currentPage = targetPage
                 gridIndex = targetIndex
                 updateSelectedFileName()
-                Qt.callLater(() => { enableAnimation = true })
+                Qt.callLater(() => {
+                                 enableAnimation = true
+                             })
                 return
             }
         }
         gridIndex = 0
         updateSelectedFileName()
-        Qt.callLater(() => { enableAnimation = true })
+        Qt.callLater(() => {
+                         enableAnimation = true
+                     })
     }
 
     function loadWallpaperDirectory() {
-        const currentWallpaper = SessionData.wallpaperPath
+        const currentWallpaper = getCurrentWallpaper()
 
         if (!currentWallpaper || currentWallpaper.startsWith("#") || currentWallpaper.startsWith("we:")) {
             if (CacheData.wallpaperLastPath && CacheData.wallpaperLastPath !== "") {
@@ -215,6 +239,19 @@ Item {
             if (visible && active) {
                 setInitialSelection()
             }
+        }
+        function onMonitorWallpapersChanged() {
+            loadWallpaperDirectory()
+            if (visible && active) {
+                setInitialSelection()
+            }
+        }
+    }
+
+    onTargetScreenNameChanged: {
+        loadWallpaperDirectory()
+        if (visible && active) {
+            setInitialSelection()
         }
     }
 
@@ -267,18 +304,18 @@ Item {
             fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
             allowStacking: true
 
-            onFileSelected: (path) => {
-                const cleanPath = path.replace(/^file:\/\//, '')
-                SessionData.setWallpaper(cleanPath)
+            onFileSelected: path => {
+                                const cleanPath = path.replace(/^file:\/\//, '')
+                                setCurrentWallpaper(cleanPath)
 
-                const dirPath = cleanPath.substring(0, cleanPath.lastIndexOf('/'))
-                if (dirPath) {
-                    wallpaperDir = dirPath
-                    CacheData.wallpaperLastPath = dirPath
-                    CacheData.saveCache()
-                }
-                close()
-            }
+                                const dirPath = cleanPath.substring(0, cleanPath.lastIndexOf('/'))
+                                if (dirPath) {
+                                    wallpaperDir = dirPath
+                                    CacheData.wallpaperLastPath = dirPath
+                                    CacheData.saveCache()
+                                }
+                                close()
+                            }
 
             onDialogClosed: {
                 Qt.callLater(() => wallpaperBrowserLoader.active = false)
@@ -327,7 +364,7 @@ Item {
                     const startIndex = currentPage * itemsPerPage
                     const endIndex = Math.min(startIndex + itemsPerPage, wallpaperFolderModel.count)
                     const items = []
-                    for (let i = startIndex; i < endIndex; i++) {
+                    for (var i = startIndex; i < endIndex; i++) {
                         const filePath = wallpaperFolderModel.get(i, "filePath")
                         if (filePath) {
                             items.push(filePath.toString().replace(/^file:\/\//, ''))
@@ -369,7 +406,7 @@ Item {
                     height: wallpaperGrid.cellHeight
 
                     property string wallpaperPath: modelData || ""
-                    property bool isSelected: SessionData.wallpaperPath === modelData
+                    property bool isSelected: getCurrentWallpaper() === modelData
 
                     Rectangle {
                         id: wallpaperCard
@@ -437,7 +474,7 @@ Item {
                             onClicked: {
                                 gridIndex = index
                                 if (modelData) {
-                                    SessionData.setWallpaper(modelData)
+                                    setCurrentWallpaper(modelData)
                                 }
                             }
                         }

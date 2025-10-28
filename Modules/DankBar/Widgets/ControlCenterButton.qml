@@ -31,8 +31,13 @@ BasePill {
                             return "sync"
                         }
 
-                        if (NetworkService.networkStatus === "ethernet") {
+                        const status = NetworkService.networkStatus
+                        if (status === "ethernet") {
                             return "lan"
+                        }
+
+                        if (status === "vpn") {
+                            return NetworkService.ethernetConnected ? "lan" : NetworkService.wifiSignalIcon
                         }
 
                         return NetworkService.wifiSignalIcon
@@ -125,22 +130,27 @@ BasePill {
 
                     name: {
                         if (NetworkService.wifiToggling) {
-                            return "sync";
+                            return "sync"
                         }
 
-                        if (NetworkService.networkStatus === "ethernet") {
-                            return "lan";
+                        const status = NetworkService.networkStatus
+                        if (status === "ethernet") {
+                            return "lan"
                         }
 
-                        return NetworkService.wifiSignalIcon;
+                        if (status === "vpn") {
+                            return NetworkService.ethernetConnected ? "lan" : NetworkService.wifiSignalIcon
+                        }
+
+                        return NetworkService.wifiSignalIcon
                     }
                     size: Theme.barIconSize(root.barThickness)
                     color: {
                         if (NetworkService.wifiToggling) {
-                            return Theme.primary;
+                            return Theme.primary
                         }
 
-                        return NetworkService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton;
+                        return NetworkService.networkStatus !== "disconnected" ? Theme.primary : Theme.outlineButton
                     }
                     anchors.verticalCenter: parent.verticalCenter
                     visible: root.showNetworkIcon && NetworkService.networkAvailable

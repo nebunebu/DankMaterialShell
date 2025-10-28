@@ -213,10 +213,26 @@ Item {
         }
     }
 
+    property string lastCredentialsToken: ""
+    property var lastCredentialsTime: 0
+
     Connections {
         target: NetworkService
 
         function onCredentialsNeeded(token, ssid, setting, fields, hints, reason, connType, connName, vpnService) {
+            const now = Date.now()
+            const timeSinceLastPrompt = now - lastCredentialsTime
+
+            if (wifiPasswordModal.shouldBeVisible && timeSinceLastPrompt < 1000) {
+                NetworkService.cancelCredentials(lastCredentialsToken)
+                lastCredentialsToken = token
+                lastCredentialsTime = now
+                wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason, connType, connName, vpnService)
+                return
+            }
+
+            lastCredentialsToken = token
+            lastCredentialsTime = now
             wifiPasswordModal.showFromPrompt(token, ssid, setting, fields, hints, reason, connType, connName, vpnService)
         }
     }

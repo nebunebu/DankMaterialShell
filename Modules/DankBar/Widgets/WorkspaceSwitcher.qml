@@ -17,8 +17,16 @@ Item {
     property real barThickness: 48
     property var hyprlandOverviewLoader: null
     property var parentScreen: null
+    property int _desktopEntriesUpdateTrigger: 0
     readonly property var sortedToplevels: {
         return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, screenName);
+    }
+
+    Connections {
+        target: DesktopEntries
+        function onApplicationsChanged() {
+            _desktopEntriesUpdateTrigger++
+        }
     }
     property int currentWorkspace: {
         if (CompositorService.isNiri) {
@@ -43,6 +51,7 @@ Item {
     }
 
     function getWorkspaceIcons(ws) {
+        _desktopEntriesUpdateTrigger
         if (!SettingsData.showWorkspaceApps || !ws) {
             return []
         }

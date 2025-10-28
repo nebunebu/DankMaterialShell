@@ -2,6 +2,7 @@ pragma Singleton
 
 pragma ComponentBehavior: Bound
 
+import QtCore
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -68,8 +69,8 @@ Singleton {
     function scanSoundThemes() {
         const xdgDataDirs = Quickshell.env("XDG_DATA_DIRS")
         const searchPaths = xdgDataDirs && xdgDataDirs.trim() !== ""
-            ? xdgDataDirs.split(":")
-            : ["/usr/share", "/usr/local/share", StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share"]
+            ? xdgDataDirs.split(":").concat(Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericDataLocation)))
+            : ["/usr/share", "/usr/local/share", Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericDataLocation))]
 
         const basePaths = searchPaths.map(p => p + "/sounds").join(" ")
         const script = `
@@ -134,8 +135,8 @@ Singleton {
 
         const xdgDataDirs = Quickshell.env("XDG_DATA_DIRS")
         const searchPaths = xdgDataDirs && xdgDataDirs.trim() !== ""
-            ? xdgDataDirs.split(":")
-            : ["/usr/share", "/usr/local/share", StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share"]
+            ? xdgDataDirs.split(":").concat(Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericDataLocation)))
+            : ["/usr/share", "/usr/local/share", Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericDataLocation))]
 
         const extensions = ["oga", "ogg", "wav", "mp3", "flac"]
         const themesToSearch = themeName !== "freedesktop" ? `${themeName} freedesktop` : themeName

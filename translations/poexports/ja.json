@@ -390,7 +390,7 @@
     "Connect": "接続"
   },
   "Connect to VPN": {
-    "Connect to VPN": ""
+    "Connect to VPN": "VPNに接続"
   },
   "Connect to Wi-Fi": {
     "Connect to Wi-Fi": "Wi-Fiに接続"
@@ -493,6 +493,9 @@
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar フォントスケール"
+  },
+  "DankSearch not available": {
+    "DankSearch not available": "DankSearchが利用できません"
   },
   "Date Format": {
     "Date Format": "日付形式"
@@ -629,6 +632,9 @@
   "Enter PIN for ": {
     "Enter PIN for ": "PINを入力してください "
   },
+  "Enter a search query": {
+    "Enter a search query": "検索クエリを入力してください"
+  },
   "Enter credentials for ": {
     "Enter credentials for ": "資格情報を入力"
   },
@@ -660,16 +666,16 @@
     "Failed to activate configuration": "設定が適用できませんでした"
   },
   "Failed to connect VPN": {
-    "Failed to connect VPN": ""
+    "Failed to connect VPN": "VPNへの接続が失敗しました"
   },
   "Failed to connect to ": {
     "Failed to connect to ": "接続ができませんでした "
   },
   "Failed to disconnect VPN": {
-    "Failed to disconnect VPN": ""
+    "Failed to disconnect VPN": "VPNへの切断が失敗しました"
   },
   "Failed to disconnect VPNs": {
-    "Failed to disconnect VPNs": ""
+    "Failed to disconnect VPNs": "VPNへの切断が失敗しました"
   },
   "Failed to disconnect WiFi": {
     "Failed to disconnect WiFi": "WiFiの切断ができませんでした"
@@ -968,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Matugen設定"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": "Matugenターゲットモニター"
+  },
   "Max apps to show": {
     "Max apps to show": "表示するアプリの最大数"
   },
@@ -1006,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "モニターの選択："
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": "ダイナミックテーマの色を駆動する壁紙をモニター"
   },
   "Monospace Font": {
     "Monospace Font": "等幅フォント"
@@ -1078,6 +1090,9 @@
   },
   "No clipboard entries found": {
     "No clipboard entries found": "クリップボードのエントリが見つかりませんでした"
+  },
+  "No files found": {
+    "No files found": "ファイルが見つかりませんでした"
   },
   "No items added yet": {
     "No items added yet": "まだアイテムが追加されていません"
@@ -1367,6 +1382,12 @@
   "Scroll through windows, rather than workspaces": {
     "Scroll through windows, rather than workspaces": "ワークスペースではなくウィンドウをスクロール"
   },
+  "Search file contents": {
+    "Search file contents": "ファイルの内容を検索"
+  },
+  "Search filenames": {
+    "Search filenames": "ファイル名の検索"
+  },
   "Search for a location...": {
     "Search for a location...": "ロケーションを検索..."
   },
@@ -1375,6 +1396,9 @@
   },
   "Search...": {
     "Search...": "検索..."
+  },
+  "Searching...": {
+    "Searching...": "検索中..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "ランチャーロゴを選ぶ"
@@ -1768,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "壁紙"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": "壁紙モニター"
   },
   "Wallpapers": {
     "Wallpapers": "壁紙"

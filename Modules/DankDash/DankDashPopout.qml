@@ -49,12 +49,16 @@ DankPopout {
     property bool __contentReady: false
 
     function __tryFocusOnce() {
-        if (!__focusArmed) return
+        if (!__focusArmed)
+            return
         const win = root.window
-        if (!win || !win.visible) return
-        if (!contentLoader.item) return
+        if (!win || !win.visible)
+            return
+        if (!contentLoader.item)
+            return
 
-        if (win.requestActivate) win.requestActivate()
+        if (win.requestActivate)
+            win.requestActivate()
         contentLoader.item.forceActiveFocus(Qt.TabFocusReason)
 
         if (contentLoader.item.activeFocus)
@@ -78,14 +82,18 @@ DankPopout {
         target: contentLoader
         function onLoaded() {
             __contentReady = true
-            if (__focusArmed) __tryFocusOnce()
+            if (__focusArmed)
+                __tryFocusOnce()
         }
     }
 
     Connections {
         target: root.window ? root.window : null
         enabled: !!root.window
-        function onVisibleChanged() { if (__focusArmed) __tryFocusOnce() }
+        function onVisibleChanged() {
+            if (__focusArmed)
+                __tryFocusOnce()
+        }
     }
 
     onBackgroundClicked: {
@@ -111,14 +119,14 @@ DankPopout {
                 target: root
                 function onShouldBeVisibleChanged() {
                     if (root.shouldBeVisible) {
-                        Qt.callLater(function() {
+                        Qt.callLater(function () {
                             mainContainer.forceActiveFocus()
                         })
                     }
                 }
             }
 
-            Keys.onPressed: function(event) {
+            Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Escape) {
                     root.dashVisible = false
                     event.accepted = true
@@ -216,32 +224,43 @@ DankPopout {
                     }
 
                     model: {
-                        let tabs = [
-                            { icon: "dashboard", text: I18n.tr("Overview") },
-                            { icon: "music_note", text: I18n.tr("Media") },
-                            { icon: "wallpaper", text: I18n.tr("Wallpapers") }
-                        ]
+                        let tabs = [{
+                                        "icon": "dashboard",
+                                        "text": I18n.tr("Overview")
+                                    }, {
+                                        "icon": "music_note",
+                                        "text": I18n.tr("Media")
+                                    }, {
+                                        "icon": "wallpaper",
+                                        "text": I18n.tr("Wallpapers")
+                                    }]
 
                         if (SettingsData.weatherEnabled) {
-                            tabs.push({ icon: "wb_sunny", text: I18n.tr("Weather") })
+                            tabs.push({
+                                          "icon": "wb_sunny",
+                                          "text": I18n.tr("Weather")
+                                      })
                         }
 
-                        tabs.push({ icon: "settings", text: I18n.tr("Settings"), isAction: true })
+                        tabs.push({
+                                      "icon": "settings",
+                                      "text": I18n.tr("Settings"),
+                                      "isAction": true
+                                  })
                         return tabs
                     }
 
-                    onTabClicked: function(index) {
+                    onTabClicked: function (index) {
                         root.currentTabIndex = index
                     }
 
-                    onActionTriggered: function(index) {
+                    onActionTriggered: function (index) {
                         let settingsIndex = SettingsData.weatherEnabled ? 4 : 3
                         if (index === settingsIndex) {
                             dashVisible = false
                             settingsModal.show()
                         }
                     }
-
                 }
 
                 Item {
@@ -253,16 +272,24 @@ DankPopout {
                     id: pages
                     width: parent.width
                     implicitHeight: {
-                        if (currentIndex === 0) return overviewTab.implicitHeight
-                        if (currentIndex === 1) return mediaTab.implicitHeight
-                        if (currentIndex === 2) return wallpaperTab.implicitHeight
-                        if (SettingsData.weatherEnabled && currentIndex === 3) return weatherTab.implicitHeight
+                        if (currentIndex === 0)
+                            return overviewTab.implicitHeight
+                        if (currentIndex === 1)
+                            return mediaTab.implicitHeight
+                        if (currentIndex === 2)
+                            return wallpaperTab.implicitHeight
+                        if (SettingsData.weatherEnabled && currentIndex === 3)
+                            return weatherTab.implicitHeight
                         return overviewTab.implicitHeight
                     }
                     currentIndex: root.currentTabIndex
 
                     OverviewTab {
                         id: overviewTab
+
+                        onCloseDash: {
+                            root.dashVisible = false
+                        }
 
                         onSwitchToWeatherTab: {
                             if (SettingsData.weatherEnabled) {
@@ -286,6 +313,7 @@ DankPopout {
                         active: root.currentTabIndex === 2
                         tabBarItem: tabBar
                         keyForwardTarget: mainContainer
+                        targetScreen: root.triggerScreen
                     }
 
                     WeatherTab {

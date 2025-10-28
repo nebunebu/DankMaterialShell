@@ -309,6 +309,9 @@ EOF
       printf "%s\n\n" "$OUT" > "$TMP"
       cat "$CONFIG_DIR/kitty/dank-theme.conf" >> "$TMP"
       mv "$TMP" "$CONFIG_DIR/kitty/dank-theme.conf"
+      if [[ -f "$CONFIG_DIR/kitty/kitty.conf" ]] && grep -q "^[^#]*dank-theme.conf" "$CONFIG_DIR/kitty/kitty.conf" 2>/dev/null; then
+        pkill -USR1 -x kitty >/dev/null 2>&1 || true
+      fi
     fi
   fi
 

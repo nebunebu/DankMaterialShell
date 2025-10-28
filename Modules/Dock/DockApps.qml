@@ -213,13 +213,6 @@ Item {
                     anchors.centerIn: parent
                 }
 
-                MouseArea {
-                    visible: model.type === "separator"
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    acceptedButtons: Qt.NoButton
-                }
-
                 DockAppButton {
                     id: button
                     visible: model.type !== "separator"

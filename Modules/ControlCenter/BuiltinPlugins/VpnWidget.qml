@@ -13,6 +13,7 @@ PluginComponent {
         service: DMSNetworkService
     }
 
+
     ccWidgetIcon: DMSNetworkService.isBusy ? "sync" : (DMSNetworkService.connected ? "vpn_lock" : "vpn_key_off")
     ccWidgetPrimaryText: "VPN"
     ccWidgetSecondaryText: {
@@ -26,11 +27,7 @@ PluginComponent {
     ccWidgetIsActive: DMSNetworkService.connected
 
     onCcWidgetToggled: {
-        if (DMSNetworkService.connected) {
-            DMSNetworkService.disconnectAllActive()
-        } else if (DMSNetworkService.profiles.length > 0) {
-            DMSNetworkService.connect(DMSNetworkService.profiles[0].uuid)
-        }
+        DMSNetworkService.toggleVpn()
     }
 
     ccDetailContent: Component {
@@ -62,10 +59,10 @@ PluginComponent {
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         font.weight: Font.Medium
-                    }
-
-                    Item {
+                        elide: Text.ElideRight
+                        wrapMode: Text.NoWrap
                         Layout.fillWidth: true
+                        Layout.maximumWidth: parent.width - 120
                     }
 
                     Rectangle {
@@ -75,6 +72,7 @@ PluginComponent {
                         visible: DMSNetworkService.connected
                         width: 110
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        opacity: DMSNetworkService.isBusy ? 0.5 : 1.0
 
                         Row {
                             anchors.centerIn: parent
@@ -98,7 +96,8 @@ PluginComponent {
                             id: discAllArea
                             anchors.fill: parent
                             hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
+                            cursorShape: DMSNetworkService.isBusy ? Qt.BusyCursor : Qt.PointingHandCursor
+                            enabled: !DMSNetworkService.isBusy
                             onClicked: DMSNetworkService.disconnectAllActive()
                         }
                     }
@@ -165,6 +164,7 @@ PluginComponent {
                                 color: rowArea.containsMouse ? Theme.primaryHoverLight : (DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
                                 border.width: DMSNetworkService.isActiveUuid(modelData.uuid) ? 2 : 1
                                 border.color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
+                                opacity: DMSNetworkService.isBusy ? 0.5 : 1.0
 
                                 RowLayout {
                                     anchors.left: parent.left
@@ -183,11 +183,15 @@ PluginComponent {
                                     Column {
                                         spacing: 2
                                         Layout.alignment: Qt.AlignVCenter
+                                        Layout.fillWidth: true
 
                                         StyledText {
                                             text: modelData.name
                                             font.pixelSize: Theme.fontSizeMedium
                                             color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                            elide: Text.ElideRight
+                                            wrapMode: Text.NoWrap
+                                            width: parent.width
                                         }
 
                                         StyledText {
@@ -233,7 +237,8 @@ PluginComponent {
                                     id: rowArea
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
+                                    cursorShape: DMSNetworkService.isBusy ? Qt.BusyCursor : Qt.PointingHandCursor
+                                    enabled: !DMSNetworkService.isBusy
                                     onClicked: DMSNetworkService.toggle(modelData.uuid)
                                 }
                             }

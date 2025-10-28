@@ -13,6 +13,8 @@ Rectangle {
     property var selectedDateEvents: []
     property bool hasEvents: selectedDateEvents && selectedDateEvents.length > 0
 
+    signal closeDash()
+
     function weekStartJs() {
         return Qt.locale().firstDayOfWeek % 7
     }
@@ -428,22 +430,10 @@ Rectangle {
                         if (modelData.url && modelData.url !== "") {
                             if (Qt.openUrlExternally(modelData.url) === false) {
                                 console.warn("Failed to open URL: " + modelData.url)
+                            } else {
+                                root.closeDash()
                             }
                         }
-                    }
-                }
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.shortDuration
-                        easing.type: Theme.standardEasing
-                    }
-                }
-
-                Behavior on border.color {
-                    ColorAnimation {
-                        duration: Theme.shortDuration
-                        easing.type: Theme.standardEasing
                     }
                 }
             }

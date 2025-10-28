@@ -494,6 +494,9 @@
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar 字体缩放"
   },
+  "DankSearch not available": {
+    "DankSearch not available": "DankSearch 不可用"
+  },
   "Date Format": {
     "Date Format": "日期格式"
   },
@@ -628,6 +631,9 @@
   },
   "Enter PIN for ": {
     "Enter PIN for ": "输入PIN "
+  },
+  "Enter a search query": {
+    "Enter a search query": "输入检索内容"
   },
   "Enter credentials for ": {
     "Enter credentials for ": "输入凭据 "
@@ -968,6 +974,9 @@
   "Matugen Settings": {
     "Matugen Settings": "Matugen 设置"
   },
+  "Matugen Target Monitor": {
+    "Matugen Target Monitor": "Matugen目标监视器"
+  },
   "Max apps to show": {
     "Max apps to show": "应用显示上限"
   },
@@ -1006,6 +1015,9 @@
   },
   "Monitor Selection:": {
     "Monitor Selection:": "选择显示器："
+  },
+  "Monitor whose wallpaper drives dynamic theming colors": {
+    "Monitor whose wallpaper drives dynamic theming colors": "监视使用动态主题色的壁纸"
   },
   "Monospace Font": {
     "Monospace Font": "等宽字体"
@@ -1078,6 +1090,9 @@
   },
   "No clipboard entries found": {
     "No clipboard entries found": "无可用记录"
+  },
+  "No files found": {
+    "No files found": "未找到文件"
   },
   "No items added yet": {
     "No items added yet": "暂未添加任何项目"
@@ -1367,6 +1382,12 @@
   "Scroll through windows, rather than workspaces": {
     "Scroll through windows, rather than workspaces": "滚动窗口，而非工作区"
   },
+  "Search file contents": {
+    "Search file contents": "检索文件内容"
+  },
+  "Search filenames": {
+    "Search filenames": "检索文件名"
+  },
   "Search for a location...": {
     "Search for a location...": "搜索位置..."
   },
@@ -1375,6 +1396,9 @@
   },
   "Search...": {
     "Search...": "搜索中..."
+  },
+  "Searching...": {
+    "Searching...": "检索中..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "选择启动器Logo"
@@ -1768,6 +1792,9 @@
   },
   "Wallpaper": {
     "Wallpaper": "壁纸"
+  },
+  "Wallpaper Monitor": {
+    "Wallpaper Monitor": "壁纸监视器"
   },
   "Wallpapers": {
     "Wallpapers": "壁纸"

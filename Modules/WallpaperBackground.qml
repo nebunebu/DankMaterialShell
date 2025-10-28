@@ -476,7 +476,7 @@ Variants {
                 visible: CompositorService.isNiri && SettingsData.blurWallpaperOnOverview && NiriService.inOverview
                 blurEnabled: true
                 blur: 0.8
-                blurMax: 48
+                blurMax: 75
             }
         }
     }

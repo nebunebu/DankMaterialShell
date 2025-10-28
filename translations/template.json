@@ -1127,6 +1127,13 @@
     "comment": ""
   },
   {
+    "term": "DankSearch not available",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Date Format",
     "translation": "",
     "context": "",
@@ -1436,6 +1443,13 @@
   },
   {
     "term": "Enter PIN for ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enter a search query",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2212,6 +2226,13 @@
     "comment": ""
   },
   {
+    "term": "Matugen Target Monitor",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Max apps to show",
     "translation": "",
     "context": "",
@@ -2289,14 +2310,14 @@
     "comment": ""
   },
   {
-    "term": "Monitor",
+    "term": "Monitor Selection:",
     "translation": "",
     "context": "",
     "reference": "",
     "comment": ""
   },
   {
-    "term": "Monitor Selection:",
+    "term": "Monitor whose wallpaper drives dynamic theming colors",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2465,6 +2486,13 @@
   },
   {
     "term": "No clipboard entries found",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "No files found",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3136,6 +3164,20 @@
     "comment": ""
   },
   {
+    "term": "Search file contents",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Search filenames",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Search for a location...",
     "translation": "",
     "context": "",
@@ -3151,6 +3193,13 @@
   },
   {
     "term": "Search...",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Searching...",
     "translation": "",
     "context": "",
     "reference": "",
@@ -4054,6 +4103,13 @@
   },
   {
     "term": "Wallpaper",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Wallpaper Monitor",
     "translation": "",
     "context": "",
     "reference": "",

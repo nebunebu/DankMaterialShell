@@ -136,9 +136,7 @@ Item {
                                     var currentWallpaper = SessionData.perMonitorWallpaper ? SessionData.getMonitorWallpaper(selectedMonitorName) : SessionData.wallpaperPath
                                     if (currentWallpaper && currentWallpaper.startsWith("we:")) {
                                         var sceneId = currentWallpaper.substring(3)
-                                        return StandardPaths.writableLocation(StandardPaths.HomeLocation)
-                                            + "/.local/share/Steam/steamapps/workshop/content/431960/"
-                                            + sceneId + "/preview" + weExtensions[weExtIndex]
+                                        return StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share/Steam/steamapps/workshop/content/431960/" + sceneId + "/preview" + weExtensions[weExtIndex]
                                     }
                                     return (currentWallpaper !== "" && !currentWallpaper.startsWith("#")) ? "file://" + currentWallpaper : ""
                                 }
@@ -147,10 +145,7 @@ Item {
                                     if (currentWallpaper && currentWallpaper.startsWith("we:") && status === Image.Error) {
                                         if (weExtIndex < weExtensions.length - 1) {
                                             weExtIndex++
-                                            source = StandardPaths.writableLocation(StandardPaths.HomeLocation)
-                                                + "/.local/share/Steam/steamapps/workshop/content/431960/"
-                                                + currentWallpaper.substring(3)
-                                                + "/preview" + weExtensions[weExtIndex]
+                                            source = StandardPaths.writableLocation(StandardPaths.HomeLocation) + "/.local/share/Steam/steamapps/workshop/content/431960/" + currentWallpaper.substring(3) + "/preview" + weExtensions[weExtIndex]
                                         } else {
                                             visible = false
                                         }
@@ -241,7 +236,6 @@ Item {
                                         }
                                     }
 
-
                                     Rectangle {
                                         width: 32
                                         height: 32
@@ -263,7 +257,7 @@ Item {
                                                     var currentWallpaper = SessionData.perMonitorWallpaper ? SessionData.getMonitorWallpaper(selectedMonitorName) : SessionData.wallpaperPath
                                                     PopoutService.colorPickerModal.selectedColor = currentWallpaper.startsWith("#") ? currentWallpaper : Theme.primary
                                                     PopoutService.colorPickerModal.pickerTitle = "Choose Wallpaper Color"
-                                                    PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
+                                                    PopoutService.colorPickerModal.onColorSelectedCallback = function (selectedColor) {
                                                         if (SessionData.perMonitorWallpaper) {
                                                             SessionData.setMonitorWallpaper(selectedMonitorName, selectedColor)
                                                         } else {
@@ -434,11 +428,11 @@ Item {
                                 return modes.indexOf(SettingsData.wallpaperFillMode)
                             }
                             onSelectionChanged: (index, selected) => {
-                                if (selected) {
-                                    const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
-                                    SettingsData.setWallpaperFillMode(modes[index])
-                                }
-                            }
+                                                    if (selected) {
+                                                        const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                                        SettingsData.setWallpaperFillMode(modes[index])
+                                                    }
+                                                }
 
                             Connections {
                                 target: SettingsData
@@ -452,9 +446,9 @@ Item {
                                 target: personalizationTab
                                 function onSelectedMonitorNameChanged() {
                                     Qt.callLater(() => {
-                                        const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
-                                        fillModeGroup.currentIndex = modes.indexOf(SettingsData.wallpaperFillMode)
-                                    })
+                                                     const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                                                     fillModeGroup.currentIndex = modes.indexOf(SettingsData.wallpaperFillMode)
+                                                 })
                                 }
                             }
                         }
@@ -507,8 +501,8 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.blurWallpaperOnOverview
                             onToggled: checked => {
-                                SettingsData.setBlurWallpaperOnOverview(checked)
-                            }
+                                           SettingsData.setBlurWallpaperOnOverview(checked)
+                                       }
                         }
                     }
 
@@ -641,7 +635,7 @@ Item {
                             DankDropdown {
                                 id: monitorDropdown
 
-                                text: I18n.tr("Monitor")
+                                text: I18n.tr("Wallpaper Monitor")
                                 description: I18n.tr("Select monitor to configure wallpaper")
                                 currentValue: selectedMonitorName || "No monitors"
                                 options: {
@@ -654,6 +648,36 @@ Item {
                                 }
                                 onValueChanged: value => {
                                                     selectedMonitorName = value
+                                                }
+                            }
+
+                            DankDropdown {
+                                id: matugenTargetDropdown
+
+                                text: I18n.tr("Matugen Target Monitor")
+                                description: I18n.tr("Monitor whose wallpaper drives dynamic theming colors")
+                                currentValue: {
+                                    if (!SettingsData.matugenTargetMonitor || SettingsData.matugenTargetMonitor === "") {
+                                        var screens = Quickshell.screens
+                                        return screens.length > 0 ? screens[0].name + " (Default)" : "No monitors"
+                                    }
+                                    return SettingsData.matugenTargetMonitor
+                                }
+                                options: {
+                                    var screenNames = []
+                                    var screens = Quickshell.screens
+                                    for (var i = 0; i < screens.length; i++) {
+                                        var label = screens[i].name
+                                        if (i === 0 && (!SettingsData.matugenTargetMonitor || SettingsData.matugenTargetMonitor === "")) {
+                                            label += " (Default)"
+                                        }
+                                        screenNames.push(label)
+                                    }
+                                    return screenNames
+                                }
+                                onValueChanged: value => {
+                                                    var cleanValue = value.replace(" (Default)", "")
+                                                    SettingsData.setMatugenTargetMonitor(cleanValue)
                                                 }
                             }
                         }
@@ -720,8 +744,8 @@ Item {
                                     target: personalizationTab
                                     function onSelectedMonitorNameChanged() {
                                         cyclingToggle.checked = Qt.binding(() => {
-                                            return SessionData.perMonitorWallpaper ? SessionData.getMonitorCyclingSettings(selectedMonitorName).enabled : SessionData.wallpaperCyclingEnabled
-                                        })
+                                                                               return SessionData.perMonitorWallpaper ? SessionData.getMonitorCyclingSettings(selectedMonitorName).enabled : SessionData.wallpaperCyclingEnabled
+                                                                           })
                                     }
                                 }
                             }
@@ -779,12 +803,12 @@ Item {
                                             target: personalizationTab
                                             function onSelectedMonitorNameChanged() {
                                                 modeTabBar.currentIndex = Qt.binding(() => {
-                                                    if (SessionData.perMonitorWallpaper) {
-                                                        return SessionData.getMonitorCyclingSettings(selectedMonitorName).mode === "time" ? 1 : 0
-                                                    } else {
-                                                        return SessionData.wallpaperCyclingMode === "time" ? 1 : 0
-                                                    }
-                                                })
+                                                                                         if (SessionData.perMonitorWallpaper) {
+                                                                                             return SessionData.getMonitorCyclingSettings(selectedMonitorName).mode === "time" ? 1 : 0
+                                                                                         } else {
+                                                                                             return SessionData.wallpaperCyclingMode === "time" ? 1 : 0
+                                                                                         }
+                                                                                     })
                                                 Qt.callLater(modeTabBar.updateIndicator)
                                             }
                                         }
@@ -835,15 +859,15 @@ Item {
                                     function onSelectedMonitorNameChanged() {
                                         // Force dropdown to refresh its currentValue
                                         Qt.callLater(() => {
-                                            var currentSeconds
-                                            if (SessionData.perMonitorWallpaper) {
-                                                currentSeconds = SessionData.getMonitorCyclingSettings(selectedMonitorName).interval
-                                            } else {
-                                                currentSeconds = SessionData.wallpaperCyclingInterval
-                                            }
-                                            const index = intervalDropdown.intervalValues.indexOf(currentSeconds)
-                                            intervalDropdown.currentValue = index >= 0 ? intervalDropdown.intervalOptions[index] : "5 minutes"
-                                        })
+                                                         var currentSeconds
+                                                         if (SessionData.perMonitorWallpaper) {
+                                                             currentSeconds = SessionData.getMonitorCyclingSettings(selectedMonitorName).interval
+                                                         } else {
+                                                             currentSeconds = SessionData.wallpaperCyclingInterval
+                                                         }
+                                                         const index = intervalDropdown.intervalValues.indexOf(currentSeconds)
+                                                         intervalDropdown.currentValue = index >= 0 ? intervalDropdown.intervalOptions[index] : "5 minutes"
+                                                     })
                                     }
                                 }
                             }
@@ -925,12 +949,12 @@ Item {
                                         function onSelectedMonitorNameChanged() {
                                             // Force text field to refresh its value
                                             Qt.callLater(() => {
-                                                if (SessionData.perMonitorWallpaper) {
-                                                    timeTextField.text = SessionData.getMonitorCyclingSettings(selectedMonitorName).time
-                                                } else {
-                                                    timeTextField.text = SessionData.wallpaperCyclingTime
-                                                }
-                                            })
+                                                             if (SessionData.perMonitorWallpaper) {
+                                                                 timeTextField.text = SessionData.getMonitorCyclingSettings(selectedMonitorName).time
+                                                             } else {
+                                                                 timeTextField.text = SessionData.wallpaperCyclingTime
+                                                             }
+                                                         })
                                         }
                                     }
                                 }
@@ -956,14 +980,15 @@ Item {
                         text: I18n.tr("Transition Effect")
                         description: I18n.tr("Visual effect used when wallpaper changes")
                         currentValue: {
-                            if (SessionData.wallpaperTransition === "random") return "Random"
+                            if (SessionData.wallpaperTransition === "random")
+                                return "Random"
                             return SessionData.wallpaperTransition.charAt(0).toUpperCase() + SessionData.wallpaperTransition.slice(1)
                         }
                         options: ["Random"].concat(SessionData.availableWallpaperTransitions.map(t => t.charAt(0).toUpperCase() + t.slice(1)))
                         onValueChanged: value => {
-                            var transition = value.toLowerCase()
-                            SessionData.setWallpaperTransition(transition)
-                        }
+                                            var transition = value.toLowerCase()
+                                            SessionData.setWallpaperTransition(transition)
+                                        }
                     }
 
                     Column {
@@ -995,17 +1020,17 @@ Item {
                             currentSelection: SessionData.includedTransitions
 
                             onSelectionChanged: (index, selected) => {
-                                const transition = model[index]
-                                let newIncluded = [...SessionData.includedTransitions]
+                                                    const transition = model[index]
+                                                    let newIncluded = [...SessionData.includedTransitions]
 
-                                if (selected && !newIncluded.includes(transition)) {
-                                    newIncluded.push(transition)
-                                } else if (!selected && newIncluded.includes(transition)) {
-                                    newIncluded = newIncluded.filter(t => t !== transition)
-                                }
+                                                    if (selected && !newIncluded.includes(transition)) {
+                                                        newIncluded.push(transition)
+                                                    } else if (!selected && newIncluded.includes(transition)) {
+                                                        newIncluded = newIncluded.filter(t => t !== transition)
+                                                    }
 
-                                SessionData.includedTransitions = newIncluded
-                            }
+                                                    SessionData.includedTransitions = newIncluded
+                                                }
                         }
                     }
                 }
@@ -1065,8 +1090,8 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.blurredWallpaperLayer
                             onToggled: checked => {
-                                SettingsData.setBlurredWallpaperLayer(checked)
-                            }
+                                           SettingsData.setBlurredWallpaperLayer(checked)
+                                       }
                         }
                     }
                 }
@@ -1122,9 +1147,9 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         checked: SessionData.isLightMode
                         onToggleCompleted: checked => {
-                                       Theme.screenTransition()
-                                       Theme.setLightMode(checked)
-                                   }
+                                               Theme.screenTransition()
+                                               Theme.setLightMode(checked)
+                                           }
                     }
                 }
             }
@@ -1176,10 +1201,10 @@ Item {
                             selectionMode: "single"
                             currentIndex: SettingsData.animationSpeed
                             onSelectionChanged: (index, selected) => {
-                                if (selected) {
-                                    SettingsData.setAnimationSpeed(index)
-                                }
-                            }
+                                                    if (selected) {
+                                                        SettingsData.setAnimationSpeed(index)
+                                                    }
+                                                }
 
                             Connections {
                                 target: SettingsData
@@ -1257,10 +1282,10 @@ Item {
                                         showValue: false
                                         wheelEnabled: false
 
-                                        onSliderValueChanged: (newValue) => {
-                                            SettingsData.setAnimationSpeed(SettingsData.AnimationSpeed.Custom)
-                                            SettingsData.setCustomAnimationDuration(newValue)
-                                        }
+                                        onSliderValueChanged: newValue => {
+                                                                  SettingsData.setAnimationSpeed(SettingsData.AnimationSpeed.Custom)
+                                                                  SettingsData.setCustomAnimationDuration(newValue)
+                                                              }
 
                                         Connections {
                                             target: SettingsData
@@ -1388,19 +1413,21 @@ Item {
                         id: personalizationMatugenPaletteDropdown
                         text: I18n.tr("Matugen Palette")
                         description: I18n.tr("Select the palette algorithm used for wallpaper-based colors")
-                        options: Theme.availableMatugenSchemes.map(function (option) { return option.label })
+                        options: Theme.availableMatugenSchemes.map(function (option) {
+                            return option.label
+                        })
                         currentValue: Theme.getMatugenScheme(SettingsData.matugenScheme).label
                         enabled: Theme.matugenAvailable
                         opacity: enabled ? 1 : 0.4
                         onValueChanged: value => {
-                            for (var i = 0; i < Theme.availableMatugenSchemes.length; i++) {
-                                var option = Theme.availableMatugenSchemes[i]
-                                if (option.label === value) {
-                                    SettingsData.setMatugenScheme(option.value)
-                                    break
-                                }
-                            }
-                        }
+                                            for (var i = 0; i < Theme.availableMatugenSchemes.length; i++) {
+                                                var option = Theme.availableMatugenSchemes[i]
+                                                if (option.label === value) {
+                                                    SettingsData.setMatugenScheme(option.value)
+                                                    break
+                                                }
+                                            }
+                                        }
                     }
 
                     StyledText {
@@ -1459,8 +1486,8 @@ Item {
                             checked: SettingsData.runUserMatugenTemplates
                             enabled: Theme.matugenAvailable
                             onToggled: checked => {
-                                SettingsData.setRunUserMatugenTemplates(checked)
-                            }
+                                           SettingsData.setRunUserMatugenTemplates(checked)
+                                       }
                         }
                     }
 
@@ -1528,8 +1555,8 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.soundsEnabled
                             onToggled: checked => {
-                                SettingsData.setSoundsEnabled(checked)
-                            }
+                                           SettingsData.setSoundsEnabled(checked)
+                                       }
                         }
                     }
 
@@ -1576,8 +1603,8 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.useSystemSoundTheme
                                 onToggled: checked => {
-                                    SettingsData.setUseSystemSoundTheme(checked)
-                                }
+                                               SettingsData.setUseSystemSoundTheme(checked)
+                                           }
                             }
                         }
 
@@ -1598,10 +1625,10 @@ Item {
                                 return AudioService.availableSoundThemes.length > 0 ? AudioService.availableSoundThemes[0] : ""
                             }
                             onValueChanged: value => {
-                                if (value && value !== AudioService.currentSoundTheme) {
-                                    AudioService.setSoundTheme(value)
-                                }
-                            }
+                                                if (value && value !== AudioService.currentSoundTheme) {
+                                                    AudioService.setSoundTheme(value)
+                                                }
+                                            }
                         }
 
                         Rectangle {
@@ -1641,8 +1668,8 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundNewNotification
                                 onToggled: checked => {
-                                    SettingsData.setSoundNewNotification(checked)
-                                }
+                                               SettingsData.setSoundNewNotification(checked)
+                                           }
                             }
                         }
 
@@ -1675,8 +1702,8 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundVolumeChanged
                                 onToggled: checked => {
-                                    SettingsData.setSoundVolumeChanged(checked)
-                                }
+                                               SettingsData.setSoundVolumeChanged(checked)
+                                           }
                             }
                         }
 
@@ -1710,8 +1737,8 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundPluggedIn
                                 onToggled: checked => {
-                                    SettingsData.setSoundPluggedIn(checked)
-                                }
+                                               SettingsData.setSoundPluggedIn(checked)
+                                           }
                             }
                         }
                     }

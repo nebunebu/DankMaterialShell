@@ -17,6 +17,15 @@ DankPopout {
         service: DMSNetworkService
     }
 
+    property bool wasVisible: false
+
+    onShouldBeVisibleChanged: {
+        if (shouldBeVisible && !wasVisible) {
+            DMSNetworkService.getState()
+        }
+        wasVisible = shouldBeVisible
+    }
+
     property var triggerScreen: null
 
     function setTriggerPosition(x, y, width, section, screen) {
@@ -175,11 +184,10 @@ DankPopout {
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
-                            }
-
-                            Item {
+                                elide: Text.ElideRight
+                                wrapMode: Text.NoWrap
                                 Layout.fillWidth: true
-                                height: 1
+                                Layout.maximumWidth: parent.width - 140
                             }
 
                             // Removed Quick Connect for clarity
@@ -198,6 +206,7 @@ DankPopout {
                                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                                 border.width: 0
                                 border.color: Theme.outlineLight
+                                opacity: DMSNetworkService.isBusy ? 0.5 : 1.0
 
                                 Row {
                                     anchors.centerIn: parent
@@ -223,7 +232,8 @@ DankPopout {
 
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
+                                    cursorShape: DMSNetworkService.isBusy ? Qt.BusyCursor : Qt.PointingHandCursor
+                                    enabled: !DMSNetworkService.isBusy
                                     onClicked: DMSNetworkService.disconnectAllActive()
                                 }
 
@@ -295,6 +305,7 @@ DankPopout {
                                         color: rowArea.containsMouse ? Theme.primaryHoverLight : (DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primaryPressed : Theme.surfaceLight)
                                         border.width: DMSNetworkService.isActiveUuid(modelData.uuid) ? 2 : 1
                                         border.color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.outlineLight
+                                        opacity: DMSNetworkService.isBusy ? 0.5 : 1.0
 
                                         RowLayout {
                                             anchors.left: parent.left
@@ -313,11 +324,15 @@ DankPopout {
                                             Column {
                                                 spacing: 2
                                                 Layout.alignment: Qt.AlignVCenter
+                                                Layout.fillWidth: true
 
                                                 StyledText {
                                                     text: modelData.name
                                                     font.pixelSize: Theme.fontSizeMedium
                                                     color: DMSNetworkService.isActiveUuid(modelData.uuid) ? Theme.primary : Theme.surfaceText
+                                                    elide: Text.ElideRight
+                                                    wrapMode: Text.NoWrap
+                                                    width: parent.width
                                                 }
 
                                                 StyledText {
@@ -391,7 +406,8 @@ DankPopout {
 
                                             anchors.fill: parent
                                             hoverEnabled: true
-                                            cursorShape: Qt.PointingHandCursor
+                                            cursorShape: DMSNetworkService.isBusy ? Qt.BusyCursor : Qt.PointingHandCursor
+                                            enabled: !DMSNetworkService.isBusy
                                             onClicked: DMSNetworkService.toggle(modelData.uuid)
                                         }
 

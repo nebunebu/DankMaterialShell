@@ -57,6 +57,15 @@ PanelWindow {
     WlrLayershell.exclusiveZone: 0
     WlrLayershell.keyboardFocus: isVisible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
+    mask: Region {
+        item: Rectangle {
+            x: root.width - contentRect.width
+            y: 0
+            width: contentRect.width
+            height: root.height
+        }
+    }
+
     StyledRect {
         id: contentRect
         layer.enabled: true

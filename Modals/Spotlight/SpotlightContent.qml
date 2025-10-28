@@ -11,10 +11,40 @@ Item {
 
     property alias appLauncher: appLauncher
     property alias searchField: searchField
+    property alias fileSearchController: fileSearchController
     property var parentModal: null
+    property string searchMode: "apps"
 
     function resetScroll() {
-        resultsView.resetScroll()
+        if (searchMode === "apps") {
+            resultsView.resetScroll()
+        } else {
+            fileSearchResults.resetScroll()
+        }
+    }
+
+    function updateSearchMode() {
+        if (searchField.text.startsWith("/")) {
+            if (searchMode !== "files") {
+                searchMode = "files"
+            }
+            const query = searchField.text.substring(1)
+            fileSearchController.searchQuery = query
+        } else {
+            if (searchMode !== "apps") {
+                searchMode = "apps"
+                fileSearchController.reset()
+                appLauncher.searchQuery = searchField.text
+            }
+        }
+    }
+
+    onSearchModeChanged: {
+        if (searchMode === "files") {
+            appLauncher.keyboardNavigationActive = false
+        } else {
+            fileSearchController.keyboardNavigationActive = false
+        }
     }
 
     anchors.fill: parent
@@ -27,59 +57,95 @@ Item {
 
                             event.accepted = true
                         } else if (event.key === Qt.Key_Down) {
-                            appLauncher.selectNext()
+                            if (searchMode === "apps") {
+                                appLauncher.selectNext()
+                            } else {
+                                fileSearchController.selectNext()
+                            }
                             event.accepted = true
                         } else if (event.key === Qt.Key_Up) {
-                            appLauncher.selectPrevious()
+                            if (searchMode === "apps") {
+                                appLauncher.selectPrevious()
+                            } else {
+                                fileSearchController.selectPrevious()
+                            }
                             event.accepted = true
-                        } else if (event.key === Qt.Key_Right && appLauncher.viewMode === "grid") {
+                        } else if (event.key === Qt.Key_Right && searchMode === "apps" && appLauncher.viewMode === "grid") {
                             appLauncher.selectNextInRow()
                             event.accepted = true
-                        } else if (event.key === Qt.Key_Left && appLauncher.viewMode === "grid") {
+                        } else if (event.key === Qt.Key_Left && searchMode === "apps" && appLauncher.viewMode === "grid") {
                             appLauncher.selectPreviousInRow()
                             event.accepted = true
                         } else if (event.key == Qt.Key_J && event.modifiers & Qt.ControlModifier) {
-                            appLauncher.selectNext()
+                            if (searchMode === "apps") {
+                                appLauncher.selectNext()
+                            } else {
+                                fileSearchController.selectNext()
+                            }
                             event.accepted = true
                         } else if (event.key == Qt.Key_K && event.modifiers & Qt.ControlModifier) {
-                            appLauncher.selectPrevious()
+                            if (searchMode === "apps") {
+                                appLauncher.selectPrevious()
+                            } else {
+                                fileSearchController.selectPrevious()
+                            }
                             event.accepted = true
-                        } else if (event.key == Qt.Key_L && event.modifiers & Qt.ControlModifier && appLauncher.viewMode === "grid") {
+                        } else if (event.key == Qt.Key_L && event.modifiers & Qt.ControlModifier && searchMode === "apps" && appLauncher.viewMode === "grid") {
                             appLauncher.selectNextInRow()
                             event.accepted = true
-                        } else if (event.key == Qt.Key_H && event.modifiers & Qt.ControlModifier && appLauncher.viewMode === "grid") {
+                        } else if (event.key == Qt.Key_H && event.modifiers & Qt.ControlModifier && searchMode === "apps" && appLauncher.viewMode === "grid") {
                             appLauncher.selectPreviousInRow()
                             event.accepted = true
                         } else if (event.key === Qt.Key_Tab) {
-                            if (appLauncher.viewMode === "grid") {
-                                appLauncher.selectNextInRow()
+                            if (searchMode === "apps") {
+                                if (appLauncher.viewMode === "grid") {
+                                    appLauncher.selectNextInRow()
+                                } else {
+                                    appLauncher.selectNext()
+                                }
                             } else {
-                                appLauncher.selectNext()
+                                fileSearchController.selectNext()
                             }
                             event.accepted = true
                         } else if (event.key === Qt.Key_Backtab) {
-                            if (appLauncher.viewMode === "grid") {
-                                appLauncher.selectPreviousInRow()
+                            if (searchMode === "apps") {
+                                if (appLauncher.viewMode === "grid") {
+                                    appLauncher.selectPreviousInRow()
+                                } else {
+                                    appLauncher.selectPrevious()
+                                }
                             } else {
-                                appLauncher.selectPrevious()
+                                fileSearchController.selectPrevious()
                             }
                             event.accepted = true
                         } else if (event.key === Qt.Key_N && event.modifiers & Qt.ControlModifier) {
-                            if (appLauncher.viewMode === "grid") {
-                                appLauncher.selectNextInRow()
+                            if (searchMode === "apps") {
+                                if (appLauncher.viewMode === "grid") {
+                                    appLauncher.selectNextInRow()
+                                } else {
+                                    appLauncher.selectNext()
+                                }
                             } else {
-                                appLauncher.selectNext()
+                                fileSearchController.selectNext()
                             }
                             event.accepted = true
                         } else if (event.key === Qt.Key_P && event.modifiers & Qt.ControlModifier) {
-                            if (appLauncher.viewMode === "grid") {
-                                appLauncher.selectPreviousInRow()
+                            if (searchMode === "apps") {
+                                if (appLauncher.viewMode === "grid") {
+                                    appLauncher.selectPreviousInRow()
+                                } else {
+                                    appLauncher.selectPrevious()
+                                }
                             } else {
-                                appLauncher.selectPrevious()
+                                fileSearchController.selectPrevious()
                             }
                             event.accepted = true
                         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                            appLauncher.launchSelected()
+                            if (searchMode === "apps") {
+                                appLauncher.launchSelected()
+                            } else if (searchMode === "files") {
+                                fileSearchController.openSelected()
+                            }
                             event.accepted = true
                         }
                     }
@@ -96,6 +162,15 @@ Item {
         onViewModeSelected: mode => {
                                 SettingsData.setSpotlightModalViewMode(mode)
                             }
+    }
+
+    FileSearchController {
+        id: fileSearchController
+
+        onFileOpened: () => {
+                          if (parentModal)
+                          parentModal.hide()
+                      }
     }
 
     Column {
@@ -118,7 +193,7 @@ Item {
                 backgroundColor: Theme.surfaceContainerHigh
                 normalBorderColor: Theme.outlineMedium
                 focusedBorderColor: Theme.primary
-                leftIconName: "search"
+                leftIconName: searchMode === "files" ? "folder" : "search"
                 leftIconSize: Theme.iconSize
                 leftIconColor: Theme.surfaceVariantText
                 leftIconFocusedColor: Theme.primary
@@ -126,14 +201,18 @@ Item {
                 textColor: Theme.surfaceText
                 font.pixelSize: Theme.fontSizeLarge
                 enabled: parentModal ? parentModal.spotlightOpen : true
-                placeholderText: ""
+                placeholderText: searchMode === "files" ? "Search files..." : "Search apps..."
                 ignoreLeftRightKeys: appLauncher.viewMode !== "list"
                 ignoreTabKeys: true
                 keyForwardTargets: [spotlightKeyHandler]
-                text: appLauncher.searchQuery
-                onTextEdited: () => {
-                                  appLauncher.searchQuery = text
-                              }
+                onTextChanged: {
+                    if (searchMode === "apps") {
+                        appLauncher.searchQuery = text
+                    }
+                }
+                onTextEdited: {
+                    updateSearchMode()
+                }
                 Keys.onPressed: event => {
                                     if (event.key === Qt.Key_Escape) {
                                         if (parentModal)
@@ -141,12 +220,18 @@ Item {
 
                                         event.accepted = true
                                     } else if ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && text.length > 0) {
-                                        if (appLauncher.keyboardNavigationActive && appLauncher.model.count > 0)
-                                        appLauncher.launchSelected()
-                                        else if (appLauncher.model.count > 0)
-                                        appLauncher.launchApp(appLauncher.model.get(0))
+                                        if (searchMode === "apps") {
+                                            if (appLauncher.keyboardNavigationActive && appLauncher.model.count > 0)
+                                            appLauncher.launchSelected()
+                                            else if (appLauncher.model.count > 0)
+                                            appLauncher.launchApp(appLauncher.model.get(0))
+                                        } else if (searchMode === "files") {
+                                            if (fileSearchController.model.count > 0)
+                                            fileSearchController.openSelected()
+                                        }
                                         event.accepted = true
-                                    } else if (event.key === Qt.Key_Down || event.key === Qt.Key_Up || event.key === Qt.Key_Left || event.key === Qt.Key_Right || event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab || ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && text.length === 0)) {
+                                    } else if (event.key === Qt.Key_Down || event.key === Qt.Key_Up || event.key === Qt.Key_Left || event.key === Qt.Key_Right || event.key === Qt.Key_Tab || event.key
+                                               === Qt.Key_Backtab || ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && text.length === 0)) {
                                         event.accepted = false
                                     }
                                 }
@@ -154,7 +239,7 @@ Item {
 
             Row {
                 spacing: Theme.spacingXS
-                visible: appLauncher.model.count > 0
+                visible: searchMode === "apps" && appLauncher.model.count > 0
                 anchors.verticalCenter: parent.verticalCenter
 
                 Rectangle {
@@ -207,12 +292,116 @@ Item {
                     }
                 }
             }
+
+            Row {
+                spacing: Theme.spacingXS
+                visible: searchMode === "files"
+                anchors.verticalCenter: parent.verticalCenter
+
+                Rectangle {
+                    id: filenameFilterButton
+
+                    width: 36
+                    height: 36
+                    radius: Theme.cornerRadius
+                    color: fileSearchController.searchField === "filename" ? Theme.primaryHover : filenameFilterArea.containsMouse ? Theme.surfaceHover : "transparent"
+
+                    DankIcon {
+                        anchors.centerIn: parent
+                        name: "title"
+                        size: 18
+                        color: fileSearchController.searchField === "filename" ? Theme.primary : Theme.surfaceText
+                    }
+
+                    MouseArea {
+                        id: filenameFilterArea
+
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: () => {
+                                       fileSearchController.searchField = "filename"
+                                   }
+                        onEntered: {
+                            filenameTooltipLoader.active = true
+                            Qt.callLater(() => {
+                                             if (filenameTooltipLoader.item) {
+                                                 const p = mapToItem(null, width / 2, height + Theme.spacingXS)
+                                                 filenameTooltipLoader.item.show(I18n.tr("Search filenames"), p.x, p.y, null)
+                                             }
+                                         })
+                        }
+                        onExited: {
+                            if (filenameTooltipLoader.item)
+                                filenameTooltipLoader.item.hide()
+
+                            filenameTooltipLoader.active = false
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: contentFilterButton
+
+                    width: 36
+                    height: 36
+                    radius: Theme.cornerRadius
+                    color: fileSearchController.searchField === "body" ? Theme.primaryHover : contentFilterArea.containsMouse ? Theme.surfaceHover : "transparent"
+
+                    DankIcon {
+                        anchors.centerIn: parent
+                        name: "description"
+                        size: 18
+                        color: fileSearchController.searchField === "body" ? Theme.primary : Theme.surfaceText
+                    }
+
+                    MouseArea {
+                        id: contentFilterArea
+
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: () => {
+                                       fileSearchController.searchField = "body"
+                                   }
+                        onEntered: {
+                            contentTooltipLoader.active = true
+                            Qt.callLater(() => {
+                                             if (contentTooltipLoader.item) {
+                                                 const p = mapToItem(null, width / 2, height + Theme.spacingXS)
+                                                 contentTooltipLoader.item.show(I18n.tr("Search file contents"), p.x, p.y, null)
+                                             }
+                                         })
+                        }
+                        onExited: {
+                            if (contentTooltipLoader.item)
+                                contentTooltipLoader.item.hide()
+
+                            contentTooltipLoader.active = false
+                        }
+                    }
+                }
+            }
         }
 
-        SpotlightResults {
-            id: resultsView
-            appLauncher: spotlightKeyHandler.appLauncher
-            contextMenu: contextMenu
+        Item {
+            width: parent.width
+            height: parent.height - y
+
+            SpotlightResults {
+                id: resultsView
+                anchors.fill: parent
+                appLauncher: spotlightKeyHandler.appLauncher
+                contextMenu: contextMenu
+                visible: searchMode === "apps"
+            }
+
+            FileSearchResults {
+                id: fileSearchResults
+                anchors.fill: parent
+                fileSearchController: spotlightKeyHandler.fileSearchController
+                visible: searchMode === "files"
+            }
         }
     }
 
@@ -233,12 +422,25 @@ Item {
 
         MouseArea {
 
-            // Prevent closing when clicking on the menu itself
             x: contextMenu.x
             y: contextMenu.y
             width: contextMenu.width
             height: contextMenu.height
             onClicked: () => {}
         }
+    }
+
+    Loader {
+        id: filenameTooltipLoader
+
+        active: false
+        sourceComponent: DankTooltip {}
+    }
+
+    Loader {
+        id: contentTooltipLoader
+
+        active: false
+        sourceComponent: DankTooltip {}
     }
 }
