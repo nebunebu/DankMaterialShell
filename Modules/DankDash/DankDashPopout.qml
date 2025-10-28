@@ -287,6 +287,10 @@ DankPopout {
                     OverviewTab {
                         id: overviewTab
 
+                        onCloseDash: {
+                            root.dashVisible = false
+                        }
+
                         onSwitchToWeatherTab: {
                             if (SettingsData.weatherEnabled) {
                                 tabBar.currentIndex = 3

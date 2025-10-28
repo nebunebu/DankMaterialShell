@@ -223,6 +223,13 @@ Singleton {
                         let eventId = event.title + "_" + event['start-date']
                         + "_" + (event['start-time'] || 'allday')
                         // Create event object template
+                        let extractedUrl = ""
+                        if (!event.url && event.description) {
+                            let urlMatch = event.description.match(/https?:\/\/[^\s]+/)
+                            if (urlMatch) {
+                                extractedUrl = urlMatch[0]
+                            }
+                        }
                         let eventTemplate = {
                             "id": eventId,
                             "title": event.title || "Untitled Event",
@@ -230,7 +237,7 @@ Singleton {
                             "end": endTime,
                             "location": event.location || "",
                             "description": event.description || "",
-                            "url": event.url || "",
+                            "url": event.url || extractedUrl,
                             "calendar": "",
                             "color": "",
                             "allDay": event['all-day'] === "True",
