@@ -15,13 +15,50 @@
         ],
         key: (.key | sub("^XF86"; "")),
         dispatcher: .dispatcher,
-        params: (.arg // .params // ""),
+        # category: (
+        #   if (.dispatcher == "workspace"
+        #     or .dispatcher == "movetoworkspace"
+        #     or .dispatcher == "movetoworkspacesilent"
+        #     or .dispatcher == "renameworkspace"
+        #     or .dispatcher == "movecurrentworkspacetomonitor"
+        #     or .dispatcher == "focusworkspaceoncurrentmonitor"
+        #     or .dispatcher == "moveworkspacetomonitor"
+        #     or .dispatcher == "swapactiveworkspaces"
+        #     or .dispatcher == "togglespecialworkspace")
+        #   then "workspace"
+        #   elif (.dispatcher == "exec" or .dispatcher == "execr")
+        #   then "exec"
+        #   else null
+        #   end
+        # ),
         comment: (
           if .has_description then .description
+          elif .dispatcher == "exec"
+            then "exec " + (.arg)
+          elif .dispatcher == "execr"
+            then "exec raw" + (.arg)
+          elif .dispatcher == "pass"
+            then "pass" + (.arg)
+          elif .dispatcher == "sendshortcut"
+            then "sendshortcut" + (.arg)
+          elif .dispatcher == "sendkeystate"
+            then "sendkeystate" + (.arg)
+          elif .dispatcher == "killactive"
+            then "kill active win"
+          elif .dispatcher == "forcekillactive"
+            then "forcekill active win"
+          elif .dispatcher == "signal"
+            then "send signal " + (.arg) + " to active win"
+            # TODO: needs to be written better
+          elif .dispatcher == "signalwindow"
+            then "send signal " + (.arg) + " to specified win"
           elif .dispatcher == "workspace"
-            then "change focus to workspace " + (.arg // .params // "")
-          elif .dispatcher == "movetoworkspace" then "move focused window to workspace " + (.arg // .params // "")
-          else (.arg // .params // "")
+            then "change to ws " + (.arg)
+          else (.arg // "")
+          # elif .dispatcher == "workspace"
+          #   then "mv focus to ws " + (.arg)
+          # elif .dispatcher == "movetoworkspace" then "mv focused win to ws " + (.arg // .params // "")
+          # else (.arg // .params // "")
           end
         )
       }
