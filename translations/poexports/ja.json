@@ -975,7 +975,7 @@
     "Matugen Settings": "Matugen設定"
   },
   "Matugen Target Monitor": {
-    "Matugen Target Monitor": ""
+    "Matugen Target Monitor": "Matugenターゲットモニター"
   },
   "Max apps to show": {
     "Max apps to show": "表示するアプリの最大数"
@@ -1017,7 +1017,7 @@
     "Monitor Selection:": "モニターの選択："
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
-    "Monitor whose wallpaper drives dynamic theming colors": ""
+    "Monitor whose wallpaper drives dynamic theming colors": "ダイナミックテーマの色を駆動する壁紙をモニター"
   },
   "Monospace Font": {
     "Monospace Font": "等幅フォント"
@@ -1794,7 +1794,7 @@
     "Wallpaper": "壁紙"
   },
   "Wallpaper Monitor": {
-    "Wallpaper Monitor": ""
+    "Wallpaper Monitor": "壁紙モニター"
   },
   "Wallpapers": {
     "Wallpapers": "壁紙"
