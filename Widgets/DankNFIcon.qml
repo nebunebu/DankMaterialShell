@@ -14,6 +14,10 @@ Item {
 
     // This is for file browser, particularly - might want another map later for app IDs
     readonly property var iconMap: ({
+        // --- special types ---
+        "folder":               "\u{F024B}",
+        "file":                 "\u{F0214}",
+
         // --- special filenames (no extension) ---
         "docker":               "\u{F0868}",
         "makefile":             "\u{F09EE}",
@@ -22,6 +26,7 @@ Item {
 
         // --- programming languages ---
         "rs":                   "\u{F1617}",
+        "dart":                 "\u{e798}",
         "go":                   "\u{F07D3}",
         "py":                   "\u{F0320}",
         "js":                   "\u{F031E}",
@@ -72,6 +77,7 @@ Item {
         "rtf":                  "\u{F09EE}",
         "ppt":                  "\u{F09EE}",
         "pptx":                 "\u{F09EE}",
+        "log":                  "\u{F09EE}",
         "xls":                  "\u{F021C}",
         "xlsx":                 "\u{F021C}",
 
@@ -104,7 +110,7 @@ Item {
     })
 
 
-    readonly property string text: iconMap[name] || ""
+    readonly property string text: iconMap[name] || iconMap["file"] || ""
 
     function getIconForFile(fileName) {
         const lowerName = fileName.toLowerCase()

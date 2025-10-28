@@ -19,78 +19,68 @@ StyledRect {
     signal itemClicked(int index, string path, string name, bool isDir)
     signal itemSelected(int index, string path, string name, bool isDir)
 
+    function getFileExtension(fileName) {
+        const parts = fileName.split('.')
+        if (parts.length > 1) {
+            return parts[parts.length - 1].toLowerCase()
+        }
+        return ""
+    }
+
+    function determineFileType(fileName) {
+        const ext = getFileExtension(fileName)
+
+        const imageExts = ["png", "jpg", "jpeg", "gif", "bmp", "webp", "svg", "ico"]
+        if (imageExts.includes(ext)) {
+            return "image"
+        }
+
+        const videoExts = ["mp4", "mkv", "avi", "mov", "webm", "flv", "wmv", "m4v"]
+        if (videoExts.includes(ext)) {
+            return "video"
+        }
+
+        const audioExts = ["mp3", "wav", "flac", "ogg", "m4a", "aac", "wma"]
+        if (audioExts.includes(ext)) {
+            return "audio"
+        }
+
+        const codeExts = ["js", "ts", "jsx", "tsx", "py", "go", "rs", "c", "cpp", "h", "java", "kt", "swift", "rb", "php", "html", "css", "scss", "json", "xml", "yaml", "yml", "toml", "sh", "bash", "zsh", "fish", "qml", "vue", "svelte"]
+        if (codeExts.includes(ext)) {
+            return "code"
+        }
+
+        const docExts = ["txt", "md", "pdf", "doc", "docx", "odt", "rtf"]
+        if (docExts.includes(ext)) {
+            return "document"
+        }
+
+        const archiveExts = ["zip", "tar", "gz", "bz2", "xz", "7z", "rar"]
+        if (archiveExts.includes(ext)) {
+            return "archive"
+        }
+
+        if (!ext || fileName.indexOf('.') === -1) {
+            return "binary"
+        }
+
+        return "file"
+    }
+
     function isImageFile(fileName) {
         if (!fileName) {
             return false
         }
-        const ext = fileName.toLowerCase().split('.').pop()
-        return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'].includes(ext)
+        return determineFileType(fileName) === "image"
     }
 
-    function getFileIcon(fileName, isDir) {
-        if (isDir) {
-            return "folder"
+    function getIconForFile(fileName) {
+        const lowerName = fileName.toLowerCase()
+        if (lowerName.startsWith("dockerfile")) {
+            return "docker"
         }
-        if (!fileName) {
-            return "description"
-        }
-        const ext = fileName.toLowerCase().split('.').pop()
-        const iconMap = {
-            "mp3": 'music_note',
-            "wav": 'music_note',
-            "flac": 'music_note',
-            "ogg": 'music_note',
-            "aac": 'music_note',
-            "mp4": 'movie',
-            "mkv": 'movie',
-            "avi": 'movie',
-            "mov": 'movie',
-            "webm": 'movie',
-            "flv": 'movie',
-            "wmv": 'movie',
-            "jpg": 'image',
-            "jpeg": 'image',
-            "png": 'image',
-            "gif": 'image',
-            "bmp": 'image',
-            "webp": 'image',
-            "svg": 'image',
-            "pdf": 'picture_as_pdf',
-            "zip": 'folder_zip',
-            "rar": 'folder_zip',
-            "7z": 'folder_zip',
-            "tar": 'folder_zip',
-            "gz": 'folder_zip',
-            "bz2": 'folder_zip',
-            "xz": 'folder_zip',
-            "txt": 'description',
-            "md": 'description',
-            "doc": 'description',
-            "docx": 'description',
-            "odt": 'description',
-            "rtf": 'description',
-            "sh": 'terminal',
-            "py": 'code',
-            "js": 'code',
-            "ts": 'code',
-            "cpp": 'code',
-            "c": 'code',
-            "h": 'code',
-            "java": 'code',
-            "go": 'code',
-            "rs": 'code',
-            "php": 'code',
-            "rb": 'code',
-            "qml": 'code',
-            "html": 'code',
-            "css": 'code',
-            "json": 'data_object',
-            "xml": 'data_object',
-            "yaml": 'data_object',
-            "yml": 'data_object',
-            "toml": 'data_object'
-        }
-        return iconMap[ext] || 'description'
+        const ext = fileName.split('.').pop()
+        return ext || ""
     }
 
     function formatFileSize(size) {
@@ -168,9 +158,9 @@ StyledRect {
                 }
             }
 
-            DankIcon {
+            DankNFIcon {
                 anchors.centerIn: parent
-                name: getFileIcon(listDelegateRoot.fileName, listDelegateRoot.fileIsDir)
+                name: listDelegateRoot.fileIsDir ? "folder" : getIconForFile(listDelegateRoot.fileName)
                 size: Theme.iconSize - 2
                 color: listDelegateRoot.fileIsDir ? Theme.primary : Theme.surfaceText
                 visible: listDelegateRoot.fileIsDir || !isImageFile(listDelegateRoot.fileName)
