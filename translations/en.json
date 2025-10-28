@@ -182,7 +182,7 @@
   {
     "term": "Apply",
     "context": "Apply",
-    "reference": "Modals/DankColorPickerModal.qml:483",
+    "reference": "Modals/DankColorPickerModal.qml:489",
     "comment": ""
   },
   {
@@ -560,7 +560,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:510, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
@@ -818,7 +818,7 @@
   {
     "term": "Copy",
     "context": "Copy",
-    "reference": "Modals/DankColorPickerModal.qml:529",
+    "reference": "Modals/DankColorPickerModal.qml:535",
     "comment": ""
   },
   {
@@ -1556,7 +1556,7 @@
   {
     "term": "Hex:",
     "context": "Hex:",
-    "reference": "Modals/DankColorPickerModal.qml:444",
+    "reference": "Modals/DankColorPickerModal.qml:450",
     "comment": ""
   },
   {
@@ -1892,7 +1892,7 @@
   {
     "term": "Material Colors",
     "context": "Material Colors",
-    "reference": "Modals/DankColorPickerModal.qml:305",
+    "reference": "Modals/DankColorPickerModal.qml:311",
     "comment": ""
   },
   {
@@ -2270,7 +2270,7 @@
   {
     "term": "Opacity",
     "context": "Opacity",
-    "reference": "Modals/DankColorPickerModal.qml:407",
+    "reference": "Modals/DankColorPickerModal.qml:413",
     "comment": ""
   },
   {
@@ -2582,7 +2582,7 @@
   {
     "term": "Recent Colors",
     "context": "Recent Colors",
-    "reference": "Modals/DankColorPickerModal.qml:355",
+    "reference": "Modals/DankColorPickerModal.qml:361",
     "comment": ""
   },
   {
@@ -2756,7 +2756,7 @@
   {
     "term": "Select a color from the palette or use custom sliders",
     "context": "Select a color from the palette or use custom sliders",
-    "reference": "Modals/DankColorPickerModal.qml:145",
+    "reference": "Modals/DankColorPickerModal.qml:151",
     "comment": ""
   },
   {
