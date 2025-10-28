@@ -48,7 +48,7 @@ PanelWindow {
     anchors.bottom: true
     anchors.right: true
 
-    implicitWidth: expandable ? expandedWidthValue : slideoutWidth
+    implicitWidth: expandable && expandedWidth ? expandedWidthValue : slideoutWidth
     implicitHeight: modelData ? modelData.height : 800
 
     color: "transparent"
