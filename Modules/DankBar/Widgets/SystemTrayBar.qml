@@ -116,6 +116,7 @@ Item {
                         color: trayItemArea.containsMouse ? Theme.primaryHover : "transparent"
 
                         IconImage {
+                            id: iconImg
                             anchors.centerIn: parent
                             width: Theme.barIconSize(root.barThickness)
                             height: Theme.barIconSize(root.barThickness)
@@ -123,6 +124,21 @@ Item {
                             asynchronous: true
                             smooth: true
                             mipmap: true
+                            visible: status === Image.Ready
+                        }
+
+                        Text {
+                            anchors.centerIn: parent
+                            visible: !iconImg.visible
+                            text: {
+                                const itemId = trayItem?.id || ""
+                                if (!itemId) {
+                                    return "?"
+                                }
+                                return itemId.charAt(0).toUpperCase()
+                            }
+                            font.pixelSize: 10
+                            color: Theme.surfaceText
                         }
                     }
 
@@ -203,6 +219,7 @@ Item {
                         color: trayItemArea.containsMouse ? Theme.primaryHover : "transparent"
 
                         IconImage {
+                            id: iconImg
                             anchors.centerIn: parent
                             width: Theme.barIconSize(root.barThickness)
                             height: Theme.barIconSize(root.barThickness)
@@ -210,6 +227,21 @@ Item {
                             asynchronous: true
                             smooth: true
                             mipmap: true
+                            visible: status === Image.Ready
+                        }
+
+                        Text {
+                            anchors.centerIn: parent
+                            visible: !iconImg.visible
+                            text: {
+                                const itemId = trayItem?.id || ""
+                                if (!itemId) {
+                                    return "?"
+                                }
+                                return itemId.charAt(0).toUpperCase()
+                            }
+                            font.pixelSize: 10
+                            color: Theme.surfaceText
                         }
                     }
 
