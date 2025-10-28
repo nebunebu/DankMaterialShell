@@ -45,6 +45,12 @@ DankModal {
         close()
     }
 
+    function hideInstant() {
+        onColorSelectedCallback = null
+        shouldBeVisible = false
+        visible = false
+    }
+
     onColorSelected: (color) => {
         if (onColorSelectedCallback) {
             onColorSelectedCallback(color)
@@ -78,7 +84,7 @@ DankModal {
     }
 
     function pickColorFromScreen() {
-        hide()
+        hideInstant()
         Proc.runCommand("hyprpicker", ["hyprpicker", "--format=hex"], (output, errorCode) => {
             if (errorCode !== 0) {
                 console.warn("hyprpicker exited with code:", errorCode)
