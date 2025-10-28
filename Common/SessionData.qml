@@ -145,6 +145,10 @@ Singleton {
                         Theme.generateSystemThemesFromCurrentTheme()
                     }
                 }
+
+                if (typeof WallpaperCyclingService !== "undefined") {
+                    WallpaperCyclingService.updateCyclingState()
+                }
             }
         } catch (e) {
 

@@ -16,9 +16,6 @@ Singleton {
     property var monitorTimers: ({})
     property var monitorLastTimeChecks: ({})
     property var monitorProcesses: ({})
-    Component.onCompleted: {
-        updateCyclingState()
-    }
 
     Component {
         id: monitorTimerComponent
