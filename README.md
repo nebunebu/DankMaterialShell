@@ -440,13 +440,7 @@ If using "Blur Layer" option, you may want the blurred layer to appear on overvi
 ```kdl
 layer-rule {
     match namespace="dms:blurwallpaper"
-    opacity 0.0
-}
-
-layer-rule {
-    match namespace="dms:blurwallpaper"
     place-within-backdrop true
-    opacity 1.0
 }
 ```
 
