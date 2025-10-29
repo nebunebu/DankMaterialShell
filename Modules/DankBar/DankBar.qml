@@ -110,9 +110,9 @@ Item {
                     return
                 }
 
-                if (clockButtonRef && dankDashPopoutLoader.item.setTriggerPosition) {
-                    const globalPos = clockButtonRef.mapToGlobal(0, 0)
-                    const pos = SettingsData.getPopupTriggerPosition(globalPos, barWindow.screen, barWindow.effectiveBarThickness, clockButtonRef.width)
+                if (clockButtonRef && clockButtonRef.visualContent && dankDashPopoutLoader.item.setTriggerPosition) {
+                    const globalPos = clockButtonRef.visualContent.mapToGlobal(0, 0)
+                    const pos = SettingsData.getPopupTriggerPosition(globalPos, barWindow.screen, barWindow.effectiveBarThickness, clockButtonRef.visualWidth)
                     const section = clockButtonRef.section || "center"
                     dankDashPopoutLoader.item.setTriggerPosition(pos.x, pos.y, pos.width, section, barWindow.screen)
                 } else {

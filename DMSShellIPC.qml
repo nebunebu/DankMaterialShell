@@ -135,24 +135,22 @@ Item {
         }
 
         function toggle(tab: string): string {
-            root.dankDashPopoutLoader.active = true
-            if (root.dankDashPopoutLoader.item) {
-                if (root.dankDashPopoutLoader.item.dashVisible) {
-                    root.dankDashPopoutLoader.item.dashVisible = false
-                } else {
+            if (root.dankBarLoader.item && root.dankBarLoader.item.triggerWallpaperBrowserOnFocusedScreen()) {
+                if (root.dankDashPopoutLoader.item) {
                     switch (tab.toLowerCase()) {
                     case "media":
                         root.dankDashPopoutLoader.item.currentTabIndex = 1
                         break
+                    case "wallpaper":
+                        root.dankDashPopoutLoader.item.currentTabIndex = 2
+                        break
                     case "weather":
-                        root.dankDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 2 : 0
+                        root.dankDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 3 : 0
                         break
                     default:
                         root.dankDashPopoutLoader.item.currentTabIndex = 0
                         break
                     }
-                    root.dankDashPopoutLoader.item.setTriggerPosition(Screen.width / 2, Theme.barHeight + Theme.spacingS, 100, "center", Screen)
-                    root.dankDashPopoutLoader.item.dashVisible = true
                 }
                 return "DASH_TOGGLE_SUCCESS"
             }

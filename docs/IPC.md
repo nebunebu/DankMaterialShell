@@ -508,12 +508,12 @@ Dashboard popup control with tab selection for overview, media, and weather info
 
 **Functions:**
 - `open [tab]` - Show dashboard popup with optional tab selection
-  - Parameters: `tab` - Optional tab to open: "" (default), "overview", "media", or "weather"
+  - Parameters: `tab` - Tab to open: "", "overview", "media", or "weather"
   - Returns: Success/failure message
 - `close` - Hide dashboard popup
   - Returns: Success/failure message
 - `toggle [tab]` - Toggle dashboard popup visibility with optional tab selection
-  - Parameters: `tab` - Optional tab to open when showing: "" (default), "overview", "media", or "weather"
+  - Parameters: `tab` - Tab to open when showing: "", "overview", "media", or "weather"
   - Returns: Success/failure message
 
 ### Target: `dankdash`

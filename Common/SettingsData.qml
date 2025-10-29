@@ -965,7 +965,7 @@ Singleton {
         }
         return {
             "x": relativeX,
-            "y": barThickness + dankBarSpacing + dankBarBottomGap + Theme.popupDistance,
+            "y": barThickness + dankBarSpacing + Theme.popupDistance,
             "width": widgetWidth
         }
     }
