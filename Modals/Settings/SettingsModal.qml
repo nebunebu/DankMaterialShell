@@ -34,8 +34,8 @@ DankModal {
     }
 
     objectName: "settingsModal"
-    width: 800
-    height: 800
+    width: Math.min(800, screenWidth * 0.9)
+    height: Math.min(800, screenHeight * 0.85)
     visible: false
     onBackgroundClicked: () => {
         return hide();
