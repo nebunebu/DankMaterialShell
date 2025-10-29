@@ -29,6 +29,9 @@ Singleton {
     property bool _hasRefreshedOnce: false
 
     property var _coordCache: ({})
+    property int _refreshCount: 0
+    property real _refreshWindowStart: 0
+    readonly property int _maxRefreshesPerSecond: 3
 
     function getScreenScale(screen) {
         if (!screen) return 1
@@ -77,6 +80,19 @@ Singleton {
     function scheduleRefresh() {
         if (!isHyprland) return
         if (_refreshScheduled) return
+
+        const now = Date.now()
+        if (now - _refreshWindowStart > 1000) {
+            _refreshCount = 0
+            _refreshWindowStart = now
+        }
+
+        if (_refreshCount >= _maxRefreshesPerSecond) {
+            console.warn("CompositorService: Refresh rate limit exceeded, skipping refresh")
+            return
+        }
+
+        _refreshCount++
         _refreshScheduled = true
         refreshTimer.restart()
     }
@@ -156,6 +172,18 @@ Singleton {
                 for (let k of path) { if (v == null) return fb; v = v[k] }
                 return (v == null) ? fb : v
             } catch(e) { return fb }
+        }
+
+        let currentAddresses = new Set()
+        for (let i = 0; i < items.length; i++) {
+            const addr = items[i]?.address
+            if (addr) currentAddresses.add(addr)
+        }
+
+        for (let cachedAddr in _coordCache) {
+            if (!currentAddresses.has(cachedAddr)) {
+                delete _coordCache[cachedAddr]
+            }
         }
 
         let snap = []

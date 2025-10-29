@@ -19,7 +19,7 @@ Singleton {
 
     Process {
         id: getKeybinds
-        running: true
+        running: false
         command: [root.scriptPath, "--path", root.hyprConfigPath]
 
         stdout: SplitParser {
@@ -31,9 +31,22 @@ Singleton {
                 }
             }
         }
+
+        onExited: (code) => {
+            if (code !== 0) {
+                console.warn("[HyprKeybindsService] Process exited with code:", code)
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        getKeybinds.running = true
     }
 
     function reload() {
-        getKeybinds.running = true
+        getKeybinds.running = false
+        Qt.callLater(function() {
+            getKeybinds.running = true
+        })
     }
 }

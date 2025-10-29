@@ -10,17 +10,18 @@ Singleton {
 
     property int defaultDebounceMs: 50
     property int defaultTimeoutMs: 10000
-    property var _procDebouncers: ({}) // id -> { timer, command, callback, waitMs }
+    property var _procDebouncers: ({})
 
     function runCommand(id, command, callback, debounceMs, timeoutMs) {
         const wait = (typeof debounceMs === "number" && debounceMs >= 0) ? debounceMs : defaultDebounceMs
         const timeout = (typeof timeoutMs === "number" && timeoutMs > 0) ? timeoutMs : defaultTimeoutMs
         let procId = id ? id : Math.random()
+        const isRandomId = !id
 
         if (!_procDebouncers[procId]) {
             const t = Qt.createQmlObject('import QtQuick; Timer { repeat: false }', root)
-            t.triggered.connect(function() { _launchProc(procId) })
-            _procDebouncers[procId] = { timer: t, command: command, callback: callback, waitMs: wait, timeoutMs: timeout }
+            t.triggered.connect(function() { _launchProc(procId, isRandomId) })
+            _procDebouncers[procId] = { timer: t, command: command, callback: callback, waitMs: wait, timeoutMs: timeout, isRandomId: isRandomId }
         } else {
             _procDebouncers[procId].command = command
             _procDebouncers[procId].callback = callback
@@ -33,7 +34,7 @@ Singleton {
         entry.timer.restart()
     }
 
-    function _launchProc(id) {
+    function _launchProc(id, isRandomId) {
         const entry = _procDebouncers[id]
         if (!entry) return
 
@@ -92,6 +93,15 @@ Singleton {
             }
             try { proc.destroy() } catch (_) {}
             try { timeoutTimer.destroy() } catch (_) {}
+
+            if (isRandomId || entry.isRandomId) {
+                Qt.callLater(function() {
+                    if (_procDebouncers[id]) {
+                        try { _procDebouncers[id].timer.destroy() } catch (_) {}
+                        delete _procDebouncers[id]
+                    }
+                })
+            }
         }
 
         proc.running = true
