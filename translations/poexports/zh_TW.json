@@ -9,22 +9,22 @@
     "- Stateless System Monitoring": "- 無狀態系統監控"
   },
   "- Support Us With a Star ⭐": {
-    "- Support Us With a Star ⭐": "- 用星星 ⭐ 支持我們"
+    "- Support Us With a Star ⭐": "- 給我們點個 Star ⭐ 來支持我們"
   },
   "1 event": {
     "1 event": "1 個活動"
   },
   "24-Hour Format": {
-    "24-Hour Format": "24小時制"
+    "24-Hour Format": "24 小時制"
   },
   "24-hour format": {
-    "24-hour format": "24小時制"
+    "24-hour format": "24 小時制"
   },
   "3rd party": {
     "3rd party": "第三方"
   },
   "7-Day Forecast": {
-    "7-Day Forecast": "七天天氣預報"
+    "7-Day Forecast": "七天氣象預報"
   },
   "A file with this name already exists. Do you want to overwrite it?": {
     "A file with this name already exists. Do you want to overwrite it?": "檔案名稱已存在。是否要覆蓋它？"
@@ -69,7 +69,7 @@
     "Alt+←/Backspace: Back • F1/I: File Info • F10: Help • Esc: Close": "Alt+←/Backspace: 返回 • F1/I: 檔案資訊 • F10: 幫助 • Esc: 關閉"
   },
   "Always Show OSD Percentage": {
-    "Always Show OSD Percentage": "始終顯示 OSD 百分比"
+    "Always Show OSD Percentage": "OSD 始終顯示百分比"
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "始終顯示至少 3 個工作區，即使可用的工作區較少"
@@ -93,16 +93,16 @@
     "Apply": "套用"
   },
   "Apply GTK Colors": {
-    "Apply GTK Colors": "套用 GTK 色彩"
+    "Apply GTK Colors": "套用 GTK 顏色"
   },
   "Apply Qt Colors": {
-    "Apply Qt Colors": "套用 Qt 色彩"
+    "Apply Qt Colors": "套用 Qt 顏色"
   },
   "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.": {
     "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.": "應用暖色溫以減輕眼睛疲勞。使用下方的自動化設定來控制其啟動時間。"
   },
   "Apps Icon": {
-    "Apps Icon": "App 圖示"
+    "Apps Icon": "啟動器圖示"
   },
   "Apps are ordered by usage frequency, then last used, then alphabetically.": {
     "Apps are ordered by usage frequency, then last used, then alphabetically.": "應用程式按使用頻率、最後使用時間、字母順序排列。"
@@ -168,22 +168,22 @@
     "Automatic Control": "自動控制"
   },
   "Automatic Cycling": {
-    "Automatic Cycling": "自動循環"
+    "Automatic Cycling": "桌布自動輪替"
   },
   "Automatically calculate popup distance from bar edge.": {
     "Automatically calculate popup distance from bar edge.": "自動計算彈出框與資訊欄的距離。"
   },
   "Automatically cycle through wallpapers in the same folder": {
-    "Automatically cycle through wallpapers in the same folder": "自動循環更換同一資料夾中的桌布"
+    "Automatically cycle through wallpapers in the same folder": "自動輪替更換同一資料夾中的桌布"
   },
   "Automatically detect location based on IP address": {
-    "Automatically detect location based on IP address": ""
+    "Automatically detect location based on IP address": "根據IP位址自動偵測位置"
   },
   "Automatically determine your location using your IP address": {
     "Automatically determine your location using your IP address": "使用您的 IP 位址自動確定您的位置"
   },
   "Automatically extract colors from wallpaper": {
-    "Automatically extract colors from wallpaper": "自動從壁紙中提取顏色"
+    "Automatically extract colors from wallpaper": "自動從桌布中提取顏色"
   },
   "Automatically hide the top bar to expand screen real estate": {
     "Automatically hide the top bar to expand screen real estate": "自動隱藏頂部欄以擴大螢幕空間"
@@ -207,7 +207,7 @@
     "Back": "返回"
   },
   "Balanced palette with focused accents (default).": {
-    "Balanced palette with focused accents (default).": ""
+    "Balanced palette with focused accents (default).": "顏色平衡且帶有重點點綴的調色板 (預設)。"
   },
   "Battery": {
     "Battery": "電池"
@@ -234,7 +234,7 @@
     "Blur on Overview": "模糊概覽"
   },
   "Blur wallpaper when niri overview is open": {
-    "Blur wallpaper when niri overview is open": "當 niri 概覽打開時，模糊壁紙"
+    "Blur wallpaper when niri overview is open": "當 niri 概覽打開時，模糊桌布"
   },
   "Border": {
     "Border": "邊框"
@@ -255,7 +255,7 @@
     "Bottom Section": "下方區塊"
   },
   "Bottom dock for pinned and running applications": {
-    "Bottom dock for pinned and running applications": ""
+    "Bottom dock for pinned and running applications": "底部 Dock 用於固定和正在運行的應用程式"
   },
   "Brightness": {
     "Brightness": "亮度"
@@ -333,16 +333,16 @@
     "Close": "關閉"
   },
   "Color Override": {
-    "Color Override": "色彩覆蓋"
+    "Color Override": "顏色覆蓋"
   },
   "Color Picker": {
-    "Color Picker": "色彩選擇器"
+    "Color Picker": "顏色選擇器"
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "夜晚模式色溫"
   },
   "Colorful mix of bright contrasting accents.": {
-    "Colorful mix of bright contrasting accents.": "明亮對比的色彩組合。"
+    "Colorful mix of bright contrasting accents.": "明亮對比點綴的繽紛組合。"
   },
   "Command or script to run instead of the standard hibernate procedure": {
     "Command or script to run instead of the standard hibernate procedure": "代替標準休眠的指令或腳本"
@@ -510,7 +510,7 @@
     "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": "Del: 清除 • Shift+Del: 清除所有 • 1-9: 動作 • F10: 幫助 • Esc: 關閉"
   },
   "Derives colors that closely match the underlying image.": {
-    "Derives colors that closely match the underlying image.": ""
+    "Derives colors that closely match the underlying image.": "提取與底層圖像高度匹配的顏色。"
   },
   "Desktop background images": {
     "Desktop background images": "桌面背景圖片"
@@ -537,7 +537,7 @@
     "Disk Usage": "硬碟使用率"
   },
   "Dismiss": {
-    "Dismiss": ""
+    "Dismiss": "忽略"
   },
   "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": {
     "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen": "顯示一個帶有固定和正在運行的應用程式的 Dock，這些應用程式可以放置在螢幕的頂部、底部、左側或右側邊緣"
@@ -561,7 +561,7 @@
     "Displays the active keyboard layout and allows switching": "顯示目前鍵盤布局且允許切換"
   },
   "Diverse palette spanning the full spectrum.": {
-    "Diverse palette spanning the full spectrum.": ""
+    "Diverse palette spanning the full spectrum.": "涵蓋整個光譜的多元調色板。"
   },
   "Do Not Disturb": {
     "Do Not Disturb": "請勿打擾"
@@ -582,7 +582,7 @@
     "Donate on Ko-fi": "在 Ko-fi 上捐款"
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
-    "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖曳部件即可在版塊內重新排序。使用眼睛圖示隱藏/顯示部件（保持間距），或使用 X 將其完全移除。"
+    "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖曳部件即可在版塊內重新排序。使用眼睛圖示隱藏/顯示部件 (會保持間距)，或使用 X 將其完全移除。"
   },
   "Duration": {
     "Duration": "持續時間"
@@ -654,7 +654,7 @@
     "Enter password for ": "輸入密碼 "
   },
   "Exclusive Zone Offset": {
-    "Exclusive Zone Offset": "專屬區域偏移"
+    "Exclusive Zone Offset": "主要區域偏移"
   },
   "Execute templates from ~/.config/matugen/config.toml": {
     "Execute templates from ~/.config/matugen/config.toml": "從 ~/.config/matugen/config.toml 執行模板"
@@ -696,7 +696,7 @@
     "Failed to start connection to ": "無法啟動連線到 "
   },
   "Feels Like": {
-    "Feels Like": "感覺像"
+    "Feels Like": "體感溫度"
   },
   "File Already Exists": {
     "File Already Exists": "檔案已經存在"
@@ -714,19 +714,19 @@
     "Focused Window": "視窗對焦"
   },
   "Font Family": {
-    "Font Family": "字型"
+    "Font Family": "字體"
   },
   "Font Scale": {
-    "Font Scale": "字型比例"
+    "Font Scale": "字體比例"
   },
   "Font Settings": {
-    "Font Settings": "字型設定"
+    "Font Settings": "字體設定"
   },
   "Font Size": {
-    "Font Size": "字型大小"
+    "Font Size": "字體大小"
   },
   "Font Weight": {
-    "Font Weight": "字型寬度"
+    "Font Weight": "字體粗細"
   },
   "Force Kill Process": {
     "Force Kill Process": "強制結束程序"
@@ -741,7 +741,7 @@
     "Forgot network ": "忘記網路 "
   },
   "Format Legend": {
-    "Format Legend": ""
+    "Format Legend": "格式說明"
   },
   "Framework:": {
     "Framework:": "框架:"
@@ -765,7 +765,7 @@
     "Gamma Control": "Gamma 控制"
   },
   "Gamma control not available. Requires DMS API v6+.": {
-    "Gamma control not available. Requires DMS API v6+.": ""
+    "Gamma control not available. Requires DMS API v6+.": "Gamma 控制不可用。需要 DMS API v6+。"
   },
   "Geoclue service not running - cannot auto-detect location": {
     "Geoclue service not running - cannot auto-detect location": "Geoclue 服務未運作 - 無法自動偵測位置"
@@ -777,7 +777,7 @@
     "Good": "好"
   },
   "Goth Corners": {
-    "Goth Corners": ""
+    "Goth Corners": "圓角介面融合"
   },
   "Graphics": {
     "Graphics": "圖形"
@@ -786,7 +786,7 @@
     "Group by App": "App 分組"
   },
   "Group multiple windows of the same app together with a window count indicator": {
-    "Group multiple windows of the same app together with a window count indicator": ""
+    "Group multiple windows of the same app together with a window count indicator": "將同一應用程式的多個視窗匯集在一起，並附帶視窗數量指示器"
   },
   "Health": {
     "Health": "健康狀態"
@@ -816,7 +816,7 @@
     "Hour": "小時"
   },
   "How often to change wallpaper": {
-    "How often to change wallpaper": "多久更換一次壁紙"
+    "How often to change wallpaper": "多久更換一次桌布"
   },
   "Humidity": {
     "Humidity": "濕度"
@@ -831,7 +831,7 @@
     "Icon Theme": "圖示主題"
   },
   "Idle Inhibitor": {
-    "Idle Inhibitor": ""
+    "Idle Inhibitor": "空閒抑制器"
   },
   "Idle Settings": {
     "Idle Settings": "閒置設定"
@@ -849,7 +849,7 @@
     "Incorrect password": "密碼錯誤"
   },
   "Indicator Style": {
-    "Indicator Style": ""
+    "Indicator Style": "指示樣式"
   },
   "Individual Batteries": {
     "Individual Batteries": "獨立電池"
@@ -918,7 +918,7 @@
     "Left Section": "左方區塊"
   },
   "Light Mode": {
-    "Light Mode": "白天模式"
+    "Light Mode": "淺色主題"
   },
   "Lines: %1": {
     "Lines: %1": "行數:"
@@ -966,16 +966,16 @@
     "Manual Show/Hide": "手動顯示/隱藏"
   },
   "Material Colors": {
-    "Material Colors": "手動調整色彩"
+    "Material Colors": "手動調整顏色"
   },
   "Matugen Palette": {
-    "Matugen Palette": ""
+    "Matugen Palette": "Matugen 調色板"
   },
   "Matugen Settings": {
     "Matugen Settings": "Matugen 設定"
   },
   "Matugen Target Monitor": {
-    "Matugen Target Monitor": ""
+    "Matugen Target Monitor": "Matugen 目標監視器"
   },
   "Max apps to show": {
     "Max apps to show": "最多顯示App"
@@ -1017,7 +1017,7 @@
     "Monitor Selection:": "螢幕選擇:"
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
-    "Monitor whose wallpaper drives dynamic theming colors": ""
+    "Monitor whose wallpaper drives dynamic theming colors": "系統介面顏色依據哪一個螢幕上的桌布來決定"
   },
   "Monospace Font": {
     "Monospace Font": "等寬字體"
@@ -1074,7 +1074,7 @@
     "No Active Players": "無播放器"
   },
   "No Background": {
-    "No Background": "無背景"
+    "No Background": "部件無背景"
   },
   "No Bluetooth adapter found": {
     "No Bluetooth adapter found": "未找到藍芽適配器"
@@ -1113,7 +1113,7 @@
     "Notepad": "筆記本"
   },
   "Notepad Font Settings": {
-    "Notepad Font Settings": "筆記本字型設定"
+    "Notepad Font Settings": "筆記本字體設定"
   },
   "Notepad Slideout": {
     "Notepad Slideout": "記事本滑出"
@@ -1146,7 +1146,7 @@
     "Numbers": "數字"
   },
   "OS Logo": {
-    "OS Logo": "發行版Logo"
+    "OS Logo": "發行版 Logo"
   },
   "Office": {
     "Office": "辦公"
@@ -1194,10 +1194,10 @@
     "Password": "密碼"
   },
   "Per-Mode Wallpapers": {
-    "Per-Mode Wallpapers": "每種模式的桌布"
+    "Per-Mode Wallpapers": "以主題區分桌布"
   },
   "Per-Monitor Wallpapers": {
-    "Per-Monitor Wallpapers": "每台螢幕的桌布"
+    "Per-Monitor Wallpapers": "以螢幕區分桌布"
   },
   "Per-Monitor Workspaces": {
     "Per-Monitor Workspaces": "每台螢幕的工作區"
@@ -1272,10 +1272,10 @@
     "Power Options": "電源選項"
   },
   "Power Profile Degradation": {
-    "Power Profile Degradation": ""
+    "Power Profile Degradation": "電源配置降級"
   },
   "Pressure": {
-    "Pressure": "壓力"
+    "Pressure": "氣壓"
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "防止螢幕超時"
@@ -1284,7 +1284,7 @@
     "Primary": "主要"
   },
   "Privacy Indicator": {
-    "Privacy Indicator": ""
+    "Privacy Indicator": "隱私指示器"
   },
   "Process": {
     "Process": "程序"
@@ -1404,10 +1404,10 @@
     "Select Launcher Logo": "選擇啟動器 Logo"
   },
   "Select a color from the palette or use custom sliders": {
-    "Select a color from the palette or use custom sliders": ""
+    "Select a color from the palette or use custom sliders": "從調色板中選取一個顏色，或使用滑條調整"
   },
   "Select a preset or drag the slider to customize": {
-    "Select a preset or drag the slider to customize": ""
+    "Select a preset or drag the slider to customize": "選擇上方預設選項或拉動滑條調整"
   },
   "Select a widget to add to the ": {
     "Select a widget to add to the ": "選擇一個部件加到 "
@@ -1416,13 +1416,13 @@
     "Select an image file...": "選擇一張圖片..."
   },
   "Select font weight": {
-    "Select font weight": "選擇字型寬度"
+    "Select font weight": "選擇字體粗細"
   },
   "Select monitor to configure wallpaper": {
     "Select monitor to configure wallpaper": "選擇指定螢幕桌布"
   },
   "Select monospace font for process list and technical displays": {
-    "Select monospace font for process list and technical displays": ""
+    "Select monospace font for process list and technical displays": "寬字體用於處理程序列表和技術顯示"
   },
   "Select system font family": {
     "Select system font family": "選擇系統字體"
@@ -1431,7 +1431,7 @@
     "Select system sound theme": "選擇系統音效主題"
   },
   "Select the palette algorithm used for wallpaper-based colors": {
-    "Select the palette algorithm used for wallpaper-based colors": ""
+    "Select the palette algorithm used for wallpaper-based colors": "請選擇調色板演算法，以桌布的顏色為基底。"
   },
   "Select which transitions to include in randomization": {
     "Select which transitions to include in randomization": "選擇要包含在隨機中的轉換效果"
@@ -1446,7 +1446,7 @@
     "Set different wallpapers for each connected monitor": "為每個連接的螢幕設定不同的桌布"
   },
   "Set different wallpapers for light and dark mode": {
-    "Set different wallpapers for light and dark mode": "為明暗模式設定不同的桌布"
+    "Set different wallpapers for light and dark mode": "為淺色/深色主題設定不同的桌布"
   },
   "Settings": {
     "Settings": "設定"
@@ -1461,7 +1461,7 @@
     "Show Dock": "顯示 Dock"
   },
   "Show Line Numbers": {
-    "Show Line Numbers": ""
+    "Show Line Numbers": "顯示行數"
   },
   "Show Power Actions": {
     "Show Power Actions": "顯示電源選項"
@@ -1524,7 +1524,7 @@
     "Sound Theme": "音效主題"
   },
   "Spacer": {
-    "Spacer": ""
+    "Spacer": "空白間隔"
   },
   "Spacing": {
     "Spacing": "間距"
@@ -1563,7 +1563,7 @@
     "Switch User": "切換使用者"
   },
   "Sync Mode with Portal": {
-    "Sync Mode with Portal": ""
+    "Sync Mode with Portal": "透過 Portal 同步主題模式"
   },
   "Sync dark mode with settings portals for system-wide theme hints": {
     "Sync dark mode with settings portals for system-wide theme hints": "將暗模式與設定入口網站同步以取得系統範圍的主題提示"
@@ -1584,7 +1584,7 @@
     "System Monitoring:": "系統監視器:"
   },
   "System Tray": {
-    "System Tray": "系統任務欄"
+    "System Tray": "系統匣"
   },
   "System Update": {
     "System Update": "系統更新"
@@ -1599,19 +1599,19 @@
     "System bar with widgets and system information": "帶有部件和系統資訊的系統欄"
   },
   "System notification area icons": {
-    "System notification area icons": "系統通知區域圖示"
+    "System notification area icons": "顯示常駐程式狀態圖示和系統通知"
   },
   "System toast notifications": {
-    "System toast notifications": ""
+    "System toast notifications": "系統快顯通知"
   },
   "System tray icons": {
-    "System tray icons": "系統任務欄圖示"
+    "System tray icons": "系統匣圖示"
   },
   "System update custom command": {
     "System update custom command": "自訂系統更新指令"
   },
   "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": {
-    "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": ""
+    "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": "Tab/Shift+Tab: 切換焦點 • ←→↑↓: 切換焦點 • Enter/Space: 選擇"
   },
   "Technical Details": {
     "Technical Details": "技術細節"
@@ -1629,7 +1629,7 @@
     "The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.": "DMS_SOCKET 環境變數未設定或套接字不可用。自動插件管理需要 DMS_SOCKET。"
   },
   "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": {
-    "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "以下設定將修改您的 GTK 和 Qt 設定。如果您希望保留目前配置，請備份它們(qt5ct.conf|qt6ct.conf 和 ~/.config/gtk-3.0|gtk-4.0)。"
+    "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "以下設定將修改您的 GTK 和 Qt 設定。如果您希望保留目前配置，請備份 (qt5ct.conf|qt6ct.conf 和 ~/.config/gtk-3.0|gtk-4.0)。"
   },
   "Theme & Colors": {
     "Theme & Colors": "主題和顏色"
@@ -1659,7 +1659,7 @@
     "To update, run the following command:": "若要更新，請執行以下命令："
   },
   "Toast Messages": {
-    "Toast Messages": ""
+    "Toast Messages": "快顯通知"
   },
   "Today": {
     "Today": "今天"
@@ -1680,7 +1680,7 @@
     "Top Section": "上方區塊"
   },
   "Transition Effect": {
-    "Transition Effect": "過渡效果"
+    "Transition Effect": "切換動畫效果"
   },
   "Turn off monitors after": {
     "Turn off monitors after": "關閉螢幕之後"
@@ -1734,7 +1734,7 @@
     "Use animated wave progress bars for media playback": "在媒體播放使用動畫波浪進度條"
   },
   "Use automatic location detection (geoclue2)": {
-    "Use automatic location detection (geoclue2)": ""
+    "Use automatic location detection (geoclue2)": "使用自動位置偵測（geoclue2）"
   },
   "Use custom command for update your system": {
     "Use custom command for update your system": "使用自訂指令更新您的系統"
@@ -1773,7 +1773,7 @@
     "VPN status and quick connect": "VPN 狀態和快速連接"
   },
   "Vibrant palette with playful saturation.": {
-    "Vibrant palette with playful saturation.": ""
+    "Vibrant palette with playful saturation.": "色彩鮮明且飽和度活潑的調色板。"
   },
   "Visibility": {
     "Visibility": "能見度"
@@ -1788,7 +1788,7 @@
     "Volume Changed": "音量改變"
   },
   "Volume, brightness, and other system OSDs": {
-    "Volume, brightness, and other system OSDs": ""
+    "Volume, brightness, and other system OSDs": "音量、亮度及其他系統OSD"
   },
   "Wallpaper": {
     "Wallpaper": "桌布"
@@ -1833,7 +1833,7 @@
     "Widgets": "部件"
   },
   "Wind": {
-    "Wind": "風"
+    "Wind": "風速"
   },
   "Window Scrolling": {
     "Window Scrolling": "視窗滾動"
