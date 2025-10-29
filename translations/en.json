@@ -212,7 +212,7 @@
   {
     "term": "Apps are ordered by usage frequency, then last used, then alphabetically.",
     "context": "Apps are ordered by usage frequency, then last used, then alphabetically.",
-    "reference": "Modules/Settings/LauncherTab.qml:608",
+    "reference": "Modules/Settings/LauncherTab.qml:605",
     "comment": ""
   },
   {
@@ -512,7 +512,7 @@
   {
     "term": "Brightness",
     "context": "Brightness",
-    "reference": "Modules/Settings/LauncherTab.qml:324",
+    "reference": "Modules/Settings/LauncherTab.qml:321",
     "comment": ""
   },
   {
@@ -584,7 +584,7 @@
   {
     "term": "Choose Launcher Logo Color",
     "context": "Choose Launcher Logo Color",
-    "reference": "Modules/Settings/LauncherTab.qml:251",
+    "reference": "Modules/Settings/LauncherTab.qml:248",
     "comment": ""
   },
   {
@@ -662,7 +662,7 @@
   {
     "term": "Color Override",
     "context": "Color Override",
-    "reference": "Modules/Settings/LauncherTab.qml:187",
+    "reference": "Modules/Settings/LauncherTab.qml:184",
     "comment": ""
   },
   {
@@ -732,6 +732,12 @@
     "comment": ""
   },
   {
+    "term": "Compositor",
+    "context": "Compositor",
+    "reference": "Modules/Settings/LauncherTab.qml:97",
+    "comment": ""
+  },
+  {
     "term": "Configuration activated",
     "context": "Configuration activated",
     "reference": "Services/DMSNetworkService.qml:374",
@@ -788,7 +794,7 @@
   {
     "term": "Contrast",
     "context": "Contrast",
-    "reference": "Modules/Settings/LauncherTab.qml:353",
+    "reference": "Modules/Settings/LauncherTab.qml:350",
     "comment": ""
   },
   {
@@ -878,7 +884,7 @@
   {
     "term": "Custom",
     "context": "Custom",
-    "reference": "Modules/Settings/LauncherTab.qml:94, Modules/Settings/LauncherTab.qml:200",
+    "reference": "Modules/Settings/LauncherTab.qml:99, Modules/Settings/LauncherTab.qml:197",
     "comment": ""
   },
   {
@@ -926,7 +932,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:229",
+    "reference": "Services/DMSService.qml:230",
     "comment": ""
   },
   {
@@ -980,7 +986,7 @@
   {
     "term": "Default",
     "context": "Default",
-    "reference": "Modules/Settings/LauncherTab.qml:200",
+    "reference": "Modules/Settings/LauncherTab.qml:197",
     "comment": ""
   },
   {
@@ -1700,7 +1706,7 @@
   {
     "term": "Invert on mode change",
     "context": "Invert on mode change",
-    "reference": "Modules/Settings/LauncherTab.qml:382",
+    "reference": "Modules/Settings/LauncherTab.qml:379",
     "comment": ""
   },
   {
@@ -1718,31 +1724,31 @@
   {
     "term": "Last launched %1",
     "context": "Last launched %1",
-    "reference": "Modules/Settings/LauncherTab.qml:708",
+    "reference": "Modules/Settings/LauncherTab.qml:705",
     "comment": ""
   },
   {
     "term": "Last launched %1 day%2 ago",
     "context": "Last launched %1 day%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:704",
+    "reference": "Modules/Settings/LauncherTab.qml:701",
     "comment": ""
   },
   {
     "term": "Last launched %1 hour%2 ago",
     "context": "Last launched %1 hour%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:699",
+    "reference": "Modules/Settings/LauncherTab.qml:696",
     "comment": ""
   },
   {
     "term": "Last launched %1 minute%2 ago",
     "context": "Last launched %1 minute%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:694",
+    "reference": "Modules/Settings/LauncherTab.qml:691",
     "comment": ""
   },
   {
     "term": "Last launched just now",
     "context": "Last launched just now",
-    "reference": "Modules/Settings/LauncherTab.qml:691",
+    "reference": "Modules/Settings/LauncherTab.qml:688",
     "comment": ""
   },
   {
@@ -1760,7 +1766,7 @@
   {
     "term": "Launch Prefix",
     "context": "Launch Prefix",
-    "reference": "Modules/Settings/LauncherTab.qml:433",
+    "reference": "Modules/Settings/LauncherTab.qml:430",
     "comment": ""
   },
   {
@@ -2516,7 +2522,7 @@
   {
     "term": "Primary",
     "context": "Primary",
-    "reference": "Modules/Settings/LauncherTab.qml:200",
+    "reference": "Modules/Settings/LauncherTab.qml:197",
     "comment": ""
   },
   {
@@ -2588,7 +2594,7 @@
   {
     "term": "Recently Used Apps",
     "context": "Recently Used Apps",
-    "reference": "Modules/Settings/LauncherTab.qml:578",
+    "reference": "Modules/Settings/LauncherTab.qml:575",
     "comment": ""
   },
   {
@@ -2768,7 +2774,7 @@
   {
     "term": "Select an image file...",
     "context": "Select an image file...",
-    "reference": "Modules/Settings/LauncherTab.qml:152",
+    "reference": "Modules/Settings/LauncherTab.qml:149",
     "comment": ""
   },
   {
@@ -2972,13 +2978,13 @@
   {
     "term": "Size Offset",
     "context": "Size Offset",
-    "reference": "Modules/Settings/LauncherTab.qml:273",
+    "reference": "Modules/Settings/LauncherTab.qml:270",
     "comment": ""
   },
   {
     "term": "Sort Alphabetically",
     "context": "Sort Alphabetically",
-    "reference": "Modules/Settings/LauncherTab.qml:488",
+    "reference": "Modules/Settings/LauncherTab.qml:485",
     "comment": ""
   },
   {
@@ -3038,7 +3044,7 @@
   {
     "term": "Surface",
     "context": "Surface",
-    "reference": "Modules/Settings/LauncherTab.qml:200",
+    "reference": "Modules/Settings/LauncherTab.qml:197",
     "comment": ""
   },
   {
@@ -3248,7 +3254,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:230",
+    "reference": "Services/DMSService.qml:231",
     "comment": ""
   },
   {
@@ -3554,7 +3560,7 @@
   {
     "term": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
     "context": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
-    "reference": "Modules/Settings/LauncherTab.qml:517",
+    "reference": "Modules/Settings/LauncherTab.qml:514",
     "comment": ""
   },
   {
