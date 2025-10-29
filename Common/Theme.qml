@@ -111,12 +111,12 @@ Singleton {
                                 console.info("Theme: Matugen now available, regenerating colors for dynamic theme")
                                 const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode)
                                 const iconTheme = (typeof SettingsData !== "undefined" && SettingsData.iconTheme) ? SettingsData.iconTheme : "System Default"
-                                Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
                                 const selectedMatugenType = (typeof SettingsData !== "undefined" && SettingsData.matugenScheme) ? SettingsData.matugenScheme : "scheme-tonal-spot"
-                                if (rawWallpaperPath.startsWith("#")) {
-                                    setDesiredTheme("hex", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+                                const effectivePath = rawWallpaperPath.startsWith("we:") ? (stateDir + "/we_screenshots/" + rawWallpaperPath.substring(3) + ".jpg") : rawWallpaperPath
+                                if (effectivePath.startsWith("#")) {
+                                    setDesiredTheme("hex", effectivePath, isLight, iconTheme, selectedMatugenType)
                                 } else {
-                                    setDesiredTheme("image", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+                                    setDesiredTheme("image", effectivePath, isLight, iconTheme, selectedMatugenType)
                                 }
                                 return
                             }
@@ -126,12 +126,12 @@ Singleton {
 
                             if (currentTheme === dynamic) {
                                 if (rawWallpaperPath) {
-                                    Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
                                     const selectedMatugenType = (typeof SettingsData !== "undefined" && SettingsData.matugenScheme) ? SettingsData.matugenScheme : "scheme-tonal-spot"
-                                    if (rawWallpaperPath.startsWith("#")) {
-                                        setDesiredTheme("hex", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+                                    const effectivePath = rawWallpaperPath.startsWith("we:") ? (stateDir + "/we_screenshots/" + rawWallpaperPath.substring(3) + ".jpg") : rawWallpaperPath
+                                    if (effectivePath.startsWith("#")) {
+                                        setDesiredTheme("hex", effectivePath, isLight, iconTheme, selectedMatugenType)
                                     } else {
-                                        setDesiredTheme("image", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+                                        setDesiredTheme("image", effectivePath, isLight, iconTheme, selectedMatugenType)
                                     }
                                 }
                             } else {
@@ -148,7 +148,6 @@ Singleton {
                                 }
 
                                 if (primaryColor) {
-                                    Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
                                     setDesiredTheme("hex", primaryColor, isLight, iconTheme, matugenType)
                                 }
                             }
@@ -812,11 +811,12 @@ Singleton {
         const desiredPath = stateDir + "/matugen.desired.json"
 
         Quickshell.execDetached(["sh", "-c", `mkdir -p '${stateDir}' && cat > '${desiredPath}' << 'EOF'\n${json}\nEOF`])
+        Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
         workerRunning = true
         const syncModeWithPortal = (typeof SettingsData !== "undefined" && SettingsData.syncModeWithPortal) ? "true" : "false"
         if (rawWallpaperPath.startsWith("we:")) {
-            console.log("Theme: Starting matugen worker (WE wallpaper)")
-            systemThemeGenerator.command = ["sh", "-c", `sleep 1 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' '${configDir}' '${syncModeWithPortal}' --run`]
+            console.log("Theme: Starting matugen worker (WE wallpaper, waiting for screenshot)")
+            systemThemeGenerator.command = ["sh", "-c", `sleep 3 && ${shellDir}/scripts/matugen-worker.sh '${stateDir}' '${shellDir}' '${configDir}' '${syncModeWithPortal}' --run`]
         } else {
             console.log("Theme: Starting matugen worker")
             systemThemeGenerator.command = [shellDir + "/scripts/matugen-worker.sh", stateDir, shellDir, configDir, syncModeWithPortal, "--run"]
@@ -837,10 +837,11 @@ Singleton {
                 return
             }
             const selectedMatugenType = (typeof SettingsData !== "undefined" && SettingsData.matugenScheme) ? SettingsData.matugenScheme : "scheme-tonal-spot"
-            if (rawWallpaperPath.startsWith("#")) {
-                setDesiredTheme("hex", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+            const effectivePath = rawWallpaperPath.startsWith("we:") ? (stateDir + "/we_screenshots/" + rawWallpaperPath.substring(3) + ".jpg") : rawWallpaperPath
+            if (effectivePath.startsWith("#")) {
+                setDesiredTheme("hex", effectivePath, isLight, iconTheme, selectedMatugenType)
             } else {
-                setDesiredTheme("image", rawWallpaperPath, isLight, iconTheme, selectedMatugenType)
+                setDesiredTheme("image", effectivePath, isLight, iconTheme, selectedMatugenType)
             }
         } else {
             let primaryColor
