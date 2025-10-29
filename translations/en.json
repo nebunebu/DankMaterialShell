@@ -410,7 +410,7 @@
   {
     "term": "Balanced palette with focused accents (default).",
     "context": "Balanced palette with focused accents (default).",
-    "reference": "Common/Theme.qml:216",
+    "reference": "Common/Theme.qml:215",
     "comment": ""
   },
   {
@@ -680,7 +680,7 @@
   {
     "term": "Colorful mix of bright contrasting accents.",
     "context": "Colorful mix of bright contrasting accents.",
-    "reference": "Common/Theme.qml:240",
+    "reference": "Common/Theme.qml:239",
     "comment": ""
   },
   {
@@ -1004,7 +1004,7 @@
   {
     "term": "Derives colors that closely match the underlying image.",
     "context": "Derives colors that closely match the underlying image.",
-    "reference": "Common/Theme.qml:228",
+    "reference": "Common/Theme.qml:227",
     "comment": ""
   },
   {
@@ -1106,7 +1106,7 @@
   {
     "term": "Diverse palette spanning the full spectrum.",
     "context": "Diverse palette spanning the full spectrum.",
-    "reference": "Common/Theme.qml:252",
+    "reference": "Common/Theme.qml:251",
     "comment": ""
   },
   {
@@ -1586,13 +1586,13 @@
   {
     "term": "High-contrast palette for strong visual distinction.",
     "context": "High-contrast palette for strong visual distinction.",
-    "reference": "Common/Theme.qml:224",
+    "reference": "Common/Theme.qml:223",
     "comment": ""
   },
   {
     "term": "High-fidelity palette that preserves source hues.",
     "context": "High-fidelity palette that preserves source hues.",
-    "reference": "Common/Theme.qml:236",
+    "reference": "Common/Theme.qml:235",
     "comment": ""
   },
   {
@@ -1814,7 +1814,7 @@
   {
     "term": "Lively palette with saturated accents.",
     "context": "Lively palette with saturated accents.",
-    "reference": "Common/Theme.qml:220",
+    "reference": "Common/Theme.qml:219",
     "comment": ""
   },
   {
@@ -1970,7 +1970,7 @@
   {
     "term": "Minimal palette built around a single hue.",
     "context": "Minimal palette built around a single hue.",
-    "reference": "Common/Theme.qml:244",
+    "reference": "Common/Theme.qml:243",
     "comment": ""
   },
   {
@@ -2012,7 +2012,7 @@
   {
     "term": "Muted palette with subdued, calming tones.",
     "context": "Muted palette with subdued, calming tones.",
-    "reference": "Common/Theme.qml:248",
+    "reference": "Common/Theme.qml:247",
     "comment": ""
   },
   {
@@ -3482,7 +3482,7 @@
   {
     "term": "Vibrant palette with playful saturation.",
     "context": "Vibrant palette with playful saturation.",
-    "reference": "Common/Theme.qml:232",
+    "reference": "Common/Theme.qml:231",
     "comment": ""
   },
   {
