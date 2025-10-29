@@ -551,6 +551,113 @@ Item {
                                     componentMapRevision++
                                 }
 
+                                readonly property var sortedToplevels: {
+                                    return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, barWindow.screenName);
+                                }
+
+                                function getRealWorkspaces() {
+                                    if (CompositorService.isNiri) {
+                                        if (!barWindow.screenName || !SettingsData.workspacesPerMonitor) {
+                                            return NiriService.getCurrentOutputWorkspaceNumbers()
+                                        }
+                                        const workspaces = NiriService.allWorkspaces.filter(ws => ws.output === barWindow.screenName).map(ws => ws.idx + 1)
+                                        return workspaces.length > 0 ? workspaces : [1, 2]
+                                    } else if (CompositorService.isHyprland) {
+                                        const workspaces = Hyprland.workspaces?.values || []
+
+                                        if (!barWindow.screenName || !SettingsData.workspacesPerMonitor) {
+                                            const sorted = workspaces.slice().sort((a, b) => a.id - b.id)
+                                            const filtered = sorted.filter(ws => ws.id > -1)
+                                            return filtered.length > 0 ? filtered : [{"id": 1, "name": "1"}]
+                                        }
+
+                                        const monitorWorkspaces = workspaces.filter(ws => {
+                                            return ws.lastIpcObject && ws.lastIpcObject.monitor === barWindow.screenName && ws.id > -1
+                                        })
+
+                                        if (monitorWorkspaces.length === 0) {
+                                            return [{"id": 1, "name": "1"}]
+                                        }
+
+                                        return monitorWorkspaces.sort((a, b) => a.id - b.id)
+                                    }
+                                    return [1]
+                                }
+
+                                function getCurrentWorkspace() {
+                                    if (CompositorService.isNiri) {
+                                        if (!barWindow.screenName || !SettingsData.workspacesPerMonitor) {
+                                            return NiriService.getCurrentWorkspaceNumber()
+                                        }
+                                        const activeWs = NiriService.allWorkspaces.find(ws => ws.output === barWindow.screenName && ws.is_active)
+                                        return activeWs ? activeWs.idx + 1 : 1
+                                    } else if (CompositorService.isHyprland) {
+                                        const monitors = Hyprland.monitors?.values || []
+                                        const currentMonitor = monitors.find(monitor => monitor.name === barWindow.screenName)
+                                        return currentMonitor?.activeWorkspace?.id ?? 1
+                                    }
+                                    return 1
+                                }
+
+                                function switchWorkspace(direction) {
+                                    const realWorkspaces = getRealWorkspaces()
+                                    if (realWorkspaces.length < 2) {
+                                        return
+                                    }
+
+                                    if (CompositorService.isNiri) {
+                                        const currentWs = getCurrentWorkspace()
+                                        const currentIndex = realWorkspaces.findIndex(ws => ws === currentWs)
+                                        const validIndex = currentIndex === -1 ? 0 : currentIndex
+                                        const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+                                        if (nextIndex !== validIndex) {
+                                            NiriService.switchToWorkspace(realWorkspaces[nextIndex] - 1)
+                                        }
+                                    } else if (CompositorService.isHyprland) {
+                                        const currentWs = getCurrentWorkspace()
+                                        const currentIndex = realWorkspaces.findIndex(ws => ws.id === currentWs)
+                                        const validIndex = currentIndex === -1 ? 0 : currentIndex
+                                        const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+                                        if (nextIndex !== validIndex) {
+                                            Hyprland.dispatch(`workspace ${realWorkspaces[nextIndex].id}`)
+                                        }
+                                    }
+                                }
+
+                                function switchApp(deltaY) {
+                                    const windows = sortedToplevels;
+                                    if (windows.length < 2) {
+                                        return;
+                                    }
+                                    let currentIndex = -1;
+                                    for (let i = 0; i < windows.length; i++) {
+                                        if (windows[i].activated) {
+                                            currentIndex = i;
+                                            break;
+                                        }
+                                    }
+                                    let nextIndex;
+                                    if (deltaY < 0) {
+                                        if (currentIndex === -1) {
+                                            nextIndex = 0;
+                                        } else {
+                                            nextIndex = currentIndex + 1;
+                                        }
+                                    } else {
+                                        if (currentIndex === -1) {
+                                            nextIndex = windows.length - 1;
+                                        } else {
+                                            nextIndex = currentIndex - 1;
+                                        }
+                                    }
+                                    const nextWindow = windows[nextIndex];
+                                    if (nextWindow) {
+                                        nextWindow.activate();
+                                    }
+                                }
+
                                 readonly property int availableWidth: width
                                 readonly property int launcherButtonWidth: 40
                                 readonly property int workspaceSwitcherWidth: 120
@@ -682,6 +789,52 @@ Item {
                                 Item {
                                     id: stackContainer
                                     anchors.fill: parent
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        acceptedButtons: Qt.NoButton
+                                        propagateComposedEvents: true
+                                        z: -1
+
+                                        property real scrollAccumulator: 0
+                                        property real touchpadThreshold: 500
+
+                                        onWheel: wheel => {
+                                            const deltaY = wheel.angleDelta.y
+                                            const deltaX = wheel.angleDelta.x
+
+                                            if (CompositorService.isNiri && Math.abs(deltaX) > Math.abs(deltaY)) {
+                                                topBarContent.switchApp(deltaX)
+                                                wheel.accepted = false
+                                                return
+                                            }
+
+                                            const isMouseWheel = Math.abs(deltaY) >= 120 && (Math.abs(deltaY) % 120) === 0
+                                            const direction = deltaY < 0 ? 1 : -1
+
+                                            if (isMouseWheel) {
+                                                if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
+                                                    topBarContent.switchWorkspace(direction)
+                                                } else {
+                                                    topBarContent.switchApp(deltaY)
+                                                }
+                                            } else {
+                                                scrollAccumulator += deltaY
+
+                                                if (Math.abs(scrollAccumulator) >= touchpadThreshold) {
+                                                    const touchDirection = scrollAccumulator < 0 ? 1 : -1
+                                                    if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
+                                                        topBarContent.switchWorkspace(touchDirection)
+                                                    } else {
+                                                        topBarContent.switchApp(deltaY)
+                                                    }
+                                                    scrollAccumulator = 0
+                                                }
+                                            }
+
+                                            wheel.accepted = false
+                                        }
+                                    }
 
                                     Item {
                                         id: horizontalStack
