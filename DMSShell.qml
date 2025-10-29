@@ -54,7 +54,7 @@ Item {
 
     Loader {
         id: blurredWallpaperBackgroundLoader
-        active: SettingsData.blurredWallpaperLayer
+        active: SettingsData.blurredWallpaperLayer && CompositorService.isNiri
         asynchronous: false
 
         sourceComponent: BlurredWallpaperBackground {}

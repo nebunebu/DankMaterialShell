@@ -6,6 +6,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import Quickshell.I3
 import Quickshell.Wayland
 import qs.Common
 
@@ -186,6 +187,11 @@ Singleton {
 
             if (CompositorService.isDwl) {
                 DwlService.quit()
+                return
+            }
+
+            if (CompositorService.isSway) {
+                try { I3.dispatch("exit") } catch(_){}
                 return
             }
 

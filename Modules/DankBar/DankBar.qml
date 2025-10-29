@@ -4,6 +4,7 @@ import QtQuick.Effects
 import QtQuick.Shapes
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.I3
 import Quickshell.Io
 import Quickshell.Services.Mpris
 import Quickshell.Services.Notifications
@@ -31,6 +32,9 @@ Item {
             focusedScreenName = Hyprland.focusedWorkspace.monitor.name
         } else if (CompositorService.isNiri && NiriService.currentOutput) {
             focusedScreenName = NiriService.currentOutput
+        } else if (CompositorService.isSway) {
+            const focusedWs = I3.workspaces?.values?.find(ws => ws.focused === true)
+            focusedScreenName = focusedWs?.monitor?.name || ""
         }
 
         if (!focusedScreenName && barVariants.instances.length > 0) {
@@ -55,6 +59,9 @@ Item {
             focusedScreenName = Hyprland.focusedWorkspace.monitor.name
         } else if (CompositorService.isNiri && NiriService.currentOutput) {
             focusedScreenName = NiriService.currentOutput
+        } else if (CompositorService.isSway) {
+            const focusedWs = I3.workspaces?.values?.find(ws => ws.focused === true)
+            focusedScreenName = focusedWs?.monitor?.name || ""
         }
 
         if (!focusedScreenName && barVariants.instances.length > 0) {
@@ -573,6 +580,16 @@ Item {
                                             return Array.from({length: 9}, (_, i) => i)
                                         }
                                         return Array.from({length: DwlService.tagCount}, (_, i) => i)
+                                    } else if (CompositorService.isSway) {
+                                        const workspaces = I3.workspaces?.values || []
+                                        if (workspaces.length === 0) return [{"num": 1}]
+
+                                        if (!barWindow.screenName || !SettingsData.workspacesPerMonitor) {
+                                            return workspaces.slice().sort((a, b) => a.num - b.num)
+                                        }
+
+                                        const monitorWorkspaces = workspaces.filter(ws => ws.monitor?.name === barWindow.screenName)
+                                        return monitorWorkspaces.length > 0 ? monitorWorkspaces.sort((a, b) => a.num - b.num) : [{"num": 1}]
                                     }
                                     return [1]
                                 }
@@ -594,6 +611,14 @@ Item {
                                         if (!outputState || !outputState.tags) return 0
                                         const activeTags = DwlService.getActiveTags(barWindow.screenName)
                                         return activeTags.length > 0 ? activeTags[0] : 0
+                                    } else if (CompositorService.isSway) {
+                                        if (!barWindow.screenName || !SettingsData.workspacesPerMonitor) {
+                                            const focusedWs = I3.workspaces?.values?.find(ws => ws.focused === true)
+                                            return focusedWs ? focusedWs.num : 1
+                                        }
+
+                                        const focusedWs = I3.workspaces?.values?.find(ws => ws.monitor?.name === barWindow.screenName && ws.focused === true)
+                                        return focusedWs ? focusedWs.num : 1
                                     }
                                     return 1
                                 }
@@ -630,6 +655,15 @@ Item {
 
                                         if (nextIndex !== validIndex) {
                                             DwlService.switchToTag(barWindow.screenName, realWorkspaces[nextIndex])
+                                        }
+                                    } else if (CompositorService.isSway) {
+                                        const currentWs = getCurrentWorkspace()
+                                        const currentIndex = realWorkspaces.findIndex(ws => ws.num === currentWs)
+                                        const validIndex = currentIndex === -1 ? 0 : currentIndex
+                                        const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+                                        if (nextIndex !== validIndex) {
+                                            try { I3.dispatch(`workspace number ${realWorkspaces[nextIndex].num}`) } catch(_){}
                                         }
                                     }
                                 }

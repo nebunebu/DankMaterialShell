@@ -12,7 +12,7 @@
 
 </div>
 
-A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/). Optimized for the [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hyprland.org/), and [dwl/mangowc](https://github.com/DreamMaoMao/mangowc) compositors.
+A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/). Optimized for the [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hyprland.org/), [sway](https://swaywm.org/), and [dwl/mangowc](https://github.com/DreamMaoMao/mangowc) compositors.
 
 Features notifications, app launcher, wallpaper customization, and fully customizable with [plugins](https://github.com/AvengeMedia/dms-plugin-registry).
 
@@ -134,7 +134,7 @@ curl -fsSL https://install.danklinux.com | sh
 
 ### Compositor Setup
 
-DankMaterialShell particularly aims at supporting the **niri** and **Hyprland** compositors, but it does support more wayland compositors with a diminished feature set (no monitor off, workspace switcher, overview integration, etc.):
+DankMaterialShell particularly aims at supporting the **niri**, **Hyprland**, **sway**, and **dwl/MangoWC** compositors, but it does support more wayland compositors with a diminished feature set (no monitor off, workspace switcher, overview integration, etc.):
 
 **Niri**:
 ```bash
@@ -163,6 +163,10 @@ sudo dnf copr enable solopasha/hyprland && sudo dnf install hyprland
 ```
 
 For detailed Hyprland installation instructions, see the [Hyprland wiki](https://wiki.hypr.land/Getting-Started/Installation/).
+
+**sway/dwl (MangoWC)**:
+
+TODO - not documented.
 
 ### Dank Shell Installation
 

@@ -93,6 +93,8 @@ Item {
                                     modes.push("Hyprland")
                                 } else if (CompositorService.isDwl) {
                                     modes.push("mango")
+                                } else if (CompositorService.isSway) {
+                                    modes.push("Sway")
                                 } else {
                                     modes.push(I18n.tr("Compositor"))
                                 }

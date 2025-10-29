@@ -13,10 +13,12 @@ Singleton {
     property bool isHyprland: false
     property bool isNiri: false
     property bool isDwl: false
+    property bool isSway: false
     property string compositor: "unknown"
 
     readonly property string hyprlandSignature: Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE")
     readonly property string niriSocket: Quickshell.env("NIRI_SOCKET")
+    readonly property string swaySocket: Quickshell.env("SWAYSOCK")
     property bool useNiriSorting: isNiri && NiriService
 
     property var sortedToplevels: sortedToplevelsCache
@@ -363,6 +365,7 @@ Singleton {
             isHyprland = true
             isNiri = false
             isDwl = false
+            isSway = false
             compositor = "hyprland"
             console.info("CompositorService: Detected Hyprland")
             try {
@@ -377,28 +380,39 @@ Singleton {
                     isNiri = true
                     isHyprland = false
                     isDwl = false
+                    isSway = false
                     compositor = "niri"
                     console.info("CompositorService: Detected Niri with socket:", niriSocket)
                     NiriService.generateNiriBinds()
                     NiriService.generateNiriBlurrule()
-                } else {
-                    isHyprland = false
-                    isNiri = true
-                    isDwl = false
-                    compositor = "niri"
-                    console.warn("CompositorService: Niri socket check failed, defaulting to Niri anyway")
                 }
             }, 0)
+            return
+        }
+
+        if (swaySocket && swaySocket.length > 0) {
+            Proc.runCommand("swaySocketCheck", ["test", "-S", swaySocket], (output, exitCode) => {
+                if (exitCode === 0) {
+                    isNiri = false
+                    isHyprland = false
+                    isDwl = false
+                    isSway = true
+                    compositor = "sway"
+                    console.info("CompositorService: Detected Sway with socket:", swaySocket)
+                }
+            }, 0)
+            return            
+        }
+        
+        if (DMSService.dmsAvailable) {
+            Qt.callLater(checkForDwl)
         } else {
-            if (DMSService.dmsAvailable) {
-                Qt.callLater(checkForDwl)
-            } else {
-                isHyprland = false
-                isNiri = false
-                isDwl = false
-                compositor = "unknown"
-                console.warn("CompositorService: No compositor detected")
-            }
+            isHyprland = false
+            isNiri = false
+            isDwl = false
+            isSway = false
+            compositor = "unknown"
+            console.warn("CompositorService: No compositor detected")
         }
     }
 
@@ -425,6 +439,7 @@ Singleton {
         if (isNiri) return NiriService.powerOffMonitors()
         if (isHyprland) return Hyprland.dispatch("dpms off")
         if (isDwl) return _dwlPowerOffMonitors()
+        if (isSway) { try { I3.dispatch("output * dpms off") } catch(_){} return }
         console.warn("CompositorService: Cannot power off monitors, unknown compositor")
     }
 
@@ -432,6 +447,7 @@ Singleton {
         if (isNiri) return NiriService.powerOnMonitors()
         if (isHyprland) return Hyprland.dispatch("dpms on")
         if (isDwl) return _dwlPowerOnMonitors()
+        if (isSway) { try { I3.dispatch("output * dpms on") } catch(_){} return }
         console.warn("CompositorService: Cannot power on monitors, unknown compositor")
     }
 
