@@ -12,6 +12,7 @@ Singleton {
 
     property bool isHyprland: false
     property bool isNiri: false
+    property bool isDwl: false
     property string compositor: "unknown"
 
     readonly property string hyprlandSignature: Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE")
@@ -85,6 +86,15 @@ Singleton {
         detectCompositor()
         scheduleSort()
         Qt.callLater(() => NiriService.generateNiriLayoutConfig())
+    }
+
+    Connections {
+        target: DwlService
+        function onStateChanged() {
+            if (isDwl && !isHyprland && !isNiri) {
+                scheduleSort()
+            }
+        }
     }
 
     function computeSortedToplevels() {
@@ -331,6 +341,7 @@ Singleton {
         if (hyprlandSignature && hyprlandSignature.length > 0) {
             isHyprland = true
             isNiri = false
+            isDwl = false
             compositor = "hyprland"
             console.info("CompositorService: Detected Hyprland")
             try {
@@ -344,6 +355,7 @@ Singleton {
                 if (exitCode === 0) {
                     isNiri = true
                     isHyprland = false
+                    isDwl = false
                     compositor = "niri"
                     console.info("CompositorService: Detected Niri with socket:", niriSocket)
                     NiriService.generateNiriBinds()
@@ -351,27 +363,82 @@ Singleton {
                 } else {
                     isHyprland = false
                     isNiri = true
+                    isDwl = false
                     compositor = "niri"
                     console.warn("CompositorService: Niri socket check failed, defaulting to Niri anyway")
                 }
             }, 0)
         } else {
+            if (DMSService.dmsAvailable) {
+                Qt.callLater(checkForDwl)
+            } else {
+                isHyprland = false
+                isNiri = false
+                isDwl = false
+                compositor = "unknown"
+                console.warn("CompositorService: No compositor detected")
+            }
+        }
+    }
+
+    Connections {
+        target: DMSService
+        function onCapabilitiesReceived() {
+            if (!isHyprland && !isNiri && !isDwl) {
+                checkForDwl()
+            }
+        }
+    }
+
+    function checkForDwl() {
+        if (DMSService.apiVersion >= 12 && DMSService.capabilities.includes("dwl")) {
             isHyprland = false
             isNiri = false
-            compositor = "unknown"
-            console.warn("CompositorService: No compositor detected")
+            isDwl = true
+            compositor = "dwl"
+            console.info("CompositorService: Detected DWL via DMS capability")
         }
     }
 
     function powerOffMonitors() {
         if (isNiri) return NiriService.powerOffMonitors()
         if (isHyprland) return Hyprland.dispatch("dpms off")
+        if (isDwl) return _dwlPowerOffMonitors()
         console.warn("CompositorService: Cannot power off monitors, unknown compositor")
     }
 
     function powerOnMonitors() {
         if (isNiri) return NiriService.powerOnMonitors()
         if (isHyprland) return Hyprland.dispatch("dpms on")
+        if (isDwl) return _dwlPowerOnMonitors()
         console.warn("CompositorService: Cannot power on monitors, unknown compositor")
+    }
+
+    function _dwlPowerOffMonitors() {
+        if (!Quickshell.screens || Quickshell.screens.length === 0) {
+            console.warn("CompositorService: No screens available for DWL power off")
+            return
+        }
+
+        for (let i = 0; i < Quickshell.screens.length; i++) {
+            const screen = Quickshell.screens[i]
+            if (screen && screen.name) {
+                Quickshell.execDetached(["wlr-randr", "--output", screen.name, "--off"])
+            }
+        }
+    }
+
+    function _dwlPowerOnMonitors() {
+        if (!Quickshell.screens || Quickshell.screens.length === 0) {
+            console.warn("CompositorService: No screens available for DWL power on")
+            return
+        }
+
+        for (let i = 0; i < Quickshell.screens.length; i++) {
+            const screen = Quickshell.screens[i]
+            if (screen && screen.name) {
+                Quickshell.execDetached(["wlr-randr", "--output", screen.name, "--on"])
+            }
+        }
     }
 }

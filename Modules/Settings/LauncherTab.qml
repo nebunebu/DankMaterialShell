@@ -87,9 +87,14 @@ Item {
                             anchors.horizontalCenter: parent.horizontalCenter
                             model: {
                                 const modes = [I18n.tr("Apps Icon"), I18n.tr("OS Logo")]
-                                if (CompositorService.isNiri || CompositorService.isHyprland) {
-                                    const compositorName = CompositorService.isNiri ? "niri" : "Hyprland"
-                                    modes.push(compositorName)
+                                if (CompositorService.isNiri) {
+                                    modes.push("niri")
+                                } else if (CompositorService.isHyprland) {
+                                    modes.push("Hyprland")
+                                } else if (CompositorService.isDwl) {
+                                    modes.push("mango")
+                                } else {
+                                    modes.push(I18n.tr("Compositor"))
                                 }
                                 modes.push(I18n.tr("Custom"))
                                 return modes
@@ -97,12 +102,8 @@ Item {
                             currentIndex: {
                                 if (SettingsData.launcherLogoMode === "apps") return 0
                                 if (SettingsData.launcherLogoMode === "os") return 1
-                                if (SettingsData.launcherLogoMode === "compositor") {
-                                    return (CompositorService.isNiri || CompositorService.isHyprland) ? 2 : -1
-                                }
-                                if (SettingsData.launcherLogoMode === "custom") {
-                                    return (CompositorService.isNiri || CompositorService.isHyprland) ? 3 : 2
-                                }
+                                if (SettingsData.launcherLogoMode === "compositor") return 2
+                                if (SettingsData.launcherLogoMode === "custom") return 3
                                 return 0
                             }
                             onSelectionChanged: (index, selected) => {
@@ -111,13 +112,9 @@ Item {
                                     SettingsData.setLauncherLogoMode("apps")
                                 } else if (index === 1) {
                                     SettingsData.setLauncherLogoMode("os")
-                                } else if (CompositorService.isNiri || CompositorService.isHyprland) {
-                                    if (index === 2) {
-                                        SettingsData.setLauncherLogoMode("compositor")
-                                    } else if (index === 3) {
-                                        SettingsData.setLauncherLogoMode("custom")
-                                    }
                                 } else if (index === 2) {
+                                    SettingsData.setLauncherLogoMode("compositor")
+                                } else if (index === 3) {
                                     SettingsData.setLauncherLogoMode("custom")
                                 }
                             }

@@ -24,6 +24,7 @@ assignees: ""
 
 - [ ] niri
 - [ ] Hyprland
+- [ ] dwl (MangoWC)
 - [ ] Other (specify)
 
 ## Distribution

@@ -28,11 +28,14 @@ Item {
             _desktopEntriesUpdateTrigger++
         }
     }
+
     property int currentWorkspace: {
         if (CompositorService.isNiri) {
             return getNiriActiveWorkspace()
         } else if (CompositorService.isHyprland) {
             return getHyprlandActiveWorkspace()
+        } else if (CompositorService.isDwl) {
+            return getDwlActiveTag()
         }
         return 1
     }
@@ -46,6 +49,10 @@ Item {
             // Filter out special workspaces
 			const filteredList = baseList.filter(ws => ws.id > -1)
             return SettingsData.showWorkspacePadding ? padWorkspaces(filteredList) : filteredList
+        }
+        if (CompositorService.isDwl) {
+            const baseList = getDwlTags()
+            return SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList
         }
         return [1]
     }
@@ -69,15 +76,30 @@ Item {
             targetWorkspaceId = workspace.id
         } else if (CompositorService.isHyprland) {
             targetWorkspaceId = ws.id !== undefined ? ws.id : ws
+        } else if (CompositorService.isDwl) {
+            if (typeof ws !== "object" || ws.tag === undefined) {
+                return []
+            }
+            targetWorkspaceId = ws.tag
         } else {
             return []
         }
 
         const wins = CompositorService.isNiri ? (NiriService.windows || []) : CompositorService.sortedToplevels
 
-
         const byApp = {}
-        const isActiveWs = CompositorService.isNiri ? NiriService.allWorkspaces.some(ws => ws.id === targetWorkspaceId && ws.is_active) : targetWorkspaceId === root.currentWorkspace
+        let isActiveWs = false
+        if (CompositorService.isNiri) {
+            isActiveWs = NiriService.allWorkspaces.some(ws => ws.id === targetWorkspaceId && ws.is_active)
+        } else if (CompositorService.isDwl) {
+            const output = DwlService.getOutputState(root.screenName)
+            if (output && output.tags) {
+                const tag = output.tags.find(t => t.tag === targetWorkspaceId)
+                isActiveWs = tag ? (tag.state === 1) : false
+            }
+        } else {
+            isActiveWs = targetWorkspaceId === root.currentWorkspace
+        }
 
         wins.forEach((w, i) => {
                          if (!w) {
@@ -128,10 +150,14 @@ Item {
 
     function padWorkspaces(list) {
         const padded = list.slice()
-        const placeholder = CompositorService.isHyprland ? {
-                                                               "id": -1,
-                                                               "name": ""
-                                                           } : -1
+        let placeholder
+        if (CompositorService.isHyprland) {
+            placeholder = {"id": -1, "name": ""}
+        } else if (CompositorService.isDwl) {
+            placeholder = {"tag": -1}
+        } else {
+            placeholder = -1
+        }
         while (padded.length < 3) {
             padded.push(placeholder)
         }
@@ -199,7 +225,6 @@ Item {
             return Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : 1
         }
 
-        // Find the monitor object for this screen
         const monitors = Hyprland.monitors?.values || []
         const currentMonitor = monitors.find(monitor => monitor.name === root.screenName)
 
@@ -207,8 +232,39 @@ Item {
             return 1
         }
 
-        // Use the monitor's active workspace ID (like original config)
         return currentMonitor.activeWorkspace?.id ?? 1
+    }
+
+    function getDwlTags() {
+        if (!DwlService.dwlAvailable) {
+            return [{"tag": 0}, {"tag": 1}]
+        }
+
+        const output = DwlService.getOutputState(root.screenName)
+        if (!output || !output.tags || output.tags.length === 0) {
+            const tagCount = DwlService.tagCount || 9
+            const tags = []
+            for (let i = 0; i < tagCount; i++) {
+                tags.push({"tag": i})
+            }
+            return tags
+        }
+
+        return output.tags.map(tag => ({"tag": tag.tag, "state": tag.state, "clients": tag.clients, "focused": tag.focused}))
+    }
+
+    function getDwlActiveTag() {
+        if (!DwlService.dwlAvailable) {
+            return 0
+        }
+
+        const output = DwlService.getOutputState(root.screenName)
+        if (!output || !output.tags) {
+            return 0
+        }
+
+        const activeTag = output.tags.find(tag => tag.state === 1)
+        return activeTag ? activeTag.tag : 0
     }
 
     readonly property real padding: Math.max(Theme.spacingXS, Theme.spacingS * (widgetHeight / 30))
@@ -219,6 +275,8 @@ Item {
         return root.workspaceList.filter(ws => {
                                              if (CompositorService.isHyprland) {
                                                  return ws && ws.id !== -1
+                                             } else if (CompositorService.isDwl) {
+                                                 return ws && ws.tag !== -1
                                              }
                                              return ws !== -1
                                          })
@@ -255,12 +313,27 @@ Item {
             }
 
             Hyprland.dispatch(`workspace ${realWorkspaces[nextIndex].id}`)
+        } else if (CompositorService.isDwl) {
+            const realWorkspaces = getRealWorkspaces()
+            if (realWorkspaces.length < 2) {
+                return
+            }
+
+            const currentIndex = realWorkspaces.findIndex(ws => ws.tag === root.currentWorkspace)
+            const validIndex = currentIndex === -1 ? 0 : currentIndex
+            const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+            if (nextIndex === validIndex) {
+                return
+            }
+
+            DwlService.switchToTag(root.screenName, realWorkspaces[nextIndex].tag)
         }
     }
 
     width: isVertical ? barThickness : visualWidth
     height: isVertical ? visualHeight : barThickness
-    visible: CompositorService.isNiri || CompositorService.isHyprland
+    visible: CompositorService.isNiri || CompositorService.isHyprland || CompositorService.isDwl
 
     Rectangle {
         id: visualBackground
@@ -303,12 +376,16 @@ Item {
                 property bool isActive: {
                     if (CompositorService.isHyprland) {
                         return modelData && modelData.id === root.currentWorkspace
+                    } else if (CompositorService.isDwl) {
+                        return modelData && modelData.tag === root.currentWorkspace
                     }
                     return modelData === root.currentWorkspace
                 }
                 property bool isPlaceholder: {
                     if (CompositorService.isHyprland) {
                         return modelData && modelData.id === -1
+                    } else if (CompositorService.isDwl) {
+                        return modelData && modelData.tag === -1
                     }
                     return modelData === -1
                 }
@@ -319,9 +396,10 @@ Item {
                 property bool isUrgent: {
                     if (CompositorService.isHyprland) {
                         return modelData?.urgent ?? false
-                    }
-                    if (CompositorService.isNiri) {
+                    } else if (CompositorService.isNiri) {
                         return loadedIsUrgent
+                    } else if (CompositorService.isDwl) {
+                        return modelData?.state === 2
                     }
                     return false
                 }
@@ -372,6 +450,8 @@ Item {
                             NiriService.switchToWorkspace(modelData - 1)
                         } else if (CompositorService.isHyprland && modelData?.id) {
                             Hyprland.dispatch(`workspace ${modelData.id}`)
+                        } else if (CompositorService.isDwl && modelData?.tag !== undefined) {
+                            DwlService.switchToTag(root.screenName, modelData.tag)
                         }
                     }
                 }
@@ -394,6 +474,8 @@ Item {
                             wsData = NiriService.allWorkspaces.find(ws => ws.idx + 1 === modelData && ws.output === root.screenName) || null;
                         } else if (CompositorService.isHyprland) {
                             wsData = modelData;
+                        } else if (CompositorService.isDwl) {
+                            wsData = modelData;
                         }
                         delegateRoot.loadedWorkspaceData = wsData;
                         delegateRoot.loadedIsUrgent = wsData?.is_urgent ?? false;
@@ -406,7 +488,11 @@ Item {
                         delegateRoot.loadedHasIcon = icData !== null;
 
                         if (SettingsData.showWorkspaceApps) {
-                            delegateRoot.loadedIcons = root.getWorkspaceIcons(CompositorService.isHyprland ? modelData : (modelData === -1 ? null : modelData));
+                            if (CompositorService.isDwl) {
+                                delegateRoot.loadedIcons = root.getWorkspaceIcons(modelData);
+                            } else {
+                                delegateRoot.loadedIcons = root.getWorkspaceIcons(CompositorService.isHyprland ? modelData : (modelData === -1 ? null : modelData));
+                            }
                         } else {
                             delegateRoot.loadedIcons = [];
                         }
@@ -651,11 +737,25 @@ Item {
                         StyledText {
                             anchors.centerIn: parent
                             text: {
-                                const isPlaceholder = CompositorService.isHyprland ? (modelData?.id === -1) : (modelData === -1)
+                                let isPlaceholder
+                                if (CompositorService.isHyprland) {
+                                    isPlaceholder = modelData?.id === -1
+                                } else if (CompositorService.isDwl) {
+                                    isPlaceholder = modelData?.tag === -1
+                                } else {
+                                    isPlaceholder = modelData === -1
+                                }
+
                                 if (isPlaceholder) {
                                     return index + 1
                                 }
-                                return CompositorService.isHyprland ? (modelData?.id || "") : (modelData - 1);
+
+                                if (CompositorService.isHyprland) {
+                                    return modelData?.id || ""
+                                } else if (CompositorService.isDwl) {
+                                    return (modelData?.tag !== undefined) ? (modelData.tag + 1) : ""
+                                }
+                                return modelData - 1
                             }
                             color: (isActive || isUrgent) ? Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.95) : isPlaceholder ? Theme.surfaceTextAlpha : Theme.surfaceTextMedium
                             font.pixelSize: Theme.barTextSize(barThickness)
@@ -682,6 +782,11 @@ Item {
                     target: SettingsData
                     function onShowWorkspaceAppsChanged() { delegateRoot.updateAllData() }
                     function onWorkspaceNameIconsChanged() { delegateRoot.updateAllData() }
+                }
+                Connections {
+                    target: DwlService
+                    enabled: CompositorService.isDwl
+                    function onStateChanged() { delegateRoot.updateAllData() }
                 }
             }
         }

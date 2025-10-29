@@ -37,7 +37,7 @@ BasePill {
             }
 
             IconImage {
-                visible: SettingsData.launcherLogoMode === "compositor"
+                visible: SettingsData.launcherLogoMode === "compositor" && (CompositorService.isNiri || CompositorService.isHyprland || CompositorService.isDwl)
                 anchors.centerIn: parent
                 width: Theme.barIconSize(root.barThickness, SettingsData.launcherLogoSizeOffset)
                 height: Theme.barIconSize(root.barThickness, SettingsData.launcherLogoSizeOffset)
@@ -48,6 +48,8 @@ BasePill {
                         return "file://" + Theme.shellDir + "/assets/niri.svg"
                     } else if (CompositorService.isHyprland) {
                         return "file://" + Theme.shellDir + "/assets/hyprland.svg"
+                    } else if (CompositorService.isDwl) {
+                        return "file://" + Theme.shellDir + "/assets/mango.png"
                     }
                     return ""
                 }

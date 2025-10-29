@@ -12,7 +12,7 @@
 
 </div>
 
-A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/). Optimized for the [niri](https://github.com/YaLTeR/niri) and [Hyprland](https://hyprland.org/) compositors.
+A modern Wayland desktop shell built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/). Optimized for the [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hyprland.org/), and [dwl/mangowc](https://github.com/DreamMaoMao/mangowc) compositors.
 
 Features notifications, app launcher, wallpaper customization, and fully customizable with [plugins](https://github.com/AvengeMedia/dms-plugin-registry).
 

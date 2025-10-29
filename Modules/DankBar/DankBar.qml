@@ -580,6 +580,11 @@ Item {
                                         }
 
                                         return monitorWorkspaces.sort((a, b) => a.id - b.id)
+                                    } else if (CompositorService.isDwl) {
+                                        if (!DwlService.dwlAvailable || DwlService.tagCount === 0) {
+                                            return Array.from({length: 9}, (_, i) => i)
+                                        }
+                                        return Array.from({length: DwlService.tagCount}, (_, i) => i)
                                     }
                                     return [1]
                                 }
@@ -595,6 +600,12 @@ Item {
                                         const monitors = Hyprland.monitors?.values || []
                                         const currentMonitor = monitors.find(monitor => monitor.name === barWindow.screenName)
                                         return currentMonitor?.activeWorkspace?.id ?? 1
+                                    } else if (CompositorService.isDwl) {
+                                        if (!DwlService.dwlAvailable) return 0
+                                        const outputState = DwlService.getOutputState(barWindow.screenName)
+                                        if (!outputState || !outputState.tags) return 0
+                                        const activeTags = DwlService.getActiveTags(barWindow.screenName)
+                                        return activeTags.length > 0 ? activeTags[0] : 0
                                     }
                                     return 1
                                 }
@@ -622,6 +633,15 @@ Item {
 
                                         if (nextIndex !== validIndex) {
                                             Hyprland.dispatch(`workspace ${realWorkspaces[nextIndex].id}`)
+                                        }
+                                    } else if (CompositorService.isDwl) {
+                                        const currentTag = getCurrentWorkspace()
+                                        const currentIndex = realWorkspaces.findIndex(tag => tag === currentTag)
+                                        const validIndex = currentIndex === -1 ? 0 : currentIndex
+                                        const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+                                        if (nextIndex !== validIndex) {
+                                            DwlService.switchToTag(barWindow.screenName, realWorkspaces[nextIndex])
                                         }
                                     }
                                 }

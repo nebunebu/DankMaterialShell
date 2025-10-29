@@ -42,6 +42,7 @@ Singleton {
     signal capabilitiesReceived()
     signal credentialsRequest(var data)
     signal bluetoothPairingRequest(var data)
+    signal dwlStateUpdate(var data)
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
@@ -266,6 +267,8 @@ Singleton {
             }
         } else if (service === "bluetooth.pairing") {
             bluetoothPairingRequest(data)
+        } else if (service === "dwl") {
+            dwlStateUpdate(data)
         }
     }
 

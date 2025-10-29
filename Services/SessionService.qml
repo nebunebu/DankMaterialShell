@@ -184,7 +184,11 @@ Singleton {
                 return
             }
 
-            // Hyprland fallback
+            if (CompositorService.isDwl) {
+                DwlService.quit()
+                return
+            }
+
             Hyprland.dispatch("exit")
         } else {
             Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionLogout])
