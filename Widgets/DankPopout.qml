@@ -75,17 +75,7 @@ PanelWindow {
 
     readonly property real screenWidth: root.screen.width
     readonly property real screenHeight: root.screen.height
-    readonly property real dpr: {
-        if (CompositorService.isNiri && root.screen) {
-            const niriScale = NiriService.displayScales[root.screen.name]
-            if (niriScale !== undefined) return niriScale
-        }
-        if (CompositorService.isHyprland && root.screen) {
-            const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === root.screen.name)
-            if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
-        }
-        return root.screen?.devicePixelRatio || 1
-    }
+    readonly property real dpr: CompositorService.getScreenScale(root.screen)
 
     readonly property real alignedWidth: Theme.px(popupWidth, dpr)
     readonly property real alignedHeight: Theme.px(popupHeight, dpr)

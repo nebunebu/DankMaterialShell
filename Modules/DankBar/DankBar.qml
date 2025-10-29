@@ -173,19 +173,7 @@ Item {
             readonly property color _surfaceContainer: Theme.surfaceContainer
             readonly property real _backgroundAlpha: topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency
             readonly property color _bgColor: Theme.withAlpha(_surfaceContainer, _backgroundAlpha)
-            readonly property real _dpr: {
-                if (CompositorService.isNiri && barWindow.screen) {
-                    const niriScale = NiriService.displayScales[barWindow.screen.name]
-                    if (niriScale !== undefined)
-                        return niriScale
-                }
-                if (CompositorService.isHyprland && barWindow.screen) {
-                    const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === barWindow.screen.name)
-                    if (hyprlandMonitor?.scale !== undefined)
-                        return hyprlandMonitor.scale
-                }
-                return (barWindow.screen?.devicePixelRatio) || 1
-            }
+            readonly property real _dpr: CompositorService.getScreenScale(barWindow.screen)
 
             property string screenName: modelData.name
             readonly property int notificationCount: NotificationService.notifications.length

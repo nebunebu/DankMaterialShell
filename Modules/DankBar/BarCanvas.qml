@@ -18,17 +18,7 @@ Item {
     anchors.topMargin: -(SettingsData.dankBarGothCornersEnabled && !axis.isVertical && axis.edge === "bottom" ? barWindow._wingR : 0)
     anchors.bottomMargin: -(SettingsData.dankBarGothCornersEnabled && !axis.isVertical && axis.edge === "top" ? barWindow._wingR : 0)
 
-    readonly property real dpr: {
-        if (CompositorService.isNiri && barWindow.screen) {
-            const niriScale = NiriService.displayScales[barWindow.screen.name]
-            if (niriScale !== undefined) return niriScale
-        }
-        if (CompositorService.isHyprland && barWindow.screen) {
-            const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === barWindow.screen.name)
-            if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
-        }
-        return barWindow.screen?.devicePixelRatio || 1
-    }
+    readonly property real dpr: CompositorService.getScreenScale(barWindow.screen)
 
     function requestRepaint() {
         debounceTimer.restart()

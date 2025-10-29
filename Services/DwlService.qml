@@ -12,6 +12,7 @@ Singleton {
     property var tagCount: 0
     property var layouts: []
     property string activeOutput: ""
+    property var outputScales: ({})
 
     signal stateChanged()
 
@@ -38,6 +39,15 @@ Singleton {
         if (DMSService.dmsAvailable) {
             checkCapabilities()
         }
+        refreshOutputScales()
+    }
+
+    Timer {
+        id: scaleRefreshTimer
+        interval: 2000
+        repeat: true
+        running: dwlAvailable
+        onTriggered: refreshOutputScales()
     }
 
     function checkCapabilities() {
@@ -166,5 +176,32 @@ Singleton {
 
     function quit() {
         Quickshell.execDetached(["mmsg", "-d", "quit"])
+    }
+
+    function refreshOutputScales() {
+        if (!dwlAvailable) return
+
+        Proc.runCommand("wlr-randr", ["--json"], (output, exitCode) => {
+            if (exitCode !== 0) {
+                console.warn("DwlService: wlr-randr failed with exit code:", exitCode)
+                return
+            }
+            try {
+                const outputData = JSON.parse(output)
+                const newScales = {}
+                for (const outputInfo of outputData) {
+                    if (outputInfo.name && outputInfo.scale !== undefined) {
+                        newScales[outputInfo.name] = outputInfo.scale
+                    }
+                }
+                outputScales = newScales
+            } catch (e) {
+                console.warn("DwlService: Failed to parse wlr-randr output:", e)
+            }
+        }, 0)
+    }
+
+    function getOutputScale(outputName) {
+        return outputScales[outputName]
     }
 }

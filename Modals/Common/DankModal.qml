@@ -17,17 +17,7 @@ PanelWindow {
     property real height: 300
     readonly property real screenWidth: screen ? screen.width : 1920
     readonly property real screenHeight: screen ? screen.height : 1080
-    readonly property real dpr: {
-        if (CompositorService.isNiri && screen) {
-            const niriScale = NiriService.displayScales[screen.name]
-            if (niriScale !== undefined) return niriScale
-        }
-        if (CompositorService.isHyprland && screen) {
-            const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === screen.name)
-            if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
-        }
-        return (screen?.devicePixelRatio) || 1
-    }
+    readonly property real dpr: CompositorService.getScreenScale(screen)
     property bool showBackground: true
     property real backgroundOpacity: 0.5
     property string positioning: "center"

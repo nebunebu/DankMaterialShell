@@ -28,6 +28,27 @@ Singleton {
 
     property var _coordCache: ({})
 
+    function getScreenScale(screen) {
+        if (!screen) return 1
+
+        if (isNiri && screen) {
+            const niriScale = NiriService.displayScales[screen.name]
+            if (niriScale !== undefined) return niriScale
+        }
+
+        if (isHyprland && screen) {
+            const hyprlandMonitor = Hyprland.monitors.values.find(m => m.name === screen.name)
+            if (hyprlandMonitor?.scale !== undefined) return hyprlandMonitor.scale
+        }
+
+        if (isDwl && screen) {
+            const dwlScale = DwlService.getOutputScale(screen.name)
+            if (dwlScale !== undefined && dwlScale > 0) return dwlScale
+        }
+
+        return screen?.devicePixelRatio || 1
+    }
+
     Timer {
         id: refreshTimer
         interval: 40
