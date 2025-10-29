@@ -11,6 +11,7 @@ Scope {
     id: root
 
     property bool lockSecured: false
+    property bool unlockInProgress: false
 
     readonly property alias passwd: passwd
     readonly property alias fprint: fprint
@@ -50,7 +51,11 @@ Scope {
 
         onCompleted: res => {
             if (res === PamResult.Success) {
-                root.unlockRequested();
+                if (!root.unlockInProgress) {
+                    root.unlockInProgress = true;
+                    fprint.abort();
+                    root.unlockRequested();
+                }
                 return;
             }
 
@@ -92,7 +97,11 @@ Scope {
                 return;
 
             if (res === PamResult.Success) {
-                root.unlockRequested();
+                if (!root.unlockInProgress) {
+                    root.unlockInProgress = true;
+                    passwd.abort();
+                    root.unlockRequested();
+                }
                 return;
             }
 
@@ -162,8 +171,11 @@ Scope {
             root.state = "";
             root.fprintState = "";
             root.lockMessage = "";
+            root.unlockInProgress = false;
         } else {
             fprint.abort();
+            passwd.abort();
+            root.unlockInProgress = false;
         }
     }
 
