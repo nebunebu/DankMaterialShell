@@ -10,7 +10,6 @@ import qs.Common
 Singleton {
     id: root
 
-    property int refCount: 0
     property bool isActive: false
     property string networkStatus: "disconnected"
     property string primaryConnection: ""
@@ -56,8 +55,6 @@ Singleton {
     property string connectionError: ""
 
     property bool isScanning: false
-    property bool autoScan: false
-
     property bool wifiAvailable: true
     property bool wifiToggling: false
     property bool changingPreference: false
@@ -66,7 +63,6 @@ Singleton {
     property string connectionStatus: ""
     property string lastConnectionError: ""
     property bool passwordDialogShouldReopen: false
-    property bool autoRefreshEnabled: false
     property string wifiPassword: ""
     property string forgetSSID: ""
 
@@ -109,114 +105,20 @@ Singleton {
         root.userPreference = SettingsData.networkPreference
     }
 
-    Component.onDestruction: {
-        nmStateMonitor.running = false
-    }
-
     function activate() {
         if (!isActive) {
             isActive = true
             console.info("LegacyNetworkService: Activating...")
-            initializeDBusMonitors()
+            doRefreshNetworkState()
         }
     }
 
-    function addRef() {
-        refCount++
-        if (refCount === 1) {
-            startAutoScan()
-        }
-    }
-
-    function removeRef() {
-        refCount = Math.max(0, refCount - 1)
-        if (refCount === 0) {
-            stopAutoScan()
-        }
-    }
-
-    function initializeDBusMonitors() {
-        nmStateMonitor.running = true
-        doRefreshNetworkState()
-    }
-
-    Process {
-        id: nmStateMonitor
-        command: lowPriorityCmd.concat(["gdbus", "monitor", "--system", "--dest", "org.freedesktop.NetworkManager"])
-        running: false
-
-        property var lastRefreshTime: 0
-        property int minRefreshInterval: 1000
-
-        stdout: SplitParser {
-            splitMarker: "\n"
-            onRead: line => {
-                const now = Date.now()                    
-                    if (line.includes("PropertiesChanged") && line.includes("org.freedesktop.NetworkManager.AccessPoint")) {
-                        if (line.includes("'Strength'") && root.activeAccessPointPath && line.includes(root.activeAccessPointPath)) {
-                            parseSignalStrengthFromDbus(line)
-                        }
-                        return
-                    }
-
-                    if (line.includes("StateChanged") || 
-                        line.includes("PrimaryConnectionChanged") || 
-                        line.includes("WirelessEnabled") || 
-                        (line.includes("ActiveConnection") && line.includes("State"))) {
-
-                        if (now - nmStateMonitor.lastRefreshTime > nmStateMonitor.minRefreshInterval) {
-                            nmStateMonitor.lastRefreshTime = now
-                            refreshNetworkState()
-                        }
-                    }
-            }
-        }
-
-        onExited: exitCode => {
-            if (exitCode !== 0 && !restartTimer.running) {
-                console.warn("NetworkManager monitor failed, restarting in 5s")
-                restartTimer.start()
-            }
-        }
-    }
-
-    Timer {
-        id: restartTimer
-        interval: 5000
-        running: false
-        onTriggered: nmStateMonitor.running = true
-    }
-
-    Timer {
-        id: refreshDebounceTimer
-        interval: 100
-        running: false
-        onTriggered: doRefreshNetworkState()
-    }
-
-    function refreshNetworkState() {
-        refreshDebounceTimer.restart()
-    }
-
-    function parseSignalStrengthFromDbus(line) {
-        const strengthMatch = line.match(/'Strength': <byte (0x[0-9a-fA-F]+)>/)
-        if (strengthMatch) {
-            const hexValue = strengthMatch[1]
-            const strength = parseInt(hexValue, 16)
-            if (strength >= 0 && strength <= 100) {
-                root.wifiSignalStrength = strength
-            }
-        }
-    }
 
     function doRefreshNetworkState() {
         updatePrimaryConnection()
         updateDeviceStates()
         updateActiveConnections()
         updateWifiState()
-        if (root.refCount > 0 && root.wifiEnabled) {
-            scanWifiNetworks()
-        }
     }
 
     function updatePrimaryConnection() {
@@ -333,9 +235,6 @@ Singleton {
                     getEthernetIP.running = true
                 } else {
                     root.ethernetIP = ""
-                    if (root.networkStatus === "ethernet") {
-                        updatePrimaryConnection()
-                    }
                 }
             }
         }
@@ -907,18 +806,6 @@ Singleton {
         }
     }
 
-    function startAutoScan() {
-        root.autoScan = true
-        root.autoRefreshEnabled = true
-        if (root.wifiEnabled) {
-            scanWifi()
-        }
-    }
-
-    function stopAutoScan() {
-        root.autoScan = false
-        root.autoRefreshEnabled = false
-    }
 
     function fetchNetworkInfo(ssid) {
         root.networkInfoSSID = ssid
