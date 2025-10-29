@@ -140,13 +140,13 @@
   {
     "term": "Always Show OSD Percentage",
     "context": "Always Show OSD Percentage",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:675",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:664",
     "comment": ""
   },
   {
     "term": "Always show a minimum of 3 workspaces, even if fewer are available",
     "context": "Always show a minimum of 3 workspaces, even if fewer are available",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:71",
     "comment": ""
   },
   {
@@ -608,7 +608,7 @@
   {
     "term": "Choose where notification popups appear on screen",
     "context": "Choose where notification popups appear on screen",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:602",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:591",
     "comment": ""
   },
   {
@@ -740,7 +740,7 @@
   {
     "term": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
     "context": "Configure icons for named workspaces. Icons take priority over numbers when both are enabled.",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:438",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:427",
     "comment": ""
   },
   {
@@ -1070,7 +1070,7 @@
   {
     "term": "Display application icons in workspace indicators",
     "context": "Display application icons in workspace indicators",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:93",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:82",
     "comment": ""
   },
   {
@@ -1082,7 +1082,7 @@
   {
     "term": "Display volume and brightness percentage values by default in OSD popups",
     "context": "Display volume and brightness percentage values by default in OSD popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:682",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:671",
     "comment": ""
   },
   {
@@ -1916,7 +1916,7 @@
   {
     "term": "Max apps to show",
     "context": "Max apps to show",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:114",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:103",
     "comment": ""
   },
   {
@@ -1934,7 +1934,7 @@
   {
     "term": "Media Player Settings",
     "context": "Media Player Settings",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:183",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:172",
     "comment": ""
   },
   {
@@ -2018,7 +2018,7 @@
   {
     "term": "Named Workspace Icons",
     "context": "Named Workspace Icons",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:428",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:417",
     "comment": ""
   },
   {
@@ -2210,7 +2210,7 @@
   {
     "term": "Notification Popups",
     "context": "Notification Popups",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:585, Modules/Settings/DisplaysTab.qml:24",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:574, Modules/Settings/DisplaysTab.qml:24",
     "comment": ""
   },
   {
@@ -2354,7 +2354,7 @@
   {
     "term": "Per-Monitor Workspaces",
     "context": "Per-Monitor Workspaces",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:145",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:134",
     "comment": ""
   },
   {
@@ -2456,7 +2456,7 @@
   {
     "term": "Popup Position",
     "context": "Popup Position",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:601",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:590",
     "comment": ""
   },
   {
@@ -2654,13 +2654,13 @@
   {
     "term": "Running Apps Only In Current Workspace",
     "context": "Running Apps Only In Current Workspace",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:388",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:377",
     "comment": ""
   },
   {
     "term": "Running Apps Settings",
     "context": "Running Apps Settings",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:378",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:367",
     "comment": ""
   },
   {
@@ -2703,12 +2703,6 @@
     "term": "Science",
     "context": "Science",
     "reference": "Services/AppSearchService.qml:175",
-    "comment": ""
-  },
-  {
-    "term": "Scroll through windows, rather than workspaces",
-    "context": "Scroll through windows, rather than workspaces",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:71",
     "comment": ""
   },
   {
@@ -2882,7 +2876,7 @@
   {
     "term": "Show Workspace Apps",
     "context": "Show Workspace Apps",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:92",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:81",
     "comment": ""
   },
   {
@@ -2912,13 +2906,13 @@
   {
     "term": "Show only apps running in current workspace",
     "context": "Show only apps running in current workspace",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:389",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:378",
     "comment": ""
   },
   {
     "term": "Show only workspaces belonging to each specific monitor.",
     "context": "Show only workspaces belonging to each specific monitor.",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:146",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:135",
     "comment": ""
   },
   {
@@ -3128,7 +3122,7 @@
   {
     "term": "System Updater",
     "context": "System Updater",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:230",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:219",
     "comment": ""
   },
   {
@@ -3164,7 +3158,7 @@
   {
     "term": "System update custom command",
     "context": "System update custom command",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:266",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:255",
     "comment": ""
   },
   {
@@ -3182,7 +3176,7 @@
   {
     "term": "Terminal custom additional parameters",
     "context": "Terminal custom additional parameters",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:313",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:302",
     "comment": ""
   },
   {
@@ -3368,7 +3362,7 @@
   {
     "term": "Use Custom Command",
     "context": "Use Custom Command",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:240",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:229",
     "comment": ""
   },
   {
@@ -3404,13 +3398,13 @@
   {
     "term": "Use animated wave progress bars for media playback",
     "context": "Use animated wave progress bars for media playback",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:194",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:183",
     "comment": ""
   },
   {
     "term": "Use custom command for update your system",
     "context": "Use custom command for update your system",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:241",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:230",
     "comment": ""
   },
   {
@@ -3536,7 +3530,7 @@
   {
     "term": "Wave Progress Bars",
     "context": "Wave Progress Bars",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:193",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:182",
     "comment": ""
   },
   {
@@ -3606,12 +3600,6 @@
     "comment": ""
   },
   {
-    "term": "Window Scrolling",
-    "context": "Window Scrolling",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:70",
-    "comment": ""
-  },
-  {
     "term": "Workspace",
     "context": "Workspace",
     "reference": "Widgets/DankIconPicker.qml:28",
@@ -3626,7 +3614,7 @@
   {
     "term": "Workspace Padding",
     "context": "Workspace Padding",
-    "reference": "Modules/Settings/WidgetTweaksTab.qml:81",
+    "reference": "Modules/Settings/WidgetTweaksTab.qml:70",
     "comment": ""
   },
   {
