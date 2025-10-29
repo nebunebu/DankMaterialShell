@@ -67,17 +67,6 @@ Item {
                     }
                     DankToggle {
                         width: parent.width
-                        text: I18n.tr("Window Scrolling")
-                        description: I18n.tr("Scroll through windows, rather than workspaces")
-                        checked: SettingsData.workspaceScrolling
-                        visible: CompositorService.isNiri
-                        onToggled: checked => {
-                            return SettingsData.setWorkspaceScrolling(checked)
-                        }
-                    }
-
-                    DankToggle {
-                        width: parent.width
                         text: I18n.tr("Workspace Padding")
                         description: I18n.tr("Always show a minimum of 3 workspaces, even if fewer are available")
                         checked: SettingsData.showWorkspacePadding

@@ -280,104 +280,11 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.RightButton
 
-        property real scrollAccumulator: 0
-        property real touchpadThreshold: 500
-
         onClicked: mouse => {
             if (mouse.button === Qt.RightButton && CompositorService.isHyprland && root.hyprlandOverviewLoader?.item) {
                 root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
             }
         }
-
-        onWheel: wheel => {
-                     const deltaY = wheel.angleDelta.y
-                     const isMouseWheel = Math.abs(deltaY) >= 120 && (Math.abs(deltaY) % 120) === 0
-                     const direction = deltaY < 0 ? 1 : -1
-
-                     if (isMouseWheel) {
-                        if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
-                            switchWorkspace(direction)
-                        }
-                        else {
-                            const windows = root.sortedToplevels;
-                            if (windows.length < 2) {
-                                return;
-                            }
-                         let currentIndex = -1;
-                         for (let i = 0; i < windows.length; i++) {
-                            if (windows[i].activated) {
-                                currentIndex = i;
-                                break;
-                            }
-
-                         }
-                         let nextIndex;
-                         if (deltaY < 0) {
-                            if (currentIndex === -1) {
-                                nextIndex = 0;
-                            } else {
-                                nextIndex = currentIndex +1;
-                            }
-                         } else {
-                            if (currentIndex === -1) {
-                                nextIndex = windows.length -1;
-                            } else {
-                                nextIndex = currentIndex - 1
-                            }
-                         }
-                         const nextWindow = windows[nextIndex];
-                         if (nextWindow) {
-                            nextWindow.activate();
-                         }
-                        }
-
-                     } else {
-                         scrollAccumulator += deltaY
-
-                         if (Math.abs(scrollAccumulator) >= touchpadThreshold) {
-                             const touchDirection = scrollAccumulator < 0 ? 1 : -1
-                             if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
-                                switchWorkspace(touchDirection)
-                             }
-                             else {
-                                const windows = root.sortedToplevels;
-                                if (windows.length < 2) {
-                                    return;
-                                }
-                                let currentIndex = -1;
-                                for (let i = 0; i < windows.length; i++) {
-                                    if (windows[i].activated) {
-                                        currentIndex = i;
-                                        break;
-                                    }
-
-                                }
-                                let nextIndex;
-                                if (deltaY < 0) {
-                                    if (currentIndex === -1) {
-                                    nextIndex = 0;
-                                } else {
-                                    nextIndex = currentIndex +1;
-                                }
-                            } else {
-                                if (currentIndex === -1) {
-                                    nextIndex = windows.length -1;
-                                } else {
-                                    nextIndex = currentIndex - 1
-                                }
-                            }
-                            const nextWindow = windows[nextIndex];
-                            if (nextWindow) {
-                                nextWindow.activate();
-                            }
-                        }
-
-                            scrollAccumulator = 0
-                         }
-                     }
-
-                     wheel.accepted = true
-                 }
     }
 
     Flow {

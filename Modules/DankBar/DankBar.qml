@@ -798,8 +798,20 @@ Item {
 
                                         property real scrollAccumulator: 0
                                         property real touchpadThreshold: 500
+                                        property bool actionInProgress: false
+
+                                        Timer {
+                                            id: cooldownTimer
+                                            interval: 100
+                                            onTriggered: parent.actionInProgress = false
+                                        }
 
                                         onWheel: wheel => {
+                                            if (actionInProgress) {
+                                                wheel.accepted = false
+                                                return
+                                            }
+
                                             const deltaY = wheel.angleDelta.y
                                             const deltaX = wheel.angleDelta.x
 
@@ -813,22 +825,18 @@ Item {
                                             const direction = deltaY < 0 ? 1 : -1
 
                                             if (isMouseWheel) {
-                                                if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
-                                                    topBarContent.switchWorkspace(direction)
-                                                } else {
-                                                    topBarContent.switchApp(deltaY)
-                                                }
+                                                topBarContent.switchWorkspace(direction)
+                                                actionInProgress = true
+                                                cooldownTimer.restart()
                                             } else {
                                                 scrollAccumulator += deltaY
 
                                                 if (Math.abs(scrollAccumulator) >= touchpadThreshold) {
                                                     const touchDirection = scrollAccumulator < 0 ? 1 : -1
-                                                    if (!SettingsData.workspaceScrolling || !CompositorService.isNiri) {
-                                                        topBarContent.switchWorkspace(touchDirection)
-                                                    } else {
-                                                        topBarContent.switchApp(deltaY)
-                                                    }
+                                                    topBarContent.switchWorkspace(touchDirection)
                                                     scrollAccumulator = 0
+                                                    actionInProgress = true
+                                                    cooldownTimer.restart()
                                                 }
                                             }
 
