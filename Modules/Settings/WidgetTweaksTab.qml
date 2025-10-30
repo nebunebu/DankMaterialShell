@@ -138,6 +138,17 @@ Item {
                             return SettingsData.setWorkspacesPerMonitor(checked);
                         }
                     }
+
+                    DankToggle {
+                        width: parent.width
+                        text: I18n.tr("Show All Tags")
+                        description: I18n.tr("Show all 9 tags instead of only occupied tags (DWL only)")
+                        checked: SettingsData.dwlShowAllTags
+                        visible: CompositorService.isDwl
+                        onToggled: checked => {
+                            return SettingsData.setDwlShowAllTags(checked);
+                        }
+                    }
                 }
             }
 

@@ -3,13 +3,14 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
 
     property bool dwlAvailable: false
     property var outputs: ({})
-    property var tagCount: 0
+    property var tagCount: 9
     property var layouts: []
     property string activeOutput: ""
     property var outputScales: ({})
@@ -39,15 +40,9 @@ Singleton {
         if (DMSService.dmsAvailable) {
             checkCapabilities()
         }
-        refreshOutputScales()
-    }
-
-    Timer {
-        id: scaleRefreshTimer
-        interval: 2000
-        repeat: true
-        running: dwlAvailable
-        onTriggered: refreshOutputScales()
+        if (dwlAvailable) {
+            refreshOutputScales()
+        }
     }
 
     function checkCapabilities() {
@@ -61,6 +56,7 @@ Singleton {
             dwlAvailable = true
             console.info("DwlService: DWL capability detected")
             requestState()
+            refreshOutputScales()
         } else if (!hasDwl) {
             dwlAvailable = false
         }
@@ -80,7 +76,7 @@ Singleton {
 
     function handleStateUpdate(state) {
         outputs = state.outputs || {}
-        tagCount = state.tagCount || 0
+        tagCount = state.tagCount || 9
         layouts = state.layouts || []
         activeOutput = state.activeOutput || ""
         stateChanged()
@@ -178,30 +174,71 @@ Singleton {
         Quickshell.execDetached(["mmsg", "-d", "quit"])
     }
 
-    function refreshOutputScales() {
-        if (!dwlAvailable) return
+    Process {
+        id: scaleQueryProcess
+        command: ["wlr-randr", "--json"]
+        running: false
 
-        Proc.runCommand("wlr-randr", ["--json"], (output, exitCode) => {
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    const outputData = JSON.parse(text)
+                    const newScales = {}
+                    for (const outputInfo of outputData) {
+                        if (outputInfo.name && outputInfo.scale !== undefined) {
+                            newScales[outputInfo.name] = outputInfo.scale
+                        }
+                    }
+                    outputScales = newScales
+                } catch (e) {
+                    console.warn("DwlService: Failed to parse wlr-randr output:", e)
+                }
+            }
+        }
+
+        onExited: exitCode => {
             if (exitCode !== 0) {
                 console.warn("DwlService: wlr-randr failed with exit code:", exitCode)
-                return
             }
-            try {
-                const outputData = JSON.parse(output)
-                const newScales = {}
-                for (const outputInfo of outputData) {
-                    if (outputInfo.name && outputInfo.scale !== undefined) {
-                        newScales[outputInfo.name] = outputInfo.scale
-                    }
-                }
-                outputScales = newScales
-            } catch (e) {
-                console.warn("DwlService: Failed to parse wlr-randr output:", e)
-            }
-        }, 0)
+        }
+    }
+
+    function refreshOutputScales() {
+        if (!dwlAvailable) return
+        scaleQueryProcess.running = true
     }
 
     function getOutputScale(outputName) {
         return outputScales[outputName]
+    }
+
+    function getVisibleTags(outputName) {
+        const output = getOutputState(outputName)
+        if (!output || !output.tags) {
+            return [0]
+        }
+
+        const occupiedTags = output.tags
+            .filter(tag => tag.clients > 0)
+            .map(tag => tag.tag)
+            .sort((a, b) => a - b)
+
+        if (occupiedTags.length === 0) {
+            return [0]
+        }
+
+        const minTag = occupiedTags[0]
+        const maxTag = occupiedTags[occupiedTags.length - 1]
+
+        const visibleTags = []
+        for (let i = minTag; i <= maxTag; i++) {
+            visibleTags.push(i)
+        }
+
+        if (maxTag + 1 < tagCount) {
+            visibleTags.push(maxTag + 1)
+        }
+
+        return visibleTags
     }
 }
