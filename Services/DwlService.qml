@@ -176,29 +176,34 @@ Singleton {
 
     Process {
         id: scaleQueryProcess
-        command: ["wlr-randr", "--json"]
+        command: ["mmsg", "-A"]
         running: false
 
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
-                    const outputData = JSON.parse(text)
                     const newScales = {}
-                    for (const outputInfo of outputData) {
-                        if (outputInfo.name && outputInfo.scale !== undefined) {
-                            newScales[outputInfo.name] = outputInfo.scale
+                    const lines = text.trim().split('\n')
+                    for (const line of lines) {
+                        const parts = line.trim().split(/\s+/)
+                        if (parts.length >= 3 && parts[1] === "scale_factor") {
+                            const outputName = parts[0]
+                            const scale = parseFloat(parts[2])
+                            if (!isNaN(scale)) {
+                                newScales[outputName] = scale
+                            }
                         }
                     }
                     outputScales = newScales
                 } catch (e) {
-                    console.warn("DwlService: Failed to parse wlr-randr output:", e)
+                    console.warn("DwlService: Failed to parse mmsg output:", e)
                 }
             }
         }
 
         onExited: exitCode => {
             if (exitCode !== 0) {
-                console.warn("DwlService: wlr-randr failed with exit code:", exitCode)
+                console.warn("DwlService: mmsg failed with exit code:", exitCode)
             }
         }
     }

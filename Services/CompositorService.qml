@@ -488,7 +488,7 @@ Singleton {
         for (let i = 0; i < Quickshell.screens.length; i++) {
             const screen = Quickshell.screens[i]
             if (screen && screen.name) {
-                Quickshell.execDetached(["wlr-randr", "--output", screen.name, "--off"])
+                Quickshell.execDetached(["mmsg", "-d", "disable_monitor," + screen.name])
             }
         }
     }
@@ -502,7 +502,7 @@ Singleton {
         for (let i = 0; i < Quickshell.screens.length; i++) {
             const screen = Quickshell.screens[i]
             if (screen && screen.name) {
-                Quickshell.execDetached(["wlr-randr", "--output", screen.name, "--on"])
+                Quickshell.execDetached(["mmsg", "-d", "enable_monitor," + screen.name])
             }
         }
     }

@@ -596,12 +596,10 @@ Item {
 
                     border.width: {
                         if (isUrgent && !isActive) return 2
-                        if (CompositorService.isDwl && isActive && root.dwlActiveTags.length > 1) return 2
                         return 0
                     }
                     border.color: {
                         if (isUrgent && !isActive) return Theme.error
-                        if (CompositorService.isDwl && isActive && root.dwlActiveTags.length > 1) return Qt.lighter(Theme.primary, 1.3)
                         return Theme.withAlpha(Theme.error, 0)
                     }
 
