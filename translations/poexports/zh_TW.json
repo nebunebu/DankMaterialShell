@@ -216,7 +216,7 @@
     "Battery level and power management": "電量與電源管理"
   },
   "Battery not detected - only AC power settings available": {
-    "Battery not detected - only AC power settings available": "未偵測到電池 - 僅 AC 電源設定可用"
+    "Battery not detected - only AC power settings available": "未偵測到電池 - 僅提供交流電源設定"
   },
   "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": {
     "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": "將鎖定畫面綁定到 loginctl 的 dbus 訊號。如果使用外部鎖屏，請停用"
@@ -234,7 +234,7 @@
     "Blur on Overview": "模糊概覽"
   },
   "Blur wallpaper when niri overview is open": {
-    "Blur wallpaper when niri overview is open": "當 niri 概覽打開時，模糊桌布"
+    "Blur wallpaper when niri overview is open": "當 niri 概覽打開時模糊桌布"
   },
   "Border": {
     "Border": "邊框"
@@ -369,7 +369,7 @@
     "Compact Mode": "緊湊模式"
   },
   "Compositor": {
-    "Compositor": ""
+    "Compositor": "合成器"
   },
   "Compositor:": {
     "Compositor:": "合成器:"
@@ -492,7 +492,7 @@
     "Dank Bar Widget Transparency": "Dank Bar 部件透明度"
   },
   "Dank Suite:": {
-    "Dank Suite:": ""
+    "Dank Suite:": "Dank 套件:"
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar 字體縮放"
@@ -621,7 +621,7 @@
     "Enable fingerprint authentication": "啟用指紋驗證"
   },
   "Enable loginctl lock integration": {
-    "Enable loginctl lock integration": "啟用 loginctl lock 集成"
+    "Enable loginctl lock integration": "啟用 loginctl 鎖定整合"
   },
   "End": {
     "End": "結束"
@@ -657,7 +657,7 @@
     "Enter password for ": "輸入密碼 "
   },
   "Exclusive Zone Offset": {
-    "Exclusive Zone Offset": "主要區域偏移"
+    "Exclusive Zone Offset": "獨佔區域偏移"
   },
   "Execute templates from ~/.config/matugen/config.toml": {
     "Execute templates from ~/.config/matugen/config.toml": "從 ~/.config/matugen/config.toml 執行模板"
@@ -795,7 +795,7 @@
     "Health": "健康狀態"
   },
   "Height to Edge Gap (Exclusive Zone)": {
-    "Height to Edge Gap (Exclusive Zone)": ""
+    "Height to Edge Gap (Exclusive Zone)": "邊緣間隙高度 (獨佔區域)"
   },
   "Hex:": {
     "Hex:": "色碼:"
@@ -1457,6 +1457,9 @@
   "Shift+Del: Clear All • Esc: Close": {
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: 清除所有 • Esc: 關閉"
   },
+  "Show All Tags": {
+    "Show All Tags": ""
+  },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "顯示電源操作確認"
   },
@@ -1471,6 +1474,9 @@
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "顯示工作區應用程式"
+  },
+  "Show all 9 tags instead of only occupied tags (DWL only)": {
+    "Show all 9 tags instead of only occupied tags (DWL only)": ""
   },
   "Show on Last Display": {
     "Show on Last Display": "在最後顯示幕上顯示"

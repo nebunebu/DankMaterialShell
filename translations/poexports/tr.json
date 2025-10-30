@@ -369,7 +369,7 @@
     "Compact Mode": "Kompakt Mod"
   },
   "Compositor": {
-    "Compositor": ""
+    "Compositor": "Kompozitör"
   },
   "Compositor:": {
     "Compositor:": "Kompozitör:"
@@ -615,7 +615,7 @@
     "Enable WiFi": "WiFi Etkinleştir"
   },
   "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": {
-    "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": "Compositor tarafından hedeflenebilir bulanıklık katmanını etkinleştir (isim alanı: dms:blurwallpaper). Manuel Niri yapılandırması gerektirir."
+    "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.": "Kompozitör tarafından hedeflenebilir bulanıklık katmanını etkinleştir (isim alanı: dms:blurwallpaper). Manuel Niri yapılandırması gerektirir."
   },
   "Enable fingerprint authentication": {
     "Enable fingerprint authentication": "Parmak izi kimlik doğrulamasını etkinleştir"
@@ -1457,6 +1457,9 @@
   "Shift+Del: Clear All • Esc: Close": {
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: Tümünü Temizle • Esc: Kapat"
   },
+  "Show All Tags": {
+    "Show All Tags": ""
+  },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "Güç Eylemlerinde Onay Göster"
   },
@@ -1471,6 +1474,9 @@
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "Çalışma Alanı Uygulamalarını Göster"
+  },
+  "Show all 9 tags instead of only occupied tags (DWL only)": {
+    "Show all 9 tags instead of only occupied tags (DWL only)": ""
   },
   "Show on Last Display": {
     "Show on Last Display": "Son Ekranda Göster"
