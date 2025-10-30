@@ -1458,7 +1458,7 @@
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: 清除所有 • Esc: 關閉"
   },
   "Show All Tags": {
-    "Show All Tags": ""
+    "Show All Tags": "顯示所有標籤"
   },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "顯示電源操作確認"
@@ -1476,7 +1476,7 @@
     "Show Workspace Apps": "顯示工作區應用程式"
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
-    "Show all 9 tags instead of only occupied tags (DWL only)": ""
+    "Show all 9 tags instead of only occupied tags (DWL only)": "顯示所有 9 個標籤，而非僅顯示已佔用的標籤 (僅限 DWL)"
   },
   "Show on Last Display": {
     "Show on Last Display": "在最後顯示幕上顯示"
