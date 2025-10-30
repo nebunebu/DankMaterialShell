@@ -49,9 +49,9 @@ jobs:
           set -e
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${TAG}^" 2>/dev/null || echo "")
           if [ -z "$PREVIOUS_TAG" ]; then
-            CHANGELOG=$(git log --oneline --pretty=format:"- %s (%h)" --author='^(?!github-actions\[bot\])' | head -50)
+            CHANGELOG=$(git log --oneline --pretty=format:"%an|%s (%h)" | grep -v "^github-actions\[bot\]|" | sed 's/^[^|]*|/- /' | head -50)
           else
-            CHANGELOG=$(git log --oneline --pretty=format:"- %s (%h)" --author='^(?!github-actions\[bot\])' "${PREVIOUS_TAG}..${TAG}")
+            CHANGELOG=$(git log --oneline --pretty=format:"%an|%s (%h)" "${PREVIOUS_TAG}..${TAG}" | grep -v "^github-actions\[bot\]|" | sed 's/^[^|]*|/- /')
           fi
 
           cat > RELEASE_BODY.md << 'EOF'
