@@ -14,13 +14,13 @@
   {
     "term": "- Stateless System Monitoring",
     "context": "- Stateless System Monitoring",
-    "reference": "Modules/Settings/AboutTab.qml:432",
+    "reference": "Modules/Settings/AboutTab.qml:469",
     "comment": ""
   },
   {
     "term": "- Support Us With a Star ⭐",
     "context": "- Support Us With a Star ⭐",
-    "reference": "Modules/Settings/AboutTab.qml:397",
+    "reference": "Modules/Settings/AboutTab.qml:434",
     "comment": ""
   },
   {
@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modules/Settings/AboutTab.qml:251, Modals/Settings/SettingsSidebar.qml:44",
+    "reference": "Modules/Settings/AboutTab.qml:288, Modals/Settings/SettingsSidebar.qml:44",
     "comment": ""
   },
   {
@@ -1142,7 +1142,7 @@
   {
     "term": "Donate on Ko-fi",
     "context": "Donate on Ko-fi",
-    "reference": "Modules/Settings/AboutTab.qml:486",
+    "reference": "Modules/Settings/AboutTab.qml:523",
     "comment": ""
   },
   {
@@ -1514,7 +1514,7 @@
   {
     "term": "Github:",
     "context": "Github:",
-    "reference": "Modules/Settings/AboutTab.qml:370",
+    "reference": "Modules/Settings/AboutTab.qml:407",
     "comment": ""
   },
   {
@@ -2456,7 +2456,7 @@
   {
     "term": "Plugins:",
     "context": "Plugins:",
-    "reference": "Modules/Settings/AboutTab.qml:347",
+    "reference": "Modules/Settings/AboutTab.qml:384",
     "comment": ""
   },
   {
@@ -2630,7 +2630,7 @@
   {
     "term": "Resources",
     "context": "Resources",
-    "reference": "Modules/Settings/AboutTab.qml:309",
+    "reference": "Modules/Settings/AboutTab.qml:346",
     "comment": ""
   },
   {
@@ -3050,7 +3050,7 @@
   {
     "term": "Support Development",
     "context": "Support Development",
-    "reference": "Modules/Settings/AboutTab.qml:471",
+    "reference": "Modules/Settings/AboutTab.qml:508",
     "comment": ""
   },
   {
@@ -3122,7 +3122,7 @@
   {
     "term": "System Monitoring:",
     "context": "System Monitoring:",
-    "reference": "Modules/Settings/AboutTab.qml:405",
+    "reference": "Modules/Settings/AboutTab.qml:442",
     "comment": ""
   },
   {
@@ -3566,7 +3566,7 @@
   {
     "term": "Website:",
     "context": "Website:",
-    "reference": "Modules/Settings/AboutTab.qml:324",
+    "reference": "Modules/Settings/AboutTab.qml:361",
     "comment": ""
   },
   {
