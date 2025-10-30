@@ -3332,6 +3332,13 @@
     "comment": ""
   },
   {
+    "term": "Show All Tags",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Show Confirmation on Power Actions",
     "translation": "",
     "context": "",
@@ -3361,6 +3368,13 @@
   },
   {
     "term": "Show Workspace Apps",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show all 9 tags instead of only occupied tags (DWL only)",
     "translation": "",
     "context": "",
     "reference": "",
