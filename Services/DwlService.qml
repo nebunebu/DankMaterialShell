@@ -166,8 +166,31 @@ Singleton {
     }
 
     function toggleTag(outputName, tagIndex) {
-        const tagmask = 1 << tagIndex
-        setTags(outputName, tagmask, 1)
+        const output = getOutputState(outputName)
+        if (!output || !output.tags) {
+            console.log("toggleTag: no output or tags for", outputName)
+            return
+        }
+
+        let currentMask = 0
+        output.tags.forEach(tag => {
+            if (tag.state === 1) {
+                currentMask |= (1 << tag.tag)
+            }
+        })
+
+        const clickedMask = 1 << tagIndex
+        const newMask = currentMask ^ clickedMask
+
+        console.log("toggleTag:", outputName, "tag:", tagIndex, "currentMask:", currentMask.toString(2), "clickedMask:", clickedMask.toString(2), "newMask:", newMask.toString(2))
+
+        if (newMask === 0) {
+            console.log("toggleTag: newMask is 0, switching to tag", tagIndex)
+            setTags(outputName, 1 << tagIndex, 0)
+        } else {
+            console.log("toggleTag: setting combined mask", newMask)
+            setTags(outputName, newMask, 0)
+        }
     }
 
     function quit() {
@@ -223,32 +246,14 @@ Singleton {
             return [0]
         }
 
-        const activeTags = output.tags
-            .filter(tag => tag.state === 1)
-            .map(tag => tag.tag)
+        const visibleTags = new Set([0])
 
-        const occupiedTags = output.tags
-            .filter(tag => tag.clients > 0)
-            .map(tag => tag.tag)
+        output.tags.forEach(tag => {
+            if (tag.state === 1 || tag.clients > 0) {
+                visibleTags.add(tag.tag)
+            }
+        })
 
-        const combinedTags = [...new Set([...activeTags, ...occupiedTags])].sort((a, b) => a - b)
-
-        if (combinedTags.length === 0) {
-            return [0]
-        }
-
-        const minTag = combinedTags[0]
-        const maxTag = combinedTags[combinedTags.length - 1]
-
-        const visibleTags = []
-        for (let i = minTag; i <= maxTag; i++) {
-            visibleTags.push(i)
-        }
-
-        if (maxTag + 1 < tagCount) {
-            visibleTags.push(maxTag + 1)
-        }
-
-        return visibleTags
+        return Array.from(visibleTags).sort((a, b) => a - b)
     }
 }

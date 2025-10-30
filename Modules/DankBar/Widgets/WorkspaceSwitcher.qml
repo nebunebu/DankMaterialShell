@@ -510,22 +510,25 @@ Item {
                     hoverEnabled: !isPlaceholder
                     cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
                     enabled: !isPlaceholder
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: mouse => {
                         if (isPlaceholder) {
                             return
                         }
+
+                        const isRightClick = mouse.button === Qt.RightButton
 
                         if (CompositorService.isNiri) {
                             NiriService.switchToWorkspace(modelData - 1)
                         } else if (CompositorService.isHyprland && modelData?.id) {
                             Hyprland.dispatch(`workspace ${modelData.id}`)
                         } else if (CompositorService.isDwl && modelData?.tag !== undefined) {
-                            console.log("DWL tag clicked:", modelData.tag, "modifiers:", mouse.modifiers, "ctrl:", (mouse.modifiers & Qt.ControlModifier))
-                            if (mouse.modifiers & Qt.ControlModifier) {
-                                console.log("Using toggleTag for tag", modelData.tag)
+                            console.log("DWL click - tag:", modelData.tag, "rightClick:", isRightClick)
+                            if (isRightClick) {
+                                console.log("Calling toggleTag")
                                 DwlService.toggleTag(root.screenName, modelData.tag)
                             } else {
-                                console.log("Using switchToTag for tag", modelData.tag)
+                                console.log("Calling switchToTag")
                                 DwlService.switchToTag(root.screenName, modelData.tag)
                             }
                         } else if (CompositorService.isSway && modelData?.num) {
