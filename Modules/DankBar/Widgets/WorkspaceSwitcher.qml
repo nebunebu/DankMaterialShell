@@ -36,11 +36,18 @@ Item {
         } else if (CompositorService.isHyprland) {
             return getHyprlandActiveWorkspace()
         } else if (CompositorService.isDwl) {
-            return getDwlActiveTag()
+            const activeTags = getDwlActiveTags()
+            return activeTags.length > 0 ? activeTags[0] : 0
         } else if (CompositorService.isSway) {
             return getSwayActiveWorkspace()
         }
         return 1
+    }
+    property var dwlActiveTags: {
+        if (CompositorService.isDwl) {
+            return getDwlActiveTags()
+        }
+        return []
     }
     property var workspaceList: {
         if (CompositorService.isNiri) {
@@ -297,18 +304,13 @@ Item {
         })
     }
 
-    function getDwlActiveTag() {
+    function getDwlActiveTags() {
         if (!DwlService.dwlAvailable) {
-            return 0
+            return [0]
         }
 
-        const output = DwlService.getOutputState(root.screenName)
-        if (!output || !output.tags) {
-            return 0
-        }
-
-        const activeTag = output.tags.find(tag => tag.state === 1)
-        return activeTag ? activeTag.tag : 0
+        const activeTags = DwlService.getActiveTags(root.screenName)
+        return activeTags.length > 0 ? activeTags : [0]
     }
 
     readonly property real padding: Math.max(Theme.spacingXS, Theme.spacingS * (widgetHeight / 30))
@@ -438,7 +440,7 @@ Item {
                     if (CompositorService.isHyprland) {
                         return modelData && modelData.id === root.currentWorkspace
                     } else if (CompositorService.isDwl) {
-                        return modelData && modelData.tag === root.currentWorkspace
+                        return modelData && root.dwlActiveTags.includes(modelData.tag)
                     } else if (CompositorService.isSway) {
                         return modelData && modelData.num === root.currentWorkspace
                     }
@@ -508,7 +510,7 @@ Item {
                     hoverEnabled: !isPlaceholder
                     cursorShape: isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
                     enabled: !isPlaceholder
-                    onClicked: {
+                    onClicked: mouse => {
                         if (isPlaceholder) {
                             return
                         }
@@ -518,7 +520,14 @@ Item {
                         } else if (CompositorService.isHyprland && modelData?.id) {
                             Hyprland.dispatch(`workspace ${modelData.id}`)
                         } else if (CompositorService.isDwl && modelData?.tag !== undefined) {
-                            DwlService.switchToTag(root.screenName, modelData.tag)
+                            console.log("DWL tag clicked:", modelData.tag, "modifiers:", mouse.modifiers, "ctrl:", (mouse.modifiers & Qt.ControlModifier))
+                            if (mouse.modifiers & Qt.ControlModifier) {
+                                console.log("Using toggleTag for tag", modelData.tag)
+                                DwlService.toggleTag(root.screenName, modelData.tag)
+                            } else {
+                                console.log("Using switchToTag for tag", modelData.tag)
+                                DwlService.switchToTag(root.screenName, modelData.tag)
+                            }
                         } else if (CompositorService.isSway && modelData?.num) {
                             try { I3.dispatch(`workspace number ${modelData.num}`) } catch(_){}
                         }
@@ -585,8 +594,16 @@ Item {
                     radius: Theme.cornerRadius
                     color: isActive ? Theme.primary : isUrgent ? Theme.error : isPlaceholder ? Theme.surfaceTextLight : isHovered ? Theme.outlineButton : Theme.surfaceTextAlpha
 
-                    border.width: isUrgent && !isActive ? 2 : 0
-                    border.color: isUrgent && !isActive ? Theme.error : Theme.withAlpha(Theme.error, 0)
+                    border.width: {
+                        if (isUrgent && !isActive) return 2
+                        if (CompositorService.isDwl && isActive && root.dwlActiveTags.length > 1) return 2
+                        return 0
+                    }
+                    border.color: {
+                        if (isUrgent && !isActive) return Theme.error
+                        if (CompositorService.isDwl && isActive && root.dwlActiveTags.length > 1) return Qt.lighter(Theme.primary, 1.3)
+                        return Theme.withAlpha(Theme.error, 0)
+                    }
 
                     Behavior on width {
                         enabled: (!SettingsData.showWorkspaceApps || SettingsData.maxWorkspaceIcons <= 3)
@@ -613,6 +630,13 @@ Item {
 
                     Behavior on border.width {
                         NumberAnimation {
+                            duration: Theme.shortDuration
+                            easing.type: Theme.emphasizedEasing
+                        }
+                    }
+
+                    Behavior on border.color {
+                        ColorAnimation {
                             duration: Theme.shortDuration
                             easing.type: Theme.emphasizedEasing
                         }

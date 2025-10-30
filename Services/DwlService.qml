@@ -218,17 +218,22 @@ Singleton {
             return [0]
         }
 
+        const activeTags = output.tags
+            .filter(tag => tag.state === 1)
+            .map(tag => tag.tag)
+
         const occupiedTags = output.tags
             .filter(tag => tag.clients > 0)
             .map(tag => tag.tag)
-            .sort((a, b) => a - b)
 
-        if (occupiedTags.length === 0) {
+        const combinedTags = [...new Set([...activeTags, ...occupiedTags])].sort((a, b) => a - b)
+
+        if (combinedTags.length === 0) {
             return [0]
         }
 
-        const minTag = occupiedTags[0]
-        const maxTag = occupiedTags[occupiedTags.length - 1]
+        const minTag = combinedTags[0]
+        const maxTag = combinedTags[combinedTags.length - 1]
 
         const visibleTags = []
         for (let i = minTag; i <= maxTag; i++) {
