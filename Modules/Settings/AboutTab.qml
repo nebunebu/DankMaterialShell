@@ -41,13 +41,26 @@ Item {
         return "niri GitHub"
     }
 
-    property string discordUrl: "https://discord.gg/vT8Sfjy7sx"
-    property string discordTooltip: "niri/dms Discord"
+    property string dmsDiscordUrl: "https://discord.gg/vT8Sfjy7sx"
+    property string dmsDiscordTooltip: "niri/dms Discord"
+
+    property string compositorDiscordUrl: {
+        if (isHyprland) return "https://discord.com/invite/hQ9XvMUjjr"
+        if (isDwl) return "https://discord.gg/CPjbDxesh5"
+        return ""
+    }
+
+    property string compositorDiscordTooltip: {
+        if (isHyprland) return "Hyprland Discord Server"
+        if (isDwl) return "mangowc Discord Server"
+        return ""
+    }
 
     property string redditUrl: "https://reddit.com/r/niri"
     property string redditTooltip: "r/niri Subreddit"
 
     property bool showMatrix: isNiri && !isHyprland && !isSway && !isDwl
+    property bool showCompositorDiscord: isHyprland || isDwl
     property bool showReddit: isNiri && !isHyprland && !isSway && !isDwl
 
     DankFlickable {
@@ -109,9 +122,12 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: 24
                         width: {
-                            let baseWidth = compositorButton.width + discordButton.width + Theme.spacingM
+                            let baseWidth = compositorButton.width + dmsDiscordButton.width + Theme.spacingM
                             if (showMatrix) {
                                 baseWidth += matrixButton.width + 4
+                            }
+                            if (showCompositorDiscord) {
+                                baseWidth += compositorDiscordButton.width + Theme.spacingM
                             }
                             if (showReddit) {
                                 baseWidth += redditButton.width + Theme.spacingM
@@ -190,14 +206,14 @@ Item {
                         }
 
                         Item {
-                            id: discordButton
+                            id: dmsDiscordButton
                             width: 20
                             height: 20
                             x: showMatrix ? matrixButton.x + matrixButton.width + Theme.spacingM : compositorButton.x + compositorButton.width + Theme.spacingM
                             anchors.verticalCenter: parent.verticalCenter
 
                             property bool hovered: false
-                            property string tooltipText: discordTooltip
+                            property string tooltipText: dmsDiscordTooltip
 
                             Image {
                                 anchors.fill: parent
@@ -216,7 +232,39 @@ Item {
                                 hoverEnabled: true
                                 onEntered: parent.hovered = true
                                 onExited: parent.hovered = false
-                                onClicked: Qt.openUrlExternally(discordUrl)
+                                onClicked: Qt.openUrlExternally(dmsDiscordUrl)
+                            }
+                        }
+
+                        Item {
+                            id: compositorDiscordButton
+                            width: 20
+                            height: 20
+                            x: dmsDiscordButton.x + dmsDiscordButton.width + Theme.spacingM
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible: showCompositorDiscord
+
+                            property bool hovered: false
+                            property string tooltipText: compositorDiscordTooltip
+
+                            Image {
+                                anchors.fill: parent
+                                source: Qt.resolvedUrl(".").toString().replace(
+                                            "file://", "").replace(
+                                            "/Modules/Settings/",
+                                            "") + "/assets/discord.svg"
+                                sourceSize: Qt.size(20, 20)
+                                smooth: true
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                hoverEnabled: true
+                                onEntered: parent.hovered = true
+                                onExited: parent.hovered = false
+                                onClicked: Qt.openUrlExternally(compositorDiscordUrl)
                             }
                         }
 
@@ -224,7 +272,7 @@ Item {
                             id: redditButton
                             width: 20
                             height: 20
-                            x: discordButton.x + discordButton.width + Theme.spacingM
+                            x: showCompositorDiscord ? compositorDiscordButton.x + compositorDiscordButton.width + Theme.spacingM : dmsDiscordButton.x + dmsDiscordButton.width + Theme.spacingM
                             anchors.verticalCenter: parent.verticalCenter
                             visible: showReddit
 
@@ -543,7 +591,8 @@ Item {
         property var hoveredButton: {
             if (compositorButton.hovered) return compositorButton
             if (matrixButton.visible && matrixButton.hovered) return matrixButton
-            if (discordButton.hovered) return discordButton
+            if (dmsDiscordButton.hovered) return dmsDiscordButton
+            if (compositorDiscordButton.visible && compositorDiscordButton.hovered) return compositorDiscordButton
             if (redditButton.visible && redditButton.hovered) return redditButton
             return null
         }
