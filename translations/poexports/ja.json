@@ -1458,7 +1458,7 @@
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: すべてクリア • Esc: 閉じる"
   },
   "Show All Tags": {
-    "Show All Tags": ""
+    "Show All Tags": "すべてのタグを表示"
   },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "電源アクションの確認を表示"
@@ -1476,7 +1476,7 @@
     "Show Workspace Apps": "ワークスペースアプリを表示"
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
-    "Show all 9 tags instead of only occupied tags (DWL only)": ""
+    "Show all 9 tags instead of only occupied tags (DWL only)": "占有タグのみではなく、9 つのタグをすべて表示 (DWL のみ)"
   },
   "Show on Last Display": {
     "Show on Last Display": "最後のディスプレイに表示"
