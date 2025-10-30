@@ -278,15 +278,23 @@ Item {
 
         const output = DwlService.getOutputState(root.screenName)
         if (!output || !output.tags || output.tags.length === 0) {
-            const tagCount = DwlService.tagCount || 9
-            const tags = []
-            for (let i = 0; i < tagCount; i++) {
-                tags.push({"tag": i})
-            }
-            return tags
+            return [{"tag": 0}]
         }
 
-        return output.tags.map(tag => ({"tag": tag.tag, "state": tag.state, "clients": tag.clients, "focused": tag.focused}))
+        if (SettingsData.dwlShowAllTags) {
+            return output.tags.map(tag => ({"tag": tag.tag, "state": tag.state, "clients": tag.clients, "focused": tag.focused}))
+        }
+
+        const visibleTagIndices = DwlService.getVisibleTags(root.screenName)
+        return visibleTagIndices.map(tagIndex => {
+            const tagData = output.tags.find(t => t.tag === tagIndex)
+            return {
+                "tag": tagIndex,
+                "state": tagData?.state ?? 0,
+                "clients": tagData?.clients ?? 0,
+                "focused": tagData?.focused ?? false
+            }
+        })
     }
 
     function getDwlActiveTag() {

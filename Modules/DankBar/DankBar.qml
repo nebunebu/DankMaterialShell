@@ -576,10 +576,13 @@ Item {
 
                                         return monitorWorkspaces.sort((a, b) => a.id - b.id)
                                     } else if (CompositorService.isDwl) {
-                                        if (!DwlService.dwlAvailable || DwlService.tagCount === 0) {
-                                            return Array.from({length: 9}, (_, i) => i)
+                                        if (!DwlService.dwlAvailable) {
+                                            return [0]
                                         }
-                                        return Array.from({length: DwlService.tagCount}, (_, i) => i)
+                                        if (SettingsData.dwlShowAllTags) {
+                                            return Array.from({length: DwlService.tagCount}, (_, i) => i)
+                                        }
+                                        return DwlService.getVisibleTags(barWindow.screenName)
                                     } else if (CompositorService.isSway) {
                                         const workspaces = I3.workspaces?.values || []
                                         if (workspaces.length === 0) return [{"num": 1}]
