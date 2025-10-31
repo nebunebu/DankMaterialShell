@@ -37,6 +37,27 @@ BasePill {
             }
 
             IconImage {
+                visible: SettingsData.launcherLogoMode === "dank"
+                anchors.centerIn: parent
+                width: Theme.barIconSize(root.barThickness, SettingsData.launcherLogoSizeOffset)
+                height: Theme.barIconSize(root.barThickness, SettingsData.launcherLogoSizeOffset)
+                smooth: true
+                mipmap: true
+                asynchronous: true
+                source: "file://" + Theme.shellDir + "/assets/danklogo.svg"
+                layer.enabled: Theme.effectiveLogoColor !== ""
+                layer.smooth: true
+                layer.mipmap: true
+                layer.effect: MultiEffect {
+                    saturation: 0
+                    colorization: 1
+                    colorizationColor: Theme.effectiveLogoColor
+                    brightness: 0.55
+                    contrast: 0.5
+                }
+            }
+
+            IconImage {
                 visible: SettingsData.launcherLogoMode === "compositor" && (CompositorService.isNiri || CompositorService.isHyprland || CompositorService.isDwl || CompositorService.isSway)
                 anchors.centerIn: parent
                 width: Theme.barIconSize(root.barThickness, SettingsData.launcherLogoSizeOffset)
@@ -60,8 +81,12 @@ BasePill {
                     saturation: 0
                     colorization: 1
                     colorizationColor: Theme.effectiveLogoColor
-                    brightness: SettingsData.launcherLogoBrightness
-                    contrast: SettingsData.launcherLogoContrast
+                    brightness: {
+                        SettingsData.launcherLogoBrightness
+                    }
+                    contrast: {
+                        SettingsData.launcherLogoContrast
+                    }
                 }
             }
 

@@ -86,7 +86,7 @@ Item {
                             id: logoModeGroup
                             anchors.horizontalCenter: parent.horizontalCenter
                             model: {
-                                const modes = [I18n.tr("Apps Icon"), I18n.tr("OS Logo")]
+                                const modes = [I18n.tr("Apps Icon"), I18n.tr("OS Logo"), I18n.tr("Dank")]
                                 if (CompositorService.isNiri) {
                                     modes.push("niri")
                                 } else if (CompositorService.isHyprland) {
@@ -104,8 +104,9 @@ Item {
                             currentIndex: {
                                 if (SettingsData.launcherLogoMode === "apps") return 0
                                 if (SettingsData.launcherLogoMode === "os") return 1
-                                if (SettingsData.launcherLogoMode === "compositor") return 2
-                                if (SettingsData.launcherLogoMode === "custom") return 3
+                                if (SettingsData.launcherLogoMode === "dank") return 2
+                                if (SettingsData.launcherLogoMode === "compositor") return 3
+                                if (SettingsData.launcherLogoMode === "custom") return 4
                                 return 0
                             }
                             onSelectionChanged: (index, selected) => {
@@ -115,8 +116,10 @@ Item {
                                 } else if (index === 1) {
                                     SettingsData.setLauncherLogoMode("os")
                                 } else if (index === 2) {
-                                    SettingsData.setLauncherLogoMode("compositor")
+                                    SettingsData.setLauncherLogoMode("dank")
                                 } else if (index === 3) {
+                                    SettingsData.setLauncherLogoMode("compositor")
+                                } else if (index === 4) {
                                     SettingsData.setLauncherLogoMode("custom")
                                 }
                             }

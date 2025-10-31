@@ -243,10 +243,10 @@ Singleton {
     function getVisibleTags(outputName) {
         const output = getOutputState(outputName)
         if (!output || !output.tags) {
-            return [0]
+            return []
         }
 
-        const visibleTags = new Set([0])
+        const visibleTags = new Set()
 
         output.tags.forEach(tag => {
             if (tag.state === 1 || tag.clients > 0) {

@@ -37,7 +37,7 @@ Item {
             return getHyprlandActiveWorkspace()
         } else if (CompositorService.isDwl) {
             const activeTags = getDwlActiveTags()
-            return activeTags.length > 0 ? activeTags[0] : 0
+            return activeTags.length > 0 ? activeTags[0] : -1
         } else if (CompositorService.isSway) {
             return getSwayActiveWorkspace()
         }
@@ -280,12 +280,12 @@ Item {
 
     function getDwlTags() {
         if (!DwlService.dwlAvailable) {
-            return [{"tag": 0}, {"tag": 1}]
+            return []
         }
 
         const output = DwlService.getOutputState(root.screenName)
         if (!output || !output.tags || output.tags.length === 0) {
-            return [{"tag": 0}]
+            return []
         }
 
         if (SettingsData.dwlShowAllTags) {
@@ -306,11 +306,11 @@ Item {
 
     function getDwlActiveTags() {
         if (!DwlService.dwlAvailable) {
-            return [0]
+            return []
         }
 
         const activeTags = DwlService.getActiveTags(root.screenName)
-        return activeTags.length > 0 ? activeTags : [0]
+        return activeTags
     }
 
     readonly property real padding: Math.max(Theme.spacingXS, Theme.spacingS * (widgetHeight / 30))
