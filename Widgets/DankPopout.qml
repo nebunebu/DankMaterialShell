@@ -123,6 +123,8 @@ PanelWindow {
         transformOrigin: Item.Center
         layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
         layer.smooth: true
+        layer.textureSize: Qt.size(width * Math.max(2, root.screen?.devicePixelRatio || 1), height * Math.max(2, root.screen?.devicePixelRatio || 1))
+        layer.samples: 4
         opacity: shouldBeVisible ? 1 : 0
         transform: [scaleTransform, motionTransform]
 

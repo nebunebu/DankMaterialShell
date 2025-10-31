@@ -33,7 +33,6 @@ Item {
         color: Theme.surfaceText
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-        renderType: Text.NativeRendering
         antialiasing: true
         font.variableAxes: {
             "FILL": root.fill.toFixed(1),

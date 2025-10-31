@@ -69,6 +69,9 @@ PanelWindow {
     StyledRect {
         id: contentRect
         layer.enabled: true
+        layer.smooth: true
+        layer.textureSize: Qt.size(width * Math.max(2, root.modelData?.devicePixelRatio || 1), height * Math.max(2, root.modelData?.devicePixelRatio || 1))
+        layer.samples: 4
 
         anchors.top: parent.top
         anchors.bottom: parent.bottom

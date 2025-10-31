@@ -137,7 +137,6 @@ Item {
         text: root.text
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-        renderType: Text.NativeRendering
         antialiasing: true
     }
 }

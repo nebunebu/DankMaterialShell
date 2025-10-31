@@ -171,6 +171,8 @@ PanelWindow {
         clip: false
         layer.enabled: true
         layer.smooth: true
+        layer.textureSize: Qt.size(width * Math.max(2, root.screen?.devicePixelRatio || 1), height * Math.max(2, root.screen?.devicePixelRatio || 1))
+        layer.samples: 4
         opacity: root.shouldBeVisible ? 1 : 0
         transform: [scaleTransform, motionTransform]
 
