@@ -138,13 +138,13 @@
     "Audio Output Devices (": "音频输出设备 ("
   },
   "Authenticate": {
-    "Authenticate": ""
+    "Authenticate": "认证"
   },
   "Authentication Required": {
-    "Authentication Required": ""
+    "Authentication Required": "需要认证"
   },
   "Authentication failed, please try again": {
-    "Authentication failed, please try again": ""
+    "Authentication failed, please try again": "认证失败，请重试"
   },
   "Authorize": {
     "Authorize": "授权"

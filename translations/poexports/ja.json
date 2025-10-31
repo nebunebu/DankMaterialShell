@@ -138,13 +138,13 @@
     "Audio Output Devices (": "オーディオ出力デバイス（"
   },
   "Authenticate": {
-    "Authenticate": ""
+    "Authenticate": "認証"
   },
   "Authentication Required": {
-    "Authentication Required": ""
+    "Authentication Required": "認証が必要です"
   },
   "Authentication failed, please try again": {
-    "Authentication failed, please try again": ""
+    "Authentication failed, please try again": "認証が失敗しました、もう一度試してください"
   },
   "Authorize": {
     "Authorize": "許可"
