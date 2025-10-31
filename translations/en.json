@@ -276,6 +276,24 @@
     "comment": ""
   },
   {
+    "term": "Authenticate",
+    "context": "Authenticate",
+    "reference": "Modals/PolkitAuthModal.qml:252",
+    "comment": ""
+  },
+  {
+    "term": "Authentication Required",
+    "context": "Authentication Required",
+    "reference": "Modals/PolkitAuthModal.qml:103",
+    "comment": ""
+  },
+  {
+    "term": "Authentication failed, please try again",
+    "context": "Authentication failed, please try again",
+    "reference": "Modals/PolkitAuthModal.qml:133",
+    "comment": ""
+  },
+  {
     "term": "Authorize",
     "context": "Authorize",
     "reference": "Modals/BluetoothPairingModal.qml:292",
@@ -560,7 +578,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/PolkitAuthModal.qml:220, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
@@ -2186,7 +2204,7 @@
   {
     "term": "Notepad",
     "context": "Notepad",
-    "reference": "DMSShell.qml:437, Modules/Settings/DankBarTab.qml:175",
+    "reference": "DMSShell.qml:441, Modules/Settings/DankBarTab.qml:175",
     "comment": ""
   },
   {
@@ -2348,7 +2366,7 @@
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/WifiPasswordModal.qml:296",
+    "reference": "Modals/PolkitAuthModal.qml:184, Modals/WifiPasswordModal.qml:296",
     "comment": ""
   },
   {
