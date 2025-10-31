@@ -278,19 +278,19 @@
   {
     "term": "Authenticate",
     "context": "Authenticate",
-    "reference": "Modals/PolkitAuthModal.qml:252",
+    "reference": "Modals/PolkitAuthModal.qml:322",
     "comment": ""
   },
   {
     "term": "Authentication Required",
     "context": "Authentication Required",
-    "reference": "Modals/PolkitAuthModal.qml:103",
+    "reference": "Modals/PolkitAuthModal.qml:134",
     "comment": ""
   },
   {
     "term": "Authentication failed, please try again",
     "context": "Authentication failed, please try again",
-    "reference": "Modals/PolkitAuthModal.qml:133",
+    "reference": "Modals/PolkitAuthModal.qml:244",
     "comment": ""
   },
   {
@@ -578,7 +578,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/PolkitAuthModal.qml:220, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/PolkitAuthModal.qml:289, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
@@ -2366,7 +2366,7 @@
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/PolkitAuthModal.qml:184, Modals/WifiPasswordModal.qml:296",
+    "reference": "Modals/WifiPasswordModal.qml:296",
     "comment": ""
   },
   {
