@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
+import Quickshell.Widgets
 import qs.Common
 import qs.Services
 import qs.Widgets
@@ -93,18 +94,44 @@ Item {
                     anchors.margins: Theme.spacingL
                     spacing: Theme.spacingM
 
-                    Item {
-                        width: parent.width
-                        height: asciiText.implicitHeight
+                    Row {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        spacing: Theme.spacingL
 
-                        StyledText {
-                            id: asciiText
+                        Image {
+                            id: logoImage
 
-                            text: "██████╗  █████╗ ███╗   ██╗██╗  ██╗\n██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝\n██║  ██║███████║██╔██╗ ██║█████╔╝ \n██║  ██║██╔══██║██║╚██╗██║██╔═██╗ \n██████╔╝██║  ██║██║ ╚████║██║  ██╗\n╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝"
-                            isMonospace: true
-                            font.pixelSize: Theme.fontSizeMedium
-                            color: Theme.primary
-                            anchors.centerIn: parent
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: 120
+                            height: width * (569.94629 / 506.50931)
+                            fillMode: Image.PreserveAspectFit
+                            smooth: true
+                            mipmap: true
+                            asynchronous: true
+                            source: "file://" + Theme.shellDir + "/assets/danklogonormal.svg"
+                            layer.enabled: true
+                            layer.smooth: true
+                            layer.mipmap: true
+                            layer.effect: MultiEffect {
+                                saturation: 0
+                                colorization: 1
+                                colorizationColor: Theme.primary
+                            }
+                        }
+
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: "DANK LINUX"
+                            font.pixelSize: 48
+                            font.weight: Font.Bold
+                            font.family: interFont.name
+                            color: Theme.surfaceText
+                            antialiasing: true
+
+                            FontLoader {
+                                id: interFont
+                                source: Qt.resolvedUrl("../../assets/fonts/inter/InterVariable.ttf")
+                            }
                         }
                     }
 
