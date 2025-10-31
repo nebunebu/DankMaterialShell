@@ -21,7 +21,7 @@ Features notifications, app launcher, wallpaper customization, and fully customi
 <div align="center">
 <div style="max-width: 700px; margin: 0 auto;">
 
-https://github.com/user-attachments/assets/40d2c56e-c1c9-4671-b04f-8f8b7b83b9ec
+https://github.com/user-attachments/assets/1200a739-7770-4601-8b85-695ca527819a
 
 </div>
 </div>
@@ -76,11 +76,13 @@ https://github.com/user-attachments/assets/40d2c56e-c1c9-4671-b04f-8f8b7b83b9ec
 
 </details>
 
-## Quick start (full dotfiles, most distros)
+## Quick start (Arch, Fedora, Debian, Ubuntu, openSUSE)
 
 ```bash
 curl -fsSL https://install.danklinux.com | sh
 ```
+*Installs dms & dependencies*
+
 *Or skip to [Installation](https://github.com/AvengeMedia/DankMaterialShell?tab=readme-ov-file#installation)*
 
 <details><summary><strong>Features</strong></summary>
