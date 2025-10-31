@@ -58,7 +58,7 @@ DankModal {
     shouldBeVisible: false
     allowStacking: true
     width: 350
-    height: 160
+    height: contentLoader.item ? contentLoader.item.implicitHeight + Theme.spacingM * 2 : 160
     enableShadow: true
     shouldHaveFocus: true
     onBackgroundClicked: {
@@ -158,10 +158,16 @@ DankModal {
     content: Component {
         Item {
             anchors.fill: parent
+            implicitHeight: mainColumn.implicitHeight
 
             Column {
-                anchors.centerIn: parent
-                width: parent.width - Theme.spacingM * 2
+                id: mainColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: Theme.spacingM
+                anchors.rightMargin: Theme.spacingM
+                anchors.topMargin: Theme.spacingM
                 spacing: Theme.spacingM
 
                 StyledText {
