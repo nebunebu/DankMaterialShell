@@ -8,9 +8,13 @@ DankModal {
     id: root
 
     property string passwordInput: ""
+    property var currentFlow: PolkitService.agent?.flow
+    property bool isLoading: false
+    property real minHeight: 240
 
     function show() {
         passwordInput = ""
+        isLoading = false
         open()
         Qt.callLater(() => {
             if (contentLoader.item && contentLoader.item.passwordField) {
@@ -21,11 +25,17 @@ DankModal {
 
     shouldBeVisible: false
     width: 420
-    height: contentLoader.item ? contentLoader.item.implicitHeight + Theme.spacingM * 2 : 240
+    height: Math.max(minHeight, contentLoader.item ? contentLoader.item.implicitHeight + Theme.spacingM * 2 : 240)
 
-    onShouldBeVisibleChanged: () => {
-        if (!shouldBeVisible) {
-            passwordInput = ""
+    Connections {
+        target: contentLoader.item
+        function onImplicitHeightChanged() {
+            if (shouldBeVisible && contentLoader.item) {
+                const newHeight = contentLoader.item.implicitHeight + Theme.spacingM * 2
+                if (newHeight > minHeight) {
+                    minHeight = newHeight
+                }
+            }
         }
     }
 
@@ -37,31 +47,56 @@ DankModal {
         })
     }
 
-    onBackgroundClicked: () => {
-        PolkitService.cancel()
-        close()
+    onClosed: {
         passwordInput = ""
+        isLoading = false
+    }
+
+    onBackgroundClicked: () => {
+        if (currentFlow && !isLoading) {
+            currentFlow.cancelAuthenticationRequest()
+        }
     }
 
     Connections {
-        target: PolkitService
+        target: PolkitService.agent
+        enabled: PolkitService.polkitAvailable
 
-        function onAuthenticationRequested() {
+        function onAuthenticationRequestStarted() {
             show()
         }
 
-        function onAuthenticationCompleted() {
-            close()
-            passwordInput = ""
+        function onIsActiveChanged() {
+            if (!(PolkitService.agent?.isActive ?? false)) {
+                close()
+            }
         }
+    }
+
+    Connections {
+        target: currentFlow
+        enabled: currentFlow !== null
 
         function onIsResponseRequiredChanged() {
-            if (PolkitService.isResponseRequired && root.shouldBeVisible) {
+            if (currentFlow.isResponseRequired) {
+                isLoading = false
                 passwordInput = ""
                 if (contentLoader.item && contentLoader.item.passwordField) {
                     contentLoader.item.passwordField.forceActiveFocus()
                 }
             }
+        }
+
+        function onAuthenticationSucceeded() {
+            close()
+        }
+
+        function onAuthenticationFailed() {
+            isLoading = false
+        }
+
+        function onAuthenticationRequestCancelled() {
+            close()
         }
     }
 
@@ -73,89 +108,89 @@ DankModal {
 
             anchors.fill: parent
             focus: true
-            implicitHeight: mainColumn.implicitHeight
+            implicitHeight: headerRow.implicitHeight + mainColumn.implicitHeight + Theme.spacingM
 
             Keys.onEscapePressed: event => {
-                PolkitService.cancel()
-                close()
-                passwordInput = ""
+                if (currentFlow && !isLoading) {
+                    currentFlow.cancelAuthenticationRequest()
+                }
                 event.accepted = true
             }
 
-            Column {
-                id: mainColumn
+            Row {
+                id: headerRow
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.leftMargin: Theme.spacingM
                 anchors.rightMargin: Theme.spacingM
                 anchors.topMargin: Theme.spacingM
-                spacing: Theme.spacingM
 
-                Row {
-                    width: parent.width
+                Column {
+                    width: parent.width - 40
+                    spacing: Theme.spacingXS
+
+                    StyledText {
+                        text: I18n.tr("Authentication Required")
+                        font.pixelSize: Theme.fontSizeLarge
+                        color: Theme.surfaceText
+                        font.weight: Font.Medium
+                    }
 
                     Column {
-                        width: parent.width - 40
+                        width: parent.width
                         spacing: Theme.spacingXS
 
                         StyledText {
-                            text: I18n.tr("Authentication Required")
-                            font.pixelSize: Theme.fontSizeLarge
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
-                        }
-
-                        Column {
+                            text: currentFlow?.message ?? ""
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceTextMedium
                             width: parent.width
-                            spacing: Theme.spacingXS
-
-                            StyledText {
-                                text: PolkitService.message
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceTextMedium
-                                width: parent.width
-                                wrapMode: Text.Wrap
-                            }
-
-                            StyledText {
-                                visible: PolkitService.supplementaryMessage !== ""
-                                text: PolkitService.supplementaryMessage
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.surfaceTextMedium
-                                width: parent.width
-                                wrapMode: Text.Wrap
-                                opacity: 0.8
-                            }
-
-                            StyledText {
-                                visible: PolkitService.failed
-                                text: I18n.tr("Authentication failed, please try again")
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.error
-                                width: parent.width
-                            }
+                            wrapMode: Text.Wrap
                         }
-                    }
 
-                    DankActionButton {
-                        iconName: "close"
-                        iconSize: Theme.iconSize - 4
-                        iconColor: Theme.surfaceText
-                        onClicked: () => {
-                            PolkitService.cancel()
-                            close()
-                            passwordInput = ""
+                        StyledText {
+                            visible: (currentFlow?.supplementaryMessage ?? "") !== ""
+                            text: currentFlow?.supplementaryMessage ?? ""
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: (currentFlow?.supplementaryIsError ?? false) ? Theme.error : Theme.surfaceTextMedium
+                            width: parent.width
+                            wrapMode: Text.Wrap
+                            opacity: (currentFlow?.supplementaryIsError ?? false) ? 1 : 0.8
                         }
                     }
                 }
 
+                DankActionButton {
+                    iconName: "close"
+                    iconSize: Theme.iconSize - 4
+                    iconColor: Theme.surfaceText
+                    enabled: !isLoading
+                    opacity: enabled ? 1 : 0.5
+                    onClicked: () => {
+                        if (currentFlow) {
+                            currentFlow.cancelAuthenticationRequest()
+                        }
+                    }
+                }
+            }
+
+            Column {
+                id: mainColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: Theme.spacingM
+                anchors.rightMargin: Theme.spacingM
+                anchors.bottomMargin: Theme.spacingM
+                spacing: Theme.spacingM
+
                 StyledText {
-                    text: PolkitService.inputPrompt
+                    text: currentFlow?.inputPrompt ?? ""
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.surfaceText
                     width: parent.width
-                    visible: PolkitService.inputPrompt !== ""
+                    visible: (currentFlow?.inputPrompt ?? "") !== ""
                 }
 
                 Rectangle {
@@ -165,9 +200,11 @@ DankModal {
                     color: Theme.surfaceHover
                     border.color: passwordField.activeFocus ? Theme.primary : Theme.outlineStrong
                     border.width: passwordField.activeFocus ? 2 : 1
+                    opacity: isLoading ? 0.5 : 1
 
                     MouseArea {
                         anchors.fill: parent
+                        enabled: !isLoading
                         onClicked: () => {
                             passwordField.forceActiveFocus()
                         }
@@ -180,18 +217,48 @@ DankModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: passwordInput
-                        echoMode: PolkitService.responseVisible ? TextInput.Normal : TextInput.Password
-                        placeholderText: I18n.tr("Password")
+                        echoMode: (currentFlow?.responseVisible ?? false) ? TextInput.Normal : TextInput.Password
+                        placeholderText: ""
                         backgroundColor: "transparent"
-                        enabled: root.shouldBeVisible
+                        enabled: !isLoading
                         onTextEdited: () => {
                             passwordInput = text
                         }
                         onAccepted: () => {
-                            if (passwordInput.length > 0) {
-                                PolkitService.submit(passwordInput)
+                            if (passwordInput.length > 0 && currentFlow && !isLoading) {
+                                isLoading = true
+                                currentFlow.submit(passwordInput)
                                 passwordInput = ""
                             }
+                        }
+                    }
+                }
+
+                Item {
+                    width: parent.width
+                    height: (currentFlow?.failed ?? false) ? failedText.implicitHeight : 0
+                    visible: height > 0
+
+                    StyledText {
+                        id: failedText
+                        text: I18n.tr("Authentication failed, please try again")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.error
+                        width: parent.width
+                        opacity: (currentFlow?.failed ?? false) ? 1 : 0
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Theme.shortDuration
+                                easing.type: Theme.standardEasing
+                            }
+                        }
+                    }
+
+                    Behavior on height {
+                        NumberAnimation {
+                            duration: Theme.shortDuration
+                            easing.type: Theme.standardEasing
                         }
                     }
                 }
@@ -212,6 +279,8 @@ DankModal {
                             color: cancelArea.containsMouse ? Theme.surfaceTextHover : "transparent"
                             border.color: Theme.surfaceVariantAlpha
                             border.width: 1
+                            enabled: !isLoading
+                            opacity: enabled ? 1 : 0.5
 
                             StyledText {
                                 id: cancelText
@@ -229,10 +298,11 @@ DankModal {
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
+                                enabled: parent.enabled
                                 onClicked: () => {
-                                    PolkitService.cancel()
-                                    close()
-                                    passwordInput = ""
+                                    if (currentFlow) {
+                                        currentFlow.cancelAuthenticationRequest()
+                                    }
                                 }
                             }
                         }
@@ -242,7 +312,7 @@ DankModal {
                             height: 36
                             radius: Theme.cornerRadius
                             color: authArea.containsMouse ? Qt.darker(Theme.primary, 1.1) : Theme.primary
-                            enabled: passwordInput.length > 0 || !PolkitService.isResponseRequired
+                            enabled: !isLoading && (passwordInput.length > 0 || !(currentFlow?.isResponseRequired ?? true))
                             opacity: enabled ? 1 : 0.5
 
                             StyledText {
@@ -263,8 +333,11 @@ DankModal {
                                 cursorShape: Qt.PointingHandCursor
                                 enabled: parent.enabled
                                 onClicked: () => {
-                                    PolkitService.submit(passwordInput)
-                                    passwordInput = ""
+                                    if (currentFlow && !isLoading) {
+                                        isLoading = true
+                                        currentFlow.submit(passwordInput)
+                                        passwordInput = ""
+                                    }
                                 }
                             }
 

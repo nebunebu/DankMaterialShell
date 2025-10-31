@@ -52,8 +52,6 @@ BasePill {
                     saturation: 0
                     colorization: 1
                     colorizationColor: Theme.effectiveLogoColor
-                    brightness: 0.55
-                    contrast: 0.5
                 }
             }
 

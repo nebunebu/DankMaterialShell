@@ -121,7 +121,7 @@ PanelWindow {
         active: root.visible
         asynchronous: false
         transformOrigin: Item.Center
-        layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true"
+        layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
         layer.smooth: true
         opacity: shouldBeVisible ? 1 : 0
         transform: [scaleTransform, motionTransform]
