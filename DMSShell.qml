@@ -213,6 +213,10 @@ Item {
         }
     }
 
+    PolkitAuthModal {
+        id: polkitAuthModal
+    }
+
     property string lastCredentialsToken: ""
     property var lastCredentialsTime: 0
 
