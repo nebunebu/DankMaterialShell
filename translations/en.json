@@ -212,7 +212,7 @@
   {
     "term": "Apps are ordered by usage frequency, then last used, then alphabetically.",
     "context": "Apps are ordered by usage frequency, then last used, then alphabetically.",
-    "reference": "Modules/Settings/LauncherTab.qml:607",
+    "reference": "Modules/Settings/LauncherTab.qml:610",
     "comment": ""
   },
   {
@@ -512,7 +512,7 @@
   {
     "term": "Brightness",
     "context": "Brightness",
-    "reference": "Modules/Settings/LauncherTab.qml:323",
+    "reference": "Modules/Settings/LauncherTab.qml:326",
     "comment": ""
   },
   {
@@ -584,7 +584,7 @@
   {
     "term": "Choose Launcher Logo Color",
     "context": "Choose Launcher Logo Color",
-    "reference": "Modules/Settings/LauncherTab.qml:250",
+    "reference": "Modules/Settings/LauncherTab.qml:253",
     "comment": ""
   },
   {
@@ -662,7 +662,7 @@
   {
     "term": "Color Override",
     "context": "Color Override",
-    "reference": "Modules/Settings/LauncherTab.qml:186",
+    "reference": "Modules/Settings/LauncherTab.qml:189",
     "comment": ""
   },
   {
@@ -794,7 +794,7 @@
   {
     "term": "Contrast",
     "context": "Contrast",
-    "reference": "Modules/Settings/LauncherTab.qml:352",
+    "reference": "Modules/Settings/LauncherTab.qml:355",
     "comment": ""
   },
   {
@@ -884,7 +884,7 @@
   {
     "term": "Custom",
     "context": "Custom",
-    "reference": "Modules/Settings/LauncherTab.qml:101, Modules/Settings/LauncherTab.qml:199",
+    "reference": "Modules/Settings/LauncherTab.qml:101, Modules/Settings/LauncherTab.qml:202",
     "comment": ""
   },
   {
@@ -948,6 +948,12 @@
     "comment": ""
   },
   {
+    "term": "Dank",
+    "context": "Dank",
+    "reference": "Modules/Settings/LauncherTab.qml:89",
+    "comment": ""
+  },
+  {
     "term": "Dank Bar",
     "context": "Dank Bar",
     "reference": "Modals/Settings/SettingsSidebar.qml:20",
@@ -986,7 +992,7 @@
   {
     "term": "Default",
     "context": "Default",
-    "reference": "Modules/Settings/LauncherTab.qml:199",
+    "reference": "Modules/Settings/LauncherTab.qml:202",
     "comment": ""
   },
   {
@@ -1706,7 +1712,7 @@
   {
     "term": "Invert on mode change",
     "context": "Invert on mode change",
-    "reference": "Modules/Settings/LauncherTab.qml:381",
+    "reference": "Modules/Settings/LauncherTab.qml:384",
     "comment": ""
   },
   {
@@ -1724,31 +1730,31 @@
   {
     "term": "Last launched %1",
     "context": "Last launched %1",
-    "reference": "Modules/Settings/LauncherTab.qml:707",
+    "reference": "Modules/Settings/LauncherTab.qml:710",
     "comment": ""
   },
   {
     "term": "Last launched %1 day%2 ago",
     "context": "Last launched %1 day%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:703",
+    "reference": "Modules/Settings/LauncherTab.qml:706",
     "comment": ""
   },
   {
     "term": "Last launched %1 hour%2 ago",
     "context": "Last launched %1 hour%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:698",
+    "reference": "Modules/Settings/LauncherTab.qml:701",
     "comment": ""
   },
   {
     "term": "Last launched %1 minute%2 ago",
     "context": "Last launched %1 minute%2 ago",
-    "reference": "Modules/Settings/LauncherTab.qml:693",
+    "reference": "Modules/Settings/LauncherTab.qml:696",
     "comment": ""
   },
   {
     "term": "Last launched just now",
     "context": "Last launched just now",
-    "reference": "Modules/Settings/LauncherTab.qml:690",
+    "reference": "Modules/Settings/LauncherTab.qml:693",
     "comment": ""
   },
   {
@@ -1766,7 +1772,7 @@
   {
     "term": "Launch Prefix",
     "context": "Launch Prefix",
-    "reference": "Modules/Settings/LauncherTab.qml:432",
+    "reference": "Modules/Settings/LauncherTab.qml:435",
     "comment": ""
   },
   {
@@ -2522,7 +2528,7 @@
   {
     "term": "Primary",
     "context": "Primary",
-    "reference": "Modules/Settings/LauncherTab.qml:199",
+    "reference": "Modules/Settings/LauncherTab.qml:202",
     "comment": ""
   },
   {
@@ -2594,7 +2600,7 @@
   {
     "term": "Recently Used Apps",
     "context": "Recently Used Apps",
-    "reference": "Modules/Settings/LauncherTab.qml:577",
+    "reference": "Modules/Settings/LauncherTab.qml:580",
     "comment": ""
   },
   {
@@ -2774,7 +2780,7 @@
   {
     "term": "Select an image file...",
     "context": "Select an image file...",
-    "reference": "Modules/Settings/LauncherTab.qml:151",
+    "reference": "Modules/Settings/LauncherTab.qml:154",
     "comment": ""
   },
   {
@@ -2990,13 +2996,13 @@
   {
     "term": "Size Offset",
     "context": "Size Offset",
-    "reference": "Modules/Settings/LauncherTab.qml:272",
+    "reference": "Modules/Settings/LauncherTab.qml:275",
     "comment": ""
   },
   {
     "term": "Sort Alphabetically",
     "context": "Sort Alphabetically",
-    "reference": "Modules/Settings/LauncherTab.qml:487",
+    "reference": "Modules/Settings/LauncherTab.qml:490",
     "comment": ""
   },
   {
@@ -3056,7 +3062,7 @@
   {
     "term": "Surface",
     "context": "Surface",
-    "reference": "Modules/Settings/LauncherTab.qml:199",
+    "reference": "Modules/Settings/LauncherTab.qml:202",
     "comment": ""
   },
   {
@@ -3572,7 +3578,7 @@
   {
     "term": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
     "context": "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.",
-    "reference": "Modules/Settings/LauncherTab.qml:516",
+    "reference": "Modules/Settings/LauncherTab.qml:519",
     "comment": ""
   },
   {
