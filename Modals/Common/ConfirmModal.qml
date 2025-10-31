@@ -165,10 +165,10 @@ DankModal {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.leftMargin: Theme.spacingM
-                anchors.rightMargin: Theme.spacingM
-                anchors.topMargin: Theme.spacingM
-                spacing: Theme.spacingM
+                anchors.leftMargin: Theme.spacingL
+                anchors.rightMargin: Theme.spacingL
+                anchors.topMargin: Theme.spacingL
+                spacing: 0
 
                 StyledText {
                     text: confirmTitle
@@ -177,6 +177,11 @@ DankModal {
                     font.weight: Font.Medium
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
+                }
+
+                Item {
+                    width: 1
+                    height: Theme.spacingL
                 }
 
                 StyledText {
@@ -189,7 +194,8 @@ DankModal {
                 }
 
                 Item {
-                    height: Theme.spacingS
+                    width: 1
+                    height: Theme.spacingL * 1.5
                 }
 
                 Row {
@@ -270,6 +276,11 @@ DankModal {
                             }
                         }
                     }
+                }
+
+                Item {
+                    width: 1
+                    height: Theme.spacingL
                 }
             }
         }
