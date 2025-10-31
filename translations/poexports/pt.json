@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "Dispositivos de Saída de Áudio ("
   },
+  "Authenticate": {
+    "Authenticate": ""
+  },
+  "Authentication Required": {
+    "Authentication Required": ""
+  },
+  "Authentication failed, please try again": {
+    "Authentication failed, please try again": ""
+  },
   "Authorize": {
     "Authorize": ""
   },

@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "Ses Çıkış Aygıtları ("
   },
+  "Authenticate": {
+    "Authenticate": ""
+  },
+  "Authentication Required": {
+    "Authentication Required": ""
+  },
+  "Authentication failed, please try again": {
+    "Authentication failed, please try again": ""
+  },
   "Authorize": {
     "Authorize": "Yetkilendir"
   },

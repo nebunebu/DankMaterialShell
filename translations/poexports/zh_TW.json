@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "音訊輸出設備 ("
   },
+  "Authenticate": {
+    "Authenticate": ""
+  },
+  "Authentication Required": {
+    "Authentication Required": ""
+  },
+  "Authentication failed, please try again": {
+    "Authentication failed, please try again": ""
+  },
   "Authorize": {
     "Authorize": "授權"
   },

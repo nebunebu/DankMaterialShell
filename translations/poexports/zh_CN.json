@@ -137,6 +137,15 @@
   "Audio Output Devices (": {
     "Audio Output Devices (": "音频输出设备 ("
   },
+  "Authenticate": {
+    "Authenticate": ""
+  },
+  "Authentication Required": {
+    "Authentication Required": ""
+  },
+  "Authentication failed, please try again": {
+    "Authentication failed, please try again": ""
+  },
   "Authorize": {
     "Authorize": "授权"
   },
@@ -483,7 +492,7 @@
     "Daily at:": "在每日："
   },
   "Dank": {
-    "Dank": ""
+    "Dank": "Dank"
   },
   "Dank Bar": {
     "Dank Bar": "Dank Bar"
