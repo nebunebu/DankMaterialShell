@@ -58,6 +58,9 @@ Card {
                     text: {
                         if (CompositorService.isNiri) return "on niri"
                         if (CompositorService.isHyprland) return "on Hyprland"
+                        // technically they might not be on mangowc, but its what we support in the docs
+                        if (CompositorService.isDwl) return "on MangoWC"
+                        if (CompositorService.isSway) return "on Sway"
                         return ""
                     }
                     font.pixelSize: Theme.fontSizeSmall
