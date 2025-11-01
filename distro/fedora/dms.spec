@@ -1,7 +1,7 @@
 # Spec for DMS - uses rpkg macros for git builds
 
 %global debug_package %{nil}
-%global version {{{ git_dir_version }}}
+%global version {{{ git_repo_version }}}
 %global pkg_summary DankMaterialShell - Material 3 inspired shell for Wayland compositors
 
 Name:           dms
@@ -12,8 +12,8 @@ Summary:        %{pkg_summary}
 
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/DankMaterialShell
-VCS:            {{{ git_dir_vcs }}}
-Source0:        {{{ git_dir_pack }}}
+VCS:            {{{ git_repo_vcs }}}
+Source0:        {{{ git_repo_pack }}}
 
 # DMS CLI from danklinux latest commit
 Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz
@@ -76,7 +76,7 @@ network statistics. Designed for integration with DankMaterialShell but can be
 used standalone. This package always includes the latest stable dgop release.
 
 %prep
-{{{ git_dir_setup_macro }}}
+{{{ git_repo_setup_macro }}}
 
 # Extract DankLinux source
 tar -xzf %{SOURCE1} -C %{_builddir}
@@ -194,4 +194,4 @@ fi
 %{_bindir}/dgop
 
 %changelog
-{{{ git_dir_changelog }}}
+{{{ git_repo_changelog }}}

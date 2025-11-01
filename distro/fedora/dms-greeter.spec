@@ -1,7 +1,7 @@
 # Spec for DMS Greeter - Git builds using rpkg macros
 
 %global debug_package %{nil}
-%global version {{{ git_dir_version }}}
+%global version {{{ git_repo_version }}}
 %global pkg_summary DankMaterialShell greeter for greetd
 
 Name:           dms-greeter
@@ -11,8 +11,8 @@ Summary:        %{pkg_summary}
 
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/DankMaterialShell
-VCS:            {{{ git_dir_vcs }}}
-Source0:        {{{ git_dir_pack }}}
+VCS:            {{{ git_repo_vcs }}}
+Source0:        {{{ git_repo_pack }}}
 
 BuildRequires:  git-core
 BuildRequires:  rpkg
@@ -41,7 +41,7 @@ compositor detection and configuration. Features session selection, user
 authentication, and dynamic theming.
 
 %prep
-{{{ git_dir_setup_macro }}}
+{{{ git_repo_setup_macro }}}
 
 %build
 # QML-based application
@@ -353,4 +353,4 @@ if [ "$1" -eq 0 ] && [ -x /usr/sbin/semanage ]; then
 fi
 
 %changelog
-{{{ git_dir_changelog }}}
+{{{ git_repo_changelog }}}
