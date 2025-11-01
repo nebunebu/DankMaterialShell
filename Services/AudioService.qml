@@ -253,13 +253,19 @@ Singleton {
             mediaDevices = Qt.createQmlObject(`
                 import QtQuick
                 import QtMultimedia
-                MediaDevices {}
+                MediaDevices {
+                    id: devices
+                    Component.onCompleted: {
+                        console.log("AudioService: MediaDevices initialized, default output:", defaultAudioOutput?.description)
+                    }
+                }
             `, root, "AudioService.MediaDevices")
 
             if (mediaDevices) {
                 mediaDevicesConnections = Qt.createQmlObject(`
                     import QtQuick
                     Connections {
+                        target: root.mediaDevices
                         function onDefaultAudioOutputChanged() {
                             console.log("AudioService: Default audio output changed, recreating sound players")
                             root.destroySoundPlayers()
@@ -267,7 +273,6 @@ Singleton {
                         }
                     }
                 `, root, "AudioService.MediaDevicesConnections")
-                mediaDevicesConnections.target = mediaDevices
             }
         } catch (e) {
             console.log("AudioService: MediaDevices not available, using default audio output")
