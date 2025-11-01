@@ -496,14 +496,16 @@ Item {
                                     if (parent.showPassword) {
                                         return GreeterState.passwordBuffer
                                     }
-                                    return "•".repeat(Math.min(GreeterState.passwordBuffer.length, 25))
+                                    return "•".repeat(GreeterState.passwordBuffer.length)
                                 }
                                 return GreeterState.usernameInput
                             }
                             color: Theme.surfaceText
                             font.pixelSize: (GreeterState.showPasswordInput && !parent.showPassword) ? Theme.fontSizeLarge : Theme.fontSizeMedium
                             opacity: (GreeterState.showPasswordInput ? GreeterState.passwordBuffer.length > 0 : GreeterState.usernameInput.length > 0) ? 1 : 0
-                            elide: Text.ElideRight
+                            clip: true
+                            elide: Text.ElideNone
+                            horizontalAlignment: implicitWidth > width ? Text.AlignRight : Text.AlignLeft
 
                             Behavior on opacity {
                                 NumberAnimation {

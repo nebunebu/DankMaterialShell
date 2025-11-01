@@ -551,12 +551,14 @@ Item {
                             if (parent.showPassword) {
                                 return root.passwordBuffer
                             }
-                            return "•".repeat(Math.min(root.passwordBuffer.length, 25))
+                            return "•".repeat(root.passwordBuffer.length)
                         }
                         color: Theme.surfaceText
                         font.pixelSize: parent.showPassword ? Theme.fontSizeMedium : Theme.fontSizeLarge
                         opacity: (demoMode || root.passwordBuffer.length > 0) ? 1 : 0
-                        elide: Text.ElideRight
+                        clip: true
+                        elide: Text.ElideNone
+                        horizontalAlignment: implicitWidth > width ? Text.AlignRight : Text.AlignLeft
 
                         Behavior on opacity {
                             NumberAnimation {
