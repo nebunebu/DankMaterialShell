@@ -279,7 +279,7 @@ EOF
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-${mode}" >/dev/null 2>&1 || true
   fi
 
-  if echo "$JSON" | grep -q "\"colors\":{\"dark\":{"; then
+  if echo "$JSON" | grep -qE "\"colors\":\{\"(dark|light)\":\{"; then
     PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary_container\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     HONOR=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     SURFACE=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
