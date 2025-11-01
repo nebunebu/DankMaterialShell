@@ -141,10 +141,10 @@
     "Authenticate": ""
   },
   "Authentication Required": {
-    "Authentication Required": ""
+    "Authentication Required": "Autenticazione Richiesta"
   },
   "Authentication failed, please try again": {
-    "Authentication failed, please try again": ""
+    "Authentication failed, please try again": "Autenticazione fallita, per favore prova ancora"
   },
   "Authorize": {
     "Authorize": "Autorizza"
@@ -183,13 +183,13 @@
     "Automatically calculate popup distance from bar edge.": "Calcola automaticamente la distanza del popup dall'angolo della barra"
   },
   "Automatically cycle through wallpapers in the same folder": {
-    "Automatically cycle through wallpapers in the same folder": "Scorrere automaticamente gli sfondi nella stessa cartella"
+    "Automatically cycle through wallpapers in the same folder": "Scorre automaticamente gli sfondi nella stessa cartella"
   },
   "Automatically detect location based on IP address": {
     "Automatically detect location based on IP address": "Rileva automaticamente la posizione in base all'indirizzo IP"
   },
   "Automatically determine your location using your IP address": {
-    "Automatically determine your location using your IP address": "posizioneDetermina automaticamente la tua località usando l'indirizzo IP"
+    "Automatically determine your location using your IP address": "Determina automaticamente la tua posizione usando l'indirizzo IP"
   },
   "Automatically extract colors from wallpaper": {
     "Automatically extract colors from wallpaper": "Estrai automaticamente i colori dallo sfondo"
@@ -318,7 +318,7 @@
     "Choose where notification popups appear on screen": "Scegli dove i popup delle notifiche appaiono sullo schermo"
   },
   "Clear": {
-    "Clear": "Pulisci"
+    "Clear": "Sereno"
   },
   "Clear All": {
     "Clear All": "Pulisci Tutto"
@@ -378,7 +378,7 @@
     "Compact Mode": "Modo Compatto"
   },
   "Compositor": {
-    "Compositor": ""
+    "Compositor": "Compositor\n"
   },
   "Compositor:": {
     "Compositor:": "Compositor:"
@@ -492,7 +492,7 @@
     "Daily at:": "Giornalmente alle:"
   },
   "Dank": {
-    "Dank": ""
+    "Dank": "Dank"
   },
   "Dank Bar": {
     "Dank Bar": "Dank Bar"
@@ -522,7 +522,7 @@
     "Defaults": "Predefiniti"
   },
   "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": {
-    "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": "Del: Pulisce • Shift+Del: Pulisce Tutto • 1-9: Azioni • F10: Help • Esc: Chiude"
+    "Del: Clear • Shift+Del: Clear All • 1-9: Actions • F10: Help • Esc: Close": "Del: Elimina • Shift+Del: Elimina Tutto • 1-9: Azioni • F10: Help • Esc: Chiude"
   },
   "Derives colors that closely match the underlying image.": {
     "Derives colors that closely match the underlying image.": "Deriva colori che si avvicinano all'immagine sottostante"
@@ -711,7 +711,7 @@
     "Failed to start connection to ": "Impossibile avviare connessione a "
   },
   "Feels Like": {
-    "Feels Like": "Sembra"
+    "Feels Like": "Temperatura"
   },
   "File Already Exists": {
     "File Already Exists": "File già esistente"
@@ -789,7 +789,7 @@
     "Github:": "Github:"
   },
   "Good": {
-    "Good": "Buono"
+    "Good": "Buona"
   },
   "Goth Corners": {
     "Goth Corners": "Angoli Gotici"
@@ -1467,7 +1467,7 @@
     "Settings": "Impostazioni"
   },
   "Shift+Del: Clear All • Esc: Close": {
-    "Shift+Del: Clear All • Esc: Close": "Shift+Del: Pulisce Tutto • Esc: Chiude"
+    "Shift+Del: Clear All • Esc: Close": "Shift+Del: Elimina tutto • Esc: Chiude"
   },
   "Show All Tags": {
     "Show All Tags": ""
@@ -1803,7 +1803,7 @@
     "Visual divider between widgets": "Speratore visivo tra i widget"
   },
   "Visual effect used when wallpaper changes": {
-    "Visual effect used when wallpaper changes": "Effetti visuali usati quando cambia lo sfondo"
+    "Visual effect used when wallpaper changes": "Effetto visivo usato quando cambia lo sfondo"
   },
   "Volume Changed": {
     "Volume Changed": "Volume Cambiato"
@@ -1833,7 +1833,7 @@
     "Website:": "Sito web:"
   },
   "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": {
-    "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "Quando abilitato, le apps sono ordinate alfabeticamente. Quando disabilitato, le apps sono ordinate per frequenza d'uso"
+    "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.": "Quando abilitato, le applicazioni sono ordinate alfabeticamente. Quando disabilitato, le applicazioni sono ordinate per frequenza d'uso"
   },
   "WiFi disabled": {
     "WiFi disabled": "WiFi disabilitato"
