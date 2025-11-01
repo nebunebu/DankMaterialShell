@@ -5,7 +5,7 @@
     <img src="assets/danklogo2.svg" alt="DankMaterialShell Logo" width="200">
   </a>
 
-  ### A modern Wayland desktop shell for the scrolling compositor era
+  ### A modern Wayland desktop shell
 
   Built with [Quickshell](https://quickshell.org/) and [Go](https://go.dev/)
 
@@ -19,7 +19,14 @@
 
 </div>
 
-DankMaterialShell is a complete desktop shell for Wayland compositors. It replaces waybar, swaylock, swayidle, mako, fuzzel, polkit, and everything else you'd normally stitch together to make a desktop - all in one cohesive package with a gorgeous interface.
+DankMaterialShell is a complete desktop shell for [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hypr.land), [MangoWC](https://github.com/DreamMaoMao/mangowc), [Sway](https://swaywm.org), and other Wayland compositors. It replaces waybar, swaylock, swayidle, mako, fuzzel, polkit, and everything else you'd normally stitch together to make a desktop - all in one cohesive package with a gorgeous interface.
+
+## Components
+
+DankMaterialShell combines two main components:
+
+- **[QML/UI Layer](https://github.com/AvengeMedia/DankMaterialShell)** (this repo) - All the visual components, widgets, and shell interface built with Quickshell
+- **[Go Backend](https://github.com/AvengeMedia/danklinux)** - System integration, IPC, process management, and core services
 
 ---
 
