@@ -342,6 +342,41 @@ sudo sh -c "curl -L https://github.com/AvengeMedia/dgop/releases/latest/download
 
 A lot of options are subject to personal preference, but the below sets a good starting point for most features.
 
+### Systemd Autostart
+
+**Alternative to compositor-specific autostart**: If you installed DMS from the Fedora Copr repository, you can use systemd to manage DMS autostart instead of adding `dms run` to your compositor config.
+
+**Benefits:**
+- Works across all Wayland compositors (niri, Hyprland, sway, dwl, etc.)
+- Centralized control via systemctl
+- Automatic restart on failure
+- Integrated logging via journalctl
+
+**Enable autostart:**
+```bash
+systemctl --user enable dms.service
+```
+
+**Manual control:**
+```bash
+# Start DMS now
+systemctl --user start dms.service
+
+# Check status
+systemctl --user status dms.service
+
+# View logs
+journalctl --user -u dms.service -f
+
+# Restart DMS
+systemctl --user restart dms.service
+
+# Disable autostart
+systemctl --user disable dms.service
+```
+
+**Note:** If using systemd autostart, remove `dms run` / `spawn "dms" "run"` from your compositor's configuration to avoid running DMS twice.
+
 ### niri Integration
 
 Add to your niri config

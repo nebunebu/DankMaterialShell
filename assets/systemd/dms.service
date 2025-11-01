@@ -3,6 +3,7 @@ Description=Dank Material Shell (DMS)
 PartOf=graphical-session.target
 After=graphical-session-pre.target
 Wants=graphical-session-pre.target
+Requisite=graphical-session.target
 
 [Service]
 Type=simple

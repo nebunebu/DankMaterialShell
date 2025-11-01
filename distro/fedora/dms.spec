@@ -24,6 +24,7 @@ BuildRequires:  gzip
 BuildRequires:  golang >= 1.24
 BuildRequires:  make
 BuildRequires:  wget
+BuildRequires:  systemd-rpm-macros
 
 # Core requirements
 Requires:       (quickshell-git or quickshell)
@@ -126,6 +127,9 @@ install -Dm755 %{_builddir}/danklinux-master/bin/${DMS_BINARY} %{buildroot}%{_bi
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 
+# Install systemd user service
+install -Dm644 assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
+
 # Install shell files to shared data location
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms
 cp -r * %{buildroot}%{_datadir}/quickshell/dms/
@@ -181,6 +185,7 @@ fi
 %license LICENSE
 %doc README.md CONTRIBUTING.md
 %{_datadir}/quickshell/dms/
+%{_userunitdir}/dms.service
 
 %files -n dms-cli
 %{_bindir}/dms
