@@ -41,6 +41,7 @@ LOCK="$STATE_DIR/matugen-worker.lock"
 exec 9>"$LOCK"
 flock 9
 
+rm -f "$BUILT_KEY"
 
 read_desired() {
   [[ ! -f "$DESIRED_JSON" ]] && { echo "no desired state" >&2; exit 0; }
@@ -288,6 +289,13 @@ EOF
     PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary_container\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     HONOR=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     SURFACE=$(echo "$JSON_FLAT" | sed -n "s/.*\"surface\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+  fi
+
+  if [[ -z "$PRIMARY" ]]; then
+    echo "Error: Failed to extract PRIMARY color from matugen JSON (mode: $mode)" >&2
+    echo "This may indicate an incompatible matugen JSON format" >&2
+    set_system_color_scheme "$mode"
+    return 2
   fi
 
   if command -v ghostty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/ghostty/config-dankcolors" ]]; then

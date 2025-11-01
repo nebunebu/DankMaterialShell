@@ -811,7 +811,6 @@ Singleton {
         const desiredPath = stateDir + "/matugen.desired.json"
 
         Quickshell.execDetached(["sh", "-c", `mkdir -p '${stateDir}' && cat > '${desiredPath}' << 'EOF'\n${json}\nEOF`])
-        Quickshell.execDetached(["rm", "-f", stateDir + "/matugen.key"])
         workerRunning = true
         const syncModeWithPortal = (typeof SettingsData !== "undefined" && SettingsData.syncModeWithPortal) ? "true" : "false"
         if (rawWallpaperPath.startsWith("we:")) {
