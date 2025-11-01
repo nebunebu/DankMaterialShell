@@ -279,15 +279,16 @@ EOF
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-${mode}" >/dev/null 2>&1 || true
   fi
 
-  if [ "$mode" = "light" ]; then
-    SECTION=$(echo "$JSON" | sed -n 's/.*"light":{\([^}]*\)}.*/\1/p')
+  if echo "$JSON" | grep -q "\"colors\":{\"dark\":{"; then
+    PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary_container\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    HONOR=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    SURFACE=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   else
-    SECTION=$(echo "$JSON" | sed -n 's/.*"dark":{\([^}]*\)}.*/\1/p')
+    JSON_FLAT=$(echo "$JSON" | tr -d '\n')
+    PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary_container\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    HONOR=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    SURFACE=$(echo "$JSON_FLAT" | sed -n "s/.*\"surface\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   fi
-
-  PRIMARY=$(echo "$SECTION" | sed -n 's/.*"primary_container":"\(#[0-9a-fA-F]\{6\}\)".*/\1/p')
-  HONOR=$(echo "$SECTION"  | sed -n 's/.*"primary":"\(#[0-9a-fA-F]\{6\}\)".*/\1/p')
-  SURFACE=$(echo "$SECTION" | sed -n 's/.*"surface":"\(#[0-9a-fA-F]\{6\}\)".*/\1/p')
 
   if command -v ghostty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/ghostty/config-dankcolors" ]]; then
     OUT=$("$SHELL_DIR/matugen/dank16.py" "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} 2>/dev/null || true)
