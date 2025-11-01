@@ -33,6 +33,7 @@ Item {
     readonly property real bottomMargin: isVerticalOrientation ? (isBottomBarEdge && isLast ? barEdgeExtension : (isLast ? gapExtension : gapExtension / 2)) : 0
 
     signal clicked()
+    signal rightClicked()
 
     width: isVerticalOrientation ? barThickness : visualWidth
     height: isVerticalOrientation ? visualHeight : barThickness
@@ -69,8 +70,12 @@ Item {
         height: root.height + root.topMargin + root.bottomMargin
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        acceptedButtons: Qt.LeftButton
-        onPressed: {
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onPressed: function (mouse) {
+            if (mouse.button === Qt.RightButton) {
+                root.rightClicked()
+                return
+            }
             if (popoutTarget && popoutTarget.setTriggerPosition) {
                 const globalPos = root.visualContent.mapToGlobal(0, 0)
                 const currentScreen = parentScreen || Screen

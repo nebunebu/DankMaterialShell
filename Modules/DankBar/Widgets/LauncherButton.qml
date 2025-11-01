@@ -108,17 +108,11 @@ BasePill {
         }
     }
 
-    MouseArea {
-        id: customMouseArea
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        acceptedButtons: Qt.RightButton
-        onPressed: function (mouse){
-            if (CompositorService.isNiri) {
-                NiriService.toggleOverview()
-            } else if (root.hyprlandOverviewLoader?.item) {
-                root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
-            }
+    onRightClicked: {
+        if (CompositorService.isNiri) {
+            NiriService.toggleOverview()
+        } else if (root.hyprlandOverviewLoader?.item) {
+            root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
         }
     }
 }
