@@ -155,6 +155,16 @@ Extend dms with the plugin system. Browse community plugins at [plugins.danklinu
 
 Contributions welcome! Bug fixes, new widgets, theme improvements, or docs - it all helps.
 
+**Contributing Code:**
+1. Fork the repository
+2. Make your changes
+3. Open a pull request
+
+**Contributing Documentation:**
+1. Fork the [DankLinux-Docs](https://github.com/AvengeMedia/DankLinux-Docs) repository
+2. Update files in the `docs/` folder
+3. Open a pull request
+
 Check the [issues](https://github.com/AvengeMedia/DankMaterialShell/issues) or join the community.
 
 ---
