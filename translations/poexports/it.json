@@ -138,7 +138,7 @@
     "Audio Output Devices (": "Dispositivi Uscita Audio ("
   },
   "Authenticate": {
-    "Authenticate": ""
+    "Authenticate": "Autenticare"
   },
   "Authentication Required": {
     "Authentication Required": "Autenticazione Richiesta"
@@ -510,7 +510,7 @@
     "DankBar Font Scale": "Scala Font DankBar"
   },
   "DankSearch not available": {
-    "DankSearch not available": ""
+    "DankSearch not available": "DankSearch non disponibile"
   },
   "Date Format": {
     "Date Format": "Formato Data"
@@ -648,7 +648,7 @@
     "Enter PIN for ": "Inserisci PIN per "
   },
   "Enter a search query": {
-    "Enter a search query": ""
+    "Enter a search query": "Inserisci una query di ricerca"
   },
   "Enter credentials for ": {
     "Enter credentials for ": "Inserisci credenziali per "
@@ -990,7 +990,7 @@
     "Matugen Settings": "Impostazioni Matugen"
   },
   "Matugen Target Monitor": {
-    "Matugen Target Monitor": ""
+    "Matugen Target Monitor": "Monitor di destinazione Matugen"
   },
   "Max apps to show": {
     "Max apps to show": "Applicazioni massime da mostrare"
@@ -1032,7 +1032,7 @@
     "Monitor Selection:": "Selezione Monitor:"
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
-    "Monitor whose wallpaper drives dynamic theming colors": ""
+    "Monitor whose wallpaper drives dynamic theming colors": "Monitor con lo sfondo che genera il tema di colori dinamico"
   },
   "Monospace Font": {
     "Monospace Font": "Font Monospace"
@@ -1107,7 +1107,7 @@
     "No clipboard entries found": "Nessun appunto trovato"
   },
   "No files found": {
-    "No files found": ""
+    "No files found": "Nessun file trovato"
   },
   "No items added yet": {
     "No items added yet": "Nessun elemento aggiunto ancora"
@@ -1398,10 +1398,10 @@
     "Scroll through windows, rather than workspaces": "Scorri tra le finestre, piuttosto che i workspaces"
   },
   "Search file contents": {
-    "Search file contents": ""
+    "Search file contents": "Cerca il contenuto dei files"
   },
   "Search filenames": {
-    "Search filenames": ""
+    "Search filenames": "Cerca i nomi dei files"
   },
   "Search for a location...": {
     "Search for a location...": "Cerca una posizione..."
@@ -1413,7 +1413,7 @@
     "Search...": "Cerca..."
   },
   "Searching...": {
-    "Searching...": ""
+    "Searching...": "Cercando..."
   },
   "Select Launcher Logo": {
     "Select Launcher Logo": "Seleziona Logo Launcher"
@@ -1470,7 +1470,7 @@
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: Elimina tutto • Esc: Chiude"
   },
   "Show All Tags": {
-    "Show All Tags": ""
+    "Show All Tags": "Mostra tutti i tags"
   },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "Chiedi Conferma per Azione Engertiche"
@@ -1488,7 +1488,7 @@
     "Show Workspace Apps": "Mostra Apps Workspace"
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
-    "Show all 9 tags instead of only occupied tags (DWL only)": ""
+    "Show all 9 tags instead of only occupied tags (DWL only)": "Mostra tutti i 9 tags invece dei soli tags occupati (solo DWL)"
   },
   "Show on Last Display": {
     "Show on Last Display": "Mostra sull'ultimo display"
@@ -1815,7 +1815,7 @@
     "Wallpaper": "Sfondo"
   },
   "Wallpaper Monitor": {
-    "Wallpaper Monitor": ""
+    "Wallpaper Monitor": "Monitor dello sfondo"
   },
   "Wallpapers": {
     "Wallpapers": "Sfondi"
