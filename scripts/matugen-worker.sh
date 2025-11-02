@@ -254,7 +254,13 @@ EOF
     sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
-  
+
+  if command -v code >/dev/null 2>&1; then
+    cat "$SHELL_DIR/matugen/configs/vscode.toml" >> "$TMP_CONTENT_CFG"
+    sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
+    echo "" >> "$TMP_CONTENT_CFG"
+  fi
+
   if [[ -s "$TMP_CONTENT_CFG" ]] && grep -q '\[templates\.' "$TMP_CONTENT_CFG"; then
     case "$kind" in
       image)
@@ -308,7 +314,7 @@ EOF
   fi
 
   if command -v ghostty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/ghostty/config-dankcolors" ]]; then
-    OUT=$("$SHELL_DIR/matugen/dank16.py" "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       printf "%s\n\n" "$OUT" > "$TMP"
@@ -321,7 +327,7 @@ EOF
   fi
 
   if command -v kitty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/kitty/dank-theme.conf" ]]; then
-    OUT=$("$SHELL_DIR/matugen/dank16.py" "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       printf "%s\n\n" "$OUT" > "$TMP"
@@ -331,6 +337,30 @@ EOF
         pkill -USR1 -x kitty >/dev/null 2>&1 || true
       fi
     fi
+  fi
+
+  if command -v code >/dev/null 2>&1; then
+    VSCODE_EXT_DIR="$HOME/.vscode/extensions/local.dynamic-base16-dankshell-0.0.1"
+    VSCODE_THEME_DIR="$VSCODE_EXT_DIR/themes"
+    VSCODE_BASE_THEME="$VSCODE_THEME_DIR/dankshell-color-theme-base.json"
+    VSCODE_FINAL_THEME="$VSCODE_THEME_DIR/dankshell-color-theme.json"
+
+    mkdir -p "$VSCODE_THEME_DIR"
+
+    cp "$SHELL_DIR/matugen/templates/vscode-package.json" "$VSCODE_EXT_DIR/package.json"
+    cp "$SHELL_DIR/matugen/templates/vscode-vsixmanifest.xml" "$VSCODE_EXT_DIR/.vsixmanifest"
+
+    for variant in default dark light; do
+      VSCODE_BASE="$VSCODE_THEME_DIR/dankshell-${variant}-base.json"
+      VSCODE_FINAL="$VSCODE_THEME_DIR/dankshell-${variant}.json"
+
+      if [[ -f "$VSCODE_BASE" ]]; then
+        VARIANT_LIGHT=""
+        [[ "$variant" == "light" ]] && VARIANT_LIGHT="--light"
+
+        dms dank16 "$PRIMARY" $VARIANT_LIGHT ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
+      fi
+    done
   fi
 
   set_system_color_scheme "$mode"
