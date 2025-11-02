@@ -39,7 +39,6 @@ Singleton {
     property bool nightModeEnabled: false
     property bool automationAvailable: false
     property bool gammaControlAvailable: false
-    readonly property int dayTemp: 6500
 
     function setBrightnessInternal(percentage, device) {
         const clampedValue = Math.max(1, Math.min(100, percentage))
@@ -317,6 +316,7 @@ Singleton {
 
     function startTimeBasedMode() {
         const temperature = SessionData.nightModeTemperature || 4000
+        const highTemp = SessionData.nightModeHighTemperature || 6500
         const sunriseHour = SessionData.nightModeEndHour
         const sunriseMinute = SessionData.nightModeEndMinute
         const sunsetHour = SessionData.nightModeStartHour
@@ -335,7 +335,7 @@ Singleton {
 
             DMSService.sendRequest("wayland.gamma.setTemperature", {
                 "low": temperature,
-                "high": dayTemp
+                "high": highTemp
             }, response => {
                 if (response.error) {
                     console.error("DisplayService: Failed to set temperature:", response.error)
@@ -358,7 +358,7 @@ Singleton {
 
     function startLocationBasedMode() {
         const temperature = SessionData.nightModeTemperature || 4000
-        const dayTemp = 6500
+        const highTemp = SessionData.nightModeHighTemperature || 6500
 
         DMSService.sendRequest("wayland.gamma.setManualTimes", {
             "sunrise": null,
@@ -371,7 +371,7 @@ Singleton {
 
             DMSService.sendRequest("wayland.gamma.setTemperature", {
                 "low": temperature,
-                "high": dayTemp
+                "high": highTemp
             }, response => {
                 if (response.error) {
                     console.error("DisplayService: Failed to set temperature:", response.error)
@@ -811,6 +811,9 @@ Singleton {
             evaluateNightMode()
         }
         function onNightModeTemperatureChanged() {
+            evaluateNightMode()
+        }
+        function onNightModeHighTemperatureChanged() {
             evaluateNightMode()
         }
         function onLatitudeChanged() {

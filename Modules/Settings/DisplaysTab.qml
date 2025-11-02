@@ -145,14 +145,14 @@ Item {
 
                     Column {
                         width: parent.width
-                        spacing: 0
+                        spacing: Theme.spacingS
                         leftPadding: Theme.spacingM
                         rightPadding: Theme.spacingM
                         visible: DisplayService.gammaControlAvailable
 
                         DankDropdown {
                             width: parent.width - parent.leftPadding - parent.rightPadding
-                            text: I18n.tr("Temperature")
+                            text: I18n.tr("Night Temperature")
                             description: I18n.tr("Color temperature for night mode")
                             currentValue: SessionData.nightModeTemperature + "K"
                             options: {
@@ -165,6 +165,30 @@ Item {
                             onValueChanged: value => {
                                                 var temp = parseInt(value.replace("K", ""))
                                                 SessionData.setNightModeTemperature(temp)
+                                                if (SessionData.nightModeHighTemperature < temp) {
+                                                    SessionData.setNightModeHighTemperature(temp)
+                                                }
+                                            }
+                        }
+
+                        DankDropdown {
+                            width: parent.width - parent.leftPadding - parent.rightPadding
+                            text: I18n.tr("Day Temperature")
+                            description: I18n.tr("Color temperature for day time")
+                            currentValue: SessionData.nightModeHighTemperature + "K"
+                            options: {
+                                var temps = []
+                                var minTemp = SessionData.nightModeTemperature
+                                for (var i = Math.max(2500, minTemp); i <= 10000; i += 500) {
+                                    temps.push(i + "K")
+                                }
+                                return temps
+                            }
+                            onValueChanged: value => {
+                                                var temp = parseInt(value.replace("K", ""))
+                                                if (temp >= SessionData.nightModeTemperature) {
+                                                    SessionData.setNightModeHighTemperature(temp)
+                                                }
                                             }
                         }
                     }
