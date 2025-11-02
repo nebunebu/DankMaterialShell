@@ -43,6 +43,15 @@ flock 9
 
 rm -f "$BUILT_KEY"
 
+get_matugen_major_version() {
+  local version_output=$(matugen --version 2>&1)
+  local version=$(echo "$version_output" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -n1)
+  local major=$(echo "$version" | cut -d. -f1)
+  echo "$major"
+}
+
+MATUGEN_VERSION=$(get_matugen_major_version)
+
 read_desired() {
   [[ ! -f "$DESIRED_JSON" ]] && { echo "no desired state" >&2; exit 0; }
   cat "$DESIRED_JSON"
@@ -280,7 +289,7 @@ EOF
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-${mode}" >/dev/null 2>&1 || true
   fi
 
-  if echo "$JSON" | grep -qE "\"colors\":\{\"(dark|light)\":\{"; then
+  if [[ "$MATUGEN_VERSION" == "2" ]]; then
     PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary_container\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     HONOR=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     SURFACE=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
