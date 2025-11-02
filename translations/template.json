@@ -805,6 +805,13 @@
     "comment": ""
   },
   {
+    "term": "Color temperature for day time",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Color temperature for night mode",
     "translation": "",
     "context": "",
@@ -1170,6 +1177,13 @@
   },
   {
     "term": "Date Format",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Day Temperature",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2478,6 +2492,13 @@
     "comment": ""
   },
   {
+    "term": "Night Temperature",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "No Active Players",
     "translation": "",
     "context": "",
@@ -3739,13 +3760,6 @@
   },
   {
     "term": "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Temperature",
     "translation": "",
     "context": "",
     "reference": "",
