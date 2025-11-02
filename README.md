@@ -62,22 +62,22 @@ https://github.com/user-attachments/assets/1200a739-7770-4601-8b85-695ca527819a
 curl -fsSL https://install.danklinux.com | sh
 ```
 
-That's it. One command installs dms and all dependencies on Arch, Fedora, Debian, Ubuntu, and openSUSE.
+That's it. One command installs dms and all dependencies on Arch, Fedora, Debian, Ubuntu, or openSUSE.
 
-**[Full installation guide →](https://danklinux.com/docs/dankmaterialshell/installation)**
+**[Manual Installation Guide →](https://danklinux.com/docs/dankmaterialshell/installation)**
 
 ---
 
 ## What You Get
 
 **Dynamic Theming**
-Wallpaper-based color schemes that automatically theme GTK, Qt, terminals, and more with [matugen](https://github.com/InioX/matugen).
+Wallpaper-based color schemes that automatically theme GTK, Qt, terminals, editors (like vscode), and more with [matugen](https://github.com/InioX/matugen) and [dank16](https://github.com/AvengeMedia/danklinux/blob/master/internal/dank16/dank16.go).
 
 **System Monitoring**
 Real-time CPU, RAM, GPU metrics and temps with [dgop](https://github.com/AvengeMedia/dgop). Full process list with search and management.
 
 **Powerful Launcher**
-Spotlight-style search for apps, files, emojis, running windows, calculator, commands - extensible with plugins.
+Spotlight-style search for apps, files (via [dsearch](https://github.com/AvengeMedia/danksearch)), emojis, running windows, calculator, commands - extensible with plugins.
 
 **Control Center**
 Network, Bluetooth, audio devices, display settings, night mode - all in one clean interface.
@@ -125,9 +125,11 @@ dms ipc call theme toggle
 
 ## Theming
 
-DankMaterialShell automatically generates color schemes from your wallpaper and applies them to GTK, Qt, terminals, and more.
+DankMaterialShell automatically generates color schemes from your wallpaper or theme and applies them to GTK, Qt, terminals, and more.
 
-**Application theming:** [GTK, Qt, Firefox, terminals →](https://danklinux.com/docs/dankmaterialshell/application-themes)
+DMS is not opinionated or forcing these themes - they are created as optional themes you can enable. You can refer to the documentation if you want to use them:
+
+**Application theming:** [GTK, Qt, Firefox, terminals, vscode →](https://danklinux.com/docs/dankmaterialshell/application-themes)
 
 **Custom themes:** [Create your own color schemes →](https://danklinux.com/docs/dankmaterialshell/custom-themes)
 
