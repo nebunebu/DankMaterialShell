@@ -188,8 +188,8 @@ EOF
     trap 'rm -rf "$TMP_TEMPLATES_DIR"' RETURN
 
     # Create shifted versions of templates
-    for template in "$SHELL_DIR/matugen/templates"/*.{css,conf,json,kdl,colors} \
-                    "$USER_MATUGEN_DIR/templates"/*.{css,conf,json,kdl,colors,toml}; do
+    for template in "$SHELL_DIR/matugen/templates"/*.{css,conf,json,kdl,colors,ini,toml} \
+                    "$USER_MATUGEN_DIR/templates"/*.{css,conf,json,kdl,colors,toml,ini}; do
       [[ -f "$template" ]] || continue
       template_name="$(basename "$template")"
       shifted_template="$TMP_TEMPLATES_DIR/$template_name"
@@ -245,6 +245,18 @@ EOF
 
   if command -v kitty >/dev/null 2>&1; then
     cat "$SHELL_DIR/matugen/configs/kitty.toml" >> "$TMP_CONTENT_CFG"
+    sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
+    echo "" >> "$TMP_CONTENT_CFG"
+  fi
+
+  if command -v foot >/dev/null 2>&1; then
+    cat "$SHELL_DIR/matugen/configs/foot.toml" >> "$TMP_CONTENT_CFG"
+    sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
+    echo "" >> "$TMP_CONTENT_CFG"
+  fi
+
+  if command -v alacritty >/dev/null 2>&1; then
+    cat "$SHELL_DIR/matugen/configs/alacritty.toml" >> "$TMP_CONTENT_CFG"
     sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
@@ -317,8 +329,8 @@ EOF
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
-      printf "%s\n\n" "$OUT" > "$TMP"
-      cat "$CONFIG_DIR/ghostty/config-dankcolors" >> "$TMP"
+      sed '/^palette = /d' "$CONFIG_DIR/ghostty/config-dankcolors" > "$TMP"
+      printf "\n%s\n" "$OUT" >> "$TMP"
       mv "$TMP" "$CONFIG_DIR/ghostty/config-dankcolors"
       if [[ -f "$CONFIG_DIR/ghostty/config" ]] && grep -q "^[^#]*config-dankcolors" "$CONFIG_DIR/ghostty/config" 2>/dev/null; then
         pkill -USR2 -x 'ghostty|.ghostty-wrappe' >/dev/null 2>&1 || true
@@ -330,12 +342,47 @@ EOF
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
-      printf "%s\n\n" "$OUT" > "$TMP"
-      cat "$CONFIG_DIR/kitty/dank-theme.conf" >> "$TMP"
+      sed '/^color[0-9]/d' "$CONFIG_DIR/kitty/dank-theme.conf" > "$TMP"
+      printf "\n%s\n" "$OUT" >> "$TMP"
       mv "$TMP" "$CONFIG_DIR/kitty/dank-theme.conf"
       if [[ -f "$CONFIG_DIR/kitty/kitty.conf" ]] && grep -q "^[^#]*dank-theme.conf" "$CONFIG_DIR/kitty/kitty.conf" 2>/dev/null; then
         pkill -USR1 -x kitty >/dev/null 2>&1 || true
       fi
+    fi
+  fi
+
+  if command -v foot >/dev/null 2>&1; then
+    FOOT_CONFIG="$CONFIG_DIR/foot/dank-colors.ini"
+
+    if [[ ! -f "$FOOT_CONFIG" ]]; then
+      mkdir -p "$(dirname "$FOOT_CONFIG")"
+      echo "[colors]" > "$FOOT_CONFIG"
+    fi
+
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --foot 2>/dev/null || true)
+    if [[ -n "${OUT:-}" ]]; then
+      TMP="$(mktemp)"
+      echo "[colors]" > "$TMP"
+      sed '/^regular[0-9]/d;/^bright[0-9]/d;/^\[colors\]/d' "$FOOT_CONFIG" >> "$TMP"
+      printf "\n%s\n" "$OUT" >> "$TMP"
+      mv "$TMP" "$FOOT_CONFIG"
+    fi
+  fi
+
+  if command -v alacritty >/dev/null 2>&1; then
+    ALACRITTY_CONFIG="$CONFIG_DIR/alacritty/dank-theme.toml"
+
+    if [[ ! -f "$ALACRITTY_CONFIG" ]]; then
+      mkdir -p "$(dirname "$ALACRITTY_CONFIG")"
+      touch "$ALACRITTY_CONFIG"
+    fi
+
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --alacritty 2>/dev/null || true)
+    if [[ -n "${OUT:-}" ]]; then
+      TMP="$(mktemp)"
+      sed '/^\[colors\.normal\]/,/^$/d;/^\[colors\.bright\]/,/^$/d' "$ALACRITTY_CONFIG" > "$TMP"
+      printf "\n%s\n" "$OUT" >> "$TMP"
+      mv "$TMP" "$ALACRITTY_CONFIG"
     fi
   fi
 
