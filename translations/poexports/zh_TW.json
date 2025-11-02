@@ -347,6 +347,9 @@
   "Color Picker": {
     "Color Picker": "顏色選擇器"
   },
+  "Color temperature for day time": {
+    "Color temperature for day time": ""
+  },
   "Color temperature for night mode": {
     "Color temperature for night mode": "夜晚模式色溫"
   },
@@ -514,6 +517,9 @@
   },
   "Date Format": {
     "Date Format": "日期格式"
+  },
+  "Day Temperature": {
+    "Day Temperature": ""
   },
   "Default": {
     "Default": "預設"
@@ -1084,6 +1090,9 @@
   },
   "Night Mode": {
     "Night Mode": "夜晚模式"
+  },
+  "Night Temperature": {
+    "Night Temperature": ""
   },
   "No Active Players": {
     "No Active Players": "無播放器"

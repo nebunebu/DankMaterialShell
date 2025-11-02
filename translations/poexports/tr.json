@@ -347,6 +347,9 @@
   "Color Picker": {
     "Color Picker": "Renk Seçici"
   },
+  "Color temperature for day time": {
+    "Color temperature for day time": ""
+  },
   "Color temperature for night mode": {
     "Color temperature for night mode": "Gece modu için renk sıcaklığı"
   },
@@ -514,6 +517,9 @@
   },
   "Date Format": {
     "Date Format": "Tarih Biçimi"
+  },
+  "Day Temperature": {
+    "Day Temperature": ""
   },
   "Default": {
     "Default": "Varsayılan"
@@ -1084,6 +1090,9 @@
   },
   "Night Mode": {
     "Night Mode": "Gece Modu"
+  },
+  "Night Temperature": {
+    "Night Temperature": ""
   },
   "No Active Players": {
     "No Active Players": "Aktif Oynatıcı Yok"

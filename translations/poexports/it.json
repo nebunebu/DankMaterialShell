@@ -347,6 +347,9 @@
   "Color Picker": {
     "Color Picker": "Prelievo Colore"
   },
+  "Color temperature for day time": {
+    "Color temperature for day time": ""
+  },
   "Color temperature for night mode": {
     "Color temperature for night mode": "Temperatura colore per la modalità notturna"
   },
@@ -514,6 +517,9 @@
   },
   "Date Format": {
     "Date Format": "Formato Data"
+  },
+  "Day Temperature": {
+    "Day Temperature": ""
   },
   "Default": {
     "Default": "Predefinito"
@@ -1084,6 +1090,9 @@
   },
   "Night Mode": {
     "Night Mode": "Modalità Notte"
+  },
+  "Night Temperature": {
+    "Night Temperature": ""
   },
   "No Active Players": {
     "No Active Players": "Nessun Riproduttore Attivo"
