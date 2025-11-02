@@ -300,6 +300,7 @@ Singleton {
             loadSettings()
             initializeListModels()
             fprintdDetectionProcess.running = true
+            pluginSettingsCheckProcess.running = true
         }
     }
 
@@ -1985,7 +1986,7 @@ Singleton {
     FileView {
         id: pluginSettingsFile
 
-        path: isGreeterMode ? "" : pluginSettingsPath
+        path: isGreeterMode ? "" : (pluginSettingsFileExists ? pluginSettingsPath : "")
         blockLoading: true
         blockWrites: true
         atomicWrites: true
@@ -1999,6 +2000,17 @@ Singleton {
             if (!isGreeterMode) {
                 pluginSettings = {}
             }
+        }
+    }
+
+    property bool pluginSettingsFileExists: false
+
+    Process {
+        id: pluginSettingsCheckProcess
+        command: ["test", "-f", pluginSettingsPath]
+
+        onExited: (exitCode) => {
+            pluginSettingsFileExists = (exitCode === 0)
         }
     }
 
