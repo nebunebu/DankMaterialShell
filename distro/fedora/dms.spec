@@ -36,6 +36,7 @@ Requires:       dgop
 Recommends:     brightnessctl
 Recommends:     cava
 Recommends:     cliphist
+Recommends:     danksearch
 Recommends:     hyprpicker
 Recommends:     matugen
 Recommends:     quickshell-git
