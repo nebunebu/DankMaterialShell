@@ -34,8 +34,11 @@
     "list.activeSelectionBackground": "{{colors.surface_container_high.default.hex}}",
     "list.activeSelectionForeground": "{{colors.on_surface.default.hex}}",
     "list.inactiveSelectionBackground": "{{colors.surface_container.default.hex}}",
+    "list.inactiveSelectionForeground": "{{colors.on_surface.default.hex}}",
     "list.hoverBackground": "{{colors.surface_container.default.hex}}",
+    "list.hoverForeground": "{{colors.on_surface.default.hex}}",
     "list.focusBackground": "{{colors.surface_container_high.default.hex}}",
+    "list.focusForeground": "{{colors.on_surface.default.hex}}",
     "list.highlightForeground": "{{colors.primary.default.hex}}",
 
     "statusBar.background": "{{colors.surface.default.hex}}",
@@ -74,6 +77,11 @@
     "dropdown.foreground": "{{colors.on_surface.default.hex}}",
     "dropdown.border": "{{colors.outline.default.hex}}",
 
+    "quickInput.background": "{{colors.surface_container.default.hex}}",
+    "quickInput.foreground": "{{colors.on_surface.default.hex}}",
+    "quickInputList.focusBackground": "{{colors.surface_container_high.default.hex}}",
+    "quickInputList.focusForeground": "{{colors.on_surface.default.hex}}",
+
     "button.background": "{{colors.primary.default.hex}}",
     "button.foreground": "{{colors.on_primary.default.hex}}",
     "button.hoverBackground": "{{colors.primary_container.default.hex}}",
@@ -91,11 +99,15 @@
     "terminal.background": "{{colors.surface.default.hex}}",
     "terminal.foreground": "{{colors.on_surface.default.hex}}",
 
-    "gitDecoration.modifiedResourceForeground": "{{colors.tertiary.default.hex}}",
+    "gitDecoration.modifiedResourceForeground": "{{colors.primary.default.hex}}",
+    "gitDecoration.addedResourceForeground": "{{colors.primary.default.hex}}",
+    "gitDecoration.stageModifiedResourceForeground": "{{colors.primary.default.hex}}",
+    "gitDecoration.stageDeletedResourceForeground": "{{colors.error.default.hex}}",
     "gitDecoration.deletedResourceForeground": "{{colors.error.default.hex}}",
     "gitDecoration.untrackedResourceForeground": "{{colors.secondary.default.hex}}",
     "gitDecoration.ignoredResourceForeground": "{{colors.outline.default.hex}}",
     "gitDecoration.conflictingResourceForeground": "{{colors.error_container.default.hex}}",
+    "gitDecoration.submoduleResourceForeground": "{{colors.primary.default.hex}}",
 
     "editorWidget.background": "{{colors.surface_container.default.hex}}",
     "editorWidget.border": "{{colors.outline.default.hex}}",
