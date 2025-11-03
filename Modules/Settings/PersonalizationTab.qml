@@ -496,10 +496,10 @@ Item {
                             width: parent.width
                             spacing: Theme.spacingM
                             visible: SessionData.perModeWallpaper
-                            leftPadding: Theme.iconSize + Theme.spacingM
 
                             Row {
-                                width: parent.width - parent.leftPadding
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                width: parent.width
                                 spacing: Theme.spacingL
 
                                 Column {
