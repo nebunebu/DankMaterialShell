@@ -7,6 +7,7 @@ import Quickshell.Io
 import qs.Common
 import qs.Widgets
 import qs.Modules
+import qs.Services
 
 Variants {
     model: {
