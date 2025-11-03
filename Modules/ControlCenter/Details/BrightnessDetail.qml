@@ -310,6 +310,13 @@ Rectangle {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
+                            if (screenName && screenName.length > 0 && modelData.name !== currentDeviceName) {
+                                const pins = JSON.parse(JSON.stringify(SettingsData.brightnessDevicePins || {}))
+                                if (pins[screenName]) {
+                                    delete pins[screenName]
+                                    SettingsData.setBrightnessDevicePins(pins)
+                                }
+                            }
                             currentDeviceName = modelData.name
                             deviceNameChanged(modelData.name)
                         }

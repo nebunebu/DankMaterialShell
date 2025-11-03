@@ -60,7 +60,11 @@ DankOSD {
                 height: 40
                 x: parent.gap * 2 + Theme.iconSize
                 anchors.verticalCenter: parent.verticalCenter
-                minimum: 1
+                minimum: {
+                    const deviceInfo = DisplayService.getCurrentDeviceInfo()
+                    if (!deviceInfo) return 1
+                    return (deviceInfo.class === "backlight" || deviceInfo.class === "ddc") ? 1 : 0
+                }
                 maximum: 100
                 enabled: DisplayService.brightnessAvailable
                 showValue: true

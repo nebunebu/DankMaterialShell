@@ -103,13 +103,16 @@ Singleton {
     }
 
     function setBrightness(percentage, device, suppressOsd) {
-        const clampedValue = Math.max(1, Math.min(100, percentage))
         const actualDevice = device === "" ? getDefaultDevice() : (device || currentDevice || getDefaultDevice())
 
         if (!actualDevice) {
             console.warn("DisplayService: No device selected for brightness change")
             return
         }
+
+        const deviceInfo = getCurrentDeviceInfoByName(actualDevice)
+        const minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
+        const clampedValue = Math.max(minValue, Math.min(100, percentage))
 
         if (!DMSService.isConnected) {
             console.warn("DisplayService: Not connected to DMS")
@@ -588,12 +591,15 @@ Singleton {
                 return "Invalid brightness value: " + percentage
             }
 
-            const clampedValue = Math.max(1, Math.min(100, value))
             const targetDevice = device || ""
 
             if (targetDevice && !root.devices.some(d => d.id === targetDevice)) {
                 return "Device not found: " + targetDevice
             }
+
+            const deviceInfo = targetDevice ? root.getCurrentDeviceInfoByName(targetDevice) : null
+            const minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
+            const clampedValue = Math.max(minValue, Math.min(100, value))
 
             root.lastIpcDevice = targetDevice
             if (targetDevice && targetDevice !== root.currentDevice) {

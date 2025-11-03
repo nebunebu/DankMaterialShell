@@ -145,7 +145,10 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width - (Theme.iconSize + Theme.spacingS * 2)
         enabled: DisplayService.brightnessAvailable && targetDeviceName.length > 0
-        minimum: 1
+        minimum: {
+            if (!targetDevice) return 1
+            return (targetDevice.class === "backlight" || targetDevice.class === "ddc") ? 1 : 0
+        }
         maximum: 100
         value: targetBrightness
         onSliderValueChanged: function (newValue) {
