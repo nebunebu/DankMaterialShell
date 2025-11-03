@@ -528,7 +528,7 @@ Singleton {
         }
 
         function onBrightnessDeviceUpdate(device) {
-            updateSingleDevice(device, false)
+            updateSingleDevice(device, true)
         }
     }
 
