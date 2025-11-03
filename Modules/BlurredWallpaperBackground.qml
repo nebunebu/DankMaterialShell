@@ -160,7 +160,7 @@ Variants {
                 asynchronous: true
                 smooth: true
                 cache: true
-                fillMode: root.getFillMode(SettingsData.wallpaperFillMode)
+                fillMode: root.getFillMode(SessionData.isGreeterMode ? GreetdSettings.wallpaperFillMode : SettingsData.wallpaperFillMode)
             }
 
             Image {
@@ -171,7 +171,7 @@ Variants {
                 asynchronous: true
                 smooth: true
                 cache: true
-                fillMode: root.getFillMode(SettingsData.wallpaperFillMode)
+                fillMode: root.getFillMode(SessionData.isGreeterMode ? GreetdSettings.wallpaperFillMode : SettingsData.wallpaperFillMode)
 
                 onStatusChanged: {
                     if (status !== Image.Ready)
