@@ -173,6 +173,12 @@
   "Auto-saving...": {
     "Auto-saving...": "Salvataggio automatico..."
   },
+  "Autoconnect disabled": {
+    "Autoconnect disabled": ""
+  },
+  "Autoconnect enabled": {
+    "Autoconnect enabled": ""
+  },
   "Automatic Control": {
     "Automatic Control": "Controllo Automatico"
   },
@@ -548,6 +554,9 @@
   "Device paired": {
     "Device paired": "Dispositivo accoppiato"
   },
+  "Disable Autoconnect": {
+    "Disable Autoconnect": ""
+  },
   "Disconnect": {
     "Disconnect": "Disconnetti"
   },
@@ -622,6 +631,9 @@
   },
   "Empty": {
     "Empty": "Vuoto"
+  },
+  "Enable Autoconnect": {
+    "Enable Autoconnect": ""
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "Abilita Temperatura GPU"
@@ -718,6 +730,9 @@
   },
   "Failed to start connection to ": {
     "Failed to start connection to ": "Impossibile avviare connessione a "
+  },
+  "Failed to update autoconnect": {
+    "Failed to update autoconnect": ""
   },
   "Feels Like": {
     "Feels Like": "Temperatura"

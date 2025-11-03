@@ -173,6 +173,12 @@
   "Auto-saving...": {
     "Auto-saving...": "Otomatik kaydetme..."
   },
+  "Autoconnect disabled": {
+    "Autoconnect disabled": ""
+  },
+  "Autoconnect enabled": {
+    "Autoconnect enabled": ""
+  },
   "Automatic Control": {
     "Automatic Control": "Otomatik Kontrol"
   },
@@ -548,6 +554,9 @@
   "Device paired": {
     "Device paired": "Cihaz eşleştirildi"
   },
+  "Disable Autoconnect": {
+    "Disable Autoconnect": ""
+  },
   "Disconnect": {
     "Disconnect": "Bağlantıyı Kes"
   },
@@ -622,6 +631,9 @@
   },
   "Empty": {
     "Empty": "Boş"
+  },
+  "Enable Autoconnect": {
+    "Enable Autoconnect": ""
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "GPU Sıcaklığını Etkinleştir"
@@ -718,6 +730,9 @@
   },
   "Failed to start connection to ": {
     "Failed to start connection to ": "Bağlantı başlatılamadı "
+  },
+  "Failed to update autoconnect": {
+    "Failed to update autoconnect": ""
   },
   "Feels Like": {
     "Feels Like": "Hissedilen"

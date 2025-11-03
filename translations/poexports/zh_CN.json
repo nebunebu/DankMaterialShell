@@ -173,6 +173,12 @@
   "Auto-saving...": {
     "Auto-saving...": "自动保存中..."
   },
+  "Autoconnect disabled": {
+    "Autoconnect disabled": ""
+  },
+  "Autoconnect enabled": {
+    "Autoconnect enabled": ""
+  },
   "Automatic Control": {
     "Automatic Control": "自动切换"
   },
@@ -548,6 +554,9 @@
   "Device paired": {
     "Device paired": "设备已配对"
   },
+  "Disable Autoconnect": {
+    "Disable Autoconnect": ""
+  },
   "Disconnect": {
     "Disconnect": "断开连接"
   },
@@ -622,6 +631,9 @@
   },
   "Empty": {
     "Empty": "空"
+  },
+  "Enable Autoconnect": {
+    "Enable Autoconnect": ""
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "显示 GPU 温度"
@@ -718,6 +730,9 @@
   },
   "Failed to start connection to ": {
     "Failed to start connection to ": "无法启动连接至 "
+  },
+  "Failed to update autoconnect": {
+    "Failed to update autoconnect": ""
   },
   "Feels Like": {
     "Feels Like": "体感温度"
