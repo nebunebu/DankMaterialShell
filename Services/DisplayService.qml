@@ -25,6 +25,7 @@ Singleton {
     }
     property int maxBrightness: 100
     property bool brightnessInitialized: false
+    property bool suppressNextOsd: false
 
     signal brightnessChanged
     signal deviceSwitched
@@ -56,7 +57,12 @@ Singleton {
         newBrightness[device.id] = device.currentPercent
         deviceBrightness = newBrightness
 
-        if (!suppressSignal && oldValue !== device.currentPercent) {
+        const shouldSuppress = suppressSignal || suppressNextOsd
+        if (suppressNextOsd) {
+            suppressNextOsd = false
+        }
+
+        if (!shouldSuppress && oldValue !== device.currentPercent) {
             brightnessChanged()
         }
     }
@@ -117,6 +123,10 @@ Singleton {
         if (!DMSService.isConnected) {
             console.warn("DisplayService: Not connected to DMS")
             return
+        }
+
+        if (suppressOsd) {
+            suppressNextOsd = true
         }
 
         DMSService.sendRequest("brightness.setBrightness", {
@@ -531,7 +541,7 @@ Singleton {
         }
 
         function onBrightnessDeviceUpdate(device) {
-            updateSingleDevice(device, true)
+            updateSingleDevice(device, false)
         }
     }
 
