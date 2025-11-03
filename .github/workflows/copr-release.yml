@@ -166,6 +166,12 @@ jobs:
           gunzip -c %{_builddir}/dgop.gz > %{_builddir}/dgop
           chmod +x %{_builddir}/dgop
 
+          # Download udev rules from danklinux
+          wget -O %{_builddir}/90-dms.rules "https://raw.githubusercontent.com/AvengeMedia/danklinux/master/assets/data/etc/udev/rules.d/90-dms.rules" || {
+            echo "Failed to download udev rules"
+            exit 1
+          }
+
           %build
 
           %install
@@ -174,7 +180,8 @@ jobs:
 
           install -Dm644 %{_builddir}/dms-qml/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
-          install -Dm0644 %{_builddir}/dms-qml/90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
+          # Install udev rules from danklinux
+          install -Dm0644 %{_builddir}/90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
 
           install -dm755 %{buildroot}%{_datadir}/quickshell/dms
           cp -r %{_builddir}/dms-qml/* %{buildroot}%{_datadir}/quickshell/dms/

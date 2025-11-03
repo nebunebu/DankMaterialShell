@@ -130,8 +130,8 @@ install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 # Install systemd user service
 install -Dm644 assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
-# Install udev rules
-install -Dm0644 90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
+# Install udev rules from danklinux
+install -Dm0644 %{_builddir}/danklinux-master/assets/data/etc/udev/rules.d/90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
 
 # Install shell files to shared data location
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms
