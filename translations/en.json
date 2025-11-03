@@ -342,6 +342,18 @@
     "comment": ""
   },
   {
+    "term": "Autoconnect disabled",
+    "context": "Autoconnect disabled",
+    "reference": "Services/DMSNetworkService.qml:885",
+    "comment": ""
+  },
+  {
+    "term": "Autoconnect enabled",
+    "context": "Autoconnect enabled",
+    "reference": "Services/DMSNetworkService.qml:885",
+    "comment": ""
+  },
+  {
     "term": "Automatic Control",
     "context": "Automatic Control",
     "reference": "Modules/Settings/DisplaysTab.qml:199",
@@ -1074,6 +1086,12 @@
     "comment": ""
   },
   {
+    "term": "Disable Autoconnect",
+    "context": "Disable Autoconnect",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:623",
+    "comment": ""
+  },
+  {
     "term": "Disconnect",
     "context": "Disconnect",
     "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:222",
@@ -1221,6 +1239,12 @@
     "term": "Empty",
     "context": "Empty",
     "reference": "Modules/Notepad/NotepadTextEditor.qml:565",
+    "comment": ""
+  },
+  {
+    "term": "Enable Autoconnect",
+    "context": "Enable Autoconnect",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:623",
     "comment": ""
   },
   {
@@ -1416,6 +1440,12 @@
     "comment": ""
   },
   {
+    "term": "Failed to update autoconnect",
+    "context": "Failed to update autoconnect",
+    "reference": "Services/DMSNetworkService.qml:883",
+    "comment": ""
+  },
+  {
     "term": "Feels Like",
     "context": "Feels Like",
     "reference": "Modules/DankDash/WeatherTab.qml:260, Modules/Settings/TimeWeatherTab.qml:1087",
@@ -1496,7 +1526,7 @@
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:610",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:646",
     "comment": ""
   },
   {
@@ -2090,7 +2120,7 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:344, Modules/ControlCenter/Details/NetworkDetail.qml:587",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:344, Modules/ControlCenter/Details/NetworkDetail.qml:600",
     "comment": ""
   },
   {

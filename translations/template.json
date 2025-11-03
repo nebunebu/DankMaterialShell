@@ -399,6 +399,20 @@
     "comment": ""
   },
   {
+    "term": "Autoconnect disabled",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Autoconnect enabled",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Automatic Control",
     "translation": "",
     "context": "",
@@ -1253,6 +1267,13 @@
     "comment": ""
   },
   {
+    "term": "Disable Autoconnect",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Disconnect",
     "translation": "",
     "context": "",
@@ -1422,6 +1443,13 @@
   },
   {
     "term": "Empty",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enable Autoconnect",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1646,6 +1674,13 @@
   },
   {
     "term": "Failed to start connection to ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Failed to update autoconnect",
     "translation": "",
     "context": "",
     "reference": "",
