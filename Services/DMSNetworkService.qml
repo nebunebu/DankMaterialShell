@@ -869,4 +869,22 @@ Singleton {
             getState()
         }
     }
+
+    function setWifiAutoconnect(ssid, autoconnect) {
+        if (!networkAvailable || DMSService.apiVersion <= 13) return
+
+        const params = {
+            ssid: ssid,
+            autoconnect: autoconnect
+        }
+
+        DMSService.sendRequest("network.wifi.setAutoconnect", params, response => {
+            if (response.error) {
+                ToastService.showError(I18n.tr("Failed to update autoconnect"))
+            } else {
+                ToastService.showInfo(autoconnect ? I18n.tr("Autoconnect enabled") : I18n.tr("Autoconnect disabled"))
+                Qt.callLater(() => getState())
+            }
+        })
+    }
 }
