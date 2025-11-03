@@ -45,6 +45,7 @@ Singleton {
     signal bluetoothPairingRequest(var data)
     signal dwlStateUpdate(var data)
     signal brightnessStateUpdate(var data)
+    signal brightnessDeviceUpdate(var device)
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
@@ -271,6 +272,10 @@ Singleton {
             dwlStateUpdate(data)
         } else if (service === "brightness") {
             brightnessStateUpdate(data)
+        } else if (service === "brightness.update") {
+            if (data.device) {
+                brightnessDeviceUpdate(data.device)
+            }
         }
     }
 

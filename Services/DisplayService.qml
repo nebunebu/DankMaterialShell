@@ -35,6 +35,32 @@ Singleton {
     property bool automationAvailable: false
     property bool gammaControlAvailable: false
 
+    function updateSingleDevice(device, suppressSignal) {
+        const deviceIndex = devices.findIndex(d => d.id === device.id)
+        if (deviceIndex !== -1) {
+            const newDevices = [...devices]
+            newDevices[deviceIndex] = {
+                "id": device.id,
+                "name": device.id,
+                "class": device.class,
+                "current": device.current,
+                "percentage": device.currentPercent,
+                "max": device.max,
+                "backend": device.backend
+            }
+            devices = newDevices
+        }
+
+        const oldValue = deviceBrightness[device.id]
+        const newBrightness = Object.assign({}, deviceBrightness)
+        newBrightness[device.id] = device.currentPercent
+        deviceBrightness = newBrightness
+
+        if (!suppressSignal && oldValue !== device.currentPercent) {
+            brightnessChanged()
+        }
+    }
+
     function updateFromBrightnessState(state) {
         if (!state || !state.devices) {
             return
@@ -97,11 +123,6 @@ Singleton {
                                    if (response.error) {
                                        console.error("DisplayService: Failed to set brightness:", response.error)
                                        ToastService.showError("Failed to set brightness: " + response.error)
-                                       return
-                                   }
-
-                                   if (!suppressOsd) {
-                                       brightnessChanged()
                                    }
                                })
     }
@@ -458,10 +479,30 @@ Singleton {
         }
     }
 
+    function rescanDevices() {
+        if (!DMSService.isConnected) {
+            return
+        }
+
+        DMSService.sendRequest("brightness.rescan", null, response => {
+                                   if (response.error) {
+                                       console.error("DisplayService: Failed to rescan brightness devices:", response.error)
+                                   }
+                               })
+    }
+
     Component.onCompleted: {
         nightModeEnabled = SessionData.nightModeEnabled
         if (DMSService.isConnected) {
             checkGammaControlAvailability()
+        }
+    }
+
+    Connections {
+        target: Quickshell
+
+        function onScreensChanged() {
+            rescanDevices()
         }
     }
 
@@ -484,6 +525,10 @@ Singleton {
 
         function onBrightnessStateUpdate(data) {
             updateFromBrightnessState(data)
+        }
+
+        function onBrightnessDeviceUpdate(device) {
+            updateSingleDevice(device, false)
         }
     }
 
@@ -554,7 +599,7 @@ Singleton {
             if (targetDevice && targetDevice !== root.currentDevice) {
                 root.setCurrentDevice(targetDevice, false)
             }
-            root.setBrightness(clampedValue, targetDevice)
+            root.setBrightness(clampedValue, targetDevice, false)
 
             if (targetDevice) {
                 return "Brightness set to " + clampedValue + "% on " + targetDevice
@@ -575,21 +620,31 @@ Singleton {
                 return "Device not found: " + actualDevice
             }
 
-            const currentLevel = actualDevice ? root.getDeviceBrightness(actualDevice) : root.brightnessLevel
-            const stepValue = parseInt(step || "10")
-            const newLevel = Math.max(1, Math.min(100, currentLevel + stepValue))
+            const stepValue = parseInt(step || "5")
 
-            root.lastIpcDevice = targetDevice
-            if (targetDevice && targetDevice !== root.currentDevice) {
-                root.setCurrentDevice(targetDevice, false)
+            root.lastIpcDevice = actualDevice
+            if (actualDevice && actualDevice !== root.currentDevice) {
+                root.setCurrentDevice(actualDevice, false)
             }
-            root.setBrightness(newLevel, targetDevice)
 
-            if (targetDevice) {
-                return "Brightness increased to " + newLevel + "% on " + targetDevice
-            } else {
-                return "Brightness increased to " + newLevel + "%"
-            }
+            DMSService.sendRequest("brightness.increment", {
+                                       "device": actualDevice,
+                                       "step": stepValue
+                                   }, response => {
+                                       if (response.error) {
+                                           console.error("DisplayService: Failed to increment brightness:", response.error)
+                                           ToastService.showError("Failed to increment brightness: " + response.error)
+                                           return
+                                       }
+                                       if (response.result && response.result.devices) {
+                                           const device = response.result.devices.find(d => d.id === actualDevice)
+                                           if (device) {
+                                               updateSingleDevice(device, false)
+                                           }
+                                       }
+                                   })
+
+            return "Brightness increased by " + stepValue + "%" + (targetDevice ? " on " + targetDevice : "")
         }
 
         function decrement(step: string, device: string): string {
@@ -604,21 +659,31 @@ Singleton {
                 return "Device not found: " + actualDevice
             }
 
-            const currentLevel = actualDevice ? root.getDeviceBrightness(actualDevice) : root.brightnessLevel
-            const stepValue = parseInt(step || "10")
-            const newLevel = Math.max(1, Math.min(100, currentLevel - stepValue))
+            const stepValue = parseInt(step || "5")
 
-            root.lastIpcDevice = targetDevice
-            if (targetDevice && targetDevice !== root.currentDevice) {
-                root.setCurrentDevice(targetDevice, false)
+            root.lastIpcDevice = actualDevice
+            if (actualDevice && actualDevice !== root.currentDevice) {
+                root.setCurrentDevice(actualDevice, false)
             }
-            root.setBrightness(newLevel, targetDevice)
 
-            if (targetDevice) {
-                return "Brightness decreased to " + newLevel + "% on " + targetDevice
-            } else {
-                return "Brightness decreased to " + newLevel + "%"
-            }
+            DMSService.sendRequest("brightness.decrement", {
+                                       "device": actualDevice,
+                                       "step": stepValue
+                                   }, response => {
+                                       if (response.error) {
+                                           console.error("DisplayService: Failed to decrement brightness:", response.error)
+                                           ToastService.showError("Failed to decrement brightness: " + response.error)
+                                           return
+                                       }
+                                       if (response.result && response.result.devices) {
+                                           const device = response.result.devices.find(d => d.id === actualDevice)
+                                           if (device) {
+                                               updateSingleDevice(device, false)
+                                           }
+                                       }
+                                   })
+
+            return "Brightness decreased by " + stepValue + "%" + (targetDevice ? " on " + targetDevice : "")
         }
 
         function status(): string {
@@ -634,9 +699,9 @@ Singleton {
                 return "No brightness devices available"
             }
 
-            let result = "Available devices:\\n"
+            let result = "Available devices:\n"
             for (const device of root.devices) {
-                result += device.id + " (" + device.class + ")\\n"
+                result += device.id + " (" + device.class + ")\n"
             }
             return result
         }
