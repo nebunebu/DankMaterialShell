@@ -33,7 +33,6 @@ Requires:       dms-cli
 Requires:       dgop
 
 # Core utilities (Highly recommended for DMS functionality)
-Recommends:     brightnessctl
 Recommends:     cava
 Recommends:     cliphist
 Recommends:     danksearch
@@ -131,6 +130,9 @@ install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 # Install systemd user service
 install -Dm644 assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
+# Install udev rules
+install -Dm0644 90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
+
 # Install shell files to shared data location
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms
 cp -r * %{buildroot}%{_datadir}/quickshell/dms/
@@ -187,6 +189,7 @@ fi
 %doc README.md CONTRIBUTING.md
 %{_datadir}/quickshell/dms/
 %{_userunitdir}/dms.service
+%{_prefix}/lib/udev/rules.d/90-dms.rules
 
 %files -n dms-cli
 %{_bindir}/dms

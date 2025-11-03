@@ -93,7 +93,6 @@ jobs:
           Requires:       dms-cli
           Requires:       dgop
 
-          Recommends:     brightnessctl
           Recommends:     cava
           Recommends:     cliphist
           Recommends:     danksearch
@@ -175,6 +174,8 @@ jobs:
 
           install -Dm644 %{_builddir}/dms-qml/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
+          install -Dm0644 %{_builddir}/dms-qml/90-dms.rules %{buildroot}%{_prefix}/lib/udev/rules.d/90-dms.rules
+
           install -dm755 %{buildroot}%{_datadir}/quickshell/dms
           cp -r %{_builddir}/dms-qml/* %{buildroot}%{_datadir}/quickshell/dms/
 
@@ -229,6 +230,7 @@ jobs:
           %doc README.md CONTRIBUTING.md
           %{_datadir}/quickshell/dms/
           %{_userunitdir}/dms.service
+          %{_prefix}/lib/udev/rules.d/90-dms.rules
 
           %files -n dms-cli
           %{_bindir}/dms
