@@ -21,6 +21,7 @@ Singleton {
 
     property bool isLightMode: false
     property bool doNotDisturb: false
+    property bool isSwitchingMode: false
 
     property string wallpaperPath: ""
     property bool perMonitorWallpaper: false
@@ -294,9 +295,11 @@ Singleton {
     }
 
     function setLightMode(lightMode) {
+        isSwitchingMode = true
         isLightMode = lightMode
         syncWallpaperForCurrentMode()
         saveSettings()
+        Qt.callLater(() => { isSwitchingMode = false })
     }
 
     function setDoNotDisturb(enabled) {
