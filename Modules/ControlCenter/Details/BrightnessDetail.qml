@@ -47,6 +47,16 @@ Rectangle {
             }
         }
 
+        const backlight = DisplayService.devices.find(d => d.class === "backlight")
+        if (backlight) {
+            return backlight.name
+        }
+
+        const ddc = DisplayService.devices.find(d => d.class === "ddc")
+        if (ddc) {
+            return ddc.name
+        }
+
         return DisplayService.devices.length > 0 ? DisplayService.devices[0].name : ""
     }
 
@@ -224,8 +234,10 @@ Rectangle {
 
                                     if (deviceClass === "backlight" || deviceClass === "ddc") {
                                         const brightness = DisplayService.getDeviceBrightness(modelData.name)
-                                        if (brightness <= 33) return "brightness_low"
-                                        if (brightness <= 66) return "brightness_medium"
+                                        if (brightness <= 33)
+                                            return "brightness_low"
+                                        if (brightness <= 66)
+                                            return "brightness_medium"
                                         return "brightness_high"
                                     } else if (deviceName.includes("kbd")) {
                                         return "keyboard"
@@ -277,9 +289,12 @@ Rectangle {
                             StyledText {
                                 text: {
                                     const deviceClass = modelData.class || ""
-                                    if (deviceClass === "backlight") return "Backlight device"
-                                    if (deviceClass === "ddc") return "DDC/CI monitor"
-                                    if (deviceClass === "leds") return "LED device"
+                                    if (deviceClass === "backlight")
+                                        return "Backlight device"
+                                    if (deviceClass === "ddc")
+                                        return "DDC/CI monitor"
+                                    if (deviceClass === "leds")
+                                        return "LED device"
                                     return deviceClass
                                 }
                                 font.pixelSize: Theme.fontSizeSmall
@@ -299,7 +314,6 @@ Rectangle {
                             deviceNameChanged(modelData.name)
                         }
                     }
-
                 }
             }
         }
