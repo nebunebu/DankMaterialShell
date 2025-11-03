@@ -38,7 +38,7 @@
   {
     "term": "24-hour format",
     "context": "24-hour format",
-    "reference": "Modules/Settings/PersonalizationTab.qml:946",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1334",
     "comment": ""
   },
   {
@@ -152,7 +152,7 @@
   {
     "term": "Animation Speed",
     "context": "Animation Speed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1168",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1556",
     "comment": ""
   },
   {
@@ -350,7 +350,7 @@
   {
     "term": "Automatic Cycling",
     "context": "Automatic Cycling",
-    "reference": "Modules/Settings/PersonalizationTab.qml:699",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1087",
     "comment": ""
   },
   {
@@ -362,7 +362,7 @@
   {
     "term": "Automatically cycle through wallpapers in the same folder",
     "context": "Automatically cycle through wallpapers in the same folder",
-    "reference": "Modules/Settings/PersonalizationTab.qml:706",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1094",
     "comment": ""
   },
   {
@@ -380,7 +380,7 @@
   {
     "term": "Automatically extract colors from wallpaper",
     "context": "Automatically extract colors from wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1372",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1760",
     "comment": ""
   },
   {
@@ -428,7 +428,7 @@
   {
     "term": "Balanced palette with focused accents (default).",
     "context": "Balanced palette with focused accents (default).",
-    "reference": "Common/Theme.qml:201",
+    "reference": "Common/Theme.qml:202",
     "comment": ""
   },
   {
@@ -470,19 +470,19 @@
   {
     "term": "Blur Layer",
     "context": "Blur Layer",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1055",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1443",
     "comment": ""
   },
   {
     "term": "Blur on Overview",
     "context": "Blur on Overview",
-    "reference": "Modules/Settings/PersonalizationTab.qml:466",
+    "reference": "Modules/Settings/PersonalizationTab.qml:912",
     "comment": ""
   },
   {
     "term": "Blur wallpaper when niri overview is open",
     "context": "Blur wallpaper when niri overview is open",
-    "reference": "Modules/Settings/PersonalizationTab.qml:473",
+    "reference": "Modules/Settings/PersonalizationTab.qml:919",
     "comment": ""
   },
   {
@@ -704,7 +704,7 @@
   {
     "term": "Colorful mix of bright contrasting accents.",
     "context": "Colorful mix of bright contrasting accents.",
-    "reference": "Common/Theme.qml:225",
+    "reference": "Common/Theme.qml:226",
     "comment": ""
   },
   {
@@ -968,7 +968,7 @@
   {
     "term": "Daily at:",
     "context": "Daily at:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:871",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1259",
     "comment": ""
   },
   {
@@ -1008,6 +1008,12 @@
     "comment": ""
   },
   {
+    "term": "Dark Mode",
+    "context": "Dark Mode",
+    "reference": "Modules/Settings/PersonalizationTab.qml:699",
+    "comment": ""
+  },
+  {
     "term": "Date Format",
     "context": "Date Format",
     "reference": "Modules/Settings/TimeWeatherTab.qml:179",
@@ -1040,7 +1046,7 @@
   {
     "term": "Derives colors that closely match the underlying image.",
     "context": "Derives colors that closely match the underlying image.",
-    "reference": "Common/Theme.qml:213",
+    "reference": "Common/Theme.qml:214",
     "comment": ""
   },
   {
@@ -1142,7 +1148,7 @@
   {
     "term": "Diverse palette spanning the full spectrum.",
     "context": "Diverse palette spanning the full spectrum.",
-    "reference": "Common/Theme.qml:237",
+    "reference": "Common/Theme.qml:238",
     "comment": ""
   },
   {
@@ -1190,13 +1196,13 @@
   {
     "term": "Duration",
     "context": "Duration",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1221",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1609",
     "comment": ""
   },
   {
     "term": "Dynamic Theming",
     "context": "Dynamic Theming",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1365",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1753",
     "comment": ""
   },
   {
@@ -1226,7 +1232,7 @@
   {
     "term": "Enable System Sounds",
     "context": "Enable System Sounds",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1521",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1909",
     "comment": ""
   },
   {
@@ -1244,7 +1250,7 @@
   {
     "term": "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.",
     "context": "Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1062",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1450",
     "comment": ""
   },
   {
@@ -1334,7 +1340,7 @@
   {
     "term": "Execute templates from ~/.config/matugen/config.toml",
     "context": "Execute templates from ~/.config/matugen/config.toml",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1458",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1846",
     "comment": ""
   },
   {
@@ -1622,13 +1628,13 @@
   {
     "term": "High-contrast palette for strong visual distinction.",
     "context": "High-contrast palette for strong visual distinction.",
-    "reference": "Common/Theme.qml:209",
+    "reference": "Common/Theme.qml:210",
     "comment": ""
   },
   {
     "term": "High-fidelity palette that preserves source hues.",
     "context": "High-fidelity palette that preserves source hues.",
-    "reference": "Common/Theme.qml:221",
+    "reference": "Common/Theme.qml:222",
     "comment": ""
   },
   {
@@ -1640,7 +1646,7 @@
   {
     "term": "How often to change wallpaper",
     "context": "How often to change wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:817",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1205",
     "comment": ""
   },
   {
@@ -1694,7 +1700,7 @@
   {
     "term": "Include Transitions",
     "context": "Include Transitions",
-    "reference": "Modules/Settings/PersonalizationTab.qml:983",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1371",
     "comment": ""
   },
   {
@@ -1736,7 +1742,7 @@
   {
     "term": "Interval",
     "context": "Interval",
-    "reference": "Modules/Settings/PersonalizationTab.qml:816",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1204",
     "comment": ""
   },
   {
@@ -1838,7 +1844,7 @@
   {
     "term": "Light Mode",
     "context": "Light Mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1112",
+    "reference": "Modules/Settings/PersonalizationTab.qml:510, Modules/Settings/PersonalizationTab.qml:1500",
     "comment": ""
   },
   {
@@ -1850,7 +1856,7 @@
   {
     "term": "Lively palette with saturated accents.",
     "context": "Lively palette with saturated accents.",
-    "reference": "Common/Theme.qml:205",
+    "reference": "Common/Theme.qml:206",
     "comment": ""
   },
   {
@@ -1940,19 +1946,19 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1397, Modules/Settings/ThemeColorsTab.qml:629",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1785, Modules/Settings/ThemeColorsTab.qml:629",
     "comment": ""
   },
   {
     "term": "Matugen Settings",
     "context": "Matugen Settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1340",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1728",
     "comment": ""
   },
   {
     "term": "Matugen Target Monitor",
     "context": "Matugen Target Monitor",
-    "reference": "Modules/Settings/PersonalizationTab.qml:640",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1028",
     "comment": ""
   },
   {
@@ -2006,7 +2012,7 @@
   {
     "term": "Minimal palette built around a single hue.",
     "context": "Minimal palette built around a single hue.",
-    "reference": "Common/Theme.qml:229",
+    "reference": "Common/Theme.qml:230",
     "comment": ""
   },
   {
@@ -2018,19 +2024,19 @@
   {
     "term": "Mode:",
     "context": "Mode:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:748",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1136",
     "comment": ""
   },
   {
     "term": "Monitor Selection:",
     "context": "Monitor Selection:",
-    "reference": "Modules/Settings/PersonalizationTab.qml:612",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1000",
     "comment": ""
   },
   {
     "term": "Monitor whose wallpaper drives dynamic theming colors",
     "context": "Monitor whose wallpaper drives dynamic theming colors",
-    "reference": "Modules/Settings/PersonalizationTab.qml:641",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1029",
     "comment": ""
   },
   {
@@ -2048,7 +2054,7 @@
   {
     "term": "Muted palette with subdued, calming tones.",
     "context": "Muted palette with subdued, calming tones.",
-    "reference": "Common/Theme.qml:233",
+    "reference": "Common/Theme.qml:234",
     "comment": ""
   },
   {
@@ -2120,7 +2126,7 @@
   {
     "term": "New Notification",
     "context": "New Notification",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1635",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2023",
     "comment": ""
   },
   {
@@ -2390,13 +2396,13 @@
   {
     "term": "Per-Mode Wallpapers",
     "context": "Per-Mode Wallpapers",
-    "reference": "Modules/Settings/PersonalizationTab.qml:523",
+    "reference": "Modules/Settings/PersonalizationTab.qml:470",
     "comment": ""
   },
   {
     "term": "Per-Monitor Wallpapers",
     "context": "Per-Monitor Wallpapers",
-    "reference": "Modules/Settings/PersonalizationTab.qml:580",
+    "reference": "Modules/Settings/PersonalizationTab.qml:968",
     "comment": ""
   },
   {
@@ -2444,31 +2450,31 @@
   {
     "term": "Play sound when new notification arrives",
     "context": "Play sound when new notification arrives",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1641",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2029",
     "comment": ""
   },
   {
     "term": "Play sound when power cable is connected",
     "context": "Play sound when power cable is connected",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1710",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2098",
     "comment": ""
   },
   {
     "term": "Play sound when volume is adjusted",
     "context": "Play sound when volume is adjusted",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1675",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2063",
     "comment": ""
   },
   {
     "term": "Play sounds for system events",
     "context": "Play sounds for system events",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1528",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1916",
     "comment": ""
   },
   {
     "term": "Plugged In",
     "context": "Plugged In",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1704",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2092",
     "comment": ""
   },
   {
@@ -2690,7 +2696,7 @@
   {
     "term": "Run User Templates",
     "context": "Run User Templates",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1451",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1839",
     "comment": ""
   },
   {
@@ -2804,7 +2810,7 @@
   {
     "term": "Select a preset or drag the slider to customize",
     "context": "Select a preset or drag the slider to customize",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1302",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1690",
     "comment": ""
   },
   {
@@ -2828,7 +2834,7 @@
   {
     "term": "Select monitor to configure wallpaper",
     "context": "Select monitor to configure wallpaper",
-    "reference": "Modules/Settings/PersonalizationTab.qml:622",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1010",
     "comment": ""
   },
   {
@@ -2846,19 +2852,19 @@
   {
     "term": "Select system sound theme",
     "context": "Select system sound theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1599",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1987",
     "comment": ""
   },
   {
     "term": "Select the palette algorithm used for wallpaper-based colors",
     "context": "Select the palette algorithm used for wallpaper-based colors",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1398, Modules/Settings/ThemeColorsTab.qml:630",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1786, Modules/Settings/ThemeColorsTab.qml:630",
     "comment": ""
   },
   {
     "term": "Select which transitions to include in randomization",
     "context": "Select which transitions to include in randomization",
-    "reference": "Modules/Settings/PersonalizationTab.qml:990",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1378",
     "comment": ""
   },
   {
@@ -2876,13 +2882,13 @@
   {
     "term": "Set different wallpapers for each connected monitor",
     "context": "Set different wallpapers for each connected monitor",
-    "reference": "Modules/Settings/PersonalizationTab.qml:587",
+    "reference": "Modules/Settings/PersonalizationTab.qml:975",
     "comment": ""
   },
   {
     "term": "Set different wallpapers for light and dark mode",
     "context": "Set different wallpapers for light and dark mode",
-    "reference": "Modules/Settings/PersonalizationTab.qml:530",
+    "reference": "Modules/Settings/PersonalizationTab.qml:477",
     "comment": ""
   },
   {
@@ -3044,7 +3050,7 @@
   {
     "term": "Sound Theme",
     "context": "Sound Theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1598",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1986",
     "comment": ""
   },
   {
@@ -3350,7 +3356,7 @@
   {
     "term": "Transition Effect",
     "context": "Transition Effect",
-    "reference": "Modules/Settings/PersonalizationTab.qml:963",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1351",
     "comment": ""
   },
   {
@@ -3446,7 +3452,7 @@
   {
     "term": "Use System Theme",
     "context": "Use System Theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1570",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1958",
     "comment": ""
   },
   {
@@ -3470,13 +3476,13 @@
   {
     "term": "Use light theme instead of dark theme",
     "context": "Use light theme instead of dark theme",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1119",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1507",
     "comment": ""
   },
   {
     "term": "Use sound theme from system settings",
     "context": "Use sound theme from system settings",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1576",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1964",
     "comment": ""
   },
   {
@@ -3530,7 +3536,7 @@
   {
     "term": "Vibrant palette with playful saturation.",
     "context": "Vibrant palette with playful saturation.",
-    "reference": "Common/Theme.qml:217",
+    "reference": "Common/Theme.qml:218",
     "comment": ""
   },
   {
@@ -3548,13 +3554,13 @@
   {
     "term": "Visual effect used when wallpaper changes",
     "context": "Visual effect used when wallpaper changes",
-    "reference": "Modules/Settings/PersonalizationTab.qml:964",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1352",
     "comment": ""
   },
   {
     "term": "Volume Changed",
     "context": "Volume Changed",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1669",
+    "reference": "Modules/Settings/PersonalizationTab.qml:2057",
     "comment": ""
   },
   {
@@ -3572,7 +3578,7 @@
   {
     "term": "Wallpaper Monitor",
     "context": "Wallpaper Monitor",
-    "reference": "Modules/Settings/PersonalizationTab.qml:621",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1009",
     "comment": ""
   },
   {
@@ -3722,7 +3728,7 @@
   {
     "term": "matugen not detected - dynamic theming unavailable",
     "context": "matugen not detected - dynamic theming unavailable",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1478",
+    "reference": "Modules/Settings/PersonalizationTab.qml:1866",
     "comment": ""
   },
   {
