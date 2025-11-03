@@ -138,13 +138,13 @@
     "Audio Output Devices (": "Ses Çıkış Aygıtları ("
   },
   "Authenticate": {
-    "Authenticate": ""
+    "Authenticate": "Kimlik Doğrula"
   },
   "Authentication Required": {
-    "Authentication Required": ""
+    "Authentication Required": "Kimlik Doğrulama Gerekli"
   },
   "Authentication failed, please try again": {
-    "Authentication failed, please try again": ""
+    "Authentication failed, please try again": "Kimlik doğrulama başarısız, lütfen tekrar deneyin"
   },
   "Authorize": {
     "Authorize": "Yetkilendir"
@@ -348,7 +348,7 @@
     "Color Picker": "Renk Seçici"
   },
   "Color temperature for day time": {
-    "Color temperature for day time": ""
+    "Color temperature for day time": "Gündüz için renk sıcaklığı"
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "Gece modu için renk sıcaklığı"
@@ -495,7 +495,7 @@
     "Daily at:": "Her gün saat:"
   },
   "Dank": {
-    "Dank": ""
+    "Dank": "Dank"
   },
   "Dank Bar": {
     "Dank Bar": "Dank Bar"
@@ -519,7 +519,7 @@
     "Date Format": "Tarih Biçimi"
   },
   "Day Temperature": {
-    "Day Temperature": ""
+    "Day Temperature": "Gündüz Sıcaklığı"
   },
   "Default": {
     "Default": "Varsayılan"
@@ -1092,7 +1092,7 @@
     "Night Mode": "Gece Modu"
   },
   "Night Temperature": {
-    "Night Temperature": ""
+    "Night Temperature": "Gece Sıcaklığı"
   },
   "No Active Players": {
     "No Active Players": "Aktif Oynatıcı Yok"
@@ -1479,7 +1479,7 @@
     "Shift+Del: Clear All • Esc: Close": "Shift+Del: Tümünü Temizle • Esc: Kapat"
   },
   "Show All Tags": {
-    "Show All Tags": ""
+    "Show All Tags": "Tüm Etiketleri Göster"
   },
   "Show Confirmation on Power Actions": {
     "Show Confirmation on Power Actions": "Güç Eylemlerinde Onay Göster"
@@ -1497,7 +1497,7 @@
     "Show Workspace Apps": "Çalışma Alanı Uygulamalarını Göster"
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
-    "Show all 9 tags instead of only occupied tags (DWL only)": ""
+    "Show all 9 tags instead of only occupied tags (DWL only)": "Sadece dolu etiketleri değil, tüm 9 etiketi göster (sadece DWL)"
   },
   "Show on Last Display": {
     "Show on Last Display": "Son Ekranda Göster"

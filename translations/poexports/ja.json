@@ -348,7 +348,7 @@
     "Color Picker": "カラーピッカー"
   },
   "Color temperature for day time": {
-    "Color temperature for day time": ""
+    "Color temperature for day time": "昼間の色温度"
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "ナイトモードの色温度"
@@ -519,7 +519,7 @@
     "Date Format": "日付形式"
   },
   "Day Temperature": {
-    "Day Temperature": ""
+    "Day Temperature": "昼間の温度"
   },
   "Default": {
     "Default": "デフォルト"
@@ -1092,7 +1092,7 @@
     "Night Mode": "ナイトモード"
   },
   "Night Temperature": {
-    "Night Temperature": ""
+    "Night Temperature": "夜間の温度"
   },
   "No Active Players": {
     "No Active Players": "アクティブプレイヤーなし"
