@@ -1946,13 +1946,6 @@
     "comment": ""
   },
   {
-    "term": "Hibernate system after",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "translation": "",
     "context": "",
@@ -3697,6 +3690,13 @@
   },
   {
     "term": "Suspend",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Suspend behavior",
     "translation": "",
     "context": "",
     "reference": "",

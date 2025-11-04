@@ -722,37 +722,37 @@
   {
     "term": "Command or script to run instead of the standard hibernate procedure",
     "context": "Command or script to run instead of the standard hibernate procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:496",
+    "reference": "Modals/Settings/PowerSettings.qml:502",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard lock procedure",
     "context": "Command or script to run instead of the standard lock procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:400",
+    "reference": "Modals/Settings/PowerSettings.qml:406",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard logout procedure",
     "context": "Command or script to run instead of the standard logout procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:432",
+    "reference": "Modals/Settings/PowerSettings.qml:438",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard power off procedure",
     "context": "Command or script to run instead of the standard power off procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:560",
+    "reference": "Modals/Settings/PowerSettings.qml:566",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard reboot procedure",
     "context": "Command or script to run instead of the standard reboot procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:528",
+    "reference": "Modals/Settings/PowerSettings.qml:534",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard suspend procedure",
     "context": "Command or script to run instead of the standard suspend procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:464",
+    "reference": "Modals/Settings/PowerSettings.qml:470",
     "comment": ""
   },
   {
@@ -950,7 +950,7 @@
   {
     "term": "Custom Power Actions",
     "context": "Custom Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:386",
+    "reference": "Modals/Settings/PowerSettings.qml:392",
     "comment": ""
   },
   {
@@ -1668,12 +1668,6 @@
     "comment": ""
   },
   {
-    "term": "Hibernate system after",
-    "context": "Hibernate system after",
-    "reference": "Modals/Settings/PowerSettings.qml:274",
-    "comment": ""
-  },
-  {
     "term": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "context": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "reference": "Modules/Settings/DockTab.qml:135",
@@ -1742,7 +1736,7 @@
   {
     "term": "Idle monitoring not supported - requires newer Quickshell version",
     "context": "Idle monitoring not supported - requires newer Quickshell version",
-    "reference": "Modals/Settings/PowerSettings.qml:307",
+    "reference": "Modals/Settings/PowerSettings.qml:313",
     "comment": ""
   },
   {
@@ -2588,7 +2582,7 @@
   {
     "term": "Power Action Confirmation",
     "context": "Power Action Confirmation",
-    "reference": "Modals/Settings/PowerSettings.qml:342",
+    "reference": "Modals/Settings/PowerSettings.qml:348",
     "comment": ""
   },
   {
@@ -2720,7 +2714,7 @@
   {
     "term": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
     "context": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
-    "reference": "Modals/Settings/PowerSettings.qml:353",
+    "reference": "Modals/Settings/PowerSettings.qml:359",
     "comment": ""
   },
   {
@@ -2966,7 +2960,7 @@
   {
     "term": "Show Confirmation on Power Actions",
     "context": "Show Confirmation on Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:352",
+    "reference": "Modals/Settings/PowerSettings.qml:358",
     "comment": ""
   },
   {
@@ -3171,6 +3165,12 @@
     "term": "Suspend",
     "context": "Suspend",
     "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
+    "comment": ""
+  },
+  {
+    "term": "Suspend behavior",
+    "context": "Suspend behavior",
+    "reference": "Modals/Settings/PowerSettings.qml:275",
     "comment": ""
   },
   {
