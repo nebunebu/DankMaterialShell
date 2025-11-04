@@ -1134,14 +1134,14 @@ Item {
                             width: parent.width
                             height: 24
                             value: SettingsData.dankBarInnerPadding
-                            minimum: 0
+                            minimum: -8
                             maximum: 24
                             unit: ""
                             showValue: true
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.set("dankBarInnerPadding", 
+                                                      SettingsData.set("dankBarInnerPadding",
                                                           newValue)
                                                   }
 
