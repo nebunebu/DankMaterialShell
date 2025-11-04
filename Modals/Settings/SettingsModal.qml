@@ -36,7 +36,7 @@ DankModal {
     objectName: "settingsModal"
     width: Math.min(800, screenWidth * 0.9)
     height: Math.min(800, screenHeight * 0.85)
-    backgroundColor: Theme.popupBackground()
+    backgroundColor: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
     visible: false
     onBackgroundClicked: () => {
         return hide();

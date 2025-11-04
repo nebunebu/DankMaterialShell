@@ -90,7 +90,7 @@ Rectangle {
 
     implicitHeight: brightnessContent.height + Theme.spacingM
     radius: Theme.cornerRadius
-    color: Theme.surfaceContainerHigh
+    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
     border.width: 0
 
@@ -141,7 +141,7 @@ Rectangle {
                 height: 40
                 visible: screenName && screenName.length > 0 && DisplayService.devices && DisplayService.devices.length > 1
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHighest
+                color: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
 
                 Item {
                     anchors.fill: parent
@@ -213,7 +213,7 @@ Rectangle {
                     width: parent.width
                     height: 80
                     radius: Theme.cornerRadius
-                    color: Theme.surfaceContainerHighest
+                    color: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
                     border.color: modelData.name === currentDeviceName ? Theme.primary : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.12)
                     border.width: modelData.name === currentDeviceName ? 2 : 0
 

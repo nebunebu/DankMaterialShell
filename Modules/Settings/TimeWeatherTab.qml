@@ -26,7 +26,7 @@ Item {
                 width: parent.width
                 height: timeSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -89,7 +89,7 @@ Item {
                 width: parent.width
                 height: timeSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -152,7 +152,7 @@ Item {
                 width: parent.width
                 height: dateSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -338,7 +338,7 @@ Item {
                         width: parent.width
                         height: formatHelp.implicitHeight + Theme.spacingM * 2
                         radius: Theme.cornerRadius
-                        color: Theme.surfaceContainerHigh
+                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                               Theme.outline.b, 0.1)
                         border.width: 0
@@ -440,7 +440,7 @@ Item {
                 width: parent.width
                 height: enableWeatherSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -503,7 +503,7 @@ Item {
                 width: parent.width
                 height: temperatureSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -575,7 +575,7 @@ Item {
                 width: parent.width
                 height: locationSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -804,7 +804,7 @@ Item {
                 width: parent.width
                 height: weatherDisplaySection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -1058,7 +1058,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent
@@ -1105,7 +1105,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent
@@ -1152,7 +1152,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent
@@ -1199,7 +1199,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent
@@ -1246,7 +1246,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent
@@ -1293,7 +1293,7 @@ Item {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
                                 Column {
                                     anchors.centerIn: parent

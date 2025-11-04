@@ -121,7 +121,7 @@ PanelWindow {
         Rectangle {
             id: osdBackground
             anchors.fill: parent
-            color: Theme.popupBackground()
+            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
             radius: Theme.cornerRadius
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
             border.width: 1

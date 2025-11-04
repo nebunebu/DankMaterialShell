@@ -25,7 +25,7 @@ Item {
                 width: parent.width
                 height: dockPositionSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -95,7 +95,7 @@ Item {
                 width: parent.width
                 height: dockVisibilitySection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -262,7 +262,7 @@ Item {
                 width: parent.width
                 height: groupByAppSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -334,7 +334,7 @@ Item {
                 width: parent.width
                 height: indicatorStyleSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -400,7 +400,7 @@ Item {
                 width: parent.width
                 height: iconSizeSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -443,7 +443,7 @@ Item {
                         unit: ""
                         showValue: true
                         wheelEnabled: false
-                        thumbOutlineColor: Theme.surfaceContainerHigh
+                        thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         onSliderValueChanged: newValue => {
                                                   SettingsData.setDockIconSize(newValue)
                                               }
@@ -463,7 +463,7 @@ Item {
                 width: parent.width
                 height: dockSpacingSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -517,7 +517,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDockSpacing(
                                                           newValue)
@@ -545,7 +545,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDockBottomGap(
                                                           newValue)
@@ -567,7 +567,7 @@ Item {
                 width: parent.width
                 height: transparencySection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -610,7 +610,7 @@ Item {
                         unit: "%"
                         showValue: true
                         wheelEnabled: false
-                        thumbOutlineColor: Theme.surfaceContainerHigh
+                        thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         onSliderValueChanged: newValue => {
                                                   SettingsData.setDockTransparency(
                                                       newValue / 100)

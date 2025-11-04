@@ -55,7 +55,7 @@ Rectangle {
 
     width: 270
     height: parent.height
-    color: Theme.popupBackground()
+    color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
     radius: Theme.cornerRadius
 
     DankFlickable {

@@ -38,7 +38,7 @@ Item {
                 width: parent.width
                 height: launcherLogoSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -288,7 +288,7 @@ Item {
                                     unit: ""
                                     showValue: true
                                     wheelEnabled: false
-                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                     anchors.horizontalCenter: parent.horizontalCenter
                                     onSliderValueChanged: newValue => {
                                         SettingsData.setLauncherLogoSizeOffset(newValue)
@@ -339,7 +339,7 @@ Item {
                                         unit: "%"
                                         showValue: true
                                         wheelEnabled: false
-                                        thumbOutlineColor: Theme.surfaceContainerHigh
+                                        thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         onSliderValueChanged: newValue => {
                                             SettingsData.setLauncherLogoBrightness(newValue / 100)
@@ -368,7 +368,7 @@ Item {
                                         unit: "%"
                                         showValue: true
                                         wheelEnabled: false
-                                        thumbOutlineColor: Theme.surfaceContainerHigh
+                                        thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         onSliderValueChanged: newValue => {
                                             SettingsData.setLauncherLogoContrast(newValue / 100)
@@ -408,7 +408,7 @@ Item {
                 width: parent.width
                 height: launchPrefixSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -463,7 +463,7 @@ Item {
                 width: parent.width
                 height: sortingSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -528,7 +528,7 @@ Item {
                 width: parent.width
                 height: recentlyUsedSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0

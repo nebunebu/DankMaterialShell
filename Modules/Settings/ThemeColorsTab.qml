@@ -81,7 +81,7 @@ Item {
                 width: parent.width
                 height: themeSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -707,7 +707,7 @@ Item {
                 width: parent.width
                 height: transparencySection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -750,6 +750,14 @@ Item {
                             font.weight: Font.Medium
                         }
 
+                        StyledText {
+                            text: I18n.tr("Controls opacity of the DankBar panel background")
+                            font.pixelSize: Theme.fontSizeSmall - 2
+                            color: Theme.surfaceVariantText
+                            width: parent.width
+                            wrapMode: Text.WordWrap
+                        }
+
                         DankSlider {
                             width: parent.width
                             height: 24
@@ -760,7 +768,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDankBarTransparency(
                                                           newValue / 100)
@@ -776,14 +784,27 @@ Item {
                             width: parent.width
                             height: Math.max(transparencyLabel.height, widgetColorGroup.height)
 
-                            StyledText {
-                                id: transparencyLabel
-                                text: I18n.tr("Dank Bar Widget Transparency")
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.surfaceText
-                                font.weight: Font.Medium
+                            Column {
                                 anchors.left: parent.left
                                 anchors.verticalCenter: parent.verticalCenter
+                                width: parent.width - widgetColorGroup.width - Theme.spacingM
+                                spacing: 2
+
+                                StyledText {
+                                    id: transparencyLabel
+                                    text: I18n.tr("Dank Bar Widget Transparency")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                }
+
+                                StyledText {
+                                    text: I18n.tr("Controls opacity of individual widgets inside DankBar")
+                                    font.pixelSize: Theme.fontSizeSmall - 2
+                                    color: Theme.surfaceVariantText
+                                    width: parent.width
+                                    wrapMode: Text.WordWrap
+                                }
                             }
 
                             DankButtonGroup {
@@ -829,7 +850,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDankBarWidgetTransparency(
                                                           newValue / 100)
@@ -848,6 +869,14 @@ Item {
                             font.weight: Font.Medium
                         }
 
+                        StyledText {
+                            text: I18n.tr("Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)")
+                            font.pixelSize: Theme.fontSizeSmall - 2
+                            color: Theme.surfaceVariantText
+                            width: parent.width
+                            wrapMode: Text.WordWrap
+                        }
+
                         DankSlider {
                             width: parent.width
                             height: 24
@@ -858,7 +887,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setPopupTransparency(
                                                           newValue / 100)
@@ -893,7 +922,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setCornerRadius(
                                                           newValue)
@@ -950,7 +979,7 @@ Item {
                 width: parent.width
                 height: fontSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -1132,7 +1161,7 @@ Item {
                                 iconName: "remove"
                                 iconSize: Theme.iconSizeSmall
                                 enabled: SettingsData.fontScale > 1.0
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.max(1.0, SettingsData.fontScale - 0.05)
@@ -1144,7 +1173,7 @@ Item {
                                 width: 60
                                 height: 32
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 border.color: Qt.rgba(Theme.outline.r,
                                                       Theme.outline.g,
                                                       Theme.outline.b, 0.2)
@@ -1165,7 +1194,7 @@ Item {
                                 iconName: "add"
                                 iconSize: Theme.iconSizeSmall
                                 enabled: SettingsData.fontScale < 2.0
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.min(2.0,
@@ -1182,7 +1211,7 @@ Item {
                 width: parent.width
                 height: portalSyncSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -1273,7 +1302,7 @@ Item {
                 width: parent.width
                 height: iconThemeSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -1324,7 +1353,7 @@ Item {
                 width: parent.width
                 height: systemThemingSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0

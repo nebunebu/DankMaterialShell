@@ -671,7 +671,7 @@ Item {
                 width: parent.width
                 height: positionSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -735,7 +735,7 @@ Item {
                 width: parent.width
                 height: dankBarAutoHideSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -906,7 +906,7 @@ Item {
                 width: parent.width
                 height: dankBarSpacingSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -971,7 +971,7 @@ Item {
                                 buttonSize: 20
                                 iconName: "refresh"
                                 iconSize: 12
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 anchors.verticalCenter: parent.verticalCenter
                                 onClicked: {
@@ -995,7 +995,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDankBarSpacing(
                                                           newValue)
@@ -1043,7 +1043,7 @@ Item {
                                 buttonSize: 20
                                 iconName: "refresh"
                                 iconSize: 12
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 anchors.verticalCenter: parent.verticalCenter
                                 onClicked: {
@@ -1067,7 +1067,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDankBarBottomGap(
                                                           newValue)
@@ -1115,7 +1115,7 @@ Item {
                                 buttonSize: 20
                                 iconName: "refresh"
                                 iconSize: 12
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 anchors.verticalCenter: parent.verticalCenter
                                 onClicked: {
@@ -1139,7 +1139,7 @@ Item {
                             unit: ""
                             showValue: true
                             wheelEnabled: false
-                            thumbOutlineColor: Theme.surfaceContainerHigh
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
                                                       SettingsData.setDankBarInnerPadding(
                                                           newValue)
@@ -1214,7 +1214,7 @@ Item {
                                         buttonSize: 20
                                         iconName: "refresh"
                                         iconSize: 12
-                                        backgroundColor: Theme.surfaceContainerHigh
+                                        backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
@@ -1238,7 +1238,7 @@ Item {
                                     unit: ""
                                     showValue: true
                                     wheelEnabled: false
-                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                     onSliderValueChanged: newValue => {
                                         SettingsData.setPopupGapsManual(newValue)
                                     }
@@ -1399,7 +1399,7 @@ Item {
                                         buttonSize: 20
                                         iconName: "refresh"
                                         iconSize: 12
-                                        backgroundColor: Theme.surfaceContainerHigh
+                                        backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
@@ -1423,7 +1423,7 @@ Item {
                                     unit: "%"
                                     showValue: true
                                     wheelEnabled: false
-                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                     onSliderValueChanged: newValue => {
                                         SettingsData.dankBarBorderOpacity = newValue / 100
                                     }
@@ -1470,7 +1470,7 @@ Item {
                                         buttonSize: 20
                                         iconName: "refresh"
                                         iconSize: 12
-                                        backgroundColor: Theme.surfaceContainerHigh
+                                        backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
@@ -1494,7 +1494,7 @@ Item {
                                     unit: "px"
                                     showValue: true
                                     wheelEnabled: false
-                                    thumbOutlineColor: Theme.surfaceContainerHigh
+                                    thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                     onSliderValueChanged: newValue => {
                                         SettingsData.dankBarBorderThickness = newValue
                                     }
@@ -1561,7 +1561,7 @@ Item {
                                 iconName: "remove"
                                 iconSize: Theme.iconSizeSmall
                                 enabled: SettingsData.dankBarFontScale > 0.5
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.max(0.5, SettingsData.dankBarFontScale - 0.05)
@@ -1573,7 +1573,7 @@ Item {
                                 width: 60
                                 height: 32
                                 radius: Theme.cornerRadius
-                                color: Theme.surfaceContainerHigh
+                                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
                                 border.width: 0
 
@@ -1591,7 +1591,7 @@ Item {
                                 iconName: "add"
                                 iconSize: Theme.iconSizeSmall
                                 enabled: SettingsData.dankBarFontScale < 2.0
-                                backgroundColor: Theme.surfaceContainerHigh
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.min(2.0, SettingsData.dankBarFontScale + 0.05)
@@ -1608,7 +1608,7 @@ Item {
                 width: parent.width
                 height: widgetManagementSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
-                color: Theme.surfaceContainerHigh
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
@@ -1731,7 +1731,7 @@ Item {
                     width: parent.width
                     height: leftSection.implicitHeight + Theme.spacingL * 2
                     radius: Theme.cornerRadius
-                    color: Theme.surfaceContainerHigh
+                    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                           Theme.outline.b, 0.2)
                     border.width: 0
@@ -1810,7 +1810,7 @@ Item {
                     width: parent.width
                     height: centerSection.implicitHeight + Theme.spacingL * 2
                     radius: Theme.cornerRadius
-                    color: Theme.surfaceContainerHigh
+                    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                           Theme.outline.b, 0.2)
                     border.width: 0
@@ -1889,7 +1889,7 @@ Item {
                     width: parent.width
                     height: rightSection.implicitHeight + Theme.spacingL * 2
                     radius: Theme.cornerRadius
-                    color: Theme.surfaceContainerHigh
+                    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                           Theme.outline.b, 0.2)
                     border.width: 0

@@ -157,7 +157,7 @@ Row {
             }
         }
         thumbOutlineColor: Theme.surfaceContainer
-        trackColor: Theme.surfaceContainerHigh
+        trackColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
     }
 
     Loader {

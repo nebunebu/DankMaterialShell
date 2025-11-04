@@ -190,7 +190,7 @@ Item {
                 width: parent.width - 80 - Theme.spacingL
                 height: 56
                 cornerRadius: Theme.cornerRadius
-                backgroundColor: Theme.surfaceContainerHigh
+                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                 normalBorderColor: Theme.outlineMedium
                 focusedBorderColor: Theme.primary
                 leftIconName: searchMode === "files" ? "folder" : "search"

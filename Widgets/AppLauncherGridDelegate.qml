@@ -36,7 +36,7 @@ Rectangle {
     width: cellWidth - cellPadding
     height: cellHeight - cellPadding
     radius: Theme.cornerRadius
-    color: currentIndex === index ? Theme.surfaceContainerHighest : mouseArea.containsMouse ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh
+    color: currentIndex === index ? Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency) : mouseArea.containsMouse ? Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency) : Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
     Column {
         anchors.centerIn: parent

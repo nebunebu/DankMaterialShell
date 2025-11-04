@@ -382,7 +382,7 @@ DankModal {
                                             if (index < SessionData.recentColors.length) {
                                                 return SessionData.recentColors[index]
                                             }
-                                            return Theme.surfaceContainerHigh
+                                            return Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         }
 
                                         opacity: index < SessionData.recentColors.length ? 1.0 : 0.3

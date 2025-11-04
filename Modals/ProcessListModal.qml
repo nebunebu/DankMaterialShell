@@ -44,7 +44,7 @@ DankModal {
     width: 900
     height: 680
     visible: false
-    backgroundColor: Theme.popupBackground()
+    backgroundColor: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
     cornerRadius: Theme.cornerRadius
     enableShadow: true
     onBackgroundClicked: () => {
@@ -181,7 +181,7 @@ DankModal {
                 Rectangle {
                     Layout.fillWidth: true
                     height: 52
-                    color: Theme.surfaceContainerHigh
+                    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     radius: Theme.cornerRadius
                     border.color: Theme.outlineLight
                     border.width: 1
@@ -281,7 +281,7 @@ DankModal {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     radius: Theme.cornerRadius
-                    color: Theme.surfaceContainerHigh
+                    color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     border.color: Theme.outlineLight
                     border.width: 1
 

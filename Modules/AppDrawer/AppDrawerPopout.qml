@@ -69,7 +69,7 @@ DankPopout {
 
             property alias searchField: searchField
 
-            color: Theme.popupBackground()
+            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
             radius: Theme.cornerRadius
             antialiasing: true
             smooth: true
@@ -208,7 +208,7 @@ DankPopout {
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: 52
                         cornerRadius: Theme.cornerRadius
-                        backgroundColor: Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, Theme.getContentBackgroundAlpha() * 0.7)
+                        backgroundColor: Theme.withAlpha(Theme.surfaceVariant, Theme.popupTransparency)
                         normalBorderColor: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
                         focusedBorderColor: Theme.primary
                         leftIconName: "search"
@@ -540,7 +540,7 @@ DankPopout {
 
         background: Rectangle {
             radius: Theme.cornerRadius
-            color: Theme.popupBackground()
+            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
             border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
             border.width: 1
 

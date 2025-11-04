@@ -56,7 +56,7 @@ DankPopout {
             id: batteryContent
 
             implicitHeight: contentColumn.implicitHeight + Theme.spacingL * 2
-            color: Theme.popupBackground()
+            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
             radius: Theme.cornerRadius
             border.color: Theme.outlineMedium
             border.width: 0
@@ -304,7 +304,7 @@ DankPopout {
                         width: (parent.width - Theme.spacingM) / 2
                         height: 64
                         radius: Theme.cornerRadius
-                        color: Theme.surfaceContainerHigh
+                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         border.width: 0
 
                         Column {
@@ -339,7 +339,7 @@ DankPopout {
                         width: (parent.width - Theme.spacingM) / 2
                         height: 64
                         radius: Theme.cornerRadius
-                        color: Theme.surfaceContainerHigh
+                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         border.width: 0
 
                         Column {
@@ -388,7 +388,7 @@ DankPopout {
                             width: parent.width
                             height: batteryColumn.implicitHeight + Theme.spacingM * 2
                             radius: Theme.cornerRadius
-                            color: Theme.surfaceContainer
+                            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
                             border.width: 0
 
                             Column {
@@ -458,7 +458,7 @@ DankPopout {
                                         width: (parent.width - Theme.spacingS * 2) / 3
                                         height: 48
                                         radius: Theme.cornerRadius
-                                        color: Theme.surfaceContainerHigh
+                                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         border.width: 0
 
                                         Column {
@@ -495,7 +495,7 @@ DankPopout {
                                         width: (parent.width - Theme.spacingS * 2) / 3
                                         height: 48
                                         radius: Theme.cornerRadius
-                                        color: Theme.surfaceContainerHigh
+                                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         border.width: 0
 
                                         Column {
@@ -524,7 +524,7 @@ DankPopout {
                                         width: (parent.width - Theme.spacingS * 2) / 3
                                         height: 48
                                         radius: Theme.cornerRadius
-                                        color: Theme.surfaceContainerHigh
+                                        color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                         border.width: 0
 
                                         Column {

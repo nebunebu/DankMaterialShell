@@ -46,7 +46,7 @@ DankPopout {
         }
     }
 
-    readonly property color _containerBg: Theme.surfaceContainerHigh
+    readonly property color _containerBg: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
     function setTriggerPosition(x, y, width, section, screen) {
         StateUtils.setTriggerPosition(root, x, y, width, section, screen)
