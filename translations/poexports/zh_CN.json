@@ -354,7 +354,7 @@
     "Color Picker": "取色器"
   },
   "Color temperature for day time": {
-    "Color temperature for day time": "白天色温"
+    "Color temperature for day time": "白天的色温"
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "夜间模式色温"
@@ -430,6 +430,15 @@
   },
   "Control currently playing media": {
     "Control currently playing media": "控制当前播放的媒体"
+  },
+  "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+  },
+  "Controls opacity of individual widgets inside DankBar": {
+    "Controls opacity of individual widgets inside DankBar": ""
+  },
+  "Controls opacity of the DankBar panel background": {
+    "Controls opacity of the DankBar panel background": ""
   },
   "Copied to clipboard": {
     "Copied to clipboard": "复制到剪切板"
@@ -525,13 +534,13 @@
     "Dark Mode": "暗色模式"
   },
   "Darken Modal Background": {
-    "Darken Modal Background": ""
+    "Darken Modal Background": "暗化背景"
   },
   "Date Format": {
     "Date Format": "日期格式"
   },
   "Day Temperature": {
-    "Day Temperature": "白天温度"
+    "Day Temperature": "日间温度"
   },
   "Default": {
     "Default": "默认"
@@ -1113,7 +1122,7 @@
     "Night Mode": "夜间模式"
   },
   "Night Temperature": {
-    "Night Temperature": "晚间温度"
+    "Night Temperature": "夜间温度"
   },
   "No Active Players": {
     "No Active Players": "没有正在播放的音频"
@@ -1521,7 +1530,7 @@
     "Show all 9 tags instead of only occupied tags (DWL only)": "显示所有 9 个标签，而非仅占用的标签（仅限 DWL）"
   },
   "Show darkened overlay behind modal dialogs": {
-    "Show darkened overlay behind modal dialogs": ""
+    "Show darkened overlay behind modal dialogs": "在对话框后显示暗色遮罩"
   },
   "Show on Last Display": {
     "Show on Last Display": "上一个显示器"

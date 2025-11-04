@@ -431,6 +431,15 @@
   "Control currently playing media": {
     "Control currently playing media": "控制目前播放器"
   },
+  "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+  },
+  "Controls opacity of individual widgets inside DankBar": {
+    "Controls opacity of individual widgets inside DankBar": ""
+  },
+  "Controls opacity of the DankBar panel background": {
+    "Controls opacity of the DankBar panel background": ""
+  },
   "Copied to clipboard": {
     "Copied to clipboard": "複製到剪貼簿"
   },
