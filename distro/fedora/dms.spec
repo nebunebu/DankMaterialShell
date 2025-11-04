@@ -174,7 +174,13 @@ if [ "$1" -ge 2 ]; then
             export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$user_uid/bus
             export WAYLAND_DISPLAY=$wayland_display
             export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:\$PATH
-            dms restart >/dev/null 2>&1
+            
+            # Check if DMS is running as a systemd service
+            if systemctl --user is-active dms.service >/dev/null 2>&1; then
+                systemctl --user restart dms.service >/dev/null 2>&1
+            else
+                dms restart >/dev/null 2>&1
+            fi
         " 2>/dev/null || true
         
         break
