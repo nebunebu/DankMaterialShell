@@ -1,9 +1,12 @@
 import QtQuick
+import Quickshell.Wayland
 import qs.Common
 import qs.Widgets
 
 DankPopout {
     id: root
+
+    WlrLayershell.keyboardFocus: shouldBeVisible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None 
 
     property var triggerScreen: null
     property Component pluginContent: null
