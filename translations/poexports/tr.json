@@ -524,6 +524,9 @@
   "Dark Mode": {
     "Dark Mode": ""
   },
+  "Darken Modal Background": {
+    "Darken Modal Background": ""
+  },
   "Date Format": {
     "Date Format": "Tarih Biçimi"
   },
@@ -1516,6 +1519,9 @@
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
     "Show all 9 tags instead of only occupied tags (DWL only)": "Sadece dolu etiketleri değil, tüm 9 etiketi göster (sadece DWL)"
+  },
+  "Show darkened overlay behind modal dialogs": {
+    "Show darkened overlay behind modal dialogs": ""
   },
   "Show on Last Display": {
     "Show on Last Display": "Son Ekranda Göster"

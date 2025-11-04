@@ -524,6 +524,9 @@
   "Dark Mode": {
     "Dark Mode": "暗色模式"
   },
+  "Darken Modal Background": {
+    "Darken Modal Background": ""
+  },
   "Date Format": {
     "Date Format": "日期格式"
   },
@@ -1516,6 +1519,9 @@
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
     "Show all 9 tags instead of only occupied tags (DWL only)": "显示所有 9 个标签，而非仅占用的标签（仅限 DWL）"
+  },
+  "Show darkened overlay behind modal dialogs": {
+    "Show darkened overlay behind modal dialogs": ""
   },
   "Show on Last Display": {
     "Show on Last Display": "上一个显示器"

@@ -524,6 +524,9 @@
   "Dark Mode": {
     "Dark Mode": "ダークモード"
   },
+  "Darken Modal Background": {
+    "Darken Modal Background": ""
+  },
   "Date Format": {
     "Date Format": "日付形式"
   },
@@ -1516,6 +1519,9 @@
   },
   "Show all 9 tags instead of only occupied tags (DWL only)": {
     "Show all 9 tags instead of only occupied tags (DWL only)": "占有タグのみではなく、9 つのタグをすべて表示 (DWL のみ)"
+  },
+  "Show darkened overlay behind modal dialogs": {
+    "Show darkened overlay behind modal dialogs": ""
   },
   "Show on Last Display": {
     "Show on Last Display": "最後のディスプレイに表示"
