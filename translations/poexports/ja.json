@@ -432,13 +432,13 @@
     "Control currently playing media": "現在再生中のメディアを制御"
   },
   "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
-    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": "すべてのポップアウト、モーダル、およびそれらのコンテンツレイヤー(DankDash、設定、アプリドロワー、コントロールセンターなど)の不透明度を制御"
   },
   "Controls opacity of individual widgets inside DankBar": {
-    "Controls opacity of individual widgets inside DankBar": ""
+    "Controls opacity of individual widgets inside DankBar": "DankBar内の個々のウィジェットの不透明度を制御"
   },
   "Controls opacity of the DankBar panel background": {
-    "Controls opacity of the DankBar panel background": ""
+    "Controls opacity of the DankBar panel background": "DankBarパネルの背景の不透明度を制御"
   },
   "Copied to clipboard": {
     "Copied to clipboard": "クリップボードにコピーしました"
@@ -534,7 +534,7 @@
     "Dark Mode": "ダークモード"
   },
   "Darken Modal Background": {
-    "Darken Modal Background": ""
+    "Darken Modal Background": "モーダル背景を暗くする"
   },
   "Date Format": {
     "Date Format": "日付形式"
@@ -1530,7 +1530,7 @@
     "Show all 9 tags instead of only occupied tags (DWL only)": "占有タグのみではなく、9 つのタグをすべて表示 (DWL のみ)"
   },
   "Show darkened overlay behind modal dialogs": {
-    "Show darkened overlay behind modal dialogs": ""
+    "Show darkened overlay behind modal dialogs": "モーダルダイアログの背後に暗いオーバーレイを表示"
   },
   "Show on Last Display": {
     "Show on Last Display": "最後のディスプレイに表示"
@@ -1615,6 +1615,9 @@
   },
   "Suspend": {
     "Suspend": "一時停止"
+  },
+  "Suspend behavior": {
+    "Suspend behavior": ""
   },
   "Suspend system after": {
     "Suspend system after": "後にシステムを一時停止"

@@ -432,13 +432,13 @@
     "Control currently playing media": "控制当前播放的媒体"
   },
   "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
-    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": "控制所有弹出窗口、模态及其内容层（DankDash、设置、应用抽屉、控制中心等）的不透明度"
   },
   "Controls opacity of individual widgets inside DankBar": {
-    "Controls opacity of individual widgets inside DankBar": ""
+    "Controls opacity of individual widgets inside DankBar": "控制 DankBar 中各个控件的不透明度"
   },
   "Controls opacity of the DankBar panel background": {
-    "Controls opacity of the DankBar panel background": ""
+    "Controls opacity of the DankBar panel background": "控制 DankBar 面板背景的不透明度"
   },
   "Copied to clipboard": {
     "Copied to clipboard": "复制到剪切板"
@@ -1615,6 +1615,9 @@
   },
   "Suspend": {
     "Suspend": "挂起"
+  },
+  "Suspend behavior": {
+    "Suspend behavior": ""
   },
   "Suspend system after": {
     "Suspend system after": "在此时间后挂起系统"
