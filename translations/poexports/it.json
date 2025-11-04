@@ -174,10 +174,10 @@
     "Auto-saving...": "Salvataggio automatico..."
   },
   "Autoconnect disabled": {
-    "Autoconnect disabled": ""
+    "Autoconnect disabled": "Connessione automatica disabilitata"
   },
   "Autoconnect enabled": {
-    "Autoconnect enabled": ""
+    "Autoconnect enabled": "Connessione automatica abilitata"
   },
   "Automatic Control": {
     "Automatic Control": "Controllo Automatico"
@@ -531,10 +531,10 @@
     "DankSearch not available": "DankSearch non disponibile"
   },
   "Dark Mode": {
-    "Dark Mode": ""
+    "Dark Mode": "Modalità Scura"
   },
   "Darken Modal Background": {
-    "Darken Modal Background": ""
+    "Darken Modal Background": "Scurisci lo sfondo modale"
   },
   "Date Format": {
     "Date Format": "Formato Data"
@@ -567,7 +567,7 @@
     "Device paired": "Dispositivo accoppiato"
   },
   "Disable Autoconnect": {
-    "Disable Autoconnect": ""
+    "Disable Autoconnect": "Disabilita connessione automatica"
   },
   "Disconnect": {
     "Disconnect": "Disconnetti"
@@ -645,7 +645,7 @@
     "Empty": "Vuoto"
   },
   "Enable Autoconnect": {
-    "Enable Autoconnect": ""
+    "Enable Autoconnect": "Abilita connessione automatica"
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "Abilita Temperatura GPU"
@@ -744,7 +744,7 @@
     "Failed to start connection to ": "Impossibile avviare connessione a "
   },
   "Failed to update autoconnect": {
-    "Failed to update autoconnect": ""
+    "Failed to update autoconnect": "Impossibile aggiornare connessione automatica"
   },
   "Feels Like": {
     "Feels Like": "Temperatura"
@@ -1530,7 +1530,7 @@
     "Show all 9 tags instead of only occupied tags (DWL only)": "Mostra tutti i 9 tags invece dei soli tags occupati (solo DWL)"
   },
   "Show darkened overlay behind modal dialogs": {
-    "Show darkened overlay behind modal dialogs": ""
+    "Show darkened overlay behind modal dialogs": "Mostra la sovrapposizione oscurata dietro le finestre di dialogo modali"
   },
   "Show on Last Display": {
     "Show on Last Display": "Mostra sull'ultimo display"
