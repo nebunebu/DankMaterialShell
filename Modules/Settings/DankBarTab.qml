@@ -502,11 +502,11 @@ Item {
     function handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value) {
         // Control Center settings are global, not per-widget instance
         if (settingName === "showNetworkIcon") {
-            SettingsData.setControlCenterShowNetworkIcon(value)
+            SettingsData.set("controlCenterShowNetworkIcon", value)
         } else if (settingName === "showBluetoothIcon") {
-            SettingsData.setControlCenterShowBluetoothIcon(value)
+            SettingsData.set("controlCenterShowBluetoothIcon", value)
         } else if (settingName === "showAudioIcon") {
-            SettingsData.setControlCenterShowAudioIcon(value)
+            SettingsData.set("controlCenterShowAudioIcon", value)
         }
     }
 
@@ -786,7 +786,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dankBarAutoHide
                             onToggled: toggled => {
-                                           return SettingsData.setDankBarAutoHide(
+                                           return SettingsData.set("dankBarAutoHide", 
                                                toggled)
                                        }
                         }
@@ -838,7 +838,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dankBarVisible
                             onToggled: toggled => {
-                                           return SettingsData.setDankBarVisible(
+                                           return SettingsData.set("dankBarVisible", 
                                                toggled)
                                        }
                         }
@@ -892,7 +892,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dankBarOpenOnOverview
                             onToggled: toggled => {
-                                           return SettingsData.setDankBarOpenOnOverview(
+                                           return SettingsData.set("dankBarOpenOnOverview", 
                                                toggled)
                                        }
                         }
@@ -1047,7 +1047,7 @@ Item {
                                 iconColor: Theme.surfaceText
                                 anchors.verticalCenter: parent.verticalCenter
                                 onClicked: {
-                                    SettingsData.setDankBarBottomGap(0)
+                                    SettingsData.set("dankBarBottomGap", 0)
                                 }
                             }
 
@@ -1069,7 +1069,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDankBarBottomGap(
+                                                      SettingsData.set("dankBarBottomGap", 
                                                           newValue)
                                                   }
 
@@ -1119,7 +1119,7 @@ Item {
                                 iconColor: Theme.surfaceText
                                 anchors.verticalCenter: parent.verticalCenter
                                 onClicked: {
-                                    SettingsData.setDankBarInnerPadding(4)
+                                    SettingsData.set("dankBarInnerPadding", 4)
                                 }
                             }
 
@@ -1141,7 +1141,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDankBarInnerPadding(
+                                                      SettingsData.set("dankBarInnerPadding", 
                                                           newValue)
                                                   }
 
@@ -1164,7 +1164,7 @@ Item {
                             description: I18n.tr("Automatically calculate popup distance from bar edge.")
                             checked: SettingsData.popupGapsAuto
                             onToggled: checked => {
-                                SettingsData.setPopupGapsAuto(checked)
+                                SettingsData.set("popupGapsAuto", checked)
                             }
                         }
 
@@ -1218,7 +1218,7 @@ Item {
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
-                                            SettingsData.setPopupGapsManual(4)
+                                            SettingsData.set("popupGapsManual", 4)
                                         }
                                     }
 
@@ -1240,7 +1240,7 @@ Item {
                                     wheelEnabled: false
                                     thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                                     onSliderValueChanged: newValue => {
-                                        SettingsData.setPopupGapsManual(newValue)
+                                        SettingsData.set("popupGapsManual", newValue)
                                     }
 
                                     Binding {
@@ -1260,7 +1260,7 @@ Item {
                         description: "Removes rounded corners from bar container."
                         checked: SettingsData.dankBarSquareCorners
                         onToggled: checked => {
-                                       SettingsData.setDankBarSquareCorners(
+                                       SettingsData.set("dankBarSquareCorners", 
                                            checked)
                                    }
                     }
@@ -1271,7 +1271,7 @@ Item {
                         description: "Remove widget backgrounds for a minimal look with tighter spacing."
                         checked: SettingsData.dankBarNoBackground
                         onToggled: checked => {
-                                       SettingsData.setDankBarNoBackground(
+                                       SettingsData.set("dankBarNoBackground", 
                                            checked)
                                    }
                     }
@@ -1282,7 +1282,7 @@ Item {
                         description: "Add curved swooping tips at the bottom of the bar."
                         checked: SettingsData.dankBarGothCornersEnabled
                         onToggled: checked => {
-                                       SettingsData.setDankBarGothCornersEnabled(
+                                       SettingsData.set("dankBarGothCornersEnabled", 
                                            checked)
                                    }
                     }
@@ -1297,7 +1297,7 @@ Item {
                             description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
                             checked: SettingsData.dankBarBorderEnabled
                             onToggled: checked => {
-                                           SettingsData.setDankBarBorderEnabled(checked)
+                                           SettingsData.set("dankBarBorderEnabled", checked)
                                        }
                         }
 
@@ -1565,7 +1565,7 @@ Item {
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.max(0.5, SettingsData.dankBarFontScale - 0.05)
-                                    SettingsData.setDankBarFontScale(newScale)
+                                    SettingsData.set("dankBarFontScale", newScale)
                                 }
                             }
 
@@ -1595,7 +1595,7 @@ Item {
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.min(2.0, SettingsData.dankBarFontScale + 0.05)
-                                    SettingsData.setDankBarFontScale(newScale)
+                                    SettingsData.set("dankBarFontScale", newScale)
                                 }
                             }
                         }
@@ -1770,19 +1770,19 @@ Item {
                                              }
                         onCompactModeChanged: (widgetId, value) => {
                                                   if (widgetId === "clock") {
-                                                      SettingsData.setClockCompactMode(
+                                                      SettingsData.set("clockCompactMode", 
                                                           value)
                                                   } else if (widgetId === "music") {
-                                                      SettingsData.setMediaSize(
+                                                      SettingsData.set("mediaSize", 
                                                           value)
                                                   } else if (widgetId === "focusedWindow") {
-                                                      SettingsData.setFocusedWindowCompactMode(
+                                                      SettingsData.set("focusedWindowCompactMode", 
                                                           value)
                                                   } else if (widgetId === "runningApps") {
-                                                      SettingsData.setRunningAppsCompactMode(
+                                                      SettingsData.set("runningAppsCompactMode", 
                                                           value)
                                                   } else if (widgetId === "keyboard_layout_name") {
-                                                      SettingsData.setKeyboardLayoutNameCompactMode(
+                                                      SettingsData.set("keyboardLayoutNameCompactMode", 
                                                           value)
                                                   }
                                               }
@@ -1849,19 +1849,19 @@ Item {
                                              }
                         onCompactModeChanged: (widgetId, value) => {
                                                   if (widgetId === "clock") {
-                                                      SettingsData.setClockCompactMode(
+                                                      SettingsData.set("clockCompactMode", 
                                                           value)
                                                   } else if (widgetId === "music") {
-                                                      SettingsData.setMediaSize(
+                                                      SettingsData.set("mediaSize", 
                                                           value)
                                                   } else if (widgetId === "focusedWindow") {
-                                                      SettingsData.setFocusedWindowCompactMode(
+                                                      SettingsData.set("focusedWindowCompactMode", 
                                                           value)
                                                   } else if (widgetId === "runningApps") {
-                                                      SettingsData.setRunningAppsCompactMode(
+                                                      SettingsData.set("runningAppsCompactMode", 
                                                           value)
                                                   } else if (widgetId === "keyboard_layout_name") {
-                                                      SettingsData.setKeyboardLayoutNameCompactMode(
+                                                      SettingsData.set("keyboardLayoutNameCompactMode", 
                                                           value)
                                                   }
                                               }
@@ -1928,19 +1928,19 @@ Item {
                                              }
                         onCompactModeChanged: (widgetId, value) => {
                                                   if (widgetId === "clock") {
-                                                      SettingsData.setClockCompactMode(
+                                                      SettingsData.set("clockCompactMode", 
                                                           value)
                                                   } else if (widgetId === "music") {
-                                                      SettingsData.setMediaSize(
+                                                      SettingsData.set("mediaSize", 
                                                           value)
                                                   } else if (widgetId === "focusedWindow") {
-                                                      SettingsData.setFocusedWindowCompactMode(
+                                                      SettingsData.set("focusedWindowCompactMode", 
                                                           value)
                                                   } else if (widgetId === "runningApps") {
-                                                      SettingsData.setRunningAppsCompactMode(
+                                                      SettingsData.set("runningAppsCompactMode", 
                                                           value)
                                                   } else if (widgetId === "keyboard_layout_name") {
-                                                      SettingsData.setKeyboardLayoutNameCompactMode(
+                                                      SettingsData.set("keyboardLayoutNameCompactMode", 
                                                           value)
                                                   }
                                               }

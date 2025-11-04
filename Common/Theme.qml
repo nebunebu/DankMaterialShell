@@ -482,7 +482,7 @@ Singleton {
         }
         const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
         if (savePrefs && typeof SettingsData !== "undefined" && !isGreeterMode)
-            SettingsData.setTheme(currentTheme)
+            SettingsData.set("currentThemeName", currentTheme)
 
         if (!isGreeterMode) {
             generateSystemThemesFromCurrentTheme()

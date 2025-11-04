@@ -146,7 +146,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dockAutoHide
                             onToggled: checked => {
-                                           SettingsData.setDockAutoHide(checked)
+                                           SettingsData.set("dockAutoHide", checked)
                                        }
                         }
                     }
@@ -250,7 +250,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dockOpenOnOverview
                             onToggled: checked => {
-                                           SettingsData.setDockOpenOnOverview(checked)
+                                           SettingsData.set("dockOpenOnOverview", checked)
                                        }
                         }
                     }
@@ -315,7 +315,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dockGroupByApp
                             onToggled: checked => {
-                                           SettingsData.setDockGroupByApp(checked)
+                                           SettingsData.set("dockGroupByApp", checked)
                                        }
                         }
                     }
@@ -380,7 +380,7 @@ Item {
                             currentIndex: SettingsData.dockIndicatorStyle === "circle" ? 0 : 1
                             onSelectionChanged: (index, selected) => {
                                 if (selected) {
-                                    SettingsData.setDockIndicatorStyle(index === 0 ? "circle" : "line")
+                                    SettingsData.set("dockIndicatorStyle", index === 0 ? "circle" : "line")
                                 }
                             }
                         }
@@ -445,7 +445,7 @@ Item {
                         wheelEnabled: false
                         thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         onSliderValueChanged: newValue => {
-                                                  SettingsData.setDockIconSize(newValue)
+                                                  SettingsData.set("dockIconSize", newValue)
                                               }
                     }
                 }
@@ -519,7 +519,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDockSpacing(
+                                                      SettingsData.set("dockSpacing", 
                                                           newValue)
                                                   }
                         }
@@ -547,7 +547,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDockBottomGap(
+                                                      SettingsData.set("dockBottomGap", 
                                                           newValue)
                                                   }
                         }
@@ -612,7 +612,7 @@ Item {
                         wheelEnabled: false
                         thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         onSliderValueChanged: newValue => {
-                                                  SettingsData.setDockTransparency(
+                                                  SettingsData.set("dockTransparency", 
                                                       newValue / 100)
                                               }
                     }

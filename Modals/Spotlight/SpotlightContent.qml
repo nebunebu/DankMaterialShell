@@ -160,7 +160,7 @@ Item {
                            parentModal.hide()
                        }
         onViewModeSelected: mode => {
-                                SettingsData.setSpotlightModalViewMode(mode)
+                                SettingsData.set("spotlightModalViewMode", mode)
                             }
     }
 

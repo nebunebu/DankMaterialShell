@@ -59,7 +59,7 @@ DankPopout {
         gridColumns: 4
         onAppLaunched: appDrawerPopout.close()
         onViewModeSelected: function (mode) {
-            SettingsData.setAppLauncherViewMode(mode)
+            SettingsData.set("appLauncherViewMode", mode)
         }
     }
 

@@ -59,7 +59,7 @@ Item {
         var prefs = SettingsData.screenPreferences || {};
         var newPrefs = Object.assign({}, prefs);
         newPrefs[componentId] = screenNames;
-        SettingsData.setScreenPreferences(newPrefs);
+        SettingsData.set("screenPreferences", newPrefs);
     }
 
     function getShowOnLastDisplay(componentId) {
@@ -70,7 +70,7 @@ Item {
         var prefs = SettingsData.showOnLastDisplay || {};
         var newPrefs = Object.assign({}, prefs);
         newPrefs[componentId] = enabled;
-        SettingsData.setShowOnLastDisplay(newPrefs);
+        SettingsData.set("showOnLastDisplay", newPrefs);
     }
 
     DankFlickable {

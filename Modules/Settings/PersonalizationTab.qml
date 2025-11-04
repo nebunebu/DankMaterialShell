@@ -413,7 +413,7 @@ Item {
                             onSelectionChanged: (index, selected) => {
                                                     if (selected) {
                                                         const modes = ["Stretch", "Fit", "Fill", "Tile", "TileVertically", "TileHorizontally", "Pad"]
-                                                        SettingsData.setWallpaperFillMode(modes[index])
+                                                        SettingsData.set("wallpaperFillMode", modes[index])
                                                     }
                                                 }
 
@@ -930,7 +930,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.blurWallpaperOnOverview
                             onToggled: checked => {
-                                           SettingsData.setBlurWallpaperOnOverview(checked)
+                                           SettingsData.set("blurWallpaperOnOverview", checked)
                                        }
                         }
                     }
@@ -1461,7 +1461,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.blurredWallpaperLayer
                             onToggled: checked => {
-                                           SettingsData.setBlurredWallpaperLayer(checked)
+                                           SettingsData.set("blurredWallpaperLayer", checked)
                                        }
                         }
                     }
@@ -1573,7 +1573,7 @@ Item {
                             currentIndex: SettingsData.animationSpeed
                             onSelectionChanged: (index, selected) => {
                                                     if (selected) {
-                                                        SettingsData.setAnimationSpeed(index)
+                                                        SettingsData.set("animationSpeed", index)
                                                     }
                                                 }
 
@@ -1654,8 +1654,8 @@ Item {
                                         wheelEnabled: false
 
                                         onSliderValueChanged: newValue => {
-                                                                  SettingsData.setAnimationSpeed(SettingsData.AnimationSpeed.Custom)
-                                                                  SettingsData.setCustomAnimationDuration(newValue)
+                                                                  SettingsData.set("animationSpeed", SettingsData.AnimationSpeed.Custom)
+                                                                  SettingsData.set("customAnimationDuration", newValue)
                                                               }
 
                                         Connections {
@@ -1926,7 +1926,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.soundsEnabled
                             onToggled: checked => {
-                                           SettingsData.setSoundsEnabled(checked)
+                                           SettingsData.set("soundsEnabled", checked)
                                        }
                         }
                     }
@@ -1974,7 +1974,7 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.useSystemSoundTheme
                                 onToggled: checked => {
-                                               SettingsData.setUseSystemSoundTheme(checked)
+                                               SettingsData.set("useSystemSoundTheme", checked)
                                            }
                             }
                         }
@@ -2039,7 +2039,7 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundNewNotification
                                 onToggled: checked => {
-                                               SettingsData.setSoundNewNotification(checked)
+                                               SettingsData.set("soundNewNotification", checked)
                                            }
                             }
                         }
@@ -2073,7 +2073,7 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundVolumeChanged
                                 onToggled: checked => {
-                                               SettingsData.setSoundVolumeChanged(checked)
+                                               SettingsData.set("soundVolumeChanged", checked)
                                            }
                             }
                         }
@@ -2108,7 +2108,7 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
                                 checked: SettingsData.soundPluggedIn
                                 onToggled: checked => {
-                                               SettingsData.setSoundPluggedIn(checked)
+                                               SettingsData.set("soundPluggedIn", checked)
                                            }
                             }
                         }

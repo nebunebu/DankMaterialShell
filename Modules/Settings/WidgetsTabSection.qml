@@ -483,7 +483,7 @@ Column {
                                 iconSize: 16
                                 iconColor: SettingsData.runningAppsGroupByApp ? Theme.primary : Theme.outline
                                 onClicked: {
-                                    SettingsData.setRunningAppsGroupByApp(!SettingsData.runningAppsGroupByApp)
+                                    SettingsData.set("runningAppsGroupByApp", !SettingsData.runningAppsGroupByApp)
                                 }
                                 onEntered: {
                                     groupByAppTooltipLoader.active = true

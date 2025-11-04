@@ -85,7 +85,7 @@ Rectangle {
             pins[screenName] = currentDeviceName
         }
 
-        SettingsData.setBrightnessDevicePins(pins)
+        SettingsData.set("brightnessDevicePins", pins)
     }
 
     implicitHeight: brightnessContent.height + Theme.spacingM
@@ -314,7 +314,7 @@ Rectangle {
                                 const pins = JSON.parse(JSON.stringify(SettingsData.brightnessDevicePins || {}))
                                 if (pins[screenName]) {
                                     delete pins[screenName]
-                                    SettingsData.setBrightnessDevicePins(pins)
+                                    SettingsData.set("brightnessDevicePins", pins)
                                 }
                             }
                             currentDeviceName = modelData.name

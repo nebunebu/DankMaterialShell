@@ -50,7 +50,7 @@ Item {
                     }
                     return w
                 })
-                SettingsData.setControlCenterWidgets(newWidgets)
+                SettingsData.set("controlCenterWidgets", newWidgets)
                 if (root.collapseCallback) {
                     root.collapseCallback()
                 }
@@ -74,7 +74,7 @@ Item {
                     }
                     return w
                 })
-                SettingsData.setControlCenterWidgets(newWidgets)
+                SettingsData.set("controlCenterWidgets", newWidgets)
                 if (root.collapseCallback) {
                     root.collapseCallback()
                 }

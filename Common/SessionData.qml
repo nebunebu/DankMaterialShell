@@ -223,37 +223,37 @@ Singleton {
         console.info("SessionData: Migrating configuration from undefined to version 1")
         if (typeof SettingsData !== "undefined") {
             if (settings.acMonitorTimeout !== undefined) {
-                SettingsData.setAcMonitorTimeout(settings.acMonitorTimeout)
+                SettingsData.set("acMonitorTimeout", settings.acMonitorTimeout)
             }
             if (settings.acLockTimeout !== undefined) {
-                SettingsData.setAcLockTimeout(settings.acLockTimeout)
+                SettingsData.set("acLockTimeout", settings.acLockTimeout)
             }
             if (settings.acSuspendTimeout !== undefined) {
-                SettingsData.setAcSuspendTimeout(settings.acSuspendTimeout)
+                SettingsData.set("acSuspendTimeout", settings.acSuspendTimeout)
             }
             if (settings.acHibernateTimeout !== undefined) {
-                SettingsData.setAcHibernateTimeout(settings.acHibernateTimeout)
+                SettingsData.set("acHibernateTimeout", settings.acHibernateTimeout)
             }
             if (settings.batteryMonitorTimeout !== undefined) {
-                SettingsData.setBatteryMonitorTimeout(settings.batteryMonitorTimeout)
+                SettingsData.set("batteryMonitorTimeout", settings.batteryMonitorTimeout)
             }
             if (settings.batteryLockTimeout !== undefined) {
-                SettingsData.setBatteryLockTimeout(settings.batteryLockTimeout)
+                SettingsData.set("batteryLockTimeout", settings.batteryLockTimeout)
             }
             if (settings.batterySuspendTimeout !== undefined) {
-                SettingsData.setBatterySuspendTimeout(settings.batterySuspendTimeout)
+                SettingsData.set("batterySuspendTimeout", settings.batterySuspendTimeout)
             }
             if (settings.batteryHibernateTimeout !== undefined) {
-                SettingsData.setBatteryHibernateTimeout(settings.batteryHibernateTimeout)
+                SettingsData.set("batteryHibernateTimeout", settings.batteryHibernateTimeout)
             }
             if (settings.lockBeforeSuspend !== undefined) {
-                SettingsData.setLockBeforeSuspend(settings.lockBeforeSuspend)
+                SettingsData.set("lockBeforeSuspend", settings.lockBeforeSuspend)
             }
             if (settings.loginctlLockIntegration !== undefined) {
-                SettingsData.setLoginctlLockIntegration(settings.loginctlLockIntegration)
+                SettingsData.set("loginctlLockIntegration", settings.loginctlLockIntegration)
             }
             if (settings.launchPrefix !== undefined) {
-                SettingsData.setLaunchPrefix(settings.launchPrefix)
+                SettingsData.set("launchPrefix", settings.launchPrefix)
             }
         }
         if (typeof CacheData !== "undefined") {

@@ -280,7 +280,7 @@ Singleton {
 
         if (vpnConnected && activeUuid) {
             lastConnectedVpnUuid = activeUuid
-            SettingsData.setVpnLastConnected(activeUuid)
+            SettingsData.set("vpnLastConnected", activeUuid)
         }
 
         if (vpnIsBusy) {
@@ -558,7 +558,7 @@ Singleton {
         userPreference = preference
         changingPreference = true
         targetPreference = preference
-        SettingsData.setNetworkPreference(preference)
+        SettingsData.set("networkPreference", preference)
 
         DMSService.sendRequest("network.preference.set", { preference: preference }, response => {
             changingPreference = false

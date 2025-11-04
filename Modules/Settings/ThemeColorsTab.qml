@@ -770,7 +770,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDankBarTransparency(
+                                                      SettingsData.set("dankBarTransparency", 
                                                           newValue / 100)
                                                   }
                         }
@@ -835,7 +835,7 @@ Item {
                                 onSelectionChanged: (index, selected) => {
                                     if (!selected) return
                                     const colorOptions = ["sth", "s", "sc", "sch"]
-                                    SettingsData.setWidgetBackgroundColor(colorOptions[index])
+                                    SettingsData.set("widgetBackgroundColor", colorOptions[index])
                                 }
                             }
                         }
@@ -852,7 +852,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setDankBarWidgetTransparency(
+                                                      SettingsData.set("dankBarWidgetTransparency", 
                                                           newValue / 100)
                                                   }
                         }
@@ -889,7 +889,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.setPopupTransparency(
+                                                      SettingsData.set("popupTransparency", 
                                                           newValue / 100)
                                                   }
                         }
@@ -968,7 +968,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.modalDarkenBackground
                             onToggled: checked => {
-                                SettingsData.setModalDarkenBackground(checked)
+                                SettingsData.set("modalDarkenBackground", checked)
                             }
                         }
                     }
@@ -1026,9 +1026,9 @@ Item {
                         options: cachedFontFamilies
                         onValueChanged: value => {
                                             if (value.startsWith("Default"))
-                                            SettingsData.setFontFamily(SettingsData.defaultFontFamily)
+                                            SettingsData.set("fontFamily", SettingsData.defaultFontFamily)
                                             else
-                                            SettingsData.setFontFamily(value)
+                                            SettingsData.set("fontFamily", value)
                                         }
                     }
 
@@ -1094,7 +1094,7 @@ Item {
                                                 weight = Font.Normal
                                                 break
                                             }
-                                            SettingsData.setFontWeight(weight)
+                                            SettingsData.set("fontWeight", weight)
                                         }
                     }
 
@@ -1113,9 +1113,9 @@ Item {
                         options: cachedMonoFamilies
                         onValueChanged: value => {
                                             if (value === "Default")
-                                            SettingsData.setMonoFontFamily(SettingsData.defaultMonoFontFamily)
+                                            SettingsData.set("monoFontFamily", SettingsData.defaultMonoFontFamily)
                                             else
-                                            SettingsData.setMonoFontFamily(value)
+                                            SettingsData.set("monoFontFamily", value)
                                         }
                     }
 
@@ -1165,7 +1165,7 @@ Item {
                                 iconColor: Theme.surfaceText
                                 onClicked: {
                                     var newScale = Math.max(1.0, SettingsData.fontScale - 0.05)
-                                    SettingsData.setFontScale(newScale)
+                                    SettingsData.set("fontScale", newScale)
                                 }
                             }
 
@@ -1199,7 +1199,7 @@ Item {
                                 onClicked: {
                                     var newScale = Math.min(2.0,
                                                             SettingsData.fontScale + 0.05)
-                                    SettingsData.setFontScale(newScale)
+                                    SettingsData.set("fontScale", newScale)
                                 }
                             }
                         }
@@ -1258,7 +1258,7 @@ Item {
                         height: 32
                         checked: SettingsData.syncModeWithPortal
                         anchors.verticalCenter: parent.verticalCenter
-                        onToggled: checked => SettingsData.setSyncModeWithPortal(checked)
+                        onToggled: checked => SettingsData.set("syncModeWithPortal", checked)
                     }
                 }
             }
@@ -1499,7 +1499,7 @@ Item {
         onFileSelected: function(filePath) {
             // Save the custom theme file path and switch to custom theme
             if (filePath.endsWith(".json")) {
-                SettingsData.setCustomThemeFile(filePath)
+                SettingsData.set("customThemeFile", filePath)
                 Theme.switchTheme("custom")
                 close()
             }

@@ -77,7 +77,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.use24HourClock
                             onToggled: checked => {
-                                           return SettingsData.setClockFormat(
+                                           return SettingsData.set("clockFormat", 
                                                checked)
                                        }
                         }
@@ -140,7 +140,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.showSeconds
                             onToggled: checked => {
-                                           return SettingsData.setTimeFormat(
+                                           return SettingsData.set("timeFormat", 
                                                checked)
                                        }
                         }
@@ -240,7 +240,7 @@ Item {
                                                 customFormatInput.visible = true
                                             } else {
                                                 customFormatInput.visible = false
-                                                SettingsData.setClockDateFormat(
+                                                SettingsData.set("clockDateFormat", 
                                                     formatMap[value])
                                             }
                                         }
@@ -302,7 +302,7 @@ Item {
                                                 customLockFormatInput.visible = true
                                             } else {
                                                 customLockFormatInput.visible = false
-                                                SettingsData.setLockDateFormat(
+                                                SettingsData.set("lockDateFormat", 
                                                     formatMap[value])
                                             }
                                         }
@@ -317,7 +317,7 @@ Item {
                         text: SettingsData.clockDateFormat
                         onTextChanged: {
                             if (visible && text)
-                                SettingsData.setClockDateFormat(text)
+                                SettingsData.set("clockDateFormat", text)
                         }
                     }
 
@@ -330,7 +330,7 @@ Item {
                         text: SettingsData.lockDateFormat
                         onTextChanged: {
                             if (visible && text)
-                                SettingsData.setLockDateFormat(text)
+                                SettingsData.set("lockDateFormat", text)
                         }
                     }
 
@@ -491,7 +491,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.weatherEnabled
                             onToggled: checked => {
-                                           return SettingsData.setWeatherEnabled(
+                                           return SettingsData.set("weatherEnabled", 
                                                checked)
                                        }
                         }
@@ -556,7 +556,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.useFahrenheit
                             onToggled: checked => {
-                                           return SettingsData.setTemperatureUnit(
+                                           return SettingsData.set("temperatureUnit", 
                                                checked)
                                        }
                         }
@@ -628,7 +628,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.useAutoLocation
                             onToggled: checked => {
-                                           return SettingsData.setAutoLocation(
+                                           return SettingsData.set("autoLocation", 
                                                checked)
                                        }
                         }
@@ -966,7 +966,7 @@ Item {
                                                 cursorShape: Qt.PointingHandCursor
                                                 onClicked: {
                                                     if (WeatherService.weather.available) {
-                                                        SettingsData.setTemperatureUnit(!SettingsData.useFahrenheit)
+                                                        SettingsData.set("temperatureUnit", !SettingsData.useFahrenheit)
                                                     }
                                                 }
                                                 enabled: WeatherService.weather.available
