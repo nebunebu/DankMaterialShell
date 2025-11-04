@@ -37,6 +37,9 @@ Singleton {
     property bool matugenSuppression: false
     property bool configGenerationPending: false
 
+    readonly property string screenshotsDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.PicturesLocation)) + "/Screenshots"
+    property string pendingScreenshotPath: ""
+
     signal windowUrgentChanged
 
     function setWorkspaces(newMap) {
@@ -270,6 +273,9 @@ Singleton {
             break
         case 'WorkspaceUrgencyChanged':
             handleWorkspaceUrgencyChanged(event.WorkspaceUrgencyChanged)
+            break
+        case 'ScreenshotCaptured':
+            handleScreenshotCaptured(event.ScreenshotCaptured)
             break
         }
     }
@@ -539,6 +545,18 @@ Singleton {
         windowUrgentChanged()
     }
 
+    function handleScreenshotCaptured(data) {
+        if (!data.path)
+            return
+
+        if (pendingScreenshotPath && data.path === pendingScreenshotPath) {
+            Quickshell.execDetached({
+                command: ["swappy", "-f", data.path]
+            })
+            pendingScreenshotPath = ""
+        }
+    }
+
     function updateCurrentOutputWorkspaces() {
         if (!currentOutput) {
             currentOutputWorkspaces = allWorkspaces
@@ -627,6 +645,56 @@ Singleton {
                         "Action": {
                             "Quit": {
                                 "skip_confirmation": true
+                            }
+                        }
+                    })
+    }
+
+    function screenshot() {
+        pendingScreenshotPath = ""
+        const timestamp = Date.now()
+        const path = `${screenshotsDir}/dms-screenshot-${timestamp}.png`
+        pendingScreenshotPath = path
+
+        return send({
+                        "Action": {
+                            "Screenshot": {
+                                "show_pointer": true,
+                                "path": path
+                            }
+                        }
+                    })
+    }
+
+    function screenshotScreen() {
+        pendingScreenshotPath = ""
+        const timestamp = Date.now()
+        const path = `${screenshotsDir}/dms-screenshot-${timestamp}.png`
+        pendingScreenshotPath = path
+
+        return send({
+                        "Action": {
+                            "ScreenshotScreen": {
+                                "write_to_disk": true,
+                                "show_pointer": true,
+                                "path": path
+                            }
+                        }
+                    })
+    }
+
+    function screenshotWindow() {
+        pendingScreenshotPath = ""
+        const timestamp = Date.now()
+        const path = `${screenshotsDir}/dms-screenshot-${timestamp}.png`
+        pendingScreenshotPath = path
+
+        return send({
+                        "Action": {
+                            "ScreenshotWindow": {
+                                "write_to_disk": true,
+                                "show_pointer": true,
+                                "path": path
                             }
                         }
                     })
@@ -903,5 +971,39 @@ window-rule {
         writeBindsProcess.bindsPath = blurrulePath
         writeBindsProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cp --no-preserve=mode "${sourceBlurrulePath}" "${blurrulePath}"`]
         writeBindsProcess.running = true
+    }
+
+    IpcHandler {
+        function screenshot(): string {
+            if (!CompositorService.isNiri) {
+                return "NIRI_NOT_AVAILABLE"
+            }
+            if (NiriService.screenshot()) {
+                return "SCREENSHOT_SUCCESS"
+            }
+            return "SCREENSHOT_FAILED"
+        }
+
+        function screenshotScreen(): string {
+            if (!CompositorService.isNiri) {
+                return "NIRI_NOT_AVAILABLE"
+            }
+            if (NiriService.screenshotScreen()) {
+                return "SCREENSHOT_SCREEN_SUCCESS"
+            }
+            return "SCREENSHOT_SCREEN_FAILED"
+        }
+
+        function screenshotWindow(): string {
+            if (!CompositorService.isNiri) {
+                return "NIRI_NOT_AVAILABLE"
+            }
+            if (NiriService.screenshotWindow()) {
+                return "SCREENSHOT_WINDOW_SUCCESS"
+            }
+            return "SCREENSHOT_WINDOW_FAILED"
+        }
+
+        target: "niri"
     }
 }
