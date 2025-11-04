@@ -174,10 +174,10 @@
     "Auto-saving...": "自動保存..."
   },
   "Autoconnect disabled": {
-    "Autoconnect disabled": ""
+    "Autoconnect disabled": "自動連線關閉"
   },
   "Autoconnect enabled": {
-    "Autoconnect enabled": ""
+    "Autoconnect enabled": "自動連線啟用"
   },
   "Automatic Control": {
     "Automatic Control": "自動控制"
@@ -408,13 +408,13 @@
     "Confirm passkey for ": "確認密碼 "
   },
   "Connect": {
-    "Connect": "連接"
+    "Connect": "連線"
   },
   "Connect to VPN": {
-    "Connect to VPN": "連接到 VPN"
+    "Connect to VPN": "連線到 VPN"
   },
   "Connect to Wi-Fi": {
-    "Connect to Wi-Fi": "連接到 Wi-Fi"
+    "Connect to Wi-Fi": "連線到 Wi-Fi"
   },
   "Connected Displays": {
     "Connected Displays": "已連接的螢幕"
@@ -522,7 +522,7 @@
     "DankSearch not available": "DankSearch 不可用"
   },
   "Dark Mode": {
-    "Dark Mode": ""
+    "Dark Mode": "深色主題"
   },
   "Date Format": {
     "Date Format": "日期格式"
@@ -555,13 +555,13 @@
     "Device paired": "裝置已配對"
   },
   "Disable Autoconnect": {
-    "Disable Autoconnect": ""
+    "Disable Autoconnect": "關閉自動連線"
   },
   "Disconnect": {
-    "Disconnect": "斷開連接"
+    "Disconnect": "斷開連線"
   },
   "Disconnected from WiFi": {
-    "Disconnected from WiFi": "已中斷 WiFi 連接"
+    "Disconnected from WiFi": "已中斷 WiFi 連線"
   },
   "Disk": {
     "Disk": "硬碟"
@@ -633,7 +633,7 @@
     "Empty": "空白"
   },
   "Enable Autoconnect": {
-    "Enable Autoconnect": ""
+    "Enable Autoconnect": "啟用自動連線"
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "啟用 GPU 溫度"
@@ -705,7 +705,7 @@
     "Failed to connect VPN": "VPN 連線失敗"
   },
   "Failed to connect to ": {
-    "Failed to connect to ": "無法連接到 "
+    "Failed to connect to ": "無法連線到 "
   },
   "Failed to disconnect VPN": {
     "Failed to disconnect VPN": "無法斷開 VPN"
@@ -732,7 +732,7 @@
     "Failed to start connection to ": "無法啟動連線到 "
   },
   "Failed to update autoconnect": {
-    "Failed to update autoconnect": ""
+    "Failed to update autoconnect": "自動連線更新失敗"
   },
   "Feels Like": {
     "Feels Like": "體感溫度"
@@ -1818,7 +1818,7 @@
     "VPN Connections": "VPN 連線"
   },
   "VPN status and quick connect": {
-    "VPN status and quick connect": "VPN 狀態和快速連接"
+    "VPN status and quick connect": "VPN 狀態和快速連線"
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "色彩鮮明且飽和度活潑的調色板。"

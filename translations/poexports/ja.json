@@ -174,10 +174,10 @@
     "Auto-saving...": "自動保存中..."
   },
   "Autoconnect disabled": {
-    "Autoconnect disabled": ""
+    "Autoconnect disabled": "自動接続が無効"
   },
   "Autoconnect enabled": {
-    "Autoconnect enabled": ""
+    "Autoconnect enabled": "自動接続が有効"
   },
   "Automatic Control": {
     "Automatic Control": "自動制御"
@@ -555,7 +555,7 @@
     "Device paired": "デバイスがペアリングされました"
   },
   "Disable Autoconnect": {
-    "Disable Autoconnect": ""
+    "Disable Autoconnect": "自動接続を無効"
   },
   "Disconnect": {
     "Disconnect": "切断"
@@ -633,7 +633,7 @@
     "Empty": "空白"
   },
   "Enable Autoconnect": {
-    "Enable Autoconnect": ""
+    "Enable Autoconnect": "自動接続を有効"
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "GPU温度を有効にする"
@@ -732,7 +732,7 @@
     "Failed to start connection to ": "接続ができませんでした "
   },
   "Failed to update autoconnect": {
-    "Failed to update autoconnect": ""
+    "Failed to update autoconnect": "自動接続の更新が失敗しました"
   },
   "Feels Like": {
     "Feels Like": "どうやら"
