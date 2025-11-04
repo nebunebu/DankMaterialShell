@@ -283,7 +283,7 @@ EOF
         ;;
     esac
   fi
-  
+
   rm -f "$TMP_CONTENT_CFG"
   popd >/dev/null
 
@@ -402,10 +402,14 @@ EOF
       VSCODE_FINAL="$VSCODE_THEME_DIR/dankshell-${variant}.json"
 
       if [[ -f "$VSCODE_BASE" ]]; then
-        VARIANT_LIGHT=""
-        [[ "$variant" == "light" ]] && VARIANT_LIGHT="--light"
+        VARIANT_FLAG=""
+        if [[ "$variant" == "light" ]]; then
+          VARIANT_FLAG="--light"
+        elif [[ "$variant" == "default" && "$mode" == "light" ]]; then
+          VARIANT_FLAG="--light"
+        fi
 
-        dms dank16 "$PRIMARY" $VARIANT_LIGHT ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
+        dms dank16 "$PRIMARY" $VARIANT_FLAG ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
       fi
     done
   fi
