@@ -432,13 +432,13 @@
     "Control currently playing media": "Controllo media attualmente in riproduzione "
   },
   "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
-    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": "Controlla l'opacità di tutti i popup, delle finestre modali e dei relativi livelli di contenuto (Dank Dash, Impostazioni, App Drawer, Centro di controllo, ecc.)"
   },
   "Controls opacity of individual widgets inside DankBar": {
-    "Controls opacity of individual widgets inside DankBar": ""
+    "Controls opacity of individual widgets inside DankBar": "Controlla l'opacità di ogni widget nella DankBar"
   },
   "Controls opacity of the DankBar panel background": {
-    "Controls opacity of the DankBar panel background": ""
+    "Controls opacity of the DankBar panel background": "Controlla l'opacità dello sfondo del pannello della DankBar"
   },
   "Copied to clipboard": {
     "Copied to clipboard": "Copiato nella clipboard"
@@ -1530,7 +1530,7 @@
     "Show all 9 tags instead of only occupied tags (DWL only)": "Mostra tutti i 9 tags invece dei soli tags occupati (solo DWL)"
   },
   "Show darkened overlay behind modal dialogs": {
-    "Show darkened overlay behind modal dialogs": "Mostra la sovrapposizione oscurata dietro le finestre di dialogo modali"
+    "Show darkened overlay behind modal dialogs": "Mostra la sovrapposizione scurita dietro le finestre di dialogo modali"
   },
   "Show on Last Display": {
     "Show on Last Display": "Mostra sull'ultimo display"
@@ -1617,7 +1617,7 @@
     "Suspend": "Sospendi"
   },
   "Suspend behavior": {
-    "Suspend behavior": ""
+    "Suspend behavior": "Sospendi funzionalità"
   },
   "Suspend system after": {
     "Suspend system after": "Sospendi sistema dopo"
