@@ -10,9 +10,7 @@ Type=simple
 ExecStart=/usr/bin/dms run --session
 ExecReload=/usr/bin/pkill -HUP -x dms
 Restart=always
-RestartSec=3
-StartLimitBurst=5
-StartLimitIntervalSec=30
+RestartSec=2
 TimeoutStopSec=10
 
 [Install]
