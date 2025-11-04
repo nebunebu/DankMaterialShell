@@ -179,7 +179,7 @@ if [ "$1" -ge 2 ]; then
             if systemctl --user is-active dms.service >/dev/null 2>&1; then
                 systemctl --user restart dms.service >/dev/null 2>&1
             else
-                dms restart >/dev/null 2>&1
+                pkill -HUP dms >/dev/null 2>&1
             fi
         " 2>/dev/null || true
         
