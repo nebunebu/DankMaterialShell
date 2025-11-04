@@ -550,8 +550,10 @@ Singleton {
             return
 
         if (pendingScreenshotPath && data.path === pendingScreenshotPath) {
+            const editor = Quickshell.env("DMS_SCREENSHOT_EDITOR")
+            const command = editor === "satty" ? ["satty", "-f", data.path] : ["swappy", "-f", data.path]
             Quickshell.execDetached({
-                command: ["swappy", "-f", data.path]
+                command: command
             })
             pendingScreenshotPath = ""
         }
