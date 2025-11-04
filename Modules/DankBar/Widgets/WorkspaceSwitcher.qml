@@ -417,8 +417,12 @@ Item {
         acceptedButtons: Qt.RightButton
 
         onClicked: mouse => {
-            if (mouse.button === Qt.RightButton && CompositorService.isHyprland && root.hyprlandOverviewLoader?.item) {
-                root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
+            if (mouse.button === Qt.RightButton) {
+                if (CompositorService.isNiri) {
+                    NiriService.toggleOverview()
+                } else if (CompositorService.isHyprland && root.hyprlandOverviewLoader?.item) {
+                    root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
+                }
             }
         }
     }
@@ -519,9 +523,17 @@ Item {
                         const isRightClick = mouse.button === Qt.RightButton
 
                         if (CompositorService.isNiri) {
-                            NiriService.switchToWorkspace(modelData - 1)
+                            if (isRightClick) {
+                                NiriService.toggleOverview()
+                            } else {
+                                NiriService.switchToWorkspace(modelData - 1)
+                            }
                         } else if (CompositorService.isHyprland && modelData?.id) {
-                            Hyprland.dispatch(`workspace ${modelData.id}`)
+                            if (isRightClick && root.hyprlandOverviewLoader?.item) {
+                                root.hyprlandOverviewLoader.item.overviewOpen = !root.hyprlandOverviewLoader.item.overviewOpen
+                            } else {
+                                Hyprland.dispatch(`workspace ${modelData.id}`)
+                            }
                         } else if (CompositorService.isDwl && modelData?.tag !== undefined) {
                             console.log("DWL click - tag:", modelData.tag, "rightClick:", isRightClick)
                             if (isRightClick) {
