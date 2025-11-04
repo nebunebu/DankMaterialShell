@@ -188,13 +188,13 @@
   {
     "term": "Apply GTK Colors",
     "context": "Apply GTK Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1384",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1413",
     "comment": ""
   },
   {
     "term": "Apply Qt Colors",
     "context": "Apply Qt Colors",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1420",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1449",
     "comment": ""
   },
   {
@@ -846,6 +846,24 @@
     "comment": ""
   },
   {
+    "term": "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)",
+    "context": "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:873",
+    "comment": ""
+  },
+  {
+    "term": "Controls opacity of individual widgets inside DankBar",
+    "context": "Controls opacity of individual widgets inside DankBar",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:802",
+    "comment": ""
+  },
+  {
+    "term": "Controls opacity of the DankBar panel background",
+    "context": "Controls opacity of the DankBar panel background",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:754",
+    "comment": ""
+  },
+  {
     "term": "Copied to clipboard",
     "context": "Copied to clipboard",
     "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:95",
@@ -878,7 +896,7 @@
   {
     "term": "Corner Radius (0 = square corners)",
     "context": "Corner Radius (0 = square corners)",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:881",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:910",
     "comment": ""
   },
   {
@@ -1004,7 +1022,7 @@
   {
     "term": "Dank Bar Widget Transparency",
     "context": "Dank Bar Widget Transparency",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:781",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:795",
     "comment": ""
   },
   {
@@ -1028,7 +1046,7 @@
   {
     "term": "Darken Modal Background",
     "context": "Darken Modal Background",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:922",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:951",
     "comment": ""
   },
   {
@@ -1490,19 +1508,19 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:986, Modules/Notepad/NotepadSettings.qml:220",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1015, Modules/Notepad/NotepadSettings.qml:220",
     "comment": ""
   },
   {
     "term": "Font Scale",
     "context": "Font Scale",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1106",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1135",
     "comment": ""
   },
   {
     "term": "Font Settings",
     "context": "Font Settings",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:977",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1006",
     "comment": ""
   },
   {
@@ -1514,7 +1532,7 @@
   {
     "term": "Font Weight",
     "context": "Font Weight",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1007",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1036",
     "comment": ""
   },
   {
@@ -1706,7 +1724,7 @@
   {
     "term": "Icon Theme",
     "context": "Icon Theme",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1302",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1331",
     "comment": ""
   },
   {
@@ -2078,7 +2096,7 @@
   {
     "term": "Monospace Font",
     "context": "Monospace Font",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1073",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1102",
     "comment": ""
   },
   {
@@ -2552,7 +2570,7 @@
   {
     "term": "Popup Transparency",
     "context": "Popup Transparency",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:845",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:866",
     "comment": ""
   },
   {
@@ -2780,7 +2798,7 @@
   {
     "term": "Scale all font sizes",
     "context": "Scale all font sizes",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1113",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1142",
     "comment": ""
   },
   {
@@ -2864,7 +2882,7 @@
   {
     "term": "Select font weight",
     "context": "Select font weight",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1008",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1037",
     "comment": ""
   },
   {
@@ -2876,13 +2894,13 @@
   {
     "term": "Select monospace font for process list and technical displays",
     "context": "Select monospace font for process list and technical displays",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1074",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1103",
     "comment": ""
   },
   {
     "term": "Select system font family",
     "context": "Select system font family",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:987",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1016",
     "comment": ""
   },
   {
@@ -2984,7 +3002,7 @@
   {
     "term": "Show darkened overlay behind modal dialogs",
     "context": "Show darkened overlay behind modal dialogs",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:929",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:958",
     "comment": ""
   },
   {
@@ -3176,13 +3194,13 @@
   {
     "term": "Sync Mode with Portal",
     "context": "Sync Mode with Portal",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1210",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1239",
     "comment": ""
   },
   {
     "term": "Sync dark mode with settings portals for system-wide theme hints",
     "context": "Sync dark mode with settings portals for system-wide theme hints",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1217",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1246",
     "comment": ""
   },
   {
@@ -3194,7 +3212,7 @@
   {
     "term": "System App Theming",
     "context": "System App Theming",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1352",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1381",
     "comment": ""
   },
   {
@@ -3296,7 +3314,7 @@
   {
     "term": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
     "context": "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).",
-    "reference": "Modules/Settings/ThemeColorsTab.qml:1263",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:1292",
     "comment": ""
   },
   {
