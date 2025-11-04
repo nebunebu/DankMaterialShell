@@ -174,10 +174,10 @@
     "Auto-saving...": "Otomatik kaydetme..."
   },
   "Autoconnect disabled": {
-    "Autoconnect disabled": ""
+    "Autoconnect disabled": "Otomatik bağlanma devre dışı"
   },
   "Autoconnect enabled": {
-    "Autoconnect enabled": ""
+    "Autoconnect enabled": "Otomatik bağlanma etkin"
   },
   "Automatic Control": {
     "Automatic Control": "Otomatik Kontrol"
@@ -432,13 +432,13 @@
     "Control currently playing media": "Şu anda oynatılan medyayı kontrol et"
   },
   "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": {
-    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": ""
+    "Controls opacity of all popouts, modals, and their content layers (DankDash, Settings, App Drawer, Control Center, etc.)": "Tüm açılır pencerelerin, modal pencerelerin ve bunların içerik katmanlarının (DankDash, Ayarlar, Uygulama Çekmecesi, Kontrol Merkezi vb.) opaklığını kontrol eder"
   },
   "Controls opacity of individual widgets inside DankBar": {
-    "Controls opacity of individual widgets inside DankBar": ""
+    "Controls opacity of individual widgets inside DankBar": "DankBar içindeki her widget için ayrı opaklığı kontrol eder"
   },
   "Controls opacity of the DankBar panel background": {
-    "Controls opacity of the DankBar panel background": ""
+    "Controls opacity of the DankBar panel background": "DankBar panelinin arka plan opaklığını kontrol eder"
   },
   "Copied to clipboard": {
     "Copied to clipboard": "Panoya kopyalandı"
@@ -531,10 +531,10 @@
     "DankSearch not available": "DankSearch kullanılamıyor"
   },
   "Dark Mode": {
-    "Dark Mode": ""
+    "Dark Mode": "Karanlık Mod"
   },
   "Darken Modal Background": {
-    "Darken Modal Background": ""
+    "Darken Modal Background": "Koyu Modal Arkaplanı"
   },
   "Date Format": {
     "Date Format": "Tarih Biçimi"
@@ -567,7 +567,7 @@
     "Device paired": "Cihaz eşleştirildi"
   },
   "Disable Autoconnect": {
-    "Disable Autoconnect": ""
+    "Disable Autoconnect": "Otomatik Bağlanmayı Devre Dışı Bırak"
   },
   "Disconnect": {
     "Disconnect": "Bağlantıyı Kes"
@@ -645,7 +645,7 @@
     "Empty": "Boş"
   },
   "Enable Autoconnect": {
-    "Enable Autoconnect": ""
+    "Enable Autoconnect": "Otomatik Bağlanmayı Etkinleştir"
   },
   "Enable GPU Temperature": {
     "Enable GPU Temperature": "GPU Sıcaklığını Etkinleştir"
@@ -744,7 +744,7 @@
     "Failed to start connection to ": "Bağlantı başlatılamadı "
   },
   "Failed to update autoconnect": {
-    "Failed to update autoconnect": ""
+    "Failed to update autoconnect": "Otomatik bağlanma güncellenemedi"
   },
   "Feels Like": {
     "Feels Like": "Hissedilen"
@@ -1530,7 +1530,7 @@
     "Show all 9 tags instead of only occupied tags (DWL only)": "Sadece dolu etiketleri değil, tüm 9 etiketi göster (sadece DWL)"
   },
   "Show darkened overlay behind modal dialogs": {
-    "Show darkened overlay behind modal dialogs": ""
+    "Show darkened overlay behind modal dialogs": "Modal diyalogların arkasında karartılmış kaplama göster"
   },
   "Show on Last Display": {
     "Show on Last Display": "Son Ekranda Göster"
