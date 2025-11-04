@@ -53,7 +53,7 @@ PanelWindow {
 
     Timer {
         id: closeTimer
-        interval: animationDuration + 120
+        interval: animationDuration
         onTriggered: {
             if (!shouldBeVisible) {
                 visible = false
@@ -103,7 +103,8 @@ PanelWindow {
 
     MouseArea {
         anchors.fill: parent
-        enabled: shouldBeVisible
+        enabled: shouldBeVisible && contentLoader.opacity > 0.1
+        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         onClicked: mouse => {
             if (mouse.x < alignedX || mouse.x > alignedX + alignedWidth ||
                 mouse.y < alignedY || mouse.y > alignedY + alignedHeight) {
@@ -127,6 +128,7 @@ PanelWindow {
         layer.textureSize: Qt.size(width * Math.max(2, root.screen?.devicePixelRatio || 1), height * Math.max(2, root.screen?.devicePixelRatio || 1))
         layer.samples: 4
         opacity: shouldBeVisible ? 1 : 0
+        visible: opacity > 0
         transform: [scaleTransform, motionTransform]
 
         Scale {
