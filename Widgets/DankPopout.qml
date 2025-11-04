@@ -8,7 +8,8 @@ import qs.Services
 PanelWindow {
     id: root
 
-    WlrLayershell.namespace: "quickshell:popout"
+    property string blurNamespace: "dms:popout"
+    WlrLayershell.namespace: blurNamespace
 
     property alias content: contentLoader.sourceComponent
     property alias contentLoader: contentLoader

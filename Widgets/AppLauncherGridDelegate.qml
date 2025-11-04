@@ -36,7 +36,7 @@ Rectangle {
     width: cellWidth - cellPadding
     height: cellHeight - cellPadding
     radius: Theme.cornerRadius
-    color: currentIndex === index ? Theme.primaryPressed : mouseArea.containsMouse ? Theme.primaryHoverLight : Theme.surfaceContainerHigh
+    color: currentIndex === index ? Theme.surfaceContainerHighest : mouseArea.containsMouse ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh
 
     Column {
         anchors.centerIn: parent

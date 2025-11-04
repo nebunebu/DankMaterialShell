@@ -34,7 +34,7 @@ Rectangle {
     width: listView.width
     height: itemHeight
     radius: Theme.cornerRadius
-    color: isCurrentItem ? Theme.primaryPressed : mouseArea.containsMouse ? Theme.primaryHoverLight : Theme.surfaceContainerHigh
+    color: isCurrentItem ? Theme.surfaceContainerHighest : mouseArea.containsMouse ? Theme.surfaceContainerHighest : Theme.surfaceContainerHigh
 
     Row {
         anchors.fill: parent

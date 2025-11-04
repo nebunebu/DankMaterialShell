@@ -866,7 +866,6 @@ Item {
                         }
                     }
 
-
                     Rectangle {
                         width: parent.width
                         height: 1
@@ -899,6 +898,49 @@ Item {
                                                       SettingsData.setCornerRadius(
                                                           newValue)
                                                   }
+                        }
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                    }
+
+                    Row {
+                        width: parent.width
+                        height: 40
+                        spacing: Theme.spacingM
+
+                        Column {
+                            width: parent.width - modalBackgroundToggle.width - parent.spacing
+                            anchors.verticalCenter: parent.verticalCenter
+                            spacing: 2
+
+                            StyledText {
+                                text: I18n.tr("Darken Modal Background")
+                                font.pixelSize: Theme.fontSizeMedium
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Show darkened overlay behind modal dialogs")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                            }
+                        }
+
+                        DankToggle {
+                            id: modalBackgroundToggle
+                            width: 48
+                            height: 24
+                            anchors.verticalCenter: parent.verticalCenter
+                            checked: SettingsData.modalDarkenBackground
+                            onToggled: checked => {
+                                SettingsData.setModalDarkenBackground(checked)
+                            }
                         }
                     }
                 }
