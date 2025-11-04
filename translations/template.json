@@ -1197,6 +1197,13 @@
     "comment": ""
   },
   {
+    "term": "Darken Modal Background",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Date Format",
     "translation": "",
     "context": "",
@@ -3466,6 +3473,13 @@
   },
   {
     "term": "Show all 9 tags instead of only occupied tags (DWL only)",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show darkened overlay behind modal dialogs",
     "translation": "",
     "context": "",
     "reference": "",
