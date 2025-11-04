@@ -1,6 +1,6 @@
 pragma Singleton
 
-pragma ComponentBehavior
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
@@ -13,9 +13,12 @@ Singleton {
     property bool brightnessAvailable: devices.length > 0
     property var devices: []
     property var deviceBrightness: ({})
+    property var deviceBrightnessUserSet: ({})
+    property int brightnessVersion: 0
     property string currentDevice: ""
     property string lastIpcDevice: ""
     property int brightnessLevel: {
+        brightnessVersion
         const deviceToUse = lastIpcDevice === "" ? getDefaultDevice() : (lastIpcDevice || currentDevice)
         if (!deviceToUse) {
             return 50
@@ -52,17 +55,30 @@ Singleton {
             devices = newDevices
         }
 
+        const isLogarithmic = SessionData.getBrightnessLogarithmic(device.id)
+        const userSetValue = deviceBrightnessUserSet[device.id]
+
+        let displayValue = device.currentPercent
+        if (isLogarithmic) {
+            if (userSetValue !== undefined) {
+                displayValue = userSetValue
+            } else {
+                displayValue = linearToLogarithmic(device.currentPercent)
+            }
+        }
+
         const oldValue = deviceBrightness[device.id]
         const newBrightness = Object.assign({}, deviceBrightness)
-        newBrightness[device.id] = device.currentPercent
+        newBrightness[device.id] = displayValue
         deviceBrightness = newBrightness
+        brightnessVersion++
 
         const shouldSuppress = suppressSignal || suppressNextOsd
         if (suppressNextOsd) {
             suppressNextOsd = false
         }
 
-        if (!shouldSuppress && oldValue !== device.currentPercent) {
+        if (!shouldSuppress && oldValue !== displayValue) {
             brightnessChanged()
         }
     }
@@ -84,9 +100,21 @@ Singleton {
 
         const newBrightness = {}
         for (const device of state.devices) {
-            newBrightness[device.id] = device.currentPercent
+            const isLogarithmic = SessionData.getBrightnessLogarithmic(device.id)
+            const userSetValue = deviceBrightnessUserSet[device.id]
+
+            if (isLogarithmic) {
+                if (userSetValue !== undefined) {
+                    newBrightness[device.id] = userSetValue
+                } else {
+                    newBrightness[device.id] = linearToLogarithmic(device.currentPercent)
+                }
+            } else {
+                newBrightness[device.id] = device.currentPercent
+            }
         }
         deviceBrightness = newBrightness
+        brightnessVersion++
 
         brightnessAvailable = devices.length > 0
 
@@ -129,10 +157,24 @@ Singleton {
             suppressNextOsd = true
         }
 
-        DMSService.sendRequest("brightness.setBrightness", {
-                                   "device": actualDevice,
-                                   "percent": clampedValue
-                               }, response => {
+        const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+
+        if (isLogarithmic) {
+            const newUserSet = Object.assign({}, deviceBrightnessUserSet)
+            newUserSet[actualDevice] = clampedValue
+            deviceBrightnessUserSet = newUserSet
+            SessionData.setBrightnessUserSetValue(actualDevice, clampedValue)
+        }
+
+        const params = {
+            "device": actualDevice,
+            "percent": clampedValue
+        }
+        if (isLogarithmic) {
+            params.logarithmic = true
+        }
+
+        DMSService.sendRequest("brightness.setBrightness", params, response => {
                                    if (response.error) {
                                        console.error("DisplayService: Failed to set brightness:", response.error)
                                        ToastService.showError("Failed to set brightness: " + response.error)
@@ -165,6 +207,12 @@ Singleton {
         }
 
         return 50
+    }
+
+    function linearToLogarithmic(linearPercent) {
+        const normalized = linearPercent / 100.0
+        const logPercent = Math.pow(normalized, 2.0) * 100.0
+        return Math.round(logPercent)
     }
 
     function getDefaultDevice() {
@@ -504,8 +552,14 @@ Singleton {
                                })
     }
 
+    function updateDeviceBrightnessDisplay(deviceName) {
+        brightnessVersion++
+        brightnessChanged()
+    }
+
     Component.onCompleted: {
         nightModeEnabled = SessionData.nightModeEnabled
+        deviceBrightnessUserSet = Object.assign({}, SessionData.brightnessUserSetValues)
         if (DMSService.isConnected) {
             checkGammaControlAvailability()
         }
@@ -717,9 +771,53 @@ Singleton {
 
             let result = "Available devices:\n"
             for (const device of root.devices) {
-                result += device.id + " (" + device.class + ")\n"
+                const isLog = SessionData.getBrightnessLogarithmic(device.id)
+                result += device.id + " (" + device.class + ")" + (isLog ? " [logarithmic]" : "") + "\n"
             }
             return result
+        }
+
+        function enableLogarithmic(device: string): string {
+            const targetDevice = device || root.currentDevice
+            if (!targetDevice) {
+                return "No device specified"
+            }
+
+            if (!root.devices.some(d => d.id === targetDevice)) {
+                return "Device not found: " + targetDevice
+            }
+
+            SessionData.setBrightnessLogarithmic(targetDevice, true)
+            return "Logarithmic mode enabled for " + targetDevice
+        }
+
+        function disableLogarithmic(device: string): string {
+            const targetDevice = device || root.currentDevice
+            if (!targetDevice) {
+                return "No device specified"
+            }
+
+            if (!root.devices.some(d => d.id === targetDevice)) {
+                return "Device not found: " + targetDevice
+            }
+
+            SessionData.setBrightnessLogarithmic(targetDevice, false)
+            return "Logarithmic mode disabled for " + targetDevice
+        }
+
+        function toggleLogarithmic(device: string): string {
+            const targetDevice = device || root.currentDevice
+            if (!targetDevice) {
+                return "No device specified"
+            }
+
+            if (!root.devices.some(d => d.id === targetDevice)) {
+                return "Device not found: " + targetDevice
+            }
+
+            const currentState = SessionData.getBrightnessLogarithmic(targetDevice)
+            SessionData.setBrightnessLogarithmic(targetDevice, !currentState)
+            return "Logarithmic mode " + (!currentState ? "enabled" : "disabled") + " for " + targetDevice
         }
 
         target: "brightness"

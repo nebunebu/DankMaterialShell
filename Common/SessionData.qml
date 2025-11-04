@@ -60,6 +60,8 @@ Singleton {
     property bool showThirdPartyPlugins: false
     property string launchPrefix: ""
     property string lastBrightnessDevice: ""
+    property var brightnessLogarithmicDevices: ({})
+    property var brightnessUserSetValues: ({})
 
     property int selectedGpuIndex: 0
     property bool nvidiaGpuTempEnabled: false
@@ -107,6 +109,8 @@ Singleton {
                 wallpaperPathDark = settings.wallpaperPathDark !== undefined ? settings.wallpaperPathDark : ""
                 monitorWallpapersLight = settings.monitorWallpapersLight !== undefined ? settings.monitorWallpapersLight : {}
                 monitorWallpapersDark = settings.monitorWallpapersDark !== undefined ? settings.monitorWallpapersDark : {}
+                brightnessLogarithmicDevices = settings.brightnessLogarithmicDevices !== undefined ? settings.brightnessLogarithmicDevices : {}
+                brightnessUserSetValues = settings.brightnessUserSetValues !== undefined ? settings.brightnessUserSetValues : {}
                 doNotDisturb = settings.doNotDisturb !== undefined ? settings.doNotDisturb : false
                 nightModeEnabled = settings.nightModeEnabled !== undefined ? settings.nightModeEnabled : false
                 nightModeTemperature = settings.nightModeTemperature !== undefined ? settings.nightModeTemperature : 4500
@@ -185,6 +189,8 @@ Singleton {
                                                 "wallpaperPathDark": wallpaperPathDark,
                                                 "monitorWallpapersLight": monitorWallpapersLight,
                                                 "monitorWallpapersDark": monitorWallpapersDark,
+                                                "brightnessLogarithmicDevices": brightnessLogarithmicDevices,
+                                                "brightnessUserSetValues": brightnessUserSetValues,
                                                 "doNotDisturb": doNotDisturb,
                                                 "nightModeEnabled": nightModeEnabled,
                                                 "nightModeTemperature": nightModeTemperature,
@@ -268,7 +274,7 @@ Singleton {
     }
 
     function cleanupUnusedKeys() {
-        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
+        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "brightnessLogarithmicDevices", "brightnessUserSetValues", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
 
         try {
             const content = settingsFile.text()
@@ -654,6 +660,36 @@ Singleton {
     function setLastBrightnessDevice(device) {
         lastBrightnessDevice = device
         saveSettings()
+    }
+
+    function setBrightnessLogarithmic(deviceName, enabled) {
+        var newSettings = Object.assign({}, brightnessLogarithmicDevices)
+        if (enabled) {
+            newSettings[deviceName] = true
+        } else {
+            delete newSettings[deviceName]
+        }
+        brightnessLogarithmicDevices = newSettings
+        saveSettings()
+
+        if (typeof DisplayService !== "undefined") {
+            DisplayService.updateDeviceBrightnessDisplay(deviceName)
+        }
+    }
+
+    function getBrightnessLogarithmic(deviceName) {
+        return brightnessLogarithmicDevices[deviceName] === true
+    }
+
+    function setBrightnessUserSetValue(deviceName, value) {
+        var newValues = Object.assign({}, brightnessUserSetValues)
+        newValues[deviceName] = value
+        brightnessUserSetValues = newValues
+        saveSettings()
+    }
+
+    function getBrightnessUserSetValue(deviceName) {
+        return brightnessUserSetValues[deviceName]
     }
 
     function setSelectedGpuIndex(index) {

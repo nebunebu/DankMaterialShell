@@ -71,6 +71,7 @@ Row {
     }
 
     property real targetBrightness: {
+        DisplayService.brightnessVersion
         if (!targetDeviceName) {
             return 0
         }
