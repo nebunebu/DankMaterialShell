@@ -34,6 +34,12 @@ Singleton {
         Custom
     }
 
+    enum SuspendBehavior {
+        Suspend,
+        Hibernate,
+        SuspendThenHibernate
+    }
+
     readonly property string defaultFontFamily: "Inter Variable"
     readonly property string defaultMonoFontFamily: "Fira Code"
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
@@ -213,11 +219,11 @@ Singleton {
     property int acMonitorTimeout: 0
     property int acLockTimeout: 0
     property int acSuspendTimeout: 0
-    property int acHibernateTimeout: 0
+    property int acSuspendBehavior: SettingsData.SuspendBehavior.Suspend
     property int batteryMonitorTimeout: 0
     property int batteryLockTimeout: 0
     property int batterySuspendTimeout: 0
-    property int batteryHibernateTimeout: 0
+    property int batterySuspendBehavior: SettingsData.SuspendBehavior.Suspend
     property bool lockBeforeSuspend: false
     property bool loginctlLockIntegration: true
     property string launchPrefix: ""

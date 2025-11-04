@@ -266,38 +266,44 @@ Item {
                         }
                     }
 
-                    DankDropdown {
-                        id: hibernateDropdown
-                        property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
-                        property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
-
-                        text: I18n.tr("Hibernate system after")
-                        options: timeoutOptions
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingS
                         visible: SessionService.hibernateSupported
 
-                        Connections {
-                            target: powerCategory
-                            function onCurrentIndexChanged() {
-                                const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acHibernateTimeout : SettingsData.batteryHibernateTimeout
-                                const index = hibernateDropdown.timeoutValues.indexOf(currentTimeout)
-                                hibernateDropdown.currentValue = index >= 0 ? hibernateDropdown.timeoutOptions[index] : "Never"
+                        StyledText {
+                            text: I18n.tr("Suspend behavior")
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.surfaceText
+                        }
+
+                        DankButtonGroup {
+                            id: suspendBehaviorSelector
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            model: ["Suspend", "Hibernate", "Suspend then Hibernate"]
+                            selectionMode: "single"
+                            checkEnabled: false
+
+                            Connections {
+                                target: powerCategory
+                                function onCurrentIndexChanged() {
+                                    const behavior = powerCategory.currentIndex === 0 ? SettingsData.acSuspendBehavior : SettingsData.batterySuspendBehavior
+                                    suspendBehaviorSelector.currentIndex = behavior
+                                }
                             }
-                        }
 
-                        Component.onCompleted: {
-                            const currentTimeout = powerCategory.currentIndex === 0 ? SettingsData.acHibernateTimeout : SettingsData.batteryHibernateTimeout
-                            const index = timeoutValues.indexOf(currentTimeout)
-                            currentValue = index >= 0 ? timeoutOptions[index] : "Never"
-                        }
+                            Component.onCompleted: {
+                                const behavior = powerCategory.currentIndex === 0 ? SettingsData.acSuspendBehavior : SettingsData.batterySuspendBehavior
+                                currentIndex = behavior
+                            }
 
-                        onValueChanged: value => {
-                            const index = timeoutOptions.indexOf(value)
-                            if (index >= 0) {
-                                const timeout = timeoutValues[index]
-                                if (powerCategory.currentIndex === 0) {
-                                    SettingsData.set("acHibernateTimeout", timeout)
-                                } else {
-                                    SettingsData.set("batteryHibernateTimeout", timeout)
+                            onSelectionChanged: (index, selected) => {
+                                if (selected) {
+                                    if (powerCategory.currentIndex === 0) {
+                                        SettingsData.set("acSuspendBehavior", index)
+                                    } else {
+                                        SettingsData.set("batterySuspendBehavior", index)
+                                    }
                                 }
                             }
                         }
