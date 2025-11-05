@@ -50,7 +50,8 @@ Singleton {
                 "current": device.current,
                 "percentage": device.currentPercent,
                 "max": device.max,
-                "backend": device.backend
+                "backend": device.backend,
+                "displayMax": device.class === "ddc" ? device.max : 100
             }
             devices = newDevices
         }
@@ -95,7 +96,8 @@ Singleton {
                                               "current": d.current,
                                               "percentage": d.currentPercent,
                                               "max": d.max,
-                                              "backend": d.backend
+                                              "backend": d.backend,
+                                              "displayMax": d.class === "ddc" ? d.max : 100
                                           }))
 
         const newBrightness = {}
@@ -146,7 +148,8 @@ Singleton {
 
         const deviceInfo = getCurrentDeviceInfoByName(actualDevice)
         const minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
-        const clampedValue = Math.max(minValue, Math.min(100, percentage))
+        const maxValue = deviceInfo?.displayMax || 100
+        const clampedValue = Math.max(minValue, Math.min(maxValue, percentage))
 
         if (!DMSService.isConnected) {
             console.warn("DisplayService: Not connected to DMS")
@@ -254,6 +257,14 @@ Singleton {
             }
         }
         return null
+    }
+
+    function getDeviceMax(deviceName) {
+        const deviceInfo = getCurrentDeviceInfoByName(deviceName)
+        if (!deviceInfo) {
+            return 100
+        }
+        return deviceInfo.displayMax || 100
     }
 
     // Night Mode Functions - Simplified

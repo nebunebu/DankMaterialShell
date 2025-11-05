@@ -65,10 +65,18 @@ DankOSD {
                     if (!deviceInfo) return 1
                     return (deviceInfo.class === "backlight" || deviceInfo.class === "ddc") ? 1 : 0
                 }
-                maximum: 100
+                maximum: {
+                    const deviceInfo = DisplayService.getCurrentDeviceInfo()
+                    if (!deviceInfo) return 100
+                    return deviceInfo.displayMax || 100
+                }
                 enabled: DisplayService.brightnessAvailable
                 showValue: true
-                unit: "%"
+                unit: {
+                    const deviceInfo = DisplayService.getCurrentDeviceInfo()
+                    if (!deviceInfo) return "%"
+                    return deviceInfo.class === "ddc" ? "" : "%"
+                }
                 thumbOutlineColor: Theme.surfaceContainer
                 alwaysShowValue: SettingsData.osdAlwaysShowValue
 

@@ -150,8 +150,16 @@ Row {
             if (!targetDevice) return 1
             return (targetDevice.class === "backlight" || targetDevice.class === "ddc") ? 1 : 0
         }
-        maximum: 100
+        maximum: {
+            if (!targetDevice) return 100
+            return targetDevice.displayMax || 100
+        }
         value: targetBrightness
+        showValue: true
+        unit: {
+            if (!targetDevice) return "%"
+            return targetDevice.class === "ddc" ? "" : "%"
+        }
         onSliderValueChanged: function (newValue) {
             if (DisplayService.brightnessAvailable && targetDeviceName) {
                 DisplayService.setBrightness(newValue, targetDeviceName, true)
