@@ -314,13 +314,11 @@ EOF
   fi
 
   if [[ "$MATUGEN_VERSION" == "2" ]]; then
-    PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary_container\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
-    HONOR=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     SURFACE=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   else
     JSON_FLAT=$(echo "$JSON" | tr -d '\n')
-    PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary_container\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
-    HONOR=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
     SURFACE=$(echo "$JSON_FLAT" | sed -n "s/.*\"surface\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   fi
 
@@ -332,7 +330,7 @@ EOF
   fi
 
   if command -v ghostty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/ghostty/config-dankcolors" ]]; then
-    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --ghostty 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --ghostty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       sed '/^palette = /d' "$CONFIG_DIR/ghostty/config-dankcolors" > "$TMP"
@@ -345,7 +343,7 @@ EOF
   fi
 
   if command -v kitty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/kitty/dank-theme.conf" ]]; then
-    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       sed '/^color[0-9]/d' "$CONFIG_DIR/kitty/dank-theme.conf" > "$TMP"
@@ -365,7 +363,7 @@ EOF
       echo "[colors]" > "$FOOT_CONFIG"
     fi
 
-    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --foot 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --foot 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       echo "[colors]" > "$TMP"
@@ -383,7 +381,7 @@ EOF
       touch "$ALACRITTY_CONFIG"
     fi
 
-    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --alacritty 2>/dev/null || true)
+    OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --alacritty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
       TMP="$(mktemp)"
       sed '/^\[colors\.normal\]/,/^$/d;/^\[colors\.bright\]/,/^$/d' "$ALACRITTY_CONFIG" > "$TMP"
@@ -415,7 +413,7 @@ EOF
           VARIANT_FLAG="--light"
         fi
 
-        dms dank16 "$PRIMARY" $VARIANT_FLAG ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
+        dms dank16 "$PRIMARY" $VARIANT_FLAG ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
       fi
     done
   fi
@@ -460,7 +458,7 @@ EOF
           VARIANT_FLAG="--light"
         fi
 
-        dms dank16 "$PRIMARY" $VARIANT_FLAG ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$CODIUM_BASE" > "$CODIUM_FINAL" 2>/dev/null || cp "$CODIUM_BASE" "$CODIUM_FINAL"
+        dms dank16 "$PRIMARY" $VARIANT_FLAG ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$CODIUM_BASE" > "$CODIUM_FINAL" 2>/dev/null || cp "$CODIUM_BASE" "$CODIUM_FINAL"
       fi
     done
   fi
