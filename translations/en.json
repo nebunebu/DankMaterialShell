@@ -110,13 +110,13 @@
   {
     "term": "Add a VPN in NetworkManager",
     "context": "Add a VPN in NetworkManager",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147, Modules/DankBar/Popouts/VpnPopout.qml:286",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147, Modules/DankBar/Popouts/VpnPopout.qml:288",
     "comment": ""
   },
   {
     "term": "All",
     "context": "All",
-    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppDrawerPopout.qml:45, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modals/Spotlight/SpotlightModal.qml:59",
+    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppDrawerPopout.qml:47, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modals/Spotlight/SpotlightModal.qml:61",
     "comment": ""
   },
   {
@@ -158,7 +158,7 @@
   {
     "term": "Anonymous Identity (optional)",
     "context": "Anonymous Identity (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:389",
+    "reference": "Modals/WifiPasswordModal.qml:391",
     "comment": ""
   },
   {
@@ -176,13 +176,13 @@
   {
     "term": "Applications",
     "context": "Applications",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:188",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:190",
     "comment": ""
   },
   {
     "term": "Apply",
     "context": "Apply",
-    "reference": "Modals/DankColorPickerModal.qml:489",
+    "reference": "Modals/DankColorPickerModal.qml:491",
     "comment": ""
   },
   {
@@ -218,31 +218,31 @@
   {
     "term": "Are you sure you want to hibernate the system?",
     "context": "Are you sure you want to hibernate the system?",
-    "reference": "Modals/PowerMenuModal.qml:44",
+    "reference": "Modals/PowerMenuModal.qml:46",
     "comment": ""
   },
   {
     "term": "Are you sure you want to log out?",
     "context": "Are you sure you want to log out?",
-    "reference": "Modals/PowerMenuModal.qml:36",
+    "reference": "Modals/PowerMenuModal.qml:38",
     "comment": ""
   },
   {
     "term": "Are you sure you want to power off the system?",
     "context": "Are you sure you want to power off the system?",
-    "reference": "Modals/PowerMenuModal.qml:52",
+    "reference": "Modals/PowerMenuModal.qml:54",
     "comment": ""
   },
   {
     "term": "Are you sure you want to reboot the system?",
     "context": "Are you sure you want to reboot the system?",
-    "reference": "Modals/PowerMenuModal.qml:48",
+    "reference": "Modals/PowerMenuModal.qml:50",
     "comment": ""
   },
   {
     "term": "Are you sure you want to suspend the system?",
     "context": "Are you sure you want to suspend the system?",
-    "reference": "Modals/PowerMenuModal.qml:40",
+    "reference": "Modals/PowerMenuModal.qml:42",
     "comment": ""
   },
   {
@@ -278,37 +278,37 @@
   {
     "term": "Authenticate",
     "context": "Authenticate",
-    "reference": "Modals/PolkitAuthModal.qml:322",
+    "reference": "Modals/PolkitAuthModal.qml:324",
     "comment": ""
   },
   {
     "term": "Authentication Required",
     "context": "Authentication Required",
-    "reference": "Modals/PolkitAuthModal.qml:134",
+    "reference": "Modals/PolkitAuthModal.qml:136",
     "comment": ""
   },
   {
     "term": "Authentication failed, please try again",
     "context": "Authentication failed, please try again",
-    "reference": "Modals/PolkitAuthModal.qml:244",
+    "reference": "Modals/PolkitAuthModal.qml:246",
     "comment": ""
   },
   {
     "term": "Authorize",
     "context": "Authorize",
-    "reference": "Modals/BluetoothPairingModal.qml:292",
+    "reference": "Modals/BluetoothPairingModal.qml:294",
     "comment": ""
   },
   {
     "term": "Authorize pairing with ",
     "context": "Authorize pairing with ",
-    "reference": "Modals/BluetoothPairingModal.qml:114",
+    "reference": "Modals/BluetoothPairingModal.qml:116",
     "comment": ""
   },
   {
     "term": "Authorize service for ",
     "context": "Authorize service for ",
-    "reference": "Modals/BluetoothPairingModal.qml:116",
+    "reference": "Modals/BluetoothPairingModal.qml:118",
     "comment": ""
   },
   {
@@ -590,13 +590,13 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:249, Modals/PolkitAuthModal.qml:289, Modals/DankColorPickerModal.qml:516, Modals/WifiPasswordModal.qml:492, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/DankColorPickerModal.qml:518, Modals/WifiPasswordModal.qml:494, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
     "comment": ""
   },
   {
     "term": "Capacity",
     "context": "Capacity",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:350, Modules/DankBar/Popouts/BatteryPopout.qml:506",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508",
     "comment": ""
   },
   {
@@ -650,7 +650,7 @@
   {
     "term": "Clear All",
     "context": "Clear All",
-    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:157",
+    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:159",
     "comment": ""
   },
   {
@@ -686,7 +686,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modals/NetworkInfoModal.qml:129, Modals/NetworkWiredInfoModal.qml:129, Modules/SystemUpdatePopout.qml:333, Modules/DankBar/Widgets/RunningApps.qml:788",
+    "reference": "Modals/NetworkInfoModal.qml:131, Modals/NetworkWiredInfoModal.qml:131, Modules/SystemUpdatePopout.qml:335, Modules/DankBar/Widgets/RunningApps.qml:788",
     "comment": ""
   },
   {
@@ -794,31 +794,31 @@
   {
     "term": "Confirm",
     "context": "Confirm",
-    "reference": "Modals/BluetoothPairingModal.qml:290",
+    "reference": "Modals/BluetoothPairingModal.qml:292",
     "comment": ""
   },
   {
     "term": "Confirm passkey for ",
     "context": "Confirm passkey for ",
-    "reference": "Modals/BluetoothPairingModal.qml:112",
+    "reference": "Modals/BluetoothPairingModal.qml:114",
     "comment": ""
   },
   {
     "term": "Connect",
     "context": "Connect",
-    "reference": "Modals/WifiPasswordModal.qml:534",
+    "reference": "Modals/WifiPasswordModal.qml:536",
     "comment": ""
   },
   {
     "term": "Connect to VPN",
     "context": "Connect to VPN",
-    "reference": "Modals/WifiPasswordModal.qml:182",
+    "reference": "Modals/WifiPasswordModal.qml:184",
     "comment": ""
   },
   {
     "term": "Connect to Wi-Fi",
     "context": "Connect to Wi-Fi",
-    "reference": "Modals/WifiPasswordModal.qml:184",
+    "reference": "Modals/WifiPasswordModal.qml:186",
     "comment": ""
   },
   {
@@ -866,7 +866,7 @@
   {
     "term": "Copied to clipboard",
     "context": "Copied to clipboard",
-    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:95",
+    "reference": "Modals/Clipboard/ClipboardHistoryModal.qml:97",
     "comment": ""
   },
   {
@@ -878,7 +878,7 @@
   {
     "term": "Copy",
     "context": "Copy",
-    "reference": "Modals/DankColorPickerModal.qml:535",
+    "reference": "Modals/DankColorPickerModal.qml:537",
     "comment": ""
   },
   {
@@ -1118,7 +1118,7 @@
   {
     "term": "Disconnect",
     "context": "Disconnect",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:222",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:224",
     "comment": ""
   },
   {
@@ -1220,7 +1220,7 @@
   {
     "term": "Domain (optional)",
     "context": "Domain (optional)",
-    "reference": "Modals/WifiPasswordModal.qml:421",
+    "reference": "Modals/WifiPasswordModal.qml:423",
     "comment": ""
   },
   {
@@ -1322,19 +1322,19 @@
   {
     "term": "Enter 6-digit passkey",
     "context": "Enter 6-digit passkey",
-    "reference": "Modals/BluetoothPairingModal.qml:188",
+    "reference": "Modals/BluetoothPairingModal.qml:190",
     "comment": ""
   },
   {
     "term": "Enter PIN",
     "context": "Enter PIN",
-    "reference": "Modals/BluetoothPairingModal.qml:153",
+    "reference": "Modals/BluetoothPairingModal.qml:155",
     "comment": ""
   },
   {
     "term": "Enter PIN for ",
     "context": "Enter PIN for ",
-    "reference": "Modals/BluetoothPairingModal.qml:118",
+    "reference": "Modals/BluetoothPairingModal.qml:120",
     "comment": ""
   },
   {
@@ -1346,7 +1346,7 @@
   {
     "term": "Enter credentials for ",
     "context": "Enter credentials for ",
-    "reference": "Modals/WifiPasswordModal.qml:200",
+    "reference": "Modals/WifiPasswordModal.qml:202",
     "comment": ""
   },
   {
@@ -1370,13 +1370,13 @@
   {
     "term": "Enter passkey for ",
     "context": "Enter passkey for ",
-    "reference": "Modals/BluetoothPairingModal.qml:120",
+    "reference": "Modals/BluetoothPairingModal.qml:122",
     "comment": ""
   },
   {
     "term": "Enter password for ",
     "context": "Enter password for ",
-    "reference": "Modals/WifiPasswordModal.qml:198, Modals/WifiPasswordModal.qml:200",
+    "reference": "Modals/WifiPasswordModal.qml:200, Modals/WifiPasswordModal.qml:202",
     "comment": ""
   },
   {
@@ -1646,7 +1646,7 @@
   {
     "term": "Health",
     "context": "Health",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:315, Modules/DankBar/Popouts/BatteryPopout.qml:469",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471",
     "comment": ""
   },
   {
@@ -1658,13 +1658,13 @@
   {
     "term": "Hex:",
     "context": "Hex:",
-    "reference": "Modals/DankColorPickerModal.qml:450",
+    "reference": "Modals/DankColorPickerModal.qml:452",
     "comment": ""
   },
   {
     "term": "Hibernate",
     "context": "Hibernate",
-    "reference": "Modals/PowerMenuModal.qml:43, Modals/PowerMenuModal.qml:311, Modules/Lock/LockPowerMenu.qml:312",
+    "reference": "Modals/PowerMenuModal.qml:45, Modals/PowerMenuModal.qml:313, Modules/Lock/LockPowerMenu.qml:312",
     "comment": ""
   },
   {
@@ -1754,7 +1754,7 @@
   {
     "term": "Incorrect password",
     "context": "Incorrect password",
-    "reference": "Modals/WifiPasswordModal.qml:211",
+    "reference": "Modals/WifiPasswordModal.qml:213",
     "comment": ""
   },
   {
@@ -1766,7 +1766,7 @@
   {
     "term": "Individual Batteries",
     "context": "Individual Batteries",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:375",
+    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:377",
     "comment": ""
   },
   {
@@ -1850,7 +1850,7 @@
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:744, Modals/Spotlight/SpotlightContextMenu.qml:251",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:746, Modals/Spotlight/SpotlightContextMenu.qml:251",
     "comment": ""
   },
   {
@@ -1862,7 +1862,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:804, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:806, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
     "comment": ""
   },
   {
@@ -1880,7 +1880,7 @@
   {
     "term": "Left",
     "context": "Left",
-    "reference": "Modules/Settings/DankBarTab.qml:763, Modules/DankBar/Popouts/BatteryPopout.qml:538",
+    "reference": "Modules/Settings/DankBarTab.qml:763, Modules/DankBar/Popouts/BatteryPopout.qml:540",
     "comment": ""
   },
   {
@@ -1940,7 +1940,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:35, Modals/PowerMenuModal.qml:204, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
+    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -1988,7 +1988,7 @@
   {
     "term": "Material Colors",
     "context": "Material Colors",
-    "reference": "Modals/DankColorPickerModal.qml:311",
+    "reference": "Modals/DankColorPickerModal.qml:313",
     "comment": ""
   },
   {
@@ -2018,7 +2018,7 @@
   {
     "term": "Media",
     "context": "Media",
-    "reference": "Services/AppSearchService.qml:158, Services/AppSearchService.qml:159, Services/AppSearchService.qml:160, Widgets/DankIconPicker.qml:37, Modules/DankDash/DankDashPopout.qml:232",
+    "reference": "Services/AppSearchService.qml:158, Services/AppSearchService.qml:159, Services/AppSearchService.qml:160, Widgets/DankIconPicker.qml:37, Modules/DankDash/DankDashPopout.qml:234",
     "comment": ""
   },
   {
@@ -2144,7 +2144,7 @@
   {
     "term": "Network Information",
     "context": "Network Information",
-    "reference": "Modals/NetworkInfoModal.qml:59, Modals/NetworkWiredInfoModal.qml:59",
+    "reference": "Modals/NetworkInfoModal.qml:61, Modals/NetworkWiredInfoModal.qml:61",
     "comment": ""
   },
   {
@@ -2222,7 +2222,7 @@
   {
     "term": "No VPN profiles found",
     "context": "No VPN profiles found",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140, Modules/DankBar/Popouts/VpnPopout.qml:279",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140, Modules/DankBar/Popouts/VpnPopout.qml:281",
     "comment": ""
   },
   {
@@ -2372,7 +2372,7 @@
   {
     "term": "Opacity",
     "context": "Opacity",
-    "reference": "Modals/DankColorPickerModal.qml:413",
+    "reference": "Modals/DankColorPickerModal.qml:415",
     "comment": ""
   },
   {
@@ -2396,7 +2396,7 @@
   {
     "term": "Overview",
     "context": "Overview",
-    "reference": "Modules/DankDash/DankDashPopout.qml:229",
+    "reference": "Modules/DankDash/DankDashPopout.qml:231",
     "comment": ""
   },
   {
@@ -2414,31 +2414,31 @@
   {
     "term": "Pair",
     "context": "Pair",
-    "reference": "Modals/BluetoothPairingModal.qml:293",
+    "reference": "Modals/BluetoothPairingModal.qml:295",
     "comment": ""
   },
   {
     "term": "Pair Bluetooth Device",
     "context": "Pair Bluetooth Device",
-    "reference": "Modals/BluetoothPairingModal.qml:103",
+    "reference": "Modals/BluetoothPairingModal.qml:105",
     "comment": ""
   },
   {
     "term": "Pairing failed",
     "context": "Pairing failed",
-    "reference": "Modals/BluetoothPairingModal.qml:354, Modules/ControlCenter/Details/BluetoothDetail.qml:40",
+    "reference": "Modals/BluetoothPairingModal.qml:356, Modules/ControlCenter/Details/BluetoothDetail.qml:40",
     "comment": ""
   },
   {
     "term": "Passkey:",
     "context": "Passkey:",
-    "reference": "Modals/BluetoothPairingModal.qml:212",
+    "reference": "Modals/BluetoothPairingModal.qml:214",
     "comment": ""
   },
   {
     "term": "Password",
     "context": "Password",
-    "reference": "Modals/WifiPasswordModal.qml:296",
+    "reference": "Modals/WifiPasswordModal.qml:298",
     "comment": ""
   },
   {
@@ -2480,7 +2480,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:607, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
@@ -2588,19 +2588,19 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:51, Modals/PowerMenuModal.qml:419, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
+    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:147, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
+    "reference": "Modals/PowerMenuModal.qml:149, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
     "term": "Power Profile Degradation",
     "context": "Power Profile Degradation",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:623",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:625",
     "comment": ""
   },
   {
@@ -2678,13 +2678,13 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:47, Modals/PowerMenuModal.qml:365, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
+    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
     "term": "Recent Colors",
     "context": "Recent Colors",
-    "reference": "Modals/DankColorPickerModal.qml:361",
+    "reference": "Modals/DankColorPickerModal.qml:363",
     "comment": ""
   },
   {
@@ -2852,7 +2852,7 @@
   {
     "term": "Select a color from the palette or use custom sliders",
     "context": "Select a color from the palette or use custom sliders",
-    "reference": "Modals/DankColorPickerModal.qml:151",
+    "reference": "Modals/DankColorPickerModal.qml:153",
     "comment": ""
   },
   {
@@ -2942,7 +2942,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:247, Modals/Settings/SettingsModal.qml:166",
+    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:249, Modals/Settings/SettingsModal.qml:168",
     "comment": ""
   },
   {
@@ -3038,7 +3038,7 @@
   {
     "term": "Show password",
     "context": "Show password",
-    "reference": "Modals/WifiPasswordModal.qml:464",
+    "reference": "Modals/WifiPasswordModal.qml:466",
     "comment": ""
   },
   {
@@ -3164,7 +3164,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:39, Modals/PowerMenuModal.qml:257, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
+    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {
@@ -3218,13 +3218,13 @@
   {
     "term": "System Monitor",
     "context": "System Monitor",
-    "reference": "Modals/ProcessListModal.qml:157",
+    "reference": "Modals/ProcessListModal.qml:159",
     "comment": ""
   },
   {
     "term": "System Monitor Unavailable",
     "context": "System Monitor Unavailable",
-    "reference": "Modals/ProcessListModal.qml:126",
+    "reference": "Modals/ProcessListModal.qml:128",
     "comment": ""
   },
   {
@@ -3254,7 +3254,7 @@
   {
     "term": "System Updates",
     "context": "System Updates",
-    "reference": "Modules/SystemUpdatePopout.qml:93",
+    "reference": "Modules/SystemUpdatePopout.qml:95",
     "comment": ""
   },
   {
@@ -3362,7 +3362,7 @@
   {
     "term": "To Full",
     "context": "To Full",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:536",
+    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:538",
     "comment": ""
   },
   {
@@ -3434,7 +3434,7 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:607, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
     "comment": ""
   },
   {
@@ -3464,7 +3464,7 @@
   {
     "term": "Update All",
     "context": "Update All",
-    "reference": "Modules/SystemUpdatePopout.qml:289",
+    "reference": "Modules/SystemUpdatePopout.qml:291",
     "comment": ""
   },
   {
@@ -3560,7 +3560,7 @@
   {
     "term": "Username",
     "context": "Username",
-    "reference": "Modals/WifiPasswordModal.qml:259",
+    "reference": "Modals/WifiPasswordModal.qml:261",
     "comment": ""
   },
   {
@@ -3584,7 +3584,7 @@
   {
     "term": "VPN Connections",
     "context": "VPN Connections",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:112",
+    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:114",
     "comment": ""
   },
   {
@@ -3644,7 +3644,7 @@
   {
     "term": "Wallpapers",
     "context": "Wallpapers",
-    "reference": "Modules/DankDash/DankDashPopout.qml:235",
+    "reference": "Modules/DankDash/DankDashPopout.qml:237",
     "comment": ""
   },
   {
@@ -3656,7 +3656,7 @@
   {
     "term": "Weather",
     "context": "Weather",
-    "reference": "Modules/DankDash/DankDashPopout.qml:241",
+    "reference": "Modules/DankDash/DankDashPopout.qml:243",
     "comment": ""
   },
   {
