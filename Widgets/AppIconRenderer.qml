@@ -22,10 +22,11 @@ Item {
     property real fallbackTopMargin: 0
     property real fallbackBottomMargin: 0
 
-    property bool isMaterial: iconValue.indexOf("material:") === 0
-    property bool isUnicode: iconValue.indexOf("unicode:") === 0
-    property string materialName: isMaterial ? iconValue.substring(9) : ""
-    property string unicodeChar: isUnicode ? iconValue.substring(8) : ""
+    readonly property bool isMaterial: iconValue.startsWith("material:")
+    readonly property bool isUnicode: iconValue.startsWith("unicode:")
+    readonly property string materialName: isMaterial ? iconValue.substring(9) : ""
+    readonly property string unicodeChar: isUnicode ? iconValue.substring(8) : ""
+    readonly property string iconPath: isMaterial || isUnicode ? "" : Quickshell.iconPath(iconValue, true)
 
     visible: iconValue !== undefined && iconValue !== ""
 
@@ -49,7 +50,7 @@ Item {
         id: iconImg
 
         anchors.fill: parent
-        source: root.isMaterial || root.isUnicode ? "" : Quickshell.iconPath(root.iconValue, true)
+        source: root.iconPath
         smooth: true
         asynchronous: true
         visible: !root.isMaterial && !root.isUnicode && status === Image.Ready

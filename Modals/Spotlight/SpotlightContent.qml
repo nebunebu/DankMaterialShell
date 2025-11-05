@@ -201,7 +201,7 @@ Item {
                 textColor: Theme.surfaceText
                 font.pixelSize: Theme.fontSizeLarge
                 enabled: parentModal ? parentModal.spotlightOpen : true
-                placeholderText: searchMode === "files" ? "Search files..." : "Search apps..."
+                placeholderText: ""
                 ignoreLeftRightKeys: appLauncher.viewMode !== "list"
                 ignoreTabKeys: true
                 keyForwardTargets: [spotlightKeyHandler]
