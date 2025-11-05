@@ -98,7 +98,7 @@
   {
     "term": "Add Widget",
     "context": "Add Widget",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:708, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:737, Modules/ControlCenter/Components/EditControls.qml:58, Modules/ControlCenter/Components/EditControls.qml:159",
     "comment": ""
   },
   {
@@ -266,7 +266,7 @@
   {
     "term": "Audio Icon",
     "context": "Audio Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:899",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:928",
     "comment": ""
   },
   {
@@ -320,13 +320,13 @@
   {
     "term": "Auto Popup Gaps",
     "context": "Auto Popup Gaps",
-    "reference": "Modules/Settings/DankBarTab.qml:1163",
+    "reference": "Modules/Settings/DankBarTab.qml:1218",
     "comment": ""
   },
   {
     "term": "Auto-hide",
     "context": "Auto-hide",
-    "reference": "Modules/Settings/DankBarTab.qml:768",
+    "reference": "Modules/Settings/DankBarTab.qml:823",
     "comment": ""
   },
   {
@@ -368,7 +368,7 @@
   {
     "term": "Automatically calculate popup distance from bar edge.",
     "context": "Automatically calculate popup distance from bar edge.",
-    "reference": "Modules/Settings/DankBarTab.qml:1164",
+    "reference": "Modules/Settings/DankBarTab.qml:1219",
     "comment": ""
   },
   {
@@ -398,7 +398,7 @@
   {
     "term": "Automatically hide the top bar to expand screen real estate",
     "context": "Automatically hide the top bar to expand screen real estate",
-    "reference": "Modules/Settings/DankBarTab.qml:775",
+    "reference": "Modules/Settings/DankBarTab.qml:830",
     "comment": ""
   },
   {
@@ -470,7 +470,7 @@
   {
     "term": "Bluetooth Icon",
     "context": "Bluetooth Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:846",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:875",
     "comment": ""
   },
   {
@@ -500,37 +500,37 @@
   {
     "term": "Border",
     "context": "Border",
-    "reference": "Modules/Settings/DankBarTab.qml:1296",
+    "reference": "Modules/Settings/DankBarTab.qml:1351",
     "comment": ""
   },
   {
     "term": "Border Color",
     "context": "Border Color",
-    "reference": "Modules/Settings/DankBarTab.qml:1326",
+    "reference": "Modules/Settings/DankBarTab.qml:1381",
     "comment": ""
   },
   {
     "term": "Border Opacity",
     "context": "Border Opacity",
-    "reference": "Modules/Settings/DankBarTab.qml:1378, Modules/Settings/DankBarTab.qml:1392",
+    "reference": "Modules/Settings/DankBarTab.qml:1433, Modules/Settings/DankBarTab.qml:1447",
     "comment": ""
   },
   {
     "term": "Border Thickness",
     "context": "Border Thickness",
-    "reference": "Modules/Settings/DankBarTab.qml:1449, Modules/Settings/DankBarTab.qml:1463",
+    "reference": "Modules/Settings/DankBarTab.qml:1504, Modules/Settings/DankBarTab.qml:1518",
     "comment": ""
   },
   {
     "term": "Bottom",
     "context": "Bottom",
-    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "reference": "Modules/Settings/DankBarTab.qml:763",
     "comment": ""
   },
   {
     "term": "Bottom Section",
     "context": "Bottom Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1901",
+    "reference": "Modules/Settings/DankBarTab.qml:1964",
     "comment": ""
   },
   {
@@ -602,7 +602,7 @@
   {
     "term": "Center Section",
     "context": "Center Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1822",
+    "reference": "Modules/Settings/DankBarTab.qml:1881",
     "comment": ""
   },
   {
@@ -626,7 +626,7 @@
   {
     "term": "Choose the border accent color",
     "context": "Choose the border accent color",
-    "reference": "Modules/Settings/DankBarTab.qml:1333",
+    "reference": "Modules/Settings/DankBarTab.qml:1388",
     "comment": ""
   },
   {
@@ -764,7 +764,7 @@
   {
     "term": "Compact Mode",
     "context": "Compact Mode",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:521",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:550",
     "comment": ""
   },
   {
@@ -1028,7 +1028,7 @@
   {
     "term": "DankBar Font Scale",
     "context": "DankBar Font Scale",
-    "reference": "Modules/Settings/DankBarTab.qml:1535",
+    "reference": "Modules/Settings/DankBarTab.qml:1590",
     "comment": ""
   },
   {
@@ -1232,7 +1232,7 @@
   {
     "term": "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.",
     "context": "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.",
-    "reference": "Modules/Settings/DankBarTab.qml:1717",
+    "reference": "Modules/Settings/DankBarTab.qml:1772",
     "comment": ""
   },
   {
@@ -1250,7 +1250,7 @@
   {
     "term": "Edge Spacing (0 = edge-to-edge)",
     "context": "Edge Spacing (0 = edge-to-edge)",
-    "reference": "Modules/Settings/DankBarTab.qml:950, Modules/Settings/DankBarTab.qml:964",
+    "reference": "Modules/Settings/DankBarTab.qml:1005, Modules/Settings/DankBarTab.qml:1019",
     "comment": ""
   },
   {
@@ -1382,7 +1382,7 @@
   {
     "term": "Exclusive Zone Offset",
     "context": "Exclusive Zone Offset",
-    "reference": "Modules/Settings/DankBarTab.qml:1022, Modules/Settings/DankBarTab.qml:1036",
+    "reference": "Modules/Settings/DankBarTab.qml:1077, Modules/Settings/DankBarTab.qml:1091",
     "comment": ""
   },
   {
@@ -1622,7 +1622,7 @@
   {
     "term": "Goth Corners",
     "context": "Goth Corners",
-    "reference": "Modules/Settings/DankBarTab.qml:1281",
+    "reference": "Modules/Settings/DankBarTab.qml:1336",
     "comment": ""
   },
   {
@@ -1880,13 +1880,13 @@
   {
     "term": "Left",
     "context": "Left",
-    "reference": "Modules/Settings/DankBarTab.qml:708, Modules/DankBar/Popouts/BatteryPopout.qml:538",
+    "reference": "Modules/Settings/DankBarTab.qml:763, Modules/DankBar/Popouts/BatteryPopout.qml:538",
     "comment": ""
   },
   {
     "term": "Left Section",
     "context": "Left Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1743",
+    "reference": "Modules/Settings/DankBarTab.qml:1798",
     "comment": ""
   },
   {
@@ -1976,13 +1976,13 @@
   {
     "term": "Manual Gap Size",
     "context": "Manual Gap Size",
-    "reference": "Modules/Settings/DankBarTab.qml:1193, Modules/Settings/DankBarTab.qml:1207",
+    "reference": "Modules/Settings/DankBarTab.qml:1248, Modules/Settings/DankBarTab.qml:1262",
     "comment": ""
   },
   {
     "term": "Manual Show/Hide",
     "context": "Manual Show/Hide",
-    "reference": "Modules/Settings/DankBarTab.qml:820",
+    "reference": "Modules/Settings/DankBarTab.qml:875",
     "comment": ""
   },
   {
@@ -2132,7 +2132,7 @@
   {
     "term": "Network Icon",
     "context": "Network Icon",
-    "reference": "Modules/Settings/WidgetsTabSection.qml:793",
+    "reference": "Modules/Settings/WidgetsTabSection.qml:822",
     "comment": ""
   },
   {
@@ -2204,7 +2204,7 @@
   {
     "term": "No Background",
     "context": "No Background",
-    "reference": "Modules/Settings/DankBarTab.qml:1270",
+    "reference": "Modules/Settings/DankBarTab.qml:1325",
     "comment": ""
   },
   {
@@ -2570,7 +2570,7 @@
   {
     "term": "Position",
     "context": "Position",
-    "reference": "Modules/Settings/DankBarTab.qml:698",
+    "reference": "Modules/Settings/DankBarTab.qml:753",
     "comment": ""
   },
   {
@@ -2720,7 +2720,7 @@
   {
     "term": "Reset",
     "context": "Reset",
-    "reference": "Modules/Settings/DankBarTab.qml:1675, Modules/ControlCenter/Components/EditControls.qml:227",
+    "reference": "Modules/Settings/DankBarTab.qml:1730, Modules/ControlCenter/Components/EditControls.qml:227",
     "comment": ""
   },
   {
@@ -2732,13 +2732,13 @@
   {
     "term": "Right",
     "context": "Right",
-    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "reference": "Modules/Settings/DankBarTab.qml:763",
     "comment": ""
   },
   {
     "term": "Right Section",
     "context": "Right Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1901",
+    "reference": "Modules/Settings/DankBarTab.qml:1964",
     "comment": ""
   },
   {
@@ -2786,7 +2786,7 @@
   {
     "term": "Scale DankBar font sizes independently",
     "context": "Scale DankBar font sizes independently",
-    "reference": "Modules/Settings/DankBarTab.qml:1542",
+    "reference": "Modules/Settings/DankBarTab.qml:1597",
     "comment": ""
   },
   {
@@ -3008,7 +3008,7 @@
   {
     "term": "Show on Overview",
     "context": "Show on Overview",
-    "reference": "Modules/Settings/DockTab.qml:232, Modules/Settings/DankBarTab.qml:874",
+    "reference": "Modules/Settings/DockTab.qml:232, Modules/Settings/DankBarTab.qml:929",
     "comment": ""
   },
   {
@@ -3086,7 +3086,7 @@
   {
     "term": "Size",
     "context": "Size",
-    "reference": "Modules/ProcessList/SystemTab.qml:456, Modules/Settings/DankBarTab.qml:1094, Modules/Settings/DankBarTab.qml:1108",
+    "reference": "Modules/ProcessList/SystemTab.qml:456, Modules/Settings/DankBarTab.qml:1149, Modules/Settings/DankBarTab.qml:1163",
     "comment": ""
   },
   {
@@ -3116,13 +3116,13 @@
   {
     "term": "Spacing",
     "context": "Spacing",
-    "reference": "Modules/Settings/DockTab.qml:492, Modules/Settings/DankBarTab.qml:933",
+    "reference": "Modules/Settings/DockTab.qml:492, Modules/Settings/DankBarTab.qml:988",
     "comment": ""
   },
   {
     "term": "Square Corners",
     "context": "Square Corners",
-    "reference": "Modules/Settings/DankBarTab.qml:1259",
+    "reference": "Modules/Settings/DankBarTab.qml:1314",
     "comment": ""
   },
   {
@@ -3386,7 +3386,7 @@
   {
     "term": "Toggle top bar visibility manually (can be controlled via IPC)",
     "context": "Toggle top bar visibility manually (can be controlled via IPC)",
-    "reference": "Modules/Settings/DankBarTab.qml:827",
+    "reference": "Modules/Settings/DankBarTab.qml:882",
     "comment": ""
   },
   {
@@ -3398,7 +3398,7 @@
   {
     "term": "Top",
     "context": "Top",
-    "reference": "Modules/Settings/DankBarTab.qml:708",
+    "reference": "Modules/Settings/DankBarTab.qml:763",
     "comment": ""
   },
   {
@@ -3410,7 +3410,7 @@
   {
     "term": "Top Section",
     "context": "Top Section",
-    "reference": "Modules/Settings/DankBarTab.qml:1743",
+    "reference": "Modules/Settings/DankBarTab.qml:1798",
     "comment": ""
   },
   {
@@ -3698,7 +3698,7 @@
   {
     "term": "Widget Management",
     "context": "Widget Management",
-    "reference": "Modules/Settings/DankBarTab.qml:1637",
+    "reference": "Modules/Settings/DankBarTab.qml:1692",
     "comment": ""
   },
   {
