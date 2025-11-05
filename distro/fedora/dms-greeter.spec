@@ -242,6 +242,7 @@ Next steps:
 
 Ready to test? Reboot or run: sudo systemctl start greetd
 Documentation: /usr/share/doc/dms-greeter/README.md
+Website: https://danklinux.com/docs/dankgreeter/
 =========================================================================
 
 EOF
