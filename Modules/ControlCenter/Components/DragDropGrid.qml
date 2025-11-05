@@ -836,6 +836,9 @@ Column {
             onExpandClicked: {
                 if (root.editMode)
                     return
+                if (builtinInstance) {
+                    builtinInstance.ccWidgetExpanded()
+                }
                 root.expandClicked(widgetData, widgetIndex)
             }
         }
@@ -969,6 +972,9 @@ Column {
             onExpandClicked: {
                 if (root.editMode)
                     return
+                if (pluginInstance) {
+                    pluginInstance.ccWidgetExpanded()
+                }
                 root.expandClicked(widgetData, widgetIndex)
             }
         }
