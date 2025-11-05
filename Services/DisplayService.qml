@@ -29,9 +29,8 @@ Singleton {
     }
     property int maxBrightness: 100
     property bool brightnessInitialized: false
-    property bool suppressNextOsd: false
 
-    signal brightnessChanged
+    signal brightnessChanged(bool showOsd)
     signal deviceSwitched
 
     property bool nightModeActive: nightModeEnabled
@@ -40,7 +39,7 @@ Singleton {
     property bool automationAvailable: false
     property bool gammaControlAvailable: false
 
-    function updateSingleDevice(device, suppressSignal) {
+    function updateSingleDevice(device) {
         const deviceIndex = devices.findIndex(d => d.id === device.id)
         if (deviceIndex !== -1) {
             const newDevices = [...devices]
@@ -77,20 +76,10 @@ Singleton {
             }
         }
 
-        const oldValue = deviceBrightness[device.id]
         const newBrightness = Object.assign({}, deviceBrightness)
         newBrightness[device.id] = displayValue
         deviceBrightness = newBrightness
         brightnessVersion++
-
-        const shouldSuppress = suppressSignal || suppressNextOsd
-        if (suppressNextOsd) {
-            suppressNextOsd = false
-        }
-
-        if (!shouldSuppress && oldValue !== displayValue) {
-            brightnessChanged()
-        }
     }
 
     function updateFromBrightnessState(state) {
@@ -166,8 +155,18 @@ Singleton {
         }
 
         const deviceInfo = getCurrentDeviceInfoByName(actualDevice)
-        const minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
-        const maxValue = deviceInfo?.displayMax || 100
+        const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+
+        let minValue = 0
+        let maxValue = 100
+
+        if (isLogarithmic) {
+            minValue = 1
+            maxValue = 100
+        } else {
+            minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
+            maxValue = deviceInfo?.displayMax || 100
+        }
 
         if (maxValue <= 0) {
             console.warn("DisplayService: Invalid max value for device", actualDevice, "- skipping brightness change")
@@ -181,17 +180,20 @@ Singleton {
             return
         }
 
-        if (suppressOsd) {
-            suppressNextOsd = true
-        }
-
-        const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+        const newBrightness = Object.assign({}, deviceBrightness)
+        newBrightness[actualDevice] = clampedValue
+        deviceBrightness = newBrightness
+        brightnessVersion++
 
         if (isLogarithmic) {
             const newUserSet = Object.assign({}, deviceBrightnessUserSet)
             newUserSet[actualDevice] = clampedValue
             deviceBrightnessUserSet = newUserSet
             SessionData.setBrightnessUserSetValue(actualDevice, clampedValue)
+        }
+
+        if (!suppressOsd) {
+            brightnessChanged(true)
         }
 
         const params = {
@@ -631,7 +633,7 @@ Singleton {
         }
 
         function onBrightnessDeviceUpdate(device) {
-            updateSingleDevice(device, false)
+            updateSingleDevice(device)
         }
     }
 
@@ -733,22 +735,20 @@ Singleton {
                 root.setCurrentDevice(actualDevice, false)
             }
 
-            DMSService.sendRequest("brightness.increment", {
-                                       "device": actualDevice,
-                                       "step": stepValue
-                                   }, response => {
-                                       if (response.error) {
-                                           console.error("DisplayService: Failed to increment brightness:", response.error)
-                                           ToastService.showError("Failed to increment brightness: " + response.error)
-                                           return
-                                       }
-                                       if (response.result && response.result.devices) {
-                                           const device = response.result.devices.find(d => d.id === actualDevice)
-                                           if (device) {
-                                               updateSingleDevice(device, false)
-                                           }
-                                       }
-                                   })
+            const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+            const currentBrightness = root.getDeviceBrightness(actualDevice)
+            const deviceInfo = root.getCurrentDeviceInfoByName(actualDevice)
+
+            let maxValue = 100
+            if (isLogarithmic) {
+                maxValue = 100
+            } else {
+                maxValue = deviceInfo?.displayMax || 100
+            }
+
+            const newBrightness = Math.min(maxValue, currentBrightness + stepValue)
+
+            root.setBrightness(newBrightness, actualDevice, false)
 
             return "Brightness increased by " + stepValue + "%" + (targetDevice ? " on " + targetDevice : "")
         }
@@ -772,22 +772,20 @@ Singleton {
                 root.setCurrentDevice(actualDevice, false)
             }
 
-            DMSService.sendRequest("brightness.decrement", {
-                                       "device": actualDevice,
-                                       "step": stepValue
-                                   }, response => {
-                                       if (response.error) {
-                                           console.error("DisplayService: Failed to decrement brightness:", response.error)
-                                           ToastService.showError("Failed to decrement brightness: " + response.error)
-                                           return
-                                       }
-                                       if (response.result && response.result.devices) {
-                                           const device = response.result.devices.find(d => d.id === actualDevice)
-                                           if (device) {
-                                               updateSingleDevice(device, false)
-                                           }
-                                       }
-                                   })
+            const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+            const currentBrightness = root.getDeviceBrightness(actualDevice)
+            const deviceInfo = root.getCurrentDeviceInfoByName(actualDevice)
+
+            let minValue = 0
+            if (isLogarithmic) {
+                minValue = 1
+            } else {
+                minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
+            }
+
+            const newBrightness = Math.max(minValue, currentBrightness - stepValue)
+
+            root.setBrightness(newBrightness, actualDevice, false)
 
             return "Brightness decreased by " + stepValue + "%" + (targetDevice ? " on " + targetDevice : "")
         }

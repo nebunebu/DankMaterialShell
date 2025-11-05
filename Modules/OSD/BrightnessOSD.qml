@@ -13,8 +13,10 @@ DankOSD {
 
     Connections {
         target: DisplayService
-        function onBrightnessChanged() {
-            root.show()
+        function onBrightnessChanged(showOsd) {
+            if (showOsd) {
+                root.show()
+            }
         }
     }
 
@@ -63,11 +65,19 @@ DankOSD {
                 minimum: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return 1
+                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
+                    if (isLogarithmic) {
+                        return 1
+                    }
                     return (deviceInfo.class === "backlight" || deviceInfo.class === "ddc") ? 1 : 0
                 }
                 maximum: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return 100
+                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
+                    if (isLogarithmic) {
+                        return 100
+                    }
                     return deviceInfo.displayMax || 100
                 }
                 enabled: DisplayService.brightnessAvailable
@@ -75,6 +85,10 @@ DankOSD {
                 unit: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return "%"
+                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
+                    if (isLogarithmic) {
+                        return "%"
+                    }
                     return deviceInfo.class === "ddc" ? "" : "%"
                 }
                 thumbOutlineColor: Theme.surfaceContainer
@@ -106,7 +120,7 @@ DankOSD {
                 Connections {
                     target: DisplayService
 
-                    function onBrightnessChanged() {
+                    function onBrightnessChanged(showOsd) {
                         if (!brightnessSlider.pressed && brightnessSlider.value !== DisplayService.brightnessLevel) {
                             brightnessSlider.value = DisplayService.brightnessLevel
                         }
