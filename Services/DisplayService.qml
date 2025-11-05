@@ -14,6 +14,7 @@ Singleton {
     property var devices: []
     property var deviceBrightness: ({})
     property var deviceBrightnessUserSet: ({})
+    property var deviceMaxCache: ({})
     property int brightnessVersion: 0
     property string currentDevice: ""
     property string lastIpcDevice: ""
@@ -43,6 +44,14 @@ Singleton {
         const deviceIndex = devices.findIndex(d => d.id === device.id)
         if (deviceIndex !== -1) {
             const newDevices = [...devices]
+            let displayMax = device.class === "ddc" ? device.max : 100
+            if (displayMax <= 0 && deviceMaxCache[device.id]) {
+                displayMax = deviceMaxCache[device.id]
+            } else if (displayMax > 0) {
+                const newCache = Object.assign({}, deviceMaxCache)
+                newCache[device.id] = displayMax
+                deviceMaxCache = newCache
+            }
             newDevices[deviceIndex] = {
                 "id": device.id,
                 "name": device.id,
@@ -51,7 +60,7 @@ Singleton {
                 "percentage": device.currentPercent,
                 "max": device.max,
                 "backend": device.backend,
-                "displayMax": device.class === "ddc" ? device.max : 100
+                "displayMax": displayMax
             }
             devices = newDevices
         }
@@ -89,16 +98,26 @@ Singleton {
             return
         }
 
-        devices = state.devices.map(d => ({
-                                              "id": d.id,
-                                              "name": d.id,
-                                              "class": d.class,
-                                              "current": d.current,
-                                              "percentage": d.currentPercent,
-                                              "max": d.max,
-                                              "backend": d.backend,
-                                              "displayMax": d.class === "ddc" ? d.max : 100
-                                          }))
+        devices = state.devices.map(d => {
+                                              let displayMax = d.class === "ddc" ? d.max : 100
+                                              if (displayMax <= 0 && deviceMaxCache[d.id]) {
+                                                  displayMax = deviceMaxCache[d.id]
+                                              } else if (displayMax > 0) {
+                                                  const newCache = Object.assign({}, deviceMaxCache)
+                                                  newCache[d.id] = displayMax
+                                                  deviceMaxCache = newCache
+                                              }
+                                              return {
+                                                  "id": d.id,
+                                                  "name": d.id,
+                                                  "class": d.class,
+                                                  "current": d.current,
+                                                  "percentage": d.currentPercent,
+                                                  "max": d.max,
+                                                  "backend": d.backend,
+                                                  "displayMax": displayMax
+                                              }
+                                          })
 
         const newBrightness = {}
         for (const device of state.devices) {
@@ -149,6 +168,12 @@ Singleton {
         const deviceInfo = getCurrentDeviceInfoByName(actualDevice)
         const minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
         const maxValue = deviceInfo?.displayMax || 100
+
+        if (maxValue <= 0) {
+            console.warn("DisplayService: Invalid max value for device", actualDevice, "- skipping brightness change")
+            return
+        }
+
         const clampedValue = Math.max(minValue, Math.min(maxValue, percentage))
 
         if (!DMSService.isConnected) {
