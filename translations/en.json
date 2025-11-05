@@ -1010,7 +1010,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:232",
+    "reference": "Services/DMSService.qml:298",
     "comment": ""
   },
   {
@@ -3644,7 +3644,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:232",
+    "reference": "Services/DMSService.qml:298",
     "comment": ""
   },
   {
