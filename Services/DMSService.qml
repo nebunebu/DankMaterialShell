@@ -47,6 +47,8 @@ Singleton {
     signal brightnessStateUpdate(var data)
     signal brightnessDeviceUpdate(var device)
 
+    property var activeSubscriptions: ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "dwl", "brightness"]
+
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
             detectUpdateCommand()
@@ -220,8 +222,72 @@ Singleton {
             "method": "subscribe"
         }
 
-        console.log("DMSService: Subscribing to all services")
+        if (activeSubscriptions.length > 0) {
+            request.params = {
+                "services": activeSubscriptions
+            }
+            console.log("DMSService: Subscribing to services:", JSON.stringify(activeSubscriptions))
+        } else {
+            console.log("DMSService: Subscribing to all services")
+        }
+
         subscribeSocket.send(request)
+    }
+
+    function subscribe(services) {
+        if (!Array.isArray(services)) {
+            services = [services]
+        }
+
+        activeSubscriptions = services
+
+        if (subscribeConnected) {
+            subscribeSocket.connected = false
+            Qt.callLater(() => {
+                subscribeSocket.connected = true
+            })
+        }
+    }
+
+    function addSubscription(service) {
+        if (activeSubscriptions.includes("all")) {
+            console.warn("DMSService: Cannot add specific subscription when subscribed to 'all'")
+            return
+        }
+
+        if (!activeSubscriptions.includes(service)) {
+            const newSubs = [...activeSubscriptions, service]
+            subscribe(newSubs)
+        }
+    }
+
+    function removeSubscription(service) {
+        if (activeSubscriptions.includes("all")) {
+            const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "dwl", "brightness"]
+            const filtered = allServices.filter(s => s !== service)
+            subscribe(filtered)
+        } else {
+            const filtered = activeSubscriptions.filter(s => s !== service)
+            if (filtered.length === 0) {
+                console.warn("DMSService: Cannot remove last subscription")
+                return
+            }
+            subscribe(filtered)
+        }
+    }
+
+    function subscribeAll() {
+        subscribe(["all"])
+    }
+
+    function subscribeAllExcept(excludeServices) {
+        if (!Array.isArray(excludeServices)) {
+            excludeServices = [excludeServices]
+        }
+
+        const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "cups", "dwl", "brightness"]
+        const filtered = allServices.filter(s => !excludeServices.includes(s))
+        subscribe(filtered)
     }
 
     function handleSubscriptionEvent(response) {

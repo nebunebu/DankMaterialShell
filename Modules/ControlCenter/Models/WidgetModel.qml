@@ -41,6 +41,18 @@ QtObject {
 
         onItemChanged: {
             root.cupsBuiltinInstance = item
+            if (item && !DMSService.activeSubscriptions.includes("cups") && !DMSService.activeSubscriptions.includes("all")) {
+                DMSService.addSubscription("cups")
+            }
+        }
+
+        onActiveChanged: {
+            if (!active) {
+                if (DMSService.activeSubscriptions.includes("cups")) {
+                    DMSService.removeSubscription("cups")
+                }
+                root.cupsBuiltinInstance = null
+            }
         }
 
         Connections {
