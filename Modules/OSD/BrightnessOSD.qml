@@ -65,8 +65,8 @@ DankOSD {
                 minimum: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return 1
-                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
-                    if (isLogarithmic) {
+                    const isExponential = SessionData.getBrightnessExponential(deviceInfo.id)
+                    if (isExponential) {
                         return 1
                     }
                     return (deviceInfo.class === "backlight" || deviceInfo.class === "ddc") ? 1 : 0
@@ -74,8 +74,8 @@ DankOSD {
                 maximum: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return 100
-                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
-                    if (isLogarithmic) {
+                    const isExponential = SessionData.getBrightnessExponential(deviceInfo.id)
+                    if (isExponential) {
                         return 100
                     }
                     return deviceInfo.displayMax || 100
@@ -85,8 +85,8 @@ DankOSD {
                 unit: {
                     const deviceInfo = DisplayService.getCurrentDeviceInfo()
                     if (!deviceInfo) return "%"
-                    const isLogarithmic = SessionData.getBrightnessLogarithmic(deviceInfo.id)
-                    if (isLogarithmic) {
+                    const isExponential = SessionData.getBrightnessExponential(deviceInfo.id)
+                    if (isExponential) {
                         return "%"
                     }
                     return deviceInfo.class === "ddc" ? "" : "%"

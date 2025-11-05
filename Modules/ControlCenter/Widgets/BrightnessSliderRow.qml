@@ -148,16 +148,16 @@ Row {
         enabled: DisplayService.brightnessAvailable && targetDeviceName.length > 0
         minimum: {
             if (!targetDevice) return 1
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(targetDevice.id)
-            if (isLogarithmic) {
+            const isExponential = SessionData.getBrightnessExponential(targetDevice.id)
+            if (isExponential) {
                 return 1
             }
             return (targetDevice.class === "backlight" || targetDevice.class === "ddc") ? 1 : 0
         }
         maximum: {
             if (!targetDevice) return 100
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(targetDevice.id)
-            if (isLogarithmic) {
+            const isExponential = SessionData.getBrightnessExponential(targetDevice.id)
+            if (isExponential) {
                 return 100
             }
             return targetDevice.displayMax || 100
@@ -166,8 +166,8 @@ Row {
         showValue: true
         unit: {
             if (!targetDevice) return "%"
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(targetDevice.id)
-            if (isLogarithmic) {
+            const isExponential = SessionData.getBrightnessExponential(targetDevice.id)
+            if (isExponential) {
                 return "%"
             }
             return targetDevice.class === "ddc" ? "" : "%"

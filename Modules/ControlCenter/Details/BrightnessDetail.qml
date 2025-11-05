@@ -316,7 +316,7 @@ Rectangle {
                             width: parent.width
                             height: 24
                             radius: height / 2
-                            color: SessionData.getBrightnessLogarithmic(modelData.name) ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.surfaceText, 0.05)
+                            color: SessionData.getBrightnessExponential(modelData.name) ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.surfaceText, 0.05)
 
                             Row {
                                 anchors.centerIn: parent
@@ -325,14 +325,14 @@ Rectangle {
                                 DankIcon {
                                     name: "show_chart"
                                     size: 14
-                                    color: SessionData.getBrightnessLogarithmic(modelData.name) ? Theme.primary : Theme.surfaceText
+                                    color: SessionData.getBrightnessExponential(modelData.name) ? Theme.primary : Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
 
                                 StyledText {
-                                    text: SessionData.getBrightnessLogarithmic(modelData.name) ? "Logarithmic" : "Linear"
+                                    text: SessionData.getBrightnessExponential(modelData.name) ? "Exponential" : "Linear"
                                     font.pixelSize: Theme.fontSizeSmall
-                                    color: SessionData.getBrightnessLogarithmic(modelData.name) ? Theme.primary : Theme.surfaceText
+                                    color: SessionData.getBrightnessExponential(modelData.name) ? Theme.primary : Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -341,8 +341,8 @@ Rectangle {
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: {
-                                    const currentState = SessionData.getBrightnessLogarithmic(modelData.name)
-                                    SessionData.setBrightnessLogarithmic(modelData.name, !currentState)
+                                    const currentState = SessionData.getBrightnessExponential(modelData.name)
+                                    SessionData.setBrightnessExponential(modelData.name, !currentState)
                                 }
                             }
                         }

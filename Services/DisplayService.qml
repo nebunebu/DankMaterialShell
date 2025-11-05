@@ -64,15 +64,15 @@ Singleton {
             devices = newDevices
         }
 
-        const isLogarithmic = SessionData.getBrightnessLogarithmic(device.id)
+        const isExponential = SessionData.getBrightnessExponential(device.id)
         const userSetValue = deviceBrightnessUserSet[device.id]
 
         let displayValue = device.currentPercent
-        if (isLogarithmic) {
+        if (isExponential) {
             if (userSetValue !== undefined) {
                 displayValue = userSetValue
             } else {
-                displayValue = linearToLogarithmic(device.currentPercent)
+                displayValue = linearToExponential(device.currentPercent)
             }
         }
 
@@ -110,14 +110,14 @@ Singleton {
 
         const newBrightness = {}
         for (const device of state.devices) {
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(device.id)
+            const isExponential = SessionData.getBrightnessExponential(device.id)
             const userSetValue = deviceBrightnessUserSet[device.id]
 
-            if (isLogarithmic) {
+            if (isExponential) {
                 if (userSetValue !== undefined) {
                     newBrightness[device.id] = userSetValue
                 } else {
-                    newBrightness[device.id] = linearToLogarithmic(device.currentPercent)
+                    newBrightness[device.id] = linearToExponential(device.currentPercent)
                 }
             } else {
                 newBrightness[device.id] = device.currentPercent
@@ -155,12 +155,12 @@ Singleton {
         }
 
         const deviceInfo = getCurrentDeviceInfoByName(actualDevice)
-        const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+        const isExponential = SessionData.getBrightnessExponential(actualDevice)
 
         let minValue = 0
         let maxValue = 100
 
-        if (isLogarithmic) {
+        if (isExponential) {
             minValue = 1
             maxValue = 100
         } else {
@@ -185,7 +185,7 @@ Singleton {
         deviceBrightness = newBrightness
         brightnessVersion++
 
-        if (isLogarithmic) {
+        if (isExponential) {
             const newUserSet = Object.assign({}, deviceBrightnessUserSet)
             newUserSet[actualDevice] = clampedValue
             deviceBrightnessUserSet = newUserSet
@@ -200,8 +200,8 @@ Singleton {
             "device": actualDevice,
             "percent": clampedValue
         }
-        if (isLogarithmic) {
-            params.logarithmic = true
+        if (isExponential) {
+            params.exponential = true
         }
 
         DMSService.sendRequest("brightness.setBrightness", params, response => {
@@ -239,10 +239,10 @@ Singleton {
         return 50
     }
 
-    function linearToLogarithmic(linearPercent) {
+    function linearToExponential(linearPercent) {
         const normalized = linearPercent / 100.0
-        const logPercent = Math.pow(normalized, 2.0) * 100.0
-        return Math.round(logPercent)
+        const expPercent = Math.pow(normalized, 2.0) * 100.0
+        return Math.round(expPercent)
     }
 
     function getDefaultDevice() {
@@ -735,12 +735,12 @@ Singleton {
                 root.setCurrentDevice(actualDevice, false)
             }
 
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+            const isExponential = SessionData.getBrightnessExponential(actualDevice)
             const currentBrightness = root.getDeviceBrightness(actualDevice)
             const deviceInfo = root.getCurrentDeviceInfoByName(actualDevice)
 
             let maxValue = 100
-            if (isLogarithmic) {
+            if (isExponential) {
                 maxValue = 100
             } else {
                 maxValue = deviceInfo?.displayMax || 100
@@ -772,12 +772,12 @@ Singleton {
                 root.setCurrentDevice(actualDevice, false)
             }
 
-            const isLogarithmic = SessionData.getBrightnessLogarithmic(actualDevice)
+            const isExponential = SessionData.getBrightnessExponential(actualDevice)
             const currentBrightness = root.getDeviceBrightness(actualDevice)
             const deviceInfo = root.getCurrentDeviceInfoByName(actualDevice)
 
             let minValue = 0
-            if (isLogarithmic) {
+            if (isExponential) {
                 minValue = 1
             } else {
                 minValue = (deviceInfo && (deviceInfo.class === "backlight" || deviceInfo.class === "ddc")) ? 1 : 0
@@ -805,13 +805,13 @@ Singleton {
 
             let result = "Available devices:\n"
             for (const device of root.devices) {
-                const isLog = SessionData.getBrightnessLogarithmic(device.id)
-                result += device.id + " (" + device.class + ")" + (isLog ? " [logarithmic]" : "") + "\n"
+                const isExp = SessionData.getBrightnessExponential(device.id)
+                result += device.id + " (" + device.class + ")" + (isExp ? " [exponential]" : "") + "\n"
             }
             return result
         }
 
-        function enableLogarithmic(device: string): string {
+        function enableExponential(device: string): string {
             const targetDevice = device || root.currentDevice
             if (!targetDevice) {
                 return "No device specified"
@@ -821,11 +821,11 @@ Singleton {
                 return "Device not found: " + targetDevice
             }
 
-            SessionData.setBrightnessLogarithmic(targetDevice, true)
-            return "Logarithmic mode enabled for " + targetDevice
+            SessionData.setBrightnessExponential(targetDevice, true)
+            return "Exponential mode enabled for " + targetDevice
         }
 
-        function disableLogarithmic(device: string): string {
+        function disableExponential(device: string): string {
             const targetDevice = device || root.currentDevice
             if (!targetDevice) {
                 return "No device specified"
@@ -835,11 +835,11 @@ Singleton {
                 return "Device not found: " + targetDevice
             }
 
-            SessionData.setBrightnessLogarithmic(targetDevice, false)
-            return "Logarithmic mode disabled for " + targetDevice
+            SessionData.setBrightnessExponential(targetDevice, false)
+            return "Exponential mode disabled for " + targetDevice
         }
 
-        function toggleLogarithmic(device: string): string {
+        function toggleExponential(device: string): string {
             const targetDevice = device || root.currentDevice
             if (!targetDevice) {
                 return "No device specified"
@@ -849,9 +849,9 @@ Singleton {
                 return "Device not found: " + targetDevice
             }
 
-            const currentState = SessionData.getBrightnessLogarithmic(targetDevice)
-            SessionData.setBrightnessLogarithmic(targetDevice, !currentState)
-            return "Logarithmic mode " + (!currentState ? "enabled" : "disabled") + " for " + targetDevice
+            const currentState = SessionData.getBrightnessExponential(targetDevice)
+            SessionData.setBrightnessExponential(targetDevice, !currentState)
+            return "Exponential mode " + (!currentState ? "enabled" : "disabled") + " for " + targetDevice
         }
 
         target: "brightness"

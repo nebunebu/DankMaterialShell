@@ -60,7 +60,7 @@ Singleton {
     property bool showThirdPartyPlugins: false
     property string launchPrefix: ""
     property string lastBrightnessDevice: ""
-    property var brightnessLogarithmicDevices: ({})
+    property var brightnessExponentialDevices: ({})
     property var brightnessUserSetValues: ({})
 
     property int selectedGpuIndex: 0
@@ -109,7 +109,7 @@ Singleton {
                 wallpaperPathDark = settings.wallpaperPathDark !== undefined ? settings.wallpaperPathDark : ""
                 monitorWallpapersLight = settings.monitorWallpapersLight !== undefined ? settings.monitorWallpapersLight : {}
                 monitorWallpapersDark = settings.monitorWallpapersDark !== undefined ? settings.monitorWallpapersDark : {}
-                brightnessLogarithmicDevices = settings.brightnessLogarithmicDevices !== undefined ? settings.brightnessLogarithmicDevices : {}
+                brightnessExponentialDevices = settings.brightnessExponentialDevices !== undefined ? settings.brightnessExponentialDevices : (settings.brightnessLogarithmicDevices || {})
                 brightnessUserSetValues = settings.brightnessUserSetValues !== undefined ? settings.brightnessUserSetValues : {}
                 doNotDisturb = settings.doNotDisturb !== undefined ? settings.doNotDisturb : false
                 nightModeEnabled = settings.nightModeEnabled !== undefined ? settings.nightModeEnabled : false
@@ -189,7 +189,7 @@ Singleton {
                                                 "wallpaperPathDark": wallpaperPathDark,
                                                 "monitorWallpapersLight": monitorWallpapersLight,
                                                 "monitorWallpapersDark": monitorWallpapersDark,
-                                                "brightnessLogarithmicDevices": brightnessLogarithmicDevices,
+                                                "brightnessExponentialDevices": brightnessExponentialDevices,
                                                 "brightnessUserSetValues": brightnessUserSetValues,
                                                 "doNotDisturb": doNotDisturb,
                                                 "nightModeEnabled": nightModeEnabled,
@@ -274,7 +274,7 @@ Singleton {
     }
 
     function cleanupUnusedKeys() {
-        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "brightnessLogarithmicDevices", "brightnessUserSetValues", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
+        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "brightnessExponentialDevices", "brightnessUserSetValues", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
 
         try {
             const content = settingsFile.text()
@@ -662,14 +662,14 @@ Singleton {
         saveSettings()
     }
 
-    function setBrightnessLogarithmic(deviceName, enabled) {
-        var newSettings = Object.assign({}, brightnessLogarithmicDevices)
+    function setBrightnessExponential(deviceName, enabled) {
+        var newSettings = Object.assign({}, brightnessExponentialDevices)
         if (enabled) {
             newSettings[deviceName] = true
         } else {
             delete newSettings[deviceName]
         }
-        brightnessLogarithmicDevices = newSettings
+        brightnessExponentialDevices = newSettings
         saveSettings()
 
         if (typeof DisplayService !== "undefined") {
@@ -677,8 +677,8 @@ Singleton {
         }
     }
 
-    function getBrightnessLogarithmic(deviceName) {
-        return brightnessLogarithmicDevices[deviceName] === true
+    function getBrightnessExponential(deviceName) {
+        return brightnessExponentialDevices[deviceName] === true
     }
 
     function setBrightnessUserSetValue(deviceName, value) {
