@@ -12,7 +12,7 @@ PluginComponent {
     Ref {
         service: CupsService
     }
-    
+
     ccWidgetIcon: CupsService.cupsAvailable && CupsService.getPrintersNum() > 0 ? "print" : "print_disabled"
     ccWidgetPrimaryText: I18n.tr("Printers")
     ccWidgetSecondaryText: {
@@ -28,7 +28,9 @@ PluginComponent {
     }
     ccWidgetIsActive: CupsService.cupsAvailable && CupsService.getTotalJobsNum() > 0
 
-    onCcWidgetToggled: {}
+    onCcWidgetToggled: {
+
+    }
 
     ccDetailContent: Component {
         Rectangle {
@@ -66,7 +68,7 @@ PluginComponent {
 
                     Column {
                         spacing: Theme.spacingS
-                        
+
                         StyledText {
                             text: CupsService.getCurrentPrinterStatePrettyShort()
                             font.pixelSize: Theme.fontSizeSmall
@@ -74,10 +76,10 @@ PluginComponent {
                             font.weight: Font.Medium
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
-                        
+
                         Row {
                             spacing: Theme.spacingM
-                            
+
                             Rectangle {
                                 height: 24
                                 width: 80
@@ -85,18 +87,18 @@ PluginComponent {
                                 color: printerStatusToggle.containsMouse ? Theme.errorHover : Theme.surfaceLight
                                 visible: true
                                 opacity: 1.0
-        
+
                                 Row {
                                     anchors.centerIn: parent
                                     spacing: Theme.spacingXS
-        
+
                                     DankIcon {
                                         anchors.verticalCenter: parent.verticalCenter
                                         name: CupsService.getCurrentPrinterState() === "stopped" ? "play_arrow" : "pause"
                                         size: Theme.fontSizeSmall + 4
                                         color: Theme.surfaceText
                                     }
-        
+
                                     StyledText {
                                         anchors.verticalCenter: parent.verticalCenter
                                         text: CupsService.getCurrentPrinterState() === "stopped" ? I18n.tr("Resume") : I18n.tr("Pause")
@@ -105,7 +107,7 @@ PluginComponent {
                                         font.weight: Font.Medium
                                     }
                                 }
-        
+
                                 MouseArea {
                                     id: printerStatusToggle
                                     anchors.fill: parent
@@ -122,7 +124,7 @@ PluginComponent {
                                     }
                                 }
                             }
-    
+
                             Rectangle {
                                 height: 24
                                 width: 80
@@ -130,18 +132,18 @@ PluginComponent {
                                 color: clearJobsToggle.containsMouse ? Theme.errorHover : Theme.surfaceLight
                                 visible: true
                                 opacity: 1.0
-        
+
                                 Row {
                                     anchors.centerIn: parent
                                     spacing: Theme.spacingXS
-        
+
                                     DankIcon {
                                         anchors.verticalCenter: parent.verticalCenter
                                         name: "delete_forever"
                                         size: Theme.fontSizeSmall + 4
                                         color: Theme.surfaceText
                                     }
-        
+
                                     StyledText {
                                         anchors.verticalCenter: parent.verticalCenter
                                         text: I18n.tr("Jobs")
@@ -150,7 +152,7 @@ PluginComponent {
                                         font.weight: Font.Medium
                                     }
                                 }
-        
+
                                 MouseArea {
                                     id: clearJobsToggle
                                     anchors.fill: parent
@@ -265,7 +267,7 @@ PluginComponent {
                                         Layout.fillWidth: true
                                     }
                                 }
-                                
+
                                 DankActionButton {
                                     id: cancelJobButton
                                     anchors.right: parent.right
@@ -274,7 +276,7 @@ PluginComponent {
                                     iconName: "delete"
                                     buttonSize: 36
                                     onClicked: {
-                                        CupsService.cancelJob(modelData.id)
+                                        CupsService.cancelJob(CupsService.getSelectedPrinter(), modelData.id)
                                     }
                                 }
                             }

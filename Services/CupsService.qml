@@ -1,6 +1,6 @@
 pragma Singleton
 
-pragma ComponentBehavior: Bound
+pragma ComponentBehavior
 
 import QtQuick
 import Quickshell
@@ -9,13 +9,13 @@ import qs.Common
 
 Singleton {
     id: root
-    
+
     property int refCount: 0
 
     property var printerNames: []
     property var printers: []
     property string selectedPrinter: ""
-    
+
     property bool cupsAvailable: false
     property bool stateInitialized: false
 
@@ -38,21 +38,21 @@ Singleton {
             }
         }
     }
-    
+
     Connections {
         target: DMSService
         enabled: DMSService.isConnected
 
         function onCupsStateUpdate(data) {
             console.log("CupsService: Subscription update received")
-            updateState(data)
+            getState()
         }
 
         function onCapabilitiesChanged() {
             checkDMSCapabilities()
         }
     }
-    
+
     function checkDMSCapabilities() {
         if (!DMSService.isConnected) {
             return
@@ -71,17 +71,31 @@ Singleton {
     }
 
     function getState() {
-        if (!cupsAvailable) return
+        if (!cupsAvailable)
+            return
 
-        DMSService.sendRequest("cups.getState", null, response => {
-            if (response.result) {
-                updateState(response.result)
-            }
-        })
+        DMSService.sendRequest("cups.getPrinters", null, response => {
+                                   if (response.result) {
+                                       updatePrinters(response.result)
+                                       fetchAllJobs()
+                                   }
+                               })
     }
 
-    function updateState(state) {
-        printerNames = Object.keys(state.printers)
+    function updatePrinters(printersData) {
+        printerNames = printersData.map(p => p.name)
+
+        let printersObj = {}
+        for (var i = 0; i < printersData.length; i++) {
+            let printer = printersData[i]
+            printersObj[printer.name] = {
+                "state": printer.state,
+                "stateReason": printer.stateReason,
+                "jobs": []
+            }
+        }
+        printers = printersObj
+
         if (printerNames.length > 0) {
             if (selectedPrinter.length > 0) {
                 if (!printerNames.includes(selectedPrinter)) {
@@ -91,13 +105,32 @@ Singleton {
                 selectedPrinter = printerNames[0]
             }
         }
-        printers = state.printers
     }
-    
+
+    function fetchAllJobs() {
+        for (var i = 0; i < printerNames.length; i++) {
+            fetchJobsForPrinter(printerNames[i])
+        }
+    }
+
+    function fetchJobsForPrinter(printerName) {
+        const params = {
+            "printerName": printerName
+        }
+
+        DMSService.sendRequest("cups.getJobs", params, response => {
+                                   if (response.result && printers[printerName]) {
+                                       let updatedPrinters = Object.assign({}, printers)
+                                       updatedPrinters[printerName].jobs = response.result
+                                       printers = updatedPrinters
+                                   }
+                               })
+    }
+
     function getSelectedPrinter() {
         return selectedPrinter
     }
-    
+
     function setSelectedPrinter(printerName) {
         if (printerNames.length > 0) {
             if (printerNames.includes(printerName)) {
@@ -107,21 +140,24 @@ Singleton {
             }
         }
     }
-    
+
     function getPrintersNum() {
-        if (!cupsAvailable) return 0
+        if (!cupsAvailable)
+            return 0
 
         return printerNames.length
     }
-    
+
     function getPrintersNames() {
-        if (!cupsAvailable) return []
-        
+        if (!cupsAvailable)
+            return []
+
         return printerNames
     }
-    
+
     function getTotalJobsNum() {
-        if (!cupsAvailable) return 0
+        if (!cupsAvailable)
+            return 0
 
         var result = 0
         for (var i = 0; i < printerNames.length; i++) {
@@ -132,186 +168,191 @@ Singleton {
         }
         return result
     }
-    
+
     function getCurrentPrinterState() {
-        if (!cupsAvailable || !selectedPrinter) return ""
-        
+        if (!cupsAvailable || !selectedPrinter)
+            return ""
+
         var printer = printers[selectedPrinter]
         return printer.state
     }
 
     function getCurrentPrinterStatePrettyShort() {
-        if (!cupsAvailable || !selectedPrinter) return ""
-        
+        if (!cupsAvailable || !selectedPrinter)
+            return ""
+
         var printer = printers[selectedPrinter]
-        return getPrinterStateTranslation(printer.state) + 
-            " (" + getPrinterStateReasonTranslation(printer.stateReason) + ")"
+        return getPrinterStateTranslation(printer.state) + " (" + getPrinterStateReasonTranslation(printer.stateReason) + ")"
     }
 
     function getCurrentPrinterStatePretty() {
-        if (!cupsAvailable || !selectedPrinter) return ""
-        
+        if (!cupsAvailable || !selectedPrinter)
+            return ""
+
         var printer = printers[selectedPrinter]
-        return getPrinterStateTranslation(printer.state) + 
-            " (" + I18n.tr("Reason") + ": " + getPrinterStateReasonTranslation(printer.stateReason) + ")"
+        return getPrinterStateTranslation(printer.state) + " (" + I18n.tr("Reason") + ": " + getPrinterStateReasonTranslation(printer.stateReason) + ")"
     }
 
     function getCurrentPrinterJobs() {
-        if (!cupsAvailable || !selectedPrinter) return []
-        
+        if (!cupsAvailable || !selectedPrinter)
+            return []
+
         return getJobs(selectedPrinter)
     }
 
     function getJobs(printerName) {
-        if (!cupsAvailable) return ""
+        if (!cupsAvailable)
+            return ""
 
         var printer = printers[printerName]
         return printer.jobs
     }
-    
+
     function getJobsNum(printerName) {
-        if (!cupsAvailable) return 0
+        if (!cupsAvailable)
+            return 0
 
         var printer = printers[printerName]
         return printer.jobs.length
     }
 
     function pausePrinter(printerName) {
-        if (!cupsAvailable) return
+        if (!cupsAvailable)
+            return
 
         const params = {
-            printerName: printerName
+            "printerName": printerName
         }
 
         DMSService.sendRequest("cups.pausePrinter", params, response => {
-            if (response.error) {
-                ToastService.showError(I18n.tr("Failed to pause printer") + " - " + response.error)
-            }
-        })
+                                   if (response.error) {
+                                       ToastService.showError(I18n.tr("Failed to pause printer") + " - " + response.error)
+                                   }
+                               })
     }
 
     function resumePrinter(printerName) {
-        if (!cupsAvailable) return
+        if (!cupsAvailable)
+            return
 
         const params = {
-            printerName: printerName
+            "printerName": printerName
         }
 
         DMSService.sendRequest("cups.resumePrinter", params, response => {
-            if (response.error) {
-                ToastService.showError(I18n.tr("Failed to resume printer") + " - " + response.error)
-            }
-        })
+                                   if (response.error) {
+                                       ToastService.showError(I18n.tr("Failed to resume printer") + " - " + response.error)
+                                   }
+                               })
     }
 
-    function cancelJob(jobid) {
-        if (!cupsAvailable) return
+    function cancelJob(printerName, jobID) {
+        if (!cupsAvailable)
+            return
 
         const params = {
-            jobid: jobid
+            "printerName": printerName,
+            "jobID": jobID
         }
 
         DMSService.sendRequest("cups.cancelJob", params, response => {
-            if (response.error) {
-                ToastService.showError(I18n.tr("Failed to cancel selected job") + " - " + response.error)
-            }
-        })
+                                   if (response.error) {
+                                       ToastService.showError(I18n.tr("Failed to cancel selected job") + " - " + response.error)
+                                   } else {
+                                       fetchJobsForPrinter(printerName)
+                                   }
+                               })
     }
 
     function purgeJobs(printerName) {
-        if (!cupsAvailable) return
+        if (!cupsAvailable)
+            return
 
         const params = {
-            printerName: printerName
+            "printerName": printerName
         }
 
         DMSService.sendRequest("cups.purgeJobs", params, response => {
-            if (response.error) {
-                ToastService.showError(I18n.tr("Failed to cancel all jobs") + " - " + response.error)
-            }
-        })
+                                   if (response.error) {
+                                       ToastService.showError(I18n.tr("Failed to cancel all jobs") + " - " + response.error)
+                                   } else {
+                                       fetchJobsForPrinter(printerName)
+                                   }
+                               })
     }
-    
+
     readonly property var states: ({
-        "idle": I18n.tr("Idle"),
-        "processing": I18n.tr("Processing"),
-        "stopped": I18n.tr("Stopped")
-    })
+                                       "idle": I18n.tr("Idle"),
+                                       "processing": I18n.tr("Processing"),
+                                       "stopped": I18n.tr("Stopped")
+                                   })
 
     readonly property var reasonsGeneral: ({
-        "none": I18n.tr("None"),
-        "other": I18n.tr("Other")
-    })
+                                               "none": I18n.tr("None"),
+                                               "other": I18n.tr("Other")
+                                           })
 
     readonly property var reasonsSupplies: ({
-        "toner-low": I18n.tr("Toner Low"),
-        "toner-empty": I18n.tr("Toner Empty"),
-        "marker-supply-low": I18n.tr("Marker Supply Low"),
-        "marker-supply-empty": I18n.tr("Marker Supply Empty"),
-        "marker-waste-almost-full": I18n.tr("Marker Waste Almost Full"),
-        "marker-waste-full": I18n.tr("Marker Waste Full")
-    })
+                                                "toner-low": I18n.tr("Toner Low"),
+                                                "toner-empty": I18n.tr("Toner Empty"),
+                                                "marker-supply-low": I18n.tr("Marker Supply Low"),
+                                                "marker-supply-empty": I18n.tr("Marker Supply Empty"),
+                                                "marker-waste-almost-full": I18n.tr("Marker Waste Almost Full"),
+                                                "marker-waste-full": I18n.tr("Marker Waste Full")
+                                            })
 
     readonly property var reasonsMedia: ({
-        "media-low": I18n.tr("Media Low"),
-        "media-empty": I18n.tr("Media Empty"),
-        "media-needed": I18n.tr("Media Needed"),
-        "media-jam": I18n.tr("Media Jam")
-    })
+                                             "media-low": I18n.tr("Media Low"),
+                                             "media-empty": I18n.tr("Media Empty"),
+                                             "media-needed": I18n.tr("Media Needed"),
+                                             "media-jam": I18n.tr("Media Jam")
+                                         })
 
     readonly property var reasonsParts: ({
-        "cover-open": I18n.tr("Cover Open"),
-        "door-open": I18n.tr("Door Open"),
-        "interlock-open": I18n.tr("Interlock Open"),
-        "output-tray-missing": I18n.tr("Output Tray Missing"),
-        "output-area-almost-full": I18n.tr("Output Area Almost Full"),
-        "output-area-full": I18n.tr("Output Area Full")
-    })
+                                             "cover-open": I18n.tr("Cover Open"),
+                                             "door-open": I18n.tr("Door Open"),
+                                             "interlock-open": I18n.tr("Interlock Open"),
+                                             "output-tray-missing": I18n.tr("Output Tray Missing"),
+                                             "output-area-almost-full": I18n.tr("Output Area Almost Full"),
+                                             "output-area-full": I18n.tr("Output Area Full")
+                                         })
 
     readonly property var reasonsErrors: ({
-        "paused": I18n.tr("Paused"),
-        "shutdown": I18n.tr("Shutdown"),
-        "connecting-to-device": I18n.tr("Connecting to Device"),
-        "timed-out": I18n.tr("Timed Out"),
-        "stopping": I18n.tr("Stopping"),
-        "stopped-partly": I18n.tr("Stopped Partly")
-    })
+                                              "paused": I18n.tr("Paused"),
+                                              "shutdown": I18n.tr("Shutdown"),
+                                              "connecting-to-device": I18n.tr("Connecting to Device"),
+                                              "timed-out": I18n.tr("Timed Out"),
+                                              "stopping": I18n.tr("Stopping"),
+                                              "stopped-partly": I18n.tr("Stopped Partly")
+                                          })
 
     readonly property var reasonsService: ({
-        "spool-area-full": I18n.tr("Spool Area Full"),
-        "cups-missing-filter-warning": I18n.tr("CUPS Missing Filter Warning"),
-        "cups-insecure-filter-warning": I18n.tr("CUPS Insecure Filter Warning")
-    })
+                                               "spool-area-full": I18n.tr("Spool Area Full"),
+                                               "cups-missing-filter-warning": I18n.tr("CUPS Missing Filter Warning"),
+                                               "cups-insecure-filter-warning": I18n.tr("CUPS Insecure Filter Warning")
+                                           })
 
     readonly property var reasonsConnectivity: ({
-        "offline-report": I18n.tr("Offline Report"),
-        "moving-to-paused": I18n.tr("Moving to Paused")
-    })
+                                                    "offline-report": I18n.tr("Offline Report"),
+                                                    "moving-to-paused": I18n.tr("Moving to Paused")
+                                                })
 
     readonly property var severitySuffixes: ({
-        "-error": I18n.tr("Error"),
-        "-warning": I18n.tr("Warning"),
-        "-report": I18n.tr("Report")
-    })
+                                                 "-error": I18n.tr("Error"),
+                                                 "-warning": I18n.tr("Warning"),
+                                                 "-report": I18n.tr("Report")
+                                             })
 
     function getPrinterStateTranslation(state) {
         return states[state] || state
     }
 
     function getPrinterStateReasonTranslation(reason) {
-        let allReasons = Object.assign({},
-            reasonsGeneral,
-            reasonsSupplies,
-            reasonsMedia,
-            reasonsParts,
-            reasonsErrors,
-            reasonsService,
-            reasonsConnectivity
-        )
-        
+        let allReasons = Object.assign({}, reasonsGeneral, reasonsSupplies, reasonsMedia, reasonsParts, reasonsErrors, reasonsService, reasonsConnectivity)
+
         let basReason = reason
         let suffix = ""
-        
+
         for (let s in severitySuffixes) {
             if (reason.endsWith(s)) {
                 basReason = reason.slice(0, -s.length)
@@ -319,7 +360,7 @@ Singleton {
                 break
             }
         }
-        
+
         let translation = allReasons[basReason] || basReason
         return suffix ? translation + " (" + suffix + ")" : translation
     }
