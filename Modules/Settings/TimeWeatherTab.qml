@@ -77,7 +77,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.use24HourClock
                             onToggled: checked => {
-                                           return SettingsData.set("clockFormat", 
+                                           return SettingsData.set("use24HourClock",
                                                checked)
                                        }
                         }
@@ -140,7 +140,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.showSeconds
                             onToggled: checked => {
-                                           return SettingsData.set("timeFormat", 
+                                           return SettingsData.set("showSeconds",
                                                checked)
                                        }
                         }
