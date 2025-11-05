@@ -16,7 +16,8 @@ Singleton {
             selectedGpuIndex: 0,
             pciId: "",
             mountPath: "/",
-            minimumWidth: true
+            minimumWidth: true,
+            showSwap: false
         }
         leftModel.append(dummy)
         centerModel.append(dummy)
@@ -37,6 +38,7 @@ Singleton {
             var pciId = typeof order[i] === "string" ? undefined : order[i].pciId
             var mountPath = typeof order[i] === "string" ? undefined : order[i].mountPath
             var minimumWidth = typeof order[i] === "string" ? undefined : order[i].minimumWidth
+            var showSwap = typeof order[i] === "string" ? undefined : order[i].showSwap
             var item = {
                 widgetId: widgetId,
                 enabled: enabled
@@ -46,6 +48,7 @@ Singleton {
             if (pciId !== undefined) item.pciId = pciId
             if (mountPath !== undefined) item.mountPath = mountPath
             if (minimumWidth !== undefined) item.minimumWidth = minimumWidth
+            if (showSwap !== undefined) item.showSwap = showSwap
 
             model.append(item)
         }

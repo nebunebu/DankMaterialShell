@@ -541,6 +541,58 @@ Item {
                     newWidget.pciId = widget.pciId
                 if (widget.mountPath !== undefined)
                     newWidget.mountPath = widget.mountPath
+                if (widget.showSwap !== undefined)
+                    newWidget.showSwap = widget.showSwap
+                if (widget.id === "controlCenterButton") {
+                    newWidget.showNetworkIcon = widget.showNetworkIcon !== undefined ? widget.showNetworkIcon : true
+                    newWidget.showBluetoothIcon = widget.showBluetoothIcon !== undefined ? widget.showBluetoothIcon : true
+                    newWidget.showAudioIcon = widget.showAudioIcon !== undefined ? widget.showAudioIcon : true
+                }
+                widgets[widgetIndex] = newWidget
+            }
+        }
+
+        if (sectionId === "left")
+            SettingsData.setDankBarLeftWidgets(widgets)
+        else if (sectionId === "center")
+            SettingsData.setDankBarCenterWidgets(widgets)
+        else if (sectionId === "right")
+            SettingsData.setDankBarRightWidgets(widgets)
+    }
+
+    function handleShowSwapChanged(sectionId, widgetIndex, enabled) {
+        var widgets = []
+        if (sectionId === "left")
+            widgets = SettingsData.dankBarLeftWidgets.slice()
+        else if (sectionId === "center")
+            widgets = SettingsData.dankBarCenterWidgets.slice()
+        else if (sectionId === "right")
+            widgets = SettingsData.dankBarRightWidgets.slice()
+
+        if (widgetIndex >= 0 && widgetIndex < widgets.length) {
+            var widget = widgets[widgetIndex]
+            if (typeof widget === "string") {
+                widgets[widgetIndex] = {
+                    "id": widget,
+                    "enabled": true,
+                    "showSwap": enabled
+                }
+            } else {
+                var newWidget = {
+                    "id": widget.id,
+                    "enabled": widget.enabled,
+                    "showSwap": enabled
+                }
+                if (widget.size !== undefined)
+                    newWidget.size = widget.size
+                if (widget.selectedGpuIndex !== undefined)
+                    newWidget.selectedGpuIndex = widget.selectedGpuIndex
+                if (widget.pciId !== undefined)
+                    newWidget.pciId = widget.pciId
+                if (widget.mountPath !== undefined)
+                    newWidget.mountPath = widget.mountPath
+                if (widget.minimumWidth !== undefined)
+                    newWidget.minimumWidth = widget.minimumWidth
                 if (widget.id === "controlCenterButton") {
                     newWidget.showNetworkIcon = widget.showNetworkIcon !== undefined ? widget.showNetworkIcon : true
                     newWidget.showBluetoothIcon = widget.showBluetoothIcon !== undefined ? widget.showBluetoothIcon : true
@@ -582,6 +634,7 @@ Item {
                                var widgetShowBluetoothIcon = typeof widget === "string" ? undefined : widget.showBluetoothIcon
                                var widgetShowAudioIcon = typeof widget === "string" ? undefined : widget.showAudioIcon
                                var widgetMinimumWidth = typeof widget === "string" ? undefined : widget.minimumWidth
+                               var widgetShowSwap = typeof widget === "string" ? undefined : widget.showSwap
                                var widgetDef = baseWidgetDefinitions.find(w => {
                                                                               return w.id === widgetId
                                                                           })
@@ -604,6 +657,8 @@ Item {
                                    item.showAudioIcon = widgetShowAudioIcon
                                    if (widgetMinimumWidth !== undefined)
                                    item.minimumWidth = widgetMinimumWidth
+                                   if (widgetShowSwap !== undefined)
+                                   item.showSwap = widgetShowSwap
 
                                    widgets.push(item)
                                }
@@ -1802,6 +1857,10 @@ Item {
                                                    dankBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
+                        onShowSwapChanged: (sectionId, widgetIndex, enabled) => {
+                                               dankBarTab.handleShowSwapChanged(
+                                                   sectionId, widgetIndex, enabled)
+                                           }
                     }
                 }
 
@@ -1881,6 +1940,10 @@ Item {
                                                    dankBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
+                        onShowSwapChanged: (sectionId, widgetIndex, enabled) => {
+                                               dankBarTab.handleShowSwapChanged(
+                                                   sectionId, widgetIndex, enabled)
+                                           }
                     }
                 }
 
@@ -1960,6 +2023,10 @@ Item {
                                                    dankBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
+                        onShowSwapChanged: (sectionId, widgetIndex, enabled) => {
+                                               dankBarTab.handleShowSwapChanged(
+                                                   sectionId, widgetIndex, enabled)
+                                           }
                     }
                 }
             }
