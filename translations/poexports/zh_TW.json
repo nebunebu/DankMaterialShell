@@ -296,6 +296,12 @@
   "CPU usage indicator": {
     "CPU usage indicator": "CPU 使用率指示器"
   },
+  "CUPS Insecure Filter Warning": {
+    "CUPS Insecure Filter Warning": ""
+  },
+  "CUPS Missing Filter Warning": {
+    "CUPS Missing Filter Warning": ""
+  },
   "Cancel": {
     "Cancel": "取消"
   },
@@ -419,6 +425,9 @@
   "Connected Displays": {
     "Connected Displays": "已連接的螢幕"
   },
+  "Connecting to Device": {
+    "Connecting to Device": ""
+  },
   "Connection failed. Check password and try again.": {
     "Connection failed. Check password and try again.": "連線失敗。請檢查密碼並重試。"
   },
@@ -457,6 +466,9 @@
   },
   "Corner Radius (0 = square corners)": {
     "Corner Radius (0 = square corners)": "圓角半徑 (0 = 方角)"
+  },
+  "Cover Open": {
+    "Cover Open": ""
   },
   "Create Dir": {
     "Create Dir": "新建資料夾"
@@ -626,6 +638,9 @@
   "Donate on Ko-fi": {
     "Donate on Ko-fi": "在 Ko-fi 上捐款"
   },
+  "Door Open": {
+    "Door Open": ""
+  },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖曳部件即可在版塊內重新排序。使用眼睛圖示隱藏/顯示部件 (會保持間距)，或使用 X 將其完全移除。"
   },
@@ -701,6 +716,9 @@
   "Enter password for ": {
     "Enter password for ": "輸入密碼 "
   },
+  "Error": {
+    "Error": ""
+  },
   "Exclusive Zone Offset": {
     "Exclusive Zone Offset": "獨佔區域偏移"
   },
@@ -712,6 +730,12 @@
   },
   "Failed to activate configuration": {
     "Failed to activate configuration": "無法啟動配置"
+  },
+  "Failed to cancel all jobs": {
+    "Failed to cancel all jobs": ""
+  },
+  "Failed to cancel selected job": {
+    "Failed to cancel selected job": ""
   },
   "Failed to connect VPN": {
     "Failed to connect VPN": "VPN 連線失敗"
@@ -731,8 +755,14 @@
   "Failed to enable WiFi": {
     "Failed to enable WiFi": "無法啟用 WiFi"
   },
+  "Failed to pause printer": {
+    "Failed to pause printer": ""
+  },
   "Failed to remove device": {
     "Failed to remove device": "無法移除裝置"
+  },
+  "Failed to resume printer": {
+    "Failed to resume printer": ""
   },
   "Failed to set profile image": {
     "Failed to set profile image": "無法設定個人資料圖片"
@@ -881,6 +911,9 @@
   "Icon Theme": {
     "Icon Theme": "圖示主題"
   },
+  "Idle": {
+    "Idle": ""
+  },
   "Idle Inhibitor": {
     "Idle Inhibitor": "空閒抑制器"
   },
@@ -911,6 +944,9 @@
   "Install plugins from the DMS plugin registry": {
     "Install plugins from the DMS plugin registry": "從 DMS 插件註冊表安裝插件"
   },
+  "Interlock Open": {
+    "Interlock Open": ""
+  },
   "Internet": {
     "Internet": "網際網路"
   },
@@ -919,6 +955,12 @@
   },
   "Invert on mode change": {
     "Invert on mode change": "模式改變時反轉"
+  },
+  "Jobs": {
+    "Jobs": ""
+  },
+  "Jobs: ": {
+    "Jobs: ": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "鍵盤布局名稱"
@@ -1016,6 +1058,18 @@
   "Manual Show/Hide": {
     "Manual Show/Hide": "手動顯示/隱藏"
   },
+  "Marker Supply Empty": {
+    "Marker Supply Empty": ""
+  },
+  "Marker Supply Low": {
+    "Marker Supply Low": ""
+  },
+  "Marker Waste Almost Full": {
+    "Marker Waste Almost Full": ""
+  },
+  "Marker Waste Full": {
+    "Marker Waste Full": ""
+  },
   "Material Colors": {
     "Material Colors": "手動調整顏色"
   },
@@ -1036,6 +1090,18 @@
   },
   "Media Controls": {
     "Media Controls": "媒體控制台"
+  },
+  "Media Empty": {
+    "Media Empty": ""
+  },
+  "Media Jam": {
+    "Media Jam": ""
+  },
+  "Media Low": {
+    "Media Low": ""
+  },
+  "Media Needed": {
+    "Media Needed": ""
   },
   "Media Player Settings": {
     "Media Player Settings": "媒體播放設定"
@@ -1075,6 +1141,9 @@
   },
   "Mount": {
     "Mount": "掛載"
+  },
+  "Moving to Paused": {
+    "Moving to Paused": ""
   },
   "Muted palette with subdued, calming tones.": {
     "Muted palette with subdued, calming tones.": "柔和的調色板，柔和、平靜的色調。"
@@ -1160,6 +1229,12 @@
   "No plugins found.": {
     "No plugins found.": "找不到插件。"
   },
+  "No printer found": {
+    "No printer found": ""
+  },
+  "None": {
+    "None": ""
+  },
   "Normal Priority": {
     "Normal Priority": "普通優先級"
   },
@@ -1205,6 +1280,9 @@
   "Office": {
     "Office": "辦公"
   },
+  "Offline Report": {
+    "Offline Report": ""
+  },
   "On-Screen Displays": {
     "On-Screen Displays": "螢幕顯示"
   },
@@ -1222,6 +1300,18 @@
   },
   "Open search bar to find text": {
     "Open search bar to find text": "打開搜尋欄尋找文本"
+  },
+  "Other": {
+    "Other": ""
+  },
+  "Output Area Almost Full": {
+    "Output Area Almost Full": ""
+  },
+  "Output Area Full": {
+    "Output Area Full": ""
+  },
+  "Output Tray Missing": {
+    "Output Tray Missing": ""
   },
   "Overview": {
     "Overview": "概覽"
@@ -1246,6 +1336,12 @@
   },
   "Password": {
     "Password": "密碼"
+  },
+  "Pause": {
+    "Pause": ""
+  },
+  "Paused": {
+    "Paused": ""
   },
   "Per-Mode Wallpapers": {
     "Per-Mode Wallpapers": "以主題區分桌布"
@@ -1337,11 +1433,23 @@
   "Primary": {
     "Primary": "主要"
   },
+  "Print Server not available": {
+    "Print Server not available": ""
+  },
+  "Printers": {
+    "Printers": ""
+  },
+  "Printers: ": {
+    "Printers: ": ""
+  },
   "Privacy Indicator": {
     "Privacy Indicator": "隱私指示器"
   },
   "Process": {
     "Process": "程序"
+  },
+  "Processing": {
+    "Processing": ""
   },
   "Profile Image Error": {
     "Profile Image Error": "個人圖片錯誤"
@@ -1367,6 +1475,9 @@
   "Rain Chance": {
     "Rain Chance": "降雨機率"
   },
+  "Reason": {
+    "Reason": ""
+  },
   "Reboot": {
     "Reboot": "重新啟動"
   },
@@ -1385,6 +1496,9 @@
   "Remove": {
     "Remove": "刪除"
   },
+  "Report": {
+    "Report": ""
+  },
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "請求確認關機、重新啟動、暫停、休眠和登出操作"
   },
@@ -1393,6 +1507,9 @@
   },
   "Resources": {
     "Resources": "資源"
+  },
+  "Resume": {
+    "Resume": ""
   },
   "Right": {
     "Right": "右方"
@@ -1574,6 +1691,9 @@
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "顯示麥克風、攝影機或螢幕共用處於活動狀態"
   },
+  "Shutdown": {
+    "Shutdown": ""
+  },
   "Size": {
     "Size": "大小"
   },
@@ -1592,6 +1712,9 @@
   "Spacing": {
     "Spacing": "間距"
   },
+  "Spool Area Full": {
+    "Spool Area Full": ""
+  },
   "Square Corners": {
     "Square Corners": "方角"
   },
@@ -1603,6 +1726,15 @@
   },
   "Status": {
     "Status": "狀態"
+  },
+  "Stopped": {
+    "Stopped": ""
+  },
+  "Stopped Partly": {
+    "Stopped Partly": ""
+  },
+  "Stopping": {
+    "Stopping": ""
   },
   "Storage & Disks": {
     "Storage & Disks": "存儲與硬碟"
@@ -1697,6 +1829,9 @@
   "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": {
     "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "以下設定將修改您的 GTK 和 Qt 設定。如果您希望保留目前配置，請備份 (qt5ct.conf|qt6ct.conf 和 ~/.config/gtk-3.0|gtk-4.0)。"
   },
+  "The job queue of this printer is empty": {
+    "The job queue of this printer is empty": ""
+  },
   "Theme & Colors": {
     "Theme & Colors": "主題和顏色"
   },
@@ -1718,6 +1853,9 @@
   "Time & Weather": {
     "Time & Weather": "時間與天氣"
   },
+  "Timed Out": {
+    "Timed Out": ""
+  },
   "To Full": {
     "To Full": "全部"
   },
@@ -1735,6 +1873,12 @@
   },
   "Tomorrow": {
     "Tomorrow": "明天"
+  },
+  "Toner Empty": {
+    "Toner Empty": ""
+  },
+  "Toner Low": {
+    "Toner Low": ""
   },
   "Top": {
     "Top": "上方"
@@ -1864,6 +2008,9 @@
   },
   "Wallpapers": {
     "Wallpapers": "桌布"
+  },
+  "Warning": {
+    "Warning": ""
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "波浪進度條"
