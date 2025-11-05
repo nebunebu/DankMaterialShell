@@ -273,6 +273,12 @@ EOF
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
+  if command -v codium >/dev/null 2>&1; then
+    cat "$SHELL_DIR/matugen/configs/codium.toml" >> "$TMP_CONTENT_CFG"
+    sed -i "s|input_path = './matugen/templates/|input_path = '${CONTENT_TEMPLATES_PATH}|g" "$TMP_CONTENT_CFG"
+    echo "" >> "$TMP_CONTENT_CFG"
+  fi
+
   if [[ -s "$TMP_CONTENT_CFG" ]] && grep -q '\[templates\.' "$TMP_CONTENT_CFG"; then
     case "$kind" in
       image)
@@ -410,6 +416,51 @@ EOF
         fi
 
         dms dank16 "$PRIMARY" $VARIANT_FLAG ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$VSCODE_BASE" > "$VSCODE_FINAL" 2>/dev/null || cp "$VSCODE_BASE" "$VSCODE_FINAL"
+      fi
+    done
+  fi
+
+  if command -v codium >/dev/null 2>&1; then
+    CODIUM_EXT_DIR="$HOME/.vscode-oss/extensions/local.dynamic-base16-dankshell-0.0.1"
+    CODIUM_THEME_DIR="$CODIUM_EXT_DIR/themes"
+    CODIUM_BASE_THEME="$CODIUM_THEME_DIR/dankshell-color-theme-base.json"
+    CODIUM_FINAL_THEME="$CODIUM_THEME_DIR/dankshell-color-theme.json"
+    CODIUM_EXTENSIONS_JSON="$HOME/.vscode-oss/extensions/extensions.json"
+
+    mkdir -p "$CODIUM_THEME_DIR"
+
+    cp "$SHELL_DIR/matugen/templates/vscode-package.json" "$CODIUM_EXT_DIR/package.json"
+    cp "$SHELL_DIR/matugen/templates/vscode-vsixmanifest.xml" "$CODIUM_EXT_DIR/.vsixmanifest"
+
+    if [[ -f "$CODIUM_EXTENSIONS_JSON" ]]; then
+      if ! grep -q "local.dynamic-base16-dankshell" "$CODIUM_EXTENSIONS_JSON" 2>/dev/null; then
+        cp "$CODIUM_EXTENSIONS_JSON" "$CODIUM_EXTENSIONS_JSON.backup-$(date +%s)" 2>/dev/null || true
+
+        CODIUM_ENTRY='{"identifier":{"id":"local.dynamic-base16-dankshell"},"version":"0.0.1","location":{"$mid":1,"path":"'"$CODIUM_EXT_DIR"'","scheme":"file"},"relativeLocation":"local.dynamic-base16-dankshell-0.0.1","metadata":{"id":"local.dynamic-base16-dankshell","publisherId":"local","publisherDisplayName":"local","targetPlatform":"undefined","isApplicationScoped":false,"updated":false,"isPreReleaseVersion":false,"installedTimestamp":'"$(date +%s)000"',"preRelease":false}}'
+
+        if [[ "$(cat "$CODIUM_EXTENSIONS_JSON")" == "[]" ]]; then
+          echo "[$CODIUM_ENTRY]" > "$CODIUM_EXTENSIONS_JSON"
+        else
+          TMP_JSON="$(mktemp)"
+          sed 's/]$/,'"$CODIUM_ENTRY"']/' "$CODIUM_EXTENSIONS_JSON" > "$TMP_JSON"
+          mv "$TMP_JSON" "$CODIUM_EXTENSIONS_JSON"
+        fi
+      fi
+    fi
+
+    for variant in default dark light; do
+      CODIUM_BASE="$CODIUM_THEME_DIR/dankshell-${variant}-base.json"
+      CODIUM_FINAL="$CODIUM_THEME_DIR/dankshell-${variant}.json"
+
+      if [[ -f "$CODIUM_BASE" ]]; then
+        VARIANT_FLAG=""
+        if [[ "$variant" == "light" ]]; then
+          VARIANT_FLAG="--light"
+        elif [[ "$variant" == "default" && "$mode" == "light" ]]; then
+          VARIANT_FLAG="--light"
+        fi
+
+        dms dank16 "$PRIMARY" $VARIANT_FLAG ${HONOR:+--honor-primary "$HONOR"} ${SURFACE:+--background "$SURFACE"} --vscode-enrich "$CODIUM_BASE" > "$CODIUM_FINAL" 2>/dev/null || cp "$CODIUM_BASE" "$CODIUM_FINAL"
       fi
     done
   fi
