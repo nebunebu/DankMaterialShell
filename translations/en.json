@@ -590,13 +590,13 @@
   {
     "term": "CUPS Insecure Filter Warning",
     "context": "CUPS Insecure Filter Warning",
-    "reference": "Services/CupsService.qml:283",
+    "reference": "Services/CupsService.qml:332",
     "comment": ""
   },
   {
     "term": "CUPS Missing Filter Warning",
     "context": "CUPS Missing Filter Warning",
-    "reference": "Services/CupsService.qml:282",
+    "reference": "Services/CupsService.qml:331",
     "comment": ""
   },
   {
@@ -842,7 +842,7 @@
   {
     "term": "Connecting to Device",
     "context": "Connecting to Device",
-    "reference": "Services/CupsService.qml:274",
+    "reference": "Services/CupsService.qml:323",
     "comment": ""
   },
   {
@@ -920,7 +920,7 @@
   {
     "term": "Cover Open",
     "context": "Cover Open",
-    "reference": "Services/CupsService.qml:263",
+    "reference": "Services/CupsService.qml:312",
     "comment": ""
   },
   {
@@ -1256,7 +1256,7 @@
   {
     "term": "Door Open",
     "context": "Door Open",
-    "reference": "Services/CupsService.qml:264",
+    "reference": "Services/CupsService.qml:313",
     "comment": ""
   },
   {
@@ -1412,7 +1412,7 @@
   {
     "term": "Error",
     "context": "Error",
-    "reference": "Services/CupsService.qml:292",
+    "reference": "Services/CupsService.qml:341",
     "comment": ""
   },
   {
@@ -1442,13 +1442,13 @@
   {
     "term": "Failed to cancel all jobs",
     "context": "Failed to cancel all jobs",
-    "reference": "Services/CupsService.qml:230",
+    "reference": "Services/CupsService.qml:277",
     "comment": ""
   },
   {
     "term": "Failed to cancel selected job",
     "context": "Failed to cancel selected job",
-    "reference": "Services/CupsService.qml:216",
+    "reference": "Services/CupsService.qml:260",
     "comment": ""
   },
   {
@@ -1490,7 +1490,7 @@
   {
     "term": "Failed to pause printer",
     "context": "Failed to pause printer",
-    "reference": "Services/CupsService.qml:188",
+    "reference": "Services/CupsService.qml:229",
     "comment": ""
   },
   {
@@ -1502,7 +1502,7 @@
   {
     "term": "Failed to resume printer",
     "context": "Failed to resume printer",
-    "reference": "Services/CupsService.qml:202",
+    "reference": "Services/CupsService.qml:244",
     "comment": ""
   },
   {
@@ -1784,7 +1784,7 @@
   {
     "term": "Idle",
     "context": "Idle",
-    "reference": "Services/CupsService.qml:236",
+    "reference": "Services/CupsService.qml:285",
     "comment": ""
   },
   {
@@ -1850,7 +1850,7 @@
   {
     "term": "Interlock Open",
     "context": "Interlock Open",
-    "reference": "Services/CupsService.qml:265",
+    "reference": "Services/CupsService.qml:314",
     "comment": ""
   },
   {
@@ -1874,7 +1874,7 @@
   {
     "term": "Jobs",
     "context": "Jobs",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:147",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:149",
     "comment": ""
   },
   {
@@ -2072,25 +2072,25 @@
   {
     "term": "Marker Supply Empty",
     "context": "Marker Supply Empty",
-    "reference": "Services/CupsService.qml:250",
+    "reference": "Services/CupsService.qml:299",
     "comment": ""
   },
   {
     "term": "Marker Supply Low",
     "context": "Marker Supply Low",
-    "reference": "Services/CupsService.qml:249",
+    "reference": "Services/CupsService.qml:298",
     "comment": ""
   },
   {
     "term": "Marker Waste Almost Full",
     "context": "Marker Waste Almost Full",
-    "reference": "Services/CupsService.qml:251",
+    "reference": "Services/CupsService.qml:300",
     "comment": ""
   },
   {
     "term": "Marker Waste Full",
     "context": "Marker Waste Full",
-    "reference": "Services/CupsService.qml:252",
+    "reference": "Services/CupsService.qml:301",
     "comment": ""
   },
   {
@@ -2138,25 +2138,25 @@
   {
     "term": "Media Empty",
     "context": "Media Empty",
-    "reference": "Services/CupsService.qml:257",
+    "reference": "Services/CupsService.qml:306",
     "comment": ""
   },
   {
     "term": "Media Jam",
     "context": "Media Jam",
-    "reference": "Services/CupsService.qml:259",
+    "reference": "Services/CupsService.qml:308",
     "comment": ""
   },
   {
     "term": "Media Low",
     "context": "Media Low",
-    "reference": "Services/CupsService.qml:256",
+    "reference": "Services/CupsService.qml:305",
     "comment": ""
   },
   {
     "term": "Media Needed",
     "context": "Media Needed",
-    "reference": "Services/CupsService.qml:258",
+    "reference": "Services/CupsService.qml:307",
     "comment": ""
   },
   {
@@ -2234,7 +2234,7 @@
   {
     "term": "Moving to Paused",
     "context": "Moving to Paused",
-    "reference": "Services/CupsService.qml:288",
+    "reference": "Services/CupsService.qml:337",
     "comment": ""
   },
   {
@@ -2414,7 +2414,7 @@
   {
     "term": "None",
     "context": "None",
-    "reference": "Services/CupsService.qml:242",
+    "reference": "Services/CupsService.qml:291",
     "comment": ""
   },
   {
@@ -2510,7 +2510,7 @@
   {
     "term": "Offline Report",
     "context": "Offline Report",
-    "reference": "Services/CupsService.qml:287",
+    "reference": "Services/CupsService.qml:336",
     "comment": ""
   },
   {
@@ -2552,25 +2552,25 @@
   {
     "term": "Other",
     "context": "Other",
-    "reference": "Services/CupsService.qml:243",
+    "reference": "Services/CupsService.qml:292",
     "comment": ""
   },
   {
     "term": "Output Area Almost Full",
     "context": "Output Area Almost Full",
-    "reference": "Services/CupsService.qml:267",
+    "reference": "Services/CupsService.qml:316",
     "comment": ""
   },
   {
     "term": "Output Area Full",
     "context": "Output Area Full",
-    "reference": "Services/CupsService.qml:268",
+    "reference": "Services/CupsService.qml:317",
     "comment": ""
   },
   {
     "term": "Output Tray Missing",
     "context": "Output Tray Missing",
-    "reference": "Services/CupsService.qml:266",
+    "reference": "Services/CupsService.qml:315",
     "comment": ""
   },
   {
@@ -2624,13 +2624,13 @@
   {
     "term": "Pause",
     "context": "Pause",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:102",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:104",
     "comment": ""
   },
   {
     "term": "Paused",
     "context": "Paused",
-    "reference": "Services/CupsService.qml:272",
+    "reference": "Services/CupsService.qml:321",
     "comment": ""
   },
   {
@@ -2846,7 +2846,7 @@
   {
     "term": "Processing",
     "context": "Processing",
-    "reference": "Services/CupsService.qml:237",
+    "reference": "Services/CupsService.qml:286",
     "comment": ""
   },
   {
@@ -2894,7 +2894,7 @@
   {
     "term": "Reason",
     "context": "Reason",
-    "reference": "Services/CupsService.qml:156",
+    "reference": "Services/CupsService.qml:193",
     "comment": ""
   },
   {
@@ -2936,7 +2936,7 @@
   {
     "term": "Report",
     "context": "Report",
-    "reference": "Services/CupsService.qml:294",
+    "reference": "Services/CupsService.qml:343",
     "comment": ""
   },
   {
@@ -2960,7 +2960,7 @@
   {
     "term": "Resume",
     "context": "Resume",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:102",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:104",
     "comment": ""
   },
   {
@@ -3320,7 +3320,7 @@
   {
     "term": "Shutdown",
     "context": "Shutdown",
-    "reference": "Services/CupsService.qml:273",
+    "reference": "Services/CupsService.qml:322",
     "comment": ""
   },
   {
@@ -3362,7 +3362,7 @@
   {
     "term": "Spool Area Full",
     "context": "Spool Area Full",
-    "reference": "Services/CupsService.qml:281",
+    "reference": "Services/CupsService.qml:330",
     "comment": ""
   },
   {
@@ -3392,19 +3392,19 @@
   {
     "term": "Stopped",
     "context": "Stopped",
-    "reference": "Services/CupsService.qml:238",
+    "reference": "Services/CupsService.qml:287",
     "comment": ""
   },
   {
     "term": "Stopped Partly",
     "context": "Stopped Partly",
-    "reference": "Services/CupsService.qml:277",
+    "reference": "Services/CupsService.qml:326",
     "comment": ""
   },
   {
     "term": "Stopping",
     "context": "Stopping",
-    "reference": "Services/CupsService.qml:276",
+    "reference": "Services/CupsService.qml:325",
     "comment": ""
   },
   {
@@ -3584,7 +3584,7 @@
   {
     "term": "The job queue of this printer is empty",
     "context": "The job queue of this printer is empty",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:204",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:206",
     "comment": ""
   },
   {
@@ -3632,7 +3632,7 @@
   {
     "term": "Timed Out",
     "context": "Timed Out",
-    "reference": "Services/CupsService.qml:275",
+    "reference": "Services/CupsService.qml:324",
     "comment": ""
   },
   {
@@ -3674,13 +3674,13 @@
   {
     "term": "Toner Empty",
     "context": "Toner Empty",
-    "reference": "Services/CupsService.qml:248",
+    "reference": "Services/CupsService.qml:297",
     "comment": ""
   },
   {
     "term": "Toner Low",
     "context": "Toner Low",
-    "reference": "Services/CupsService.qml:247",
+    "reference": "Services/CupsService.qml:296",
     "comment": ""
   },
   {
@@ -3938,7 +3938,7 @@
   {
     "term": "Warning",
     "context": "Warning",
-    "reference": "Services/CupsService.qml:293",
+    "reference": "Services/CupsService.qml:342",
     "comment": ""
   },
   {
