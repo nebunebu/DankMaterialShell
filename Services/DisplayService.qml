@@ -43,14 +43,16 @@ Singleton {
         const deviceIndex = devices.findIndex(d => d.id === device.id)
         if (deviceIndex !== -1) {
             const newDevices = [...devices]
-            let displayMax = device.class === "ddc" ? device.max : 100
-            if (displayMax <= 0 && deviceMaxCache[device.id]) {
-                displayMax = deviceMaxCache[device.id]
-            } else if (displayMax > 0) {
+            const existingDevice = devices[deviceIndex]
+            const cachedMax = deviceMaxCache[device.id]
+
+            let displayMax = cachedMax || (device.class === "ddc" ? device.max : 100)
+            if (displayMax > 0 && !cachedMax) {
                 const newCache = Object.assign({}, deviceMaxCache)
                 newCache[device.id] = displayMax
                 deviceMaxCache = newCache
             }
+
             newDevices[deviceIndex] = {
                 "id": device.id,
                 "name": device.id,
@@ -87,14 +89,12 @@ Singleton {
             return
         }
 
+        const newMaxCache = Object.assign({}, deviceMaxCache)
         devices = state.devices.map(d => {
-                                              let displayMax = d.class === "ddc" ? d.max : 100
-                                              if (displayMax <= 0 && deviceMaxCache[d.id]) {
-                                                  displayMax = deviceMaxCache[d.id]
-                                              } else if (displayMax > 0) {
-                                                  const newCache = Object.assign({}, deviceMaxCache)
-                                                  newCache[d.id] = displayMax
-                                                  deviceMaxCache = newCache
+                                              const cachedMax = deviceMaxCache[d.id]
+                                              let displayMax = cachedMax || (d.class === "ddc" ? d.max : 100)
+                                              if (displayMax > 0 && !cachedMax) {
+                                                  newMaxCache[d.id] = displayMax
                                               }
                                               return {
                                                   "id": d.id,
@@ -107,6 +107,7 @@ Singleton {
                                                   "displayMax": displayMax
                                               }
                                           })
+        deviceMaxCache = newMaxCache
 
         const newBrightness = {}
         for (const device of state.devices) {
@@ -207,7 +208,9 @@ Singleton {
         DMSService.sendRequest("brightness.setBrightness", params, response => {
                                    if (response.error) {
                                        console.error("DisplayService: Failed to set brightness:", response.error)
-                                       ToastService.showError("Failed to set brightness: " + response.error)
+                                       ToastService.showError("Failed to set brightness: " + response.error, "", "", "brightness")
+                                   } else {
+                                       ToastService.dismissCategory("brightness")
                                    }
                                })
     }
@@ -309,11 +312,12 @@ Singleton {
                                }, response => {
                                    if (response.error) {
                                        console.error("DisplayService: Failed to enable gamma control:", response.error)
-                                       ToastService.showError("Failed to enable night mode: " + response.error)
+                                       ToastService.showError("Failed to enable night mode: " + response.error, "", "", "night-mode")
                                        nightModeEnabled = false
                                        SessionData.setNightModeEnabled(false)
                                        return
                                    }
+                                   ToastService.dismissCategory("night-mode")
 
                                    if (SessionData.nightModeAutoEnabled) {
                                        startAutomation()
@@ -336,7 +340,9 @@ Singleton {
                                }, response => {
                                    if (response.error) {
                                        console.error("DisplayService: Failed to disable gamma control:", response.error)
-                                       ToastService.showError("Failed to disable night mode: " + response.error)
+                                       ToastService.showError("Failed to disable night mode: " + response.error, "", "", "night-mode")
+                                   } else {
+                                       ToastService.dismissCategory("night-mode")
                                    }
                                })
     }
@@ -370,11 +376,14 @@ Singleton {
                                                               }
 
                                                               DMSService.sendRequest("wayland.gamma.setTemperature", {
-                                                                                         "temp": temperature
+                                                                                         "low": temperature,
+                                                                                         "high": 6500
                                                                                      }, response => {
                                                                                          if (response.error) {
                                                                                              console.error("DisplayService: Failed to set temperature:", response.error)
-                                                                                             ToastService.showError("Failed to set night mode temperature: " + response.error)
+                                                                                             ToastService.showError("Failed to set night mode temperature: " + response.error, "", "", "night-mode")
+                                                                                         } else {
+                                                                                             ToastService.dismissCategory("night-mode")
                                                                                          }
                                                                                      })
                                                           })
@@ -423,7 +432,7 @@ Singleton {
                                                           }, response => {
                                                               if (response.error) {
                                                                   console.error("DisplayService: Failed to set temperature:", response.error)
-                                                                  ToastService.showError("Failed to set night mode temperature: " + response.error)
+                                                                  ToastService.showError("Failed to set night mode temperature: " + response.error, "", "", "night-mode")
                                                                   return
                                                               }
 
@@ -433,7 +442,9 @@ Singleton {
                                                                                      }, response => {
                                                                                          if (response.error) {
                                                                                              console.error("DisplayService: Failed to set manual times:", response.error)
-                                                                                             ToastService.showError("Failed to set night mode schedule: " + response.error)
+                                                                                             ToastService.showError("Failed to set night mode schedule: " + response.error, "", "", "night-mode")
+                                                                                         } else {
+                                                                                             ToastService.dismissCategory("night-mode")
                                                                                          }
                                                                                      })
                                                           })
@@ -459,7 +470,7 @@ Singleton {
                                                           }, response => {
                                                               if (response.error) {
                                                                   console.error("DisplayService: Failed to set temperature:", response.error)
-                                                                  ToastService.showError("Failed to set night mode temperature: " + response.error)
+                                                                  ToastService.showError("Failed to set night mode temperature: " + response.error, "", "", "night-mode")
                                                                   return
                                                               }
 
@@ -469,7 +480,9 @@ Singleton {
                                                                                          }, response => {
                                                                                              if (response.error) {
                                                                                                  console.error("DisplayService: Failed to enable IP location:", response.error)
-                                                                                                 ToastService.showError("Failed to enable IP location: " + response.error)
+                                                                                                 ToastService.showError("Failed to enable IP location: " + response.error, "", "", "night-mode")
+                                                                                             } else {
+                                                                                                 ToastService.dismissCategory("night-mode")
                                                                                              }
                                                                                          })
                                                               } else if (SessionData.latitude !== 0.0 && SessionData.longitude !== 0.0) {
@@ -487,7 +500,9 @@ Singleton {
                                                                                                                     }, response => {
                                                                                                                         if (response.error) {
                                                                                                                             console.error("DisplayService: Failed to set location:", response.error)
-                                                                                                                            ToastService.showError("Failed to set night mode location: " + response.error)
+                                                                                                                            ToastService.showError("Failed to set night mode location: " + response.error, "", "", "night-mode")
+                                                                                                                        } else {
+                                                                                                                            ToastService.dismissCategory("night-mode")
                                                                                                                         }
                                                                                                                     })
                                                                                          })

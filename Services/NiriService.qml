@@ -78,7 +78,7 @@ Singleton {
                 const trimmedLines = lines.map(line => line.replace(/\s+$/, '')).filter(line => line.length > 0)
                 configValidationOutput = trimmedLines.join('\n').trim()
                 if (hasInitialConnection) {
-                    ToastService.showError("niri: failed to load config", configValidationOutput)
+                    ToastService.showError("niri: failed to load config", configValidationOutput, "", "niri-config")
                 }
             }
         }
@@ -498,12 +498,10 @@ Singleton {
             validateProcess.running = true
         } else {
             configValidationOutput = ""
-            if (ToastService.toastVisible && ToastService.currentLevel === ToastService.levelError && ToastService.currentMessage.startsWith("niri:")) {
-                ToastService.hideToast()
-            }
+            ToastService.dismissCategory("niri-config")
             fetchOutputs()
             if (hasInitialConnection && !suppressConfigToast && !suppressNextConfigToast && !matugenSuppression) {
-                ToastService.showInfo("niri: config reloaded")
+                ToastService.showInfo("niri: config reloaded", "", "", "niri-config")
             } else if (suppressNextConfigToast) {
                 suppressNextConfigToast = false
                 suppressResetTimer.stop()
