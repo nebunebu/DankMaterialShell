@@ -14,13 +14,8 @@ URL:            https://github.com/AvengeMedia/DankMaterialShell
 VCS:            {{{ git_repo_vcs }}}
 Source0:        {{{ git_repo_pack }}}
 
-# DMS CLI from danklinux (for greeter sync commands)
-Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz
-
 BuildRequires:  git-core
 BuildRequires:  rpkg
-BuildRequires:  golang >= 1.24
-BuildRequires:  make
 # For the _tmpfilesdir macro.
 BuildRequires: systemd-rpm-macros
 
@@ -48,31 +43,7 @@ authentication, and dynamic theming.
 %prep
 {{{ git_repo_setup_macro }}}
 
-# Extract DankLinux source for dms-cli
-tar -xzf %{SOURCE1} -C %{_builddir}
-
-%build
-# Build DMS CLI from source (with greeter commands)
-cd %{_builddir}/danklinux-master
-make build
-
 %install
-# Install dms-cli binary - use architecture-specific path
-case "%{_arch}" in
-  x86_64)
-    DMS_BINARY="dms"
-    ;;
-  aarch64)
-    DMS_BINARY="dms"
-    ;;
-  *)
-    echo "Unsupported architecture: %{_arch}"
-    exit 1
-    ;;
-esac
-
-install -Dm755 %{_builddir}/danklinux-master/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
-
 # Install greeter files to shared data location
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms-greeter
 cp -r * %{buildroot}%{_datadir}/quickshell/dms-greeter/
@@ -112,7 +83,6 @@ fi
 %files
 %license LICENSE
 %doc %{_docdir}/dms-greeter/README.md
-%{_bindir}/dms
 %{_bindir}/dms-greeter
 %{_datadir}/quickshell/dms-greeter/
 %{_tmpfilesdir}/%{name}.conf
@@ -264,6 +234,7 @@ Next steps:
      sudo systemctl enable greetd
 
 3. (Optional) Sync your theme with the greeter:
+     If you have DankMaterialShell (DMS) installed, you can sync with:
      dms greeter sync
 
      Check sync status: dms greeter status
