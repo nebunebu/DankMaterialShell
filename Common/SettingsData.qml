@@ -895,7 +895,7 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
     FileView {
         id: pluginSettingsFile
 
-        path: isGreeterMode ? "" : (pluginSettingsFileExists ? pluginSettingsPath : "")
+        path: isGreeterMode ? "" : pluginSettingsPath
         blockLoading: true
         blockWrites: true
         atomicWrites: true
