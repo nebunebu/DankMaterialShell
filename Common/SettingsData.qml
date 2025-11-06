@@ -259,11 +259,15 @@ Singleton {
     property bool dankBarSquareCorners: false
     property bool dankBarNoBackground: false
     property bool dankBarGothCornersEnabled: false
+    property bool dankBarGothCornerRadiusOverride: false
+    property real dankBarGothCornerRadiusValue: 12
     property bool dankBarBorderEnabled: false
     property string dankBarBorderColor: "surfaceText"
     property real dankBarBorderOpacity: 1.0
     property real dankBarBorderThickness: 1
 
+    onDankBarGothCornerRadiusOverrideChanged: saveSettings()
+    onDankBarGothCornerRadiusValueChanged: saveSettings()
     onDankBarBorderColorChanged: saveSettings()
     onDankBarBorderOpacityChanged: saveSettings()
     onDankBarBorderThicknessChanged: saveSettings()

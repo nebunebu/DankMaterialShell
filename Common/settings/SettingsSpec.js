@@ -176,6 +176,8 @@ var SPEC = {
     dankBarSquareCorners: { def: false, migrate: ["topBarSquareCorners"] },
     dankBarNoBackground: { def: false, migrate: ["topBarNoBackground"] },
     dankBarGothCornersEnabled: { def: false, migrate: ["topBarGothCornersEnabled"] },
+    dankBarGothCornerRadiusOverride: { def: false },
+    dankBarGothCornerRadiusValue: { def: 12 },
     dankBarBorderEnabled: { def: false },
     dankBarBorderColor: { def: "surfaceText" },
     dankBarBorderOpacity: { def: 1.0 },

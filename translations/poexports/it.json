@@ -467,6 +467,9 @@
   "Corner Radius (0 = square corners)": {
     "Corner Radius (0 = square corners)": "Raggio Angoli (0 = angoli squadrati)"
   },
+  "Corner Radius Override": {
+    "Corner Radius Override": ""
+  },
   "Cover Open": {
     "Cover Open": ""
   },
@@ -856,6 +859,9 @@
   },
   "Good": {
     "Good": "Buona"
+  },
+  "Goth Corner Radius": {
+    "Goth Corner Radius": ""
   },
   "Goth Corners": {
     "Goth Corners": "Angoli Gotici"

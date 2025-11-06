@@ -72,6 +72,12 @@ Item {
             function onSurfaceContainerChanged() { root.requestRepaint() }
         }
 
+        Connections {
+            target: SettingsData
+            function onDankBarGothCornerRadiusOverrideChanged() { root.requestRepaint() }
+            function onDankBarGothCornerRadiusValueChanged() { root.requestRepaint() }
+        }
+
         onPaint: {
             const ctx = getContext("2d")
             const W = barWindow.isVertical ? correctHeight : correctWidth
@@ -169,6 +175,12 @@ Item {
             target: Theme
             function onIsLightModeChanged() { root.requestRepaint() }
             function onSurfaceChanged() { root.requestRepaint() }
+        }
+
+        Connections {
+            target: SettingsData
+            function onDankBarGothCornerRadiusOverrideChanged() { root.requestRepaint() }
+            function onDankBarGothCornerRadiusValueChanged() { root.requestRepaint() }
         }
 
         onPaint: {
@@ -278,6 +290,8 @@ Item {
             function onDankBarSpacingChanged() { root.requestRepaint() }
             function onDankBarSquareCornersChanged() { root.requestRepaint() }
             function onDankBarTransparencyChanged() { root.requestRepaint() }
+            function onDankBarGothCornerRadiusOverrideChanged() { root.requestRepaint() }
+            function onDankBarGothCornerRadiusValueChanged() { root.requestRepaint() }
         }
 
         onPaint: {

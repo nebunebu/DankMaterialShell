@@ -1331,15 +1331,103 @@ Item {
                                    }
                     }
 
-                    DankToggle {
+                    Column {
                         width: parent.width
-                        text: I18n.tr("Goth Corners")
-                        description: "Add curved swooping tips at the bottom of the bar."
-                        checked: SettingsData.dankBarGothCornersEnabled
-                        onToggled: checked => {
-                                       SettingsData.set("dankBarGothCornersEnabled", 
-                                           checked)
-                                   }
+                        spacing: Theme.spacingM
+
+                        DankToggle {
+                            width: parent.width
+                            text: I18n.tr("Goth Corners")
+                            description: "Add curved swooping tips at the bottom of the bar."
+                            checked: SettingsData.dankBarGothCornersEnabled
+                            onToggled: checked => {
+                                           SettingsData.set("dankBarGothCornersEnabled",
+                                               checked)
+                                       }
+                        }
+
+                        DankToggle {
+                            width: parent.width
+                            text: I18n.tr("Corner Radius Override")
+                            description: "Customize the goth corner radius independently."
+                            checked: SettingsData.dankBarGothCornerRadiusOverride
+                            visible: SettingsData.dankBarGothCornersEnabled
+                            onToggled: checked => {
+                                           SettingsData.set("dankBarGothCornerRadiusOverride", checked)
+                                       }
+                        }
+
+                        Column {
+                            width: parent.width
+                            spacing: Theme.spacingS
+                            visible: SettingsData.dankBarGothCornersEnabled && SettingsData.dankBarGothCornerRadiusOverride
+
+                            Row {
+                                width: parent.width
+                                spacing: Theme.spacingS
+
+                                StyledText {
+                                    text: I18n.tr("Goth Corner Radius")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    font.weight: Font.Medium
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+
+                                Item {
+                                    width: parent.width - gothCornerRadiusText.implicitWidth - resetGothCornerRadiusBtn.width - Theme.spacingS - Theme.spacingM
+                                    height: 1
+
+                                    StyledText {
+                                        id: gothCornerRadiusText
+                                        visible: false
+                                        text: I18n.tr("Goth Corner Radius")
+                                        font.pixelSize: Theme.fontSizeSmall
+                                    }
+                                }
+
+                                DankActionButton {
+                                    id: resetGothCornerRadiusBtn
+                                    buttonSize: 20
+                                    iconName: "refresh"
+                                    iconSize: 12
+                                    backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                    iconColor: Theme.surfaceText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    onClicked: {
+                                        SettingsData.set("dankBarGothCornerRadiusValue", 12)
+                                    }
+                                }
+
+                                Item {
+                                    width: Theme.spacingS
+                                    height: 1
+                                }
+                            }
+
+                            DankSlider {
+                                id: gothCornerRadiusSlider
+                                width: parent.width
+                                height: 24
+                                value: SettingsData.dankBarGothCornerRadiusValue
+                                minimum: 0
+                                maximum: 64
+                                unit: ""
+                                showValue: true
+                                wheelEnabled: false
+                                thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                onSliderValueChanged: newValue => {
+                                    SettingsData.set("dankBarGothCornerRadiusValue", newValue)
+                                }
+
+                                Binding {
+                                    target: gothCornerRadiusSlider
+                                    property: "value"
+                                    value: SettingsData.dankBarGothCornerRadiusValue
+                                    restoreMode: Binding.RestoreBinding
+                                }
+                            }
+                        }
                     }
 
                     Column {

@@ -175,7 +175,7 @@ Item {
             readonly property bool isVertical: axis.isVertical
 
             property bool gothCornersEnabled: SettingsData.dankBarGothCornersEnabled
-            property real wingtipsRadius: Theme.cornerRadius
+            property real wingtipsRadius: SettingsData.dankBarGothCornerRadiusOverride ? SettingsData.dankBarGothCornerRadiusValue : Theme.cornerRadius
             readonly property real _wingR: Math.max(0, wingtipsRadius)
             readonly property color _surfaceContainer: Theme.surfaceContainer
             readonly property real _backgroundAlpha: topBarCore?.backgroundTransparency ?? SettingsData.dankBarTransparency

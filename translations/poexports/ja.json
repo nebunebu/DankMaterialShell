@@ -467,6 +467,9 @@
   "Corner Radius (0 = square corners)": {
     "Corner Radius (0 = square corners)": "コーナー半径（0 = 角丸なし）"
   },
+  "Corner Radius Override": {
+    "Corner Radius Override": ""
+  },
   "Cover Open": {
     "Cover Open": "カバーオープン"
   },
@@ -856,6 +859,9 @@
   },
   "Good": {
     "Good": "良い"
+  },
+  "Goth Corner Radius": {
+    "Goth Corner Radius": ""
   },
   "Goth Corners": {
     "Goth Corners": "ゴスコーナーズ"

@@ -467,6 +467,9 @@
   "Corner Radius (0 = square corners)": {
     "Corner Radius (0 = square corners)": "圓角半徑 (0 = 方角)"
   },
+  "Corner Radius Override": {
+    "Corner Radius Override": ""
+  },
   "Cover Open": {
     "Cover Open": ""
   },
@@ -856,6 +859,9 @@
   },
   "Good": {
     "Good": "好"
+  },
+  "Goth Corner Radius": {
+    "Goth Corner Radius": ""
   },
   "Goth Corners": {
     "Goth Corners": "圓角介面融合"

@@ -102,7 +102,7 @@
     "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.": "Göz yorgunluğunu azaltmak için sıcak renk sıcaklığı uygulayın. Etkinleştirme zamanını kontrol etmek için aşağıdaki otomasyon ayarlarını kullanın."
   },
   "Apps Icon": {
-    "Apps Icon": "Uygulamalar Simgesi"
+    "Apps Icon": "Uygulamalar İkonu"
   },
   "Apps are ordered by usage frequency, then last used, then alphabetically.": {
     "Apps are ordered by usage frequency, then last used, then alphabetically.": "Uygulamalar önce kullanım sıklığına göre, daha sonra son kullanılana göre ve en son alfabetik olarak sıralanır."
@@ -466,6 +466,9 @@
   },
   "Corner Radius (0 = square corners)": {
     "Corner Radius (0 = square corners)": "Köşe Yarıçapı (0 = kare köşeler)"
+  },
+  "Corner Radius Override": {
+    "Corner Radius Override": ""
   },
   "Cover Open": {
     "Cover Open": "Kapak Açık"
@@ -856,6 +859,9 @@
   },
   "Good": {
     "Good": "İyi"
+  },
+  "Goth Corner Radius": {
+    "Goth Corner Radius": ""
   },
   "Goth Corners": {
     "Goth Corners": "Gotik Köşeler"
@@ -1275,7 +1281,7 @@
     "Numbers": "Numaralar"
   },
   "OS Logo": {
-    "OS Logo": "OS Logosu"
+    "OS Logo": "OS Logo"
   },
   "Office": {
     "Office": "Ofis"
