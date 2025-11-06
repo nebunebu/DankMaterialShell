@@ -74,7 +74,7 @@ Singleton {
             if (userSetValue !== undefined) {
                 displayValue = userSetValue
             } else {
-                displayValue = linearToExponential(device.currentPercent)
+                displayValue = linearToExponential(device.currentPercent, device.id)
             }
         }
 
@@ -118,7 +118,7 @@ Singleton {
                 if (userSetValue !== undefined) {
                     newBrightness[device.id] = userSetValue
                 } else {
-                    newBrightness[device.id] = linearToExponential(device.currentPercent)
+                    newBrightness[device.id] = linearToExponential(device.currentPercent, device.id)
                 }
             } else {
                 newBrightness[device.id] = device.currentPercent
@@ -203,6 +203,7 @@ Singleton {
         }
         if (isExponential) {
             params.exponential = true
+            params.exponent = SessionData.getBrightnessExponent(actualDevice)
         }
 
         DMSService.sendRequest("brightness.setBrightness", params, response => {
@@ -242,10 +243,11 @@ Singleton {
         return 50
     }
 
-    function linearToExponential(linearPercent) {
-        const normalized = linearPercent / 100.0
-        const expPercent = Math.pow(normalized, 2.0) * 100.0
-        return Math.round(expPercent)
+    function linearToExponential(linearPercent, deviceName) {
+        const exponent = SessionData.getBrightnessExponent(deviceName)
+        const hardwarePercent = linearPercent / 100.0
+        const normalizedPercent = Math.pow(hardwarePercent, 1.0 / exponent)
+        return Math.round(normalizedPercent * 100.0)
     }
 
     function getDefaultDevice() {

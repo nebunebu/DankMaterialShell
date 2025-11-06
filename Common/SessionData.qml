@@ -62,6 +62,7 @@ Singleton {
     property string lastBrightnessDevice: ""
     property var brightnessExponentialDevices: ({})
     property var brightnessUserSetValues: ({})
+    property var brightnessExponentValues: ({})
 
     property int selectedGpuIndex: 0
     property bool nvidiaGpuTempEnabled: false
@@ -111,6 +112,7 @@ Singleton {
                 monitorWallpapersDark = settings.monitorWallpapersDark !== undefined ? settings.monitorWallpapersDark : {}
                 brightnessExponentialDevices = settings.brightnessExponentialDevices !== undefined ? settings.brightnessExponentialDevices : (settings.brightnessLogarithmicDevices || {})
                 brightnessUserSetValues = settings.brightnessUserSetValues !== undefined ? settings.brightnessUserSetValues : {}
+                brightnessExponentValues = settings.brightnessExponentValues !== undefined ? settings.brightnessExponentValues : {}
                 doNotDisturb = settings.doNotDisturb !== undefined ? settings.doNotDisturb : false
                 nightModeEnabled = settings.nightModeEnabled !== undefined ? settings.nightModeEnabled : false
                 nightModeTemperature = settings.nightModeTemperature !== undefined ? settings.nightModeTemperature : 4500
@@ -191,6 +193,7 @@ Singleton {
                                                 "monitorWallpapersDark": monitorWallpapersDark,
                                                 "brightnessExponentialDevices": brightnessExponentialDevices,
                                                 "brightnessUserSetValues": brightnessUserSetValues,
+                                                "brightnessExponentValues": brightnessExponentValues,
                                                 "doNotDisturb": doNotDisturb,
                                                 "nightModeEnabled": nightModeEnabled,
                                                 "nightModeTemperature": nightModeTemperature,
@@ -690,6 +693,22 @@ Singleton {
 
     function getBrightnessUserSetValue(deviceName) {
         return brightnessUserSetValues[deviceName]
+    }
+
+    function setBrightnessExponent(deviceName, exponent) {
+        var newValues = Object.assign({}, brightnessExponentValues)
+        if (exponent !== undefined && exponent !== null) {
+            newValues[deviceName] = exponent
+        } else {
+            delete newValues[deviceName]
+        }
+        brightnessExponentValues = newValues
+        saveSettings()
+    }
+
+    function getBrightnessExponent(deviceName) {
+        const value = brightnessExponentValues[deviceName]
+        return value !== undefined ? value : 1.2
     }
 
     function setSelectedGpuIndex(index) {
