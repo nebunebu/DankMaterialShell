@@ -162,13 +162,13 @@ Item {
                              return
                          }
 
-                         const keyBase = (w.app_id || w.appId || w.class || w.windowClass || "unknown").toLowerCase()
+                         const keyBase = (w.app_id || w.appId || w.class || w.windowClass || "unknown")
                          const key = isActiveWs ? `${keyBase}_${i}` : keyBase
 
                          if (!byApp[key]) {
                              const moddedId = Paths.moddedAppId(keyBase)
                              const isSteamApp = moddedId.toLowerCase().includes("steam_app")
-                             const icon = isSteamApp ? "" : Quickshell.iconPath(DesktopEntries.heuristicLookup(moddedId)?.icon, true)
+                             const icon = isSteamApp ? "" : DesktopService.resolveIconPath(moddedId)
                              byApp[key] = {
                                  "type": "icon",
                                  "icon": icon,
