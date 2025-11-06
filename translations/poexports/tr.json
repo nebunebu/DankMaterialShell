@@ -297,10 +297,10 @@
     "CPU usage indicator": "CPU kullanım göstergesi"
   },
   "CUPS Insecure Filter Warning": {
-    "CUPS Insecure Filter Warning": ""
+    "CUPS Insecure Filter Warning": "CUPS Güvenli Olmayan Filtre Uyarısı"
   },
   "CUPS Missing Filter Warning": {
-    "CUPS Missing Filter Warning": ""
+    "CUPS Missing Filter Warning": "CUPS Eksik Filtre Uyarısı"
   },
   "Cancel": {
     "Cancel": "İptal"
@@ -426,7 +426,7 @@
     "Connected Displays": "Bağlı Ekranlar"
   },
   "Connecting to Device": {
-    "Connecting to Device": ""
+    "Connecting to Device": "Cihaza Bağlanma"
   },
   "Connection failed. Check password and try again.": {
     "Connection failed. Check password and try again.": "Bağlantı başarısız. Parolayı kontrol edin ve tekrar deneyin."
@@ -468,7 +468,7 @@
     "Corner Radius (0 = square corners)": "Köşe Yarıçapı (0 = kare köşeler)"
   },
   "Cover Open": {
-    "Cover Open": ""
+    "Cover Open": "Kapak Açık"
   },
   "Create Dir": {
     "Create Dir": "Dizin Oluştur"
@@ -639,7 +639,7 @@
     "Donate on Ko-fi": "Ko-fi üzerinden bağış yap"
   },
   "Door Open": {
-    "Door Open": ""
+    "Door Open": "Kapı Açık"
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "Widget'ları sürükleyerek bölümler içinde yeniden sıralayın. Göz simgesini kullanarak widget'ları gizleyin/gösterin (aralıkları korur) veya X simgesini kullanarak tamamen kaldırın."
@@ -717,7 +717,7 @@
     "Enter password for ": "Parolayı girin "
   },
   "Error": {
-    "Error": ""
+    "Error": "Hata"
   },
   "Exclusive Zone Offset": {
     "Exclusive Zone Offset": "Özel Bölge Ofseti"
@@ -732,10 +732,10 @@
     "Failed to activate configuration": "Yapılandırma etkinleştirilemedi"
   },
   "Failed to cancel all jobs": {
-    "Failed to cancel all jobs": ""
+    "Failed to cancel all jobs": "Tüm işler iptal edemedi"
   },
   "Failed to cancel selected job": {
-    "Failed to cancel selected job": ""
+    "Failed to cancel selected job": "Seçilen işler iptal edemedi"
   },
   "Failed to connect VPN": {
     "Failed to connect VPN": "VPN bağlantısı kurulamadı"
@@ -756,13 +756,13 @@
     "Failed to enable WiFi": "WiFi etkinleştirilemedi"
   },
   "Failed to pause printer": {
-    "Failed to pause printer": ""
+    "Failed to pause printer": "Yazıcıyı duraklatma başarısız"
   },
   "Failed to remove device": {
     "Failed to remove device": "Cihaz kaldırılamadı"
   },
   "Failed to resume printer": {
-    "Failed to resume printer": ""
+    "Failed to resume printer": "Yazıcıyı devam ettirme başarısız"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "Profil resmi ayarlanamadı"
@@ -912,7 +912,7 @@
     "Icon Theme": "Simge Teması"
   },
   "Idle": {
-    "Idle": ""
+    "Idle": "Boşta"
   },
   "Idle Inhibitor": {
     "Idle Inhibitor": "Boşta Kalma Engelleyici"
@@ -945,7 +945,7 @@
     "Install plugins from the DMS plugin registry": "DMS eklenti deposundan eklentiler yükle"
   },
   "Interlock Open": {
-    "Interlock Open": ""
+    "Interlock Open": "Kilit Açık"
   },
   "Internet": {
     "Internet": "İnternet"
@@ -957,10 +957,10 @@
     "Invert on mode change": "Mod değişikliğinde ters çevir"
   },
   "Jobs": {
-    "Jobs": ""
+    "Jobs": "İşler"
   },
   "Jobs: ": {
-    "Jobs: ": ""
+    "Jobs: ": "İşler:"
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Klavye Düzeni Adı"
@@ -1059,16 +1059,16 @@
     "Manual Show/Hide": "Manuel Göster/Gizle"
   },
   "Marker Supply Empty": {
-    "Marker Supply Empty": ""
+    "Marker Supply Empty": "Sarf Malzemesi Boş"
   },
   "Marker Supply Low": {
-    "Marker Supply Low": ""
+    "Marker Supply Low": "Sarf Malzemesi Az"
   },
   "Marker Waste Almost Full": {
-    "Marker Waste Almost Full": ""
+    "Marker Waste Almost Full": "Atık Haznesi Neredeyse Dolu"
   },
   "Marker Waste Full": {
-    "Marker Waste Full": ""
+    "Marker Waste Full": "Atık Haznesi Dolu"
   },
   "Material Colors": {
     "Material Colors": "Materyal Renkleri"
@@ -1092,16 +1092,16 @@
     "Media Controls": "Medya Kontrolleri"
   },
   "Media Empty": {
-    "Media Empty": ""
+    "Media Empty": "Kağıt Bitti"
   },
   "Media Jam": {
-    "Media Jam": ""
+    "Media Jam": "Kağıt Sıkışması"
   },
   "Media Low": {
-    "Media Low": ""
+    "Media Low": "Kağıt Az"
   },
   "Media Needed": {
-    "Media Needed": ""
+    "Media Needed": "Kağıt Gerekli"
   },
   "Media Player Settings": {
     "Media Player Settings": "Medya Oynatıcı Ayarları"
@@ -1143,7 +1143,7 @@
     "Mount": "Bağlı"
   },
   "Moving to Paused": {
-    "Moving to Paused": ""
+    "Moving to Paused": "Duraklatılıyor"
   },
   "Muted palette with subdued, calming tones.": {
     "Muted palette with subdued, calming tones.": "Sakin ve yatıştırıcı tonlara sahip, yumuşak renk paleti."
@@ -1230,10 +1230,10 @@
     "No plugins found.": "Eklenti bulunamadı."
   },
   "No printer found": {
-    "No printer found": ""
+    "No printer found": "Yazıcı Bulunamadı"
   },
   "None": {
-    "None": ""
+    "None": "Hiçbiri"
   },
   "Normal Priority": {
     "Normal Priority": "Normal Öncelik"
@@ -1281,7 +1281,7 @@
     "Office": "Ofis"
   },
   "Offline Report": {
-    "Offline Report": ""
+    "Offline Report": "Çevrimdışı Rapor"
   },
   "On-Screen Displays": {
     "On-Screen Displays": "Ekran Üstü Gösterimler"
@@ -1302,16 +1302,16 @@
     "Open search bar to find text": "Metin bulmak için arama çubuğunu aç"
   },
   "Other": {
-    "Other": ""
+    "Other": "Diğer"
   },
   "Output Area Almost Full": {
-    "Output Area Almost Full": ""
+    "Output Area Almost Full": "Çıkış Alanı Neredeyse Dolu"
   },
   "Output Area Full": {
-    "Output Area Full": ""
+    "Output Area Full": "Çıkış Alanı Dolu"
   },
   "Output Tray Missing": {
-    "Output Tray Missing": ""
+    "Output Tray Missing": "Çıktı Tepsisi Yok"
   },
   "Overview": {
     "Overview": "Genel Görünüm"
@@ -1338,10 +1338,10 @@
     "Password": "Parola"
   },
   "Pause": {
-    "Pause": ""
+    "Pause": "Duraklat"
   },
   "Paused": {
-    "Paused": ""
+    "Paused": "Duraklatıldı"
   },
   "Per-Mode Wallpapers": {
     "Per-Mode Wallpapers": "Moda Özel Duvar Kağıtları"
@@ -1434,13 +1434,13 @@
     "Primary": "Birincil"
   },
   "Print Server not available": {
-    "Print Server not available": ""
+    "Print Server not available": "Yazıcı Sunucusu Kullanılamıyor"
   },
   "Printers": {
-    "Printers": ""
+    "Printers": "Yazıcılar"
   },
   "Printers: ": {
-    "Printers: ": ""
+    "Printers: ": "Yazıcılar:"
   },
   "Privacy Indicator": {
     "Privacy Indicator": "Gizlilik Göstergesi"
@@ -1449,7 +1449,7 @@
     "Process": "Süreç"
   },
   "Processing": {
-    "Processing": ""
+    "Processing": "İşleniyor"
   },
   "Profile Image Error": {
     "Profile Image Error": "Profil Resmi Hatası"
@@ -1476,7 +1476,7 @@
     "Rain Chance": "Yağış İhtimali"
   },
   "Reason": {
-    "Reason": ""
+    "Reason": "Sebep"
   },
   "Reboot": {
     "Reboot": "Yeniden Başlat"
@@ -1497,7 +1497,7 @@
     "Remove": "Kaldır"
   },
   "Report": {
-    "Report": ""
+    "Report": "Rapor"
   },
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Kapatma, yeniden başlatma, askıya alma, hazırda bekletme ve oturumu kapatma işlemlerinde onay iste"
@@ -1509,7 +1509,7 @@
     "Resources": "Kaynaklar"
   },
   "Resume": {
-    "Resume": ""
+    "Resume": "Sürdür"
   },
   "Right": {
     "Right": "Sağ"
@@ -1692,7 +1692,7 @@
     "Shows when microphone, camera, or screen sharing is active": "Mikrofon, kamera veya ekran paylaşımı aktif olduğunda gösterir"
   },
   "Shutdown": {
-    "Shutdown": ""
+    "Shutdown": "Kapat"
   },
   "Size": {
     "Size": "Boyut"
@@ -1713,7 +1713,7 @@
     "Spacing": "Boşluk"
   },
   "Spool Area Full": {
-    "Spool Area Full": ""
+    "Spool Area Full": "Aktarım Alanı Dolu"
   },
   "Square Corners": {
     "Square Corners": "Kare Köşeler"
@@ -1728,13 +1728,13 @@
     "Status": "Durum"
   },
   "Stopped": {
-    "Stopped": ""
+    "Stopped": "Durduruldu"
   },
   "Stopped Partly": {
-    "Stopped Partly": ""
+    "Stopped Partly": "Kısmen Durduruldu"
   },
   "Stopping": {
-    "Stopping": ""
+    "Stopping": "Durduruluyor"
   },
   "Storage & Disks": {
     "Storage & Disks": "Depolama & Diskler"
@@ -1830,7 +1830,7 @@
     "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "Aşağıdaki ayarlar GTK ve Qt ayarlarınızı değiştirecektir. Mevcut yapılandırmalarınızı korumak istiyorsanız, lütfen yedekleyin (qt5ct.conf|qt6ct.conf ve ~/.config/gtk-3.0|gtk-4.0)."
   },
   "The job queue of this printer is empty": {
-    "The job queue of this printer is empty": ""
+    "The job queue of this printer is empty": "Bu yazıcının iş kuyruğu boş"
   },
   "Theme & Colors": {
     "Theme & Colors": "Tema & Renkler"
@@ -1854,7 +1854,7 @@
     "Time & Weather": "Zaman & Hava Durumu"
   },
   "Timed Out": {
-    "Timed Out": ""
+    "Timed Out": "Zaman Aşımı"
   },
   "To Full": {
     "To Full": "Dolmasına"
@@ -1875,10 +1875,10 @@
     "Tomorrow": "Yarın"
   },
   "Toner Empty": {
-    "Toner Empty": ""
+    "Toner Empty": "Toner Boş"
   },
   "Toner Low": {
-    "Toner Low": ""
+    "Toner Low": "Toner Az"
   },
   "Top": {
     "Top": "Üst"
@@ -2010,7 +2010,7 @@
     "Wallpapers": "Duvar Kağıtları"
   },
   "Warning": {
-    "Warning": ""
+    "Warning": "Uyarı"
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "Dalga İlerleme Çubukları"
