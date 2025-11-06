@@ -5,15 +5,28 @@ Item {
     id: root
 
     property string name: ""
-    property alias size: icon.font.pixelSize
+    property int size: Theme.fontSizeMedium
     property alias color: icon.color
 
-    implicitWidth: icon.implicitWidth
-    implicitHeight: icon.implicitHeight
+    width: size
+    height: size
     visible: text.length > 0
 
     // This is for file browser, particularly - might want another map later for app IDs
     readonly property var iconMap: ({
+        // --- Distribution logos ---
+        "debian":               "\u{f08da}",
+        "arch":                 "\u{f08c7}",
+        "archcraft":           "\u{f345}",
+        "guix":                 "\u{f325}",
+        "fedora":               "\u{f08db}",
+        "nixos":                "\u{f1105}",
+        "ubuntu":               "\u{f0548}",
+        "gentoo":               "\u{f08e8}",
+        "endeavouros":          "\u{f322}",
+        "manjaro":              "\u{f160a}",
+        "opensuse":             "\u{f314}",
+
         // --- special types ---
         "folder":               "\u{F024B}",
         "file":                 "\u{F0214}",
@@ -129,14 +142,12 @@ Item {
     StyledText {
         id: icon
 
-        anchors.fill: parent
+        anchors.centerIn: parent
 
         font.family: firaCodeFont.name
-        font.pixelSize: Theme.fontSizeMedium
+        font.pixelSize: root.size
         color: Theme.surfaceText
         text: root.text
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
         antialiasing: true
     }
 }
