@@ -297,10 +297,10 @@
     "CPU usage indicator": "CPU 占用情况"
   },
   "CUPS Insecure Filter Warning": {
-    "CUPS Insecure Filter Warning": ""
+    "CUPS Insecure Filter Warning": "CUPS 警告：不安全的打印过滤器"
   },
   "CUPS Missing Filter Warning": {
-    "CUPS Missing Filter Warning": ""
+    "CUPS Missing Filter Warning": "CUPS 警告：缺少打印过滤器"
   },
   "Cancel": {
     "Cancel": "取消"
@@ -360,7 +360,7 @@
     "Color Picker": "取色器"
   },
   "Color temperature for day time": {
-    "Color temperature for day time": "白天的色温"
+    "Color temperature for day time": "白天模式色温"
   },
   "Color temperature for night mode": {
     "Color temperature for night mode": "夜间模式色温"
@@ -426,7 +426,7 @@
     "Connected Displays": "已连接显示器"
   },
   "Connecting to Device": {
-    "Connecting to Device": ""
+    "Connecting to Device": "连接设备中"
   },
   "Connection failed. Check password and try again.": {
     "Connection failed. Check password and try again.": "连接失败，请检查密码后重试。"
@@ -468,7 +468,7 @@
     "Corner Radius (0 = square corners)": "圆角半径（0 = 直角）"
   },
   "Cover Open": {
-    "Cover Open": ""
+    "Cover Open": "打印机盖已打开"
   },
   "Create Dir": {
     "Create Dir": "创建目录"
@@ -552,7 +552,7 @@
     "Date Format": "日期格式"
   },
   "Day Temperature": {
-    "Day Temperature": "日间温度"
+    "Day Temperature": "日间色温"
   },
   "Default": {
     "Default": "默认"
@@ -639,7 +639,7 @@
     "Donate on Ko-fi": "在Ko-fi上赞助"
   },
   "Door Open": {
-    "Door Open": ""
+    "Door Open": "打印机维护口已打开"
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "拖动组件以在各区块内重新排序。点击眼睛图标可隐藏/显示组件（保留间距），点击 X 可彻底移除。"
@@ -717,7 +717,7 @@
     "Enter password for ": "输入密码"
   },
   "Error": {
-    "Error": ""
+    "Error": "错误"
   },
   "Exclusive Zone Offset": {
     "Exclusive Zone Offset": "独占区域偏移量"
@@ -732,10 +732,10 @@
     "Failed to activate configuration": "无法应用配置"
   },
   "Failed to cancel all jobs": {
-    "Failed to cancel all jobs": ""
+    "Failed to cancel all jobs": "无法取消所有任务"
   },
   "Failed to cancel selected job": {
-    "Failed to cancel selected job": ""
+    "Failed to cancel selected job": "无法取消所选的任务"
   },
   "Failed to connect VPN": {
     "Failed to connect VPN": "连接 VPN 失败"
@@ -756,13 +756,13 @@
     "Failed to enable WiFi": "无法启用 Wi-Fi"
   },
   "Failed to pause printer": {
-    "Failed to pause printer": ""
+    "Failed to pause printer": "无法暂停打印机"
   },
   "Failed to remove device": {
     "Failed to remove device": "删除设备失败"
   },
   "Failed to resume printer": {
-    "Failed to resume printer": ""
+    "Failed to resume printer": "无法恢复打印机"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "无法设置个人资料图片"
@@ -912,7 +912,7 @@
     "Icon Theme": "图标主题"
   },
   "Idle": {
-    "Idle": ""
+    "Idle": "待机"
   },
   "Idle Inhibitor": {
     "Idle Inhibitor": "待机抑制器"
@@ -945,7 +945,7 @@
     "Install plugins from the DMS plugin registry": "从 DMS 插件库安装插件"
   },
   "Interlock Open": {
-    "Interlock Open": ""
+    "Interlock Open": "安全联锁已打开"
   },
   "Internet": {
     "Internet": "互联网"
@@ -957,10 +957,10 @@
     "Invert on mode change": "切换模式时反色"
   },
   "Jobs": {
-    "Jobs": ""
+    "Jobs": "任务"
   },
   "Jobs: ": {
-    "Jobs: ": ""
+    "Jobs: ": "任务： "
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "键盘布局名称"
@@ -1059,16 +1059,16 @@
     "Manual Show/Hide": "手动显示/隐藏"
   },
   "Marker Supply Empty": {
-    "Marker Supply Empty": ""
+    "Marker Supply Empty": "打印耗材已用尽"
   },
   "Marker Supply Low": {
-    "Marker Supply Low": ""
+    "Marker Supply Low": "打印耗材不足"
   },
   "Marker Waste Almost Full": {
-    "Marker Waste Almost Full": ""
+    "Marker Waste Almost Full": "废墨仓即将饱和"
   },
   "Marker Waste Full": {
-    "Marker Waste Full": ""
+    "Marker Waste Full": "废墨仓已饱和"
   },
   "Material Colors": {
     "Material Colors": "Material 配色"
@@ -1092,16 +1092,16 @@
     "Media Controls": "媒体控制"
   },
   "Media Empty": {
-    "Media Empty": ""
+    "Media Empty": "缺纸"
   },
   "Media Jam": {
-    "Media Jam": ""
+    "Media Jam": "卡纸"
   },
   "Media Low": {
-    "Media Low": ""
+    "Media Low": "纸张不足"
   },
   "Media Needed": {
-    "Media Needed": ""
+    "Media Needed": "需要纸张"
   },
   "Media Player Settings": {
     "Media Player Settings": "媒体播放器设置"
@@ -1143,7 +1143,7 @@
     "Mount": "挂载"
   },
   "Moving to Paused": {
-    "Moving to Paused": ""
+    "Moving to Paused": "正在暂停打印机"
   },
   "Muted palette with subdued, calming tones.": {
     "Muted palette with subdued, calming tones.": "柔和配色，带来舒缓的视觉感受。"
@@ -1191,7 +1191,7 @@
     "Night Mode": "夜间模式"
   },
   "Night Temperature": {
-    "Night Temperature": "夜间温度"
+    "Night Temperature": "夜间色温"
   },
   "No Active Players": {
     "No Active Players": "没有正在播放的音频"
@@ -1230,10 +1230,10 @@
     "No plugins found.": "未找到插件"
   },
   "No printer found": {
-    "No printer found": ""
+    "No printer found": "未找到打印机"
   },
   "None": {
-    "None": ""
+    "None": "无"
   },
   "Normal Priority": {
     "Normal Priority": "标准通知"
@@ -1281,13 +1281,13 @@
     "Office": "办公"
   },
   "Offline Report": {
-    "Offline Report": ""
+    "Offline Report": "官方报告"
   },
   "On-Screen Displays": {
     "On-Screen Displays": "屏幕显示"
   },
   "Only adjust gamma based on time or location rules.": {
-    "Only adjust gamma based on time or location rules.": "仅根据时间或位置规则调节伽马值。"
+    "Only adjust gamma based on time or location rules.": "根据时间或位置调节伽马值。"
   },
   "Opacity": {
     "Opacity": "不透明度"
@@ -1302,16 +1302,16 @@
     "Open search bar to find text": "打开搜索栏以查找文本"
   },
   "Other": {
-    "Other": ""
+    "Other": "其他"
   },
   "Output Area Almost Full": {
-    "Output Area Almost Full": ""
+    "Output Area Almost Full": "出纸盒即将饱和"
   },
   "Output Area Full": {
-    "Output Area Full": ""
+    "Output Area Full": "出纸盒已满"
   },
   "Output Tray Missing": {
-    "Output Tray Missing": ""
+    "Output Tray Missing": "未检测到出纸盒"
   },
   "Overview": {
     "Overview": "概览"
@@ -1338,10 +1338,10 @@
     "Password": "密码"
   },
   "Pause": {
-    "Pause": ""
+    "Pause": "暂停"
   },
   "Paused": {
-    "Paused": ""
+    "Paused": "暂停"
   },
   "Per-Mode Wallpapers": {
     "Per-Mode Wallpapers": "按模式设置壁纸"
@@ -1434,13 +1434,13 @@
     "Primary": "主题色"
   },
   "Print Server not available": {
-    "Print Server not available": ""
+    "Print Server not available": "打印服务不可用"
   },
   "Printers": {
-    "Printers": ""
+    "Printers": "打印机"
   },
   "Printers: ": {
-    "Printers: ": ""
+    "Printers: ": "打印机： "
   },
   "Privacy Indicator": {
     "Privacy Indicator": "隐私指示器"
@@ -1449,7 +1449,7 @@
     "Process": "进程"
   },
   "Processing": {
-    "Processing": ""
+    "Processing": "处理中"
   },
   "Profile Image Error": {
     "Profile Image Error": "个人资料图片错误"
@@ -1476,7 +1476,7 @@
     "Rain Chance": "降雨概率"
   },
   "Reason": {
-    "Reason": ""
+    "Reason": "原因"
   },
   "Reboot": {
     "Reboot": "重启"
@@ -1497,7 +1497,7 @@
     "Remove": "移除"
   },
   "Report": {
-    "Report": ""
+    "Report": "报告"
   },
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "关机、重启、挂起、休眠和注销前请求确认"
@@ -1509,7 +1509,7 @@
     "Resources": "资源"
   },
   "Resume": {
-    "Resume": ""
+    "Resume": "恢复"
   },
   "Right": {
     "Right": "右侧"
@@ -1692,7 +1692,7 @@
     "Shows when microphone, camera, or screen sharing is active": "显示麦克风、摄像头或屏幕共享的使用状态"
   },
   "Shutdown": {
-    "Shutdown": ""
+    "Shutdown": "关机"
   },
   "Size": {
     "Size": "尺寸"
@@ -1713,7 +1713,7 @@
     "Spacing": "间距"
   },
   "Spool Area Full": {
-    "Spool Area Full": ""
+    "Spool Area Full": "打印缓冲区已满"
   },
   "Square Corners": {
     "Square Corners": "直角边框"
@@ -1728,13 +1728,13 @@
     "Status": "状态"
   },
   "Stopped": {
-    "Stopped": ""
+    "Stopped": "已停止"
   },
   "Stopped Partly": {
-    "Stopped Partly": ""
+    "Stopped Partly": "部分停止"
   },
   "Stopping": {
-    "Stopping": ""
+    "Stopping": "正在停止"
   },
   "Storage & Disks": {
     "Storage & Disks": "存储与磁盘"
@@ -1749,7 +1749,7 @@
     "Suspend": "挂起"
   },
   "Suspend behavior": {
-    "Suspend behavior": ""
+    "Suspend behavior": "挂起行为"
   },
   "Suspend system after": {
     "Suspend system after": "在此时间后挂起系统"
@@ -1830,7 +1830,7 @@
     "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "以下设置将修改您的 GTK 和 Qt 配置。如需保留当前配置，请先备份 (qt5ct.conf|qt6ct.conf 和 ~/.config/gtk-3.0|gtk-4.0)。"
   },
   "The job queue of this printer is empty": {
-    "The job queue of this printer is empty": ""
+    "The job queue of this printer is empty": "打印任务队列为空"
   },
   "Theme & Colors": {
     "Theme & Colors": "主题与配色"
@@ -1854,7 +1854,7 @@
     "Time & Weather": "时间与天气"
   },
   "Timed Out": {
-    "Timed Out": ""
+    "Timed Out": "超时"
   },
   "To Full": {
     "To Full": "充至满电"
@@ -1875,10 +1875,10 @@
     "Tomorrow": "明日"
   },
   "Toner Empty": {
-    "Toner Empty": ""
+    "Toner Empty": "碳粉已用尽"
   },
   "Toner Low": {
-    "Toner Low": ""
+    "Toner Low": "碳粉不足"
   },
   "Top": {
     "Top": "顶部"
@@ -2010,7 +2010,7 @@
     "Wallpapers": "壁纸"
   },
   "Warning": {
-    "Warning": ""
+    "Warning": "警告"
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "波形进度条"
