@@ -159,13 +159,52 @@ Contributions welcome! Bug fixes, new widgets, theme improvements, or docs - it 
 
 **Contributing Code:**
 1. Fork the repository
-2. Make your changes
-3. Open a pull request
+2. Set up the development environment
+3. Make your changes
+4. Open a pull request
 
 **Contributing Documentation:**
 1. Fork the [DankLinux-Docs](https://github.com/AvengeMedia/DankLinux-Docs) repository
 2. Update files in the `docs/` folder
 3. Open a pull request
+
+### Development Setup
+
+**Requirements:**
+- `python3` - Translation management
+
+**Git Hooks:**
+
+Enable the pre-commit hook to check translation sync status:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+**Translation Workflow**
+
+Set POEditor credentials:
+
+```bash
+export POEDITOR_API_TOKEN="your_api_token"
+export POEDITOR_PROJECT_ID="your_project_id"
+```
+
+Sync translations before committing:
+
+```bash
+python3 scripts/i18nsync.py sync
+```
+
+This script:
+- Extracts strings from QML files
+- Uploads changed English terms to POEditor
+- Downloads updated translations from POEditor
+- Stages all changes for commit
+
+The pre-commit hook will block commits if translations are out of sync and remind you to run the sync script.
+
+Without POEditor credentials, the hook is skipped and commits proceed normally.
 
 Check the [issues](https://github.com/AvengeMedia/DankMaterialShell/issues) or join the community.
 
