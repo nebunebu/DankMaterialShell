@@ -43,11 +43,11 @@ Singleton {
     readonly property real batteryLevel: {
         if (!batteryAvailable) return 0
         if (batteryCapacity === 0) {
-            if (usePreferred && device && device.ready) return Math.round(device.percentage)
+            if (usePreferred && device && device.ready) return Math.round(device.percentage * 100)
             const validBatteries = batteries.filter(b => b.ready && b.percentage >= 0)
             if (validBatteries.length === 0) return 0
             const avgPercentage = validBatteries.reduce((sum, b) => sum + b.percentage, 0) / validBatteries.length
-            return Math.round(avgPercentage)
+            return Math.round(avgPercentage * 100)
         }
         return Math.round((batteryEnergy * 100) / batteryCapacity)
     }
@@ -134,7 +134,7 @@ Singleton {
             if (dev && dev.ready && bluetoothTypes.includes(dev.type)) {
                 btDevices.push({
                                    "name": dev.model || UPowerDeviceType.toString(dev.type),
-                                   "percentage": Math.round(dev.percentage),
+                                   "percentage": Math.round(dev.percentage * 100),
                                    "type": dev.type
                                })
             }
