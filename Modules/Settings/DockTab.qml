@@ -547,8 +547,35 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.set("dockBottomGap", 
+                                                      SettingsData.set("dockBottomGap",
                                                           newValue)
+                                                  }
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingS
+
+                        StyledText {
+                            text: I18n.tr("Margin")
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.surfaceText
+                            font.weight: Font.Medium
+                        }
+
+                        DankSlider {
+                            width: parent.width
+                            height: 24
+                            value: SettingsData.dockMargin
+                            minimum: 0
+                            maximum: 100
+                            unit: ""
+                            showValue: true
+                            wheelEnabled: false
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                            onSliderValueChanged: newValue => {
+                                                      SettingsData.set("dockMargin", newValue)
                                                   }
                         }
                     }

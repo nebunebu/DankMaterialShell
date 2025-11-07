@@ -240,6 +240,7 @@ Singleton {
     property int dockPosition: SettingsData.Position.Bottom
     property real dockSpacing: 4
     property real dockBottomGap: 0
+    property real dockMargin: 0
     property real dockIconSize: 40
     property string dockIndicatorStyle: "circle"
 

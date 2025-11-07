@@ -54,7 +54,7 @@ Variants {
     }
 
     readonly property real dockMargin: SettingsData.dockSpacing
-    readonly property real positionSpacing: barSpacing + SettingsData.dockBottomGap
+    readonly property real positionSpacing: barSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin
     readonly property real _dpr: (dock.screen && dock.screen.devicePixelRatio) ? dock.screen.devicePixelRatio : 1
     function px(v) { return Math.round(v * _dpr) / _dpr }
 
@@ -103,13 +103,13 @@ Variants {
     exclusiveZone: {
         if (!SettingsData.showDock || autoHide) return -1
         if (barSpacing > 0) return -1
-        return px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap)
+        return px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin)
     }
 
     property real animationHeadroom: Math.ceil(SettingsData.dockIconSize * 0.35)
 
-    implicitWidth: isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
-    implicitHeight: !isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
+    implicitWidth: isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
+    implicitHeight: !isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
 
     Item {
         id: maskItem
@@ -188,7 +188,7 @@ Variants {
                     const isBottom = SettingsData.dockPosition === SettingsData.Position.Bottom
                     const globalX = buttonGlobalPos.x + dock.hoveredButton.width / 2
                     const screenRelativeY = isBottom
-                        ? (screenHeight - dock.effectiveBarHeight - SettingsData.dockSpacing - SettingsData.dockBottomGap - 35)
+                        ? (screenHeight - dock.effectiveBarHeight - SettingsData.dockSpacing - SettingsData.dockBottomGap - SettingsData.dockMargin - 35)
                         : (buttonGlobalPos.y - screenY + dock.hoveredButton.height + Theme.spacingS)
                     dockTooltip.show(tooltipText,
                                    globalX,
@@ -197,7 +197,7 @@ Variants {
                                    false, false)
                 } else {
                     const isLeft = SettingsData.dockPosition === SettingsData.Position.Left
-                    const tooltipOffset = dock.effectiveBarHeight + SettingsData.dockSpacing + Theme.spacingXS
+                    const tooltipOffset = dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockMargin + Theme.spacingXS
                     const tooltipX = isLeft ? tooltipOffset : (dock.screen.width - tooltipOffset)
                     const screenRelativeY = buttonGlobalPos.y - screenY + dock.hoveredButton.height / 2
                     dockTooltip.show(tooltipText,
@@ -259,12 +259,12 @@ Variants {
                 if (dock.isVertical) {
                     return dock.reveal ? Math.min(dockBackground.implicitHeight + 4, maxDockHeight) : Math.min(Math.max(dockBackground.implicitHeight + 64, 200), screenHeight * 0.5)
                 } else {
-                    return dock.reveal ? px(dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap) : 1
+                    return dock.reveal ? px(dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin) : 1
                 }
             }
             width: {
                 if (dock.isVertical) {
-                    return dock.reveal ? px(dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap) : 1
+                    return dock.reveal ? px(dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin) : 1
                 } else {
                     return dock.reveal ? Math.min(dockBackground.implicitWidth + 4, maxDockWidth) : Math.min(Math.max(dockBackground.implicitWidth + 64, 200), screenWidth * 0.5)
                 }
@@ -304,7 +304,7 @@ Variants {
                     x: {
                         if (!dock.isVertical) return 0
                         if (dock.reveal) return 0
-                        const hideDistance = dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + 10
+                        const hideDistance = dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + 10
                         if (SettingsData.dockPosition === SettingsData.Position.Right) {
                             return hideDistance
                         } else {
@@ -314,7 +314,7 @@ Variants {
                     y: {
                         if (dock.isVertical) return 0
                         if (dock.reveal) return 0
-                        const hideDistance = dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + 10
+                        const hideDistance = dock.effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + 10
                         if (SettingsData.dockPosition === SettingsData.Position.Bottom) {
                             return hideDistance
                         } else {
@@ -350,10 +350,10 @@ Variants {
                         right: dock.isVertical ? (SettingsData.dockPosition === SettingsData.Position.Right ? parent.right : undefined) : undefined
                         verticalCenter: dock.isVertical ? parent.verticalCenter : undefined
                     }
-                    anchors.topMargin: !dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Top ? barSpacing + 1 : 0
-                    anchors.bottomMargin: !dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Bottom ? barSpacing + 1 : 0
-                    anchors.leftMargin: dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Left ? barSpacing + 1 : 0
-                    anchors.rightMargin: dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Right ? barSpacing + 1 : 0
+                    anchors.topMargin: !dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Top ? barSpacing + SettingsData.dockMargin + 1 : 0
+                    anchors.bottomMargin: !dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Bottom ? barSpacing + SettingsData.dockMargin + 1 : 0
+                    anchors.leftMargin: dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Left ? barSpacing + SettingsData.dockMargin + 1 : 0
+                    anchors.rightMargin: dock.isVertical && SettingsData.dockPosition === SettingsData.Position.Right ? barSpacing + SettingsData.dockMargin + 1 : 0
 
                     implicitWidth: dock.isVertical ? (dockApps.implicitHeight + SettingsData.dockSpacing * 2) : (dockApps.implicitWidth + SettingsData.dockSpacing * 2)
                     implicitHeight: dock.isVertical ? (dockApps.implicitWidth + SettingsData.dockSpacing * 2) : (dockApps.implicitHeight + SettingsData.dockSpacing * 2)

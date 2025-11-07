@@ -157,6 +157,7 @@ var SPEC = {
     dockPosition: { def: 1 },
     dockSpacing: { def: 4 },
     dockBottomGap: { def: 0 },
+    dockMargin: { def: 0 },
     dockIconSize: { def: 40 },
     dockIndicatorStyle: { def: "circle" },
 

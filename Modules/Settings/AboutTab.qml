@@ -42,7 +42,7 @@ Item {
         return "niri GitHub"
     }
 
-    property string dmsDiscordUrl: "https://discord.gg/vT8Sfjy7sx"
+    property string dmsDiscordUrl: "https://discord.gg/ppWTpKmPgT"
     property string dmsDiscordTooltip: "niri/dms Discord"
 
     property string compositorDiscordUrl: {

@@ -91,7 +91,7 @@ PanelWindow {
         }
 
         const isVertical = SettingsData.dockPosition === SettingsData.Position.Left || SettingsData.dockPosition === SettingsData.Position.Right
-        const dockMargin = 16
+        const dockMargin = SettingsData.dockMargin + 16
         let buttonScreenX, buttonScreenY
 
         if (isVertical) {

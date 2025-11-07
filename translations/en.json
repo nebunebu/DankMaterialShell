@@ -1244,7 +1244,7 @@
   {
     "term": "Dock Transparency",
     "context": "Dock Transparency",
-    "reference": "Modules/Settings/DockTab.qml:596",
+    "reference": "Modules/Settings/DockTab.qml:623",
     "comment": ""
   },
   {
@@ -2079,6 +2079,12 @@
     "term": "Manual Show/Hide",
     "context": "Manual Show/Hide",
     "reference": "Modules/Settings/DankBarTab.qml:875",
+    "comment": ""
+  },
+  {
+    "term": "Margin",
+    "context": "Margin",
+    "reference": "Modules/Settings/DockTab.qml:561",
     "comment": ""
   },
   {
