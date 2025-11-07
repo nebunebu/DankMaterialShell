@@ -114,92 +114,90 @@ PanelWindow {
         }
     }
 
-    Loader {
-        id: contentLoader
+    Item {
+        id: contentContainer
         x: alignedX
         y: alignedY
         width: alignedWidth
         height: alignedHeight
-        active: root.visible
-        asynchronous: false
-        transformOrigin: Item.Center
-        layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
-        layer.smooth: true
-        layer.textureSize: Qt.size(width * Math.max(2, root.screen?.devicePixelRatio || 1), height * Math.max(2, root.screen?.devicePixelRatio || 1))
-        layer.samples: 4
-        opacity: shouldBeVisible ? 1 : 0
-        visible: opacity > 0
-        transform: [scaleTransform, motionTransform]
 
-        Scale {
-            id: scaleTransform
+        readonly property bool barTop: SettingsData.dankBarPosition === SettingsData.Position.Top
+        readonly property bool barBottom: SettingsData.dankBarPosition === SettingsData.Position.Bottom
+        readonly property bool barLeft: SettingsData.dankBarPosition === SettingsData.Position.Left
+        readonly property bool barRight: SettingsData.dankBarPosition === SettingsData.Position.Right
+        readonly property real offsetX: barLeft ? root.animationOffset : (barRight ? -root.animationOffset : 0)
+        readonly property real offsetY: barBottom ? -root.animationOffset : (barTop ? root.animationOffset : 0)
 
-            origin.x: contentLoader.width / 2
-            origin.y: contentLoader.height / 2
-            xScale: root.shouldBeVisible ? 1 : root.animationScaleCollapsed
-            yScale: root.shouldBeVisible ? 1 : root.animationScaleCollapsed
+        property real animX: 0
+        property real animY: 0
+        property real scaleValue: root.animationScaleCollapsed
 
-            Behavior on xScale {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
+        onOffsetXChanged: animX = Theme.snap(root.shouldBeVisible ? 0 : offsetX, root.dpr)
+        onOffsetYChanged: animY = Theme.snap(root.shouldBeVisible ? 0 : offsetY, root.dpr)
 
-            Behavior on yScale {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
+        Connections {
+            target: root
+            function onShouldBeVisibleChanged() {
+                contentContainer.animX = Theme.snap(root.shouldBeVisible ? 0 : contentContainer.offsetX, root.dpr)
+                contentContainer.animY = Theme.snap(root.shouldBeVisible ? 0 : contentContainer.offsetY, root.dpr)
+                contentContainer.scaleValue = root.shouldBeVisible ? 1.0 : root.animationScaleCollapsed
             }
         }
 
-        Translate {
-            id: motionTransform
-
-            readonly property bool barTop: SettingsData.dankBarPosition === SettingsData.Position.Top
-            readonly property bool barBottom: SettingsData.dankBarPosition === SettingsData.Position.Bottom
-            readonly property bool barLeft: SettingsData.dankBarPosition === SettingsData.Position.Left
-            readonly property bool barRight: SettingsData.dankBarPosition === SettingsData.Position.Right
-            readonly property real hiddenX: barLeft ? root.animationOffset : (barRight ? -root.animationOffset : 0)
-            readonly property real hiddenY: barBottom ? -root.animationOffset : (barTop ? root.animationOffset : 0)
-
-            x: Theme.snap(root.shouldBeVisible ? 0 : hiddenX, root.dpr)
-            y: Theme.snap(root.shouldBeVisible ? 0 : hiddenY, root.dpr)
-
-            Behavior on x {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
-
-            Behavior on y {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
-        }
-
-        Behavior on opacity {
+        Behavior on animX {
             NumberAnimation {
-                duration: animationDuration
+                duration: root.animationDuration
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+            }
+        }
+
+        Behavior on animY {
+            NumberAnimation {
+                duration: root.animationDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+            }
+        }
+
+        Behavior on scaleValue {
+            NumberAnimation {
+                duration: root.animationDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+            }
+        }
+
+        Loader {
+            id: contentLoader
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            active: root.visible
+            asynchronous: false
+            layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
+            layer.smooth: false
+            layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
+            layer.textureMirroring: ShaderEffectSource.NoMirroring
+            opacity: shouldBeVisible ? 1 : 0
+            visible: opacity > 0
+            scale: contentContainer.scaleValue
+            x: Theme.snap(contentContainer.animX + (parent.width - width) * (1 - contentContainer.scaleValue) * 0.5, root.dpr)
+            y: Theme.snap(contentContainer.animY + (parent.height - height) * (1 - contentContainer.scaleValue) * 0.5, root.dpr)
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: animationDuration
+                    easing.type: Easing.BezierSpline
+                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+                }
             }
         }
     }
 
     Item {
-        x: alignedX
-        y: alignedY
-        width: alignedWidth
-        height: alignedHeight
+        parent: contentContainer
+        anchors.fill: parent
         focus: true
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {

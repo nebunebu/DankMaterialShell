@@ -139,12 +139,11 @@ PanelWindow {
         }
     }
 
-    Rectangle {
-        id: contentContainer
+    Item {
+        id: modalContainer
 
         width: Theme.px(root.width, dpr)
         height: Theme.px(root.height, dpr)
-        anchors.centerIn: undefined
         x: {
             if (positioning === "center") {
                 return Theme.snap((root.screenWidth - width) / 2, dpr)
@@ -165,101 +164,93 @@ PanelWindow {
             }
             return 0
         }
-        color: root.backgroundColor
-        radius: root.cornerRadius
-        border.color: root.borderColor
-        border.width: root.borderWidth
-        clip: false
-        layer.enabled: true
-        layer.smooth: true
-        layer.textureSize: Qt.size(width * Math.max(2, root.screen?.devicePixelRatio || 1), height * Math.max(2, root.screen?.devicePixelRatio || 1))
-        layer.samples: 4
-        opacity: root.shouldBeVisible ? 1 : 0
-        transform: [scaleTransform, motionTransform]
 
-        Scale {
-            id: scaleTransform
+        readonly property bool slide: root.animationType === "slide"
+        readonly property real offsetX: slide ? 15 : 0
+        readonly property real offsetY: slide ? -30 : root.animationOffset
 
-            origin.x: contentContainer.width / 2
-            origin.y: contentContainer.height / 2
-            xScale: root.shouldBeVisible ? 1 : root.animationScaleCollapsed
-            yScale: root.shouldBeVisible ? 1 : root.animationScaleCollapsed
+        property real animX: 0
+        property real animY: 0
+        property real scaleValue: root.animationScaleCollapsed
 
-            Behavior on xScale {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
+        onOffsetXChanged: animX = Theme.snap(root.shouldBeVisible ? 0 : offsetX, root.dpr)
+        onOffsetYChanged: animY = Theme.snap(root.shouldBeVisible ? 0 : offsetY, root.dpr)
 
-            Behavior on yScale {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
+        Connections {
+            target: root
+            function onShouldBeVisibleChanged() {
+                modalContainer.animX = Theme.snap(root.shouldBeVisible ? 0 : modalContainer.offsetX, root.dpr)
+                modalContainer.animY = Theme.snap(root.shouldBeVisible ? 0 : modalContainer.offsetY, root.dpr)
+                modalContainer.scaleValue = root.shouldBeVisible ? 1.0 : root.animationScaleCollapsed
             }
         }
 
-        Translate {
-            id: motionTransform
-
-            readonly property bool slide: root.animationType === "slide"
-            readonly property real hiddenX: slide ? 15 : 0
-            readonly property real hiddenY: slide ? -30 : root.animationOffset
-
-            x: Theme.snap(root.shouldBeVisible ? 0 : hiddenX, root.dpr)
-            y: Theme.snap(root.shouldBeVisible ? 0 : hiddenY, root.dpr)
-
-            Behavior on x {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
-
-            Behavior on y {
-                NumberAnimation {
-                    duration: root.animationDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
-                }
-            }
-        }
-
-        Behavior on opacity {
+        Behavior on animX {
             NumberAnimation {
-                duration: animationDuration
+                duration: root.animationDuration
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
             }
         }
 
-        FocusScope {
-            anchors.fill: parent
-            focus: root.shouldBeVisible
+        Behavior on animY {
+            NumberAnimation {
+                duration: root.animationDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+            }
+        }
+
+        Behavior on scaleValue {
+            NumberAnimation {
+                duration: root.animationDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+            }
+        }
+
+        Rectangle {
+            id: contentContainer
+
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            color: root.backgroundColor
+            radius: root.cornerRadius
+            border.color: root.borderColor
+            border.width: root.borderWidth
             clip: false
+            layer.enabled: true
+            layer.smooth: false
+            layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
+            layer.textureMirroring: ShaderEffectSource.NoMirroring
+            opacity: root.shouldBeVisible ? 1 : 0
+            scale: modalContainer.scaleValue
+            x: Theme.snap(modalContainer.animX + (parent.width - width) * (1 - modalContainer.scaleValue) * 0.5, root.dpr)
+            y: Theme.snap(modalContainer.animY + (parent.height - height) * (1 - modalContainer.scaleValue) * 0.5, root.dpr)
 
-            Item {
-                id: directContentWrapper
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: animationDuration
+                    easing.type: Easing.BezierSpline
+                    easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
+                }
+            }
 
+            FocusScope {
                 anchors.fill: parent
-                visible: root.directContent !== null
-                focus: true
+                focus: root.shouldBeVisible
                 clip: false
 
-                Component.onCompleted: {
-                    if (root.directContent) {
-                        root.directContent.parent = directContentWrapper
-                        root.directContent.anchors.fill = directContentWrapper
-                        Qt.callLater(() => root.directContent.forceActiveFocus())
-                    }
-                }
+                Item {
+                    id: directContentWrapper
 
-                Connections {
-                    function onDirectContentChanged() {
+                    anchors.fill: parent
+                    visible: root.directContent !== null
+                    focus: true
+                    clip: false
+
+                    Component.onCompleted: {
                         if (root.directContent) {
                             root.directContent.parent = directContentWrapper
                             root.directContent.anchors.fill = directContentWrapper
@@ -267,23 +258,33 @@ PanelWindow {
                         }
                     }
 
-                    target: root
+                    Connections {
+                        function onDirectContentChanged() {
+                            if (root.directContent) {
+                                root.directContent.parent = directContentWrapper
+                                root.directContent.anchors.fill = directContentWrapper
+                                Qt.callLater(() => root.directContent.forceActiveFocus())
+                            }
+                        }
+
+                        target: root
+                    }
                 }
-            }
 
-            Loader {
-                id: contentLoader
+                Loader {
+                    id: contentLoader
 
-                anchors.fill: parent
-                active: root.directContent === null && (root.keepContentLoaded || root.shouldBeVisible || root.visible)
-                asynchronous: false
-                focus: true
-                clip: false
-                visible: root.directContent === null
+                    anchors.fill: parent
+                    active: root.directContent === null && (root.keepContentLoaded || root.shouldBeVisible || root.visible)
+                    asynchronous: false
+                    focus: true
+                    clip: false
+                    visible: root.directContent === null
 
-                onLoaded: {
-                    if (item) {
-                        Qt.callLater(() => item.forceActiveFocus())
+                    onLoaded: {
+                        if (item) {
+                            Qt.callLater(() => item.forceActiveFocus())
+                        }
                     }
                 }
             }
