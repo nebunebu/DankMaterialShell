@@ -17,7 +17,7 @@ Item {
         // --- Distribution logos ---
         "debian":               "\u{f08da}",
         "arch":                 "\u{f08c7}",
-        "archcraft":           "\u{f345}",
+        "archcraft":            "\u{f345}",
         "guix":                 "\u{f325}",
         "fedora":               "\u{f08db}",
         "nixos":                "\u{f1105}",

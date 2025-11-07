@@ -151,7 +151,7 @@ fi
 
 # Restart DMS for active users after upgrade
 if [ "$1" -ge 2 ]; then
-  pkill -HUP -x dms >/dev/null 2>&1 || true
+  pkill -USR1 -x dms >/dev/null 2>&1 || true
 fi
 
 %files
