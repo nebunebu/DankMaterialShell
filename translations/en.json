@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modules/Settings/AboutTab.qml:363, Modals/Settings/SettingsSidebar.qml:44",
+    "reference": "Modals/Settings/SettingsSidebar.qml:44, Modules/Settings/AboutTab.qml:363",
     "comment": ""
   },
   {
@@ -110,13 +110,13 @@
   {
     "term": "Add a VPN in NetworkManager",
     "context": "Add a VPN in NetworkManager",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:288, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147, Modules/DankBar/Popouts/VpnPopout.qml:288",
     "comment": ""
   },
   {
     "term": "All",
     "context": "All",
-    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppDrawerPopout.qml:47, Modals/Spotlight/SpotlightModal.qml:61",
+    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modals/Spotlight/SpotlightModal.qml:61, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modules/AppDrawer/AppDrawerPopout.qml:47",
     "comment": ""
   },
   {
@@ -602,13 +602,13 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/DankColorPickerModal.qml:518, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/DankColorPickerModal.qml:518, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:627",
     "comment": ""
   },
   {
     "term": "Capacity",
     "context": "Capacity",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508, Modules/ControlCenter/Details/BatteryDetail.qml:171",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508",
     "comment": ""
   },
   {
@@ -698,7 +698,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modals/NetworkInfoModal.qml:131, Modals/NetworkWiredInfoModal.qml:131, Modules/SystemUpdatePopout.qml:335, Modules/DankBar/Widgets/RunningApps.qml:788",
+    "reference": "Modules/SystemUpdatePopout.qml:335, Modals/NetworkWiredInfoModal.qml:131, Modals/NetworkInfoModal.qml:131, Modules/DankBar/Widgets/RunningApps.qml:788",
     "comment": ""
   },
   {
@@ -728,7 +728,7 @@
   {
     "term": "Colorful mix of bright contrasting accents.",
     "context": "Colorful mix of bright contrasting accents.",
-    "reference": "Common/Theme.qml:226",
+    "reference": "Common/Theme.qml:232",
     "comment": ""
   },
   {
@@ -1112,7 +1112,7 @@
   {
     "term": "Derives colors that closely match the underlying image.",
     "context": "Derives colors that closely match the underlying image.",
-    "reference": "Common/Theme.qml:214",
+    "reference": "Common/Theme.qml:217",
     "comment": ""
   },
   {
@@ -1148,7 +1148,7 @@
   {
     "term": "Disconnect",
     "context": "Disconnect",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:224, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:224",
     "comment": ""
   },
   {
@@ -1172,7 +1172,7 @@
   {
     "term": "Dismiss",
     "context": "Dismiss",
-    "reference": "Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633, Modules/Notifications/Popup/NotificationPopup.qml:24",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
     "comment": ""
   },
   {
@@ -1220,7 +1220,7 @@
   {
     "term": "Diverse palette spanning the full spectrum.",
     "context": "Diverse palette spanning the full spectrum.",
-    "reference": "Common/Theme.qml:238",
+    "reference": "Common/Theme.qml:247",
     "comment": ""
   },
   {
@@ -1718,7 +1718,7 @@
   {
     "term": "Health",
     "context": "Health",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471, Modules/ControlCenter/Details/BatteryDetail.qml:136",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471",
     "comment": ""
   },
   {
@@ -1748,13 +1748,13 @@
   {
     "term": "High-contrast palette for strong visual distinction.",
     "context": "High-contrast palette for strong visual distinction.",
-    "reference": "Common/Theme.qml:210",
+    "reference": "Common/Theme.qml:212",
     "comment": ""
   },
   {
     "term": "High-fidelity palette that preserves source hues.",
     "context": "High-fidelity palette that preserves source hues.",
-    "reference": "Common/Theme.qml:222",
+    "reference": "Common/Theme.qml:227",
     "comment": ""
   },
   {
@@ -1886,7 +1886,7 @@
   {
     "term": "Jobs",
     "context": "Jobs",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:149",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:169",
     "comment": ""
   },
   {
@@ -1946,7 +1946,7 @@
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:746, Modals/Spotlight/SpotlightContextMenu.qml:251",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:251, Modules/AppDrawer/AppDrawerPopout.qml:746",
     "comment": ""
   },
   {
@@ -1958,7 +1958,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:806, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:312, Modules/AppDrawer/AppDrawerPopout.qml:806, Modules/Dock/DockContextMenu.qml:417",
     "comment": ""
   },
   {
@@ -2000,7 +2000,7 @@
   {
     "term": "Lively palette with saturated accents.",
     "context": "Lively palette with saturated accents.",
-    "reference": "Common/Theme.qml:206",
+    "reference": "Common/Theme.qml:207",
     "comment": ""
   },
   {
@@ -2036,7 +2036,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/ControlCenter/PowerMenu.qml:14, Modules/Lock/LockPowerMenu.qml:209",
+    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -2114,7 +2114,7 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1785, Modules/Settings/ThemeColorsTab.qml:629",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:629, Modules/Settings/PersonalizationTab.qml:1785",
     "comment": ""
   },
   {
@@ -2204,7 +2204,7 @@
   {
     "term": "Minimal palette built around a single hue.",
     "context": "Minimal palette built around a single hue.",
-    "reference": "Common/Theme.qml:230",
+    "reference": "Common/Theme.qml:237",
     "comment": ""
   },
   {
@@ -2252,7 +2252,7 @@
   {
     "term": "Muted palette with subdued, calming tones.",
     "context": "Muted palette with subdued, calming tones.",
-    "reference": "Common/Theme.qml:234",
+    "reference": "Common/Theme.qml:242",
     "comment": ""
   },
   {
@@ -2294,7 +2294,7 @@
   {
     "term": "Network Information",
     "context": "Network Information",
-    "reference": "Modals/NetworkInfoModal.qml:61, Modals/NetworkWiredInfoModal.qml:61",
+    "reference": "Modals/NetworkWiredInfoModal.qml:61, Modals/NetworkInfoModal.qml:61",
     "comment": ""
   },
   {
@@ -2372,7 +2372,7 @@
   {
     "term": "No VPN profiles found",
     "context": "No VPN profiles found",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:281, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140, Modules/DankBar/Popouts/VpnPopout.qml:281",
     "comment": ""
   },
   {
@@ -2420,7 +2420,7 @@
   {
     "term": "No printer found",
     "context": "No printer found",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:25",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:25, Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:55",
     "comment": ""
   },
   {
@@ -2636,7 +2636,7 @@
   {
     "term": "Pause",
     "context": "Pause",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:104",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:124",
     "comment": ""
   },
   {
@@ -2684,7 +2684,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370",
     "comment": ""
   },
   {
@@ -2792,19 +2792,19 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/ControlCenter/PowerMenu.qml:17, Modules/Lock/LockPowerMenu.qml:432",
+    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:149, Modules/ControlCenter/PowerMenu.qml:13, Modules/Lock/LockPowerMenu.qml:154",
+    "reference": "Modals/PowerMenuModal.qml:149, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
     "term": "Power Profile Degradation",
     "context": "Power Profile Degradation",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:625, Modules/ControlCenter/Details/BatteryDetail.qml:240",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:625",
     "comment": ""
   },
   {
@@ -2828,7 +2828,7 @@
   {
     "term": "Print Server not available",
     "context": "Print Server not available",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:23",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:23, Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:55",
     "comment": ""
   },
   {
@@ -2912,7 +2912,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/ControlCenter/PowerMenu.qml:16, Modules/Lock/LockPowerMenu.qml:372",
+    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -2972,7 +2972,7 @@
   {
     "term": "Resume",
     "context": "Resume",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:104",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:124",
     "comment": ""
   },
   {
@@ -3014,7 +3014,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modules/Notepad/Notepad.qml:480, Modules/Notepad/NotepadTextEditor.qml:511, Modals/FileBrowser/FileBrowserSaveRow.qml:55",
+    "reference": "Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
     "comment": ""
   },
   {
@@ -3152,7 +3152,7 @@
   {
     "term": "Select the palette algorithm used for wallpaper-based colors",
     "context": "Select the palette algorithm used for wallpaper-based colors",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1786, Modules/Settings/ThemeColorsTab.qml:630",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:630, Modules/Settings/PersonalizationTab.qml:1786",
     "comment": ""
   },
   {
@@ -3188,7 +3188,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:249, Modals/Settings/SettingsModal.qml:168",
+    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:168, Modules/DankDash/DankDashPopout.qml:249",
     "comment": ""
   },
   {
@@ -3440,7 +3440,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/ControlCenter/PowerMenu.qml:15, Modules/Lock/LockPowerMenu.qml:260",
+    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {
@@ -3596,7 +3596,7 @@
   {
     "term": "The job queue of this printer is empty",
     "context": "The job queue of this printer is empty",
-    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:206",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:226",
     "comment": ""
   },
   {
@@ -3734,7 +3734,7 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370",
     "comment": ""
   },
   {
@@ -3896,7 +3896,7 @@
   {
     "term": "Vibrant palette with playful saturation.",
     "context": "Vibrant palette with playful saturation.",
-    "reference": "Common/Theme.qml:218",
+    "reference": "Common/Theme.qml:222",
     "comment": ""
   },
   {

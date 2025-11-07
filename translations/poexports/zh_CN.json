@@ -468,7 +468,7 @@
     "Corner Radius (0 = square corners)": "圆角半径（0 = 直角）"
   },
   "Corner Radius Override": {
-    "Corner Radius Override": ""
+    "Corner Radius Override": "圆角半径覆盖"
   },
   "Cover Open": {
     "Cover Open": "打印机盖已打开"
@@ -861,7 +861,7 @@
     "Good": "良好"
   },
   "Goth Corner Radius": {
-    "Goth Corner Radius": ""
+    "Goth Corner Radius": "哥特圆角半径"
   },
   "Goth Corners": {
     "Goth Corners": "哥特风格圆角"
