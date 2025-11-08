@@ -543,6 +543,10 @@ DankModal {
                                             const r = Math.round(root.currentColor.r * 255)
                                             const g = Math.round(root.currentColor.g * 255)
                                             const b = Math.round(root.currentColor.b * 255)
+                                            if (root.alpha < 1) {
+                                                const a = Math.round(root.alpha * 255)
+                                                return `${r}, ${g}, ${b}, ${a}`
+                                            }
                                             return `${r}, ${g}, ${b}`
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -560,7 +564,13 @@ DankModal {
                                         const r = Math.round(root.currentColor.r * 255)
                                         const g = Math.round(root.currentColor.g * 255)
                                         const b = Math.round(root.currentColor.b * 255)
-                                        const rgbString = `rgb(${r}, ${g}, ${b})`
+                                        let rgbString
+                                        if (root.alpha < 1) {
+                                            const a = Math.round(root.alpha * 255)
+                                            rgbString = `rgba(${r}, ${g}, ${b}, ${a})`
+                                        } else {
+                                            rgbString = `rgb(${r}, ${g}, ${b})`
+                                        }
                                         Quickshell.execDetached(["sh", "-c", `echo "${rgbString}" | wl-copy`])
                                         ToastService.showInfo(`${rgbString} copied`)
                                     }
@@ -597,6 +607,10 @@ DankModal {
                                             const h = Math.round(root.hue * 360)
                                             const s = Math.round(root.saturation * 100)
                                             const v = Math.round(root.value * 100)
+                                            if (root.alpha < 1) {
+                                                const a = Math.round(root.alpha * 100)
+                                                return `${h}°, ${s}%, ${v}%, ${a}%`
+                                            }
                                             return `${h}°, ${s}%, ${v}%`
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -614,7 +628,13 @@ DankModal {
                                         const h = Math.round(root.hue * 360)
                                         const s = Math.round(root.saturation * 100)
                                         const v = Math.round(root.value * 100)
-                                        const hsvString = `${h}, ${s}, ${v}`
+                                        let hsvString
+                                        if (root.alpha < 1) {
+                                            const a = Math.round(root.alpha * 100)
+                                            hsvString = `${h}, ${s}, ${v}, ${a}`
+                                        } else {
+                                            hsvString = `${h}, ${s}, ${v}`
+                                        }
                                         Quickshell.execDetached(["sh", "-c", `echo "${hsvString}" | wl-copy`])
                                         ToastService.showInfo(`HSV ${hsvString} copied`)
                                     }

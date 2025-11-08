@@ -1706,7 +1706,7 @@
   {
     "term": "HSV",
     "context": "HSV",
-    "reference": "Modals/DankColorPickerModal.qml:576",
+    "reference": "Modals/DankColorPickerModal.qml:586",
     "comment": ""
   },
   {
@@ -3020,7 +3020,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/DankColorPickerModal.qml:630, Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
+    "reference": "Modals/DankColorPickerModal.qml:650, Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
     "comment": ""
   },
   {
