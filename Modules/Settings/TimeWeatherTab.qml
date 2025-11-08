@@ -556,7 +556,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.useFahrenheit
                             onToggled: checked => {
-                                           return SettingsData.set("temperatureUnit", 
+                                           return SettingsData.set("useFahrenheit",
                                                checked)
                                        }
                         }
@@ -628,7 +628,7 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.useAutoLocation
                             onToggled: checked => {
-                                           return SettingsData.set("autoLocation", 
+                                           return SettingsData.set("useAutoLocation",
                                                checked)
                                        }
                         }
@@ -966,7 +966,7 @@ Item {
                                                 cursorShape: Qt.PointingHandCursor
                                                 onClicked: {
                                                     if (WeatherService.weather.available) {
-                                                        SettingsData.set("temperatureUnit", !SettingsData.useFahrenheit)
+                                                        SettingsData.set("useFahrenheit", !SettingsData.useFahrenheit)
                                                     }
                                                 }
                                                 enabled: WeatherService.weather.available
