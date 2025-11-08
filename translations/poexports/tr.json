@@ -468,7 +468,7 @@
     "Corner Radius (0 = square corners)": "Köşe Yarıçapı (0 = kare köşeler)"
   },
   "Corner Radius Override": {
-    "Corner Radius Override": ""
+    "Corner Radius Override": "Köşe Yarıçapı Değiştirme"
   },
   "Cover Open": {
     "Cover Open": "Kapak Açık"
@@ -861,7 +861,7 @@
     "Good": "İyi"
   },
   "Goth Corner Radius": {
-    "Goth Corner Radius": ""
+    "Goth Corner Radius": "Gotik Köşe Yarıçapı"
   },
   "Goth Corners": {
     "Goth Corners": "Gotik Köşeler"
@@ -1065,7 +1065,7 @@
     "Manual Show/Hide": "Manuel Göster/Gizle"
   },
   "Margin": {
-    "Margin": ""
+    "Margin": "Kenar Boşluğu"
   },
   "Marker Supply Empty": {
     "Marker Supply Empty": "Sarf Malzemesi Boş"

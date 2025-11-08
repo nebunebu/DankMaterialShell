@@ -111,40 +111,6 @@ Item {
                             color: Theme.surfaceText
                             anchors.verticalCenter: parent.verticalCenter
                         }
-
-                        Item {
-                            width: parent.width - parent.children[0].width - parent.children[1].width - surfaceBaseGroup.width - Theme.spacingM * 3
-                            height: 1
-                        }
-
-                        DankButtonGroup {
-                            id: surfaceBaseGroup
-                            property int currentSurfaceIndex: {
-                                switch (SettingsData.surfaceBase) {
-                                    case "sc": return 0
-                                    case "s": return 1
-                                    default: return 0
-                                }
-                            }
-
-                            model: ["Container", "Surface"]
-                            currentIndex: currentSurfaceIndex
-                            selectionMode: "single"
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            buttonHeight: 20
-                            minButtonWidth: 48
-                            buttonPadding: Theme.spacingS
-                            checkIconSize: Theme.iconSizeSmall - 2
-                            textSize: Theme.fontSizeSmall - 2
-                            spacing: 1
-
-                            onSelectionChanged: (index, selected) => {
-                                if (!selected) return
-                                const surfaceOptions = ["sc", "s"]
-                                SettingsData.setSurfaceBase(surfaceOptions[index])
-                            }
-                        }
                     }
 
                     Column {

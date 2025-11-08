@@ -38,7 +38,6 @@ Singleton {
     property real fontScale: 1.0
     property real cornerRadius: 12
     property string widgetBackgroundColor: "sch"
-    property string surfaceBase: "s"
     property string lockDateFormat: ""
     property bool lockScreenShowPowerActions: true
     property var screenPreferences: ({})
@@ -74,7 +73,6 @@ Singleton {
                 fontScale = settings.fontScale !== undefined ? settings.fontScale : 1.0
                 cornerRadius = settings.cornerRadius !== undefined ? settings.cornerRadius : 12
                 widgetBackgroundColor = settings.widgetBackgroundColor !== undefined ? settings.widgetBackgroundColor : "sch"
-                surfaceBase = settings.surfaceBase !== undefined ? settings.surfaceBase : "s"
                 lockDateFormat = settings.lockDateFormat !== undefined ? settings.lockDateFormat : ""
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 screenPreferences = settings.screenPreferences !== undefined ? settings.screenPreferences : ({})

@@ -66,7 +66,6 @@ Singleton {
     property real popupTransparency: 1.0
     property real dockTransparency: 1
     property string widgetBackgroundColor: "sch"
-    property string surfaceBase: "s"
     property real cornerRadius: 12
 
     property bool use24HourClock: true
@@ -622,12 +621,6 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
         }
     }
 
-    function setSurfaceBase(base) {
-        set("surfaceBase", base)
-        if (typeof Theme !== "undefined") {
-            Theme.generateSystemThemesFromCurrentTheme()
-        }
-    }
 
     function setCornerRadius(radius) {
         set("cornerRadius", radius)

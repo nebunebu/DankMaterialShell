@@ -18,7 +18,6 @@ var SPEC = {
     dockTransparency: { def: 1.0, coerce: percentToUnit },
 
     widgetBackgroundColor: { def: "sch" },
-    surfaceBase: { def: "s", onChange: "regenSystemThemes" },
     cornerRadius: { def: 12, onChange: "updateNiriLayout" },
 
     use24HourClock: { def: true },

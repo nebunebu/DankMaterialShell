@@ -260,12 +260,7 @@ Singleton {
     property color primaryText: currentThemeData.primaryText
     property color primaryContainer: currentThemeData.primaryContainer
     property color secondary: currentThemeData.secondary
-    property color surface: {
-        if (typeof SettingsData !== "undefined" && SettingsData.surfaceBase === "s") {
-            return currentThemeData.background
-        }
-        return currentThemeData.surface
-    }
+    property color surface: currentThemeData.surface
     property color surfaceText: currentThemeData.surfaceText
     property color surfaceVariant: currentThemeData.surfaceVariant
     property color surfaceVariantText: currentThemeData.surfaceVariantText
@@ -274,24 +269,9 @@ Singleton {
     property color backgroundText: currentThemeData.backgroundText
     property color outline: currentThemeData.outline
     property color outlineVariant: currentThemeData.outlineVariant || Qt.rgba(outline.r, outline.g, outline.b, 0.6)
-    property color surfaceContainer: {
-        if (typeof SettingsData !== "undefined" && SettingsData.surfaceBase === "s") {
-            return currentThemeData.surface
-        }
-        return currentThemeData.surfaceContainer
-    }
-    property color surfaceContainerHigh: {
-        if (typeof SettingsData !== "undefined" && SettingsData.surfaceBase === "s") {
-            return currentThemeData.surfaceContainer
-        }
-        return currentThemeData.surfaceContainerHigh
-    }
-    property color surfaceContainerHighest: {
-        if (typeof SettingsData !== "undefined" && SettingsData.surfaceBase === "s") {
-            return currentThemeData.surfaceContainerHigh
-        }
-        return currentThemeData.surfaceContainerHighest
-    }
+    property color surfaceContainer: currentThemeData.surfaceContainer
+    property color surfaceContainerHigh: currentThemeData.surfaceContainerHigh
+    property color surfaceContainerHighest: currentThemeData.surfaceContainerHighest
 
     property color onSurface: surfaceText
     property color onSurfaceVariant: surfaceVariantText
@@ -790,7 +770,6 @@ Singleton {
             "mode": isLight ? "light" : "dark",
             "iconTheme": iconTheme || "System Default",
             "matugenType": matugenType || "scheme-tonal-spot",
-            "surfaceBase": (typeof SettingsData !== "undefined" && SettingsData.surfaceBase) ? SettingsData.surfaceBase : "sc",
             "runUserTemplates": (typeof SettingsData !== "undefined") ? SettingsData.runUserMatugenTemplates : true
         }
 

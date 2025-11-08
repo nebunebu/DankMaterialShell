@@ -19,7 +19,7 @@
     --md-sys-color-on-error-container: {{colors.on_error_container.light.hex}};
     --md-sys-color-background: {{colors.background.light.hex}};
     --md-sys-color-on-background: {{colors.on_background.light.hex}};
-    --md-sys-color-surface: {{colors.surface.light.hex}};
+    --md-sys-color-surface: {{colors.background.light.hex}};
     --md-sys-color-on-surface: {{colors.on_surface.light.hex}};
     --md-sys-color-surface-variant: {{colors.surface_variant.light.hex}};
     --md-sys-color-on-surface-variant: {{colors.on_surface_variant.light.hex}};
@@ -46,9 +46,9 @@
     --md-sys-color-surface-bright: {{colors.surface_bright.light.hex}};
     --md-sys-color-surface-container-lowest: {{colors.surface_container_lowest.light.hex}};
     --md-sys-color-surface-container-low: {{colors.surface_container_low.light.hex}};
-    --md-sys-color-surface-container: {{colors.surface_container.light.hex}};
-    --md-sys-color-surface-container-high: {{colors.surface_container_high.light.hex}};
-    --md-sys-color-surface-container-highest: {{colors.surface_container_highest.light.hex}};
+    --md-sys-color-surface-container: {{colors.background.light.hex}};
+    --md-sys-color-surface-container-high: {{colors.background.light.hex}};
+    --md-sys-color-surface-container-highest: {{colors.background.light.hex}};
 
     --m3-radius: 12px;
     --m3-radius-sm: 10px;
