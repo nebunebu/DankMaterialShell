@@ -11,9 +11,13 @@ DankModal {
 
     layerNamespace: "dms:hyprkeybinds"
 
-    width: 1400
-    height: 900
+    property real _maxW: Math.min(Screen.width * 0.92, 1200)
+    property real _maxH: Math.min(Screen.height * 0.92, 900)
+    width: _maxW
+    height: _maxH
     onBackgroundClicked: close()
+
+    Shortcut { sequence: "Esc"; onActivated: root.close() }
 
     function categorizeKeybinds() {
         const categories = {
