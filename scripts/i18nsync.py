@@ -20,6 +20,7 @@ LANGUAGES = {
     "pt-br": "pt.json",
     "tr": "tr.json",
     "it": "it.json",
+    "pl": "pl.json",
 }
 
 def error(msg):
