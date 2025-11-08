@@ -27,6 +27,10 @@ Column {
         }
     }
 
+    Component.onCompleted: {
+        Qt.callLater(loadValue)
+    }
+
     onValueChanged: {
         if (!isInitialized) return
         const settings = findSettings()

@@ -803,10 +803,12 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
     }
 
     function setPluginSetting(pluginId, key, value) {
-        if (!pluginSettings[pluginId]) {
-            pluginSettings[pluginId] = {}
+        const updated = JSON.parse(JSON.stringify(pluginSettings))
+        if (!updated[pluginId]) {
+            updated[pluginId] = {}
         }
-        pluginSettings[pluginId][key] = value
+        updated[pluginId][key] = value
+        pluginSettings = updated
         savePluginSettings()
     }
 
@@ -818,7 +820,8 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
     }
 
     function getPluginSettingsForPlugin(pluginId) {
-        return pluginSettings[pluginId] || {}
+        const settings = pluginSettings[pluginId]
+        return settings ? JSON.parse(JSON.stringify(settings)) : {}
     }
 
 

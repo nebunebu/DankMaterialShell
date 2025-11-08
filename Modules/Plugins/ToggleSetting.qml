@@ -26,7 +26,7 @@ Row {
     }
 
     Component.onCompleted: {
-        loadValue()
+        Qt.callLater(loadValue)
     }
 
     onValueChanged: {
