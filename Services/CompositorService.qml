@@ -29,12 +29,17 @@ Singleton {
     property bool _hasRefreshedOnce: false
 
     property var _coordCache: ({})
+    readonly property bool _qtDpiOverridden: Quickshell.env("QT_WAYLAND_FORCE_DPI") !== ""
     property int _refreshCount: 0
     property real _refreshWindowStart: 0
     readonly property int _maxRefreshesPerSecond: 3
 
     function getScreenScale(screen) {
         if (!screen) return 1
+
+        if (_qtDpiOverridden) {
+            return screen.devicePixelRatio || 1
+        }
 
         if (isNiri && screen) {
             const niriScale = NiriService.displayScales[screen.name]
