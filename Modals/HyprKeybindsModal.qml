@@ -147,12 +147,13 @@ DankModal {
                                         width: Math.min(140, parent.width * 0.42)
                                         height: 22
                                         radius: 4
-                                        opacity: 0.3
+                                        opacity: 0.9
 
                                         StyledText {
                                             anchors.centerIn: parent
                                             anchors.margins: 2
                                             width: parent.width - 4
+                                            color: Theme.secondary
                                             text: {
                                                 const mods = modelData.mods || []
                                                 const key = modelData.key || ""
@@ -225,12 +226,13 @@ DankModal {
                                             width: Math.min(140, parent.width * 0.42)
                                             height: 22
                                             radius: 4
-                                            opacity: 0.3
+                                            opacity: 0.9
 
                                             StyledText {
                                                 anchors.centerIn: parent
                                                 anchors.margins: 2
                                                 width: parent.width - 4
+                                                color: Theme.secondary
                                                 text: {
                                                     const mods = modelData.mods || []
                                                     const key = modelData.key || ""
