@@ -17,6 +17,8 @@ DankModal {
     height: _maxH
     onBackgroundClicked: close()
 
+    Shortcut { sequence: "Esc"; onActivated: root.close() }
+
     function categorizeKeybinds() {
         const categories = {
             "Workspace": [],
