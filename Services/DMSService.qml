@@ -47,7 +47,7 @@ Singleton {
     signal brightnessStateUpdate(var data)
     signal brightnessDeviceUpdate(var device)
 
-    property var activeSubscriptions: ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "dwl", "brightness"]
+    property var activeSubscriptions: ["network", "network.credentials", "loginctl", "freedesktop", "gamma", "bluetooth", "bluetooth.pairing", "dwl", "brightness"]
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
