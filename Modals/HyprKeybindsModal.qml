@@ -10,13 +10,33 @@ DankModal {
     id: root
 
     layerNamespace: "dms:hyprkeybinds"
-
+    property real scrollStep: 60
+    property var activeFlickable: null
     property real _maxW: Math.min(Screen.width * 0.92, 1200)
     property real _maxH: Math.min(Screen.height * 0.92, 900)
     width: _maxW
     height: _maxH
     onBackgroundClicked: close()
 
+    function scrollDown() {
+        if (!root.activeFlickable) return
+        let newY = root.activeFlickable.contentY + scrollStep
+        newY = Math.min(newY, root.activeFlickable.contentHeight - root.activeFlickable.height)
+        root.activeFlickable.contentY = newY
+    }
+
+    function scrollUp() {
+        if (!root.activeFlickable) return
+        let newY = root.activeFlickable.contentY - root.scrollStep
+        newY = Math.max(0, newY)
+        root.activeFlickable.contentY = newY
+    }
+
+
+    Shortcut { sequence: "Ctrl+j"; onActivated: root.scrollDown() }
+    Shortcut { sequence: "Down";   onActivated: root.scrollDown() }
+    Shortcut { sequence: "Ctrl+k"; onActivated: root.scrollUp() }
+    Shortcut { sequence: "Up";     onActivated: root.scrollUp() }
     Shortcut { sequence: "Esc"; onActivated: root.close() }
 
     function categorizeKeybinds() {
@@ -104,6 +124,9 @@ DankModal {
                 contentWidth: rowLayout.implicitWidth
                 contentHeight: rowLayout.implicitHeight
                 clip: true
+
+                Component.onCompleted: root.activeFlickable = mainFlickable
+                Component.onDestruction: root.activeFlickable = null
 
                 Row {
                     id: rowLayout
