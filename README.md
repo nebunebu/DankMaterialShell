@@ -62,7 +62,7 @@ https://github.com/user-attachments/assets/1200a739-7770-4601-8b85-695ca527819a
 curl -fsSL https://install.danklinux.com | sh
 ```
 
-That's it. One command installs dms and all dependencies on Arch, Fedora, Debian, Ubuntu, or openSUSE.
+That's it. One command installs dms and all dependencies on Arch, Fedora, Debian, Ubuntu, openSUSE, or Gentoo.
 
 **[Manual Installation Guide →](https://danklinux.com/docs/dankmaterialshell/installation)**
 
