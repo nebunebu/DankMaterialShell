@@ -875,11 +875,17 @@
   "Group multiple windows of the same app together with a window count indicator": {
     "Group multiple windows of the same app together with a window count indicator": "同じアプリの複数のウィンドウをウィンドウ数インジケーターでグループ化します"
   },
+  "HSV": {
+    "HSV": ""
+  },
   "Health": {
     "Health": "健康"
   },
   "Height to Edge Gap (Exclusive Zone)": {
     "Height to Edge Gap (Exclusive Zone)": "エッジギャップまでの高さ（排他ゾーン）"
+  },
+  "Hex": {
+    "Hex": ""
   },
   "Hex:": {
     "Hex:": "16進数:"
@@ -1480,6 +1486,9 @@
   },
   "Quick note-taking slideout panel": {
     "Quick note-taking slideout panel": "クイックノート作成スライドアウトパネル"
+  },
+  "RGB": {
+    "RGB": ""
   },
   "Rain Chance": {
     "Rain Chance": "降水確率"

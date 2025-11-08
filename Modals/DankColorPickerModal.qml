@@ -106,12 +106,13 @@ DankModal {
     }
 
     width: 680
-    height: 680
+    height: contentLoader.item ? contentLoader.item.implicitHeight + Theme.spacingM * 2 : 680
     backgroundColor: Theme.surfaceContainer
     cornerRadius: Theme.cornerRadius
     borderColor: Theme.outlineMedium
     borderWidth: 1
     keepContentLoaded: true
+    allowStacking: true
 
     onBackgroundClicked: hide()
 
@@ -122,6 +123,7 @@ DankModal {
             property alias hexInput: hexInput
 
             anchors.fill: parent
+            implicitHeight: mainColumn.implicitHeight
             focus: true
 
             Keys.onEscapePressed: event => {
@@ -130,7 +132,10 @@ DankModal {
             }
 
             Column {
-                anchors.fill: parent
+                id: mainColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
                 anchors.margins: Theme.spacingM
                 spacing: Theme.spacingM
 
@@ -444,103 +449,192 @@ DankModal {
                     }
                 }
 
-                Row {
+                Column {
                     width: parent.width
                     spacing: Theme.spacingS
 
-                    StyledText {
-                        text: I18n.tr("Hex:")
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.surfaceTextMedium
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
 
-                    DankTextField {
-                        id: hexInput
-                        width: 120
-                        height: 38
-                        text: root.currentColor.toString()
-                        font.pixelSize: Theme.fontSizeMedium
-                        textColor: {
-                            if (text.length === 0) return Theme.surfaceText
-                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
-                            return hexPattern.test(text) ? Theme.surfaceText : Theme.error
+                        Column {
+                            width: (parent.width - Theme.spacingM * 2) / 3
+                            spacing: Theme.spacingXS
+
+                            StyledText {
+                                text: I18n.tr("Hex")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceTextMedium
+                                font.weight: Font.Medium
+                            }
+
+                            Row {
+                                width: parent.width
+                                spacing: Theme.spacingXS
+
+                                DankTextField {
+                                    id: hexInput
+                                    width: parent.width - 36
+                                    height: 36
+                                    text: root.currentColor.toString()
+                                    font.pixelSize: Theme.fontSizeMedium
+                                    textColor: {
+                                        if (text.length === 0) return Theme.surfaceText
+                                        const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
+                                        return hexPattern.test(text) ? Theme.surfaceText : Theme.error
+                                    }
+                                    placeholderText: "#000000"
+                                    backgroundColor: Theme.surfaceHover
+                                    borderWidth: 1
+                                    focusedBorderWidth: 2
+                                    topPadding: Theme.spacingS
+                                    bottomPadding: Theme.spacingS
+                                    onAccepted: () => {
+                                        const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
+                                        if (!hexPattern.test(text)) return
+                                        const color = Qt.color(text)
+                                        if (color) {
+                                            root.selectedColor = color
+                                            root.currentColor = color
+                                            root.updateFromColor(color)
+                                        }
+                                    }
+                                }
+
+                                DankActionButton {
+                                    iconName: "content_copy"
+                                    iconSize: Theme.iconSize - 6
+                                    iconColor: Theme.surfaceText
+                                    buttonSize: 36
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    onClicked: () => {
+                                        root.copyColorToClipboard(hexInput.text)
+                                    }
+                                }
+                            }
                         }
-                        placeholderText: "#000000"
-                        backgroundColor: Theme.surfaceHover
-                        borderWidth: 1
-                        focusedBorderWidth: 2
-                        topPadding: Theme.spacingS
-                        bottomPadding: Theme.spacingS
-                        anchors.verticalCenter: parent.verticalCenter
-                        onAccepted: () => {
-                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
-                            if (!hexPattern.test(text)) return
-                            const color = Qt.color(text)
-                            if (color) {
-                                root.selectedColor = color
-                                root.currentColor = color
-                                root.updateFromColor(color)
+
+                        Column {
+                            width: (parent.width - Theme.spacingM * 2) / 3
+                            spacing: Theme.spacingXS
+
+                            StyledText {
+                                text: I18n.tr("RGB")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceTextMedium
+                                font.weight: Font.Medium
+                            }
+
+                            Row {
+                                width: parent.width
+                                spacing: Theme.spacingXS
+
+                                Rectangle {
+                                    width: parent.width - 36
+                                    height: 36
+                                    radius: Theme.cornerRadius
+                                    color: Theme.surfaceHover
+                                    border.color: Theme.outline
+                                    border.width: 1
+
+                                    StyledText {
+                                        anchors.centerIn: parent
+                                        text: {
+                                            const r = Math.round(root.currentColor.r * 255)
+                                            const g = Math.round(root.currentColor.g * 255)
+                                            const b = Math.round(root.currentColor.b * 255)
+                                            return `${r}, ${g}, ${b}`
+                                        }
+                                        font.pixelSize: Theme.fontSizeMedium
+                                        color: Theme.surfaceText
+                                    }
+                                }
+
+                                DankActionButton {
+                                    iconName: "content_copy"
+                                    iconSize: Theme.iconSize - 6
+                                    iconColor: Theme.surfaceText
+                                    buttonSize: 36
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    onClicked: () => {
+                                        const r = Math.round(root.currentColor.r * 255)
+                                        const g = Math.round(root.currentColor.g * 255)
+                                        const b = Math.round(root.currentColor.b * 255)
+                                        const rgbString = `rgb(${r}, ${g}, ${b})`
+                                        Quickshell.execDetached(["sh", "-c", `echo "${rgbString}" | wl-copy`])
+                                        ToastService.showInfo(`${rgbString} copied`)
+                                    }
+                                }
+                            }
+                        }
+
+                        Column {
+                            width: (parent.width - Theme.spacingM * 2) / 3
+                            spacing: Theme.spacingXS
+
+                            StyledText {
+                                text: I18n.tr("HSV")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceTextMedium
+                                font.weight: Font.Medium
+                            }
+
+                            Row {
+                                width: parent.width
+                                spacing: Theme.spacingXS
+
+                                Rectangle {
+                                    width: parent.width - 36
+                                    height: 36
+                                    radius: Theme.cornerRadius
+                                    color: Theme.surfaceHover
+                                    border.color: Theme.outline
+                                    border.width: 1
+
+                                    StyledText {
+                                        anchors.centerIn: parent
+                                        text: {
+                                            const h = Math.round(root.hue * 360)
+                                            const s = Math.round(root.saturation * 100)
+                                            const v = Math.round(root.value * 100)
+                                            return `${h}°, ${s}%, ${v}%`
+                                        }
+                                        font.pixelSize: Theme.fontSizeMedium
+                                        color: Theme.surfaceText
+                                    }
+                                }
+
+                                DankActionButton {
+                                    iconName: "content_copy"
+                                    iconSize: Theme.iconSize - 6
+                                    iconColor: Theme.surfaceText
+                                    buttonSize: 36
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    onClicked: () => {
+                                        const h = Math.round(root.hue * 360)
+                                        const s = Math.round(root.saturation * 100)
+                                        const v = Math.round(root.value * 100)
+                                        const hsvString = `${h}, ${s}, ${v}`
+                                        Quickshell.execDetached(["sh", "-c", `echo "${hsvString}" | wl-copy`])
+                                        ToastService.showInfo(`HSV ${hsvString} copied`)
+                                    }
+                                }
                             }
                         }
                     }
 
                     DankButton {
-                        width: 80
-                        buttonHeight: 36
-                        text: I18n.tr("Apply")
-                        backgroundColor: Theme.primary
-                        textColor: Theme.background
-                        anchors.verticalCenter: parent.verticalCenter
-                        onClicked: {
-                            const hexPattern = /^#?[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/
-                            if (!hexPattern.test(hexInput.text)) return
-                            const color = Qt.color(hexInput.text)
-                            if (color) {
-                                root.currentColor = color
-                                root.updateFromColor(color)
-                                root.selectedColor = root.currentColor
-                                root.colorSelected(root.currentColor)
-                                SessionData.addRecentColor(root.currentColor)
-                                root.hide()
-                            }
-                        }
-                    }
-
-                    Item {
-                        width: parent.width - 460
-                        height: 1
-                    }
-
-                    DankButton {
+                        visible: root.onColorSelectedCallback !== null && root.onColorSelectedCallback !== undefined
                         width: 70
                         buttonHeight: 36
-                        text: I18n.tr("Cancel")
-                        backgroundColor: "transparent"
-                        textColor: Theme.surfaceText
-                        anchors.verticalCenter: parent.verticalCenter
-                        onClicked: root.hide()
-
-                        Rectangle {
-                            anchors.fill: parent
-                            radius: Theme.cornerRadius
-                            color: "transparent"
-                            border.color: Theme.surfaceVariantAlpha
-                            border.width: 1
-                            z: -1
-                        }
-                    }
-
-                    DankButton {
-                        width: 70
-                        buttonHeight: 36
-                        text: I18n.tr("Copy")
+                        text: I18n.tr("Save")
                         backgroundColor: Theme.primary
                         textColor: Theme.background
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
                         onClicked: {
-                            const colorString = root.currentColor.toString()
-                            root.copyColorToClipboard(colorString)
+                            SessionData.addRecentColor(root.currentColor)
+                            root.colorSelected(root.currentColor)
+                            root.hide()
                         }
                     }
                 }

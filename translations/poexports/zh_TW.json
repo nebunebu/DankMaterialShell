@@ -875,11 +875,17 @@
   "Group multiple windows of the same app together with a window count indicator": {
     "Group multiple windows of the same app together with a window count indicator": "將同一應用程式的多個視窗匯集在一起，並附帶視窗數量指示器"
   },
+  "HSV": {
+    "HSV": ""
+  },
   "Health": {
     "Health": "健康狀態"
   },
   "Height to Edge Gap (Exclusive Zone)": {
     "Height to Edge Gap (Exclusive Zone)": "邊緣間隙高度 (獨佔區域)"
+  },
+  "Hex": {
+    "Hex": ""
   },
   "Hex:": {
     "Hex:": "色碼:"
@@ -1480,6 +1486,9 @@
   },
   "Quick note-taking slideout panel": {
     "Quick note-taking slideout panel": "快速筆記滑出面板"
+  },
+  "RGB": {
+    "RGB": ""
   },
   "Rain Chance": {
     "Rain Chance": "降雨機率"

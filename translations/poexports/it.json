@@ -875,11 +875,17 @@
   "Group multiple windows of the same app together with a window count indicator": {
     "Group multiple windows of the same app together with a window count indicator": "Raggruppa molteplici finestre della stessa app con un indicatore del numero di finestre"
   },
+  "HSV": {
+    "HSV": ""
+  },
   "Health": {
     "Health": "Salute"
   },
   "Height to Edge Gap (Exclusive Zone)": {
     "Height to Edge Gap (Exclusive Zone)": "Altezza Gap Angolo (Zona Esclusa)"
+  },
+  "Hex": {
+    "Hex": ""
   },
   "Hex:": {
     "Hex:": "Hex:"
@@ -1480,6 +1486,9 @@
   },
   "Quick note-taking slideout panel": {
     "Quick note-taking slideout panel": "Pannello scorrevole per la presa veloce di appunti"
+  },
+  "RGB": {
+    "RGB": ""
   },
   "Rain Chance": {
     "Rain Chance": "Possibili Piogge"

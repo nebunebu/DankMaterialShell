@@ -875,11 +875,17 @@
   "Group multiple windows of the same app together with a window count indicator": {
     "Group multiple windows of the same app together with a window count indicator": "Aynı uygulamanın birden fazla penceresini pencere sayısı göstergesi ile gruplayın"
   },
+  "HSV": {
+    "HSV": ""
+  },
   "Health": {
     "Health": "Sağlık"
   },
   "Height to Edge Gap (Exclusive Zone)": {
     "Height to Edge Gap (Exclusive Zone)": "Kenar Boşluğu Yüksekliği (Özel Bölge)"
+  },
+  "Hex": {
+    "Hex": ""
   },
   "Hex:": {
     "Hex:": "Hex:"
@@ -1480,6 +1486,9 @@
   },
   "Quick note-taking slideout panel": {
     "Quick note-taking slideout panel": "Hızlı not alma sürgü paneli"
+  },
+  "RGB": {
+    "RGB": ""
   },
   "Rain Chance": {
     "Rain Chance": "Yağış İhtimali"

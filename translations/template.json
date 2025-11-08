@@ -210,13 +210,6 @@
     "comment": ""
   },
   {
-    "term": "Apply",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Apply GTK Colors",
     "translation": "",
     "context": "",
@@ -1037,13 +1030,6 @@
   },
   {
     "term": "Copied!",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Copy",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2002,6 +1988,13 @@
     "comment": ""
   },
   {
+    "term": "HSV",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Health",
     "translation": "",
     "context": "",
@@ -2016,7 +2009,7 @@
     "comment": ""
   },
   {
-    "term": "Hex:",
+    "term": "Hex",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3382,6 +3375,13 @@
   },
   {
     "term": "Quick note-taking slideout panel",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "RGB",
     "translation": "",
     "context": "",
     "reference": "",

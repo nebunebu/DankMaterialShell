@@ -180,12 +180,6 @@
     "comment": ""
   },
   {
-    "term": "Apply",
-    "context": "Apply",
-    "reference": "Modals/DankColorPickerModal.qml:491",
-    "comment": ""
-  },
-  {
     "term": "Apply GTK Colors",
     "context": "Apply GTK Colors",
     "reference": "Modules/Settings/ThemeColorsTab.qml:1379",
@@ -602,7 +596,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/DankColorPickerModal.qml:518, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:627",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:627",
     "comment": ""
   },
   {
@@ -891,12 +885,6 @@
     "term": "Copied!",
     "context": "Copied!",
     "reference": "Modules/Toast.qml:17",
-    "comment": ""
-  },
-  {
-    "term": "Copy",
-    "context": "Copy",
-    "reference": "Modals/DankColorPickerModal.qml:537",
     "comment": ""
   },
   {
@@ -1716,6 +1704,12 @@
     "comment": ""
   },
   {
+    "term": "HSV",
+    "context": "HSV",
+    "reference": "Modals/DankColorPickerModal.qml:576",
+    "comment": ""
+  },
+  {
     "term": "Health",
     "context": "Health",
     "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471",
@@ -1728,9 +1722,9 @@
     "comment": ""
   },
   {
-    "term": "Hex:",
-    "context": "Hex:",
-    "reference": "Modals/DankColorPickerModal.qml:452",
+    "term": "Hex",
+    "context": "Hex",
+    "reference": "Modals/DankColorPickerModal.qml:465",
     "comment": ""
   },
   {
@@ -2114,7 +2108,7 @@
   {
     "term": "Material Colors",
     "context": "Material Colors",
-    "reference": "Modals/DankColorPickerModal.qml:313",
+    "reference": "Modals/DankColorPickerModal.qml:318",
     "comment": ""
   },
   {
@@ -2546,7 +2540,7 @@
   {
     "term": "Opacity",
     "context": "Opacity",
-    "reference": "Modals/DankColorPickerModal.qml:415",
+    "reference": "Modals/DankColorPickerModal.qml:420",
     "comment": ""
   },
   {
@@ -2904,6 +2898,12 @@
     "comment": ""
   },
   {
+    "term": "RGB",
+    "context": "RGB",
+    "reference": "Modals/DankColorPickerModal.qml:522",
+    "comment": ""
+  },
+  {
     "term": "Rain Chance",
     "context": "Rain Chance",
     "reference": "Modules/DankDash/WeatherTab.qml:448, Modules/Settings/TimeWeatherTab.qml:1275",
@@ -2924,7 +2924,7 @@
   {
     "term": "Recent Colors",
     "context": "Recent Colors",
-    "reference": "Modals/DankColorPickerModal.qml:363",
+    "reference": "Modals/DankColorPickerModal.qml:368",
     "comment": ""
   },
   {
@@ -3020,7 +3020,7 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
+    "reference": "Modals/DankColorPickerModal.qml:630, Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
     "comment": ""
   },
   {
@@ -3104,7 +3104,7 @@
   {
     "term": "Select a color from the palette or use custom sliders",
     "context": "Select a color from the palette or use custom sliders",
-    "reference": "Modals/DankColorPickerModal.qml:153",
+    "reference": "Modals/DankColorPickerModal.qml:158",
     "comment": ""
   },
   {
