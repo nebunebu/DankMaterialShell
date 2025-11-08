@@ -247,7 +247,7 @@ Item {
                                 SettingsData.set("updaterCustomCommand", "");
                                 SettingsData.set("updaterTerminalAdditionalParams", "");
                             }
-                            return SettingsData.set("updaterUseCustomCommandEnabled", checked);
+                            return SettingsData.set("updaterUseCustomCommand", checked);
                         }
                     }
 
