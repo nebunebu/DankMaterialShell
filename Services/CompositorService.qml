@@ -21,17 +21,10 @@ Singleton {
     readonly property string swaySocket: Quickshell.env("SWAYSOCK")
     property bool useNiriSorting: isNiri && NiriService
 
-    property var sortedToplevels: sortedToplevelsCache
-    property var sortedToplevelsCache: []
-
+    property var sortedToplevels: []
     property bool _sortScheduled: false
-    property bool _refreshScheduled: false
-    property bool _hasRefreshedOnce: false
 
-    property var _coordCache: ({})
-    property int _refreshCount: 0
-    property real _refreshWindowStart: 0
-    readonly property int _maxRefreshesPerSecond: 3
+    signal toplevelsChanged()
 
     function getScreenScale(screen) {
         if (!screen) return 1
@@ -59,46 +52,27 @@ Singleton {
     }
 
     Timer {
-        id: refreshTimer
-        interval: 40
+        id: sortDebounceTimer
+        interval: 100
         repeat: false
         onTriggered: {
-            try {
-                Hyprland.refreshToplevels()
-            } catch(e) {}
-            _refreshScheduled = false
-            _hasRefreshedOnce = true
-            scheduleSort()
+            _sortScheduled = false
+            if (isHyprland) {
+                try {
+                    Hyprland.refreshToplevels()
+                } catch(e) {
+                    console.warn("CompositorService: Failed to refresh toplevels:", e)
+                }
+            }
+            sortedToplevels = computeSortedToplevels()
+            toplevelsChanged()
         }
     }
 
     function scheduleSort() {
         if (_sortScheduled) return
         _sortScheduled = true
-        Qt.callLater(function() {
-            _sortScheduled = false
-            sortedToplevelsCache = computeSortedToplevels()
-        })
-    }
-
-    function scheduleRefresh() {
-        if (!isHyprland) return
-        if (_refreshScheduled) return
-
-        const now = Date.now()
-        if (now - _refreshWindowStart > 1000) {
-            _refreshCount = 0
-            _refreshWindowStart = now
-        }
-
-        if (_refreshCount >= _maxRefreshesPerSecond) {
-            console.warn("CompositorService: Refresh rate limit exceeded, skipping refresh")
-            return
-        }
-
-        _refreshCount++
-        _refreshScheduled = true
-        refreshTimer.restart()
+        sortDebounceTimer.restart()
     }
 
     Connections {
@@ -106,18 +80,27 @@ Singleton {
         function onValuesChanged() { root.scheduleSort() }
     }
     Connections {
-        target: Hyprland.toplevels
-        function onValuesChanged() {
-            root.scheduleSort()
+        target: isHyprland ? Hyprland : null
+        enabled: isHyprland
+
+        function onRawEvent(event) {
+            if (event.name === "openwindow" ||
+                event.name === "closewindow" ||
+                event.name === "movewindow" ||
+                event.name === "movewindowv2" ||
+                event.name === "workspace" ||
+                event.name === "workspacev2" ||
+                event.name === "focusedmon" ||
+                event.name === "focusedmonv2" ||
+                event.name === "activewindow" ||
+                event.name === "activewindowv2" ||
+                event.name === "changefloatingmode" ||
+                event.name === "fullscreen" ||
+                event.name === "moveintogroup" ||
+                event.name === "moveoutofgroup") {
+                root.scheduleSort()
+            }
         }
-    }
-    Connections {
-        target: Hyprland.workspaces
-        function onValuesChanged() { root.scheduleSort() }
-    }
-    Connections {
-        target: Hyprland
-        function onFocusedWorkspaceChanged() { root.scheduleSort() }
     }
     Connections {
         target: NiriService
@@ -165,7 +148,6 @@ Singleton {
 
     function sortHyprlandToplevelsSafe() {
         if (!Hyprland.toplevels || !Hyprland.toplevels.values) return []
-        if (_refreshScheduled && sortedToplevelsCache.length > 0) return sortedToplevelsCache
 
         const items = Array.from(Hyprland.toplevels.values)
 
@@ -177,21 +159,7 @@ Singleton {
             } catch(e) { return fb }
         }
 
-        let currentAddresses = new Set()
-        for (let i = 0; i < items.length; i++) {
-            const addr = items[i]?.address
-            if (addr) currentAddresses.add(addr)
-        }
-
-        for (let cachedAddr in _coordCache) {
-            if (!currentAddresses.has(cachedAddr)) {
-                delete _coordCache[cachedAddr]
-            }
-        }
-
         let snap = []
-        let missingAnyPosition = false
-        let hasNewWindow = false
         for (let i = 0; i < items.length; i++) {
             const t = items[i]
             if (!t) continue
@@ -208,23 +176,8 @@ Singleton {
             const wsId = _get(li, ["workspace", "id"], null) ?? _get(t, ["workspace", "id"], Number.MAX_SAFE_INTEGER)
 
             const at = _get(li, ["at"], null)
-            let atX = (at !== null && at !== undefined && typeof at[0] === "number") ? at[0] : NaN
-            let atY = (at !== null && at !== undefined && typeof at[1] === "number") ? at[1] : NaN
-
-            if (!(atX === atX) || !(atY === atY)) {
-                const cached = _coordCache[addr]
-                if (cached) {
-                    atX = cached.x
-                    atY = cached.y
-                } else {
-                    if (addr) hasNewWindow = true
-                    missingAnyPosition = true
-                    atX = 1e9
-                    atY = 1e9
-                }
-            } else if (addr) {
-                _coordCache[addr] = { x: atX, y: atY }
-            }
+            let atX = (at !== null && at !== undefined && typeof at[0] === "number") ? at[0] : 1e9
+            let atY = (at !== null && at !== undefined && typeof at[1] === "number") ? at[1] : 1e9
 
             const relX = Number.isFinite(monX) ? (atX - monX) : atX
             const relY = Number.isFinite(monY) ? (atY - monY) : atY
@@ -240,10 +193,6 @@ Singleton {
                 address: addr,
                 wayland: t.wayland
             })
-        }
-
-        if (missingAnyPosition && hasNewWindow && !_hasRefreshedOnce) {
-            scheduleRefresh()
         }
 
         const groups = new Map()
@@ -400,9 +349,6 @@ Singleton {
             isSway = false
             compositor = "hyprland"
             console.info("CompositorService: Detected Hyprland")
-            try {
-                Hyprland.refreshToplevels()
-            } catch(e) {}
             return
         }
 

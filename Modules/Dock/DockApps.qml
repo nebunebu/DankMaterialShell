@@ -238,7 +238,7 @@ Item {
 
     Connections {
         target: CompositorService
-        function onSortedToplevelsChanged() {
+        function onToplevelsChanged() {
             dockModel.updateModel()
         }
     }

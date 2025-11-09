@@ -118,12 +118,12 @@ Singleton {
                     import Quickshell.Wayland
 
                     IdleInhibitor {
-                        active: false
+                        enabled: false
                     }
                 `
 
                 mediaInhibitor = Qt.createQmlObject(inhibitorString, root, "IdleService.MediaInhibitor")
-                mediaInhibitor.active = Qt.binding(() => root.idleInhibitorAvailable && SettingsData.preventIdleForMedia && root.mediaPlaying)
+                mediaInhibitor.enabled = Qt.binding(() => root.idleInhibitorAvailable && SettingsData.preventIdleForMedia && root.mediaPlaying)
             }
         } catch (e) {
             console.warn("IdleService: Error creating IdleMonitors:", e)
