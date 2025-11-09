@@ -3,6 +3,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
 import qs.Common
+import qs.Services
 import qs.Widgets
 
 pragma ComponentBehavior: Bound
@@ -83,7 +84,7 @@ PanelWindow {
 
         StyledRect {
             id: contentRect
-            readonly property real dpr: root.modelData?.devicePixelRatio || 1
+            readonly property real dpr: CompositorService.getScreenScale(root.modelData)
             layer.enabled: true
             layer.smooth: false
             layer.textureSize: Qt.size(width * dpr, height * dpr)
@@ -182,8 +183,15 @@ PanelWindow {
                 anchors.bottomMargin: Theme.spacingL
 
                 Loader {
+                    id: contentLoader
                     anchors.fill: parent
                     sourceComponent: root.content
+
+                    onLoaded: {
+                        if (item && "devicePixelRatio" in item) {
+                            item.devicePixelRatio = contentRect.dpr
+                        }
+                    }
                 }
             }
         }

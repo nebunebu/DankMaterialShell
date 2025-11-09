@@ -15,6 +15,7 @@ pragma ComponentBehavior: Bound
 Item {
     id: root
 
+    property real devicePixelRatio: 1
     property bool fileDialogOpen: false
     property string currentFileName: ""
     property url currentFileUrl
@@ -150,6 +151,7 @@ Item {
             id: tabBar
             width: parent.width
             contentLoaded: textEditor.contentLoaded
+            devicePixelRatio: root.devicePixelRatio
 
             onTabSwitched: (tabIndex) => {
                 switchToTab(tabIndex)
@@ -168,6 +170,7 @@ Item {
             id: textEditor
             width: parent.width
             height: parent.height - tabBar.height - Theme.spacingM * 2
+            devicePixelRatio: root.devicePixelRatio
 
             onSaveRequested: {
                 if (currentTab && !currentTab.isTemporary && currentTab.filePath) {
@@ -214,6 +217,7 @@ Item {
         id: notepadSettings
         anchors.fill: parent
         isVisible: showSettingsMenu
+        devicePixelRatio: root.devicePixelRatio
         onSettingsRequested: showSettingsMenu = !showSettingsMenu
         onFindRequested: {
             showSettingsMenu = false

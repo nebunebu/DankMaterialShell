@@ -11,6 +11,7 @@ pragma ComponentBehavior: Bound
 Column {
     id: root
 
+    property real devicePixelRatio: 1
     property alias text: textArea.text
     property alias textArea: textArea
     property bool contentLoaded: false
