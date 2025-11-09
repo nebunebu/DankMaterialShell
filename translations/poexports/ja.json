@@ -876,7 +876,7 @@
     "Group multiple windows of the same app together with a window count indicator": "同じアプリの複数のウィンドウをウィンドウ数インジケーターでグループ化します"
   },
   "HSV": {
-    "HSV": ""
+    "HSV": "色相/彩度/輝度"
   },
   "Health": {
     "Health": "健康"
@@ -885,7 +885,7 @@
     "Height to Edge Gap (Exclusive Zone)": "エッジギャップまでの高さ（排他ゾーン）"
   },
   "Hex": {
-    "Hex": ""
+    "Hex": "16進数"
   },
   "Hex:": {
     "Hex:": "16進数:"
@@ -1488,7 +1488,7 @@
     "Quick note-taking slideout panel": "クイックノート作成スライドアウトパネル"
   },
   "RGB": {
-    "RGB": ""
+    "RGB": "RGB"
   },
   "Rain Chance": {
     "Rain Chance": "降水確率"
