@@ -513,11 +513,11 @@ Item {
 
         active: false
 
-        HyprKeybindsModal {
-            id: hyprKeybindsModal
+        KeybindsModal {
+            id: keybindsModal
 
             Component.onCompleted: {
-                PopoutService.hyprKeybindsModal = hyprKeybindsModal
+                PopoutService.hyprKeybindsModal = keybindsModal
             }
         }
     }

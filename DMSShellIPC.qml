@@ -307,10 +307,57 @@ Item {
     }
 
     IpcHandler {
+        function toggle(provider: string): string {
+            if (!provider) {
+                return "ERROR: No provider specified"
+            }
+
+            KeybindsService.loadProvider(provider)
+            root.hyprKeybindsModalLoader.active = true
+
+            if (root.hyprKeybindsModalLoader.item) {
+                if (root.hyprKeybindsModalLoader.item.shouldBeVisible) {
+                    root.hyprKeybindsModalLoader.item.close()
+                } else {
+                    root.hyprKeybindsModalLoader.item.open()
+                }
+                return `KEYBINDS_TOGGLE_SUCCESS: ${provider}`
+            }
+            return `KEYBINDS_TOGGLE_FAILED: ${provider}`
+        }
+
+        function open(provider: string): string {
+            if (!provider) {
+                return "ERROR: No provider specified"
+            }
+
+            KeybindsService.loadProvider(provider)
+            root.hyprKeybindsModalLoader.active = true
+
+            if (root.hyprKeybindsModalLoader.item) {
+                root.hyprKeybindsModalLoader.item.open()
+                return `KEYBINDS_OPEN_SUCCESS: ${provider}`
+            }
+            return `KEYBINDS_OPEN_FAILED: ${provider}`
+        }
+
+        function close(): string {
+            if (root.hyprKeybindsModalLoader.item) {
+                root.hyprKeybindsModalLoader.item.close()
+                return "KEYBINDS_CLOSE_SUCCESS"
+            }
+            return "KEYBINDS_CLOSE_FAILED"
+        }
+
+        target: "keybinds"
+    }
+
+    IpcHandler {
         function openBinds(): string {
             if (!CompositorService.isHyprland) {
                 return "HYPR_NOT_AVAILABLE"
             }
+            KeybindsService.loadProvider("hyprland")
             root.hyprKeybindsModalLoader.active = true
             if (root.hyprKeybindsModalLoader.item) {
                 root.hyprKeybindsModalLoader.item.open()
@@ -334,6 +381,7 @@ Item {
             if (!CompositorService.isHyprland) {
                 return "HYPR_NOT_AVAILABLE"
             }
+            KeybindsService.loadProvider("hyprland")
             root.hyprKeybindsModalLoader.active = true
             if (root.hyprKeybindsModalLoader.item) {
                 if (root.hyprKeybindsModalLoader.item.shouldBeVisible) {
