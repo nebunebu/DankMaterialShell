@@ -398,13 +398,13 @@
   {
     "term": "Automatically lock after",
     "context": "Automatically lock after",
-    "reference": "Modals/Settings/PowerSettings.qml:176",
+    "reference": "Modals/Settings/PowerSettings.qml:169",
     "comment": ""
   },
   {
     "term": "Automatically lock the screen when the system prepares to suspend",
     "context": "Automatically lock the screen when the system prepares to suspend",
-    "reference": "Modals/Settings/PowerSettings.qml:95",
+    "reference": "Modals/Settings/PowerSettings.qml:88",
     "comment": ""
   },
   {
@@ -450,15 +450,9 @@
     "comment": ""
   },
   {
-    "term": "Battery not detected - only AC power settings available",
-    "context": "Battery not detected - only AC power settings available",
-    "reference": "Modals/Settings/PowerSettings.qml:22",
-    "comment": ""
-  },
-  {
     "term": "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen",
     "context": "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen",
-    "reference": "Modals/Settings/PowerSettings.qml:82",
+    "reference": "Modals/Settings/PowerSettings.qml:75",
     "comment": ""
   },
   {
@@ -734,37 +728,37 @@
   {
     "term": "Command or script to run instead of the standard hibernate procedure",
     "context": "Command or script to run instead of the standard hibernate procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:514",
+    "reference": "Modals/Settings/PowerSettings.qml:508",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard lock procedure",
     "context": "Command or script to run instead of the standard lock procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:418",
+    "reference": "Modals/Settings/PowerSettings.qml:412",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard logout procedure",
     "context": "Command or script to run instead of the standard logout procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:450",
+    "reference": "Modals/Settings/PowerSettings.qml:444",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard power off procedure",
     "context": "Command or script to run instead of the standard power off procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:578",
+    "reference": "Modals/Settings/PowerSettings.qml:572",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard reboot procedure",
     "context": "Command or script to run instead of the standard reboot procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:546",
+    "reference": "Modals/Settings/PowerSettings.qml:540",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard suspend procedure",
     "context": "Command or script to run instead of the standard suspend procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:482",
+    "reference": "Modals/Settings/PowerSettings.qml:476",
     "comment": ""
   },
   {
@@ -980,7 +974,7 @@
   {
     "term": "Custom Power Actions",
     "context": "Custom Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:404",
+    "reference": "Modals/Settings/PowerSettings.qml:398",
     "comment": ""
   },
   {
@@ -1352,13 +1346,13 @@
   {
     "term": "Enable fingerprint authentication",
     "context": "Enable fingerprint authentication",
-    "reference": "Modals/Settings/PowerSettings.qml:103",
+    "reference": "Modals/Settings/PowerSettings.qml:96",
     "comment": ""
   },
   {
     "term": "Enable loginctl lock integration",
     "context": "Enable loginctl lock integration",
-    "reference": "Modals/Settings/PowerSettings.qml:81",
+    "reference": "Modals/Settings/PowerSettings.qml:74",
     "comment": ""
   },
   {
@@ -1832,13 +1826,13 @@
   {
     "term": "Idle Settings",
     "context": "Idle Settings",
-    "reference": "Modals/Settings/PowerSettings.qml:138",
+    "reference": "Modals/Settings/PowerSettings.qml:131",
     "comment": ""
   },
   {
     "term": "Idle monitoring not supported - requires newer Quickshell version",
     "context": "Idle monitoring not supported - requires newer Quickshell version",
-    "reference": "Modals/Settings/PowerSettings.qml:325",
+    "reference": "Modals/Settings/PowerSettings.qml:319",
     "comment": ""
   },
   {
@@ -1874,7 +1868,7 @@
   {
     "term": "Inhibit idle timeout when audio or video is playing",
     "context": "Inhibit idle timeout when audio or video is playing",
-    "reference": "Modals/Settings/PowerSettings.qml:164",
+    "reference": "Modals/Settings/PowerSettings.qml:157",
     "comment": ""
   },
   {
@@ -2054,7 +2048,7 @@
   {
     "term": "Lock Screen",
     "context": "Lock Screen",
-    "reference": "Modals/Settings/PowerSettings.qml:54",
+    "reference": "Modals/Settings/PowerSettings.qml:47",
     "comment": ""
   },
   {
@@ -2066,7 +2060,7 @@
   {
     "term": "Lock before suspend",
     "context": "Lock before suspend",
-    "reference": "Modals/Settings/PowerSettings.qml:94",
+    "reference": "Modals/Settings/PowerSettings.qml:87",
     "comment": ""
   },
   {
@@ -2840,7 +2834,7 @@
   {
     "term": "Power Action Confirmation",
     "context": "Power Action Confirmation",
-    "reference": "Modals/Settings/PowerSettings.qml:360",
+    "reference": "Modals/Settings/PowerSettings.qml:354",
     "comment": ""
   },
   {
@@ -2870,7 +2864,7 @@
   {
     "term": "Prevent idle for media",
     "context": "Prevent idle for media",
-    "reference": "Modals/Settings/PowerSettings.qml:163",
+    "reference": "Modals/Settings/PowerSettings.qml:156",
     "comment": ""
   },
   {
@@ -3020,7 +3014,7 @@
   {
     "term": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
     "context": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
-    "reference": "Modals/Settings/PowerSettings.qml:371",
+    "reference": "Modals/Settings/PowerSettings.qml:365",
     "comment": ""
   },
   {
@@ -3284,7 +3278,7 @@
   {
     "term": "Show Confirmation on Power Actions",
     "context": "Show Confirmation on Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:370",
+    "reference": "Modals/Settings/PowerSettings.qml:364",
     "comment": ""
   },
   {
@@ -3302,7 +3296,7 @@
   {
     "term": "Show Power Actions",
     "context": "Show Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:64",
+    "reference": "Modals/Settings/PowerSettings.qml:57",
     "comment": ""
   },
   {
@@ -3368,7 +3362,7 @@
   {
     "term": "Show power, restart, and logout buttons on the lock screen",
     "context": "Show power, restart, and logout buttons on the lock screen",
-    "reference": "Modals/Settings/PowerSettings.qml:65",
+    "reference": "Modals/Settings/PowerSettings.qml:58",
     "comment": ""
   },
   {
@@ -3524,13 +3518,13 @@
   {
     "term": "Suspend behavior",
     "context": "Suspend behavior",
-    "reference": "Modals/Settings/PowerSettings.qml:287",
+    "reference": "Modals/Settings/PowerSettings.qml:280",
     "comment": ""
   },
   {
     "term": "Suspend system after",
     "context": "Suspend system after",
-    "reference": "Modals/Settings/PowerSettings.qml:250",
+    "reference": "Modals/Settings/PowerSettings.qml:243",
     "comment": ""
   },
   {
@@ -3800,7 +3794,7 @@
   {
     "term": "Turn off monitors after",
     "context": "Turn off monitors after",
-    "reference": "Modals/Settings/PowerSettings.qml:213",
+    "reference": "Modals/Settings/PowerSettings.qml:206",
     "comment": ""
   },
   {
@@ -3908,7 +3902,7 @@
   {
     "term": "Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)",
     "context": "Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)",
-    "reference": "Modals/Settings/PowerSettings.qml:104",
+    "reference": "Modals/Settings/PowerSettings.qml:97",
     "comment": ""
   },
   {
@@ -4172,7 +4166,7 @@
   {
     "term": "loginctl not available - lock integration requires DMS socket connection",
     "context": "loginctl not available - lock integration requires DMS socket connection",
-    "reference": "Modals/Settings/PowerSettings.qml:71",
+    "reference": "Modals/Settings/PowerSettings.qml:64",
     "comment": ""
   },
   {

@@ -37,7 +37,7 @@ Singleton {
     readonly property int suspendTimeout: isOnBattery ? SettingsData.batterySuspendTimeout : SettingsData.acSuspendTimeout
     readonly property int suspendBehavior: isOnBattery ? SettingsData.batterySuspendBehavior : SettingsData.acSuspendBehavior
 
-    readonly property bool mediaPlaying: MprisController.activePlayer !== null
+    readonly property bool mediaPlaying: MprisController.activePlayer !== null && MprisController.activePlayer.isPlaying
 
     onMonitorTimeoutChanged: _rearmIdleMonitors()
     onLockTimeoutChanged: _rearmIdleMonitors()
@@ -60,6 +60,36 @@ Singleton {
 
     function wake() {
         requestMonitorOn()
+    }
+
+    function createMediaInhibitor() {
+        if (!idleInhibitorAvailable) {
+            return
+        }
+
+        if (mediaInhibitor) {
+            mediaInhibitor.destroy()
+            mediaInhibitor = null
+        }
+
+        const inhibitorString = `
+            import QtQuick
+            import Quickshell.Wayland
+
+            IdleInhibitor {
+                active: false
+            }
+        `
+
+        mediaInhibitor = Qt.createQmlObject(inhibitorString, root, "IdleService.MediaInhibitor")
+        mediaInhibitor.active = Qt.binding(() => root.mediaPlaying)
+    }
+
+    function destroyMediaInhibitor() {
+        if (mediaInhibitor) {
+            mediaInhibitor.destroy()
+            mediaInhibitor = null
+        }
     }
 
     function createIdleMonitors() {
@@ -112,18 +142,8 @@ Singleton {
                 }
             })
 
-            if (idleInhibitorAvailable) {
-                const inhibitorString = `
-                    import QtQuick
-                    import Quickshell.Wayland
-
-                    IdleInhibitor {
-                        active: false
-                    }
-                `
-
-                mediaInhibitor = Qt.createQmlObject(inhibitorString, root, "IdleService.MediaInhibitor")
-                mediaInhibitor.active = Qt.binding(() => root.idleInhibitorAvailable && SettingsData.preventIdleForMedia && root.mediaPlaying)
+            if (SettingsData.preventIdleForMedia) {
+                createMediaInhibitor()
             }
         } catch (e) {
             console.warn("IdleService: Error creating IdleMonitors:", e)
@@ -150,6 +170,17 @@ Singleton {
         function onPrepareForSleep() {
             if (SettingsData.lockBeforeSuspend) {
                 root.lockRequested()
+            }
+        }
+    }
+
+    Connections {
+        target: SettingsData
+        function onPreventIdleForMediaChanged() {
+            if (SettingsData.preventIdleForMedia) {
+                createMediaInhibitor()
+            } else {
+                destroyMediaInhibitor()
             }
         }
     }

@@ -18,13 +18,6 @@ Item {
             width: parent.width
             spacing: Theme.spacingXL
 
-            StyledText {
-                text: I18n.tr("Battery not detected - only AC power settings available")
-                font.pixelSize: Theme.fontSizeMedium
-                color: Theme.surfaceVariantText
-                visible: !BatteryService.batteryAvailable
-            }
-
             StyledRect {
                 width: parent.width
                 height: lockScreenSection.implicitHeight + Theme.spacingL * 2
@@ -287,6 +280,7 @@ Item {
                             text: I18n.tr("Suspend behavior")
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceText
+                            leftPadding: Theme.spacingM
                         }
 
                         DankButtonGroup {

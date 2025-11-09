@@ -525,13 +525,6 @@
     "comment": ""
   },
   {
-    "term": "Battery not detected - only AC power settings available",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
     "term": "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen",
     "translation": "",
     "context": "",
