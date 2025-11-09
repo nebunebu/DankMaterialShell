@@ -108,7 +108,6 @@ Singleton {
     Connections {
         target: Hyprland.toplevels
         function onValuesChanged() {
-            root._hasRefreshedOnce = false
             root.scheduleSort()
         }
     }
@@ -166,7 +165,7 @@ Singleton {
 
     function sortHyprlandToplevelsSafe() {
         if (!Hyprland.toplevels || !Hyprland.toplevels.values) return []
-        if (_refreshScheduled) return sortedToplevelsCache
+        if (_refreshScheduled && sortedToplevelsCache.length > 0) return sortedToplevelsCache
 
         const items = Array.from(Hyprland.toplevels.values)
 
@@ -198,6 +197,8 @@ Singleton {
             if (!t) continue
 
             const addr = t.address || ""
+            if (!addr) continue
+
             const li = t.lastIpcObject || null
 
             const monName = _get(li, ["monitor"], null) ?? _get(t, ["monitor", "name"], "")
@@ -241,8 +242,7 @@ Singleton {
             })
         }
 
-        if (missingAnyPosition && hasNewWindow) {
-            _hasRefreshedOnce = false
+        if (missingAnyPosition && hasNewWindow && !_hasRefreshedOnce) {
             scheduleRefresh()
         }
 
