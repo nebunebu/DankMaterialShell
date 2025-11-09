@@ -224,6 +224,7 @@ Singleton {
     property int batterySuspendTimeout: 0
     property int batterySuspendBehavior: SettingsData.SuspendBehavior.Suspend
     property bool lockBeforeSuspend: false
+    property bool preventIdleForMedia: false
     property bool loginctlLockIntegration: true
     property string launchPrefix: ""
     property var brightnessDevicePins: ({})

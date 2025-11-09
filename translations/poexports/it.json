@@ -297,10 +297,10 @@
     "CPU usage indicator": "Indicatore uso CPU"
   },
   "CUPS Insecure Filter Warning": {
-    "CUPS Insecure Filter Warning": ""
+    "CUPS Insecure Filter Warning": "Avviso Filtro non Sicuro CUPS"
   },
   "CUPS Missing Filter Warning": {
-    "CUPS Missing Filter Warning": ""
+    "CUPS Missing Filter Warning": "Avviso Filtro Mancante CUPS"
   },
   "Cancel": {
     "Cancel": "Annulla"
@@ -310,6 +310,9 @@
   },
   "Center Section": {
     "Center Section": "Sezione Centrale"
+  },
+  "Changes:": {
+    "Changes:": ""
   },
   "Check for system updates": {
     "Check for system updates": "Controlla aggiornamenti di sistema"
@@ -410,6 +413,9 @@
   "Confirm": {
     "Confirm": "Conferma"
   },
+  "Confirm Display Changes": {
+    "Confirm Display Changes": ""
+  },
   "Confirm passkey for ": {
     "Confirm passkey for ": "Conferma passkey per"
   },
@@ -426,7 +432,7 @@
     "Connected Displays": "Display Connessi"
   },
   "Connecting to Device": {
-    "Connecting to Device": ""
+    "Connecting to Device": "Connessione al Dispositivo"
   },
   "Connection failed. Check password and try again.": {
     "Connection failed. Check password and try again.": "Connessione fallita. Controlla la password e riprova"
@@ -468,10 +474,10 @@
     "Corner Radius (0 = square corners)": "Raggio Angoli (0 = angoli squadrati)"
   },
   "Corner Radius Override": {
-    "Corner Radius Override": ""
+    "Corner Radius Override": "Sovrascrittura Raggio Angoli"
   },
   "Cover Open": {
-    "Cover Open": ""
+    "Cover Open": "Coperchio Aperto"
   },
   "Create Dir": {
     "Create Dir": "Crea Cartella"
@@ -584,6 +590,9 @@
   "Disable Autoconnect": {
     "Disable Autoconnect": "Disabilita connessione automatica"
   },
+  "Disabled": {
+    "Disabled": ""
+  },
   "Disconnect": {
     "Disconnect": "Disconnetti"
   },
@@ -610,6 +619,9 @@
   },
   "Display currently focused application title": {
     "Display currently focused application title": "Mostra il titolo delle applicazioni attualmente in focus"
+  },
+  "Display settings for ": {
+    "Display settings for ": ""
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "Mostra di default la percentuale volume e luminosità nei popups OSD"
@@ -642,7 +654,7 @@
     "Donate on Ko-fi": "Dona su Ko-fi"
   },
   "Door Open": {
-    "Door Open": ""
+    "Door Open": "Sportello Aperto"
   },
   "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": {
     "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.": "Trascina i widget per riordinarli nelle sezioni. Usa l'icona occhio per nascondere/mostrare i widget (mantenendo la spaziatura), o X per rimuoverli completamente."
@@ -686,6 +698,9 @@
   "Enable loginctl lock integration": {
     "Enable loginctl lock integration": "Abilita l'integrazione lock loginctl"
   },
+  "Enabled": {
+    "Enabled": ""
+  },
   "End": {
     "End": "Fine"
   },
@@ -720,7 +735,7 @@
     "Enter password for ": "Inserisci password per"
   },
   "Error": {
-    "Error": ""
+    "Error": "Errore"
   },
   "Exclusive Zone Offset": {
     "Exclusive Zone Offset": "Offset Zona Esclusa"
@@ -735,10 +750,10 @@
     "Failed to activate configuration": "Impossibile attivare configurazione"
   },
   "Failed to cancel all jobs": {
-    "Failed to cancel all jobs": ""
+    "Failed to cancel all jobs": "Impossibile cancellare tutti i lavori"
   },
   "Failed to cancel selected job": {
-    "Failed to cancel selected job": ""
+    "Failed to cancel selected job": "Impossibile cancellare il lavoro selezionato"
   },
   "Failed to connect VPN": {
     "Failed to connect VPN": "Impossibile connettersi alla VPN"
@@ -759,13 +774,13 @@
     "Failed to enable WiFi": "Impossibile abilitare WiFi"
   },
   "Failed to pause printer": {
-    "Failed to pause printer": ""
+    "Failed to pause printer": "Impossibile mettere in pausa la stampante"
   },
   "Failed to remove device": {
     "Failed to remove device": "Impossibile rimuovere dispositivo"
   },
   "Failed to resume printer": {
-    "Failed to resume printer": ""
+    "Failed to resume printer": "Impossibile riavviare la stampante"
   },
   "Failed to set profile image": {
     "Failed to set profile image": "Impossibile impostare immagine profilo"
@@ -861,7 +876,7 @@
     "Good": "Buona"
   },
   "Goth Corner Radius": {
-    "Goth Corner Radius": ""
+    "Goth Corner Radius": "Raggio Angoli Gotici"
   },
   "Goth Corners": {
     "Goth Corners": "Angoli Gotici"
@@ -876,7 +891,7 @@
     "Group multiple windows of the same app together with a window count indicator": "Raggruppa molteplici finestre della stessa app con un indicatore del numero di finestre"
   },
   "HSV": {
-    "HSV": ""
+    "HSV": "HSV"
   },
   "Health": {
     "Health": "Salute"
@@ -885,7 +900,7 @@
     "Height to Edge Gap (Exclusive Zone)": "Altezza Gap Angolo (Zona Esclusa)"
   },
   "Hex": {
-    "Hex": ""
+    "Hex": "Hex"
   },
   "Hex:": {
     "Hex:": "Hex:"
@@ -924,7 +939,7 @@
     "Icon Theme": "Tema Icona"
   },
   "Idle": {
-    "Idle": ""
+    "Idle": "Inattività"
   },
   "Idle Inhibitor": {
     "Idle Inhibitor": "Inibitore Riposo"
@@ -950,6 +965,9 @@
   "Individual Batteries": {
     "Individual Batteries": "Batterie Individuali"
   },
+  "Inhibit idle timeout when audio or video is playing": {
+    "Inhibit idle timeout when audio or video is playing": ""
+  },
   "Input Devices": {
     "Input Devices": "Dispositivi Input"
   },
@@ -957,7 +975,7 @@
     "Install plugins from the DMS plugin registry": "Installa plugins dal registro dei plugin DMS"
   },
   "Interlock Open": {
-    "Interlock Open": ""
+    "Interlock Open": "Interblocco Aperto"
   },
   "Internet": {
     "Internet": "Internet"
@@ -969,10 +987,13 @@
     "Invert on mode change": "Invertire al cambio di modalità"
   },
   "Jobs": {
-    "Jobs": ""
+    "Jobs": "Lavori"
   },
   "Jobs: ": {
-    "Jobs: ": ""
+    "Jobs: ": "Lavori:"
+  },
+  "Keep Changes": {
+    "Keep Changes": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Nome Layout Tastiera"
@@ -1071,19 +1092,19 @@
     "Manual Show/Hide": "Mostra/Nascondi Manuale"
   },
   "Margin": {
-    "Margin": ""
+    "Margin": "Margini"
   },
   "Marker Supply Empty": {
-    "Marker Supply Empty": ""
+    "Marker Supply Empty": "Scorta Marker Vuota"
   },
   "Marker Supply Low": {
-    "Marker Supply Low": ""
+    "Marker Supply Low": "Scorta Marker Bassa"
   },
   "Marker Waste Almost Full": {
-    "Marker Waste Almost Full": ""
+    "Marker Waste Almost Full": "Scarto Marcatori Quasi Pieno"
   },
   "Marker Waste Full": {
-    "Marker Waste Full": ""
+    "Marker Waste Full": "Scarto Marcatori Pieno"
   },
   "Material Colors": {
     "Material Colors": "Colori Material"
@@ -1107,16 +1128,16 @@
     "Media Controls": "Controlli Media"
   },
   "Media Empty": {
-    "Media Empty": ""
+    "Media Empty": "Media Vuoto"
   },
   "Media Jam": {
-    "Media Jam": ""
+    "Media Jam": "Media Inceppato"
   },
   "Media Low": {
-    "Media Low": ""
+    "Media Low": "Media Basso"
   },
   "Media Needed": {
-    "Media Needed": ""
+    "Media Needed": "Media Richiesti"
   },
   "Media Player Settings": {
     "Media Player Settings": "Impostazioni Media Player"
@@ -1142,6 +1163,9 @@
   "Mode:": {
     "Mode:": "Modalità:"
   },
+  "Mode: ": {
+    "Mode: ": ""
+  },
   "Monitor": {
     "Monitor": "Monitor"
   },
@@ -1158,7 +1182,7 @@
     "Mount": "Monta"
   },
   "Moving to Paused": {
-    "Moving to Paused": ""
+    "Moving to Paused": "Passaggio a In Pausa"
   },
   "Muted palette with subdued, calming tones.": {
     "Muted palette with subdued, calming tones.": "Tavolozza sobria con toni sommessi e calmanti."
@@ -1245,10 +1269,10 @@
     "No plugins found.": "Nessun plugin trovato."
   },
   "No printer found": {
-    "No printer found": ""
+    "No printer found": "Nessuna stampante trovata"
   },
   "None": {
-    "None": ""
+    "None": "Nulla"
   },
   "Normal Priority": {
     "Normal Priority": "Priorità Normale"
@@ -1296,7 +1320,7 @@
     "Office": "Ufficio"
   },
   "Offline Report": {
-    "Offline Report": ""
+    "Offline Report": "Riepilogo Offline"
   },
   "On-Screen Displays": {
     "On-Screen Displays": "Visualizzazione A Schermo"
@@ -1317,16 +1341,16 @@
     "Open search bar to find text": "Apri barra di ricerca per cercare testo"
   },
   "Other": {
-    "Other": ""
+    "Other": "Altro"
   },
   "Output Area Almost Full": {
-    "Output Area Almost Full": ""
+    "Output Area Almost Full": "Area Uscita Quasi Piena"
   },
   "Output Area Full": {
-    "Output Area Full": ""
+    "Output Area Full": "Area Uscita Piena"
   },
   "Output Tray Missing": {
-    "Output Tray Missing": ""
+    "Output Tray Missing": "Vassoio Uscita Mancante"
   },
   "Overview": {
     "Overview": "Panoramica"
@@ -1353,10 +1377,10 @@
     "Password": "Password"
   },
   "Pause": {
-    "Pause": ""
+    "Pause": "Pausa"
   },
   "Paused": {
-    "Paused": ""
+    "Paused": "Messo in Pausa"
   },
   "Per-Mode Wallpapers": {
     "Per-Mode Wallpapers": "Sfondo Per Modalità"
@@ -1424,6 +1448,9 @@
   "Position": {
     "Position": "Posizione"
   },
+  "Position: ": {
+    "Position: ": ""
+  },
   "Power & Security": {
     "Power & Security": "Alimentazione & Sicurezza"
   },
@@ -1442,6 +1469,9 @@
   "Pressure": {
     "Pressure": "Pressione"
   },
+  "Prevent idle for media": {
+    "Prevent idle for media": ""
+  },
   "Prevent screen timeout": {
     "Prevent screen timeout": "Previeni timeout schermo"
   },
@@ -1449,13 +1479,13 @@
     "Primary": "Primario"
   },
   "Print Server not available": {
-    "Print Server not available": ""
+    "Print Server not available": "Server di Stampa non disponibile"
   },
   "Printers": {
-    "Printers": ""
+    "Printers": "Stampanti"
   },
   "Printers: ": {
-    "Printers: ": ""
+    "Printers: ": "Stampanti:"
   },
   "Privacy Indicator": {
     "Privacy Indicator": "Indicatore Privacy"
@@ -1464,7 +1494,7 @@
     "Process": "Processo"
   },
   "Processing": {
-    "Processing": ""
+    "Processing": "Processando"
   },
   "Profile Image Error": {
     "Profile Image Error": "Errore Immagine Profilo"
@@ -1488,13 +1518,13 @@
     "Quick note-taking slideout panel": "Pannello scorrevole per la presa veloce di appunti"
   },
   "RGB": {
-    "RGB": ""
+    "RGB": "RGB"
   },
   "Rain Chance": {
     "Rain Chance": "Possibili Piogge"
   },
   "Reason": {
-    "Reason": ""
+    "Reason": "Motivo"
   },
   "Reboot": {
     "Reboot": "Riavvia"
@@ -1515,7 +1545,7 @@
     "Remove": "Rimuovi"
   },
   "Report": {
-    "Report": ""
+    "Report": "Riepilogo"
   },
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Richiedi conferma alle azioni di spegnimento, riavvio, sospensione, hibernazione e logout"
@@ -1527,7 +1557,13 @@
     "Resources": "Risorse"
   },
   "Resume": {
-    "Resume": ""
+    "Resume": "Riprendi"
+  },
+  "Revert": {
+    "Revert": ""
+  },
+  "Reverting in:": {
+    "Reverting in:": ""
   },
   "Right": {
     "Right": "Destra"
@@ -1710,7 +1746,7 @@
     "Shows when microphone, camera, or screen sharing is active": "Mostra quando microfono, videocamera, o condivisione schermo sono attivi"
   },
   "Shutdown": {
-    "Shutdown": ""
+    "Shutdown": "Spegni"
   },
   "Size": {
     "Size": "Dimensione"
@@ -1731,7 +1767,7 @@
     "Spacing": "Spaziatura"
   },
   "Spool Area Full": {
-    "Spool Area Full": ""
+    "Spool Area Full": "Area Spool Piena"
   },
   "Square Corners": {
     "Square Corners": "Angoli squadrati"
@@ -1746,13 +1782,13 @@
     "Status": "Stato"
   },
   "Stopped": {
-    "Stopped": ""
+    "Stopped": "Stoppato"
   },
   "Stopped Partly": {
-    "Stopped Partly": ""
+    "Stopped Partly": "Parzialmente Stoppato"
   },
   "Stopping": {
-    "Stopping": ""
+    "Stopping": "Stoppando"
   },
   "Storage & Disks": {
     "Storage & Disks": "Archiviazione & Dischi"
@@ -1848,7 +1884,7 @@
     "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).": "Le seguenti impostazioni modificheranno le tue impostazioni GTK e Qt. Se vuoi preservare la tua configurazione attuale, per favore fai il backup (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0)."
   },
   "The job queue of this printer is empty": {
-    "The job queue of this printer is empty": ""
+    "The job queue of this printer is empty": "La coda lavori della spampante è vuota"
   },
   "Theme & Colors": {
     "Theme & Colors": "Tema & Colori"
@@ -1872,7 +1908,7 @@
     "Time & Weather": "Orario & Meteo"
   },
   "Timed Out": {
-    "Timed Out": ""
+    "Timed Out": "Scaduto"
   },
   "To Full": {
     "To Full": "A Pieno"
@@ -1893,10 +1929,10 @@
     "Tomorrow": "Domani"
   },
   "Toner Empty": {
-    "Toner Empty": ""
+    "Toner Empty": "Toner Vuoto"
   },
   "Toner Low": {
-    "Toner Low": ""
+    "Toner Low": "Toner Basso"
   },
   "Top": {
     "Top": "Superiore"
@@ -2000,6 +2036,9 @@
   "VPN status and quick connect": {
     "VPN status and quick connect": "Stato VPN e connessione veloce"
   },
+  "VRR: ": {
+    "VRR: ": ""
+  },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Tavolozza vibrate con saturazione giocosa"
   },
@@ -2028,7 +2067,7 @@
     "Wallpapers": "Sfondi"
   },
   "Warning": {
-    "Warning": ""
+    "Warning": "Attenzione"
   },
   "Wave Progress Bars": {
     "Wave Progress Bars": "Progress Bar ad Onde"

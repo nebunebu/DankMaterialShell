@@ -141,6 +141,7 @@ var SPEC = {
     batterySuspendTimeout: { def: 0 },
     batterySuspendBehavior: { def: 0 },
     lockBeforeSuspend: { def: false },
+    preventIdleForMedia: { def: false },
     loginctlLockIntegration: { def: true },
     launchPrefix: { def: "" },
     brightnessDevicePins: { def: {} },

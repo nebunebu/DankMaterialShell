@@ -398,7 +398,7 @@
   {
     "term": "Automatically lock after",
     "context": "Automatically lock after",
-    "reference": "Modals/Settings/PowerSettings.qml:166",
+    "reference": "Modals/Settings/PowerSettings.qml:176",
     "comment": ""
   },
   {
@@ -612,6 +612,12 @@
     "comment": ""
   },
   {
+    "term": "Changes:",
+    "context": "Changes:",
+    "reference": "Modals/DisplayConfirmationModal.qml:123",
+    "comment": ""
+  },
+  {
     "term": "Check for system updates",
     "context": "Check for system updates",
     "reference": "Modules/Settings/DankBarTab.qml:188",
@@ -728,37 +734,37 @@
   {
     "term": "Command or script to run instead of the standard hibernate procedure",
     "context": "Command or script to run instead of the standard hibernate procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:502",
+    "reference": "Modals/Settings/PowerSettings.qml:514",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard lock procedure",
     "context": "Command or script to run instead of the standard lock procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:406",
+    "reference": "Modals/Settings/PowerSettings.qml:418",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard logout procedure",
     "context": "Command or script to run instead of the standard logout procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:438",
+    "reference": "Modals/Settings/PowerSettings.qml:450",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard power off procedure",
     "context": "Command or script to run instead of the standard power off procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:566",
+    "reference": "Modals/Settings/PowerSettings.qml:578",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard reboot procedure",
     "context": "Command or script to run instead of the standard reboot procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:534",
+    "reference": "Modals/Settings/PowerSettings.qml:546",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard suspend procedure",
     "context": "Command or script to run instead of the standard suspend procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:470",
+    "reference": "Modals/Settings/PowerSettings.qml:482",
     "comment": ""
   },
   {
@@ -801,6 +807,12 @@
     "term": "Confirm",
     "context": "Confirm",
     "reference": "Modals/BluetoothPairingModal.qml:292",
+    "comment": ""
+  },
+  {
+    "term": "Confirm Display Changes",
+    "context": "Confirm Display Changes",
+    "reference": "Modals/DisplayConfirmationModal.qml:78",
     "comment": ""
   },
   {
@@ -968,7 +980,7 @@
   {
     "term": "Custom Power Actions",
     "context": "Custom Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:392",
+    "reference": "Modals/Settings/PowerSettings.qml:404",
     "comment": ""
   },
   {
@@ -1134,6 +1146,12 @@
     "comment": ""
   },
   {
+    "term": "Disabled",
+    "context": "Disabled",
+    "reference": "Modals/DisplayConfirmationModal.qml:145",
+    "comment": ""
+  },
+  {
     "term": "Disconnect",
     "context": "Disconnect",
     "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:224",
@@ -1185,6 +1203,12 @@
     "term": "Display currently focused application title",
     "context": "Display currently focused application title",
     "reference": "Modules/Settings/DankBarTab.qml:38",
+    "comment": ""
+  },
+  {
+    "term": "Display settings for ",
+    "context": "Display settings for ",
+    "reference": "Modals/DisplayConfirmationModal.qml:85",
     "comment": ""
   },
   {
@@ -1335,6 +1359,12 @@
     "term": "Enable loginctl lock integration",
     "context": "Enable loginctl lock integration",
     "reference": "Modals/Settings/PowerSettings.qml:81",
+    "comment": ""
+  },
+  {
+    "term": "Enabled",
+    "context": "Enabled",
+    "reference": "Modals/DisplayConfirmationModal.qml:145",
     "comment": ""
   },
   {
@@ -1808,7 +1838,7 @@
   {
     "term": "Idle monitoring not supported - requires newer Quickshell version",
     "context": "Idle monitoring not supported - requires newer Quickshell version",
-    "reference": "Modals/Settings/PowerSettings.qml:313",
+    "reference": "Modals/Settings/PowerSettings.qml:325",
     "comment": ""
   },
   {
@@ -1839,6 +1869,12 @@
     "term": "Individual Batteries",
     "context": "Individual Batteries",
     "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:377",
+    "comment": ""
+  },
+  {
+    "term": "Inhibit idle timeout when audio or video is playing",
+    "context": "Inhibit idle timeout when audio or video is playing",
+    "reference": "Modals/Settings/PowerSettings.qml:164",
     "comment": ""
   },
   {
@@ -1887,6 +1923,12 @@
     "term": "Jobs: ",
     "context": "Jobs: ",
     "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:20",
+    "comment": ""
+  },
+  {
+    "term": "Keep Changes",
+    "context": "Keep Changes",
+    "reference": "Modals/DisplayConfirmationModal.qml:198",
     "comment": ""
   },
   {
@@ -2217,6 +2259,12 @@
     "term": "Mode:",
     "context": "Mode:",
     "reference": "Modules/Settings/PersonalizationTab.qml:1136",
+    "comment": ""
+  },
+  {
+    "term": "Mode: ",
+    "context": "Mode: ",
+    "reference": "Modals/DisplayConfirmationModal.qml:138",
     "comment": ""
   },
   {
@@ -2778,6 +2826,12 @@
     "comment": ""
   },
   {
+    "term": "Position: ",
+    "context": "Position: ",
+    "reference": "Modals/DisplayConfirmationModal.qml:131",
+    "comment": ""
+  },
+  {
     "term": "Power & Security",
     "context": "Power & Security",
     "reference": "Modals/Settings/SettingsSidebar.qml:38",
@@ -2786,7 +2840,7 @@
   {
     "term": "Power Action Confirmation",
     "context": "Power Action Confirmation",
-    "reference": "Modals/Settings/PowerSettings.qml:348",
+    "reference": "Modals/Settings/PowerSettings.qml:360",
     "comment": ""
   },
   {
@@ -2811,6 +2865,12 @@
     "term": "Pressure",
     "context": "Pressure",
     "reference": "Modules/DankDash/WeatherTab.qml:401, Modules/Settings/TimeWeatherTab.qml:1228",
+    "comment": ""
+  },
+  {
+    "term": "Prevent idle for media",
+    "context": "Prevent idle for media",
+    "reference": "Modals/Settings/PowerSettings.qml:163",
     "comment": ""
   },
   {
@@ -2960,7 +3020,7 @@
   {
     "term": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
     "context": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
-    "reference": "Modals/Settings/PowerSettings.qml:359",
+    "reference": "Modals/Settings/PowerSettings.qml:371",
     "comment": ""
   },
   {
@@ -2979,6 +3039,18 @@
     "term": "Resume",
     "context": "Resume",
     "reference": "Modules/ControlCenter/BuiltinPlugins/CupsWidget.qml:124",
+    "comment": ""
+  },
+  {
+    "term": "Revert",
+    "context": "Revert",
+    "reference": "Modals/DisplayConfirmationModal.qml:172",
+    "comment": ""
+  },
+  {
+    "term": "Reverting in:",
+    "context": "Reverting in:",
+    "reference": "Modals/DisplayConfirmationModal.qml:102",
     "comment": ""
   },
   {
@@ -3086,7 +3158,7 @@
   {
     "term": "Search...",
     "context": "Search...",
-    "reference": "Widgets/DankDropdown.qml:264",
+    "reference": "Widgets/DankDropdown.qml:267",
     "comment": ""
   },
   {
@@ -3212,7 +3284,7 @@
   {
     "term": "Show Confirmation on Power Actions",
     "context": "Show Confirmation on Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:358",
+    "reference": "Modals/Settings/PowerSettings.qml:370",
     "comment": ""
   },
   {
@@ -3452,13 +3524,13 @@
   {
     "term": "Suspend behavior",
     "context": "Suspend behavior",
-    "reference": "Modals/Settings/PowerSettings.qml:275",
+    "reference": "Modals/Settings/PowerSettings.qml:287",
     "comment": ""
   },
   {
     "term": "Suspend system after",
     "context": "Suspend system after",
-    "reference": "Modals/Settings/PowerSettings.qml:238",
+    "reference": "Modals/Settings/PowerSettings.qml:250",
     "comment": ""
   },
   {
@@ -3728,7 +3800,7 @@
   {
     "term": "Turn off monitors after",
     "context": "Turn off monitors after",
-    "reference": "Modals/Settings/PowerSettings.qml:202",
+    "reference": "Modals/Settings/PowerSettings.qml:213",
     "comment": ""
   },
   {
@@ -3897,6 +3969,12 @@
     "term": "VPN status and quick connect",
     "context": "VPN status and quick connect",
     "reference": "Modules/Settings/DankBarTab.qml:139",
+    "comment": ""
+  },
+  {
+    "term": "VRR: ",
+    "context": "VRR: ",
+    "reference": "Modals/DisplayConfirmationModal.qml:145",
     "comment": ""
   },
   {

@@ -311,6 +311,9 @@
   "Center Section": {
     "Center Section": "Orta Bölüm"
   },
+  "Changes:": {
+    "Changes:": ""
+  },
   "Check for system updates": {
     "Check for system updates": "Sistem güncellemelerini kontrol et"
   },
@@ -409,6 +412,9 @@
   },
   "Confirm": {
     "Confirm": "Onayla"
+  },
+  "Confirm Display Changes": {
+    "Confirm Display Changes": ""
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "Şunun için şifreyi onayla: "
@@ -584,6 +590,9 @@
   "Disable Autoconnect": {
     "Disable Autoconnect": "Otomatik Bağlanmayı Devre Dışı Bırak"
   },
+  "Disabled": {
+    "Disabled": ""
+  },
   "Disconnect": {
     "Disconnect": "Bağlantıyı Kes"
   },
@@ -610,6 +619,9 @@
   },
   "Display currently focused application title": {
     "Display currently focused application title": "Şu anda odaklanmış uygulamanın başlığını göster"
+  },
+  "Display settings for ": {
+    "Display settings for ": ""
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "OSD açılır pencerelerinde varsayılan olarak ses seviyesi ve parlaklık yüzdelik değerlerini göster"
@@ -685,6 +697,9 @@
   },
   "Enable loginctl lock integration": {
     "Enable loginctl lock integration": "loginctl kilit entegrasyonunu etkinleştir"
+  },
+  "Enabled": {
+    "Enabled": ""
   },
   "End": {
     "End": "Son"
@@ -876,7 +891,7 @@
     "Group multiple windows of the same app together with a window count indicator": "Aynı uygulamanın birden fazla penceresini pencere sayısı göstergesi ile gruplayın"
   },
   "HSV": {
-    "HSV": ""
+    "HSV": "HSV"
   },
   "Health": {
     "Health": "Sağlık"
@@ -885,7 +900,7 @@
     "Height to Edge Gap (Exclusive Zone)": "Kenar Boşluğu Yüksekliği (Özel Bölge)"
   },
   "Hex": {
-    "Hex": ""
+    "Hex": "Hex"
   },
   "Hex:": {
     "Hex:": "Hex:"
@@ -950,6 +965,9 @@
   "Individual Batteries": {
     "Individual Batteries": "Tekil Piller"
   },
+  "Inhibit idle timeout when audio or video is playing": {
+    "Inhibit idle timeout when audio or video is playing": ""
+  },
   "Input Devices": {
     "Input Devices": "Giriş Aygıtları"
   },
@@ -973,6 +991,9 @@
   },
   "Jobs: ": {
     "Jobs: ": "İşler:"
+  },
+  "Keep Changes": {
+    "Keep Changes": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Klavye Düzeni Adı"
@@ -1141,6 +1162,9 @@
   },
   "Mode:": {
     "Mode:": "Mod:"
+  },
+  "Mode: ": {
+    "Mode: ": ""
   },
   "Monitor": {
     "Monitor": "Monitör"
@@ -1424,6 +1448,9 @@
   "Position": {
     "Position": "Pozisyon"
   },
+  "Position: ": {
+    "Position: ": ""
+  },
   "Power & Security": {
     "Power & Security": "Güç & Güvenlik"
   },
@@ -1441,6 +1468,9 @@
   },
   "Pressure": {
     "Pressure": "Basınç"
+  },
+  "Prevent idle for media": {
+    "Prevent idle for media": ""
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "Ekran zaman aşımını önle"
@@ -1488,7 +1518,7 @@
     "Quick note-taking slideout panel": "Hızlı not alma sürgü paneli"
   },
   "RGB": {
-    "RGB": ""
+    "RGB": "RGB"
   },
   "Rain Chance": {
     "Rain Chance": "Yağış İhtimali"
@@ -1528,6 +1558,12 @@
   },
   "Resume": {
     "Resume": "Sürdür"
+  },
+  "Revert": {
+    "Revert": ""
+  },
+  "Reverting in:": {
+    "Reverting in:": ""
   },
   "Right": {
     "Right": "Sağ"
@@ -1999,6 +2035,9 @@
   },
   "VPN status and quick connect": {
     "VPN status and quick connect": "VPN durumu ve hızlı bağlanma"
+  },
+  "VRR: ": {
+    "VRR: ": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Oynak doygunluğa sahip canlı palet"

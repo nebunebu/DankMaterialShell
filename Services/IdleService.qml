@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Services.Mpris
 import qs.Common
 import qs.Services
 
@@ -18,6 +19,14 @@ Singleton {
         }
     }
 
+    readonly property bool idleInhibitorAvailable: {
+        try {
+            return typeof IdleInhibitor !== "undefined"
+        } catch (e) {
+            return false
+        }
+    }
+
     property bool enabled: true
     property bool respectInhibitors: true
     property bool _enableGate: true
@@ -27,6 +36,8 @@ Singleton {
     readonly property int lockTimeout: isOnBattery ? SettingsData.batteryLockTimeout : SettingsData.acLockTimeout
     readonly property int suspendTimeout: isOnBattery ? SettingsData.batterySuspendTimeout : SettingsData.acSuspendTimeout
     readonly property int suspendBehavior: isOnBattery ? SettingsData.batterySuspendBehavior : SettingsData.acSuspendBehavior
+
+    readonly property bool mediaPlaying: MprisController.activePlayer !== null
 
     onMonitorTimeoutChanged: _rearmIdleMonitors()
     onLockTimeoutChanged: _rearmIdleMonitors()
@@ -45,6 +56,7 @@ Singleton {
     property var monitorOffMonitor: null
     property var lockMonitor: null
     property var suspendMonitor: null
+    property var mediaInhibitor: null
 
     function wake() {
         requestMonitorOn()
@@ -99,6 +111,20 @@ Singleton {
                     root.requestSuspend()
                 }
             })
+
+            if (idleInhibitorAvailable) {
+                const inhibitorString = `
+                    import QtQuick
+                    import Quickshell.Wayland
+
+                    IdleInhibitor {
+                        active: false
+                    }
+                `
+
+                mediaInhibitor = Qt.createQmlObject(inhibitorString, root, "IdleService.MediaInhibitor")
+                mediaInhibitor.active = Qt.binding(() => root.idleInhibitorAvailable && SettingsData.preventIdleForMedia && root.mediaPlaying)
+            }
         } catch (e) {
             console.warn("IdleService: Error creating IdleMonitors:", e)
         }

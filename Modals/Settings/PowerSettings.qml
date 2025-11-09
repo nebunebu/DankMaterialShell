@@ -158,11 +158,21 @@ Item {
                         }
                     }
 
+                    DankToggle {
+                        width: parent.width
+                        text: I18n.tr("Prevent idle for media")
+                        description: I18n.tr("Inhibit idle timeout when audio or video is playing")
+                        checked: SettingsData.preventIdleForMedia
+                        visible: IdleService.idleMonitorAvailable
+                        onToggled: checked => SettingsData.set("preventIdleForMedia", checked)
+                    }
+
                     DankDropdown {
                         id: lockDropdown
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
+                        addHorizontalPadding: true
                         text: I18n.tr("Automatically lock after")
                         options: timeoutOptions
 
@@ -199,6 +209,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
+                        addHorizontalPadding: true
                         text: I18n.tr("Turn off monitors after")
                         options: timeoutOptions
 
@@ -235,6 +246,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
+                        addHorizontalPadding: true
                         text: I18n.tr("Suspend system after")
                         options: timeoutOptions
 

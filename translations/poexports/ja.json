@@ -311,6 +311,9 @@
   "Center Section": {
     "Center Section": "センターセクション"
   },
+  "Changes:": {
+    "Changes:": ""
+  },
   "Check for system updates": {
     "Check for system updates": "システムアップデートを検査"
   },
@@ -409,6 +412,9 @@
   },
   "Confirm": {
     "Confirm": "確認"
+  },
+  "Confirm Display Changes": {
+    "Confirm Display Changes": ""
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "パスキーを確認 "
@@ -584,6 +590,9 @@
   "Disable Autoconnect": {
     "Disable Autoconnect": "自動接続を無効"
   },
+  "Disabled": {
+    "Disabled": ""
+  },
   "Disconnect": {
     "Disconnect": "切断"
   },
@@ -610,6 +619,9 @@
   },
   "Display currently focused application title": {
     "Display currently focused application title": "現在フォーカスされているアプリケーションのタイトルを表示"
+  },
+  "Display settings for ": {
+    "Display settings for ": ""
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "OSDポップアップに音量と輝度のパーセンテージ値をデフォルトで表示"
@@ -685,6 +697,9 @@
   },
   "Enable loginctl lock integration": {
     "Enable loginctl lock integration": "ログインロックの統合を有効に"
+  },
+  "Enabled": {
+    "Enabled": ""
   },
   "End": {
     "End": "終わり"
@@ -950,6 +965,9 @@
   "Individual Batteries": {
     "Individual Batteries": "バッテリーごと"
   },
+  "Inhibit idle timeout when audio or video is playing": {
+    "Inhibit idle timeout when audio or video is playing": ""
+  },
   "Input Devices": {
     "Input Devices": "入力デバイス"
   },
@@ -973,6 +991,9 @@
   },
   "Jobs: ": {
     "Jobs: ": "ジョブ: "
+  },
+  "Keep Changes": {
+    "Keep Changes": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "キーボードレイアウト名"
@@ -1141,6 +1162,9 @@
   },
   "Mode:": {
     "Mode:": "モード："
+  },
+  "Mode: ": {
+    "Mode: ": ""
   },
   "Monitor": {
     "Monitor": "モニター"
@@ -1424,6 +1448,9 @@
   "Position": {
     "Position": "位置"
   },
+  "Position: ": {
+    "Position: ": ""
+  },
   "Power & Security": {
     "Power & Security": "電源とセキュリティ"
   },
@@ -1441,6 +1468,9 @@
   },
   "Pressure": {
     "Pressure": "プレッシャー"
+  },
+  "Prevent idle for media": {
+    "Prevent idle for media": ""
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "画面のタイムアウトを防止"
@@ -1528,6 +1558,12 @@
   },
   "Resume": {
     "Resume": "レジュメ"
+  },
+  "Revert": {
+    "Revert": ""
+  },
+  "Reverting in:": {
+    "Reverting in:": ""
   },
   "Right": {
     "Right": "右"
@@ -1999,6 +2035,9 @@
   },
   "VPN status and quick connect": {
     "VPN status and quick connect": "VPNステータスとクイック接続"
+  },
+  "VRR: ": {
+    "VRR: ": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "遊び心のある彩度の鮮やかなパレット。"

@@ -311,6 +311,9 @@
   "Center Section": {
     "Center Section": "中間區塊"
   },
+  "Changes:": {
+    "Changes:": ""
+  },
   "Check for system updates": {
     "Check for system updates": "檢查系統更新"
   },
@@ -409,6 +412,9 @@
   },
   "Confirm": {
     "Confirm": "確認"
+  },
+  "Confirm Display Changes": {
+    "Confirm Display Changes": ""
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "確認密碼 "
@@ -584,6 +590,9 @@
   "Disable Autoconnect": {
     "Disable Autoconnect": "關閉自動連線"
   },
+  "Disabled": {
+    "Disabled": ""
+  },
   "Disconnect": {
     "Disconnect": "斷開連線"
   },
@@ -610,6 +619,9 @@
   },
   "Display currently focused application title": {
     "Display currently focused application title": "顯示目前焦點應用程式的標題"
+  },
+  "Display settings for ": {
+    "Display settings for ": ""
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "在 OSD 彈出視窗中預設顯示音量和亮度百分比值"
@@ -685,6 +697,9 @@
   },
   "Enable loginctl lock integration": {
     "Enable loginctl lock integration": "啟用 loginctl 鎖定整合"
+  },
+  "Enabled": {
+    "Enabled": ""
   },
   "End": {
     "End": "結束"
@@ -950,6 +965,9 @@
   "Individual Batteries": {
     "Individual Batteries": "獨立電池"
   },
+  "Inhibit idle timeout when audio or video is playing": {
+    "Inhibit idle timeout when audio or video is playing": ""
+  },
   "Input Devices": {
     "Input Devices": "輸入設備"
   },
@@ -973,6 +991,9 @@
   },
   "Jobs: ": {
     "Jobs: ": ""
+  },
+  "Keep Changes": {
+    "Keep Changes": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "鍵盤布局名稱"
@@ -1141,6 +1162,9 @@
   },
   "Mode:": {
     "Mode:": "模式:"
+  },
+  "Mode: ": {
+    "Mode: ": ""
   },
   "Monitor": {
     "Monitor": "螢幕"
@@ -1424,6 +1448,9 @@
   "Position": {
     "Position": "位置"
   },
+  "Position: ": {
+    "Position: ": ""
+  },
   "Power & Security": {
     "Power & Security": "電源與安全"
   },
@@ -1441,6 +1468,9 @@
   },
   "Pressure": {
     "Pressure": "氣壓"
+  },
+  "Prevent idle for media": {
+    "Prevent idle for media": ""
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "防止螢幕超時"
@@ -1528,6 +1558,12 @@
   },
   "Resume": {
     "Resume": ""
+  },
+  "Revert": {
+    "Revert": ""
+  },
+  "Reverting in:": {
+    "Reverting in:": ""
   },
   "Right": {
     "Right": "右方"
@@ -1999,6 +2035,9 @@
   },
   "VPN status and quick connect": {
     "VPN status and quick connect": "VPN 狀態和快速連線"
+  },
+  "VRR: ": {
+    "VRR: ": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "色彩鮮明且飽和度活潑的調色板。"

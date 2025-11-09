@@ -714,6 +714,13 @@
     "comment": ""
   },
   {
+    "term": "Changes:",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Check for system updates",
     "translation": "",
     "context": "",
@@ -932,6 +939,13 @@
   },
   {
     "term": "Confirm",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Confirm Display Changes",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1323,6 +1337,13 @@
     "comment": ""
   },
   {
+    "term": "Disabled",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Disconnect",
     "translation": "",
     "context": "",
@@ -1380,6 +1401,13 @@
   },
   {
     "term": "Display currently focused application title",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Display settings for ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1555,6 +1583,13 @@
   },
   {
     "term": "Enable loginctl lock integration",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Enabled",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2149,6 +2184,13 @@
     "comment": ""
   },
   {
+    "term": "Inhibit idle timeout when audio or video is playing",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Input Devices",
     "translation": "",
     "context": "",
@@ -2199,6 +2241,13 @@
   },
   {
     "term": "Jobs: ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Keep Changes",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2584,6 +2633,13 @@
   },
   {
     "term": "Mode:",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Mode: ",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3241,6 +3297,13 @@
     "comment": ""
   },
   {
+    "term": "Position: ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Power & Security",
     "translation": "",
     "context": "",
@@ -3277,6 +3340,13 @@
   },
   {
     "term": "Pressure",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Prevent idle for media",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3473,6 +3543,20 @@
   },
   {
     "term": "Resume",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Revert",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Reverting in:",
     "translation": "",
     "context": "",
     "reference": "",
@@ -4544,6 +4628,13 @@
   },
   {
     "term": "VPN status and quick connect",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "VRR: ",
     "translation": "",
     "context": "",
     "reference": "",

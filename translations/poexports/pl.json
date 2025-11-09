@@ -311,6 +311,9 @@
   "Center Section": {
     "Center Section": "Sekcja środkowa"
   },
+  "Changes:": {
+    "Changes:": ""
+  },
   "Check for system updates": {
     "Check for system updates": "Sprawdź aktualizacje systemu"
   },
@@ -409,6 +412,9 @@
   },
   "Confirm": {
     "Confirm": "Potwierdź"
+  },
+  "Confirm Display Changes": {
+    "Confirm Display Changes": ""
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "Potwierdź klucz dostępu dla "
@@ -584,6 +590,9 @@
   "Disable Autoconnect": {
     "Disable Autoconnect": "Wyłącz automatyczne łączenie"
   },
+  "Disabled": {
+    "Disabled": ""
+  },
   "Disconnect": {
     "Disconnect": "Rozłącz"
   },
@@ -610,6 +619,9 @@
   },
   "Display currently focused application title": {
     "Display currently focused application title": "Wyświetlaj tytuł aktywnej aplikacji"
+  },
+  "Display settings for ": {
+    "Display settings for ": ""
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "Domyślnie wyświetlaj wartości procentowe głośności i jasności w wyskakujących okienkach OSD"
@@ -685,6 +697,9 @@
   },
   "Enable loginctl lock integration": {
     "Enable loginctl lock integration": "Włącz integrację blokady loginctl"
+  },
+  "Enabled": {
+    "Enabled": ""
   },
   "End": {
     "End": "Koniec"
@@ -950,6 +965,9 @@
   "Individual Batteries": {
     "Individual Batteries": "Pojedyncze akumulatory"
   },
+  "Inhibit idle timeout when audio or video is playing": {
+    "Inhibit idle timeout when audio or video is playing": ""
+  },
   "Input Devices": {
     "Input Devices": "Urządzenia wejściowe"
   },
@@ -973,6 +991,9 @@
   },
   "Jobs: ": {
     "Jobs: ": "Zadania: "
+  },
+  "Keep Changes": {
+    "Keep Changes": ""
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Nazwa układu klawiatury"
@@ -1141,6 +1162,9 @@
   },
   "Mode:": {
     "Mode:": "Tryb:"
+  },
+  "Mode: ": {
+    "Mode: ": ""
   },
   "Monitor": {
     "Monitor": "Monitor"
@@ -1424,6 +1448,9 @@
   "Position": {
     "Position": "Pozycja"
   },
+  "Position: ": {
+    "Position: ": ""
+  },
   "Power & Security": {
     "Power & Security": "Zasilanie i bezpieczeństwo"
   },
@@ -1441,6 +1468,9 @@
   },
   "Pressure": {
     "Pressure": "Ciśnienie"
+  },
+  "Prevent idle for media": {
+    "Prevent idle for media": ""
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "Zapobiegaj wygaszaniu ekranu"
@@ -1528,6 +1558,12 @@
   },
   "Resume": {
     "Resume": "Wznów"
+  },
+  "Revert": {
+    "Revert": ""
+  },
+  "Reverting in:": {
+    "Reverting in:": ""
   },
   "Right": {
     "Right": "Prawo"
@@ -1999,6 +2035,9 @@
   },
   "VPN status and quick connect": {
     "VPN status and quick connect": "Status VPN i szybkie połączenie"
+  },
+  "VRR: ": {
+    "VRR: ": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Wibrująca paleta z zabawnym nasyceniem."

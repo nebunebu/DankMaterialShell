@@ -21,6 +21,7 @@ Item {
     property bool alignPopupRight: false
     property int dropdownWidth: 200
     property bool compactMode: text === "" && description === ""
+    property bool addHorizontalPadding: false
 
     signal valueChanged(string value)
 
@@ -40,6 +41,7 @@ Item {
         anchors.left: parent.left
         anchors.right: dropdown.left
         anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: root.addHorizontalPadding ? Theme.spacingM : 0
         anchors.rightMargin: Theme.spacingL
         spacing: Theme.spacingXS
         visible: !root.compactMode
@@ -67,6 +69,7 @@ Item {
         width: root.compactMode ? parent.width : (root.popupWidth === -1 ? undefined : (root.popupWidth > 0 ? root.popupWidth : root.dropdownWidth))
         height: 40
         anchors.right: parent.right
+        anchors.rightMargin: root.addHorizontalPadding && !root.compactMode ? Theme.spacingM : 0
         anchors.verticalCenter: parent.verticalCenter
         radius: Theme.cornerRadius
         color: dropdownArea.containsMouse || dropdownMenu.visible ? Theme.surfaceContainerHigh : Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
