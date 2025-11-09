@@ -32,11 +32,9 @@ Singleton {
     	     }
 	     for (const appId of appIds){
     	     let icon = Quickshell.iconPath(entry?.icon, true)
-	     console.log(icon)
     	     if (icon && icon !== "") return icon
 
     	     let execPath = entry?.execString?.replace(/\/bin.*/, "")
-	     console.log(execPath)
     	     if (!execPath) continue
 
 	     //Check that the app is installed with nix/guix
@@ -46,13 +44,11 @@ Singleton {
 
 	     let iconPath = `${basePath}/share/icons/hicolor/scalable/apps/${appId}.svg`
             	 icon = Quickshell.iconPath(iconPath, true)
-		 console.log(icon)
 		 if (icon && icon !== "") return icon
 
              for (const size of sizes) {
              	 iconPath = `${basePath}/share/icons/hicolor/${size}/apps/${appId}.png`
             	 icon = Quickshell.iconPath(iconPath, true)
-		 console.log(icon)
 		 if (icon && icon !== "") return icon
        	     }
 	     }

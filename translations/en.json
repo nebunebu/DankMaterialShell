@@ -692,7 +692,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modules/SystemUpdatePopout.qml:335, Modals/NetworkWiredInfoModal.qml:131, Modals/NetworkInfoModal.qml:131, Modules/DankBar/Widgets/RunningApps.qml:788",
+    "reference": "Modules/SystemUpdatePopout.qml:335, Modals/NetworkWiredInfoModal.qml:131, Modals/NetworkInfoModal.qml:131, Modules/DankBar/Widgets/RunningApps.qml:770",
     "comment": ""
   },
   {

@@ -21,19 +21,25 @@ Item {
     property real barThickness: 48
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 2 : Theme.spacingS
     property Item windowRoot: (Window.window ? Window.window.contentItem : null)
-    property int _workspaceUpdateTrigger: 0
     property int _desktopEntriesUpdateTrigger: 0
+    property int _toplevelsUpdateTrigger: 0
+
     readonly property var sortedToplevels: {
-        _workspaceUpdateTrigger
+        _toplevelsUpdateTrigger
         const toplevels = CompositorService.sortedToplevels
-        if (!toplevels || toplevels.length === 0)
-            return []
+        if (!toplevels || toplevels.length === 0) return []
 
         if (SettingsData.runningAppsCurrentWorkspace) {
-            const filtered = CompositorService.filterCurrentWorkspace(toplevels, parentScreen?.name)
-            return filtered || []
+            return CompositorService.filterCurrentWorkspace(toplevels, parentScreen?.name) || []
         }
         return toplevels
+    }
+
+    Connections {
+        target: CompositorService
+        function onToplevelsChanged() {
+            _toplevelsUpdateTrigger++
+        }
     }
 
     Connections {
@@ -89,36 +95,6 @@ Item {
     height: isVertical ? calculatedSize : barThickness
     visible: windowCount > 0
 
-    Connections {
-        target: NiriService
-        function onAllWorkspacesChanged() {
-            _workspaceUpdateTrigger++
-        }
-        function onWindowsChanged() {
-            _workspaceUpdateTrigger++
-        }
-    }
-
-    Connections {
-        target: Hyprland
-        function onFocusedWorkspaceChanged() {
-            _workspaceUpdateTrigger++
-        }
-    }
-
-    Connections {
-        target: Hyprland.workspaces
-        function onValuesChanged() {
-            _workspaceUpdateTrigger++
-        }
-    }
-
-    Connections {
-        target: Hyprland.toplevels
-        function onValuesChanged() {
-            _workspaceUpdateTrigger++
-        }
-    }
 
     Rectangle {
         id: visualBackground
@@ -241,7 +217,10 @@ Item {
 
             Repeater {
                 id: windowRepeater
-                model: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
+                model: ScriptModel {
+                    values: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
+                    objectProp: SettingsData.runningAppsGroupByApp ? "appId" : "address"
+                }
 
                 delegate: Item {
                     id: delegateItem
@@ -470,7 +449,10 @@ Item {
 
             Repeater {
                 id: windowRepeater
-                model: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
+                model: ScriptModel {
+                    values: SettingsData.runningAppsGroupByApp ? groupedWindows : sortedToplevels
+                    objectProp: SettingsData.runningAppsGroupByApp ? "appId" : "address"
+                }
 
                 delegate: Item {
                     id: delegateItem
