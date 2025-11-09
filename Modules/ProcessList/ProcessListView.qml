@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import Quickshell
 import qs.Common
 import qs.Services
 import qs.Widgets
@@ -248,7 +249,10 @@ Column {
         height: parent.height - columnHeaders.height
         clip: true
         spacing: 4
-        model: DgopService.processes
+        model: ScriptModel {
+            values: DgopService.processes
+            objectProp: "pid"
+        }
 
         delegate: ProcessListItem {
             process: modelData

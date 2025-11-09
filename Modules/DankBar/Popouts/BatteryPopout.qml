@@ -381,7 +381,9 @@ DankPopout {
                     }
 
                     Repeater {
-                        model: BatteryService.batteries
+                        model: ScriptModel {
+                            values: BatteryService.batteries
+                        }
 
                         delegate: StyledRect {
                             required property var modelData

@@ -435,7 +435,9 @@ Item {
         flow: isVertical ? Flow.TopToBottom : Flow.LeftToRight
 
         Repeater {
-            model: root.workspaceList
+            model: ScriptModel {
+                values: root.workspaceList
+            }
 
             Item {
                 id: delegateRoot
@@ -658,7 +660,9 @@ Item {
                                 visible: loadedIcons.length > 0
 
                                 Repeater {
-                                    model: loadedIcons.slice(0, SettingsData.maxWorkspaceIcons)
+                                    model: ScriptModel {
+                                        values: loadedIcons.slice(0, SettingsData.maxWorkspaceIcons)
+                                    }
                                     delegate: Item {
                                         width: 18
                                         height: 18
@@ -727,7 +731,9 @@ Item {
                                 visible: loadedIcons.length > 0
 
                                 Repeater {
-                                    model: loadedIcons.slice(0, SettingsData.maxWorkspaceIcons)
+                                    model: ScriptModel {
+                                        values: loadedIcons.slice(0, SettingsData.maxWorkspaceIcons)
+                                    }
                                     delegate: Item {
                                         width: 18
                                         height: 18

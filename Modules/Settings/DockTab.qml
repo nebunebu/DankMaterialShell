@@ -112,6 +112,60 @@ Item {
                         spacing: Theme.spacingM
 
                         DankIcon {
+                            name: "dock_to_bottom"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Column {
+                            width: parent.width - Theme.iconSize - Theme.spacingM
+                                   - enableToggle.width - Theme.spacingM
+                            spacing: Theme.spacingXS
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            StyledText {
+                                text: I18n.tr("Show Dock")
+                                font.pixelSize: Theme.fontSizeLarge
+                                font.weight: Font.Medium
+                                color: Theme.surfaceText
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceVariantText
+                                wrapMode: Text.WordWrap
+                                width: parent.width
+                            }
+                        }
+
+                        DankToggle {
+                            id: enableToggle
+
+                            anchors.verticalCenter: parent.verticalCenter
+                            checked: SettingsData.showDock
+                            onToggled: checked => {
+                                           SettingsData.setShowDock(checked)
+                                       }
+                        }
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Theme.outline
+                        opacity: 0.2
+                        visible: SettingsData.showDock
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+                        visible: SettingsData.showDock
+                        opacity: visible ? 1 : 0
+
+                        DankIcon {
                             name: "visibility_off"
                             size: Theme.iconSize
                             color: Theme.primary
@@ -149,56 +203,12 @@ Item {
                                            SettingsData.set("dockAutoHide", checked)
                                        }
                         }
-                    }
 
-                    Rectangle {
-                        width: parent.width
-                        height: 1
-                        color: Theme.outline
-                        opacity: 0.2
-                    }
-
-                    Row {
-                        width: parent.width
-                        spacing: Theme.spacingM
-
-                        DankIcon {
-                            name: "dock_to_bottom"
-                            size: Theme.iconSize
-                            color: Theme.primary
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-
-                        Column {
-                            width: parent.width - Theme.iconSize - Theme.spacingM
-                                   - enableToggle.width - Theme.spacingM
-                            spacing: Theme.spacingXS
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            StyledText {
-                                text: I18n.tr("Show Dock")
-                                font.pixelSize: Theme.fontSizeLarge
-                                font.weight: Font.Medium
-                                color: Theme.surfaceText
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Theme.mediumDuration
+                                easing.type: Theme.emphasizedEasing
                             }
-
-                            StyledText {
-                                text: I18n.tr("Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen")
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.surfaceVariantText
-                                wrapMode: Text.WordWrap
-                                width: parent.width
-                            }
-                        }
-
-                        DankToggle {
-                            id: enableToggle
-
-                            anchors.verticalCenter: parent.verticalCenter
-                            checked: SettingsData.showDock
-                            onToggled: checked => {
-                                           SettingsData.setShowDock(checked)
-                                       }
                         }
                     }
 
@@ -266,8 +276,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
-                visible: SettingsData.showDock
-                opacity: visible ? 1 : 0
 
                 Column {
                     id: groupByAppSection
@@ -320,13 +328,6 @@ Item {
                         }
                     }
                 }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Theme.mediumDuration
-                        easing.type: Theme.emphasizedEasing
-                    }
-                }
             }
 
             // Indicator Style Section
@@ -338,8 +339,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
-                visible: SettingsData.showDock
-                opacity: visible ? 1 : 0
 
                 Column {
                     id: indicatorStyleSection
@@ -386,13 +385,6 @@ Item {
                         }
                     }
                 }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Theme.mediumDuration
-                        easing.type: Theme.emphasizedEasing
-                    }
-                }
             }
 
             // Icon Size Section
@@ -404,8 +396,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
-                visible: SettingsData.showDock
-                opacity: visible ? 1 : 0
 
                 Column {
                     id: iconSizeSection
@@ -449,13 +439,6 @@ Item {
                                               }
                     }
                 }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Theme.mediumDuration
-                        easing.type: Theme.emphasizedEasing
-                    }
-                }
             }
 
             // Dock Spacing Section
@@ -467,8 +450,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
-                visible: SettingsData.showDock
-                opacity: visible ? 1 : 0
 
                 Column {
                     id: dockSpacingSection
@@ -580,13 +561,6 @@ Item {
                         }
                     }
                 }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Theme.mediumDuration
-                        easing.type: Theme.emphasizedEasing
-                    }
-                }
             }
 
             // Dock Transparency Section
@@ -598,8 +572,6 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
-                visible: SettingsData.showDock
-                opacity: visible ? 1 : 0
 
                 Column {
                     id: transparencySection
@@ -642,13 +614,6 @@ Item {
                                                   SettingsData.set("dockTransparency", 
                                                       newValue / 100)
                                               }
-                    }
-                }
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Theme.mediumDuration
-                        easing.type: Theme.emphasizedEasing
                     }
                 }
             }

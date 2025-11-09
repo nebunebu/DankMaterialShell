@@ -210,19 +210,20 @@ Rectangle {
             spacing: Theme.spacingS
 
             Repeater {
-                model: sortedNetworks
-
-                property var sortedNetworks: {
-                    const currentUuid = NetworkService.ethernetConnectionUuid
-                    const networks = NetworkService.wiredConnections
-                    let sorted = [...networks]
-                    sorted.sort((a, b) => {
-                        if (a.isActive && !b.isActive) return -1
-                        if (!a.isActive && b.isActive) return 1
-                        return a.id.localeCompare(b.id)
-                    })
-                    return sorted
+                model: ScriptModel {
+                    values: {
+                        const currentUuid = NetworkService.ethernetConnectionUuid
+                        const networks = NetworkService.wiredConnections
+                        let sorted = [...networks]
+                        sorted.sort((a, b) => {
+                            if (a.isActive && !b.isActive) return -1
+                            if (!a.isActive && b.isActive) return 1
+                            return a.id.localeCompare(b.id)
+                        })
+                        return sorted
+                    }
                 }
+
                 delegate: Rectangle {
                     required property var modelData
                     required property int index
@@ -406,22 +407,23 @@ Rectangle {
             }
 
             Repeater {
-                model: wifiContent.menuOpen ? wifiContent.frozenNetworks : sortedNetworks
-
-                property var sortedNetworks: {
-                    const ssid = NetworkService.currentWifiSSID
-                    const networks = NetworkService.wifiNetworks
-                    let sorted = [...networks]
-                    sorted.sort((a, b) => {
-                        if (a.ssid === ssid) return -1
-                        if (b.ssid === ssid) return 1
-                        return b.signal - a.signal
-                    })
-                    if (!wifiContent.menuOpen) {
-                        wifiContent.frozenNetworks = sorted
+                model: ScriptModel {
+                    values: {
+                        const ssid = NetworkService.currentWifiSSID
+                        const networks = NetworkService.wifiNetworks
+                        let sorted = [...networks]
+                        sorted.sort((a, b) => {
+                            if (a.ssid === ssid) return -1
+                            if (b.ssid === ssid) return 1
+                            return b.signal - a.signal
+                        })
+                        if (!wifiContent.menuOpen) {
+                            wifiContent.frozenNetworks = sorted
+                        }
+                        return wifiContent.menuOpen ? wifiContent.frozenNetworks : sorted
                     }
-                    return sorted
                 }
+
                 delegate: Rectangle {
                     required property var modelData
                     required property int index

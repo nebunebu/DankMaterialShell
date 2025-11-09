@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Quickshell
 import qs.Common
 import qs.Modals.Common
 import qs.Services
@@ -312,7 +313,9 @@ DankModal {
                         anchors.topMargin: Theme.spacingS
                         anchors.bottomMargin: Theme.spacingS
                         spacing: Theme.spacingS
-                        model: root.filteredPlugins
+                        model: ScriptModel {
+                            values: root.filteredPlugins
+                        }
                         clip: true
                         visible: !root.isLoading
 

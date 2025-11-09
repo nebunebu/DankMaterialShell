@@ -210,8 +210,8 @@ DankPopout {
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: 52
                         cornerRadius: Theme.cornerRadius
-                        backgroundColor: Theme.withAlpha(Theme.surfaceVariant, Theme.popupTransparency)
-                        normalBorderColor: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.3)
+                        backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                        normalBorderColor: Theme.outlineMedium
                         focusedBorderColor: Theme.primary
                         leftIconName: "search"
                         leftIconSize: Theme.iconSize

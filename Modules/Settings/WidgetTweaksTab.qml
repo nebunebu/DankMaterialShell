@@ -273,8 +273,8 @@ Item {
                                 width: parent.width
                                 height: 48
                                 placeholderText: "myPkgMngr --sysupdate"
-                                backgroundColor: Theme.surfaceVariant
-                                normalBorderColor: Theme.primarySelected
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                                normalBorderColor: Theme.outlineMedium
                                 focusedBorderColor: Theme.primary
 
                                 Component.onCompleted: {
@@ -320,8 +320,8 @@ Item {
                                 width: parent.width
                                 height: 48
                                 placeholderText: "-T udpClass"
-                                backgroundColor: Theme.surfaceVariant
-                                normalBorderColor: Theme.primarySelected
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                                normalBorderColor: Theme.outlineMedium
                                 focusedBorderColor: Theme.primary
 
                                 Component.onCompleted: {

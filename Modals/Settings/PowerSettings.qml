@@ -419,8 +419,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/myLock.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {
@@ -451,8 +451,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/myLogout.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {
@@ -483,8 +483,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/mySuspend.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {
@@ -515,8 +515,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/myHibernate.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {
@@ -547,8 +547,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/myReboot.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {
@@ -579,8 +579,8 @@ Item {
                             width: parent.width
                             height: 48
                             placeholderText: "/usr/bin/myPowerOff.sh"
-                            backgroundColor: Theme.surfaceVariant
-                            normalBorderColor: Theme.primarySelected
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHighest, Theme.popupTransparency)
+                            normalBorderColor: Theme.outlineMedium
                             focusedBorderColor: Theme.primary
 
                             Component.onCompleted: {

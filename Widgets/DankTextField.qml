@@ -30,9 +30,9 @@ StyledRect {
     property color leftIconColor: Theme.surfaceVariantText
     property color leftIconFocusedColor: Theme.primary
     property bool showClearButton: false
-    property color backgroundColor: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
+    property color backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
     property color focusedBorderColor: Theme.primary
-    property color normalBorderColor: Theme.outlineStrong
+    property color normalBorderColor: Theme.outlineMedium
     property color placeholderColor: Theme.outlineButton
     property int borderWidth: 1
     property int focusedBorderWidth: 2

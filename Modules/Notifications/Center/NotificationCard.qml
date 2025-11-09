@@ -321,7 +321,9 @@ Rectangle {
             spacing: 16
 
             Repeater {
-                model: notificationGroup?.notifications?.slice(0, 10) || []
+                model: ScriptModel {
+                    values: notificationGroup?.notifications?.slice(0, 10) || []
+                }
 
                 delegate: Rectangle {
                     required property var modelData

@@ -128,9 +128,11 @@ Rectangle {
             spacing: Theme.spacingS
 
             Repeater {
-                model: Pipewire.nodes.values.filter(node => {
-                    return node.audio && node.isSink && !node.isStream
-                })
+                model: ScriptModel {
+                    values: Pipewire.nodes.values.filter(node => {
+                        return node.audio && node.isSink && !node.isStream
+                    })
+                }
 
                 delegate: Rectangle {
                     required property var modelData

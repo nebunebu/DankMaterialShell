@@ -44,7 +44,7 @@
   {
     "term": "3rd party",
     "context": "3rd party",
-    "reference": "Modules/Settings/PluginBrowser.qml:405",
+    "reference": "Modules/Settings/PluginBrowser.qml:408",
     "comment": ""
   },
   {
@@ -326,7 +326,7 @@
   {
     "term": "Auto-hide Dock",
     "context": "Auto-hide Dock",
-    "reference": "Modules/Settings/DockTab.qml:128",
+    "reference": "Modules/Settings/DockTab.qml:182",
     "comment": ""
   },
   {
@@ -542,7 +542,7 @@
   {
     "term": "Browse Plugins",
     "context": "Browse Plugins",
-    "reference": "Modules/Settings/PluginBrowser.qml:176",
+    "reference": "Modules/Settings/PluginBrowser.qml:177",
     "comment": ""
   },
   {
@@ -590,13 +590,13 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:627",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:630",
     "comment": ""
   },
   {
     "term": "Capacity",
     "context": "Capacity",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:510",
     "comment": ""
   },
   {
@@ -1136,7 +1136,7 @@
   {
     "term": "Disable Autoconnect",
     "context": "Disable Autoconnect",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:623",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:625",
     "comment": ""
   },
   {
@@ -1172,13 +1172,13 @@
   {
     "term": "Dismiss",
     "context": "Dismiss",
-    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:542, Modules/Notifications/Center/NotificationCard.qml:635",
     "comment": ""
   },
   {
     "term": "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen",
     "context": "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen",
-    "reference": "Modules/Settings/DockTab.qml:186",
+    "reference": "Modules/Settings/DockTab.qml:135",
     "comment": ""
   },
   {
@@ -1250,7 +1250,7 @@
   {
     "term": "Dock Transparency",
     "context": "Dock Transparency",
-    "reference": "Modules/Settings/DockTab.qml:623",
+    "reference": "Modules/Settings/DockTab.qml:595",
     "comment": ""
   },
   {
@@ -1310,7 +1310,7 @@
   {
     "term": "Enable Autoconnect",
     "context": "Enable Autoconnect",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:623",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:625",
     "comment": ""
   },
   {
@@ -1628,7 +1628,7 @@
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:646",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:648",
     "comment": ""
   },
   {
@@ -1718,13 +1718,13 @@
   {
     "term": "Group by App",
     "context": "Group by App",
-    "reference": "Modules/Settings/DockTab.qml:297",
+    "reference": "Modules/Settings/DockTab.qml:305",
     "comment": ""
   },
   {
     "term": "Group multiple windows of the same app together with a window count indicator",
     "context": "Group multiple windows of the same app together with a window count indicator",
-    "reference": "Modules/Settings/DockTab.qml:304",
+    "reference": "Modules/Settings/DockTab.qml:312",
     "comment": ""
   },
   {
@@ -1736,13 +1736,13 @@
   {
     "term": "Health",
     "context": "Health",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:473",
     "comment": ""
   },
   {
     "term": "Height to Edge Gap (Exclusive Zone)",
     "context": "Height to Edge Gap (Exclusive Zone)",
-    "reference": "Modules/Settings/DockTab.qml:533",
+    "reference": "Modules/Settings/DockTab.qml:514",
     "comment": ""
   },
   {
@@ -1760,7 +1760,7 @@
   {
     "term": "Hide the dock when not in use and reveal it when hovering near the dock area",
     "context": "Hide the dock when not in use and reveal it when hovering near the dock area",
-    "reference": "Modules/Settings/DockTab.qml:135",
+    "reference": "Modules/Settings/DockTab.qml:189",
     "comment": ""
   },
   {
@@ -1796,13 +1796,13 @@
   {
     "term": "I Understand",
     "context": "I Understand",
-    "reference": "Modules/Settings/PluginBrowser.qml:633",
+    "reference": "Modules/Settings/PluginBrowser.qml:636",
     "comment": ""
   },
   {
     "term": "Icon Size",
     "context": "Icon Size",
-    "reference": "Modules/Settings/DockTab.qml:429",
+    "reference": "Modules/Settings/DockTab.qml:419",
     "comment": ""
   },
   {
@@ -1856,7 +1856,7 @@
   {
     "term": "Indicator Style",
     "context": "Indicator Style",
-    "reference": "Modules/Settings/DockTab.qml:364",
+    "reference": "Modules/Settings/DockTab.qml:363",
     "comment": ""
   },
   {
@@ -1880,7 +1880,7 @@
   {
     "term": "Install plugins from the DMS plugin registry",
     "context": "Install plugins from the DMS plugin registry",
-    "reference": "Modules/Settings/PluginBrowser.qml:230",
+    "reference": "Modules/Settings/PluginBrowser.qml:231",
     "comment": ""
   },
   {
@@ -2006,7 +2006,7 @@
   {
     "term": "Left",
     "context": "Left",
-    "reference": "Modules/Settings/DankBarTab.qml:763, Modules/DankBar/Popouts/BatteryPopout.qml:540",
+    "reference": "Modules/Settings/DankBarTab.qml:763, Modules/DankBar/Popouts/BatteryPopout.qml:542",
     "comment": ""
   },
   {
@@ -2036,7 +2036,7 @@
   {
     "term": "Loading plugins...",
     "context": "Loading plugins...",
-    "reference": "Modules/Settings/PluginBrowser.qml:298",
+    "reference": "Modules/Settings/PluginBrowser.qml:299",
     "comment": ""
   },
   {
@@ -2114,7 +2114,7 @@
   {
     "term": "Margin",
     "context": "Margin",
-    "reference": "Modules/Settings/DockTab.qml:561",
+    "reference": "Modules/Settings/DockTab.qml:542",
     "comment": ""
   },
   {
@@ -2330,7 +2330,7 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:344, Modules/ControlCenter/Details/NetworkDetail.qml:600",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:345, Modules/ControlCenter/Details/NetworkDetail.qml:602",
     "comment": ""
   },
   {
@@ -2450,7 +2450,7 @@
   {
     "term": "No plugins found",
     "context": "No plugins found",
-    "reference": "Modules/Settings/PluginBrowser.qml:530",
+    "reference": "Modules/Settings/PluginBrowser.qml:533",
     "comment": ""
   },
   {
@@ -2642,7 +2642,7 @@
   {
     "term": "Padding",
     "context": "Padding",
-    "reference": "Modules/Settings/DockTab.qml:505",
+    "reference": "Modules/Settings/DockTab.qml:486",
     "comment": ""
   },
   {
@@ -2852,7 +2852,7 @@
   {
     "term": "Power Profile Degradation",
     "context": "Power Profile Degradation",
-    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:625",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:627",
     "comment": ""
   },
   {
@@ -2906,7 +2906,7 @@
   {
     "term": "Process",
     "context": "Process",
-    "reference": "Modules/ProcessList/ProcessListView.qml:41",
+    "reference": "Modules/ProcessList/ProcessListView.qml:42",
     "comment": ""
   },
   {
@@ -3146,13 +3146,13 @@
   {
     "term": "Search plugins...",
     "context": "Search plugins...",
-    "reference": "Modules/Settings/PluginBrowser.qml:254",
+    "reference": "Modules/Settings/PluginBrowser.qml:255",
     "comment": ""
   },
   {
     "term": "Search...",
     "context": "Search...",
-    "reference": "Widgets/DankDropdown.qml:267",
+    "reference": "Widgets/DankDropdown.qml:268",
     "comment": ""
   },
   {
@@ -3284,7 +3284,7 @@
   {
     "term": "Show Dock",
     "context": "Show Dock",
-    "reference": "Modules/Settings/DockTab.qml:179",
+    "reference": "Modules/Settings/DockTab.qml:128",
     "comment": ""
   },
   {
@@ -3326,7 +3326,7 @@
   {
     "term": "Show on Overview",
     "context": "Show on Overview",
-    "reference": "Modules/Settings/DockTab.qml:232, Modules/Settings/DankBarTab.qml:929",
+    "reference": "Modules/Settings/DockTab.qml:242, Modules/Settings/DankBarTab.qml:929",
     "comment": ""
   },
   {
@@ -3440,7 +3440,7 @@
   {
     "term": "Spacing",
     "context": "Spacing",
-    "reference": "Modules/Settings/DockTab.qml:492, Modules/Settings/DankBarTab.qml:988",
+    "reference": "Modules/Settings/DockTab.qml:473, Modules/Settings/DankBarTab.qml:988",
     "comment": ""
   },
   {
@@ -3686,13 +3686,13 @@
   {
     "term": "Third-Party Plugin Warning",
     "context": "Third-Party Plugin Warning",
-    "reference": "Modules/Settings/PluginBrowser.qml:578",
+    "reference": "Modules/Settings/PluginBrowser.qml:581",
     "comment": ""
   },
   {
     "term": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
     "context": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
-    "reference": "Modules/Settings/PluginBrowser.qml:588",
+    "reference": "Modules/Settings/PluginBrowser.qml:591",
     "comment": ""
   },
   {
@@ -3722,7 +3722,7 @@
   {
     "term": "To Full",
     "context": "To Full",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:538",
+    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:540",
     "comment": ""
   },
   {
@@ -4178,7 +4178,7 @@
   {
     "term": "official",
     "context": "official",
-    "reference": "Modules/Settings/PluginBrowser.qml:385",
+    "reference": "Modules/Settings/PluginBrowser.qml:388",
     "comment": ""
   },
   {
@@ -4190,7 +4190,7 @@
   {
     "term": "• Install only from trusted sources",
     "context": "• Install only from trusted sources",
-    "reference": "Modules/Settings/PluginBrowser.qml:611",
+    "reference": "Modules/Settings/PluginBrowser.qml:614",
     "comment": ""
   },
   {
@@ -4220,13 +4220,13 @@
   {
     "term": "• Plugins may contain bugs or security issues",
     "context": "• Plugins may contain bugs or security issues",
-    "reference": "Modules/Settings/PluginBrowser.qml:599",
+    "reference": "Modules/Settings/PluginBrowser.qml:602",
     "comment": ""
   },
   {
     "term": "• Review code before installation when possible",
     "context": "• Review code before installation when possible",
-    "reference": "Modules/Settings/PluginBrowser.qml:605",
+    "reference": "Modules/Settings/PluginBrowser.qml:608",
     "comment": ""
   },
   {

@@ -2,6 +2,7 @@ import "../Common/fzf.js" as Fzf
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
+import Quickshell
 import qs.Common
 import qs.Widgets
 
@@ -306,7 +307,9 @@ Item {
                     width: parent.width
                     height: parent.height - (root.enableFuzzySearch ? searchContainer.height + Theme.spacingXS : 0)
                     clip: true
-                    model: dropdownMenu.filteredOptions
+                    model: ScriptModel {
+                        values: dropdownMenu.filteredOptions
+                    }
                     spacing: 2
 
                     interactive: true
