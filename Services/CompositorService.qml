@@ -57,13 +57,6 @@ Singleton {
         repeat: false
         onTriggered: {
             _sortScheduled = false
-            if (isHyprland) {
-                try {
-                    Hyprland.refreshToplevels()
-                } catch(e) {
-                    console.warn("CompositorService: Failed to refresh toplevels:", e)
-                }
-            }
             sortedToplevels = computeSortedToplevels()
             toplevelsChanged()
         }
@@ -98,6 +91,9 @@ Singleton {
                 event.name === "fullscreen" ||
                 event.name === "moveintogroup" ||
                 event.name === "moveoutofgroup") {
+                try {
+                    Hyprland.refreshToplevels()
+                } catch(e) {}
                 root.scheduleSort()
             }
         }
