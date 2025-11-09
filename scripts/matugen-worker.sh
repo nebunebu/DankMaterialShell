@@ -119,7 +119,7 @@ build_once() {
   fi
 
   grep -v '^\[config\]' "$SHELL_DIR/matugen/configs/base.toml" | \
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" >> "$TMP_CFG"
   echo "" >> "$TMP_CFG"
 
   cat >> "$TMP_CFG" << EOF
@@ -131,48 +131,40 @@ EOF
 
   # If light mode, use gtk3 light config
   if [[ "$mode" == "light" ]]; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/gtk3-light.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/gtk3-light.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   else
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/gtk3-dark.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/gtk3-dark.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v niri >/dev/null 2>&1; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/niri.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/niri.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v qt5ct >/dev/null 2>&1; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/qt5ct.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/qt5ct.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v qt6ct >/dev/null 2>&1; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/qt6ct.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/qt6ct.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v firefox >/dev/null 2>&1; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/firefox.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/firefox.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v pywalfox >/dev/null 2>&1; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/pywalfox.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/pywalfox.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
   if command -v vesktop >/dev/null 2>&1 && [[ -d "$CONFIG_DIR/vesktop" ]]; then
-    sed "s|input_path = '\./matugen/templates/|input_path = '$SHELL_DIR/matugen/templates/|g" \
-      "$SHELL_DIR/matugen/configs/vesktop.toml" >> "$TMP_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/vesktop.toml" >> "$TMP_CFG"
     echo "" >> "$TMP_CFG"
   fi
 
@@ -211,37 +203,37 @@ EOF
   echo "" >> "$TMP_CONTENT_CFG"
 
   if command -v ghostty >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/ghostty.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/ghostty.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v kitty >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/kitty.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/kitty.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v foot >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/foot.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/foot.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v alacritty >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/alacritty.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/alacritty.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v dgop >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/dgop.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/dgop.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v code >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/vscode.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/vscode.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
   if command -v codium >/dev/null 2>&1; then
-    cat "$SHELL_DIR/matugen/configs/codium.toml" >> "$TMP_CONTENT_CFG"
+    sed "s|'SHELL_DIR/|'$SHELL_DIR/|g" "$SHELL_DIR/matugen/configs/codium.toml" >> "$TMP_CONTENT_CFG"
     echo "" >> "$TMP_CONTENT_CFG"
   fi
 
@@ -298,10 +290,7 @@ EOF
   if command -v ghostty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/ghostty/config-dankcolors" ]]; then
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --ghostty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
-      TMP="$(mktemp)"
-      sed '/^palette = /d' "$CONFIG_DIR/ghostty/config-dankcolors" > "$TMP"
-      printf "\n%s\n" "$OUT" >> "$TMP"
-      mv "$TMP" "$CONFIG_DIR/ghostty/config-dankcolors"
+      printf "\n%s\n" "$OUT" >> "$CONFIG_DIR/ghostty/config-dankcolors"
       if [[ -f "$CONFIG_DIR/ghostty/config" ]] && grep -q "^[^#]*config-dankcolors" "$CONFIG_DIR/ghostty/config" 2>/dev/null; then
         pkill -USR2 -x 'ghostty|.ghostty-wrappe' >/dev/null 2>&1 || true
       fi
@@ -311,10 +300,7 @@ EOF
   if command -v kitty >/dev/null 2>&1 && [[ -f "$CONFIG_DIR/kitty/dank-theme.conf" ]]; then
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --kitty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
-      TMP="$(mktemp)"
-      sed '/^color[0-9]/d' "$CONFIG_DIR/kitty/dank-theme.conf" > "$TMP"
-      printf "\n%s\n" "$OUT" >> "$TMP"
-      mv "$TMP" "$CONFIG_DIR/kitty/dank-theme.conf"
+      printf "\n%s\n" "$OUT" >> "$CONFIG_DIR/kitty/dank-theme.conf"
       if [[ -f "$CONFIG_DIR/kitty/kitty.conf" ]] && grep -q "^[^#]*dank-theme.conf" "$CONFIG_DIR/kitty/kitty.conf" 2>/dev/null; then
         pkill -USR1 -x kitty >/dev/null 2>&1 || true
       fi
@@ -331,11 +317,7 @@ EOF
 
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --foot 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
-      TMP="$(mktemp)"
-      echo "[colors]" > "$TMP"
-      sed '/^regular[0-9]/d;/^bright[0-9]/d;/^\[colors\]/d' "$FOOT_CONFIG" >> "$TMP"
-      printf "\n%s\n" "$OUT" >> "$TMP"
-      mv "$TMP" "$FOOT_CONFIG"
+      printf "\n%s\n" "$OUT" >> "$FOOT_CONFIG"
     fi
   fi
 
@@ -349,10 +331,7 @@ EOF
 
     OUT=$(dms dank16 "$PRIMARY" $([[ "$mode" == "light" ]] && echo --light) ${SURFACE:+--background "$SURFACE"} --alacritty 2>/dev/null || true)
     if [[ -n "${OUT:-}" ]]; then
-      TMP="$(mktemp)"
-      sed '/^\[colors\.normal\]/,/^$/d;/^\[colors\.bright\]/,/^$/d' "$ALACRITTY_CONFIG" > "$TMP"
-      printf "\n%s\n" "$OUT" >> "$TMP"
-      mv "$TMP" "$ALACRITTY_CONFIG"
+      printf "\n%s\n" "$OUT" >> "$ALACRITTY_CONFIG"
     fi
   fi
 
