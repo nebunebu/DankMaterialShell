@@ -352,7 +352,7 @@ Item {
                         }
 
                         onClicked: (event) => {
-                            if (!windowData) return
+                            if (!windowData || !windowData.address) return
 
                             if (event.button === Qt.LeftButton) {
                                 root.overviewOpen = false

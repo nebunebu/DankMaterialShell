@@ -687,6 +687,7 @@ Item {
                                             enabled: isActive
                                             cursorShape: Qt.PointingHandCursor
                                             onClicked: {
+                                                if (!appIcon.windowId) return
                                                 if (CompositorService.isHyprland) {
                                                     Hyprland.dispatch(`focuswindow address:${appIcon.windowId}`)
                                                 } else if (CompositorService.isNiri) {
@@ -755,6 +756,7 @@ Item {
                                             enabled: isActive
                                             cursorShape: Qt.PointingHandCursor
                                             onClicked: {
+                                                if (!appIcon.windowId) return
                                                 if (CompositorService.isHyprland) {
                                                     Hyprland.dispatch(`focuswindow address:${appIcon.windowId}`)
                                                 } else if (CompositorService.isNiri) {
