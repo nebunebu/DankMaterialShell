@@ -3,7 +3,6 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
 import qs.Common
-import qs.Services
 import qs.Widgets
 
 pragma ComponentBehavior: Bound
@@ -59,11 +58,15 @@ PanelWindow {
     WlrLayershell.exclusiveZone: 0
     WlrLayershell.keyboardFocus: isVisible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
+    readonly property real dpr: CompositorService.getScreenScale(root.screen)
+    readonly property real alignedWidth: Theme.px(expandable && expandedWidth ? expandedWidthValue : slideoutWidth, dpr)
+    readonly property real alignedHeight: Theme.px(modelData ? modelData.height : 800, dpr)
+
     mask: Region {
         item: Rectangle {
-            x: root.width - contentRect.width
+            x: root.width - alignedWidth
             y: 0
-            width: contentRect.width
+            width: alignedWidth
             height: root.height
         }
     }
@@ -73,7 +76,31 @@ PanelWindow {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        width: expandable && expandedWidth ? expandedWidthValue : slideoutWidth
+        width: alignedWidth
+        height: alignedHeight
+
+        property real slideOffset: alignedWidth
+
+        Connections {
+            target: root
+            function onIsVisibleChanged() {
+                slideContainer.slideOffset = root.isVisible ? 0 : slideContainer.width
+            }
+        }
+
+        Behavior on slideOffset {
+            NumberAnimation {
+                id: slideAnimation
+                duration: 450
+                easing.type: Easing.OutCubic
+
+                onRunningChanged: {
+                    if (!running && !isVisible) {
+                        root.visible = false
+                    }
+                }
+            }
+        }
 
         Behavior on width {
             NumberAnimation {
@@ -84,36 +111,20 @@ PanelWindow {
 
         StyledRect {
             id: contentRect
-            readonly property real dpr: CompositorService.getScreenScale(root.modelData)
-            layer.enabled: true
+            layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
             layer.smooth: false
-            layer.textureSize: Qt.size(width * dpr, height * dpr)
+            layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
             layer.textureMirroring: ShaderEffectSource.NoMirroring
 
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: parent.width
-            x: isVisible ? 0 : parent.width
-
-            Behavior on x {
-                NumberAnimation {
-                    id: slideAnimation
-                    duration: 450
-                    easing.type: Easing.OutCubic
-
-                    onRunningChanged: {
-                        if (!running && !isVisible) {
-                            root.visible = false
-                        }
-                    }
-                }
-            }
+            x: Theme.snap(slideContainer.slideOffset, root.dpr)
             color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b,
                            customTransparency >= 0 ? customTransparency : SettingsData.popupTransparency)
             border.color: Theme.outlineMedium
             border.width: 1
             radius: Theme.cornerRadius
-            visible: isVisible || slideAnimation.running
 
             Column {
                 id: headerColumn
@@ -183,15 +194,8 @@ PanelWindow {
                 anchors.bottomMargin: Theme.spacingL
 
                 Loader {
-                    id: contentLoader
                     anchors.fill: parent
                     sourceComponent: root.content
-
-                    onLoaded: {
-                        if (item && "devicePixelRatio" in item) {
-                            item.devicePixelRatio = contentRect.dpr
-                        }
-                    }
                 }
             }
         }

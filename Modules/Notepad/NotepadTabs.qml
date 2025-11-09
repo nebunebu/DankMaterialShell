@@ -9,7 +9,6 @@ pragma ComponentBehavior: Bound
 Column {
     id: root
 
-    property real devicePixelRatio: 1
     property var currentTab: NotepadStorageService.tabs.length > NotepadStorageService.currentTabIndex ? NotepadStorageService.tabs[NotepadStorageService.currentTabIndex] : null
     property bool contentLoaded: false
 

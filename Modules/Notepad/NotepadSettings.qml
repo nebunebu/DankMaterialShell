@@ -9,7 +9,6 @@ pragma ComponentBehavior: Bound
 Item {
     id: root
 
-    property real devicePixelRatio: 1
     property bool isVisible: false
     property var cachedFontFamilies: []
     property var cachedMonoFamilies: []

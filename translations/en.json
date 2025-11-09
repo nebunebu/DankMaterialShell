@@ -2,7 +2,7 @@
   {
     "term": "%1 characters",
     "context": "%1 characters",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:566",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:565",
     "comment": ""
   },
   {
@@ -62,7 +62,7 @@
   {
     "term": "About",
     "context": "About",
-    "reference": "Modules/Settings/AboutTab.qml:363, Modals/Settings/SettingsSidebar.qml:44",
+    "reference": "Modals/Settings/SettingsSidebar.qml:44, Modules/Settings/AboutTab.qml:363",
     "comment": ""
   },
   {
@@ -110,13 +110,13 @@
   {
     "term": "Add a VPN in NetworkManager",
     "context": "Add a VPN in NetworkManager",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:288, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:147, Modules/DankBar/Popouts/VpnPopout.qml:288",
     "comment": ""
   },
   {
     "term": "All",
     "context": "All",
-    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppDrawerPopout.qml:47, Modals/Spotlight/SpotlightModal.qml:61",
+    "reference": "Services/AppSearchService.qml:217, Services/AppSearchService.qml:233, Modals/Spotlight/SpotlightModal.qml:61, Modules/AppDrawer/CategorySelector.qml:11, Modules/AppDrawer/AppLauncher.qml:16, Modules/AppDrawer/AppLauncher.qml:27, Modules/AppDrawer/AppLauncher.qml:28, Modules/AppDrawer/AppLauncher.qml:45, Modules/AppDrawer/AppLauncher.qml:46, Modules/AppDrawer/AppLauncher.qml:80, Modules/AppDrawer/AppDrawerPopout.qml:47",
     "comment": ""
   },
   {
@@ -332,7 +332,7 @@
   {
     "term": "Auto-saving...",
     "context": "Auto-saving...",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:582",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:581",
     "comment": ""
   },
   {
@@ -596,13 +596,13 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modules/Settings/PluginBrowser.qml:627, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:627",
     "comment": ""
   },
   {
     "term": "Capacity",
     "context": "Capacity",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508, Modules/ControlCenter/Details/BatteryDetail.qml:171",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:171, Modules/DankBar/Popouts/BatteryPopout.qml:352, Modules/DankBar/Popouts/BatteryPopout.qml:508",
     "comment": ""
   },
   {
@@ -692,7 +692,7 @@
   {
     "term": "Close",
     "context": "Close",
-    "reference": "Modals/NetworkInfoModal.qml:131, Modals/NetworkWiredInfoModal.qml:131, Modules/SystemUpdatePopout.qml:335, Modules/DankBar/Widgets/RunningApps.qml:788",
+    "reference": "Modules/SystemUpdatePopout.qml:335, Modals/NetworkWiredInfoModal.qml:131, Modals/NetworkInfoModal.qml:131, Modules/DankBar/Widgets/RunningApps.qml:788",
     "comment": ""
   },
   {
@@ -974,7 +974,7 @@
   {
     "term": "Custom Transparency",
     "context": "Custom Transparency",
-    "reference": "Modules/Notepad/NotepadSettings.qml:334",
+    "reference": "Modules/Notepad/NotepadSettings.qml:333",
     "comment": ""
   },
   {
@@ -1136,7 +1136,7 @@
   {
     "term": "Disconnect",
     "context": "Disconnect",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:224, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:88, Modules/DankBar/Popouts/VpnPopout.qml:224",
     "comment": ""
   },
   {
@@ -1160,7 +1160,7 @@
   {
     "term": "Dismiss",
     "context": "Dismiss",
-    "reference": "Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633, Modules/Notifications/Popup/NotificationPopup.qml:24",
+    "reference": "Modules/Notifications/Popup/NotificationPopup.qml:24, Modules/Notifications/Center/NotificationCard.qml:540, Modules/Notifications/Center/NotificationCard.qml:633",
     "comment": ""
   },
   {
@@ -1286,7 +1286,7 @@
   {
     "term": "Empty",
     "context": "Empty",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:566",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:565",
     "comment": ""
   },
   {
@@ -1544,13 +1544,13 @@
   {
     "term": "Find in Text",
     "context": "Find in Text",
-    "reference": "Modules/Notepad/NotepadSettings.qml:195",
+    "reference": "Modules/Notepad/NotepadSettings.qml:194",
     "comment": ""
   },
   {
     "term": "Find in note...",
     "context": "Find in note...",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:269",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:268",
     "comment": ""
   },
   {
@@ -1562,7 +1562,7 @@
   {
     "term": "Font Family",
     "context": "Font Family",
-    "reference": "Modules/Notepad/NotepadSettings.qml:221, Modules/Settings/ThemeColorsTab.qml:981",
+    "reference": "Modules/Notepad/NotepadSettings.qml:220, Modules/Settings/ThemeColorsTab.qml:981",
     "comment": ""
   },
   {
@@ -1580,7 +1580,7 @@
   {
     "term": "Font Size",
     "context": "Font Size",
-    "reference": "Modules/Notepad/NotepadSettings.qml:255",
+    "reference": "Modules/Notepad/NotepadSettings.qml:254",
     "comment": ""
   },
   {
@@ -1712,7 +1712,7 @@
   {
     "term": "Health",
     "context": "Health",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471, Modules/ControlCenter/Details/BatteryDetail.qml:136",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:136, Modules/DankBar/Popouts/BatteryPopout.qml:317, Modules/DankBar/Popouts/BatteryPopout.qml:471",
     "comment": ""
   },
   {
@@ -1940,7 +1940,7 @@
   {
     "term": "Launch",
     "context": "Launch",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:746, Modals/Spotlight/SpotlightContextMenu.qml:251",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:251, Modules/AppDrawer/AppDrawerPopout.qml:746",
     "comment": ""
   },
   {
@@ -1952,7 +1952,7 @@
   {
     "term": "Launch on dGPU",
     "context": "Launch on dGPU",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:806, Modules/Dock/DockContextMenu.qml:417, Modals/Spotlight/SpotlightContextMenu.qml:312",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:312, Modules/AppDrawer/AppDrawerPopout.qml:806, Modules/Dock/DockContextMenu.qml:417",
     "comment": ""
   },
   {
@@ -1988,7 +1988,7 @@
   {
     "term": "Lines: %1",
     "context": "Lines: %1",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:572",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:571",
     "comment": ""
   },
   {
@@ -2030,7 +2030,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/ControlCenter/PowerMenu.qml:14, Modules/Lock/LockPowerMenu.qml:209",
+    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -2114,7 +2114,7 @@
   {
     "term": "Matugen Palette",
     "context": "Matugen Palette",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1785, Modules/Settings/ThemeColorsTab.qml:595",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:595, Modules/Settings/PersonalizationTab.qml:1785",
     "comment": ""
   },
   {
@@ -2294,7 +2294,7 @@
   {
     "term": "Network Information",
     "context": "Network Information",
-    "reference": "Modals/NetworkInfoModal.qml:61, Modals/NetworkWiredInfoModal.qml:61",
+    "reference": "Modals/NetworkWiredInfoModal.qml:61, Modals/NetworkInfoModal.qml:61",
     "comment": ""
   },
   {
@@ -2318,7 +2318,7 @@
   {
     "term": "New",
     "context": "New",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:544",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:543",
     "comment": ""
   },
   {
@@ -2372,7 +2372,7 @@
   {
     "term": "No VPN profiles found",
     "context": "No VPN profiles found",
-    "reference": "Modules/DankBar/Popouts/VpnPopout.qml:281, Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140",
+    "reference": "Modules/ControlCenter/BuiltinPlugins/VpnWidget.qml:140, Modules/DankBar/Popouts/VpnPopout.qml:281",
     "comment": ""
   },
   {
@@ -2402,7 +2402,7 @@
   {
     "term": "No matches",
     "context": "No matches",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:279",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:278",
     "comment": ""
   },
   {
@@ -2444,7 +2444,7 @@
   {
     "term": "Notepad Font Settings",
     "context": "Notepad Font Settings",
-    "reference": "Modules/Notepad/NotepadSettings.qml:123",
+    "reference": "Modules/Notepad/NotepadSettings.qml:122",
     "comment": ""
   },
   {
@@ -2546,19 +2546,19 @@
   {
     "term": "Open",
     "context": "Open",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:528",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:527",
     "comment": ""
   },
   {
     "term": "Open Notepad File",
     "context": "Open Notepad File",
-    "reference": "Modules/Notepad/Notepad.qml:329",
+    "reference": "Modules/Notepad/Notepad.qml:325",
     "comment": ""
   },
   {
     "term": "Open search bar to find text",
     "context": "Open search bar to find text",
-    "reference": "Modules/Notepad/NotepadSettings.qml:202",
+    "reference": "Modules/Notepad/NotepadSettings.qml:201",
     "comment": ""
   },
   {
@@ -2684,7 +2684,7 @@
   {
     "term": "Pin to Dock",
     "context": "Pin to Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:110, Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370",
     "comment": ""
   },
   {
@@ -2792,19 +2792,19 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/ControlCenter/PowerMenu.qml:17, Modules/Lock/LockPowerMenu.qml:432",
+    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:149, Modules/ControlCenter/PowerMenu.qml:13, Modules/Lock/LockPowerMenu.qml:154",
+    "reference": "Modals/PowerMenuModal.qml:149, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
     "term": "Power Profile Degradation",
     "context": "Power Profile Degradation",
-    "reference": "Modules/DankBar/Popouts/BatteryPopout.qml:625, Modules/ControlCenter/Details/BatteryDetail.qml:240",
+    "reference": "Modules/ControlCenter/Details/BatteryDetail.qml:240, Modules/DankBar/Popouts/BatteryPopout.qml:625",
     "comment": ""
   },
   {
@@ -2918,7 +2918,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/ControlCenter/PowerMenu.qml:16, Modules/Lock/LockPowerMenu.qml:372",
+    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -3020,19 +3020,19 @@
   {
     "term": "Save",
     "context": "Save",
-    "reference": "Modals/DankColorPickerModal.qml:650, Modules/Notepad/Notepad.qml:484, Modules/Notepad/NotepadTextEditor.qml:512, Modals/FileBrowser/FileBrowserSaveRow.qml:55",
+    "reference": "Modals/DankColorPickerModal.qml:650, Modals/FileBrowser/FileBrowserSaveRow.qml:55, Modules/Notepad/NotepadTextEditor.qml:511, Modules/Notepad/Notepad.qml:480",
     "comment": ""
   },
   {
     "term": "Save Notepad File",
     "context": "Save Notepad File",
-    "reference": "Modules/Notepad/Notepad.qml:265",
+    "reference": "Modules/Notepad/Notepad.qml:261",
     "comment": ""
   },
   {
     "term": "Saved",
     "context": "Saved",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:592",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:591",
     "comment": ""
   },
   {
@@ -3158,7 +3158,7 @@
   {
     "term": "Select the palette algorithm used for wallpaper-based colors",
     "context": "Select the palette algorithm used for wallpaper-based colors",
-    "reference": "Modules/Settings/PersonalizationTab.qml:1786, Modules/Settings/ThemeColorsTab.qml:596",
+    "reference": "Modules/Settings/ThemeColorsTab.qml:596, Modules/Settings/PersonalizationTab.qml:1786",
     "comment": ""
   },
   {
@@ -3194,7 +3194,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modules/DankDash/DankDashPopout.qml:249, Modals/Settings/SettingsModal.qml:168",
+    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:168, Modules/DankDash/DankDashPopout.qml:249",
     "comment": ""
   },
   {
@@ -3224,7 +3224,7 @@
   {
     "term": "Show Line Numbers",
     "context": "Show Line Numbers",
-    "reference": "Modules/Notepad/NotepadSettings.qml:152",
+    "reference": "Modules/Notepad/NotepadSettings.qml:151",
     "comment": ""
   },
   {
@@ -3260,7 +3260,7 @@
   {
     "term": "Show on Overview",
     "context": "Show on Overview",
-    "reference": "Modules/Settings/DankBarTab.qml:929, Modules/Settings/DockTab.qml:232",
+    "reference": "Modules/Settings/DockTab.qml:232, Modules/Settings/DankBarTab.qml:929",
     "comment": ""
   },
   {
@@ -3374,7 +3374,7 @@
   {
     "term": "Spacing",
     "context": "Spacing",
-    "reference": "Modules/Settings/DankBarTab.qml:988, Modules/Settings/DockTab.qml:492",
+    "reference": "Modules/Settings/DockTab.qml:492, Modules/Settings/DankBarTab.qml:988",
     "comment": ""
   },
   {
@@ -3398,7 +3398,7 @@
   {
     "term": "Start typing your notes here...",
     "context": "Start typing your notes here...",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:387",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:386",
     "comment": ""
   },
   {
@@ -3446,7 +3446,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/ControlCenter/PowerMenu.qml:15, Modules/Lock/LockPowerMenu.qml:260",
+    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {
@@ -3740,25 +3740,25 @@
   {
     "term": "Unpin from Dock",
     "context": "Unpin from Dock",
-    "reference": "Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370, Modals/Spotlight/SpotlightContextMenu.qml:113",
+    "reference": "Modals/Spotlight/SpotlightContextMenu.qml:113, Modules/AppDrawer/AppDrawerPopout.qml:609, Modules/Dock/DockContextMenu.qml:370",
     "comment": ""
   },
   {
     "term": "Unsaved Changes",
     "context": "Unsaved Changes",
-    "reference": "Modules/Notepad/Notepad.qml:392",
+    "reference": "Modules/Notepad/Notepad.qml:388",
     "comment": ""
   },
   {
     "term": "Unsaved changes",
     "context": "Unsaved changes",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:589",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:588",
     "comment": ""
   },
   {
     "term": "Unsaved note...",
     "context": "Unsaved note...",
-    "reference": "Modules/Notepad/NotepadTextEditor.qml:587",
+    "reference": "Modules/Notepad/NotepadTextEditor.qml:586",
     "comment": ""
   },
   {
@@ -3812,7 +3812,7 @@
   {
     "term": "Use Monospace Font",
     "context": "Use Monospace Font",
-    "reference": "Modules/Notepad/NotepadSettings.qml:140",
+    "reference": "Modules/Notepad/NotepadSettings.qml:139",
     "comment": ""
   },
   {
@@ -4064,25 +4064,25 @@
   {
     "term": "You have unsaved changes. Save before closing this tab?",
     "context": "You have unsaved changes. Save before closing this tab?",
-    "reference": "Modules/Notepad/Notepad.qml:402",
+    "reference": "Modules/Notepad/Notepad.qml:398",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before continuing?",
     "context": "You have unsaved changes. Save before continuing?",
-    "reference": "Modules/Notepad/Notepad.qml:405",
+    "reference": "Modules/Notepad/Notepad.qml:401",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before creating a new file?",
     "context": "You have unsaved changes. Save before creating a new file?",
-    "reference": "Modules/Notepad/Notepad.qml:400",
+    "reference": "Modules/Notepad/Notepad.qml:396",
     "comment": ""
   },
   {
     "term": "You have unsaved changes. Save before opening a file?",
     "context": "You have unsaved changes. Save before opening a file?",
-    "reference": "Modules/Notepad/Notepad.qml:404",
+    "reference": "Modules/Notepad/Notepad.qml:400",
     "comment": ""
   },
   {
