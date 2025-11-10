@@ -34,7 +34,6 @@ Rectangle {
     }
     radius: Theme.cornerRadius
 
-
     Behavior on border.color {
         ColorAnimation {
             duration: Theme.shortDuration
@@ -266,6 +265,7 @@ Rectangle {
 
     Column {
         id: expandedContent
+        objectName: "expandedContent"
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -321,6 +321,8 @@ Rectangle {
             spacing: 16
 
             Repeater {
+                id: notificationRepeater
+                objectName: "notificationRepeater"
                 model: ScriptModel {
                     values: notificationGroup?.notifications?.slice(0, 10) || []
                 }
@@ -347,7 +349,6 @@ Rectangle {
                     color: isSelected ? Theme.primaryPressed : Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                     border.color: isSelected ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.4) : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.05)
                     border.width: isSelected ? 1 : 1
-
 
                     Behavior on border.color {
                         ColorAnimation {
