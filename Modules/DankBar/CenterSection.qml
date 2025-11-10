@@ -32,12 +32,42 @@ Item {
         totalWidgets = 0
         totalSize = 0
 
+        let configuredWidgets = 0
+        let configuredMiddleWidget = null
+        let configuredLeftWidget = null
+        let configuredRightWidget = null
+
         for (var i = 0; i < centerRepeater.count; i++) {
             const item = centerRepeater.itemAt(i)
-            if (item && getWidgetVisible(item.widgetId) && item.active && item.item) {
-                centerWidgets.push(item.item)
-                totalWidgets++
-                totalSize += isVertical ? item.item.height : item.item.width
+            if (item && getWidgetVisible(item.widgetId)) {
+                configuredWidgets++
+            }
+        }
+
+        const isOddConfigured = configuredWidgets % 2 === 1
+        const configuredMiddlePos = Math.floor(configuredWidgets / 2)
+        const configuredLeftPos = isOddConfigured ? -1 : ((configuredWidgets / 2) - 1)
+        const configuredRightPos = isOddConfigured ? -1 : (configuredWidgets / 2)
+        let currentConfigIndex = 0
+
+        for (var i = 0; i < centerRepeater.count; i++) {
+            const item = centerRepeater.itemAt(i)
+            if (item && getWidgetVisible(item.widgetId)) {
+                if (isOddConfigured && currentConfigIndex === configuredMiddlePos && item.active && item.item) {
+                    configuredMiddleWidget = item.item
+                }
+                if (!isOddConfigured && currentConfigIndex === configuredLeftPos && item.active && item.item) {
+                    configuredLeftWidget = item.item
+                }
+                if (!isOddConfigured && currentConfigIndex === configuredRightPos && item.active && item.item) {
+                    configuredRightWidget = item.item
+                }
+                if (item.active && item.item) {
+                    centerWidgets.push(item.item)
+                    totalWidgets++
+                    totalSize += isVertical ? item.item.height : item.item.width
+                }
+                currentConfigIndex++
             }
         }
 
@@ -49,11 +79,12 @@ Item {
             totalSize += spacing * (totalWidgets - 1)
         }
 
-        positionWidgets()
+        positionWidgets(configuredWidgets, configuredMiddleWidget, configuredLeftWidget, configuredRightWidget)
     }
 
-    function positionWidgets() {
+    function positionWidgets(configuredWidgets, configuredMiddleWidget, configuredLeftWidget, configuredRightWidget) {
         const parentCenter = (isVertical ? height : width) / 2
+        const isOddConfigured = configuredWidgets % 2 === 1
 
         centerWidgets.forEach(widget => {
             if (isVertical) {
@@ -63,29 +94,12 @@ Item {
             }
         })
 
-        if (totalWidgets === 1) {
-            const widget = centerWidgets[0]
-            const size = isVertical ? widget.height : widget.width
-            if (isVertical) {
-                widget.y = parentCenter - (size / 2)
-            } else {
-                widget.x = parentCenter - (size / 2)
+        if (isOddConfigured) {
+            if (!configuredMiddleWidget) {
+                return
             }
-        } else if (totalWidgets === 2) {
-            const firstWidget = centerWidgets[0]
-            const secondWidget = centerWidgets[1]
-            const firstSize = isVertical ? firstWidget.height : firstWidget.width
-
-            if (isVertical) {
-                firstWidget.y = parentCenter - (firstSize / 2)
-                secondWidget.y = firstWidget.y + firstSize + spacing
-            } else {
-                firstWidget.x = parentCenter - (firstSize / 2)
-                secondWidget.x = firstWidget.x + firstSize + spacing
-            }
-        } else if (totalWidgets % 2 === 1) {
-            const middleIndex = Math.floor(totalWidgets / 2)
-            const middleWidget = centerWidgets[middleIndex]
+            const middleWidget = configuredMiddleWidget
+            const middleIndex = centerWidgets.indexOf(middleWidget)
             const middleSize = isVertical ? middleWidget.height : middleWidget.width
 
             if (isVertical) {
@@ -116,12 +130,16 @@ Item {
                 currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
             }
         } else {
-            const leftIndex = (totalWidgets / 2) - 1
-            const rightIndex = totalWidgets / 2
+            if (!configuredLeftWidget || !configuredRightWidget) {
+                return
+            }
+
+            const leftWidget = configuredLeftWidget
+            const rightWidget = configuredRightWidget
+            const leftIndex = centerWidgets.indexOf(leftWidget)
+            const rightIndex = centerWidgets.indexOf(rightWidget)
             const halfSpacing = spacing / 2
 
-            const leftWidget = centerWidgets[leftIndex]
-            const rightWidget = centerWidgets[rightIndex]
             const leftSize = isVertical ? leftWidget.height : leftWidget.width
 
             if (isVertical) {
