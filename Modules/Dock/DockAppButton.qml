@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import Quickshell.Widgets
 import qs.Common
 import qs.Services
@@ -91,56 +92,11 @@ Item {
     }
 
     function getToplevelObject() {
-        if (!appData) {
-            return null
-        }
-
-        const sortedToplevels = CompositorService.sortedToplevels
-        if (!sortedToplevels) {
-            return null
-        }
-
-        if (appData.type === "window") {
-            if (appData.uniqueId) {
-                for (var i = 0; i < sortedToplevels.length; i++) {
-                    const toplevel = sortedToplevels[i]
-                    const checkId = toplevel.title + "|" + (toplevel.appId || "") + "|" + i
-                    if (checkId === appData.uniqueId) {
-                        return toplevel
-                    }
-                }
-            }
-
-            if (appData.windowId !== undefined && appData.windowId !== null && appData.windowId >= 0) {
-                if (appData.windowId < sortedToplevels.length) {
-                    return sortedToplevels[appData.windowId]
-                }
-            }
-        } else if (appData.type === "grouped") {
-            if (appData.windowId !== undefined && appData.windowId !== null && appData.windowId >= 0) {
-                if (appData.windowId < sortedToplevels.length) {
-                    return sortedToplevels[appData.windowId]
-                }
-            }
-        }
-
-        return null
+        return appData?.toplevel || null
     }
 
     function getGroupedToplevels() {
-        if (!appData || appData.type !== "grouped") {
-            return []
-        }
-
-        const toplevels = []
-        const allToplevels = ToplevelManager.toplevels.values
-        for (let i = 0; i < allToplevels.length; i++) {
-            const toplevel = allToplevels[i]
-            if (toplevel.appId === appData.appId) {
-                toplevels.push(toplevel)
-            }
-        }
-        return toplevels
+        return appData?.allWindows?.map(w => w.toplevel).filter(t => t !== null) || []
     }
     onIsHoveredChanged: {
         if (mouseArea.pressed) return
@@ -325,17 +281,9 @@ Item {
                                }
                            }
                        } else if (mouse.button === Qt.MiddleButton) {
-                           if (appData && appData.type === "window") {
-                               const sortedToplevels = CompositorService.sortedToplevels
-                               for (var i = 0; i < sortedToplevels.length; i++) {
-                                   const toplevel = sortedToplevels[i]
-                                   const checkId = toplevel.title + "|" + (toplevel.appId || "") + "|" + i
-                                   if (checkId === appData.uniqueId) {
-                                       toplevel.close()
-                                       break
-                                   }
-                               }
-                           } else if (appData && appData.type === "grouped") {
+                           if (appData?.type === "window") {
+                               appData?.toplevel?.close()
+                           } else if (appData?.type === "grouped") {
                                if (contextMenu) {
                                    contextMenu.showForButton(root, appData, root.height, false, cachedDesktopEntry, parentDockScreen)
                                }

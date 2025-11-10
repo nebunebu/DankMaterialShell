@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import Quickshell.Widgets
 import qs.Common
 import qs.Services
@@ -475,24 +476,10 @@ PanelWindow {
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        const sortedToplevels = CompositorService.sortedToplevels
-                        if (root.appData && root.appData.type === "window") {
-                            for (var i = 0; i < sortedToplevels.length; i++) {
-                                const toplevel = sortedToplevels[i]
-                                const checkId = toplevel.title + "|" + (toplevel.appId || "") + "|" + i
-                                if (checkId === root.appData.uniqueId) {
-                                    toplevel.close()
-                                    break
-                                }
-                            }
-                        } else if (root.appData && root.appData.type === "grouped") {
-                            const allToplevels = ToplevelManager.toplevels.values
-                            for (let i = 0; i < allToplevels.length; i++) {
-                                const toplevel = allToplevels[i]
-                                if (toplevel.appId === root.appData.appId) {
-                                    toplevel.close()
-                                }
-                            }
+                        if (root.appData?.type === "window") {
+                            root.appData?.toplevel?.close()
+                        } else if (root.appData?.type === "grouped") {
+                            root.appData?.allWindows?.forEach(window => window.toplevel?.close())
                         }
                         root.close()
                     }
