@@ -110,7 +110,7 @@ PanelWindow {
             }
         }
 
-        StyledRect {
+        Item {
             id: contentRect
             layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
             layer.smooth: false
@@ -121,11 +121,12 @@ PanelWindow {
             anchors.bottom: parent.bottom
             width: parent.width
             x: Theme.snap(slideContainer.slideOffset, root.dpr)
-            color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b,
-                           customTransparency >= 0 ? customTransparency : SettingsData.popupTransparency)
-            border.color: Theme.outlineMedium
-            border.width: 1
-            radius: Theme.cornerRadius
+
+            DankRectangle {
+                anchors.fill: parent
+                color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b,
+                               customTransparency >= 0 ? customTransparency : SettingsData.popupTransparency)
+            }
 
             Column {
                 id: headerColumn

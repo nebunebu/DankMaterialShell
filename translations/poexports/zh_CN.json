@@ -89,9 +89,6 @@
   "Applications": {
     "Applications": "应用程序"
   },
-  "Apply": {
-    "Apply": "应用"
-  },
   "Apply GTK Colors": {
     "Apply GTK Colors": "应用 GTK 配色"
   },
@@ -167,9 +164,6 @@
   "Auto-hide Dock": {
     "Auto-hide Dock": "自动隐藏程序坞"
   },
-  "Auto-location": {
-    "Auto-location": "自动定位"
-  },
   "Auto-saving...": {
     "Auto-saving...": "自动保存中..."
   },
@@ -229,9 +223,6 @@
   },
   "Battery level and power management": {
     "Battery level and power management": "电池电量与电源管理"
-  },
-  "Battery not detected - only AC power settings available": {
-    "Battery not detected - only AC power settings available": "未检测到电池，仅电源设置可用"
   },
   "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": {
     "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": "将锁屏绑定到来自 loginctl 的 dbus 信号。如使用外部锁屏程序，请禁用此项"
@@ -398,9 +389,6 @@
   "Compositor": {
     "Compositor": "合成器"
   },
-  "Compositor:": {
-    "Compositor:": "合成器："
-  },
   "Configuration activated": {
     "Configuration activated": "已应用配置"
   },
@@ -434,9 +422,6 @@
   "Connecting to Device": {
     "Connecting to Device": "连接设备中"
   },
-  "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": "连接失败，请检查密码后重试。"
-  },
   "Contrast": {
     "Contrast": "对比度"
   },
@@ -460,9 +445,6 @@
   },
   "Copied!": {
     "Copied!": "复制成功！"
-  },
-  "Copy": {
-    "Copy": "复制"
   },
   "Copy PID": {
     "Copy PID": "复制进程ID"
@@ -541,9 +523,6 @@
   },
   "Dank Bar Widget Transparency": {
     "Dank Bar Widget Transparency": "Dank Bar 小组件透明度"
-  },
-  "Dank Suite:": {
-    "Dank Suite:": "Dank 套件："
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar 字体缩放"
@@ -842,9 +821,6 @@
   "Format Legend": {
     "Format Legend": "参考格式"
   },
-  "Framework:": {
-    "Framework:": "框架："
-  },
   "Fun": {
     "Fun": "娱乐"
   },
@@ -865,9 +841,6 @@
   },
   "Gamma control not available. Requires DMS API v6+.": {
     "Gamma control not available. Requires DMS API v6+.": "伽玛控制不可用，需要 DMS API v6+。"
-  },
-  "Geoclue service not running - cannot auto-detect location": {
-    "Geoclue service not running - cannot auto-detect location": "Geoclue 服务未运行 - 无法自动检测位置"
   },
   "Github:": {
     "Github:": "Github:"
@@ -902,14 +875,8 @@
   "Hex": {
     "Hex": "十六进制"
   },
-  "Hex:": {
-    "Hex:": "十六进制颜色码："
-  },
   "Hibernate": {
     "Hibernate": "休眠"
-  },
-  "Hibernate system after": {
-    "Hibernate system after": "在此时间后休眠系统"
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "在未使用时隐藏程序坞，鼠标悬停到程序坞区域时显示"
@@ -1000,9 +967,6 @@
   },
   "Kill Process": {
     "Kill Process": "结束进程"
-  },
-  "Language:": {
-    "Language:": "开发语言："
   },
   "Last launched %1": {
     "Last launched %1": "上次启动于 %1"
@@ -1165,9 +1129,6 @@
   },
   "Mode: ": {
     "Mode: ": "模式: "
-  },
-  "Monitor": {
-    "Monitor": "显示器"
   },
   "Monitor Selection:": {
     "Monitor Selection:": "选择显示器："
@@ -1502,9 +1463,6 @@
   "Profile image is too large. Please use a smaller image.": {
     "Profile image is too large. Please use a smaller image.": "个人资料图片过大，请选择更小的图片。"
   },
-  "QML, JavaScript, Go": {
-    "QML, JavaScript, Go": "QML, JavaScript, Go"
-  },
   "Quick access to application launcher": {
     "Quick access to application launcher": "快捷访问应用启动器"
   },
@@ -1603,9 +1561,6 @@
   },
   "Science": {
     "Science": "科学"
-  },
-  "Scroll through windows, rather than workspaces": {
-    "Scroll through windows, rather than workspaces": "滚动窗口，而非工作区"
   },
   "Search file contents": {
     "Search file contents": "检索文件内容"
@@ -1865,12 +1820,6 @@
   "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": {
     "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": "Tab/Shift+Tab: 导航 • ←→↑↓: 网格导航 • 回车/空格: 选中"
   },
-  "Technical Details": {
-    "Technical Details": "技术细节"
-  },
-  "Temperature": {
-    "Temperature": "色温"
-  },
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "终端自定义附加参数"
   },
@@ -1997,9 +1946,6 @@
   "Use animated wave progress bars for media playback": {
     "Use animated wave progress bars for media playback": "进行媒体播放时显示动画波形进度条"
   },
-  "Use automatic location detection (geoclue2)": {
-    "Use automatic location detection (geoclue2)": "使用自动位置检测 （geoclue2）"
-  },
   "Use custom command for update your system": {
     "Use custom command for update your system": "使用自定义命令来更新系统"
   },
@@ -2104,9 +2050,6 @@
   },
   "Wind": {
     "Wind": "风速"
-  },
-  "Window Scrolling": {
-    "Window Scrolling": "窗口滚动"
   },
   "Workspace": {
     "Workspace": "工作区"

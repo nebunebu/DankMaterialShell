@@ -4,6 +4,7 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.Common
 import qs.Services
+import qs.Widgets
 
 PanelWindow {
     id: root
@@ -213,16 +214,12 @@ PanelWindow {
             }
         }
 
-        Rectangle {
+        Item {
             id: contentContainer
 
             anchors.centerIn: parent
             width: parent.width
             height: parent.height
-            color: root.backgroundColor
-            radius: root.cornerRadius
-            border.color: root.borderColor
-            border.width: root.borderWidth
             clip: false
             layer.enabled: true
             layer.smooth: false
@@ -239,6 +236,14 @@ PanelWindow {
                     easing.type: Easing.BezierSpline
                     easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
                 }
+            }
+
+            DankRectangle {
+                anchors.fill: parent
+                color: root.backgroundColor
+                borderColor: root.borderColor
+                borderWidth: root.borderWidth
+                radius: root.cornerRadius
             }
 
             FocusScope {

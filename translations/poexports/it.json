@@ -89,9 +89,6 @@
   "Applications": {
     "Applications": "Applicazioni"
   },
-  "Apply": {
-    "Apply": "Applica"
-  },
   "Apply GTK Colors": {
     "Apply GTK Colors": "Applica Colori GTK"
   },
@@ -167,9 +164,6 @@
   "Auto-hide Dock": {
     "Auto-hide Dock": "Nascondi automaticamente Dock"
   },
-  "Auto-location": {
-    "Auto-location": "Localizzazione automatica"
-  },
   "Auto-saving...": {
     "Auto-saving...": "Salvataggio automatico..."
   },
@@ -229,9 +223,6 @@
   },
   "Battery level and power management": {
     "Battery level and power management": "Livello batteria e gestione energetica"
-  },
-  "Battery not detected - only AC power settings available": {
-    "Battery not detected - only AC power settings available": "Batteria non rilevata - disponibili solo impostazioni di alimentazione di rete"
   },
   "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": {
     "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": "Collega il blocca schermo ai segnali dbus da loginctl.\nDisabilità se stai usando un blocca schermo esterno"
@@ -398,9 +389,6 @@
   "Compositor": {
     "Compositor": "Compositor\n"
   },
-  "Compositor:": {
-    "Compositor:": "Compositor:"
-  },
   "Configuration activated": {
     "Configuration activated": "Configurazione attivata"
   },
@@ -434,9 +422,6 @@
   "Connecting to Device": {
     "Connecting to Device": "Connessione al Dispositivo"
   },
-  "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": "Connessione fallita. Controlla la password e riprova"
-  },
   "Contrast": {
     "Contrast": "Contrasto"
   },
@@ -460,9 +445,6 @@
   },
   "Copied!": {
     "Copied!": "Copiato!"
-  },
-  "Copy": {
-    "Copy": "Copia"
   },
   "Copy PID": {
     "Copy PID": "Copia PID"
@@ -541,9 +523,6 @@
   },
   "Dank Bar Widget Transparency": {
     "Dank Bar Widget Transparency": "Trasparenza Widget Dank Bar"
-  },
-  "Dank Suite:": {
-    "Dank Suite:": "Dank Suite:"
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "Scala Font DankBar"
@@ -842,9 +821,6 @@
   "Format Legend": {
     "Format Legend": "Legenda Formato"
   },
-  "Framework:": {
-    "Framework:": "Framework:"
-  },
   "Fun": {
     "Fun": "Svago"
   },
@@ -865,9 +841,6 @@
   },
   "Gamma control not available. Requires DMS API v6+.": {
     "Gamma control not available. Requires DMS API v6+.": "Gamma control non disponibile. Richiede API DMS v6+."
-  },
-  "Geoclue service not running - cannot auto-detect location": {
-    "Geoclue service not running - cannot auto-detect location": "Il servizio Geoclue non è in esecuzione - non può determinare la posizione automaticamente"
   },
   "Github:": {
     "Github:": "Github:"
@@ -902,14 +875,8 @@
   "Hex": {
     "Hex": "Hex"
   },
-  "Hex:": {
-    "Hex:": "Hex:"
-  },
   "Hibernate": {
     "Hibernate": "Iberna"
-  },
-  "Hibernate system after": {
-    "Hibernate system after": "Iberna sistema dopo"
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "Nascondi la dock quando "
@@ -1000,9 +967,6 @@
   },
   "Kill Process": {
     "Kill Process": "Chiusura Processo"
-  },
-  "Language:": {
-    "Language:": "Lingua:"
   },
   "Last launched %1": {
     "Last launched %1": "Ultimo avviato %1"
@@ -1165,9 +1129,6 @@
   },
   "Mode: ": {
     "Mode: ": ""
-  },
-  "Monitor": {
-    "Monitor": "Monitor"
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Selezione Monitor:"
@@ -1502,9 +1463,6 @@
   "Profile image is too large. Please use a smaller image.": {
     "Profile image is too large. Please use a smaller image.": "Immagine profilo troppo grande. Per favore usa un'immagine più piccola"
   },
-  "QML, JavaScript, Go": {
-    "QML, JavaScript, Go": "\nQML, JavaScript, Go"
-  },
   "Quick access to application launcher": {
     "Quick access to application launcher": "Accesso veloce al launcher applicazioni"
   },
@@ -1603,9 +1561,6 @@
   },
   "Science": {
     "Science": "Scienza"
-  },
-  "Scroll through windows, rather than workspaces": {
-    "Scroll through windows, rather than workspaces": "Scorri tra le finestre, piuttosto che i workspaces"
   },
   "Search file contents": {
     "Search file contents": "Cerca il contenuto dei files"
@@ -1865,12 +1820,6 @@
   "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": {
     "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": "Tab/Shift+Tab: Nav • ←→↑↓: Griglia Nav • Enter/Spazio: Seleziona"
   },
-  "Technical Details": {
-    "Technical Details": "Dettagli Tecnici"
-  },
-  "Temperature": {
-    "Temperature": "Temperatura"
-  },
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "Parametri aggiuntivi personalizzati terminale"
   },
@@ -1997,9 +1946,6 @@
   "Use animated wave progress bars for media playback": {
     "Use animated wave progress bars for media playback": "Usa barre ad onde animate per la riproduzione media"
   },
-  "Use automatic location detection (geoclue2)": {
-    "Use automatic location detection (geoclue2)": "Usa il rilevamento automatico della posizione (geoclue2)"
-  },
   "Use custom command for update your system": {
     "Use custom command for update your system": "Usa comando personalizzato per aggiornare il sistema"
   },
@@ -2104,9 +2050,6 @@
   },
   "Wind": {
     "Wind": "Vento"
-  },
-  "Window Scrolling": {
-    "Window Scrolling": "Scorrimento Finestra"
   },
   "Workspace": {
     "Workspace": "Workspace"

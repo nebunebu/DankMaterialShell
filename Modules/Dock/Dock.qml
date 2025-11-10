@@ -339,7 +339,7 @@ Variants {
                     }
                 }
 
-                Rectangle {
+                Item {
                     id: dockBackground
                     objectName: "dockBackground"
                     anchors {
@@ -360,16 +360,13 @@ Variants {
                     width: implicitWidth
                     height: implicitHeight
 
-                    color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, backgroundTransparency)
-                    radius: Theme.cornerRadius
-                    border.width: 1
-                    border.color: Theme.outlineMedium
+                    layer.enabled: true
                     clip: false
 
-                    Rectangle {
+                    DankRectangle {
                         anchors.fill: parent
-                        color: Qt.rgba(Theme.surfaceTint.r, Theme.surfaceTint.g, Theme.surfaceTint.b, 0.04)
-                        radius: parent.radius
+                        color: Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, backgroundTransparency)
+                        overlayColor: Qt.rgba(Theme.surfaceTint.r, Theme.surfaceTint.g, Theme.surfaceTint.b, 0.04)
                     }
                 }
 

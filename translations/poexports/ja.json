@@ -89,9 +89,6 @@
   "Applications": {
     "Applications": "アプリ"
   },
-  "Apply": {
-    "Apply": "適用"
-  },
   "Apply GTK Colors": {
     "Apply GTK Colors": "GTKカラーを適用"
   },
@@ -167,9 +164,6 @@
   "Auto-hide Dock": {
     "Auto-hide Dock": "ドックを自動的に隠す"
   },
-  "Auto-location": {
-    "Auto-location": "自動位置特定"
-  },
   "Auto-saving...": {
     "Auto-saving...": "自動保存中..."
   },
@@ -229,9 +223,6 @@
   },
   "Battery level and power management": {
     "Battery level and power management": "バッテリーレベルおよび電源管理"
-  },
-  "Battery not detected - only AC power settings available": {
-    "Battery not detected - only AC power settings available": "バッテリーが検出されません - AC電源設定のみ利用可能です"
   },
   "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": {
     "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": "ロック画面をloginctlからのdbus信号にバインド。外部ロック画面を使用している場合は無効に"
@@ -398,9 +389,6 @@
   "Compositor": {
     "Compositor": "コンポジター"
   },
-  "Compositor:": {
-    "Compositor:": "コンポジター："
-  },
   "Configuration activated": {
     "Configuration activated": "設定が適用されました"
   },
@@ -434,9 +422,6 @@
   "Connecting to Device": {
     "Connecting to Device": "デバイスに接続中"
   },
-  "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": "接続に失敗しました。パスワードを確認して、もう一度やり直してください。"
-  },
   "Contrast": {
     "Contrast": "コントラスト"
   },
@@ -460,9 +445,6 @@
   },
   "Copied!": {
     "Copied!": "コピーしました！"
-  },
-  "Copy": {
-    "Copy": "コピー"
   },
   "Copy PID": {
     "Copy PID": "PIDをコピー"
@@ -541,9 +523,6 @@
   },
   "Dank Bar Widget Transparency": {
     "Dank Bar Widget Transparency": "Dank Barウィジェットの透明度"
-  },
-  "Dank Suite:": {
-    "Dank Suite:": "Dankスイート："
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "Dank Bar フォントスケール"
@@ -842,9 +821,6 @@
   "Format Legend": {
     "Format Legend": "フォーマット凡例"
   },
-  "Framework:": {
-    "Framework:": "フレームワーク:"
-  },
   "Fun": {
     "Fun": "娯楽"
   },
@@ -865,9 +841,6 @@
   },
   "Gamma control not available. Requires DMS API v6+.": {
     "Gamma control not available. Requires DMS API v6+.": "ガンマ制御は使用できません。DMS API v6+ が必要です。"
-  },
-  "Geoclue service not running - cannot auto-detect location": {
-    "Geoclue service not running - cannot auto-detect location": "ジオクルー サービスが実行されていない - 位置を自動検出できません"
   },
   "Github:": {
     "Github:": "GitHub:"
@@ -902,14 +875,8 @@
   "Hex": {
     "Hex": "16進数"
   },
-  "Hex:": {
-    "Hex:": "16進数:"
-  },
   "Hibernate": {
     "Hibernate": "休止状態"
-  },
-  "Hibernate system after": {
-    "Hibernate system after": "後にシステムを休止状態"
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "使用していないときはドックを非表示にし、ドックエリアの近くにホバーすると表示されます"
@@ -1000,9 +967,6 @@
   },
   "Kill Process": {
     "Kill Process": "プロセスを強制終了"
-  },
-  "Language:": {
-    "Language:": "言語："
   },
   "Last launched %1": {
     "Last launched %1": "最終起動日 %1"
@@ -1165,9 +1129,6 @@
   },
   "Mode: ": {
     "Mode: ": "モード: "
-  },
-  "Monitor": {
-    "Monitor": "モニター"
   },
   "Monitor Selection:": {
     "Monitor Selection:": "モニターの選択："
@@ -1502,9 +1463,6 @@
   "Profile image is too large. Please use a smaller image.": {
     "Profile image is too large. Please use a smaller image.": "プロフィール画像が大きすぎます。より小さい画像を使用してください。"
   },
-  "QML, JavaScript, Go": {
-    "QML, JavaScript, Go": "QML, JavaScript, Go"
-  },
   "Quick access to application launcher": {
     "Quick access to application launcher": "アプリケーションランチャーへのクイックアクセス"
   },
@@ -1603,9 +1561,6 @@
   },
   "Science": {
     "Science": "科学"
-  },
-  "Scroll through windows, rather than workspaces": {
-    "Scroll through windows, rather than workspaces": "ワークスペースではなくウィンドウをスクロール"
   },
   "Search file contents": {
     "Search file contents": "ファイルの内容を検索"
@@ -1865,12 +1820,6 @@
   "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": {
     "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": "Tab/Shift+Tab: ナビゲーション • ←→↑↓: グリッドナビゲーション • Enter/Space: 選択"
   },
-  "Technical Details": {
-    "Technical Details": "技術的な詳細"
-  },
-  "Temperature": {
-    "Temperature": "温度"
-  },
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "端末のカスタム追加パラメーター"
   },
@@ -1997,9 +1946,6 @@
   "Use animated wave progress bars for media playback": {
     "Use animated wave progress bars for media playback": "アニメーション化されたウェーブの進行状況バーをメディア再生に使用"
   },
-  "Use automatic location detection (geoclue2)": {
-    "Use automatic location detection (geoclue2)": "自動位置検出 (geoclue2) を使用"
-  },
   "Use custom command for update your system": {
     "Use custom command for update your system": "カスタムコマンドを使用してシステムを更新"
   },
@@ -2104,9 +2050,6 @@
   },
   "Wind": {
     "Wind": "風"
-  },
-  "Window Scrolling": {
-    "Window Scrolling": "ウィンドウスクロール"
   },
   "Workspace": {
     "Workspace": "ワークスペース"

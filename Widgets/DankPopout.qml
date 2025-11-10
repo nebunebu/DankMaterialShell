@@ -5,6 +5,7 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.Common
 import qs.Services
+import qs.Widgets
 
 PanelWindow {
     id: root
@@ -171,28 +172,26 @@ PanelWindow {
 
         RectangularShadow {
             id: shadowEffect
-            width: contentLoader.width
-            height: contentLoader.height
-            x: contentLoader.x
-            y: contentLoader.y
-            scale: contentLoader.scale
+            width: contentLoaderWrapper.width
+            height: contentLoaderWrapper.height
+            x: contentLoaderWrapper.x
+            y: contentLoaderWrapper.y
+            scale: contentLoaderWrapper.scale
             transformOrigin: Item.Center
 
             radius: Theme.cornerRadius
             blur: 10
             spread: 0
             color: Qt.rgba(0, 0, 0, 0.6)
-            visible: contentLoader.visible && shouldBeVisible
-            opacity: contentLoader.opacity * 0.6
+            visible: contentLoaderWrapper.visible && shouldBeVisible
+            opacity: contentLoaderWrapper.opacity * 0.6
         }
 
-        Loader {
-            id: contentLoader
+        Item {
+            id: contentLoaderWrapper
             anchors.centerIn: parent
             width: parent.width
             height: parent.height
-            active: root.visible
-            asynchronous: false
             layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
             layer.smooth: false
             layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
@@ -209,6 +208,17 @@ PanelWindow {
                     easing.type: Easing.BezierSpline
                     easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
                 }
+            }
+
+            DankRectangle {
+                anchors.fill: parent
+            }
+
+            Loader {
+                id: contentLoader
+                anchors.fill: parent
+                active: root.visible
+                asynchronous: false
             }
         }
     }

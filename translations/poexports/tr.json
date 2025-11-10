@@ -89,9 +89,6 @@
   "Applications": {
     "Applications": "Uygulamalar"
   },
-  "Apply": {
-    "Apply": "Uygula"
-  },
   "Apply GTK Colors": {
     "Apply GTK Colors": "GTK Renklerini Uygula"
   },
@@ -167,9 +164,6 @@
   "Auto-hide Dock": {
     "Auto-hide Dock": "Dock'u Otomatik Gizle"
   },
-  "Auto-location": {
-    "Auto-location": "Otomatik konum"
-  },
   "Auto-saving...": {
     "Auto-saving...": "Otomatik kaydetme..."
   },
@@ -229,9 +223,6 @@
   },
   "Battery level and power management": {
     "Battery level and power management": "Batarya seviyesi ve güç yönetimi"
-  },
-  "Battery not detected - only AC power settings available": {
-    "Battery not detected - only AC power settings available": "Batarya tespit edilmedi - sadece AC güç ayarları kullanılabilir"
   },
   "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": {
     "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen": "Kilit ekranını loginctl'den gelen dbus sinyallerine bağlayın. Harici bir kilit ekranı kullanıyorsanız devre dışı bırakın"
@@ -398,9 +389,6 @@
   "Compositor": {
     "Compositor": "Kompozitör"
   },
-  "Compositor:": {
-    "Compositor:": "Kompozitör:"
-  },
   "Configuration activated": {
     "Configuration activated": "Yapılandırma aktifleştirildi"
   },
@@ -434,9 +422,6 @@
   "Connecting to Device": {
     "Connecting to Device": "Cihaza Bağlanma"
   },
-  "Connection failed. Check password and try again.": {
-    "Connection failed. Check password and try again.": "Bağlantı başarısız. Parolayı kontrol edin ve tekrar deneyin."
-  },
   "Contrast": {
     "Contrast": "Kontrast"
   },
@@ -460,9 +445,6 @@
   },
   "Copied!": {
     "Copied!": "Kopyalandı!"
-  },
-  "Copy": {
-    "Copy": "Kopyala"
   },
   "Copy PID": {
     "Copy PID": "PID'i Kopyala"
@@ -541,9 +523,6 @@
   },
   "Dank Bar Widget Transparency": {
     "Dank Bar Widget Transparency": "Dank Bar Widget Şeffaflığı"
-  },
-  "Dank Suite:": {
-    "Dank Suite:": "Dank Suite:"
   },
   "DankBar Font Scale": {
     "DankBar Font Scale": "DankBar Yazı Tipi Ölçeği"
@@ -842,9 +821,6 @@
   "Format Legend": {
     "Format Legend": "Biçim Açıklaması"
   },
-  "Framework:": {
-    "Framework:": "Framework:"
-  },
   "Fun": {
     "Fun": "Eğlence"
   },
@@ -865,9 +841,6 @@
   },
   "Gamma control not available. Requires DMS API v6+.": {
     "Gamma control not available. Requires DMS API v6+.": "Gama kontrolü mevcut değil. DMS API V6+ gerekir."
-  },
-  "Geoclue service not running - cannot auto-detect location": {
-    "Geoclue service not running - cannot auto-detect location": "Geoclue hizmeti çalışmıyor - konum otomatik olarak algılanamıyor"
   },
   "Github:": {
     "Github:": "Github:"
@@ -902,14 +875,8 @@
   "Hex": {
     "Hex": "Hex"
   },
-  "Hex:": {
-    "Hex:": "Hex:"
-  },
   "Hibernate": {
     "Hibernate": "Hazırda Beklet"
-  },
-  "Hibernate system after": {
-    "Hibernate system after": "Şu zaman sonra sistemi hazırda beklet"
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "Kullanılmadığında dock'u gizle ve dock alanının yakınına geldiğinizde göster"
@@ -1000,9 +967,6 @@
   },
   "Kill Process": {
     "Kill Process": "Süreci Öldür"
-  },
-  "Language:": {
-    "Language:": "Dil:"
   },
   "Last launched %1": {
     "Last launched %1": "Son başlatma %1"
@@ -1165,9 +1129,6 @@
   },
   "Mode: ": {
     "Mode: ": "Mod: "
-  },
-  "Monitor": {
-    "Monitor": "Monitör"
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Monitör Seçimi:"
@@ -1502,9 +1463,6 @@
   "Profile image is too large. Please use a smaller image.": {
     "Profile image is too large. Please use a smaller image.": "Profil resmi çok büyük. Lütfen daha küçük bir resim kullanın."
   },
-  "QML, JavaScript, Go": {
-    "QML, JavaScript, Go": "QML, Javascript, Go"
-  },
   "Quick access to application launcher": {
     "Quick access to application launcher": "Uygulama başlatıcısına hızlı erişim"
   },
@@ -1603,9 +1561,6 @@
   },
   "Science": {
     "Science": "Bilim"
-  },
-  "Scroll through windows, rather than workspaces": {
-    "Scroll through windows, rather than workspaces": "Çalışma alanları yerine pencereler arasında gezin"
   },
   "Search file contents": {
     "Search file contents": "Dosya içeriklerini ara"
@@ -1865,12 +1820,6 @@
   "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": {
     "Tab/Shift+Tab: Nav • ←→↑↓: Grid Nav • Enter/Space: Select": "Tab/Shift+Tab: Yön • ←→↑↓: Izgara Yönü • Enter/Space: Seç"
   },
-  "Technical Details": {
-    "Technical Details": "Teknik Detaylar"
-  },
-  "Temperature": {
-    "Temperature": "Sıcaklık"
-  },
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "Terminal özel ek parametreleri"
   },
@@ -1997,9 +1946,6 @@
   "Use animated wave progress bars for media playback": {
     "Use animated wave progress bars for media playback": "Medya oynatımı için animasyonlu dalga ilerleme çubukları kullanın"
   },
-  "Use automatic location detection (geoclue2)": {
-    "Use automatic location detection (geoclue2)": "Otomatik konum algılama özelliğini kullan (geoclue2)"
-  },
   "Use custom command for update your system": {
     "Use custom command for update your system": "Sistemi güncellemek için özel komut kullan"
   },
@@ -2104,9 +2050,6 @@
   },
   "Wind": {
     "Wind": "Rüzgar"
-  },
-  "Window Scrolling": {
-    "Window Scrolling": "Pencere Kaydırma"
   },
   "Workspace": {
     "Workspace": "Çalışma Alanı"
