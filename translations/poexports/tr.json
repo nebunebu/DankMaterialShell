@@ -312,7 +312,7 @@
     "Center Section": "Orta Bölüm"
   },
   "Changes:": {
-    "Changes:": ""
+    "Changes:": "Değişiklikler:"
   },
   "Check for system updates": {
     "Check for system updates": "Sistem güncellemelerini kontrol et"
@@ -414,7 +414,7 @@
     "Confirm": "Onayla"
   },
   "Confirm Display Changes": {
-    "Confirm Display Changes": ""
+    "Confirm Display Changes": "Ekran Değişikliklerini Onaylayın"
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "Şunun için şifreyi onayla: "
@@ -591,7 +591,7 @@
     "Disable Autoconnect": "Otomatik Bağlanmayı Devre Dışı Bırak"
   },
   "Disabled": {
-    "Disabled": ""
+    "Disabled": "Devre Dışı"
   },
   "Disconnect": {
     "Disconnect": "Bağlantıyı Kes"
@@ -621,7 +621,7 @@
     "Display currently focused application title": "Şu anda odaklanmış uygulamanın başlığını göster"
   },
   "Display settings for ": {
-    "Display settings for ": ""
+    "Display settings for ": "Ekran ayarları: "
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "OSD açılır pencerelerinde varsayılan olarak ses seviyesi ve parlaklık yüzdelik değerlerini göster"
@@ -699,7 +699,7 @@
     "Enable loginctl lock integration": "loginctl kilit entegrasyonunu etkinleştir"
   },
   "Enabled": {
-    "Enabled": ""
+    "Enabled": "Etkin"
   },
   "End": {
     "End": "Son"
@@ -966,7 +966,7 @@
     "Individual Batteries": "Tekil Piller"
   },
   "Inhibit idle timeout when audio or video is playing": {
-    "Inhibit idle timeout when audio or video is playing": ""
+    "Inhibit idle timeout when audio or video is playing": "Ses veya video oynatılırken boşta kalma süresini engelle"
   },
   "Input Devices": {
     "Input Devices": "Giriş Aygıtları"
@@ -993,7 +993,7 @@
     "Jobs: ": "İşler:"
   },
   "Keep Changes": {
-    "Keep Changes": ""
+    "Keep Changes": "Değişiklikleri Tut"
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Klavye Düzeni Adı"
@@ -1164,7 +1164,7 @@
     "Mode:": "Mod:"
   },
   "Mode: ": {
-    "Mode: ": ""
+    "Mode: ": "Mod: "
   },
   "Monitor": {
     "Monitor": "Monitör"
@@ -1449,7 +1449,7 @@
     "Position": "Pozisyon"
   },
   "Position: ": {
-    "Position: ": ""
+    "Position: ": "Pozisyon: "
   },
   "Power & Security": {
     "Power & Security": "Güç & Güvenlik"
@@ -1470,7 +1470,7 @@
     "Pressure": "Basınç"
   },
   "Prevent idle for media": {
-    "Prevent idle for media": ""
+    "Prevent idle for media": "Medya için boşta kalmayı önle"
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "Ekran zaman aşımını önle"
@@ -1560,10 +1560,10 @@
     "Resume": "Sürdür"
   },
   "Revert": {
-    "Revert": ""
+    "Revert": "Geri Al"
   },
   "Reverting in:": {
-    "Reverting in:": ""
+    "Reverting in:": "Geri dönülüyor:"
   },
   "Right": {
     "Right": "Sağ"
@@ -2037,7 +2037,7 @@
     "VPN status and quick connect": "VPN durumu ve hızlı bağlanma"
   },
   "VRR: ": {
-    "VRR: ": ""
+    "VRR: ": "VRR: "
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Oynak doygunluğa sahip canlı palet"

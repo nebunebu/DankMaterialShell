@@ -421,7 +421,11 @@ Item {
                                     tooltipLoader.item.show(delegateItem.tooltipText, screenX + tooltipX, relativeY, root.parentScreen, isLeft, !isLeft)
                                 } else {
                                     const globalPos = delegateItem.mapToGlobal(delegateItem.width / 2, delegateItem.height)
-                                    const tooltipY = Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS
+                                    const screenHeight = root.parentScreen ? root.parentScreen.height : Screen.height
+                                    const isBottom = root.axis?.edge === "bottom"
+                                    const tooltipY = isBottom
+                                        ? (screenHeight - Theme.barHeight - SettingsData.dankBarSpacing - Theme.spacingXS - 35)
+                                        : (Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS)
                                     tooltipLoader.item.show(delegateItem.tooltipText, globalPos.x, tooltipY, root.parentScreen, false, false)
                                 }
                             }
@@ -650,7 +654,11 @@ Item {
                                     tooltipLoader.item.show(delegateItem.tooltipText, screenX + tooltipX, relativeY, root.parentScreen, isLeft, !isLeft)
                                 } else {
                                     const globalPos = delegateItem.mapToGlobal(delegateItem.width / 2, delegateItem.height)
-                                    const tooltipY = Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS
+                                    const screenHeight = root.parentScreen ? root.parentScreen.height : Screen.height
+                                    const isBottom = root.axis?.edge === "bottom"
+                                    const tooltipY = isBottom
+                                        ? (screenHeight - Theme.barHeight - SettingsData.dankBarSpacing - Theme.spacingXS - 35)
+                                        : (Theme.barHeight + SettingsData.dankBarSpacing + Theme.spacingXS)
                                     tooltipLoader.item.show(delegateItem.tooltipText, globalPos.x, tooltipY, root.parentScreen, false, false)
                                 }
                             }
