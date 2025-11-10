@@ -183,6 +183,7 @@ Item {
             width: parent.width
             spacing: Theme.spacingM
             leftPadding: Theme.spacingS
+            topPadding: Theme.spacingS
 
             DankTextField {
                 id: searchField

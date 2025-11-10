@@ -3128,13 +3128,13 @@
   {
     "term": "Search file contents",
     "context": "Search file contents",
-    "reference": "Modals/Spotlight/SpotlightContent.qml:372",
+    "reference": "Modals/Spotlight/SpotlightContent.qml:373",
     "comment": ""
   },
   {
     "term": "Search filenames",
     "context": "Search filenames",
-    "reference": "Modals/Spotlight/SpotlightContent.qml:330",
+    "reference": "Modals/Spotlight/SpotlightContent.qml:331",
     "comment": ""
   },
   {
