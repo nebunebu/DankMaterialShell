@@ -966,7 +966,7 @@
     "Individual Batteries": "バッテリーごと"
   },
   "Inhibit idle timeout when audio or video is playing": {
-    "Inhibit idle timeout when audio or video is playing": ""
+    "Inhibit idle timeout when audio or video is playing": "オーディオまたはビデオの再生中のアイドルタイムアウトを禁止"
   },
   "Input Devices": {
     "Input Devices": "入力デバイス"
@@ -1470,7 +1470,7 @@
     "Pressure": "プレッシャー"
   },
   "Prevent idle for media": {
-    "Prevent idle for media": ""
+    "Prevent idle for media": "メディアのアイドル状態を防止"
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "画面のタイムアウトを防止"
@@ -1560,10 +1560,10 @@
     "Resume": "レジュメ"
   },
   "Revert": {
-    "Revert": "反転"
+    "Revert": "戻す"
   },
   "Reverting in:": {
-    "Reverting in:": ""
+    "Reverting in:": "元に戻す:"
   },
   "Right": {
     "Right": "右"
@@ -2037,7 +2037,7 @@
     "VPN status and quick connect": "VPNステータスとクイック接続"
   },
   "VRR: ": {
-    "VRR: ": ""
+    "VRR: ": "VRR: "
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "遊び心のある彩度の鮮やかなパレット。"

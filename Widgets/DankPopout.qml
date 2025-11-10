@@ -179,9 +179,9 @@ PanelWindow {
             transformOrigin: Item.Center
 
             radius: Theme.cornerRadius
-            blur: 8
+            blur: 10
             spread: 0
-            color: Qt.rgba(0, 0, 0, 0.4)
+            color: Qt.rgba(0, 0, 0, 0.6)
             visible: contentLoader.visible && shouldBeVisible
             opacity: contentLoader.opacity * 0.6
         }
