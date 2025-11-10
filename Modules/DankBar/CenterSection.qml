@@ -54,7 +54,6 @@ Item {
 
     function positionWidgets() {
         const parentCenter = (isVertical ? height : width) / 2
-        const isOdd = totalWidgets % 2 === 1
 
         centerWidgets.forEach(widget => {
             if (isVertical) {
@@ -64,7 +63,27 @@ Item {
             }
         })
 
-        if (isOdd) {
+        if (totalWidgets === 1) {
+            const widget = centerWidgets[0]
+            const size = isVertical ? widget.height : widget.width
+            if (isVertical) {
+                widget.y = parentCenter - (size / 2)
+            } else {
+                widget.x = parentCenter - (size / 2)
+            }
+        } else if (totalWidgets === 2) {
+            const firstWidget = centerWidgets[0]
+            const secondWidget = centerWidgets[1]
+            const firstSize = isVertical ? firstWidget.height : firstWidget.width
+
+            if (isVertical) {
+                firstWidget.y = parentCenter - (firstSize / 2)
+                secondWidget.y = firstWidget.y + firstSize + spacing
+            } else {
+                firstWidget.x = parentCenter - (firstSize / 2)
+                secondWidget.x = firstWidget.x + firstSize + spacing
+            }
+        } else if (totalWidgets % 2 === 1) {
             const middleIndex = Math.floor(totalWidgets / 2)
             const middleWidget = centerWidgets[middleIndex]
             const middleSize = isVertical ? middleWidget.height : middleWidget.width
