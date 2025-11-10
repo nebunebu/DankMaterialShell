@@ -94,10 +94,7 @@ Item {
             }
         })
 
-        if (isOddConfigured) {
-            if (!configuredMiddleWidget) {
-                return
-            }
+        if (isOddConfigured && configuredMiddleWidget) {
             const middleWidget = configuredMiddleWidget
             const middleIndex = centerWidgets.indexOf(middleWidget)
             const middleSize = isVertical ? middleWidget.height : middleWidget.width
@@ -130,7 +127,98 @@ Item {
                 currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
             }
         } else {
+            if (totalWidgets === 1) {
+                const widget = centerWidgets[0]
+                const size = isVertical ? widget.height : widget.width
+                if (isVertical) {
+                    widget.y = parentCenter - (size / 2)
+                } else {
+                    widget.x = parentCenter - (size / 2)
+                }
+                return
+            }
+
             if (!configuredLeftWidget || !configuredRightWidget) {
+                if (totalWidgets % 2 === 1) {
+                    const middleIndex = Math.floor(totalWidgets / 2)
+                    const middleWidget = centerWidgets[middleIndex]
+
+                    if (!middleWidget) {
+                        return
+                    }
+
+                    const middleSize = isVertical ? middleWidget.height : middleWidget.width
+
+                    if (isVertical) {
+                        middleWidget.y = parentCenter - (middleSize / 2)
+                    } else {
+                        middleWidget.x = parentCenter - (middleSize / 2)
+                    }
+
+                    let currentPos = isVertical ? middleWidget.y : middleWidget.x
+                    for (var i = middleIndex - 1; i >= 0; i--) {
+                        const size = isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                        currentPos -= (spacing + size)
+                        if (isVertical) {
+                            centerWidgets[i].y = currentPos
+                        } else {
+                            centerWidgets[i].x = currentPos
+                        }
+                    }
+
+                    currentPos = (isVertical ? middleWidget.y : middleWidget.x) + middleSize
+                    for (var i = middleIndex + 1; i < totalWidgets; i++) {
+                        currentPos += spacing
+                        if (isVertical) {
+                            centerWidgets[i].y = currentPos
+                        } else {
+                            centerWidgets[i].x = currentPos
+                        }
+                        currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                    }
+                } else {
+                    const leftIndex = (totalWidgets / 2) - 1
+                    const rightIndex = totalWidgets / 2
+                    const fallbackLeft = centerWidgets[leftIndex]
+                    const fallbackRight = centerWidgets[rightIndex]
+
+                    if (!fallbackLeft || !fallbackRight) {
+                        return
+                    }
+
+                    const halfSpacing = spacing / 2
+                    const leftSize = isVertical ? fallbackLeft.height : fallbackLeft.width
+
+                    if (isVertical) {
+                        fallbackLeft.y = parentCenter - halfSpacing - leftSize
+                        fallbackRight.y = parentCenter + halfSpacing
+                    } else {
+                        fallbackLeft.x = parentCenter - halfSpacing - leftSize
+                        fallbackRight.x = parentCenter + halfSpacing
+                    }
+
+                    let currentPos = isVertical ? fallbackLeft.y : fallbackLeft.x
+                    for (var i = leftIndex - 1; i >= 0; i--) {
+                        const size = isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                        currentPos -= (spacing + size)
+                        if (isVertical) {
+                            centerWidgets[i].y = currentPos
+                        } else {
+                            centerWidgets[i].x = currentPos
+                        }
+                    }
+
+                    currentPos = (isVertical ? fallbackRight.y + fallbackRight.height : fallbackRight.x + fallbackRight.width)
+                    for (var i = rightIndex + 1; i < totalWidgets; i++) {
+                        currentPos += spacing
+                        if (isVertical) {
+                            centerWidgets[i].y = currentPos
+                        } else {
+                            centerWidgets[i].x = currentPos
+                        }
+                        currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                    }
+                }
                 return
             }
 
@@ -139,7 +227,6 @@ Item {
             const leftIndex = centerWidgets.indexOf(leftWidget)
             const rightIndex = centerWidgets.indexOf(rightWidget)
             const halfSpacing = spacing / 2
-
             const leftSize = isVertical ? leftWidget.height : leftWidget.width
 
             if (isVertical) {
