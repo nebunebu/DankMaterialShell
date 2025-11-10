@@ -122,6 +122,17 @@ DankModal {
         refreshPlugins()
     }
 
+    Connections {
+        target: contentLoader
+        function onLoaded() {
+            Qt.callLater(() => {
+                if (contentLoader.item && contentLoader.item.searchField) {
+                    contentLoader.item.searchField.forceActiveFocus()
+                }
+            })
+        }
+    }
+
     onDialogClosed: () => {
         allPlugins = []
         searchQuery = ""
@@ -142,6 +153,10 @@ DankModal {
 
             anchors.fill: parent
             focus: true
+
+            Component.onCompleted: {
+                browserSearchField.forceActiveFocus()
+            }
 
             Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {

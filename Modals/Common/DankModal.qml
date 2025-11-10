@@ -52,11 +52,15 @@ PanelWindow {
         closeTimer.stop()
         shouldBeVisible = true
         visible = true
-        focusScope.forceActiveFocus()
+        shouldHaveFocus = false
+        Qt.callLater(() => {
+            shouldHaveFocus = Qt.binding(() => shouldBeVisible)
+        })
     }
 
     function close() {
         shouldBeVisible = false
+        shouldHaveFocus = false
         closeTimer.restart()
     }
 
@@ -76,23 +80,12 @@ PanelWindow {
     onVisibleChanged: {
         if (root.visible) {
             opened()
-            Qt.callLater(() => {
-                if (shouldHaveFocus) {
-                    focusScope.forceActiveFocus()
-                }
-            })
         } else {
             if (Qt.inputMethod) {
                 Qt.inputMethod.hide()
                 Qt.inputMethod.reset()
             }
             dialogClosed()
-        }
-    }
-
-    onShouldHaveFocusChanged: {
-        if (shouldHaveFocus && shouldBeVisible && visible) {
-            Qt.callLater(() => focusScope.forceActiveFocus())
         }
     }
 
@@ -315,20 +308,5 @@ PanelWindow {
                                       event.accepted = true
                                   }
                               }
-        onVisibleChanged: {
-            if (visible && shouldHaveFocus) {
-                Qt.callLater(() => focusScope.forceActiveFocus())
-            }
-        }
-
-        Connections {
-            function onShouldHaveFocusChanged() {
-                if (shouldHaveFocus && shouldBeVisible) {
-                    Qt.callLater(() => focusScope.forceActiveFocus())
-                }
-            }
-
-            target: root
-        }
     }
 }

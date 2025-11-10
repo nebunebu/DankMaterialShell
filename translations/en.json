@@ -44,7 +44,7 @@
   {
     "term": "3rd party",
     "context": "3rd party",
-    "reference": "Modules/Settings/PluginBrowser.qml:413",
+    "reference": "Modules/Settings/PluginBrowser.qml:428",
     "comment": ""
   },
   {
@@ -542,7 +542,7 @@
   {
     "term": "Browse Plugins",
     "context": "Browse Plugins",
-    "reference": "Modules/Settings/PluginBrowser.qml:182",
+    "reference": "Modules/Settings/PluginBrowser.qml:197",
     "comment": ""
   },
   {
@@ -590,7 +590,7 @@
   {
     "term": "Cancel",
     "context": "Cancel",
-    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:635",
+    "reference": "Modals/BluetoothPairingModal.qml:251, Modals/PolkitAuthModal.qml:291, Modals/WifiPasswordModal.qml:494, Modals/FileBrowser/FileBrowserOverwriteDialog.qml:83, Modules/Settings/PluginBrowser.qml:650",
     "comment": ""
   },
   {
@@ -1796,7 +1796,7 @@
   {
     "term": "I Understand",
     "context": "I Understand",
-    "reference": "Modules/Settings/PluginBrowser.qml:641",
+    "reference": "Modules/Settings/PluginBrowser.qml:656",
     "comment": ""
   },
   {
@@ -1880,7 +1880,7 @@
   {
     "term": "Install plugins from the DMS plugin registry",
     "context": "Install plugins from the DMS plugin registry",
-    "reference": "Modules/Settings/PluginBrowser.qml:236",
+    "reference": "Modules/Settings/PluginBrowser.qml:251",
     "comment": ""
   },
   {
@@ -2036,7 +2036,7 @@
   {
     "term": "Loading plugins...",
     "context": "Loading plugins...",
-    "reference": "Modules/Settings/PluginBrowser.qml:304",
+    "reference": "Modules/Settings/PluginBrowser.qml:319",
     "comment": ""
   },
   {
@@ -2450,7 +2450,7 @@
   {
     "term": "No plugins found",
     "context": "No plugins found",
-    "reference": "Modules/Settings/PluginBrowser.qml:538",
+    "reference": "Modules/Settings/PluginBrowser.qml:553",
     "comment": ""
   },
   {
@@ -3146,7 +3146,7 @@
   {
     "term": "Search plugins...",
     "context": "Search plugins...",
-    "reference": "Modules/Settings/PluginBrowser.qml:260",
+    "reference": "Modules/Settings/PluginBrowser.qml:275",
     "comment": ""
   },
   {
@@ -3686,13 +3686,13 @@
   {
     "term": "Third-Party Plugin Warning",
     "context": "Third-Party Plugin Warning",
-    "reference": "Modules/Settings/PluginBrowser.qml:586",
+    "reference": "Modules/Settings/PluginBrowser.qml:601",
     "comment": ""
   },
   {
     "term": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
     "context": "Third-party plugins are created by the community and are not officially supported by DankMaterialShell.\\n\\nThese plugins may pose security and privacy risks - install at your own risk.",
-    "reference": "Modules/Settings/PluginBrowser.qml:596",
+    "reference": "Modules/Settings/PluginBrowser.qml:611",
     "comment": ""
   },
   {
@@ -4178,7 +4178,7 @@
   {
     "term": "official",
     "context": "official",
-    "reference": "Modules/Settings/PluginBrowser.qml:393",
+    "reference": "Modules/Settings/PluginBrowser.qml:408",
     "comment": ""
   },
   {
@@ -4190,7 +4190,7 @@
   {
     "term": "• Install only from trusted sources",
     "context": "• Install only from trusted sources",
-    "reference": "Modules/Settings/PluginBrowser.qml:619",
+    "reference": "Modules/Settings/PluginBrowser.qml:634",
     "comment": ""
   },
   {
@@ -4220,13 +4220,13 @@
   {
     "term": "• Plugins may contain bugs or security issues",
     "context": "• Plugins may contain bugs or security issues",
-    "reference": "Modules/Settings/PluginBrowser.qml:607",
+    "reference": "Modules/Settings/PluginBrowser.qml:622",
     "comment": ""
   },
   {
     "term": "• Review code before installation when possible",
     "context": "• Review code before installation when possible",
-    "reference": "Modules/Settings/PluginBrowser.qml:613",
+    "reference": "Modules/Settings/PluginBrowser.qml:628",
     "comment": ""
   },
   {
