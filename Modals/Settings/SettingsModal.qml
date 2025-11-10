@@ -45,7 +45,23 @@ DankModal {
     }
     content: settingsContent
     onOpened: () => {
-        Qt.callLater(() => modalFocusScope.forceActiveFocus())
+        Qt.callLater(() => {
+            modalFocusScope.forceActiveFocus()
+            if (contentLoader.item) {
+                contentLoader.item.forceActiveFocus()
+            }
+        })
+    }
+
+    onVisibleChanged: {
+        if (visible && shouldBeVisible) {
+            Qt.callLater(() => {
+                modalFocusScope.forceActiveFocus()
+                if (contentLoader.item) {
+                    contentLoader.item.forceActiveFocus()
+                }
+            })
+        }
     }
     modalFocusScope.Keys.onPressed: event => {
         const tabCount = 11
@@ -113,6 +129,14 @@ DankModal {
         }
         onDialogClosed: () => {
             allowStacking = true;
+            if (settingsModal.shouldBeVisible) {
+                Qt.callLater(() => {
+                    settingsModal.modalFocusScope.forceActiveFocus()
+                    if (settingsModal.contentLoader.item) {
+                        settingsModal.contentLoader.item.forceActiveFocus()
+                    }
+                })
+            }
         }
     }
 
@@ -132,6 +156,14 @@ DankModal {
         }
         onDialogClosed: () => {
             allowStacking = true;
+            if (settingsModal.shouldBeVisible) {
+                Qt.callLater(() => {
+                    settingsModal.modalFocusScope.forceActiveFocus()
+                    if (settingsModal.contentLoader.item) {
+                        settingsModal.contentLoader.item.forceActiveFocus()
+                    }
+                })
+            }
         }
     }
 

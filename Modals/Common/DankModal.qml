@@ -76,12 +76,23 @@ PanelWindow {
     onVisibleChanged: {
         if (root.visible) {
             opened()
+            Qt.callLater(() => {
+                if (shouldHaveFocus) {
+                    focusScope.forceActiveFocus()
+                }
+            })
         } else {
             if (Qt.inputMethod) {
                 Qt.inputMethod.hide()
                 Qt.inputMethod.reset()
             }
             dialogClosed()
+        }
+    }
+
+    onShouldHaveFocusChanged: {
+        if (shouldHaveFocus && shouldBeVisible && visible) {
+            Qt.callLater(() => focusScope.forceActiveFocus())
         }
     }
 

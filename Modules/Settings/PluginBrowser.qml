@@ -110,6 +110,11 @@ DankModal {
             parentModal.shouldHaveFocus = Qt.binding(() => {
                 return parentModal.shouldBeVisible
             })
+            Qt.callLater(() => {
+                if (parentModal.modalFocusScope) {
+                    parentModal.modalFocusScope.forceActiveFocus()
+                }
+            })
         }
     }
 
