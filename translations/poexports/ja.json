@@ -312,7 +312,7 @@
     "Center Section": "センターセクション"
   },
   "Changes:": {
-    "Changes:": ""
+    "Changes:": "変更:"
   },
   "Check for system updates": {
     "Check for system updates": "システムアップデートを検査"
@@ -414,7 +414,7 @@
     "Confirm": "確認"
   },
   "Confirm Display Changes": {
-    "Confirm Display Changes": ""
+    "Confirm Display Changes": "表示変更を確認"
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "パスキーを確認 "
@@ -591,7 +591,7 @@
     "Disable Autoconnect": "自動接続を無効"
   },
   "Disabled": {
-    "Disabled": ""
+    "Disabled": "無効化されました"
   },
   "Disconnect": {
     "Disconnect": "切断"
@@ -621,7 +621,7 @@
     "Display currently focused application title": "現在フォーカスされているアプリケーションのタイトルを表示"
   },
   "Display settings for ": {
-    "Display settings for ": ""
+    "Display settings for ": "以下の設定を表示 "
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "OSDポップアップに音量と輝度のパーセンテージ値をデフォルトで表示"
@@ -699,7 +699,7 @@
     "Enable loginctl lock integration": "ログインロックの統合を有効に"
   },
   "Enabled": {
-    "Enabled": ""
+    "Enabled": "有効化されました"
   },
   "End": {
     "End": "終わり"
@@ -993,7 +993,7 @@
     "Jobs: ": "ジョブ: "
   },
   "Keep Changes": {
-    "Keep Changes": ""
+    "Keep Changes": "変更を保持"
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "キーボードレイアウト名"
@@ -1164,7 +1164,7 @@
     "Mode:": "モード："
   },
   "Mode: ": {
-    "Mode: ": ""
+    "Mode: ": "モード: "
   },
   "Monitor": {
     "Monitor": "モニター"
@@ -1449,7 +1449,7 @@
     "Position": "位置"
   },
   "Position: ": {
-    "Position: ": ""
+    "Position: ": "位置: "
   },
   "Power & Security": {
     "Power & Security": "電源とセキュリティ"
@@ -1560,7 +1560,7 @@
     "Resume": "レジュメ"
   },
   "Revert": {
-    "Revert": ""
+    "Revert": "反転"
   },
   "Reverting in:": {
     "Reverting in:": ""

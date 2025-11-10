@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
@@ -166,6 +167,23 @@ PanelWindow {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: root.shouldBeVisible ? root.animationEnterCurve : root.animationExitCurve
             }
+        }
+
+        RectangularShadow {
+            id: shadowEffect
+            width: contentLoader.width
+            height: contentLoader.height
+            x: contentLoader.x
+            y: contentLoader.y
+            scale: contentLoader.scale
+            transformOrigin: Item.Center
+
+            radius: Theme.cornerRadius
+            blur: 8
+            spread: 0
+            color: Qt.rgba(0, 0, 0, 0.4)
+            visible: contentLoader.visible && shouldBeVisible
+            opacity: contentLoader.opacity * 0.6
         }
 
         Loader {
