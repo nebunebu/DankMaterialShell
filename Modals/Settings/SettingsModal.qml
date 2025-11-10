@@ -172,6 +172,11 @@ DankModal {
             id: rootScope
             anchors.fill: parent
 
+            Keys.onEscapePressed: event => {
+                settingsModal.hide()
+                event.accepted = true
+            }
+
             Column {
                 anchors.fill: parent
                 anchors.leftMargin: Theme.spacingL

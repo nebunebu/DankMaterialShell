@@ -3260,7 +3260,7 @@
   {
     "term": "Settings",
     "context": "Settings",
-    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:200, Modules/DankDash/DankDashPopout.qml:249",
+    "reference": "Services/AppSearchService.qml:176, Modals/Settings/SettingsModal.qml:205, Modules/DankDash/DankDashPopout.qml:249",
     "comment": ""
   },
   {
