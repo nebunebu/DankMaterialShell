@@ -24,8 +24,7 @@ Item {
     property real totalSize: 0
 
     function updateLayout() {
-        const containerSize = isVertical ? height : width
-        if (containerSize <= 0 || !visible) {
+        if ((isVertical ? height : width) <= 0 || !visible) {
             return
         }
 
@@ -33,33 +32,29 @@ Item {
         totalWidgets = 0
         totalSize = 0
 
-        let configuredWidgets = 0
         for (var i = 0; i < centerRepeater.count; i++) {
             const item = centerRepeater.itemAt(i)
-            if (item && getWidgetVisible(item.widgetId)) {
-                configuredWidgets++
-                if (item.active && item.item) {
-                    centerWidgets.push(item.item)
-                    totalWidgets++
-                    totalSize += isVertical ? item.item.height : item.item.width
-                }
+            if (item && getWidgetVisible(item.widgetId) && item.active && item.item) {
+                centerWidgets.push(item.item)
+                totalWidgets++
+                totalSize += isVertical ? item.item.height : item.item.width
             }
+        }
+
+        if (totalWidgets === 0) {
+            return
         }
 
         if (totalWidgets > 1) {
             totalSize += spacing * (totalWidgets - 1)
         }
 
-        positionWidgets(configuredWidgets)
+        positionWidgets()
     }
 
-    function positionWidgets(configuredWidgets) {
-        if (totalWidgets === 0 || (isVertical ? height : width) <= 0) {
-            return
-        }
-
+    function positionWidgets() {
         const parentCenter = (isVertical ? height : width) / 2
-        const isOdd = configuredWidgets % 2 === 1
+        const isOdd = totalWidgets % 2 === 1
 
         centerWidgets.forEach(widget => {
             if (isVertical) {
@@ -70,192 +65,74 @@ Item {
         })
 
         if (isOdd) {
-            const middleIndex = Math.floor(configuredWidgets / 2)
-            let currentActiveIndex = 0
-            let middleWidget = null
+            const middleIndex = Math.floor(totalWidgets / 2)
+            const middleWidget = centerWidgets[middleIndex]
+            const middleSize = isVertical ? middleWidget.height : middleWidget.width
 
-            for (var i = 0; i < centerRepeater.count; i++) {
-                const item = centerRepeater.itemAt(i)
-                if (item && getWidgetVisible(item.widgetId)) {
-                    if (currentActiveIndex === middleIndex && item.active && item.item) {
-                        middleWidget = item.item
-                        break
-                    }
-                    currentActiveIndex++
+            if (isVertical) {
+                middleWidget.y = parentCenter - (middleSize / 2)
+            } else {
+                middleWidget.x = parentCenter - (middleSize / 2)
+            }
+
+            let currentPos = isVertical ? middleWidget.y : middleWidget.x
+            for (var i = middleIndex - 1; i >= 0; i--) {
+                const size = isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                currentPos -= (spacing + size)
+                if (isVertical) {
+                    centerWidgets[i].y = currentPos
+                } else {
+                    centerWidgets[i].x = currentPos
                 }
             }
 
-            if (middleWidget) {
-                const middleSize = isVertical ? middleWidget.height : middleWidget.width
+            currentPos = (isVertical ? middleWidget.y : middleWidget.x) + middleSize
+            for (var i = middleIndex + 1; i < totalWidgets; i++) {
+                currentPos += spacing
                 if (isVertical) {
-                    middleWidget.y = parentCenter - (middleSize / 2)
+                    centerWidgets[i].y = currentPos
                 } else {
-                    middleWidget.x = parentCenter - (middleSize / 2)
+                    centerWidgets[i].x = currentPos
                 }
-
-                let leftWidgets = []
-                let rightWidgets = []
-                let foundMiddle = false
-
-                for (var i = 0; i < centerWidgets.length; i++) {
-                    if (centerWidgets[i] === middleWidget) {
-                        foundMiddle = true
-                        continue
-                    }
-                    if (!foundMiddle) {
-                        leftWidgets.push(centerWidgets[i])
-                    } else {
-                        rightWidgets.push(centerWidgets[i])
-                    }
-                }
-
-                let currentPos = isVertical ? middleWidget.y : middleWidget.x
-                for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                    const size = isVertical ? leftWidgets[i].height : leftWidgets[i].width
-                    currentPos -= (spacing + size)
-                    if (isVertical) {
-                        leftWidgets[i].y = currentPos
-                    } else {
-                        leftWidgets[i].x = currentPos
-                    }
-                }
-
-                currentPos = (isVertical ? middleWidget.y : middleWidget.x) + middleSize
-                for (var i = 0; i < rightWidgets.length; i++) {
-                    currentPos += spacing
-                    if (isVertical) {
-                        rightWidgets[i].y = currentPos
-                    } else {
-                        rightWidgets[i].x = currentPos
-                    }
-                    currentPos += isVertical ? rightWidgets[i].height : rightWidgets[i].width
-                }
+                currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
             }
         } else {
-            let configuredLeftIndex = (configuredWidgets / 2) - 1
-            let configuredRightIndex = configuredWidgets / 2
+            const leftIndex = (totalWidgets / 2) - 1
+            const rightIndex = totalWidgets / 2
             const halfSpacing = spacing / 2
 
-            let leftWidget = null
-            let rightWidget = null
-            let leftWidgets = []
-            let rightWidgets = []
+            const leftWidget = centerWidgets[leftIndex]
+            const rightWidget = centerWidgets[rightIndex]
+            const leftSize = isVertical ? leftWidget.height : leftWidget.width
 
-            let currentConfigIndex = 0
-            for (var i = 0; i < centerRepeater.count; i++) {
-                const item = centerRepeater.itemAt(i)
-                if (item && getWidgetVisible(item.widgetId)) {
-                    if (item.active && item.item) {
-                        if (currentConfigIndex < configuredLeftIndex) {
-                            leftWidgets.push(item.item)
-                        } else if (currentConfigIndex === configuredLeftIndex) {
-                            leftWidget = item.item
-                        } else if (currentConfigIndex === configuredRightIndex) {
-                            rightWidget = item.item
-                        } else {
-                            rightWidgets.push(item.item)
-                        }
-                    }
-                    currentConfigIndex++
+            if (isVertical) {
+                leftWidget.y = parentCenter - halfSpacing - leftSize
+                rightWidget.y = parentCenter + halfSpacing
+            } else {
+                leftWidget.x = parentCenter - halfSpacing - leftSize
+                rightWidget.x = parentCenter + halfSpacing
+            }
+
+            let currentPos = isVertical ? leftWidget.y : leftWidget.x
+            for (var i = leftIndex - 1; i >= 0; i--) {
+                const size = isVertical ? centerWidgets[i].height : centerWidgets[i].width
+                currentPos -= (spacing + size)
+                if (isVertical) {
+                    centerWidgets[i].y = currentPos
+                } else {
+                    centerWidgets[i].x = currentPos
                 }
             }
 
-            if (leftWidget && rightWidget) {
-                const leftSize = isVertical ? leftWidget.height : leftWidget.width
+            currentPos = (isVertical ? rightWidget.y + rightWidget.height : rightWidget.x + rightWidget.width)
+            for (var i = rightIndex + 1; i < totalWidgets; i++) {
+                currentPos += spacing
                 if (isVertical) {
-                    leftWidget.y = parentCenter - halfSpacing - leftSize
-                    rightWidget.y = parentCenter + halfSpacing
+                    centerWidgets[i].y = currentPos
                 } else {
-                    leftWidget.x = parentCenter - halfSpacing - leftSize
-                    rightWidget.x = parentCenter + halfSpacing
+                    centerWidgets[i].x = currentPos
                 }
-
-                let currentPos = isVertical ? leftWidget.y : leftWidget.x
-                for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                    const size = isVertical ? leftWidgets[i].height : leftWidgets[i].width
-                    currentPos -= (spacing + size)
-                    if (isVertical) {
-                        leftWidgets[i].y = currentPos
-                    } else {
-                        leftWidgets[i].x = currentPos
-                    }
-                }
-
-                currentPos = (isVertical ? rightWidget.y + rightWidget.height : rightWidget.x + rightWidget.width)
-                for (var i = 0; i < rightWidgets.length; i++) {
-                    currentPos += spacing
-                    if (isVertical) {
-                        rightWidgets[i].y = currentPos
-                    } else {
-                        rightWidgets[i].x = currentPos
-                    }
-                    currentPos += isVertical ? rightWidgets[i].height : rightWidgets[i].width
-                }
-            } else if (leftWidget && !rightWidget) {
-                const leftSize = isVertical ? leftWidget.height : leftWidget.width
-                if (isVertical) {
-                    leftWidget.y = parentCenter - halfSpacing - leftSize
-                } else {
-                    leftWidget.x = parentCenter - halfSpacing - leftSize
-                }
-
-                let currentPos = isVertical ? leftWidget.y : leftWidget.x
-                for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                    const size = isVertical ? leftWidgets[i].height : leftWidgets[i].width
-                    currentPos -= (spacing + size)
-                    if (isVertical) {
-                        leftWidgets[i].y = currentPos
-                    } else {
-                        leftWidgets[i].x = currentPos
-                    }
-                }
-
-                currentPos = (isVertical ? leftWidget.y + leftWidget.height : leftWidget.x + leftWidget.width) + spacing
-                for (var i = 0; i < rightWidgets.length; i++) {
-                    currentPos += spacing
-                    if (isVertical) {
-                        rightWidgets[i].y = currentPos
-                    } else {
-                        rightWidgets[i].x = currentPos
-                    }
-                    currentPos += isVertical ? rightWidgets[i].height : rightWidgets[i].width
-                }
-            } else if (!leftWidget && rightWidget) {
-                if (isVertical) {
-                    rightWidget.y = parentCenter + halfSpacing
-                } else {
-                    rightWidget.x = parentCenter + halfSpacing
-                }
-
-                let currentPos = (isVertical ? rightWidget.y : rightWidget.x) - spacing
-                for (var i = leftWidgets.length - 1; i >= 0; i--) {
-                    const size = isVertical ? leftWidgets[i].height : leftWidgets[i].width
-                    currentPos -= size
-                    if (isVertical) {
-                        leftWidgets[i].y = currentPos
-                    } else {
-                        leftWidgets[i].x = currentPos
-                    }
-                    currentPos -= spacing
-                }
-
-                currentPos = (isVertical ? rightWidget.y + rightWidget.height : rightWidget.x + rightWidget.width)
-                for (var i = 0; i < rightWidgets.length; i++) {
-                    currentPos += spacing
-                    if (isVertical) {
-                        rightWidgets[i].y = currentPos
-                    } else {
-                        rightWidgets[i].x = currentPos
-                    }
-                    currentPos += isVertical ? rightWidgets[i].height : rightWidgets[i].width
-                }
-            } else if (totalWidgets === 1 && centerWidgets[0]) {
-                const size = isVertical ? centerWidgets[0].height : centerWidgets[0].width
-                if (isVertical) {
-                    centerWidgets[0].y = parentCenter - (size / 2)
-                } else {
-                    centerWidgets[0].x = parentCenter - (size / 2)
-                }
+                currentPos += isVertical ? centerWidgets[i].height : centerWidgets[i].width
             }
         }
     }
