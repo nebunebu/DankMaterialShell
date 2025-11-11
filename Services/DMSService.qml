@@ -20,6 +20,7 @@ Singleton {
     property bool isConnected: false
     property bool isConnecting: false
     property bool subscribeConnected: false
+    readonly property bool forceExtWorkspace: false
 
     readonly property string socketPath: Quickshell.env("DMS_SOCKET")
 
@@ -46,6 +47,7 @@ Singleton {
     signal dwlStateUpdate(var data)
     signal brightnessStateUpdate(var data)
     signal brightnessDeviceUpdate(var device)
+    signal extWorkspaceStateUpdate(var data)
 
     property var activeSubscriptions: ["network", "network.credentials", "loginctl", "freedesktop", "gamma", "bluetooth", "bluetooth.pairing", "dwl", "brightness"]
 
@@ -263,7 +265,7 @@ Singleton {
 
     function removeSubscription(service) {
         if (activeSubscriptions.includes("all")) {
-            const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "dwl", "brightness"]
+            const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "dwl", "brightness", "extworkspace"]
             const filtered = allServices.filter(s => s !== service)
             subscribe(filtered)
         } else {
@@ -285,7 +287,7 @@ Singleton {
             excludeServices = [excludeServices]
         }
 
-        const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "cups", "dwl", "brightness"]
+        const allServices = ["network", "loginctl", "freedesktop", "gamma", "bluetooth", "cups", "dwl", "brightness", "extworkspace"]
         const filtered = allServices.filter(s => !excludeServices.includes(s))
         subscribe(filtered)
     }
@@ -342,6 +344,8 @@ Singleton {
             if (data.device) {
                 brightnessDeviceUpdate(data.device)
             }
+        } else if (service === "extworkspace") {
+            extWorkspaceStateUpdate(data)
         }
     }
 

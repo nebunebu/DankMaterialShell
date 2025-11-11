@@ -81,8 +81,9 @@ Item {
                         text: I18n.tr("Show Workspace Apps")
                         description: I18n.tr("Display application icons in workspace indicators")
                         checked: SettingsData.showWorkspaceApps
+                        visible: CompositorService.isNiri || CompositorService.isHyprland
                         onToggled: checked => {
-                                       return SettingsData.set("showWorkspaceApps", 
+                                       return SettingsData.set("showWorkspaceApps",
                                            checked)
                                    }
                     }
@@ -355,6 +356,7 @@ Item {
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
                                       Theme.outline.b, 0.2)
                 border.width: 0
+                visible: CompositorService.isNiri || CompositorService.isHyprland
 
                 Column {
                     id: runningAppsSection

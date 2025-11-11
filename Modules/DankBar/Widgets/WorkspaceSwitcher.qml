@@ -23,6 +23,8 @@ Item {
         return CompositorService.filterCurrentWorkspace(CompositorService.sortedToplevels, screenName);
     }
 
+    readonly property bool useExtWorkspace: DMSService.forceExtWorkspace || (!CompositorService.isNiri && !CompositorService.isHyprland && !CompositorService.isDwl && !CompositorService.isSway && ExtWorkspaceService.extWorkspaceAvailable)
+
     Connections {
         target: DesktopEntries
         function onApplicationsChanged() {
@@ -31,7 +33,9 @@ Item {
     }
 
     property int currentWorkspace: {
-        if (CompositorService.isNiri) {
+        if (useExtWorkspace) {
+            return getExtWorkspaceActiveWorkspace()
+        } else if (CompositorService.isNiri) {
             return getNiriActiveWorkspace()
         } else if (CompositorService.isHyprland) {
             return getHyprlandActiveWorkspace()
@@ -50,13 +54,17 @@ Item {
         return []
     }
     property var workspaceList: {
+        if (useExtWorkspace) {
+            const baseList = getExtWorkspaceWorkspaces()
+            return SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList
+        }
         if (CompositorService.isNiri) {
             const baseList = getNiriWorkspaces()
             return SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList
         }
         if (CompositorService.isHyprland) {
             const baseList = getHyprlandWorkspaces()
-			const filteredList = baseList.filter(ws => ws.id > -1)
+            const filteredList = baseList.filter(ws => ws.id > -1)
             return SettingsData.showWorkspacePadding ? padWorkspaces(filteredList) : filteredList
         }
         if (CompositorService.isDwl) {
@@ -192,7 +200,9 @@ Item {
     function padWorkspaces(list) {
         const padded = list.slice()
         let placeholder
-        if (CompositorService.isHyprland) {
+        if (useExtWorkspace) {
+            placeholder = {"id": "", "name": "", "active": false, "hidden": true}
+        } else if (CompositorService.isHyprland) {
             placeholder = {"id": -1, "name": ""}
         } else if (CompositorService.isDwl) {
             placeholder = {"tag": -1}
@@ -313,25 +323,77 @@ Item {
         return activeTags
     }
 
+    function getExtWorkspaceWorkspaces() {
+        const groups = ExtWorkspaceService.groups
+        if (!ExtWorkspaceService.extWorkspaceAvailable || groups.length === 0) {
+            return [{"id": "1", "name": "1", "active": false}]
+        }
+
+        const group = groups.find(g => g.outputs && g.outputs.includes(root.screenName))
+        if (!group || !group.workspaces) {
+            return [{"id": "1", "name": "1", "active": false}]
+        }
+
+        const visible = group.workspaces.filter(ws => !ws.hidden).sort((a, b) => {
+            const coordsA = a.coordinates || [0, 0]
+            const coordsB = b.coordinates || [0, 0]
+            if (coordsA[0] !== coordsB[0]) return coordsA[0] - coordsB[0]
+            return coordsA[1] - coordsB[1]
+        }).map(ws => ({
+            id: ws.id,
+            name: ws.name,
+            coordinates: ws.coordinates,
+            state: ws.state,
+            active: ws.active,
+            urgent: ws.urgent,
+            hidden: ws.hidden,
+            groupID: group.id
+        }))
+
+        return visible.length > 0 ? visible : [{"id": "1", "name": "1", "active": false}]
+    }
+
+    function getExtWorkspaceActiveWorkspace() {
+        if (!ExtWorkspaceService.extWorkspaceAvailable) {
+            return 1
+        }
+
+        const activeWs = ExtWorkspaceService.getActiveWorkspaceForOutput(root.screenName)
+        return activeWs ? (activeWs.id || activeWs.name || "1") : "1"
+    }
+
     readonly property real padding: Math.max(Theme.spacingXS, Theme.spacingS * (widgetHeight / 30))
     readonly property real visualWidth: isVertical ? widgetHeight : (workspaceRow.implicitWidth + padding * 2)
     readonly property real visualHeight: isVertical ? (workspaceRow.implicitHeight + padding * 2) : widgetHeight
 
     function getRealWorkspaces() {
         return root.workspaceList.filter(ws => {
-                                             if (CompositorService.isHyprland) {
-                                                 return ws && ws.id !== -1
-                                             } else if (CompositorService.isDwl) {
-                                                 return ws && ws.tag !== -1
-                                             } else if (CompositorService.isSway) {
-                                                 return ws && ws.num !== -1
-                                             }
+                                             if (useExtWorkspace) return ws && ws.id !== "" && !ws.hidden
+                                             if (CompositorService.isHyprland) return ws && ws.id !== -1
+                                             if (CompositorService.isDwl) return ws && ws.tag !== -1
+                                             if (CompositorService.isSway) return ws && ws.num !== -1
                                              return ws !== -1
                                          })
     }
 
     function switchWorkspace(direction) {
-        if (CompositorService.isNiri) {
+        if (useExtWorkspace) {
+            const realWorkspaces = getRealWorkspaces()
+            if (realWorkspaces.length < 2) {
+                return
+            }
+
+            const currentIndex = realWorkspaces.findIndex(ws => (ws.id || ws.name) === root.currentWorkspace)
+            const validIndex = currentIndex === -1 ? 0 : currentIndex
+            const nextIndex = direction > 0 ? Math.min(validIndex + 1, realWorkspaces.length - 1) : Math.max(validIndex - 1, 0)
+
+            if (nextIndex === validIndex) {
+                return
+            }
+
+            const nextWorkspace = realWorkspaces[nextIndex]
+            ExtWorkspaceService.activateWorkspace(nextWorkspace.id || nextWorkspace.name, nextWorkspace.groupID || "")
+        } else if (CompositorService.isNiri) {
             const realWorkspaces = getRealWorkspaces()
             if (realWorkspaces.length < 2) {
                 return
@@ -396,7 +458,7 @@ Item {
 
     width: isVertical ? barThickness : visualWidth
     height: isVertical ? visualHeight : barThickness
-    visible: CompositorService.isNiri || CompositorService.isHyprland || CompositorService.isDwl || CompositorService.isSway
+    visible: CompositorService.isNiri || CompositorService.isHyprland || CompositorService.isDwl || CompositorService.isSway || useExtWorkspace
 
     Rectangle {
         id: visualBackground
@@ -443,23 +505,17 @@ Item {
                 id: delegateRoot
 
                 property bool isActive: {
-                    if (CompositorService.isHyprland) {
-                        return modelData && modelData.id === root.currentWorkspace
-                    } else if (CompositorService.isDwl) {
-                        return modelData && root.dwlActiveTags.includes(modelData.tag)
-                    } else if (CompositorService.isSway) {
-                        return modelData && modelData.num === root.currentWorkspace
-                    }
+                    if (root.useExtWorkspace) return !!(modelData && modelData.active)
+                    if (CompositorService.isHyprland) return !!(modelData && modelData.id === root.currentWorkspace)
+                    if (CompositorService.isDwl) return !!(modelData && root.dwlActiveTags.includes(modelData.tag))
+                    if (CompositorService.isSway) return !!(modelData && modelData.num === root.currentWorkspace)
                     return modelData === root.currentWorkspace
                 }
                 property bool isPlaceholder: {
-                    if (CompositorService.isHyprland) {
-                        return modelData && modelData.id === -1
-                    } else if (CompositorService.isDwl) {
-                        return modelData && modelData.tag === -1
-                    } else if (CompositorService.isSway) {
-                        return modelData && modelData.num === -1
-                    }
+                    if (root.useExtWorkspace) return !!(modelData && modelData.hidden)
+                    if (CompositorService.isHyprland) return !!(modelData && modelData.id === -1)
+                    if (CompositorService.isDwl) return !!(modelData && modelData.tag === -1)
+                    if (CompositorService.isSway) return !!(modelData && modelData.num === -1)
                     return modelData === -1
                 }
                 property bool isHovered: mouseArea.containsMouse
@@ -467,15 +523,11 @@ Item {
                 property var loadedWorkspaceData: null
                 property bool loadedIsUrgent: false
                 property bool isUrgent: {
-                    if (CompositorService.isHyprland) {
-                        return modelData?.urgent ?? false
-                    } else if (CompositorService.isNiri) {
-                        return loadedIsUrgent
-                    } else if (CompositorService.isDwl) {
-                        return modelData?.state === 2
-                    } else if (CompositorService.isSway) {
-                        return loadedIsUrgent
-                    }
+                    if (root.useExtWorkspace) return modelData?.urgent ?? false
+                    if (CompositorService.isHyprland) return modelData?.urgent ?? false
+                    if (CompositorService.isNiri) return loadedIsUrgent
+                    if (CompositorService.isDwl) return modelData?.state === 2
+                    if (CompositorService.isSway) return loadedIsUrgent
                     return false
                 }
                 property var loadedIconData: null
@@ -511,13 +563,13 @@ Item {
                     enabled: !isPlaceholder
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: mouse => {
-                        if (isPlaceholder) {
-                            return
-                        }
+                        if (isPlaceholder) return
 
                         const isRightClick = mouse.button === Qt.RightButton
 
-                        if (CompositorService.isNiri) {
+                        if (root.useExtWorkspace && (modelData?.id || modelData?.name)) {
+                            ExtWorkspaceService.activateWorkspace(modelData.id || modelData.name, modelData.groupID || "")
+                        } else if (CompositorService.isNiri) {
                             if (isRightClick) {
                                 NiriService.toggleOverview()
                             } else {
@@ -558,7 +610,9 @@ Item {
                         }
 
                         var wsData = null;
-                        if (CompositorService.isNiri) {
+                        if (root.useExtWorkspace) {
+                            wsData = modelData;
+                        } else if (CompositorService.isNiri) {
                             wsData = NiriService.allWorkspaces.find(ws => ws.idx + 1 === modelData && ws.output === root.screenName) || null;
                         } else if (CompositorService.isHyprland) {
                             wsData = modelData;
@@ -839,7 +893,9 @@ Item {
                             anchors.centerIn: parent
                             text: {
                                 let isPlaceholder
-                                if (CompositorService.isHyprland) {
+                                if (root.useExtWorkspace) {
+                                    isPlaceholder = modelData?.hidden === true
+                                } else if (CompositorService.isHyprland) {
                                     isPlaceholder = modelData?.id === -1
                                 } else if (CompositorService.isDwl) {
                                     isPlaceholder = modelData?.tag === -1
@@ -849,17 +905,12 @@ Item {
                                     isPlaceholder = modelData === -1
                                 }
 
-                                if (isPlaceholder) {
-                                    return index + 1
-                                }
+                                if (isPlaceholder) return index + 1
 
-                                if (CompositorService.isHyprland) {
-                                    return modelData?.id || ""
-                                } else if (CompositorService.isDwl) {
-                                    return (modelData?.tag !== undefined) ? (modelData.tag + 1) : ""
-                                } else if (CompositorService.isSway) {
-                                    return modelData?.num || ""
-                                }
+                                if (root.useExtWorkspace) return modelData?.name || modelData?.id || ""
+                                if (CompositorService.isHyprland) return modelData?.id || ""
+                                if (CompositorService.isDwl) return (modelData?.tag !== undefined) ? (modelData.tag + 1) : ""
+                                if (CompositorService.isSway) return modelData?.num || ""
                                 return modelData - 1
                             }
                             color: (isActive || isUrgent) ? Qt.rgba(Theme.surfaceContainer.r, Theme.surfaceContainer.g, Theme.surfaceContainer.b, 0.95) : isPlaceholder ? Theme.surfaceTextAlpha : Theme.surfaceTextMedium
@@ -898,7 +949,18 @@ Item {
                     enabled: CompositorService.isSway
                     function onValuesChanged() { delegateRoot.updateAllData() }
                 }
+                Connections {
+                    target: ExtWorkspaceService
+                    enabled: root.useExtWorkspace
+                    function onStateChanged() { delegateRoot.updateAllData() }
+                }
             }
+        }
+    }
+
+    Component.onCompleted: {
+        if (useExtWorkspace && !DMSService.activeSubscriptions.includes("extworkspace")) {
+            DMSService.addSubscription("extworkspace")
         }
     }
 }
