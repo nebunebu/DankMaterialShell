@@ -115,7 +115,6 @@ PanelWindow {
             layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
             layer.smooth: false
             layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
-            layer.textureMirroring: ShaderEffectSource.NoMirroring
 
             anchors.top: parent.top
             anchors.bottom: parent.bottom

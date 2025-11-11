@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
+import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -198,65 +199,82 @@ PanelWindow {
         return Theme.popupDistance
     }
 
+    readonly property real dpr: CompositorService.getScreenScale(win.screen)
+    readonly property real alignedWidth: Theme.px(implicitWidth, dpr)
+    readonly property real alignedHeight: Theme.px(implicitHeight, dpr)
+
     Item {
         id: content
 
-        anchors.fill: parent
+        x: Theme.snap((win.width - alignedWidth) / 2, dpr)
+        y: Theme.snap((win.height - alignedHeight) / 2, dpr)
+        width: alignedWidth
+        height: alignedHeight
         visible: win.hasValidData
-        layer.enabled: true
-        layer.smooth: true
 
-        Rectangle {
-            property var shadowLayers: [shadowLayer1, shadowLayer2, shadowLayer3]
+        property real shadowBlurPx: 10
+        property real shadowSpreadPx: 0
+        property real shadowBaseAlpha: 0.60
+        readonly property real popupSurfaceAlpha: SettingsData.popupTransparency
+        readonly property real effectiveShadowAlpha: Math.max(0, Math.min(1, shadowBaseAlpha * popupSurfaceAlpha))
 
+        Item {
+            id: bgShadowLayer
             anchors.fill: parent
-            anchors.margins: 4
-            radius: Theme.cornerRadius
-            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
-            border.color: notificationData && notificationData.urgency === NotificationUrgency.Critical ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.3) : Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
-            border.width: notificationData && notificationData.urgency === NotificationUrgency.Critical ? 2 : 0
-            clip: true
+            anchors.margins: Theme.snap(4, win.dpr)
+            visible: content.popupSurfaceAlpha >= 0.95
+            layer.enabled: true
+            layer.smooth: false
+            layer.textureSize: Qt.size(Math.round(width * win.dpr), Math.round(height * win.dpr))
+            layer.textureMirroring: ShaderEffectSource.MirrorVertically
 
-            Rectangle {
-                id: shadowLayer1
+            layer.effect: MultiEffect {
+                id: shadowFx
+                autoPaddingEnabled: true
+                shadowEnabled: true
+                blurEnabled: false
+                maskEnabled: false
+                property int blurMax: 64
+                shadowBlur: Math.max(0, Math.min(1, content.shadowBlurPx / blurMax))
+                shadowScale: 1 + (2 * content.shadowSpreadPx) / Math.max(1, Math.min(bgShadowLayer.width, bgShadowLayer.height))
+                shadowColor: Qt.rgba(0, 0, 0, content.effectiveShadowAlpha)
+            }
 
+            Shape {
+                id: backgroundShape
                 anchors.fill: parent
-                anchors.margins: -3
-                color: "transparent"
-                radius: parent.radius + 3
-                border.color: Qt.rgba(0, 0, 0, 0.05)
-                border.width: 1
-                z: -3
+                preferredRendererType: Shape.CurveRenderer
+
+                readonly property real radius: Theme.cornerRadius
+                readonly property color fillColor: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
+                readonly property color strokeColor: notificationData && notificationData.urgency === NotificationUrgency.Critical ? Theme.withAlpha(Theme.primary, 0.3) : Theme.withAlpha(Theme.outline, 0.08)
+                readonly property real strokeWidth: notificationData && notificationData.urgency === NotificationUrgency.Critical ? 2 : 0
+
+                ShapePath {
+                    fillColor: backgroundShape.fillColor
+                    strokeColor: backgroundShape.strokeColor
+                    strokeWidth: backgroundShape.strokeWidth
+
+                    startX: backgroundShape.radius
+                    startY: 0
+
+                    PathLine { x: backgroundShape.width - backgroundShape.radius; y: 0 }
+                    PathQuad { x: backgroundShape.width; y: backgroundShape.radius; controlX: backgroundShape.width; controlY: 0 }
+                    PathLine { x: backgroundShape.width; y: backgroundShape.height - backgroundShape.radius }
+                    PathQuad { x: backgroundShape.width - backgroundShape.radius; y: backgroundShape.height; controlX: backgroundShape.width; controlY: backgroundShape.height }
+                    PathLine { x: backgroundShape.radius; y: backgroundShape.height }
+                    PathQuad { x: 0; y: backgroundShape.height - backgroundShape.radius; controlX: 0; controlY: backgroundShape.height }
+                    PathLine { x: 0; y: backgroundShape.radius }
+                    PathQuad { x: backgroundShape.radius; y: 0; controlX: 0; controlY: 0 }
+                }
             }
 
             Rectangle {
-                id: shadowLayer2
-
                 anchors.fill: parent
-                anchors.margins: -2
-                color: "transparent"
-                radius: parent.radius + 2
-                border.color: Qt.rgba(0, 0, 0, 0.08)
-                border.width: 1
-                z: -2
-            }
-
-            Rectangle {
-                id: shadowLayer3
-
-                anchors.fill: parent
-                color: "transparent"
-                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.12)
-                border.width: 1
-                radius: parent.radius
-                z: -1
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                radius: parent.radius
+                radius: backgroundShape.radius
                 visible: notificationData && notificationData.urgency === NotificationUrgency.Critical
                 opacity: 1
+                clip: true
 
                 gradient: Gradient {
                     orientation: Gradient.Horizontal
@@ -277,6 +295,13 @@ PanelWindow {
                     }
                 }
             }
+        }
+
+        Item {
+            id: backgroundContainer
+            anchors.fill: parent
+            anchors.margins: Theme.snap(4, win.dpr)
+            clip: true
 
             Item {
                 id: notificationContent

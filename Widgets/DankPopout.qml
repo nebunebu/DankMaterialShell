@@ -170,37 +170,22 @@ PanelWindow {
             }
         }
 
-        RectangularShadow {
-            id: shadowEffect
-            width: contentLoaderWrapper.width
-            height: contentLoaderWrapper.height
-            x: contentLoaderWrapper.x
-            y: contentLoaderWrapper.y
-            scale: contentLoaderWrapper.scale
-            transformOrigin: Item.Center
-
-            radius: Theme.cornerRadius
-            blur: 10
-            spread: 0
-            color: Qt.rgba(0, 0, 0, 0.6)
-            visible: contentLoaderWrapper.visible && shouldBeVisible
-            opacity: contentLoaderWrapper.opacity * 0.6
-        }
-
         Item {
-            id: contentLoaderWrapper
+            id: contentWrapper
             anchors.centerIn: parent
             width: parent.width
             height: parent.height
-            layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
-            layer.smooth: false
-            layer.textureSize: Qt.size(width * root.dpr, height * root.dpr)
-            layer.textureMirroring: ShaderEffectSource.NoMirroring
             opacity: shouldBeVisible ? 1 : 0
             visible: opacity > 0
             scale: contentContainer.scaleValue
             x: Theme.snap(contentContainer.animX + (parent.width - width) * (1 - contentContainer.scaleValue) * 0.5, root.dpr)
             y: Theme.snap(contentContainer.animY + (parent.height - height) * (1 - contentContainer.scaleValue) * 0.5, root.dpr)
+
+            property real shadowBlurPx: 10
+            property real shadowSpreadPx: 0
+            property real shadowBaseAlpha: 0.60
+            readonly property real popupSurfaceAlpha: SettingsData.popupTransparency
+            readonly property real effectiveShadowAlpha: Math.max(0, Math.min(1, shadowBaseAlpha * popupSurfaceAlpha * contentWrapper.opacity))
 
             Behavior on opacity {
                 NumberAnimation {
@@ -210,15 +195,45 @@ PanelWindow {
                 }
             }
 
-            DankRectangle {
+            Item {
+                id: bgShadowLayer
                 anchors.fill: parent
+                visible: contentWrapper.popupSurfaceAlpha >= 0.95
+                layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
+                layer.smooth: false
+                layer.textureSize: Qt.size(Math.round(width * root.dpr), Math.round(height * root.dpr))
+                layer.textureMirroring: ShaderEffectSource.MirrorVertically
+
+                layer.effect: MultiEffect {
+                    id: shadowFx
+                    autoPaddingEnabled: true
+                    shadowEnabled: true
+                    blurEnabled: false
+                    maskEnabled: false
+                    property int blurMax: 64
+                    shadowBlur: Math.max(0, Math.min(1, contentWrapper.shadowBlurPx / blurMax))
+                    shadowScale: 1 + (2 * contentWrapper.shadowSpreadPx) / Math.max(1, Math.min(bgShadowLayer.width, bgShadowLayer.height))
+                    shadowColor: Qt.rgba(0, 0, 0, contentWrapper.effectiveShadowAlpha)
+                }
+
+                DankRectangle {
+                    anchors.fill: parent
+                    radius: Theme.cornerRadius
+                }
             }
 
-            Loader {
-                id: contentLoader
+            Item {
+                id: contentLoaderWrapper
                 anchors.fill: parent
-                active: root.visible
-                asynchronous: false
+                x: Theme.snap(x, root.dpr)
+                y: Theme.snap(y, root.dpr)
+
+                Loader {
+                    id: contentLoader
+                    anchors.fill: parent
+                    active: root.visible
+                    asynchronous: false
+                }
             }
         }
     }

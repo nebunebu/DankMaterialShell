@@ -29,7 +29,7 @@ Singleton {
     function getScreenScale(screen) {
         if (!screen) return 1
 
-        if (Quickshell.env("QT_WAYLAND_FORCE_DPI")) {
+        if (Quickshell.env("QT_WAYLAND_FORCE_DPI") || Quickshell.env("QT_SCALE_FACTOR")) {
             return screen.devicePixelRatio || 1
         }
 

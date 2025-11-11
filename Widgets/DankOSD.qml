@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import qs.Common
 import qs.Services
+import qs.Widgets
 
 PanelWindow {
     id: root
@@ -117,14 +118,37 @@ PanelWindow {
         scale: shouldBeVisible ? 1 : 0.9
 
         property bool childHovered: false
+        property real shadowBlurPx: 10
+        property real shadowSpreadPx: 0
+        property real shadowBaseAlpha: 0.60
+        readonly property real popupSurfaceAlpha: SettingsData.popupTransparency
+        readonly property real effectiveShadowAlpha: Math.max(0, Math.min(1, shadowBaseAlpha * popupSurfaceAlpha * osdContainer.opacity))
 
-        Rectangle {
-            id: osdBackground
+        Item {
+            id: bgShadowLayer
             anchors.fill: parent
-            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
-            radius: Theme.cornerRadius
-            border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
-            border.width: 1
+            visible: osdContainer.popupSurfaceAlpha >= 0.95
+            layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true" && Quickshell.env("DMS_DISABLE_LAYER") !== "1"
+            layer.smooth: false
+            layer.textureSize: Qt.size(Math.round(width * root.dpr), Math.round(height * root.dpr))
+            layer.textureMirroring: ShaderEffectSource.MirrorVertically
+
+            layer.effect: MultiEffect {
+                id: shadowFx
+                autoPaddingEnabled: true
+                shadowEnabled: true
+                blurEnabled: false
+                maskEnabled: false
+                property int blurMax: 64
+                shadowBlur: Math.max(0, Math.min(1, osdContainer.shadowBlurPx / blurMax))
+                shadowScale: 1 + (2 * osdContainer.shadowSpreadPx) / Math.max(1, Math.min(bgShadowLayer.width, bgShadowLayer.height))
+                shadowColor: Qt.rgba(0, 0, 0, osdContainer.effectiveShadowAlpha)
+            }
+
+            DankRectangle {
+                anchors.fill: parent
+                radius: Theme.cornerRadius
+            }
         }
 
         MouseArea {
@@ -162,6 +186,6 @@ PanelWindow {
     }
 
     mask: Region {
-        item: osdBackground
+        item: bgShadowLayer
     }
 }
