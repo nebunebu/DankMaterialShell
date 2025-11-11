@@ -678,7 +678,21 @@ Item {
 
     property var currentTrayMenu: null
 
+    Connections {
+        target: currentTrayMenu
+        enabled: currentTrayMenu !== null
+        function onShowMenuChanged() {
+            if (parentWindow && typeof parentWindow.systemTrayMenuOpen !== "undefined") {
+                parentWindow.systemTrayMenuOpen = currentTrayMenu.showMenu
+            }
+        }
+    }
+
     function showForTrayItem(item, anchor, screen, atBottom, vertical, axisObj) {
+        if (parentWindow && typeof parentWindow.systemTrayMenuOpen !== "undefined") {
+            parentWindow.systemTrayMenuOpen = true
+        }
+
         if (currentTrayMenu) {
             currentTrayMenu.destroy()
         }

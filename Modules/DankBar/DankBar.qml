@@ -25,6 +25,7 @@ Item {
 
     property alias barVariants: barVariants
     property var hyprlandOverviewLoader: null
+    property bool systemTrayMenuOpen: false
 
     function triggerControlCenterOnFocusedScreen() {
         let focusedScreenName = ""
@@ -444,7 +445,7 @@ Item {
                                                 return item.loader.item[item.prop]
                                             }
                                             return false
-                                        })
+                                        }) || root.systemTrayMenuOpen
                 }
 
                 Connections {
@@ -470,7 +471,10 @@ Item {
                 }
 
                 onHasActivePopoutChanged: {
-                    if (!hasActivePopout && autoHide && !topBarMouseArea.containsMouse) {
+                    if (hasActivePopout) {
+                        revealSticky = true
+                        revealHold.stop()
+                    } else if (autoHide && !topBarMouseArea.containsMouse) {
                         revealSticky = true
                         revealHold.restart()
                     }
