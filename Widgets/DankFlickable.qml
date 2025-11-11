@@ -29,6 +29,7 @@ Flickable {
         property real lastWheelTime: 0
         property real momentum: 0
         property var velocitySamples: []
+        property bool sessionUsedMouseWheel: false
 
         function startMomentum() {
             flickable.isMomentumActive = true
@@ -49,10 +50,12 @@ Flickable {
                      const isMouseWheel = Math.abs(deltaY) >= 120 && (Math.abs(deltaY) % 120) === 0
 
                      if (isMouseWheel) {
+                         sessionUsedMouseWheel = true
                          momentumTimer.stop()
                          flickable.isMomentumActive = false
                          velocitySamples = []
                          momentum = 0
+                         flickable.momentumVelocity = 0
 
                          const lines = Math.floor(Math.abs(deltaY) / 120)
                          const scrollAmount = (deltaY > 0 ? -lines : lines) * flickable.mouseWheelSpeed
@@ -65,6 +68,7 @@ Flickable {
 
                          flickable.contentY = newY
                      } else {
+                         sessionUsedMouseWheel = false
                          momentumTimer.stop()
                          flickable.isMomentumActive = false
 
@@ -111,7 +115,7 @@ Flickable {
 
         onActiveChanged: {
             if (!active) {
-                if (Math.abs(flickable.momentumVelocity) >= flickable.minMomentumVelocity) {
+                if (!sessionUsedMouseWheel && Math.abs(flickable.momentumVelocity) >= flickable.minMomentumVelocity) {
                     startMomentum()
                 } else {
                     velocitySamples = []

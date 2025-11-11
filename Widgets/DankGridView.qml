@@ -33,6 +33,7 @@ GridView {
         property real lastWheelTime: 0
         property real momentum: 0
         property var velocitySamples: []
+        property bool sessionUsedMouseWheel: false
 
         function startMomentum() {
             isMomentumActive = true
@@ -52,10 +53,12 @@ GridView {
                      const isMouseWheel = Math.abs(deltaY) >= 120 && (Math.abs(deltaY) % 120) === 0
 
                      if (isMouseWheel) {
+                         sessionUsedMouseWheel = true
                          momentumTimer.stop()
                          isMomentumActive = false
                          velocitySamples = []
                          momentum = 0
+                         momentumVelocity = 0
 
                          const lines = Math.floor(Math.abs(deltaY) / 120)
                          const scrollAmount = (deltaY > 0 ? -lines : lines) * cellHeight * 0.35
@@ -68,6 +71,7 @@ GridView {
 
                          contentY = newY
                      } else {
+                         sessionUsedMouseWheel = false
                          momentumTimer.stop()
                          isMomentumActive = false
 
@@ -108,7 +112,7 @@ GridView {
                  }
         onActiveChanged: {
             if (!active) {
-                if (Math.abs(momentumVelocity) >= minMomentumVelocity) {
+                if (!sessionUsedMouseWheel && Math.abs(momentumVelocity) >= minMomentumVelocity) {
                     startMomentum()
                 } else {
                     velocitySamples = []
