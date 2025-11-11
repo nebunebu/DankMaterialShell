@@ -214,7 +214,7 @@ FocusScope {
         color: Theme.outlineStrong
     }
 
-    function updateIndicator(enableAnimation = true) {
+    function updateIndicator() {
         if (tabRepeater.count === 0 || currentIndex < 0 || currentIndex >= tabRepeater.count) {
             return
         }
@@ -229,25 +229,26 @@ FocusScope {
         const indicatorWidth = 60
 
         if (tabPos.x < 10 && currentIndex > 0) {
-            Qt.callLater(() => updateIndicator(enableAnimation))
+            Qt.callLater(updateIndicator)
             return
         }
 
-        indicator.animationEnabled = enableAnimation
-        indicator.width = indicatorWidth
-        indicator.x = tabCenterX - indicatorWidth / 2
-        indicator.visible = true
+        if (!indicator.initialSetupComplete) {
+            indicator.animationEnabled = false
+            indicator.width = indicatorWidth
+            indicator.x = tabCenterX - indicatorWidth / 2
+            indicator.visible = true
+            indicator.initialSetupComplete = true
+            indicator.animationEnabled = true
+        } else {
+            indicator.width = indicatorWidth
+            indicator.x = tabCenterX - indicatorWidth / 2
+            indicator.visible = true
+        }
     }
 
     onCurrentIndexChanged: {
-        if (indicator.initialSetupComplete) {
-            Qt.callLater(() => updateIndicator(true))
-        } else {
-            Qt.callLater(() => {
-                updateIndicator(false)
-                indicator.initialSetupComplete = true
-            })
-        }
+        Qt.callLater(updateIndicator)
     }
-    onWidthChanged: Qt.callLater(() => updateIndicator(indicator.initialSetupComplete))
+    onWidthChanged: Qt.callLater(updateIndicator)
 }
