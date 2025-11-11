@@ -48,8 +48,9 @@ Singleton {
     signal brightnessStateUpdate(var data)
     signal brightnessDeviceUpdate(var device)
     signal extWorkspaceStateUpdate(var data)
+    signal wlrOutputStateUpdate(var data)
 
-    property var activeSubscriptions: ["network", "network.credentials", "loginctl", "freedesktop", "gamma", "bluetooth", "bluetooth.pairing", "dwl", "brightness"]
+    property var activeSubscriptions: ["network", "network.credentials", "loginctl", "freedesktop", "gamma", "bluetooth", "bluetooth.pairing", "dwl", "brightness", "wlroutput"]
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
@@ -346,6 +347,8 @@ Singleton {
             }
         } else if (service === "extworkspace") {
             extWorkspaceStateUpdate(data)
+        } else if (service === "wlroutput") {
+            wlrOutputStateUpdate(data)
         }
     }
 

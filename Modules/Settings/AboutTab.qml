@@ -13,11 +13,13 @@ Item {
     property bool isNiri: CompositorService.isNiri
     property bool isSway: CompositorService.isSway
     property bool isDwl: CompositorService.isDwl
+    property bool isLabwc: CompositorService.isLabwc
 
     property string compositorName: {
         if (isHyprland) return "hyprland"
         if (isSway) return "sway"
         if (isDwl) return "mangowc"
+        if (isLabwc) return "labwc"
         return "niri"
     }
 
@@ -25,6 +27,7 @@ Item {
         if (isHyprland) return "/assets/hyprland.svg"
         if (isSway) return "/assets/sway.svg"
         if (isDwl) return "/assets/mango.png"
+        if (isLabwc) return "/assets/labwc.png"
         return "/assets/niri.svg"
     }
 
@@ -32,6 +35,7 @@ Item {
         if (isHyprland) return "https://hypr.land"
         if (isSway) return "https://swaywm.org"
         if (isDwl) return "https://github.com/DreamMaoMao/mangowc"
+        if (isLabwc) return "https://labwc.github.io/"
         return "https://github.com/YaLTeR/niri"
     }
 
@@ -39,6 +43,7 @@ Item {
         if (isHyprland) return "Hyprland Website"
         if (isSway) return "Sway Website"
         if (isDwl) return "mangowc GitHub"
+        if (isLabwc) return "LabWC Website"
         return "niri GitHub"
     }
 
@@ -60,9 +65,13 @@ Item {
     property string redditUrl: "https://reddit.com/r/niri"
     property string redditTooltip: "r/niri Subreddit"
 
-    property bool showMatrix: isNiri && !isHyprland && !isSway && !isDwl
+    property string ircUrl: "https://web.libera.chat/gamja/?channels=#labwc"
+    property string ircTooltip: "LabWC IRC Channel"
+
+    property bool showMatrix: isNiri && !isHyprland && !isSway && !isDwl && !isLabwc
     property bool showCompositorDiscord: isHyprland || isDwl
-    property bool showReddit: isNiri && !isHyprland && !isSway && !isDwl
+    property bool showReddit: isNiri && !isHyprland && !isSway && !isDwl && !isLabwc
+    property bool showIrc: isLabwc
 
     DankFlickable {
         anchors.fill: parent
@@ -153,6 +162,9 @@ Item {
                             if (showMatrix) {
                                 baseWidth += matrixButton.width + 4
                             }
+                            if (showIrc) {
+                                baseWidth += ircButton.width + Theme.spacingM
+                            }
                             if (showCompositorDiscord) {
                                 baseWidth += compositorDiscordButton.width + Theme.spacingM
                             }
@@ -233,10 +245,42 @@ Item {
                         }
 
                         Item {
+                            id: ircButton
+                            width: 24
+                            height: 24
+                            x: compositorButton.x + compositorButton.width + Theme.spacingM
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible: showIrc
+
+                            property bool hovered: false
+                            property string tooltipText: ircTooltip
+
+                            DankIcon {
+                                anchors.centerIn: parent
+                                name: "forum"
+                                size: 20
+                                color: Theme.surfaceText
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                hoverEnabled: true
+                                onEntered: parent.hovered = true
+                                onExited: parent.hovered = false
+                                onClicked: Qt.openUrlExternally(ircUrl)
+                            }
+                        }
+
+                        Item {
                             id: dmsDiscordButton
                             width: 20
                             height: 20
-                            x: showMatrix ? matrixButton.x + matrixButton.width + Theme.spacingM : compositorButton.x + compositorButton.width + Theme.spacingM
+                            x: {
+                                if (showMatrix) return matrixButton.x + matrixButton.width + Theme.spacingM
+                                if (showIrc) return ircButton.x + ircButton.width + Theme.spacingM
+                                return compositorButton.x + compositorButton.width + Theme.spacingM
+                            }
                             anchors.verticalCenter: parent.verticalCenter
 
                             property bool hovered: false
@@ -618,6 +662,7 @@ Item {
         property var hoveredButton: {
             if (compositorButton.hovered) return compositorButton
             if (matrixButton.visible && matrixButton.hovered) return matrixButton
+            if (ircButton.visible && ircButton.hovered) return ircButton
             if (dmsDiscordButton.hovered) return dmsDiscordButton
             if (compositorDiscordButton.visible && compositorDiscordButton.hovered) return compositorDiscordButton
             if (redditButton.visible && redditButton.hovered) return redditButton

@@ -14,11 +14,13 @@ Singleton {
     property bool isNiri: false
     property bool isDwl: false
     property bool isSway: false
+    property bool isLabwc: false
     property string compositor: "unknown"
 
     readonly property string hyprlandSignature: Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE")
     readonly property string niriSocket: Quickshell.env("NIRI_SOCKET")
     readonly property string swaySocket: Quickshell.env("SWAYSOCK")
+    readonly property string labwcPid: Quickshell.env("LABWC_PID")
     property bool useNiriSorting: isNiri && NiriService
 
     property var sortedToplevels: []
@@ -31,6 +33,13 @@ Singleton {
 
         if (Quickshell.env("QT_WAYLAND_FORCE_DPI") || Quickshell.env("QT_SCALE_FACTOR")) {
             return screen.devicePixelRatio || 1
+        }
+
+        if (WlrOutputService.wlrOutputAvailable && screen) {
+            const wlrOutput = WlrOutputService.getOutput(screen.name)
+            if (wlrOutput?.enabled && wlrOutput.scale !== undefined && wlrOutput.scale > 0) {
+                return wlrOutput.scale
+            }
         }
 
         if (isNiri && screen) {
@@ -343,6 +352,7 @@ Singleton {
             isNiri = false
             isDwl = false
             isSway = false
+            isLabwc = false
             compositor = "hyprland"
             console.info("CompositorService: Detected Hyprland")
             return
@@ -355,6 +365,7 @@ Singleton {
                     isHyprland = false
                     isDwl = false
                     isSway = false
+                    isLabwc = false
                     compositor = "niri"
                     console.info("CompositorService: Detected Niri with socket:", niriSocket)
                     NiriService.generateNiriBinds()
@@ -371,13 +382,25 @@ Singleton {
                     isHyprland = false
                     isDwl = false
                     isSway = true
+                    isLabwc = false
                     compositor = "sway"
                     console.info("CompositorService: Detected Sway with socket:", swaySocket)
                 }
             }, 0)
-            return            
+            return
         }
-        
+
+        if (labwcPid && labwcPid.length > 0) {
+            isHyprland = false
+            isNiri = false
+            isDwl = false
+            isSway = false
+            isLabwc = true
+            compositor = "labwc"
+            console.info("CompositorService: Detected LabWC with PID:", labwcPid)
+            return
+        }
+
         if (DMSService.dmsAvailable) {
             Qt.callLater(checkForDwl)
         } else {
@@ -385,6 +408,7 @@ Singleton {
             isNiri = false
             isDwl = false
             isSway = false
+            isLabwc = false
             compositor = "unknown"
             console.warn("CompositorService: No compositor detected")
         }
@@ -393,7 +417,7 @@ Singleton {
     Connections {
         target: DMSService
         function onCapabilitiesReceived() {
-            if (!isHyprland && !isNiri && !isDwl) {
+            if (!isHyprland && !isNiri && !isDwl && !isLabwc) {
                 checkForDwl()
             }
         }
@@ -404,6 +428,8 @@ Singleton {
             isHyprland = false
             isNiri = false
             isDwl = true
+            isSway = false
+            isLabwc = false
             compositor = "dwl"
             console.info("CompositorService: Detected DWL via DMS capability")
         }
