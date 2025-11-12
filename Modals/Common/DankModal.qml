@@ -75,7 +75,18 @@ PanelWindow {
 
     visible: shouldBeVisible
     color: "transparent"
-    WlrLayershell.layer: WlrLayershell.Top // if set to overlay -> virtual keyboards can be stuck under modal
+    WlrLayershell.layer: {
+        switch (Quickshell.env("DMS_MODAL_LAYER")) {
+        case "bottom":
+            return WlrLayershell.Bottom
+        case "overlay":
+            return WlrLayershell.Overlay
+        case "background":
+            return WlrLayershell.Background
+        default:
+            return WlrLayershell.Top
+        }
+    }
     WlrLayershell.exclusiveZone: -1
     WlrLayershell.keyboardFocus: shouldHaveFocus ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
     onVisibleChanged: {

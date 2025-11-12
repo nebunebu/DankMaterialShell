@@ -64,6 +64,20 @@ PanelWindow {
 
     visible: hasValidData
     WlrLayershell.layer: {
+        const envLayer = Quickshell.env("DMS_NOTIFICATION_LAYER")
+        if (envLayer) {
+            switch (envLayer) {
+            case "bottom":
+                return WlrLayershell.Bottom
+            case "overlay":
+                return WlrLayershell.Overlay
+            case "background":
+                return WlrLayershell.Background
+            case "top":
+                return WlrLayershell.Top
+            }
+        }
+
         if (!notificationData)
             return WlrLayershell.Top
 

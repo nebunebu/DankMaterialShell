@@ -65,7 +65,18 @@ PanelWindow {
     }
 
     color: "transparent"
-    WlrLayershell.layer: WlrLayershell.Top
+    WlrLayershell.layer: {
+        switch (Quickshell.env("DMS_DANKBAR_LAYER")) {
+        case "bottom":
+            return WlrLayershell.Bottom
+        case "overlay":
+            return WlrLayershell.Overlay
+        case "background":
+            return WlrLayershell.Background
+        default:
+            return WlrLayershell.Top
+        }
+    }
     WlrLayershell.exclusiveZone: -1
     WlrLayershell.keyboardFocus: shouldBeVisible ? keyboardFocusMode : WlrKeyboardFocus.None 
 
