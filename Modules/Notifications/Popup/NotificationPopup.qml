@@ -236,7 +236,6 @@ PanelWindow {
             id: bgShadowLayer
             anchors.fill: parent
             anchors.margins: Theme.snap(4, win.dpr)
-            visible: content.popupSurfaceAlpha >= 0.95
             layer.enabled: true
             layer.smooth: false
             layer.textureSize: Qt.size(Math.round(width * win.dpr), Math.round(height * win.dpr))
