@@ -37,8 +37,6 @@ Item {
             return getExtWorkspaceActiveWorkspace()
         } else if (CompositorService.isNiri) {
             return getNiriActiveWorkspace()
-        } else if (CompositorService.isHyprland) {
-            return getHyprlandActiveWorkspace()
         } else if (CompositorService.isDwl) {
             const activeTags = getDwlActiveTags()
             return activeTags.length > 0 ? activeTags[0] : -1
@@ -61,11 +59,6 @@ Item {
         if (CompositorService.isNiri) {
             const baseList = getNiriWorkspaces()
             return SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList
-        }
-        if (CompositorService.isHyprland) {
-            const baseList = getHyprlandWorkspaces()
-            const filteredList = baseList.filter(ws => ws.id > -1)
-            return SettingsData.showWorkspacePadding ? padWorkspaces(filteredList) : filteredList
         }
         if (CompositorService.isDwl) {
             const baseList = getDwlTags()
@@ -241,51 +234,6 @@ Item {
 
         const activeWs = NiriService.allWorkspaces.find(ws => ws.output === root.screenName && ws.is_active)
         return activeWs ? activeWs.idx + 1 : 1
-    }
-
-    function getHyprlandWorkspaces() {
-        const workspaces = Hyprland.workspaces?.values || []
-
-        if (!root.screenName || !SettingsData.workspacesPerMonitor) {
-            // Show all workspaces on all monitors if per-monitor filtering is disabled
-            const sorted = workspaces.slice().sort((a, b) => a.id - b.id)
-            return sorted.length > 0 ? sorted : [{
-                        "id": 1,
-                        "name": "1"
-                    }]
-        }
-
-        // Filter workspaces for this specific monitor using lastIpcObject.monitor
-        // This matches the approach from the original kyle-config
-        const monitorWorkspaces = workspaces.filter(ws => {
-            return ws.lastIpcObject && ws.lastIpcObject.monitor === root.screenName
-        })
-
-        if (monitorWorkspaces.length === 0) {
-            // Fallback if no workspaces exist for this monitor
-            return [{
-                        "id": 1,
-                        "name": "1"
-                    }]
-        }
-
-        // Return all workspaces for this monitor, sorted by ID
-        return monitorWorkspaces.sort((a, b) => a.id - b.id)
-    }
-
-    function getHyprlandActiveWorkspace() {
-        if (!root.screenName || !SettingsData.workspacesPerMonitor) {
-            return Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : 1
-        }
-
-        const monitors = Hyprland.monitors?.values || []
-        const currentMonitor = monitors.find(monitor => monitor.name === root.screenName)
-
-        if (!currentMonitor) {
-            return 1
-        }
-
-        return currentMonitor.activeWorkspace?.id ?? 1
     }
 
     function getDwlTags() {
