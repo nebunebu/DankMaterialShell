@@ -32,7 +32,7 @@ Item {
         }
     }
 
-    property int currentWorkspace: {
+    property var currentWorkspace: {
         if (useExtWorkspace) {
             return getExtWorkspaceActiveWorkspace()
         } else if (CompositorService.isNiri) {
@@ -505,7 +505,7 @@ Item {
                 id: delegateRoot
 
                 property bool isActive: {
-                    if (root.useExtWorkspace) return !!(modelData && modelData.active)
+                    if (root.useExtWorkspace) return (modelData?.id || modelData?.name) === root.currentWorkspace
                     if (CompositorService.isHyprland) return !!(modelData && modelData.id === root.currentWorkspace)
                     if (CompositorService.isDwl) return !!(modelData && root.dwlActiveTags.includes(modelData.tag))
                     if (CompositorService.isSway) return !!(modelData && modelData.num === root.currentWorkspace)
