@@ -33,8 +33,9 @@ Item {
     }
     readonly property var mainBarItems: allTrayItems.filter(item => !SessionData.isHiddenTrayId(item?.id || ""))
     readonly property int calculatedSize: {
+        if (allTrayItems.length === 0) return 0
         const itemCount = mainBarItems.length + 1
-        return itemCount > 0 ? itemCount * 24 + horizontalPadding * 2 : 0
+        return itemCount * 24 + horizontalPadding * 2
     }
     readonly property real visualWidth: isVertical ? widgetThickness : calculatedSize
     readonly property real visualHeight: isVertical ? calculatedSize : widgetThickness
