@@ -203,6 +203,8 @@ var SPEC = {
     osdAlwaysShowValue: { def: false },
 
     powerActionConfirm: { def: true },
+    powerMenuActions: { def: ["reboot", "logout", "poweroff", "lock", "suspend", "restart"] },
+    powerMenuDefaultAction: { def: "logout" },
     customPowerActionLock: { def: "" },
     customPowerActionLogout: { def: "" },
     customPowerActionSuspend: { def: "" },

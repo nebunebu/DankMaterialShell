@@ -497,6 +497,9 @@
   "Customizable empty space": {
     "Customizable empty space": "カスタマイズ可能な空きスペース"
   },
+  "Customize which actions appear in the power menu": {
+    "Customize which actions appear in the power menu": ""
+  },
   "DEMO MODE - Click anywhere to exit": {
     "DEMO MODE - Click anywhere to exit": "デモモード -任意の場所をクリックして 終了"
   },
@@ -544,6 +547,9 @@
   },
   "Default": {
     "Default": "デフォルト"
+  },
+  "Default selected action": {
+    "Default selected action": ""
   },
   "Defaults": {
     "Defaults": "デフォルト"
@@ -1023,7 +1029,7 @@
     "Location Search": "ロケーション検索"
   },
   "Lock": {
-    "Lock": ""
+    "Lock": "ロック"
   },
   "Lock Screen": {
     "Lock Screen": "ロック画面"
@@ -1292,6 +1298,9 @@
   "Only adjust gamma based on time or location rules.": {
     "Only adjust gamma based on time or location rules.": "ガンマは、時間または場所のルールに基づいてのみ調整します。"
   },
+  "Only visible if hibernate is supported by your system": {
+    "Only visible if hibernate is supported by your system": ""
+  },
   "Opacity": {
     "Opacity": "不透明度"
   },
@@ -1421,6 +1430,9 @@
   "Power Action Confirmation": {
     "Power Action Confirmation": "電源アクションの確認"
   },
+  "Power Menu Customization": {
+    "Power Menu Customization": ""
+  },
   "Power Off": {
     "Power Off": "電源オフ"
   },
@@ -1518,7 +1530,13 @@
     "Resources": "リソース"
   },
   "Restart": {
-    "Restart": ""
+    "Restart": "再起動"
+  },
+  "Restart DMS": {
+    "Restart DMS": ""
+  },
+  "Restart the DankMaterialShell": {
+    "Restart the DankMaterialShell": ""
   },
   "Resume": {
     "Resume": "レジュメ"
@@ -1649,11 +1667,32 @@
   "Show Dock": {
     "Show Dock": "ドックを表示"
   },
+  "Show Hibernate": {
+    "Show Hibernate": ""
+  },
   "Show Line Numbers": {
     "Show Line Numbers": "行番号を表示"
   },
+  "Show Lock": {
+    "Show Lock": ""
+  },
+  "Show Log Out": {
+    "Show Log Out": ""
+  },
   "Show Power Actions": {
     "Show Power Actions": "電源アクションを表示"
+  },
+  "Show Power Off": {
+    "Show Power Off": ""
+  },
+  "Show Reboot": {
+    "Show Reboot": ""
+  },
+  "Show Restart DMS": {
+    "Show Restart DMS": ""
+  },
+  "Show Suspend": {
+    "Show Suspend": ""
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "ワークスペースアプリを表示"

@@ -212,31 +212,31 @@
   {
     "term": "Are you sure you want to hibernate the system?",
     "context": "Are you sure you want to hibernate the system?",
-    "reference": "Modals/PowerMenuModal.qml:64",
+    "reference": "Modals/PowerMenuModal.qml:158",
     "comment": ""
   },
   {
     "term": "Are you sure you want to log out?",
     "context": "Are you sure you want to log out?",
-    "reference": "Modals/PowerMenuModal.qml:56",
+    "reference": "Modals/PowerMenuModal.qml:150",
     "comment": ""
   },
   {
     "term": "Are you sure you want to power off the system?",
     "context": "Are you sure you want to power off the system?",
-    "reference": "Modals/PowerMenuModal.qml:72",
+    "reference": "Modals/PowerMenuModal.qml:166",
     "comment": ""
   },
   {
     "term": "Are you sure you want to reboot the system?",
     "context": "Are you sure you want to reboot the system?",
-    "reference": "Modals/PowerMenuModal.qml:68",
+    "reference": "Modals/PowerMenuModal.qml:162",
     "comment": ""
   },
   {
     "term": "Are you sure you want to suspend the system?",
     "context": "Are you sure you want to suspend the system?",
-    "reference": "Modals/PowerMenuModal.qml:60",
+    "reference": "Modals/PowerMenuModal.qml:154",
     "comment": ""
   },
   {
@@ -728,37 +728,37 @@
   {
     "term": "Command or script to run instead of the standard hibernate procedure",
     "context": "Command or script to run instead of the standard hibernate procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:508",
+    "reference": "Modals/Settings/PowerSettings.qml:687",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard lock procedure",
     "context": "Command or script to run instead of the standard lock procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:412",
+    "reference": "Modals/Settings/PowerSettings.qml:591",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard logout procedure",
     "context": "Command or script to run instead of the standard logout procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:444",
+    "reference": "Modals/Settings/PowerSettings.qml:623",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard power off procedure",
     "context": "Command or script to run instead of the standard power off procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:572",
+    "reference": "Modals/Settings/PowerSettings.qml:751",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard reboot procedure",
     "context": "Command or script to run instead of the standard reboot procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:540",
+    "reference": "Modals/Settings/PowerSettings.qml:719",
     "comment": ""
   },
   {
     "term": "Command or script to run instead of the standard suspend procedure",
     "context": "Command or script to run instead of the standard suspend procedure",
-    "reference": "Modals/Settings/PowerSettings.qml:476",
+    "reference": "Modals/Settings/PowerSettings.qml:655",
     "comment": ""
   },
   {
@@ -974,7 +974,7 @@
   {
     "term": "Custom Power Actions",
     "context": "Custom Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:398",
+    "reference": "Modals/Settings/PowerSettings.qml:577",
     "comment": ""
   },
   {
@@ -993,6 +993,12 @@
     "term": "Customizable empty space",
     "context": "Customizable empty space",
     "reference": "Modules/Settings/DankBarTab.qml:151",
+    "comment": ""
+  },
+  {
+    "term": "Customize which actions appear in the power menu",
+    "context": "Customize which actions appear in the power menu",
+    "reference": "Modals/Settings/PowerSettings.qml:363",
     "comment": ""
   },
   {
@@ -1089,6 +1095,12 @@
     "term": "Default",
     "context": "Default",
     "reference": "Modules/Settings/LauncherTab.qml:202",
+    "comment": ""
+  },
+  {
+    "term": "Default selected action",
+    "context": "Default selected action",
+    "reference": "Modals/Settings/PowerSettings.qml:374",
     "comment": ""
   },
   {
@@ -1754,7 +1766,7 @@
   {
     "term": "Hibernate",
     "context": "Hibernate",
-    "reference": "Modals/PowerMenuModal.qml:63, Modals/PowerMenuModal.qml:555, Modules/Lock/LockPowerMenu.qml:312",
+    "reference": "Modals/PowerMenuModal.qml:117, Modals/PowerMenuModal.qml:157, Modules/Lock/LockPowerMenu.qml:312",
     "comment": ""
   },
   {
@@ -2048,7 +2060,7 @@
   {
     "term": "Lock",
     "context": "Lock",
-    "reference": "Modals/PowerMenuModal.qml:423",
+    "reference": "Modals/PowerMenuModal.qml:105",
     "comment": ""
   },
   {
@@ -2072,7 +2084,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:55, Modals/PowerMenuModal.qml:291, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
+    "reference": "Modals/PowerMenuModal.qml:93, Modals/PowerMenuModal.qml:149, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -2586,6 +2598,12 @@
     "comment": ""
   },
   {
+    "term": "Only visible if hibernate is supported by your system",
+    "context": "Only visible if hibernate is supported by your system",
+    "reference": "Modals/Settings/PowerSettings.qml:490",
+    "comment": ""
+  },
+  {
     "term": "Opacity",
     "context": "Opacity",
     "reference": "Modals/DankColorPickerModal.qml:420",
@@ -2840,13 +2858,19 @@
   {
     "term": "Power Action Confirmation",
     "context": "Power Action Confirmation",
+    "reference": "Modals/Settings/PowerSettings.qml:533",
+    "comment": ""
+  },
+  {
+    "term": "Power Menu Customization",
+    "context": "Power Menu Customization",
     "reference": "Modals/Settings/PowerSettings.qml:354",
     "comment": ""
   },
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:71, Modals/PowerMenuModal.qml:357, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
+    "reference": "Modals/PowerMenuModal.qml:99, Modals/PowerMenuModal.qml:165, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
@@ -2978,7 +3002,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:67, Modals/PowerMenuModal.qml:225, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
+    "reference": "Modals/PowerMenuModal.qml:87, Modals/PowerMenuModal.qml:161, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -3020,7 +3044,7 @@
   {
     "term": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
     "context": "Request confirmation on power off, restart, suspend, hibernate and logout actions",
-    "reference": "Modals/Settings/PowerSettings.qml:365",
+    "reference": "Modals/Settings/PowerSettings.qml:544",
     "comment": ""
   },
   {
@@ -3036,9 +3060,15 @@
     "comment": ""
   },
   {
-    "term": "Restart",
-    "context": "Restart",
-    "reference": "Modals/PowerMenuModal.qml:555",
+    "term": "Restart DMS",
+    "context": "Restart DMS",
+    "reference": "Modals/PowerMenuModal.qml:123",
+    "comment": ""
+  },
+  {
+    "term": "Restart the DankMaterialShell",
+    "context": "Restart the DankMaterialShell",
+    "reference": "Modals/Settings/PowerSettings.qml:474",
     "comment": ""
   },
   {
@@ -3290,7 +3320,7 @@
   {
     "term": "Show Confirmation on Power Actions",
     "context": "Show Confirmation on Power Actions",
-    "reference": "Modals/Settings/PowerSettings.qml:364",
+    "reference": "Modals/Settings/PowerSettings.qml:543",
     "comment": ""
   },
   {
@@ -3300,15 +3330,57 @@
     "comment": ""
   },
   {
+    "term": "Show Hibernate",
+    "context": "Show Hibernate",
+    "reference": "Modals/Settings/PowerSettings.qml:489",
+    "comment": ""
+  },
+  {
     "term": "Show Line Numbers",
     "context": "Show Line Numbers",
     "reference": "Modules/Notepad/NotepadSettings.qml:151",
     "comment": ""
   },
   {
+    "term": "Show Lock",
+    "context": "Show Lock",
+    "reference": "Modals/Settings/PowerSettings.qml:443",
+    "comment": ""
+  },
+  {
+    "term": "Show Log Out",
+    "context": "Show Log Out",
+    "reference": "Modals/Settings/PowerSettings.qml:413",
+    "comment": ""
+  },
+  {
     "term": "Show Power Actions",
     "context": "Show Power Actions",
     "reference": "Modals/Settings/PowerSettings.qml:57",
+    "comment": ""
+  },
+  {
+    "term": "Show Power Off",
+    "context": "Show Power Off",
+    "reference": "Modals/Settings/PowerSettings.qml:428",
+    "comment": ""
+  },
+  {
+    "term": "Show Reboot",
+    "context": "Show Reboot",
+    "reference": "Modals/Settings/PowerSettings.qml:398",
+    "comment": ""
+  },
+  {
+    "term": "Show Restart DMS",
+    "context": "Show Restart DMS",
+    "reference": "Modals/Settings/PowerSettings.qml:473",
+    "comment": ""
+  },
+  {
+    "term": "Show Suspend",
+    "context": "Show Suspend",
+    "reference": "Modals/Settings/PowerSettings.qml:458",
     "comment": ""
   },
   {
@@ -3524,7 +3596,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:59, Modals/PowerMenuModal.qml:489, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
+    "reference": "Modals/PowerMenuModal.qml:111, Modals/PowerMenuModal.qml:153, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {

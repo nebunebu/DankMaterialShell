@@ -292,6 +292,8 @@ Singleton {
     property bool osdAlwaysShowValue: false
 
     property bool powerActionConfirm: true
+    property var powerMenuActions: ["reboot", "logout", "poweroff", "lock", "suspend", "restart"]
+    property string powerMenuDefaultAction: "logout"
     property string customPowerActionLock: ""
     property string customPowerActionLogout: ""
     property string customPowerActionSuspend: ""

@@ -1162,6 +1162,13 @@
     "comment": ""
   },
   {
+    "term": "Customize which actions appear in the power menu",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "DEMO MODE - Click anywhere to exit",
     "translation": "",
     "context": "",
@@ -1268,6 +1275,13 @@
   },
   {
     "term": "Default",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Default selected action",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3017,6 +3031,13 @@
     "comment": ""
   },
   {
+    "term": "Only visible if hibernate is supported by your system",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Opacity",
     "translation": "",
     "context": "",
@@ -3318,6 +3339,13 @@
     "comment": ""
   },
   {
+    "term": "Power Menu Customization",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Power Off",
     "translation": "",
     "context": "",
@@ -3542,7 +3570,14 @@
     "comment": ""
   },
   {
-    "term": "Restart",
+    "term": "Restart DMS",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Restart the DankMaterialShell",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3850,6 +3885,13 @@
     "comment": ""
   },
   {
+    "term": "Show Hibernate",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Show Line Numbers",
     "translation": "",
     "context": "",
@@ -3857,7 +3899,49 @@
     "comment": ""
   },
   {
+    "term": "Show Lock",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show Log Out",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Show Power Actions",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show Power Off",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show Reboot",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show Restart DMS",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Show Suspend",
     "translation": "",
     "context": "",
     "reference": "",

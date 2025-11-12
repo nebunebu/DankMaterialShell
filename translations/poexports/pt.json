@@ -497,6 +497,9 @@
   "Customizable empty space": {
     "Customizable empty space": "Espaço vazio customizável"
   },
+  "Customize which actions appear in the power menu": {
+    "Customize which actions appear in the power menu": ""
+  },
   "DEMO MODE - Click anywhere to exit": {
     "DEMO MODE - Click anywhere to exit": "MODO DEMONSTRAÇÃO - Clique em qualquer lugar para sair"
   },
@@ -544,6 +547,9 @@
   },
   "Default": {
     "Default": "Padrão"
+  },
+  "Default selected action": {
+    "Default selected action": ""
   },
   "Defaults": {
     "Defaults": "Padrões"
@@ -1292,6 +1298,9 @@
   "Only adjust gamma based on time or location rules.": {
     "Only adjust gamma based on time or location rules.": "Apenas ajustar gama baseada em regras de tempo ou localização."
   },
+  "Only visible if hibernate is supported by your system": {
+    "Only visible if hibernate is supported by your system": ""
+  },
   "Opacity": {
     "Opacity": "Opacidade"
   },
@@ -1421,6 +1430,9 @@
   "Power Action Confirmation": {
     "Power Action Confirmation": "Confirmação de Ação de Energia"
   },
+  "Power Menu Customization": {
+    "Power Menu Customization": ""
+  },
   "Power Off": {
     "Power Off": "Desligar"
   },
@@ -1519,6 +1531,12 @@
   },
   "Restart": {
     "Restart": ""
+  },
+  "Restart DMS": {
+    "Restart DMS": ""
+  },
+  "Restart the DankMaterialShell": {
+    "Restart the DankMaterialShell": ""
   },
   "Resume": {
     "Resume": ""
@@ -1649,11 +1667,32 @@
   "Show Dock": {
     "Show Dock": "Mostrar Dock"
   },
+  "Show Hibernate": {
+    "Show Hibernate": ""
+  },
   "Show Line Numbers": {
     "Show Line Numbers": "Mostrar Numeração de Linha"
   },
+  "Show Lock": {
+    "Show Lock": ""
+  },
+  "Show Log Out": {
+    "Show Log Out": ""
+  },
   "Show Power Actions": {
     "Show Power Actions": "Mostrar Ações de Energia"
+  },
+  "Show Power Off": {
+    "Show Power Off": ""
+  },
+  "Show Reboot": {
+    "Show Reboot": ""
+  },
+  "Show Restart DMS": {
+    "Show Restart DMS": ""
+  },
+  "Show Suspend": {
+    "Show Suspend": ""
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "Mostrar Aplicativos da Área de Trabalho Virtual"
