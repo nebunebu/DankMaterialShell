@@ -149,6 +149,30 @@ DankModal {
                                                 event.accepted = true
                                             }
                                             break
+                                            case Qt.Key_R:
+                                            selectOption("reboot")
+                                            event.accepted = true
+                                            break
+                                            case Qt.Key_X:
+                                            selectOption("logout")
+                                            event.accepted = true
+                                            break
+                                            case Qt.Key_P:
+                                            selectOption("poweroff")
+                                            event.accepted = true
+                                            break
+                                            case Qt.Key_L:
+                                            selectOption("lock")
+                                            event.accepted = true
+                                            break
+                                            case Qt.Key_S:
+                                            selectOption("suspend")
+                                            event.accepted = true
+                                            break
+                                            case Qt.Key_H:
+                                            selectOption(SessionService.hibernateSupported ? "hibernate" : "restart")
+                                            event.accepted = true
+                                            break
                                         }
                                     }
 
@@ -204,6 +228,22 @@ DankModal {
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "R"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
+                            }
                         }
 
                         MouseArea {
@@ -253,6 +293,22 @@ DankModal {
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "X"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
                             }
                         }
 
@@ -304,6 +360,22 @@ DankModal {
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "P"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
+                            }
                         }
 
                         MouseArea {
@@ -353,6 +425,22 @@ DankModal {
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "L"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
                             }
                         }
 
@@ -404,6 +492,22 @@ DankModal {
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "S"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
+                            }
                         }
 
                         MouseArea {
@@ -453,6 +557,22 @@ DankModal {
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
                                 anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Rectangle {
+                                width: 20
+                                height: 16
+                                radius: 4
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                                anchors.horizontalCenter: parent.horizontalCenter
+
+                                StyledText {
+                                    text: "H"
+                                    font.pixelSize: Theme.fontSizeSmall - 1
+                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                    font.weight: Font.Medium
+                                    anchors.centerIn: parent
+                                }
                             }
                         }
 
