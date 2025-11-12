@@ -124,6 +124,14 @@ esac
 
 install -Dm755 %{_builddir}/danklinux-master/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
 
+# Shell completions 
+install -d %{buildroot}%{_datadir}/bash-completion/completions
+install -d %{buildroot}%{_datadir}/zsh/site-functions
+install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
+%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
+%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
+%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
+
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 
@@ -162,6 +170,9 @@ fi
 
 %files -n dms-cli
 %{_bindir}/dms
+%{_datadir}/bash-completion/completions/dms
+%{_datadir}/zsh/site-functions/_dms
+%{_datadir}/fish/vendor_completions.d/dms.fish
 
 %files -n dgop
 %{_bindir}/dgop

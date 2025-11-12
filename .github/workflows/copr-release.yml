@@ -172,6 +172,14 @@ jobs:
           install -Dm755 %{_builddir}/dms-cli %{buildroot}%{_bindir}/dms
           install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 
+          # Shell completions
+          install -d %{buildroot}%{_datadir}/bash-completion/completions
+          install -d %{buildroot}%{_datadir}/zsh/site-functions
+          install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
+          %{_builddir}/dms-cli completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
+          %{_builddir}/dms-cli completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
+          %{_builddir}/dms-cli completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
+
           install -Dm644 %{_builddir}/dms-qml/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
           install -dm755 %{buildroot}%{_datadir}/quickshell/dms
@@ -204,6 +212,9 @@ jobs:
 
           %files -n dms-cli
           %{_bindir}/dms
+          %{_datadir}/bash-completion/completions/dms
+          %{_datadir}/zsh/site-functions/_dms
+          %{_datadir}/fish/vendor_completions.d/dms.fish
 
           %files -n dgop
           %{_bindir}/dgop
