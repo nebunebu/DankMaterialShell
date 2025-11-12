@@ -34,7 +34,7 @@ DankModal {
     }
 
     function getActionAtIndex(index) {
-        const actions = ["poweroff", "lock", "suspend", "reboot", "logout", SessionService.hibernateSupported ? "hibernate" : "restart"]
+        const actions = ["reboot", "logout", "poweroff", "lock", "suspend", SessionService.hibernateSupported ? "hibernate" : "restart"]
         return actions[index]
     }
 
@@ -170,14 +170,14 @@ DankModal {
                     rowSpacing: Theme.spacingS
 
                     Rectangle {
-                        id: poweroffButton
+                        id: rebootButton
                         width: (parent.width - Theme.spacingS * 2) / 3
                         height: 100
                         radius: Theme.cornerRadius
                         color: {
                             if (root.selectedIndex === 0) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
-                            } else if (poweroffArea.containsMouse) {
+                            } else if (rebootArea.containsMouse) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
                             } else {
                                 return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
@@ -185,6 +185,106 @@ DankModal {
                         }
                         border.color: root.selectedIndex === 0 ? Theme.primary : "transparent"
                         border.width: root.selectedIndex === 0 ? 2 : 0
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: Theme.spacingS
+
+                            DankIcon {
+                                name: "restart_alt"
+                                size: Theme.iconSize + 8
+                                color: rebootArea.containsMouse ? Theme.warning : Theme.surfaceText
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Reboot")
+                                font.pixelSize: Theme.fontSizeMedium
+                                color: rebootArea.containsMouse ? Theme.warning : Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: rebootArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: () => {
+                                           root.selectedRow = 0
+                                           root.selectedCol = 0
+                                           selectOption("reboot")
+                                       }
+                        }
+                    }
+
+                    Rectangle {
+                        id: logoutButton
+                        width: (parent.width - Theme.spacingS * 2) / 3
+                        height: 100
+                        radius: Theme.cornerRadius
+                        color: {
+                            if (root.selectedIndex === 1) {
+                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
+                            } else if (logoutArea.containsMouse) {
+                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
+                            } else {
+                                return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
+                            }
+                        }
+                        border.color: root.selectedIndex === 1 ? Theme.primary : "transparent"
+                        border.width: root.selectedIndex === 1 ? 2 : 0
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: Theme.spacingS
+
+                            DankIcon {
+                                name: "logout"
+                                size: Theme.iconSize + 8
+                                color: Theme.surfaceText
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            StyledText {
+                                text: I18n.tr("Log Out")
+                                font.pixelSize: Theme.fontSizeMedium
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: logoutArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: () => {
+                                           root.selectedRow = 0
+                                           root.selectedCol = 1
+                                           selectOption("logout")
+                                       }
+                        }
+                    }
+
+                    Rectangle {
+                        id: poweroffButton
+                        width: (parent.width - Theme.spacingS * 2) / 3
+                        height: 100
+                        radius: Theme.cornerRadius
+                        color: {
+                            if (root.selectedIndex === 2) {
+                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
+                            } else if (poweroffArea.containsMouse) {
+                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
+                            } else {
+                                return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
+                            }
+                        }
+                        border.color: root.selectedIndex === 2 ? Theme.primary : "transparent"
+                        border.width: root.selectedIndex === 2 ? 2 : 0
 
                         Column {
                             anchors.centerIn: parent
@@ -213,7 +313,7 @@ DankModal {
                             cursorShape: Qt.PointingHandCursor
                             onClicked: () => {
                                            root.selectedRow = 0
-                                           root.selectedCol = 0
+                                           root.selectedCol = 2
                                            selectOption("poweroff")
                                        }
                         }
@@ -225,7 +325,7 @@ DankModal {
                         height: 100
                         radius: Theme.cornerRadius
                         color: {
-                            if (root.selectedIndex === 1) {
+                            if (root.selectedIndex === 3) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
                             } else if (lockArea.containsMouse) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
@@ -233,8 +333,8 @@ DankModal {
                                 return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
                             }
                         }
-                        border.color: root.selectedIndex === 1 ? Theme.primary : "transparent"
-                        border.width: root.selectedIndex === 1 ? 2 : 0
+                        border.color: root.selectedIndex === 3 ? Theme.primary : "transparent"
+                        border.width: root.selectedIndex === 3 ? 2 : 0
 
                         Column {
                             anchors.centerIn: parent
@@ -262,8 +362,8 @@ DankModal {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: () => {
-                                           root.selectedRow = 0
-                                           root.selectedCol = 1
+                                           root.selectedRow = 1
+                                           root.selectedCol = 0
                                            selectOption("lock")
                                        }
                         }
@@ -275,7 +375,7 @@ DankModal {
                         height: 100
                         radius: Theme.cornerRadius
                         color: {
-                            if (root.selectedIndex === 2) {
+                            if (root.selectedIndex === 4) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
                             } else if (suspendArea.containsMouse) {
                                 return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
@@ -283,8 +383,8 @@ DankModal {
                                 return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
                             }
                         }
-                        border.color: root.selectedIndex === 2 ? Theme.primary : "transparent"
-                        border.width: root.selectedIndex === 2 ? 2 : 0
+                        border.color: root.selectedIndex === 4 ? Theme.primary : "transparent"
+                        border.width: root.selectedIndex === 4 ? 2 : 0
 
                         Column {
                             anchors.centerIn: parent
@@ -312,109 +412,9 @@ DankModal {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: () => {
-                                           root.selectedRow = 0
-                                           root.selectedCol = 2
-                                           selectOption("suspend")
-                                       }
-                        }
-                    }
-
-                    Rectangle {
-                        id: rebootButton
-                        width: (parent.width - Theme.spacingS * 2) / 3
-                        height: 100
-                        radius: Theme.cornerRadius
-                        color: {
-                            if (root.selectedIndex === 3) {
-                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
-                            } else if (rebootArea.containsMouse) {
-                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
-                            } else {
-                                return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
-                            }
-                        }
-                        border.color: root.selectedIndex === 3 ? Theme.primary : "transparent"
-                        border.width: root.selectedIndex === 3 ? 2 : 0
-
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: Theme.spacingS
-
-                            DankIcon {
-                                name: "restart_alt"
-                                size: Theme.iconSize + 8
-                                color: rebootArea.containsMouse ? Theme.warning : Theme.surfaceText
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            StyledText {
-                                text: I18n.tr("Reboot")
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: rebootArea.containsMouse ? Theme.warning : Theme.surfaceText
-                                font.weight: Font.Medium
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-                        }
-
-                        MouseArea {
-                            id: rebootArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: () => {
-                                           root.selectedRow = 1
-                                           root.selectedCol = 0
-                                           selectOption("reboot")
-                                       }
-                        }
-                    }
-
-                    Rectangle {
-                        id: logoutButton
-                        width: (parent.width - Theme.spacingS * 2) / 3
-                        height: 100
-                        radius: Theme.cornerRadius
-                        color: {
-                            if (root.selectedIndex === 4) {
-                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12)
-                            } else if (logoutArea.containsMouse) {
-                                return Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)
-                            } else {
-                                return Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.08)
-                            }
-                        }
-                        border.color: root.selectedIndex === 4 ? Theme.primary : "transparent"
-                        border.width: root.selectedIndex === 4 ? 2 : 0
-
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: Theme.spacingS
-
-                            DankIcon {
-                                name: "logout"
-                                size: Theme.iconSize + 8
-                                color: Theme.surfaceText
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            StyledText {
-                                text: I18n.tr("Log Out")
-                                font.pixelSize: Theme.fontSizeMedium
-                                color: Theme.surfaceText
-                                font.weight: Font.Medium
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-                        }
-
-                        MouseArea {
-                            id: logoutArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: () => {
                                            root.selectedRow = 1
                                            root.selectedCol = 1
-                                           selectOption("logout")
+                                           selectOption("suspend")
                                        }
                         }
                     }

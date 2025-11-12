@@ -27,6 +27,7 @@ DankPopout {
     property bool editMode: false
     property int expandedWidgetIndex: -1
     property var expandedWidgetData: null
+    property bool powerMenuOpen: powerMenuModalLoader?.item?.shouldBeVisible ?? false
 
     signal lockRequested
 
@@ -114,6 +115,21 @@ DankPopout {
             border.width: 0
             antialiasing: true
             smooth: true
+
+            Rectangle {
+                anchors.fill: parent
+                color: Qt.rgba(0, 0, 0, 0.6)
+                radius: parent.radius
+                visible: root.powerMenuOpen
+                z: 5000
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.OutCubic
+                    }
+                }
+            }
 
             Column {
                 id: mainColumn
