@@ -347,7 +347,8 @@ Singleton {
     }
 
     function detectCompositor() {
-        if (hyprlandSignature && hyprlandSignature.length > 0) {
+        if (hyprlandSignature && hyprlandSignature.length > 0 &&
+            !niriSocket && !swaySocket && !labwcPid) {
             isHyprland = true
             isNiri = false
             isDwl = false
