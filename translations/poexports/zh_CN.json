@@ -1022,6 +1022,9 @@
   "Location Search": {
     "Location Search": "位置搜索"
   },
+  "Lock": {
+    "Lock": ""
+  },
   "Lock Screen": {
     "Lock Screen": "锁屏"
   },
@@ -1513,6 +1516,9 @@
   },
   "Resources": {
     "Resources": "资源"
+  },
+  "Restart": {
+    "Restart": ""
   },
   "Resume": {
     "Resume": "恢复"

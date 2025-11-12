@@ -482,6 +482,10 @@ Item {
                                         }
                                     }
 
+            onLockRequested: {
+                lock.activate()
+            }
+
             function actionApply(action) {
                 switch (action) {
                 case "logout":

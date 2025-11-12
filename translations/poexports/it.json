@@ -1022,6 +1022,9 @@
   "Location Search": {
     "Location Search": "Ricerca Posizione"
   },
+  "Lock": {
+    "Lock": ""
+  },
   "Lock Screen": {
     "Lock Screen": "Blocca Schermo"
   },
@@ -1513,6 +1516,9 @@
   },
   "Resources": {
     "Resources": "Risorse"
+  },
+  "Restart": {
+    "Restart": ""
   },
   "Resume": {
     "Resume": "Riprendi"

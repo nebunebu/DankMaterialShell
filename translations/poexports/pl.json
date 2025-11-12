@@ -1022,6 +1022,9 @@
   "Location Search": {
     "Location Search": "Wyszukiwanie lokalizacji"
   },
+  "Lock": {
+    "Lock": ""
+  },
   "Lock Screen": {
     "Lock Screen": "Ekran blokady"
   },
@@ -1513,6 +1516,9 @@
   },
   "Resources": {
     "Resources": "Źródła"
+  },
+  "Restart": {
+    "Restart": ""
   },
   "Resume": {
     "Resume": "Wznów"

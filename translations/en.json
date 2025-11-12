@@ -212,31 +212,31 @@
   {
     "term": "Are you sure you want to hibernate the system?",
     "context": "Are you sure you want to hibernate the system?",
-    "reference": "Modals/PowerMenuModal.qml:46",
+    "reference": "Modals/PowerMenuModal.qml:64",
     "comment": ""
   },
   {
     "term": "Are you sure you want to log out?",
     "context": "Are you sure you want to log out?",
-    "reference": "Modals/PowerMenuModal.qml:38",
+    "reference": "Modals/PowerMenuModal.qml:56",
     "comment": ""
   },
   {
     "term": "Are you sure you want to power off the system?",
     "context": "Are you sure you want to power off the system?",
-    "reference": "Modals/PowerMenuModal.qml:54",
+    "reference": "Modals/PowerMenuModal.qml:72",
     "comment": ""
   },
   {
     "term": "Are you sure you want to reboot the system?",
     "context": "Are you sure you want to reboot the system?",
-    "reference": "Modals/PowerMenuModal.qml:50",
+    "reference": "Modals/PowerMenuModal.qml:68",
     "comment": ""
   },
   {
     "term": "Are you sure you want to suspend the system?",
     "context": "Are you sure you want to suspend the system?",
-    "reference": "Modals/PowerMenuModal.qml:42",
+    "reference": "Modals/PowerMenuModal.qml:60",
     "comment": ""
   },
   {
@@ -1754,7 +1754,7 @@
   {
     "term": "Hibernate",
     "context": "Hibernate",
-    "reference": "Modals/PowerMenuModal.qml:45, Modals/PowerMenuModal.qml:313, Modules/Lock/LockPowerMenu.qml:312",
+    "reference": "Modals/PowerMenuModal.qml:63, Modals/PowerMenuModal.qml:451, Modules/Lock/LockPowerMenu.qml:312",
     "comment": ""
   },
   {
@@ -2046,6 +2046,12 @@
     "comment": ""
   },
   {
+    "term": "Lock",
+    "context": "Lock",
+    "reference": "Modals/PowerMenuModal.qml:251",
+    "comment": ""
+  },
+  {
     "term": "Lock Screen",
     "context": "Lock Screen",
     "reference": "Modals/Settings/PowerSettings.qml:47",
@@ -2066,7 +2072,7 @@
   {
     "term": "Log Out",
     "context": "Log Out",
-    "reference": "Modals/PowerMenuModal.qml:37, Modals/PowerMenuModal.qml:206, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
+    "reference": "Modals/PowerMenuModal.qml:55, Modals/PowerMenuModal.qml:401, Modules/Lock/LockPowerMenu.qml:209, Modules/ControlCenter/PowerMenu.qml:14",
     "comment": ""
   },
   {
@@ -2840,13 +2846,13 @@
   {
     "term": "Power Off",
     "context": "Power Off",
-    "reference": "Modals/PowerMenuModal.qml:53, Modals/PowerMenuModal.qml:421, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
+    "reference": "Modals/PowerMenuModal.qml:71, Modals/PowerMenuModal.qml:201, Modules/Lock/LockPowerMenu.qml:432, Modules/ControlCenter/PowerMenu.qml:17",
     "comment": ""
   },
   {
     "term": "Power Options",
     "context": "Power Options",
-    "reference": "Modals/PowerMenuModal.qml:149, Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
+    "reference": "Modules/Lock/LockPowerMenu.qml:154, Modules/ControlCenter/PowerMenu.qml:13",
     "comment": ""
   },
   {
@@ -2972,7 +2978,7 @@
   {
     "term": "Reboot",
     "context": "Reboot",
-    "reference": "Modals/PowerMenuModal.qml:49, Modals/PowerMenuModal.qml:367, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
+    "reference": "Modals/PowerMenuModal.qml:67, Modals/PowerMenuModal.qml:351, Modules/Lock/LockPowerMenu.qml:372, Modules/ControlCenter/PowerMenu.qml:16",
     "comment": ""
   },
   {
@@ -3027,6 +3033,12 @@
     "term": "Resources",
     "context": "Resources",
     "reference": "Modules/Settings/AboutTab.qml:465",
+    "comment": ""
+  },
+  {
+    "term": "Restart",
+    "context": "Restart",
+    "reference": "Modals/PowerMenuModal.qml:451",
     "comment": ""
   },
   {
@@ -3512,7 +3524,7 @@
   {
     "term": "Suspend",
     "context": "Suspend",
-    "reference": "Modals/PowerMenuModal.qml:41, Modals/PowerMenuModal.qml:259, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
+    "reference": "Modals/PowerMenuModal.qml:59, Modals/PowerMenuModal.qml:301, Modules/Lock/LockPowerMenu.qml:260, Modules/ControlCenter/PowerMenu.qml:15",
     "comment": ""
   },
   {

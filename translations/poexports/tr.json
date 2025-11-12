@@ -1022,6 +1022,9 @@
   "Location Search": {
     "Location Search": "Konum Arama"
   },
+  "Lock": {
+    "Lock": ""
+  },
   "Lock Screen": {
     "Lock Screen": "Kilit Ekranı"
   },
@@ -1513,6 +1516,9 @@
   },
   "Resources": {
     "Resources": "Kaynaklar"
+  },
+  "Restart": {
+    "Restart": ""
   },
   "Resume": {
     "Resume": "Sürdür"

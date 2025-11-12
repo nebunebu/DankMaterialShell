@@ -1022,6 +1022,9 @@
   "Location Search": {
     "Location Search": "位置搜尋"
   },
+  "Lock": {
+    "Lock": ""
+  },
   "Lock Screen": {
     "Lock Screen": "鎖定螢幕"
   },
@@ -1513,6 +1516,9 @@
   },
   "Resources": {
     "Resources": "資源"
+  },
+  "Restart": {
+    "Restart": ""
   },
   "Resume": {
     "Resume": ""
