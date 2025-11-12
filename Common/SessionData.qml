@@ -56,6 +56,7 @@ Singleton {
     property string nightModeLocationProvider: ""
 
     property var pinnedApps: []
+    property var hiddenTrayIds: []
     property var recentColors: []
     property bool showThirdPartyPlugins: false
     property string launchPrefix: ""
@@ -140,6 +141,7 @@ Singleton {
                 nightModeUseIPLocation = settings.nightModeUseIPLocation !== undefined ? settings.nightModeUseIPLocation : false
                 nightModeLocationProvider = settings.nightModeLocationProvider !== undefined ? settings.nightModeLocationProvider : ""
                 pinnedApps = settings.pinnedApps !== undefined ? settings.pinnedApps : []
+                hiddenTrayIds = settings.hiddenTrayIds !== undefined ? settings.hiddenTrayIds : []
                 selectedGpuIndex = settings.selectedGpuIndex !== undefined ? settings.selectedGpuIndex : 0
                 nvidiaGpuTempEnabled = settings.nvidiaGpuTempEnabled !== undefined ? settings.nvidiaGpuTempEnabled : false
                 nonNvidiaGpuTempEnabled = settings.nonNvidiaGpuTempEnabled !== undefined ? settings.nonNvidiaGpuTempEnabled : false
@@ -209,6 +211,7 @@ Singleton {
                                                 "nightModeUseIPLocation": nightModeUseIPLocation,
                                                 "nightModeLocationProvider": nightModeLocationProvider,
                                                 "pinnedApps": pinnedApps,
+                                                "hiddenTrayIds": hiddenTrayIds,
                                                 "selectedGpuIndex": selectedGpuIndex,
                                                 "nvidiaGpuTempEnabled": nvidiaGpuTempEnabled,
                                                 "nonNvidiaGpuTempEnabled": nonNvidiaGpuTempEnabled,
@@ -277,7 +280,7 @@ Singleton {
     }
 
     function cleanupUnusedKeys() {
-        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "brightnessExponentialDevices", "brightnessUserSetValues", "brightnessExponentValues", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
+        const validKeys = ["isLightMode", "wallpaperPath", "perMonitorWallpaper", "monitorWallpapers", "perModeWallpaper", "wallpaperPathLight", "wallpaperPathDark", "monitorWallpapersLight", "monitorWallpapersDark", "doNotDisturb", "nightModeEnabled", "nightModeTemperature", "nightModeHighTemperature", "nightModeAutoEnabled", "nightModeAutoMode", "nightModeStartHour", "nightModeStartMinute", "nightModeEndHour", "nightModeEndMinute", "latitude", "longitude", "nightModeUseIPLocation", "nightModeLocationProvider", "pinnedApps", "hiddenTrayIds", "selectedGpuIndex", "nvidiaGpuTempEnabled", "nonNvidiaGpuTempEnabled", "enabledGpuPciIds", "wallpaperCyclingEnabled", "wallpaperCyclingMode", "wallpaperCyclingInterval", "wallpaperCyclingTime", "monitorCyclingSettings", "lastBrightnessDevice", "brightnessExponentialDevices", "brightnessUserSetValues", "brightnessExponentValues", "launchPrefix", "wallpaperTransition", "includedTransitions", "recentColors", "showThirdPartyPlugins", "configVersion"]
 
         try {
             const content = settingsFile.text()
@@ -637,6 +640,26 @@ Singleton {
 
     function isPinnedApp(appId) {
         return appId && pinnedApps.indexOf(appId) !== -1
+    }
+
+    function hideTrayId(trayId) {
+        if (!trayId) return
+        const current = [...hiddenTrayIds]
+        if (current.indexOf(trayId) === -1) {
+            current.push(trayId)
+            hiddenTrayIds = current
+            saveSettings()
+        }
+    }
+
+    function showTrayId(trayId) {
+        if (!trayId) return
+        hiddenTrayIds = hiddenTrayIds.filter(id => id !== trayId)
+        saveSettings()
+    }
+
+    function isHiddenTrayId(trayId) {
+        return trayId && hiddenTrayIds.indexOf(trayId) !== -1
     }
 
     function addRecentColor(color) {

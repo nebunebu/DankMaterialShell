@@ -19,7 +19,7 @@
 
 </div>
 
-DankMaterialShell is a complete desktop shell for [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hypr.land), [MangoWC](https://github.com/DreamMaoMao/mangowc), [Sway](https://swaywm.org), [labwc](https://labwc.github.io/), and other Wayland compositors. It replaces waybar, swaylock, swayidle, mako, fuzzel, polkit, and everything else you'd normally stitch together to make a desktop - all in one cohesive package with a gorgeous interface.
+DankMaterialShell is a complete desktop shell for [niri](https://github.com/YaLTeR/niri), [Hyprland](https://hypr.land), [MangoWC](https://github.com/DreamMaoMao/mangowc), [Sway](https://swaywm.org), and other Wayland compositors. It replaces waybar, swaylock, swayidle, mako, fuzzel, polkit, and everything else you'd normally stitch together to make a desktop - all in one cohesive package with a gorgeous interface.
 
 ## Components
 
@@ -100,7 +100,7 @@ Endless customization with the [plugin registry](https://plugins.danklinux.com).
 
 ## Supported Compositors
 
-DankMaterialShell works best with **[niri](https://github.com/YaLTeR/niri)**, **[Hyprland](https://hyprland.org/)**, **[sway](https://swaywm.org/)**, **[dwl/MangoWC](https://github.com/DreamMaoMao/mangowc)**, and **[labwc](https://labwc.github.io/)** - with full workspace switching, overview integration, and monitor management.
+DankMaterialShell works best with **[niri](https://github.com/YaLTeR/niri)**, **[Hyprland](https://hyprland.org/)**, **[sway](https://swaywm.org/)**, and **[dwl/MangoWC](https://github.com/DreamMaoMao/mangowc)**. - with full workspace switching, overview integration, and monitor management.
 
 Other Wayland compositors work too, just with a reduced feature set.
 

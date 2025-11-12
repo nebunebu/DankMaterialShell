@@ -22,7 +22,7 @@ Item {
         const envValue = Quickshell.env("DMS_HIDE_TRAYIDS") || ""
         return envValue ? envValue.split(",").map(id => id.trim().toLowerCase()) : []
     }
-    readonly property var visibleTrayItems: {
+    readonly property var allTrayItems: {
         if (!hiddenTrayIds.length) {
             return SystemTray.items.values
         }
@@ -31,13 +31,19 @@ Item {
             return !hiddenTrayIds.includes(itemId.toLowerCase())
         })
     }
-    readonly property int calculatedSize: visibleTrayItems.length > 0 ? visibleTrayItems.length * 24 + horizontalPadding * 2 : 0
+    readonly property var mainBarItems: allTrayItems.filter(item => !SessionData.isHiddenTrayId(item?.id || ""))
+    readonly property int calculatedSize: {
+        const itemCount = mainBarItems.length + 1
+        return itemCount > 0 ? itemCount * 24 + horizontalPadding * 2 : 0
+    }
     readonly property real visualWidth: isVertical ? widgetThickness : calculatedSize
     readonly property real visualHeight: isVertical ? calculatedSize : widgetThickness
 
     width: isVertical ? barThickness : visualWidth
     height: isVertical ? visualHeight : barThickness
-    visible: visibleTrayItems.length > 0
+    visible: allTrayItems.length > 0
+
+    property bool menuOpen: false
 
     Rectangle {
         id: visualBackground
@@ -46,7 +52,7 @@ Item {
         anchors.centerIn: parent
         radius: SettingsData.dankBarNoBackground ? 0 : Theme.cornerRadius
         color: {
-            if (visibleTrayItems.length === 0) {
+            if (allTrayItems.length === 0) {
                 return "transparent";
             }
 
@@ -71,7 +77,7 @@ Item {
             spacing: 0
 
             Repeater {
-                model: root.visibleTrayItems
+                model: root.mainBarItems
 
                 delegate: Item {
                     id: delegateRoot
@@ -165,6 +171,35 @@ Item {
                     }
                 }
             }
+
+            Item {
+                width: 24
+                height: root.barThickness
+
+                Rectangle {
+                    id: caretButton
+                    width: 24
+                    height: 24
+                    anchors.centerIn: parent
+                    radius: Theme.cornerRadius
+                    color: caretArea.containsMouse ? Theme.primaryHover : "transparent"
+
+                    DankIcon {
+                        anchors.centerIn: parent
+                        name: root.menuOpen ? "expand_less" : "expand_more"
+                        size: Theme.barIconSize(root.barThickness)
+                        color: Theme.surfaceText
+                    }
+
+                    MouseArea {
+                        id: caretArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.menuOpen = !root.menuOpen
+                    }
+                }
+            }
         }
     }
 
@@ -174,7 +209,7 @@ Item {
             spacing: 0
 
             Repeater {
-                model: root.visibleTrayItems
+                model: root.mainBarItems
 
                 delegate: Item {
                     id: delegateRoot
@@ -268,6 +303,320 @@ Item {
                     }
                 }
             }
+
+            Item {
+                width: root.barThickness
+                height: 24
+
+                Rectangle {
+                    id: caretButtonVert
+                    width: 24
+                    height: 24
+                    anchors.centerIn: parent
+                    radius: Theme.cornerRadius
+                    color: caretAreaVert.containsMouse ? Theme.primaryHover : "transparent"
+
+                    DankIcon {
+                        anchors.centerIn: parent
+                        name: {
+                            const edge = root.axis?.edge
+                            if (edge === "left") {
+                                return root.menuOpen ? "chevron_left" : "chevron_right"
+                            } else {
+                                return root.menuOpen ? "chevron_right" : "chevron_left"
+                            }
+                        }
+                        size: Theme.barIconSize(root.barThickness)
+                        color: Theme.surfaceText
+                    }
+
+                    MouseArea {
+                        id: caretAreaVert
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.menuOpen = !root.menuOpen
+                    }
+                }
+            }
+        }
+    }
+
+    PanelWindow {
+        id: overflowMenu
+        visible: root.menuOpen
+        screen: root.parentScreen
+        WlrLayershell.layer: WlrLayershell.Top
+        WlrLayershell.exclusiveZone: -1
+        WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+        WlrLayershell.namespace: "dms:tray-overflow-menu"
+        color: "transparent"
+
+        anchors {
+            top: true
+            left: true
+            right: true
+            bottom: true
+        }
+
+        property point anchorPos: Qt.point(screen.width / 2, screen.height / 2)
+
+        onVisibleChanged: {
+            if (visible) updatePosition()
+        }
+
+        function updatePosition() {
+            if (!root.parentWindow) {
+                anchorPos = Qt.point(screen.width / 2, screen.height / 2)
+                return
+            }
+
+            const globalPos = root.mapToGlobal(0, 0)
+            const screenX = screen.x || 0
+            const screenY = screen.y || 0
+            const relativeX = globalPos.x - screenX
+            const relativeY = globalPos.y - screenY
+
+            const widgetThickness = Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
+            const effectiveBarThickness = Math.max(widgetThickness + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
+
+            if (root.isVertical) {
+                const edge = root.axis?.edge
+                let targetX = edge === "left"
+                    ? effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance
+                    : screen.width - (effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance)
+                anchorPos = Qt.point(targetX, relativeY + root.height / 2)
+            } else {
+                let targetY = root.isAtBottom
+                    ? screen.height - (effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance)
+                    : effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance
+                anchorPos = Qt.point(relativeX + root.width / 2, targetY)
+            }
+        }
+
+        Rectangle {
+            id: menuContainer
+            width: 250
+            height: Math.min(screen.height - 100, menuColumn.implicitHeight + Theme.spacingS * 2)
+
+            x: {
+                if (root.isVertical) {
+                    const edge = root.axis?.edge
+                    if (edge === "left") {
+                        const targetX = overflowMenu.anchorPos.x
+                        return Math.min(overflowMenu.screen.width - width - 10, targetX)
+                    } else {
+                        const targetX = overflowMenu.anchorPos.x - width
+                        return Math.max(10, targetX)
+                    }
+                } else {
+                    const left = 10
+                    const right = overflowMenu.width - width - 10
+                    const want = overflowMenu.anchorPos.x - width / 2
+                    return Math.max(left, Math.min(right, want))
+                }
+            }
+
+            y: {
+                if (root.isVertical) {
+                    const top = 10
+                    const bottom = overflowMenu.height - height - 10
+                    const want = overflowMenu.anchorPos.y - height / 2
+                    return Math.max(top, Math.min(bottom, want))
+                } else {
+                    if (root.isAtBottom) {
+                        const targetY = overflowMenu.anchorPos.y - height
+                        return Math.max(10, targetY)
+                    } else {
+                        const targetY = overflowMenu.anchorPos.y
+                        return Math.min(overflowMenu.screen.height - height - 10, targetY)
+                    }
+                }
+            }
+
+            color: Theme.withAlpha(Theme.surfaceContainer, Theme.popupTransparency)
+            radius: Theme.cornerRadius
+            border.color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.08)
+            border.width: 1
+
+            opacity: root.menuOpen ? 1 : 0
+            scale: root.menuOpen ? 1 : 0.85
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Theme.mediumDuration
+                    easing.type: Theme.emphasizedEasing
+                }
+            }
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Theme.mediumDuration
+                    easing.type: Theme.emphasizedEasing
+                }
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                anchors.topMargin: 4
+                anchors.leftMargin: 2
+                anchors.rightMargin: -2
+                anchors.bottomMargin: -4
+                radius: parent.radius
+                color: Qt.rgba(0, 0, 0, 0.15)
+                z: parent.z - 1
+            }
+
+            DankFlickable {
+                id: scrollView
+                anchors.fill: parent
+                anchors.margins: Theme.spacingS
+                contentWidth: width
+                contentHeight: menuColumn.implicitHeight
+                clip: true
+
+                Column {
+                    id: menuColumn
+                    width: parent.width
+                    spacing: 2
+
+                    Repeater {
+                        model: root.allTrayItems
+
+                        delegate: Rectangle {
+                            property var trayItem: modelData
+                            property string iconSource: {
+                                let icon = trayItem?.icon
+                                if (typeof icon === 'string' || icon instanceof String) {
+                                    if (icon === "") return ""
+                                    if (icon.includes("?path=")) {
+                                        const split = icon.split("?path=")
+                                        if (split.length !== 2) return icon
+                                        const name = split[0]
+                                        const path = split[1]
+                                        let fileName = name.substring(name.lastIndexOf("/") + 1)
+                                        if (fileName.startsWith("dropboxstatus")) {
+                                            fileName = `hicolor/16x16/status/${fileName}`
+                                        }
+                                        return `file://${path}/${fileName}`
+                                    }
+                                    if (icon.startsWith("/") && !icon.startsWith("file://")) {
+                                        return `file://${icon}`
+                                    }
+                                    return icon
+                                }
+                                return ""
+                            }
+
+                            width: menuColumn.width
+                            height: 32
+                            radius: Theme.cornerRadius
+                            color: itemArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : "transparent"
+
+                            Row {
+                                anchors.left: parent.left
+                                anchors.leftMargin: Theme.spacingS
+                                anchors.verticalCenter: parent.verticalCenter
+                                spacing: Theme.spacingS
+
+                                IconImage {
+                                    id: menuIconImg
+                                    width: 20
+                                    height: 20
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    source: parent.parent.iconSource
+                                    asynchronous: true
+                                    smooth: true
+                                    mipmap: true
+                                    visible: status === Image.Ready
+                                }
+
+                                Text {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    visible: !menuIconImg.visible
+                                    text: {
+                                        const itemId = trayItem?.id || ""
+                                        if (!itemId) return "?"
+                                        return itemId.charAt(0).toUpperCase()
+                                    }
+                                    font.pixelSize: 10
+                                    color: Theme.surfaceText
+                                }
+
+                                StyledText {
+                                    text: trayItem?.tooltip?.title || trayItem?.id || "Unknown"
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    color: Theme.surfaceText
+                                    elide: Text.ElideRight
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: Math.min(implicitWidth, menuColumn.width - 80)
+                                }
+                            }
+
+                            Rectangle {
+                                anchors.right: parent.right
+                                anchors.rightMargin: Theme.spacingS
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 24
+                                height: 24
+                                radius: Theme.cornerRadius
+                                color: visibilityArea.containsMouse ? Theme.primaryHover : "transparent"
+
+                                DankIcon {
+                                    anchors.centerIn: parent
+                                    name: SessionData.isHiddenTrayId(trayItem?.id || "") ? "visibility_off" : "visibility"
+                                    size: 16
+                                    color: Theme.surfaceText
+                                }
+
+                                MouseArea {
+                                    id: visibilityArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: {
+                                        const itemId = trayItem?.id || ""
+                                        if (!itemId) return
+                                        if (SessionData.isHiddenTrayId(itemId)) {
+                                            SessionData.showTrayId(itemId)
+                                        } else {
+                                            SessionData.hideTrayId(itemId)
+                                        }
+                                    }
+                                }
+                            }
+
+                            MouseArea {
+                                id: itemArea
+                                anchors.fill: parent
+                                anchors.rightMargin: 32
+                                hoverEnabled: true
+                                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: (mouse) => {
+                                    if (!trayItem) return
+
+                                    if (mouse.button === Qt.LeftButton && !trayItem.onlyMenu) {
+                                        trayItem.activate()
+                                        root.menuOpen = false
+                                        return
+                                    }
+                                    if (trayItem.hasMenu) {
+                                        root.menuOpen = false
+                                        root.showForTrayItem(trayItem, parent, parentScreen, root.isAtBottom, root.isVertical, root.axis)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            z: -1
+            onClicked: root.menuOpen = false
         }
     }
 
@@ -345,7 +694,7 @@ Item {
 
                 id: menuWindow
                 visible: menuRoot.showMenu && (menuRoot.trayItem?.hasMenu ?? false)
-                WlrLayershell.layer: WlrLayershell.Overlay
+                WlrLayershell.layer: WlrLayershell.Top
                 WlrLayershell.exclusiveZone: -1
                 WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
                 color: "transparent"
