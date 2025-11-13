@@ -830,6 +830,9 @@
   "Force Kill Process": {
     "Force Kill Process": "Forza Chiusura Processo"
   },
+  "Force terminal applications to always use dark color schemes": {
+    "Force terminal applications to always use dark color schemes": ""
+  },
   "Forget Device": {
     "Forget Device": "Dimentica Dispositivo"
   },
@@ -1904,6 +1907,9 @@
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "Parametri aggiuntivi personalizzati terminale"
   },
+  "Terminals - Always use Dark Theme": {
+    "Terminals - Always use Dark Theme": ""
+  },
   "Text": {
     "Text": "Testo"
   },
@@ -2020,6 +2026,12 @@
   },
   "Use IP Location": {
     "Use IP Location": "Usa Posizione IP"
+  },
+  "Use Imperial Units": {
+    "Use Imperial Units": ""
+  },
+  "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
   },
   "Use Monospace Font": {
     "Use Monospace Font": "Usa Font Monospace"

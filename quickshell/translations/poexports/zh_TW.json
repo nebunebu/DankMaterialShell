@@ -830,6 +830,9 @@
   "Force Kill Process": {
     "Force Kill Process": "強制結束程序"
   },
+  "Force terminal applications to always use dark color schemes": {
+    "Force terminal applications to always use dark color schemes": ""
+  },
   "Forget Device": {
     "Forget Device": "忘記設備"
   },
@@ -1904,6 +1907,9 @@
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "自訂終端附加參數"
   },
+  "Terminals - Always use Dark Theme": {
+    "Terminals - Always use Dark Theme": ""
+  },
   "Text": {
     "Text": "文字"
   },
@@ -2020,6 +2026,12 @@
   },
   "Use IP Location": {
     "Use IP Location": "使用 IP 位置"
+  },
+  "Use Imperial Units": {
+    "Use Imperial Units": ""
+  },
+  "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
   },
   "Use Monospace Font": {
     "Use Monospace Font": "使用等寬字體"

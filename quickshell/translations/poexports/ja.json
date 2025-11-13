@@ -830,6 +830,9 @@
   "Force Kill Process": {
     "Force Kill Process": "プロセスを強制終了"
   },
+  "Force terminal applications to always use dark color schemes": {
+    "Force terminal applications to always use dark color schemes": ""
+  },
   "Forget Device": {
     "Forget Device": "デバイスを忘れる"
   },
@@ -1904,6 +1907,9 @@
   "Terminal custom additional parameters": {
     "Terminal custom additional parameters": "端末のカスタム追加パラメーター"
   },
+  "Terminals - Always use Dark Theme": {
+    "Terminals - Always use Dark Theme": ""
+  },
   "Text": {
     "Text": "テキスト"
   },
@@ -2020,6 +2026,12 @@
   },
   "Use IP Location": {
     "Use IP Location": "IP ロケーションの使用"
+  },
+  "Use Imperial Units": {
+    "Use Imperial Units": ""
+  },
+  "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
   },
   "Use Monospace Font": {
     "Use Monospace Font": "等幅フォントを使用"
