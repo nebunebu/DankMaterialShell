@@ -483,7 +483,7 @@ func (f *FedoraDistribution) enableCOPRRepos(ctx context.Context, coprPkgs []Pac
 				}
 
 				priorityCmd := ExecSudoCommand(ctx, sudoPassword,
-					fmt.Sprintf("bash -c 'echo \"priority=1\" | tee -a %s' 2>&1", repoFile))
+					fmt.Sprintf("bash -c 'echo \"priority=1\" | tee -a %s'", repoFile))
 				priorityOutput, err := priorityCmd.CombinedOutput()
 				if err != nil {
 					f.logError("failed to set niri COPR repo priority", err)

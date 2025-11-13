@@ -391,8 +391,8 @@ func (m *ManualPackageInstaller) installQuickshell(ctx context.Context, sudoPass
 		CommandInfo: "sudo cmake --install build",
 	}
 
-	installCmd := ExecSudoCommand(ctx, sudoPassword,
-		fmt.Sprintf("cd %s && cmake --install build", tmpDir))
+	installCmd := ExecSudoCommand(ctx, sudoPassword, "cmake --install build")
+	installCmd.Dir = tmpDir
 	if err := installCmd.Run(); err != nil {
 		return fmt.Errorf("failed to install quickshell: %w", err)
 	}
@@ -454,8 +454,8 @@ func (m *ManualPackageInstaller) installHyprland(ctx context.Context, sudoPasswo
 		CommandInfo: "sudo make install",
 	}
 
-	installCmd := ExecSudoCommand(ctx, sudoPassword,
-		fmt.Sprintf("cd %s && make install", tmpDir))
+	installCmd := ExecSudoCommand(ctx, sudoPassword, "make install")
+	installCmd.Dir = tmpDir
 	if err := installCmd.Run(); err != nil {
 		return fmt.Errorf("failed to install Hyprland: %w", err)
 	}
@@ -520,8 +520,8 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 		CommandInfo: "sudo make install",
 	}
 
-	installCmd := ExecSudoCommand(ctx, sudoPassword,
-		fmt.Sprintf("cd %s && make install", tmpDir))
+	installCmd := ExecSudoCommand(ctx, sudoPassword, "make install")
+	installCmd.Dir = tmpDir
 	if err := installCmd.Run(); err != nil {
 		return fmt.Errorf("failed to install hyprpicker: %w", err)
 	}

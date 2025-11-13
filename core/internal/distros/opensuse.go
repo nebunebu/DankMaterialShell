@@ -524,8 +524,8 @@ func (o *OpenSUSEDistribution) installQuickshell(ctx context.Context, sudoPasswo
 		CommandInfo: "sudo cmake --install build",
 	}
 
-	installCmd := ExecSudoCommand(ctx, sudoPassword,
-		fmt.Sprintf("cd %s && cmake --install build", tmpDir))
+	installCmd := ExecSudoCommand(ctx, sudoPassword, "cmake --install build")
+	installCmd.Dir = tmpDir
 	if err := installCmd.Run(); err != nil {
 		return fmt.Errorf("failed to install quickshell: %w", err)
 	}
