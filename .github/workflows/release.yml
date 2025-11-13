@@ -337,8 +337,7 @@ jobs:
 
           ## Troubleshooting
 
-          - Run with verbose output: `quickshell -v -p ~/.config/quickshell/dms`
-          - Check logs in `~/.local/state/DankMaterialShell/`
+          - Run with verbose output: `DMS_LOG_LEVEL=debug dms run`
           - Ensure all dependencies are installed
           EOFINSTALL
 
