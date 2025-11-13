@@ -716,12 +716,12 @@ Item {
                 }
 
                 function updatePosition() {
-                    if (!menuRoot.anchorItem || !menuRoot.trayItem) {
+                    if (!root.parentWindow) {
                         anchorPos = Qt.point(screen.width / 2, screen.height / 2)
                         return
                     }
 
-                    const globalPos = menuRoot.anchorItem.mapToGlobal(0, 0)
+                    const globalPos = root.mapToGlobal(0, 0)
                     const screenX = screen.x || 0
                     const screenY = screen.y || 0
                     const relativeX = globalPos.x - screenX
@@ -730,25 +730,17 @@ Item {
                     const widgetThickness = Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
                     const effectiveBarThickness = Math.max(widgetThickness + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
 
-                    if (menuRoot.isVertical) {
-                        const edge = menuRoot.axis?.edge
-                        let targetX
-                        if (edge === "left") {
-                            targetX = effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance
-                        } else {
-                            const popupX = effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance
-                            targetX = screen.width - popupX
-                        }
-                        anchorPos = Qt.point(targetX, relativeY + menuRoot.anchorItem.height / 2)
+                    if (root.isVertical) {
+                        const edge = root.axis?.edge
+                        let targetX = edge === "left"
+                            ? effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance
+                            : screen.width - (effectiveBarThickness + SettingsData.dankBarSpacing + Theme.popupDistance)
+                        anchorPos = Qt.point(targetX, relativeY + root.height / 2)
                     } else {
-                        let targetY
-                        if (menuRoot.isAtBottom) {
-                            const popupY = effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance
-                            targetY = screen.height - popupY
-                        } else {
-                            targetY = effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance
-                        }
-                        anchorPos = Qt.point(relativeX + menuRoot.anchorItem.width / 2, targetY)
+                        let targetY = root.isAtBottom
+                            ? screen.height - (effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance)
+                            : effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap + Theme.popupDistance
+                        anchorPos = Qt.point(relativeX + root.width / 2, targetY)
                     }
                 }
 
