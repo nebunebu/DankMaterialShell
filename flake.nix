@@ -59,8 +59,8 @@
                         ]);
                 };
                 installPhase = ''
-                    mkdir -p $out/etc/xdg/quickshell/dms
-                    cp -r . $out/etc/xdg/quickshell/dms
+                    mkdir -p $out/etc/xdg/quickshell
+                    cp -r ./quickshell $out/etc/xdg/quickshell/dms
                 '';
             };
 
