@@ -149,6 +149,7 @@ var SPEC = {
     gtkThemingEnabled: { def: false, onChange: "regenSystemThemes" },
     qtThemingEnabled: { def: false, onChange: "regenSystemThemes" },
     syncModeWithPortal: { def: true },
+    terminalsAlwaysDark: { def: false, onChange: "regenSystemThemes" },
 
     showDock: { def: false },
     dockAutoHide: { def: false },

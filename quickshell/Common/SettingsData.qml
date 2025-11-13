@@ -232,6 +232,7 @@ Singleton {
     property bool gtkThemingEnabled: false
     property bool qtThemingEnabled: false
     property bool syncModeWithPortal: true
+    property bool terminalsAlwaysDark: false
 
     property bool showDock: false
     property bool dockAutoHide: false
