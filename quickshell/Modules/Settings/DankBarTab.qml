@@ -15,6 +15,9 @@ Item {
             if (widget.warning && widget.warning.includes("Plugin is disabled")) {
                 return false
             }
+            if (widget.enabled === false) {
+                return false
+            }
             return true
         })
     }
