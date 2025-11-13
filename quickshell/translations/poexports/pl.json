@@ -206,6 +206,9 @@
   "Available": {
     "Available": "Dostępny"
   },
+  "Available Layouts": {
+    "Available Layouts": ""
+  },
   "Available Plugins": {
     "Available Plugins": "Dostępne wtyczki"
   },
@@ -301,6 +304,9 @@
   },
   "Center Section": {
     "Center Section": "Sekcja środkowa"
+  },
+  "Center Tiling": {
+    "Center Tiling": ""
   },
   "Changes:": {
     "Changes:": ""
@@ -512,6 +518,9 @@
   "DMS_SOCKET not available": {
     "DMS_SOCKET not available": "DMS_SOCKET niedostępny"
   },
+  "DWL service not available": {
+    "DWL service not available": ""
+  },
   "Daily at:": {
     "Daily at:": "Codziennie o:"
   },
@@ -544,6 +553,9 @@
   },
   "Day Temperature": {
     "Day Temperature": "Temperatura w dzień"
+  },
+  "Deck": {
+    "Deck": ""
   },
   "Default": {
     "Default": "Domyślne"
@@ -598,6 +610,9 @@
   },
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "Wyświetlaj wszystkie priorytety nad aplikacjami pełnoekranowymi"
+  },
+  "Display and switch DWL layouts": {
+    "Display and switch DWL layouts": ""
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "Wyświetlaj ikony aplikacji we wskaźnikach obszaru roboczego"
@@ -863,6 +878,9 @@
   "Graphics": {
     "Graphics": "Grafika"
   },
+  "Grid": {
+    "Grid": ""
+  },
   "Group by App": {
     "Group by App": "Grupuj według aplikacji"
   },
@@ -1007,6 +1025,9 @@
   "Launcher Button Logo": {
     "Launcher Button Logo": "Logo przycisku programu uruchamiającego"
   },
+  "Layout": {
+    "Layout": ""
+  },
   "Left": {
     "Left": "Lewa"
   },
@@ -1144,6 +1165,9 @@
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
     "Monitor whose wallpaper drives dynamic theming colors": "Monitor, którego tapeta steruje dynamicznymi kolorami motywu"
+  },
+  "Monocle": {
+    "Monocle": ""
   },
   "Monospace Font": {
     "Monospace Font": "Czcionka o stałej szerokości"
@@ -1523,6 +1547,9 @@
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Poproś o potwierdzenie czynności wyłączenia, ponownego uruchomienia, zawieszenia, hibernacji i wylogowania."
   },
+  "Requires DWL compositor": {
+    "Requires DWL compositor": ""
+  },
   "Reset": {
     "Reset": "Resetuj"
   },
@@ -1552,6 +1579,12 @@
   },
   "Right Section": {
     "Right Section": "Sekcja prawa"
+  },
+  "Right Tiling": {
+    "Right Tiling": ""
+  },
+  "Right-click bar widget to cycle": {
+    "Right-click bar widget to cycle": ""
   },
   "Run User Templates": {
     "Run User Templates": "Uruchom szablony użytkownika"
@@ -1585,6 +1618,9 @@
   },
   "Science": {
     "Science": "Nauka"
+  },
+  "Scrolling": {
+    "Scrolling": ""
   },
   "Search file contents": {
     "Search file contents": "Przeszukaj zawartość plików"
@@ -1898,6 +1934,9 @@
   "This will permanently delete all clipboard history.": {
     "This will permanently delete all clipboard history.": "To trwale usunie całą historię schowka."
   },
+  "Tiling": {
+    "Tiling": ""
+  },
   "Time & Weather": {
     "Time & Weather": "Czas i pogoda"
   },
@@ -2029,6 +2068,18 @@
   },
   "VRR: ": {
     "VRR: ": ""
+  },
+  "Vertical Deck": {
+    "Vertical Deck": ""
+  },
+  "Vertical Grid": {
+    "Vertical Grid": ""
+  },
+  "Vertical Scrolling": {
+    "Vertical Scrolling": ""
+  },
+  "Vertical Tiling": {
+    "Vertical Tiling": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Wibrująca paleta z zabawnym nasyceniem."

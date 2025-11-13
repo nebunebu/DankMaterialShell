@@ -483,6 +483,13 @@
     "comment": ""
   },
   {
+    "term": "Available Layouts",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Available Plugins",
     "translation": "",
     "context": "",
@@ -701,6 +708,13 @@
   },
   {
     "term": "Center Section",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Center Tiling",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1197,6 +1211,13 @@
     "comment": ""
   },
   {
+    "term": "DWL service not available",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Daily at:",
     "translation": "",
     "context": "",
@@ -1268,6 +1289,13 @@
   },
   {
     "term": "Day Temperature",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Deck",
     "translation": "",
     "context": "",
     "reference": "",
@@ -1394,6 +1422,13 @@
   },
   {
     "term": "Display all priorities over fullscreen apps",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Display and switch DWL layouts",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2016,6 +2051,13 @@
     "comment": ""
   },
   {
+    "term": "Grid",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Group by App",
     "translation": "",
     "context": "",
@@ -2352,6 +2394,13 @@
     "comment": ""
   },
   {
+    "term": "Layout",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Left",
     "translation": "",
     "context": "",
@@ -2668,6 +2717,13 @@
   },
   {
     "term": "Monitor whose wallpaper drives dynamic theming colors",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Monocle",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3556,6 +3612,13 @@
     "comment": ""
   },
   {
+    "term": "Requires DWL compositor",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Reset",
     "translation": "",
     "context": "",
@@ -3613,6 +3676,20 @@
   },
   {
     "term": "Right Section",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Right Tiling",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Right-click bar widget to cycle",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3690,6 +3767,13 @@
   },
   {
     "term": "Science",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Scrolling",
     "translation": "",
     "context": "",
     "reference": "",
@@ -4424,6 +4508,13 @@
     "comment": ""
   },
   {
+    "term": "Tiling",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Time & Weather",
     "translation": "",
     "context": "",
@@ -4726,6 +4817,34 @@
   },
   {
     "term": "VRR: ",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Vertical Deck",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Vertical Grid",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Vertical Scrolling",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Vertical Tiling",
     "translation": "",
     "context": "",
     "reference": "",

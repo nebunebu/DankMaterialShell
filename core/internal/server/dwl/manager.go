@@ -110,6 +110,19 @@ func (m *Manager) setupRegistry() error {
 			if err := registry.Bind(e.Name, e.Interface, version, manager); err == nil {
 				dwlMgr = manager
 				log.Info("DWL: manager bound successfully")
+
+				// Set handlers immediately after binding, before roundtrips
+				manager.SetTagsHandler(func(e dwl_ipc.ZdwlIpcManagerV2TagsEvent) {
+					log.Infof("DWL: Tags count: %d", e.Amount)
+					m.tagCount = e.Amount
+					m.updateState()
+				})
+
+				manager.SetLayoutHandler(func(e dwl_ipc.ZdwlIpcManagerV2LayoutEvent) {
+					log.Infof("DWL: Layout: %s", e.Name)
+					m.layouts = append(m.layouts, e.Name)
+					m.updateState()
+				})
 			} else {
 				log.Errorf("DWL: failed to bind manager: %v", err)
 			}
@@ -198,18 +211,6 @@ func (m *Manager) setupRegistry() error {
 		log.Info("DWL: manager not found in registry")
 		return fmt.Errorf("dwl_ipc_manager_v2 not available")
 	}
-
-	dwlMgr.SetTagsHandler(func(e dwl_ipc.ZdwlIpcManagerV2TagsEvent) {
-		log.Infof("DWL: Tags count: %d", e.Amount)
-		m.tagCount = e.Amount
-		m.updateState()
-	})
-
-	dwlMgr.SetLayoutHandler(func(e dwl_ipc.ZdwlIpcManagerV2LayoutEvent) {
-		log.Infof("DWL: Layout: %s", e.Name)
-		m.layouts = append(m.layouts, e.Name)
-		m.updateState()
-	})
 
 	m.manager = dwlMgr
 

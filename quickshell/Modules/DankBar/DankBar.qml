@@ -428,6 +428,9 @@ Item {
                                          "loader": batteryPopoutLoader,
                                          "prop": "shouldBeVisible"
                                      }, {
+                                         "loader": layoutPopoutLoader,
+                                         "prop": "shouldBeVisible"
+                                     }, {
                                          "loader": vpnPopoutLoader,
                                          "prop": "shouldBeVisible"
                                      }, {
@@ -839,6 +842,7 @@ Item {
                                         "gpuTemp": gpuTempComponent,
                                         "notificationButton": notificationButtonComponent,
                                         "battery": batteryComponent,
+                                        "layout": layoutComponent,
                                         "controlCenterButton": controlCenterButtonComponent,
                                         "idleInhibitor": idleInhibitorComponent,
                                         "spacer": spacerComponent,
@@ -878,6 +882,7 @@ Item {
                                                                           "gpuTempComponent": gpuTempComponent,
                                                                           "notificationButtonComponent": notificationButtonComponent,
                                                                           "batteryComponent": batteryComponent,
+                                                                          "layoutComponent": layoutComponent,
                                                                           "controlCenterButtonComponent": controlCenterButtonComponent,
                                                                           "idleInhibitorComponent": idleInhibitorComponent,
                                                                           "spacerComponent": spacerComponent,
@@ -1338,6 +1343,27 @@ Item {
                                         onToggleBatteryPopup: {
                                             batteryPopoutLoader.active = true
                                             batteryPopoutLoader.item?.toggle()
+                                        }
+                                    }
+                                }
+
+                                Component {
+                                    id: layoutComponent
+
+                                    DWLLayout {
+                                        layoutPopupVisible: layoutPopoutLoader.item ? layoutPopoutLoader.item.shouldBeVisible : false
+                                        widgetThickness: barWindow.widgetThickness
+                                        barThickness: barWindow.effectiveBarThickness
+                                        axis: barWindow.axis
+                                        section: topBarContent.getWidgetSection(parent) || "center"
+                                        popoutTarget: {
+                                            layoutPopoutLoader.active = true
+                                            return layoutPopoutLoader.item
+                                        }
+                                        parentScreen: barWindow.screen
+                                        onToggleLayoutPopup: {
+                                            layoutPopoutLoader.active = true
+                                            layoutPopoutLoader.item?.toggle()
                                         }
                                     }
                                 }

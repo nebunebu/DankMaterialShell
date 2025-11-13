@@ -206,6 +206,9 @@
   "Available": {
     "Available": "Disponibile"
   },
+  "Available Layouts": {
+    "Available Layouts": ""
+  },
   "Available Plugins": {
     "Available Plugins": "Plugins Disponibili"
   },
@@ -301,6 +304,9 @@
   },
   "Center Section": {
     "Center Section": "Sezione Centrale"
+  },
+  "Center Tiling": {
+    "Center Tiling": ""
   },
   "Changes:": {
     "Changes:": ""
@@ -512,6 +518,9 @@
   "DMS_SOCKET not available": {
     "DMS_SOCKET not available": "DMS_SOCKET non disponibile"
   },
+  "DWL service not available": {
+    "DWL service not available": ""
+  },
   "Daily at:": {
     "Daily at:": "Giornalmente alle:"
   },
@@ -544,6 +553,9 @@
   },
   "Day Temperature": {
     "Day Temperature": "Temperatura Giorno"
+  },
+  "Deck": {
+    "Deck": ""
   },
   "Default": {
     "Default": "Predefinito"
@@ -598,6 +610,9 @@
   },
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "Visualizza tutte le priorità sulle apps a schermo pieno"
+  },
+  "Display and switch DWL layouts": {
+    "Display and switch DWL layouts": ""
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "Mostra icone applicazioni negli indicatori dei workspaces"
@@ -863,6 +878,9 @@
   "Graphics": {
     "Graphics": "Grafica"
   },
+  "Grid": {
+    "Grid": ""
+  },
   "Group by App": {
     "Group by App": "Raggruppa per App"
   },
@@ -1007,6 +1025,9 @@
   "Launcher Button Logo": {
     "Launcher Button Logo": "Logo Bottone Avviatore"
   },
+  "Layout": {
+    "Layout": ""
+  },
   "Left": {
     "Left": "Sinistra"
   },
@@ -1144,6 +1165,9 @@
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
     "Monitor whose wallpaper drives dynamic theming colors": "Monitor con lo sfondo che genera il tema di colori dinamico"
+  },
+  "Monocle": {
+    "Monocle": ""
   },
   "Monospace Font": {
     "Monospace Font": "Font Monospace"
@@ -1523,6 +1547,9 @@
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Richiedi conferma alle azioni di spegnimento, riavvio, sospensione, hibernazione e logout"
   },
+  "Requires DWL compositor": {
+    "Requires DWL compositor": ""
+  },
   "Reset": {
     "Reset": "Resetta"
   },
@@ -1552,6 +1579,12 @@
   },
   "Right Section": {
     "Right Section": "Sezione Destra"
+  },
+  "Right Tiling": {
+    "Right Tiling": ""
+  },
+  "Right-click bar widget to cycle": {
+    "Right-click bar widget to cycle": ""
   },
   "Run User Templates": {
     "Run User Templates": "Esegui Templates Utente"
@@ -1585,6 +1618,9 @@
   },
   "Science": {
     "Science": "Scienza"
+  },
+  "Scrolling": {
+    "Scrolling": ""
   },
   "Search file contents": {
     "Search file contents": "Cerca il contenuto dei files"
@@ -1898,6 +1934,9 @@
   "This will permanently delete all clipboard history.": {
     "This will permanently delete all clipboard history.": "La tua cronologia della clipboard verrà cancellata definitivamente"
   },
+  "Tiling": {
+    "Tiling": ""
+  },
   "Time & Weather": {
     "Time & Weather": "Orario & Meteo"
   },
@@ -2029,6 +2068,18 @@
   },
   "VRR: ": {
     "VRR: ": ""
+  },
+  "Vertical Deck": {
+    "Vertical Deck": ""
+  },
+  "Vertical Grid": {
+    "Vertical Grid": ""
+  },
+  "Vertical Scrolling": {
+    "Vertical Scrolling": ""
+  },
+  "Vertical Tiling": {
+    "Vertical Tiling": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Tavolozza vibrate con saturazione giocosa"

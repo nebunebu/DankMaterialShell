@@ -14,6 +14,7 @@ Item {
     required property var processListPopoutLoader
     required property var notificationCenterLoader
     required property var batteryPopoutLoader
+    required property var layoutPopoutLoader
     required property var vpnPopoutLoader
     required property var controlCenterLoader
     required property var clipboardHistoryModalPopup
@@ -94,6 +95,9 @@ Item {
                                  "prop": "shouldBeVisible"
                              }, {
                                  "loader": batteryPopoutLoader,
+                                 "prop": "shouldBeVisible"
+                             }, {
+                                 "loader": layoutPopoutLoader,
                                  "prop": "shouldBeVisible"
                              }, {
                                  "loader": vpnPopoutLoader,

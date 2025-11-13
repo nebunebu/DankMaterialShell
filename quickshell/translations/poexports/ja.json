@@ -206,6 +206,9 @@
   "Available": {
     "Available": "利用可能"
   },
+  "Available Layouts": {
+    "Available Layouts": ""
+  },
   "Available Plugins": {
     "Available Plugins": "利用可能なプラグイン"
   },
@@ -301,6 +304,9 @@
   },
   "Center Section": {
     "Center Section": "センターセクション"
+  },
+  "Center Tiling": {
+    "Center Tiling": ""
   },
   "Changes:": {
     "Changes:": "変更:"
@@ -498,7 +504,7 @@
     "Customizable empty space": "カスタマイズ可能な空きスペース"
   },
   "Customize which actions appear in the power menu": {
-    "Customize which actions appear in the power menu": ""
+    "Customize which actions appear in the power menu": "電源メニューに表示されるアクションをカスタマイズ"
   },
   "DEMO MODE - Click anywhere to exit": {
     "DEMO MODE - Click anywhere to exit": "デモモード -任意の場所をクリックして 終了"
@@ -511,6 +517,9 @@
   },
   "DMS_SOCKET not available": {
     "DMS_SOCKET not available": "DMS_SOCKETが利用できません"
+  },
+  "DWL service not available": {
+    "DWL service not available": ""
   },
   "Daily at:": {
     "Daily at:": "毎日："
@@ -545,11 +554,14 @@
   "Day Temperature": {
     "Day Temperature": "昼間の温度"
   },
+  "Deck": {
+    "Deck": ""
+  },
   "Default": {
     "Default": "デフォルト"
   },
   "Default selected action": {
-    "Default selected action": ""
+    "Default selected action": "デフォルトで選択されるアクション"
   },
   "Defaults": {
     "Defaults": "デフォルト"
@@ -598,6 +610,9 @@
   },
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "フルスクリーンアプリよりもすべての優先度を表示する"
+  },
+  "Display and switch DWL layouts": {
+    "Display and switch DWL layouts": ""
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "ワークスペース インジケーターにアプリのアイコンを表示"
@@ -863,6 +878,9 @@
   "Graphics": {
     "Graphics": "グラフィック"
   },
+  "Grid": {
+    "Grid": ""
+  },
   "Group by App": {
     "Group by App": "アプリ別にグループ化"
   },
@@ -1007,6 +1025,9 @@
   "Launcher Button Logo": {
     "Launcher Button Logo": "ランチャーのボタンロゴ"
   },
+  "Layout": {
+    "Layout": ""
+  },
   "Left": {
     "Left": "左"
   },
@@ -1144,6 +1165,9 @@
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
     "Monitor whose wallpaper drives dynamic theming colors": "ダイナミックテーマの色を駆動する壁紙をモニター"
+  },
+  "Monocle": {
+    "Monocle": ""
   },
   "Monospace Font": {
     "Monospace Font": "等幅フォント"
@@ -1299,7 +1323,7 @@
     "Only adjust gamma based on time or location rules.": "ガンマは、時間または場所のルールに基づいてのみ調整します。"
   },
   "Only visible if hibernate is supported by your system": {
-    "Only visible if hibernate is supported by your system": ""
+    "Only visible if hibernate is supported by your system": "システムでサポートされている場合にのみ、休止状態が表示されます"
   },
   "Opacity": {
     "Opacity": "不透明度"
@@ -1431,7 +1455,7 @@
     "Power Action Confirmation": "電源アクションの確認"
   },
   "Power Menu Customization": {
-    "Power Menu Customization": ""
+    "Power Menu Customization": "電源メニューのカスタマイズ"
   },
   "Power Off": {
     "Power Off": "電源オフ"
@@ -1523,6 +1547,9 @@
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "電源オフ、再起動、一時停止、休止状態、ログアウトアクションの確認を要求"
   },
+  "Requires DWL compositor": {
+    "Requires DWL compositor": ""
+  },
   "Reset": {
     "Reset": "リセット"
   },
@@ -1533,10 +1560,10 @@
     "Restart": "再起動"
   },
   "Restart DMS": {
-    "Restart DMS": ""
+    "Restart DMS": "DMSを再起動"
   },
   "Restart the DankMaterialShell": {
-    "Restart the DankMaterialShell": ""
+    "Restart the DankMaterialShell": "DankMaterialShellを再起動"
   },
   "Resume": {
     "Resume": "レジュメ"
@@ -1552,6 +1579,12 @@
   },
   "Right Section": {
     "Right Section": "右セクション"
+  },
+  "Right Tiling": {
+    "Right Tiling": ""
+  },
+  "Right-click bar widget to cycle": {
+    "Right-click bar widget to cycle": ""
   },
   "Run User Templates": {
     "Run User Templates": "ユーザーのテンプレを実行"
@@ -1585,6 +1618,9 @@
   },
   "Science": {
     "Science": "科学"
+  },
+  "Scrolling": {
+    "Scrolling": ""
   },
   "Search file contents": {
     "Search file contents": "ファイルの内容を検索"
@@ -1668,31 +1704,31 @@
     "Show Dock": "ドックを表示"
   },
   "Show Hibernate": {
-    "Show Hibernate": ""
+    "Show Hibernate": "休止状態を表示"
   },
   "Show Line Numbers": {
     "Show Line Numbers": "行番号を表示"
   },
   "Show Lock": {
-    "Show Lock": ""
+    "Show Lock": "ロックを表示"
   },
   "Show Log Out": {
-    "Show Log Out": ""
+    "Show Log Out": "ログアウトを表示"
   },
   "Show Power Actions": {
     "Show Power Actions": "電源アクションを表示"
   },
   "Show Power Off": {
-    "Show Power Off": ""
+    "Show Power Off": "パワーオフを表示"
   },
   "Show Reboot": {
-    "Show Reboot": ""
+    "Show Reboot": "再起動を表示"
   },
   "Show Restart DMS": {
-    "Show Restart DMS": ""
+    "Show Restart DMS": "DMS再起動を表示"
   },
   "Show Suspend": {
-    "Show Suspend": ""
+    "Show Suspend": "一時停止を表示"
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "ワークスペースアプリを表示"
@@ -1898,6 +1934,9 @@
   "This will permanently delete all clipboard history.": {
     "This will permanently delete all clipboard history.": "これはすべてのクリップボード履歴を完全に削除します。"
   },
+  "Tiling": {
+    "Tiling": ""
+  },
   "Time & Weather": {
     "Time & Weather": "時間および天気"
   },
@@ -2029,6 +2068,18 @@
   },
   "VRR: ": {
     "VRR: ": "VRR: "
+  },
+  "Vertical Deck": {
+    "Vertical Deck": ""
+  },
+  "Vertical Grid": {
+    "Vertical Grid": ""
+  },
+  "Vertical Scrolling": {
+    "Vertical Scrolling": ""
+  },
+  "Vertical Tiling": {
+    "Vertical Tiling": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "遊び心のある彩度の鮮やかなパレット。"

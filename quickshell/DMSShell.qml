@@ -270,6 +270,20 @@ Item {
     }
 
     LazyLoader {
+        id: layoutPopoutLoader
+
+        active: false
+
+        DWLLayoutPopout {
+            id: layoutPopout
+
+            Component.onCompleted: {
+                PopoutService.layoutPopout = layoutPopout
+            }
+        }
+    }
+
+    LazyLoader {
         id: vpnPopoutLoader
 
         active: false

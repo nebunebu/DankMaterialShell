@@ -206,6 +206,9 @@
   "Available": {
     "Available": "可用"
   },
+  "Available Layouts": {
+    "Available Layouts": ""
+  },
   "Available Plugins": {
     "Available Plugins": "可用插件"
   },
@@ -301,6 +304,9 @@
   },
   "Center Section": {
     "Center Section": "中间区域"
+  },
+  "Center Tiling": {
+    "Center Tiling": ""
   },
   "Changes:": {
     "Changes:": "更改:"
@@ -498,7 +504,7 @@
     "Customizable empty space": "可调节留白"
   },
   "Customize which actions appear in the power menu": {
-    "Customize which actions appear in the power menu": ""
+    "Customize which actions appear in the power menu": "自定义电源菜单选项"
   },
   "DEMO MODE - Click anywhere to exit": {
     "DEMO MODE - Click anywhere to exit": "演示模式 - 点击任意位置退出"
@@ -511,6 +517,9 @@
   },
   "DMS_SOCKET not available": {
     "DMS_SOCKET not available": "DMS_SOCKET 不可用"
+  },
+  "DWL service not available": {
+    "DWL service not available": ""
   },
   "Daily at:": {
     "Daily at:": "在每日："
@@ -545,11 +554,14 @@
   "Day Temperature": {
     "Day Temperature": "日间色温"
   },
+  "Deck": {
+    "Deck": ""
+  },
   "Default": {
     "Default": "默认"
   },
   "Default selected action": {
-    "Default selected action": ""
+    "Default selected action": "默认选项"
   },
   "Defaults": {
     "Defaults": "复位"
@@ -598,6 +610,9 @@
   },
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "应用全屏时仍显示所有优先级的通知"
+  },
+  "Display and switch DWL layouts": {
+    "Display and switch DWL layouts": ""
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "在工作区指示器中显示应用程序图标"
@@ -863,6 +878,9 @@
   "Graphics": {
     "Graphics": "图形"
   },
+  "Grid": {
+    "Grid": ""
+  },
   "Group by App": {
     "Group by App": "按应用分组"
   },
@@ -1007,6 +1025,9 @@
   "Launcher Button Logo": {
     "Launcher Button Logo": "启动器按钮 Logo"
   },
+  "Layout": {
+    "Layout": ""
+  },
   "Left": {
     "Left": "左"
   },
@@ -1144,6 +1165,9 @@
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
     "Monitor whose wallpaper drives dynamic theming colors": "监视使用动态主题色的壁纸"
+  },
+  "Monocle": {
+    "Monocle": ""
   },
   "Monospace Font": {
     "Monospace Font": "等宽字体"
@@ -1299,7 +1323,7 @@
     "Only adjust gamma based on time or location rules.": "根据时间或位置调节伽马值。"
   },
   "Only visible if hibernate is supported by your system": {
-    "Only visible if hibernate is supported by your system": ""
+    "Only visible if hibernate is supported by your system": "仅在休眠受系统支持时可见"
   },
   "Opacity": {
     "Opacity": "不透明度"
@@ -1431,7 +1455,7 @@
     "Power Action Confirmation": "电源操作确认"
   },
   "Power Menu Customization": {
-    "Power Menu Customization": ""
+    "Power Menu Customization": "自定义电源菜单"
   },
   "Power Off": {
     "Power Off": "关机"
@@ -1523,6 +1547,9 @@
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "关机、重启、挂起、休眠和注销前请求确认"
   },
+  "Requires DWL compositor": {
+    "Requires DWL compositor": ""
+  },
   "Reset": {
     "Reset": "重置"
   },
@@ -1533,10 +1560,10 @@
     "Restart": "重启"
   },
   "Restart DMS": {
-    "Restart DMS": ""
+    "Restart DMS": "重启DMS"
   },
   "Restart the DankMaterialShell": {
-    "Restart the DankMaterialShell": ""
+    "Restart the DankMaterialShell": "重启DankMaterialShell"
   },
   "Resume": {
     "Resume": "恢复"
@@ -1552,6 +1579,12 @@
   },
   "Right Section": {
     "Right Section": "右侧区域"
+  },
+  "Right Tiling": {
+    "Right Tiling": ""
+  },
+  "Right-click bar widget to cycle": {
+    "Right-click bar widget to cycle": ""
   },
   "Run User Templates": {
     "Run User Templates": "运行用户模板"
@@ -1585,6 +1618,9 @@
   },
   "Science": {
     "Science": "科学"
+  },
+  "Scrolling": {
+    "Scrolling": ""
   },
   "Search file contents": {
     "Search file contents": "检索文件内容"
@@ -1668,31 +1704,31 @@
     "Show Dock": "显示程序坞"
   },
   "Show Hibernate": {
-    "Show Hibernate": ""
+    "Show Hibernate": "显示休眠"
   },
   "Show Line Numbers": {
     "Show Line Numbers": "显示行号"
   },
   "Show Lock": {
-    "Show Lock": ""
+    "Show Lock": "显示锁定"
   },
   "Show Log Out": {
-    "Show Log Out": ""
+    "Show Log Out": "显示注销"
   },
   "Show Power Actions": {
     "Show Power Actions": "显示电源操作"
   },
   "Show Power Off": {
-    "Show Power Off": ""
+    "Show Power Off": "显示关机"
   },
   "Show Reboot": {
-    "Show Reboot": ""
+    "Show Reboot": "显示重启"
   },
   "Show Restart DMS": {
-    "Show Restart DMS": ""
+    "Show Restart DMS": "显示重启DMS"
   },
   "Show Suspend": {
-    "Show Suspend": ""
+    "Show Suspend": "显示挂起"
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "显示工作区内应用"
@@ -1898,6 +1934,9 @@
   "This will permanently delete all clipboard history.": {
     "This will permanently delete all clipboard history.": "此操作会清空剪贴板历史，且无法恢复。"
   },
+  "Tiling": {
+    "Tiling": ""
+  },
   "Time & Weather": {
     "Time & Weather": "时间与天气"
   },
@@ -2029,6 +2068,18 @@
   },
   "VRR: ": {
     "VRR: ": "可变刷新率: "
+  },
+  "Vertical Deck": {
+    "Vertical Deck": ""
+  },
+  "Vertical Grid": {
+    "Vertical Grid": ""
+  },
+  "Vertical Scrolling": {
+    "Vertical Scrolling": ""
+  },
+  "Vertical Tiling": {
+    "Vertical Tiling": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "充满活力的调色板，有着俏皮的饱和度。"

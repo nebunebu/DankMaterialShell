@@ -200,7 +200,8 @@ Loader {
             "vpn": components.vpnComponent,
             "notepadButton": components.notepadButtonComponent,
             "colorPicker": components.colorPickerComponent,
-            "systemUpdate": components.systemUpdateComponent
+            "systemUpdate": components.systemUpdateComponent,
+            "layout": components.layoutComponent
         }
 
         if (componentMap[widgetId]) {
@@ -220,7 +221,8 @@ Loader {
             "memUsage": dgopAvailable,
             "cpuTemp": dgopAvailable,
             "gpuTemp": dgopAvailable,
-            "network_speed_monitor": dgopAvailable
+            "network_speed_monitor": dgopAvailable,
+            "layout": CompositorService.isDwl && DwlService.dwlAvailable
         }
 
         return widgetVisibility[widgetId] ?? true

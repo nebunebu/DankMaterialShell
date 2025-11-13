@@ -206,6 +206,9 @@
   "Available": {
     "Available": "Kullanılabilir"
   },
+  "Available Layouts": {
+    "Available Layouts": ""
+  },
   "Available Plugins": {
     "Available Plugins": "Kullanılabilir Eklentiler"
   },
@@ -301,6 +304,9 @@
   },
   "Center Section": {
     "Center Section": "Orta Bölüm"
+  },
+  "Center Tiling": {
+    "Center Tiling": ""
   },
   "Changes:": {
     "Changes:": "Değişiklikler:"
@@ -512,6 +518,9 @@
   "DMS_SOCKET not available": {
     "DMS_SOCKET not available": "DMS_SOCKET kullanılamıyor"
   },
+  "DWL service not available": {
+    "DWL service not available": ""
+  },
   "Daily at:": {
     "Daily at:": "Her gün saat:"
   },
@@ -544,6 +553,9 @@
   },
   "Day Temperature": {
     "Day Temperature": "Gündüz Sıcaklığı"
+  },
+  "Deck": {
+    "Deck": ""
   },
   "Default": {
     "Default": "Varsayılan"
@@ -598,6 +610,9 @@
   },
   "Display all priorities over fullscreen apps": {
     "Display all priorities over fullscreen apps": "Tam ekran uygulamaların üzerinde tüm öncelikleri göster"
+  },
+  "Display and switch DWL layouts": {
+    "Display and switch DWL layouts": ""
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "Çalışma alanı göstergesinde uygulama simgelerini göster"
@@ -863,6 +878,9 @@
   "Graphics": {
     "Graphics": "Grafik"
   },
+  "Grid": {
+    "Grid": ""
+  },
   "Group by App": {
     "Group by App": "Uygulamaya Göre Gruplandır"
   },
@@ -1007,6 +1025,9 @@
   "Launcher Button Logo": {
     "Launcher Button Logo": "Başlatıcı Buton Logosu"
   },
+  "Layout": {
+    "Layout": ""
+  },
   "Left": {
     "Left": "Sol"
   },
@@ -1144,6 +1165,9 @@
   },
   "Monitor whose wallpaper drives dynamic theming colors": {
     "Monitor whose wallpaper drives dynamic theming colors": "Duvar kağıdı dinamik tema renklerini yönlendiren monitör"
+  },
+  "Monocle": {
+    "Monocle": ""
   },
   "Monospace Font": {
     "Monospace Font": "Sabit Aralıklı Yazı Tipi"
@@ -1523,6 +1547,9 @@
   "Request confirmation on power off, restart, suspend, hibernate and logout actions": {
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Kapatma, yeniden başlatma, askıya alma, hazırda bekletme ve oturumu kapatma işlemlerinde onay iste"
   },
+  "Requires DWL compositor": {
+    "Requires DWL compositor": ""
+  },
   "Reset": {
     "Reset": "Sıfırla"
   },
@@ -1552,6 +1579,12 @@
   },
   "Right Section": {
     "Right Section": "Sağ Bölüm"
+  },
+  "Right Tiling": {
+    "Right Tiling": ""
+  },
+  "Right-click bar widget to cycle": {
+    "Right-click bar widget to cycle": ""
   },
   "Run User Templates": {
     "Run User Templates": "Kullanıcı Şablonlarını Çalıştır"
@@ -1585,6 +1618,9 @@
   },
   "Science": {
     "Science": "Bilim"
+  },
+  "Scrolling": {
+    "Scrolling": ""
   },
   "Search file contents": {
     "Search file contents": "Dosya içeriklerini ara"
@@ -1898,6 +1934,9 @@
   "This will permanently delete all clipboard history.": {
     "This will permanently delete all clipboard history.": "Bu, tüm pano geçmişini kalıcı olarak siler."
   },
+  "Tiling": {
+    "Tiling": ""
+  },
   "Time & Weather": {
     "Time & Weather": "Zaman & Hava Durumu"
   },
@@ -2029,6 +2068,18 @@
   },
   "VRR: ": {
     "VRR: ": "VRR: "
+  },
+  "Vertical Deck": {
+    "Vertical Deck": ""
+  },
+  "Vertical Grid": {
+    "Vertical Grid": ""
+  },
+  "Vertical Scrolling": {
+    "Vertical Scrolling": ""
+  },
+  "Vertical Tiling": {
+    "Vertical Tiling": ""
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Oynak doygunluğa sahip canlı palet"
