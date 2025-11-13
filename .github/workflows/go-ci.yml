@@ -5,7 +5,7 @@ on:
     branches:
       - '**'
     paths:
-      - 'backend/**'
+      - 'core/**'
       - '.github/workflows/go-ci.yml'
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend
+        working-directory: core
 
     steps:
       - name: Checkout
@@ -22,7 +22,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: ./backend/go.mod
+          go-version-file: ./core/go.mod
 
       - name: Format check
         run: |

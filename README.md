@@ -23,7 +23,7 @@ DankMaterialShell is a complete desktop shell for [niri](https://github.com/YaLT
 
 ## Repository Structure
 
-This is a monorepo containing both the shell interface and backend services:
+This is a monorepo containing both the shell interface and the core backend services:
 
 ```
 DankMaterialShell/
@@ -32,7 +32,7 @@ DankMaterialShell/
 │   ├── Services/       # System integration (audio, network, bluetooth)
 │   ├── Widgets/        # Reusable UI controls
 │   └── Common/         # Shared resources and themes
-├── backend/            # Go backend and CLI
+├── core/               # Go backend and CLI
 │   ├── cmd/            # dms CLI and dankinstall binaries
 │   ├── internal/       # System integration, IPC, distro support
 │   └── pkg/            # Shared packages
@@ -135,15 +135,15 @@ dms plugins search   # Browse plugin registry
 See component-specific documentation:
 
 - **[quickshell/](quickshell/)** - QML shell development, widgets, and modules
-- **[backend/](backend/)** - Go backend, CLI tools, and system integration
+- **[core/](core/)** - Go backend, CLI tools, and system integration
 - **[distro/](distro/)** - Distribution packaging
 - **[nix/](nix/)** - NixOS and home-manager modules
 
 ### Building from Source
 
-**Backend:**
+**Core + Dankinstall:**
 ```bash
-cd backend
+cd core
 make              # Build dms CLI
 make dankinstall  # Build installer
 ```

@@ -97,8 +97,8 @@ gunzip -c %{_builddir}/dgop.gz > %{_builddir}/dgop
 chmod +x %{_builddir}/dgop
 
 %build
-# Build DMS CLI from source (backend/ subdirectory in monorepo)
-cd backend
+# Build DMS CLI from source (core/ subdirectory in monorepo)
+cd core
 make dist
 
 %install
@@ -116,15 +116,15 @@ case "%{_arch}" in
     ;;
 esac
 
-install -Dm755 backend/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
+install -Dm755 core/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
 
 # Shell completions
 install -d %{buildroot}%{_datadir}/bash-completion/completions
 install -d %{buildroot}%{_datadir}/zsh/site-functions
 install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
-backend/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
-backend/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
-backend/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
+core/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
+core/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
+core/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
 
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
