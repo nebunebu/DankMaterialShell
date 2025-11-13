@@ -277,9 +277,9 @@ func enableGreeter() error {
 		}
 	}
 
-	wrapperCmd := "dms-greeter"
-	if !commandExists("dms-greeter") {
-		wrapperCmd = "/usr/local/bin/dms-greeter"
+	wrapperCmd, err := findCommandPath("dms-greeter")
+	if err != nil {
+		return fmt.Errorf("dms-greeter not found in PATH. Please ensure it is installed and accessible")
 	}
 
 	compositorLower := strings.ToLower(selectedCompositor)
@@ -444,7 +444,7 @@ func checkGreeterStatus() error {
 			desc:   "Session state",
 		},
 		{
-			source: filepath.Join(homeDir, ".cache", "quickshell", "dankshell", "dms-colors.json"),
+			source: filepath.Join(homeDir, ".cache", "DankMaterialShell", "dms-colors.json"),
 			target: filepath.Join(cacheDir, "colors.json"),
 			desc:   "Color theme",
 		},

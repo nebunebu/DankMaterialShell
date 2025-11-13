@@ -46,8 +46,8 @@ setfacl -m u:greeter:x ~ ~/.config ~/.local ~/.cache ~/.local/state
 # Set group ownership on config directories
 sudo chgrp -R greeter ~/.config/DankMaterialShell
 sudo chgrp -R greeter ~/.local/state/DankMaterialShell  
-sudo chgrp -R greeter ~/.cache/quickshell
-sudo chmod -R g+rX ~/.config/DankMaterialShell ~/.local/state/DankMaterialShell ~/.cache/quickshell
+sudo chgrp -R greeter ~/.cache/DankMaterialShell
+sudo chmod -R g+rX ~/.config/DankMaterialShell ~/.cache/DankMaterialShell ~/.cache/quickshell
 
 # Create symlinks
 sudo ln -sf ~/.config/DankMaterialShell/settings.json /var/cache/dms-greeter/settings.json

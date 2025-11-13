@@ -342,7 +342,7 @@ func SyncDMSConfigs(dmsPath string, logFunc func(string), sudoPassword string) e
 			desc:   "state (wallpaper configuration)",
 		},
 		{
-			source: filepath.Join(homeDir, ".cache", "quickshell", "dankshell", "dms-colors.json"),
+			source: filepath.Join(homeDir, ".cache", "DankMaterialShell", "dms-colors.json"),
 			target: filepath.Join(cacheDir, "colors.json"),
 			desc:   "wallpaper based theming",
 		},
