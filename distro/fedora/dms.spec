@@ -98,7 +98,7 @@ chmod +x %{_builddir}/dgop
 
 %build
 # Build DMS CLI from source (backend/ subdirectory in monorepo)
-cd %{_builddir}/%{name}-%{version}/backend
+cd backend
 make dist
 
 %install
@@ -116,25 +116,25 @@ case "%{_arch}" in
     ;;
 esac
 
-install -Dm755 %{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
+install -Dm755 backend/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
 
 # Shell completions
 install -d %{buildroot}%{_datadir}/bash-completion/completions
 install -d %{buildroot}%{_datadir}/zsh/site-functions
 install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
-%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
-%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
-%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
+backend/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
+backend/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
+backend/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
 
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 
 # Install systemd user service (from quickshell/ subdirectory)
-install -Dm644 %{_builddir}/%{name}-%{version}/quickshell/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
+install -Dm644 quickshell/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
 # Install shell files to shared data location (from quickshell/ subdirectory)
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms
-cp -r %{_builddir}/%{name}-%{version}/quickshell/* %{buildroot}%{_datadir}/quickshell/dms/
+cp -r quickshell/* %{buildroot}%{_datadir}/quickshell/dms/
 
 # Remove build files
 rm -rf %{buildroot}%{_datadir}/quickshell/dms/.git*
@@ -157,9 +157,9 @@ if [ "$1" -ge 2 ]; then
 fi
 
 %files
-%license %{_builddir}/%{name}-%{version}/LICENSE
-%doc %{_builddir}/%{name}-%{version}/quickshell/README.md
-%doc %{_builddir}/%{name}-%{version}/CONTRIBUTING.md
+%license LICENSE
+%doc CONTRIBUTING.md
+%doc quickshell/README.md
 %{_datadir}/quickshell/dms/
 %{_userunitdir}/dms.service
 
