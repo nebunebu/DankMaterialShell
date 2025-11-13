@@ -66,7 +66,7 @@ PanelWindow {
 
     color: "transparent"
     WlrLayershell.layer: {
-        switch (Quickshell.env("DMS_DANKBAR_LAYER")) {
+        switch (Quickshell.env("DMS_POPOUT_LAYER")) {
         case "bottom":
             return WlrLayershell.Bottom
         case "overlay":
