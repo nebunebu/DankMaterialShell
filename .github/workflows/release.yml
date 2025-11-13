@@ -255,6 +255,9 @@ jobs:
           cp _core_assets/completion.* _release_assets/ 2>/dev/null || true
 
           # Create QML source package (exclude build artifacts and git files)
+          # Copy root LICENSE and CONTRIBUTING.md to quickshell/ for packaging
+          cp LICENSE CONTRIBUTING.md quickshell/
+
           # Tar the CONTENTS of quickshell/, not the directory itself
           (cd quickshell && tar --exclude='.git' \
               --exclude='.github' \
