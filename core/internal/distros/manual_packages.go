@@ -645,19 +645,17 @@ func (m *ManualPackageInstaller) installMatugen(ctx context.Context, sudoPasswor
 func (m *ManualPackageInstaller) installDankMaterialShell(ctx context.Context, sudoPassword string, progressChan chan<- InstallProgressMsg) error {
 	m.log("Installing DankMaterialShell (DMS)...")
 
-	// Always install/update the DMS binary
 	if err := m.installDMSBinary(ctx, sudoPassword, progressChan); err != nil {
 		m.logError("Failed to install DMS binary", err)
 	}
 
-	// Handle DMS config - clone if missing, pull if exists
 	dmsPath := filepath.Join(os.Getenv("HOME"), ".config/quickshell/dms")
+
 	if _, err := os.Stat(dmsPath); os.IsNotExist(err) {
-		// Config doesn't exist, clone it
 		progressChan <- InstallProgressMsg{
 			Phase:       PhaseSystemPackages,
 			Progress:    0.90,
-			Step:        "Cloning DankMaterialShell config...",
+			Step:        "Cloning DankMaterialShell...",
 			IsComplete:  false,
 			CommandInfo: "git clone https://github.com/AvengeMedia/DankMaterialShell.git",
 		}
@@ -667,81 +665,89 @@ func (m *ManualPackageInstaller) installDankMaterialShell(ctx context.Context, s
 			return fmt.Errorf("failed to create quickshell config directory: %w", err)
 		}
 
-		tmpRepoPath := filepath.Join(os.TempDir(), "dms-clone-tmp")
-		defer os.RemoveAll(tmpRepoPath)
-
 		cloneCmd := exec.CommandContext(ctx, "git", "clone",
-			"https://github.com/AvengeMedia/DankMaterialShell.git", tmpRepoPath)
+			"https://github.com/AvengeMedia/DankMaterialShell.git", dmsPath)
 		if err := cloneCmd.Run(); err != nil {
 			return fmt.Errorf("failed to clone DankMaterialShell: %w", err)
 		}
 
 		if !forceDMSGit {
-			fetchCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "fetch", "--tags")
-			if err := fetchCmd.Run(); err == nil {
-				tagCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "describe", "--tags", "--abbrev=0", "origin/master")
-				if tagOutput, err := tagCmd.Output(); err == nil {
-					latestTag := strings.TrimSpace(string(tagOutput))
-					checkoutCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "checkout", latestTag)
-					if err := checkoutCmd.Run(); err == nil {
-						m.log(fmt.Sprintf("Checked out latest tag: %s", latestTag))
-					}
-				}
-			}
-		}
-
-		srcPath := filepath.Join(tmpRepoPath, "quickshell")
-		cpCmd := exec.CommandContext(ctx, "cp", "-r", srcPath, dmsPath)
-		if err := cpCmd.Run(); err != nil {
-			return fmt.Errorf("failed to copy quickshell directory: %w", err)
-		}
-
-		m.log("DankMaterialShell config cloned successfully")
-	} else {
-		// Config exists, update it
-		progressChan <- InstallProgressMsg{
-			Phase:       PhaseSystemPackages,
-			Progress:    0.90,
-			Step:        "Updating DankMaterialShell config...",
-			IsComplete:  false,
-			CommandInfo: "Updating ~/.config/quickshell/dms",
-		}
-
-		tmpRepoPath := filepath.Join(os.TempDir(), "dms-update-tmp")
-		defer os.RemoveAll(tmpRepoPath)
-
-		cloneCmd := exec.CommandContext(ctx, "git", "clone",
-			"https://github.com/AvengeMedia/DankMaterialShell.git", tmpRepoPath)
-		if err := cloneCmd.Run(); err != nil {
-			m.logError("Failed to clone DankMaterialShell for update", err)
-		} else {
-			if !forceDMSGit {
-				fetchCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "fetch", "--tags")
-				if err := fetchCmd.Run(); err == nil {
-					tagCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "describe", "--tags", "--abbrev=0", "origin/master")
-					if tagOutput, err := tagCmd.Output(); err == nil {
-						latestTag := strings.TrimSpace(string(tagOutput))
-						checkoutCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "checkout", latestTag)
-						_ = checkoutCmd.Run()
-					}
-				}
+			tagCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "describe", "--tags", "--abbrev=0", "origin/master")
+			tagOutput, err := tagCmd.Output()
+			if err != nil {
+				m.log("Using default branch (no tags found)")
+				return nil
 			}
 
-			srcPath := filepath.Join(tmpRepoPath, "quickshell")
-			rsyncCmd := exec.CommandContext(ctx, "rsync", "-a", "--delete", srcPath+"/", dmsPath+"/")
-			if err := rsyncCmd.Run(); err != nil {
-				cpCmd := exec.CommandContext(ctx, "cp", "-rf", srcPath+"/.", dmsPath+"/")
-				if err := cpCmd.Run(); err != nil {
-					m.logError("Failed to update DankMaterialShell config", err)
-				} else {
-					m.log("DankMaterialShell config updated successfully")
-				}
-			} else {
-				m.log("DankMaterialShell config updated successfully")
+			latestTag := strings.TrimSpace(string(tagOutput))
+			checkoutCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "checkout", latestTag)
+			if err := checkoutCmd.Run(); err != nil {
+				m.logError(fmt.Sprintf("Failed to checkout tag %s", latestTag), err)
+				return nil
 			}
+
+			m.log(fmt.Sprintf("Checked out latest tag: %s", latestTag))
 		}
+
+		m.log("DankMaterialShell cloned successfully")
+		return nil
 	}
 
+	progressChan <- InstallProgressMsg{
+		Phase:       PhaseSystemPackages,
+		Progress:    0.90,
+		Step:        "Updating DankMaterialShell...",
+		IsComplete:  false,
+		CommandInfo: "Updating ~/.config/quickshell/dms",
+	}
+
+	fetchCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "fetch", "origin", "--tags", "--force")
+	if err := fetchCmd.Run(); err != nil {
+		m.logError("Failed to fetch updates", err)
+		return nil
+	}
+
+	tagCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "describe", "--exact-match", "--tags", "HEAD")
+	onTag := tagCmd.Run() == nil
+
+	if onTag && !forceDMSGit {
+		latestTagCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "describe", "--tags", "--abbrev=0", "origin/master")
+		tagOutput, err := latestTagCmd.Output()
+		if err != nil {
+			m.logError("Failed to get latest tag", err)
+			return nil
+		}
+
+		latestTag := strings.TrimSpace(string(tagOutput))
+		checkoutCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "checkout", latestTag)
+		if err := checkoutCmd.Run(); err != nil {
+			m.logError(fmt.Sprintf("Failed to checkout tag %s", latestTag), err)
+			return nil
+		}
+
+		m.log(fmt.Sprintf("Updated to tag: %s", latestTag))
+		return nil
+	}
+
+	branchCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "rev-parse", "--abbrev-ref", "HEAD")
+	branchOutput, err := branchCmd.Output()
+	if err != nil {
+		m.logError("Failed to get current branch", err)
+		return nil
+	}
+
+	branch := strings.TrimSpace(string(branchOutput))
+	if branch == "" {
+		branch = "master"
+	}
+
+	pullCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "pull", "origin", branch)
+	if err := pullCmd.Run(); err != nil {
+		m.logError("Failed to pull updates", err)
+		return nil
+	}
+
+	m.log("DankMaterialShell updated successfully")
 	return nil
 }
 
