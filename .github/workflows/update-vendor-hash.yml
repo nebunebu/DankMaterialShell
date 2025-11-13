@@ -6,7 +6,7 @@ on:
       - "backend/go.mod"
       - "backend/go.sum"
     branches:
-      - master
+      - NOOP
 
 jobs:
   update-vendor-hash:
