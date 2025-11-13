@@ -659,7 +659,7 @@ func (m *ManualPackageInstaller) installDankMaterialShell(ctx context.Context, s
 			Progress:    0.90,
 			Step:        "Cloning DankMaterialShell config...",
 			IsComplete:  false,
-			CommandInfo: "git clone https://github.com/AvengeMedia/DankMaterialShell.git ~/.config/quickshell/dms",
+			CommandInfo: "git clone https://github.com/AvengeMedia/DankMaterialShell.git",
 		}
 
 		configDir := filepath.Dir(dmsPath)
@@ -667,24 +667,33 @@ func (m *ManualPackageInstaller) installDankMaterialShell(ctx context.Context, s
 			return fmt.Errorf("failed to create quickshell config directory: %w", err)
 		}
 
+		tmpRepoPath := filepath.Join(os.TempDir(), "dms-clone-tmp")
+		defer os.RemoveAll(tmpRepoPath)
+
 		cloneCmd := exec.CommandContext(ctx, "git", "clone",
-			"https://github.com/AvengeMedia/DankMaterialShell.git", dmsPath)
+			"https://github.com/AvengeMedia/DankMaterialShell.git", tmpRepoPath)
 		if err := cloneCmd.Run(); err != nil {
 			return fmt.Errorf("failed to clone DankMaterialShell: %w", err)
 		}
 
 		if !forceDMSGit {
-			fetchCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "fetch", "--tags")
+			fetchCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "fetch", "--tags")
 			if err := fetchCmd.Run(); err == nil {
-				tagCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "describe", "--tags", "--abbrev=0", "origin/master")
+				tagCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "describe", "--tags", "--abbrev=0", "origin/master")
 				if tagOutput, err := tagCmd.Output(); err == nil {
 					latestTag := strings.TrimSpace(string(tagOutput))
-					checkoutCmd := exec.CommandContext(ctx, "git", "-C", dmsPath, "checkout", latestTag)
+					checkoutCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "checkout", latestTag)
 					if err := checkoutCmd.Run(); err == nil {
 						m.log(fmt.Sprintf("Checked out latest tag: %s", latestTag))
 					}
 				}
 			}
+		}
+
+		srcPath := filepath.Join(tmpRepoPath, "quickshell")
+		cpCmd := exec.CommandContext(ctx, "cp", "-r", srcPath, dmsPath)
+		if err := cpCmd.Run(); err != nil {
+			return fmt.Errorf("failed to copy quickshell directory: %w", err)
 		}
 
 		m.log("DankMaterialShell config cloned successfully")
@@ -695,15 +704,41 @@ func (m *ManualPackageInstaller) installDankMaterialShell(ctx context.Context, s
 			Progress:    0.90,
 			Step:        "Updating DankMaterialShell config...",
 			IsComplete:  false,
-			CommandInfo: "git pull in ~/.config/quickshell/dms",
+			CommandInfo: "Updating ~/.config/quickshell/dms",
 		}
 
-		pullCmd := exec.CommandContext(ctx, "git", "pull")
-		pullCmd.Dir = dmsPath
-		if err := pullCmd.Run(); err != nil {
-			m.logError("Failed to update DankMaterialShell config", err)
+		tmpRepoPath := filepath.Join(os.TempDir(), "dms-update-tmp")
+		defer os.RemoveAll(tmpRepoPath)
+
+		cloneCmd := exec.CommandContext(ctx, "git", "clone",
+			"https://github.com/AvengeMedia/DankMaterialShell.git", tmpRepoPath)
+		if err := cloneCmd.Run(); err != nil {
+			m.logError("Failed to clone DankMaterialShell for update", err)
 		} else {
-			m.log("DankMaterialShell config updated successfully")
+			if !forceDMSGit {
+				fetchCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "fetch", "--tags")
+				if err := fetchCmd.Run(); err == nil {
+					tagCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "describe", "--tags", "--abbrev=0", "origin/master")
+					if tagOutput, err := tagCmd.Output(); err == nil {
+						latestTag := strings.TrimSpace(string(tagOutput))
+						checkoutCmd := exec.CommandContext(ctx, "git", "-C", tmpRepoPath, "checkout", latestTag)
+						_ = checkoutCmd.Run()
+					}
+				}
+			}
+
+			srcPath := filepath.Join(tmpRepoPath, "quickshell")
+			rsyncCmd := exec.CommandContext(ctx, "rsync", "-a", "--delete", srcPath+"/", dmsPath+"/")
+			if err := rsyncCmd.Run(); err != nil {
+				cpCmd := exec.CommandContext(ctx, "cp", "-rf", srcPath+"/.", dmsPath+"/")
+				if err := cpCmd.Run(); err != nil {
+					m.logError("Failed to update DankMaterialShell config", err)
+				} else {
+					m.log("DankMaterialShell config updated successfully")
+				}
+			} else {
+				m.log("DankMaterialShell config updated successfully")
+			}
 		}
 	}
 

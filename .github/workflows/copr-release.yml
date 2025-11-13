@@ -1,10 +1,6 @@
-name: DMS Copr Stable Release
+name: DMS Copr Stable Release (Manual)
 
 on:
-  workflow_run:
-    workflows: ["Create Release from DMS"]
-    types: [completed]
-    branches: [master]
   workflow_dispatch:
     inputs:
       version:
@@ -15,7 +11,6 @@ on:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - name: Checkout repository
@@ -27,9 +22,6 @@ jobs:
           if [ -n "${{ github.event.inputs.version }}" ]; then
             VERSION="${{ github.event.inputs.version }}"
             echo "Using manual version: $VERSION"
-          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
-            VERSION=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name' | sed 's/^v//')
-            echo "Using latest release version from workflow_run: $VERSION"
           else
             VERSION=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name' | sed 's/^v//')
             echo "Using latest release version: $VERSION"
@@ -115,7 +107,7 @@ jobs:
           %package -n dms-cli
           Summary:        DankMaterialShell CLI tool
           License:        MIT
-          URL:            https://github.com/AvengeMedia/danklinux
+          URL:            https://github.com/AvengeMedia/DankMaterialShell
 
           %description -n dms-cli
           Command-line interface for DankMaterialShell configuration and management.
@@ -151,7 +143,7 @@ jobs:
           esac
 
           # Download dms-cli for target architecture
-          wget -O %{_builddir}/dms-cli.gz "https://github.com/AvengeMedia/danklinux/releases/latest/download/dms-distropkg-${ARCH_SUFFIX}.gz" || {
+          wget -O %{_builddir}/dms-cli.gz "https://github.com/AvengeMedia/DankMaterialShell/releases/latest/download/dms-distropkg-${ARCH_SUFFIX}.gz" || {
             echo "Failed to download dms-cli for architecture %{_arch}"
             exit 1
           }
@@ -188,7 +180,7 @@ jobs:
           rm -rf %{buildroot}%{_datadir}/quickshell/dms/.git*
           rm -f %{buildroot}%{_datadir}/quickshell/dms/.gitignore
           rm -rf %{buildroot}%{_datadir}/quickshell/dms/.github
-          rm -f %{buildroot}%{_datadir}/quickshell/dms/*.spec
+          rm -rf %{buildroot}%{_datadir}/quickshell/dms/distro
 
           %posttrans
           # Clean up old installation path from previous versions (only if empty)

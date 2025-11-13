@@ -9,7 +9,7 @@ import (
 
 // LocateDMSConfig searches for DMS installation following XDG Base Directory specification
 func LocateDMSConfig() (string, error) {
-	var searchPaths []string
+	var primaryPaths []string
 
 	configHome := os.Getenv("XDG_CONFIG_HOME")
 	if configHome == "" {
@@ -19,10 +19,10 @@ func LocateDMSConfig() (string, error) {
 	}
 
 	if configHome != "" {
-		searchPaths = append(searchPaths, filepath.Join(configHome, "quickshell", "dms"))
+		primaryPaths = append(primaryPaths, filepath.Join(configHome, "quickshell", "dms"))
 	}
 
-	searchPaths = append(searchPaths, "/usr/share/quickshell/dms")
+	primaryPaths = append(primaryPaths, "/usr/share/quickshell/dms")
 
 	configDirs := os.Getenv("XDG_CONFIG_DIRS")
 	if configDirs == "" {
@@ -31,8 +31,15 @@ func LocateDMSConfig() (string, error) {
 
 	for _, dir := range strings.Split(configDirs, ":") {
 		if dir != "" {
-			searchPaths = append(searchPaths, filepath.Join(dir, "quickshell", "dms"))
+			primaryPaths = append(primaryPaths, filepath.Join(dir, "quickshell", "dms"))
 		}
+	}
+
+	// Build search paths with secondary (monorepo) paths interleaved
+	var searchPaths []string
+	for _, path := range primaryPaths {
+		searchPaths = append(searchPaths, path)
+		searchPaths = append(searchPaths, filepath.Join(path, "quickshell"))
 	}
 
 	for _, path := range searchPaths {

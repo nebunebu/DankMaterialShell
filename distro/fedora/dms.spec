@@ -15,9 +15,6 @@ URL:            https://github.com/AvengeMedia/DankMaterialShell
 VCS:            {{{ git_repo_vcs }}}
 Source0:        {{{ git_repo_pack }}}
 
-# DMS CLI from danklinux latest commit
-Source1:        https://github.com/AvengeMedia/danklinux/archive/refs/heads/master.tar.gz
-
 BuildRequires:  git-core
 BuildRequires:  rpkg
 BuildRequires:  gzip
@@ -58,7 +55,7 @@ lock screen, and comprehensive plugin system.
 %package -n dms-cli
 Summary:        DankMaterialShell CLI tool
 License:        MIT
-URL:            https://github.com/AvengeMedia/danklinux
+URL:            https://github.com/AvengeMedia/DankMaterialShell
 
 %description -n dms-cli
 Command-line interface for DankMaterialShell configuration and management.
@@ -77,9 +74,6 @@ used standalone. This package always includes the latest stable dgop release.
 
 %prep
 {{{ git_repo_setup_macro }}}
-
-# Extract DankLinux source
-tar -xzf %{SOURCE1} -C %{_builddir}
 
 # Download and extract DGOP binary for target architecture
 case "%{_arch}" in
@@ -103,8 +97,8 @@ gunzip -c %{_builddir}/dgop.gz > %{_builddir}/dgop
 chmod +x %{_builddir}/dgop
 
 %build
-# Build DMS CLI from source
-cd %{_builddir}/danklinux-master
+# Build DMS CLI from source (backend/ subdirectory in monorepo)
+cd %{_builddir}/%{name}-%{version}/backend
 make dist
 
 %install
@@ -122,31 +116,31 @@ case "%{_arch}" in
     ;;
 esac
 
-install -Dm755 %{_builddir}/danklinux-master/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
+install -Dm755 %{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} %{buildroot}%{_bindir}/dms
 
-# Shell completions 
+# Shell completions
 install -d %{buildroot}%{_datadir}/bash-completion/completions
 install -d %{buildroot}%{_datadir}/zsh/site-functions
 install -d %{buildroot}%{_datadir}/fish/vendor_completions.d
-%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
-%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
-%{_builddir}/danklinux-master/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
+%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion bash > %{buildroot}%{_datadir}/bash-completion/completions/dms || :
+%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion zsh > %{buildroot}%{_datadir}/zsh/site-functions/_dms || :
+%{_builddir}/%{name}-%{version}/backend/bin/${DMS_BINARY} completion fish > %{buildroot}%{_datadir}/fish/vendor_completions.d/dms.fish || :
 
 # Install dgop binary
 install -Dm755 %{_builddir}/dgop %{buildroot}%{_bindir}/dgop
 
-# Install systemd user service
-install -Dm644 assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
+# Install systemd user service (from quickshell/ subdirectory)
+install -Dm644 %{_builddir}/%{name}-%{version}/quickshell/assets/systemd/dms.service %{buildroot}%{_userunitdir}/dms.service
 
-# Install shell files to shared data location
+# Install shell files to shared data location (from quickshell/ subdirectory)
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms
-cp -r * %{buildroot}%{_datadir}/quickshell/dms/
+cp -r %{_builddir}/%{name}-%{version}/quickshell/* %{buildroot}%{_datadir}/quickshell/dms/
 
 # Remove build files
 rm -rf %{buildroot}%{_datadir}/quickshell/dms/.git*
 rm -f %{buildroot}%{_datadir}/quickshell/dms/.gitignore
 rm -rf %{buildroot}%{_datadir}/quickshell/dms/.github
-rm -f %{buildroot}%{_datadir}/quickshell/dms/*.spec
+rm -rf %{buildroot}%{_datadir}/quickshell/dms/distro
 
 %posttrans
 # Clean up old installation path from previous versions (only if empty)
@@ -163,8 +157,9 @@ if [ "$1" -ge 2 ]; then
 fi
 
 %files
-%license LICENSE
-%doc README.md CONTRIBUTING.md
+%license %{_builddir}/%{name}-%{version}/LICENSE
+%doc %{_builddir}/%{name}-%{version}/quickshell/README.md
+%doc %{_builddir}/%{name}-%{version}/quickshell/CONTRIBUTING.md
 %{_datadir}/quickshell/dms/
 %{_userunitdir}/dms.service
 

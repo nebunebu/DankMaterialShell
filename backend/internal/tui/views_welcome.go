@@ -71,7 +71,7 @@ func (m Model) viewWelcome() string {
 			case "nixos":
 				errorMsg = "NixOS is currently not supported, but there is a DankMaterialShell flake available."
 			default:
-				errorMsg = fmt.Sprintf("%s is not supported.\nFeel free to request on https://github.com/AvengeMedia/DankMaterialShell/backend", m.osInfo.PrettyName)
+				errorMsg = fmt.Sprintf("%s is not supported.\nFeel free to request on https://github.com/AvengeMedia/DankMaterialShell", m.osInfo.PrettyName)
 			}
 
 			errorMsgStyled := lipgloss.NewStyle().

@@ -392,7 +392,7 @@ func updateDMSBinary() error {
 	}
 
 	fmt.Println("Fetching latest release version...")
-	cmd := exec.Command("curl", "-s", "https://api.github.com/repos/AvengeMedia/danklinux/releases/latest")
+	cmd := exec.Command("curl", "-s", "https://api.github.com/repos/AvengeMedia/DankMaterialShell/releases/latest")
 	output, err := cmd.Output()
 	if err != nil {
 		return fmt.Errorf("failed to fetch latest release: %w", err)
@@ -421,8 +421,8 @@ func updateDMSBinary() error {
 	}
 	defer os.RemoveAll(tempDir)
 
-	binaryURL := fmt.Sprintf("https://github.com/AvengeMedia/DankMaterialShell/backend/releases/download/%s/dms-%s.gz", version, arch)
-	checksumURL := fmt.Sprintf("https://github.com/AvengeMedia/DankMaterialShell/backend/releases/download/%s/dms-%s.gz.sha256", version, arch)
+	binaryURL := fmt.Sprintf("https://github.com/AvengeMedia/DankMaterialShell/releases/download/%s/dms-cli-%s.gz", version, arch)
+	checksumURL := fmt.Sprintf("https://github.com/AvengeMedia/DankMaterialShell/releases/download/%s/dms-cli-%s.gz.sha256", version, arch)
 
 	binaryPath := filepath.Join(tempDir, "dms.gz")
 	checksumPath := filepath.Join(tempDir, "dms.gz.sha256")

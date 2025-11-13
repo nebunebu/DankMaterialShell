@@ -130,7 +130,7 @@ func GetLatestDMSVersion() (string, error) {
 	}
 
 	// Add timeout to prevent hanging when GitHub is down
-	cmd := exec.Command("curl", "-s", "--max-time", "5", "https://api.github.com/repos/AvengeMedia/danklinux/releases/latest")
+	cmd := exec.Command("curl", "-s", "--max-time", "5", "https://api.github.com/repos/AvengeMedia/DankMaterialShell/releases/latest")
 	output, err := cmd.Output()
 	if err != nil {
 		return "", fmt.Errorf("failed to fetch latest release: %w", err)

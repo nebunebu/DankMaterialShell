@@ -41,7 +41,7 @@
                 ];
             in pkgs.stdenvNoCC.mkDerivation {
                 pname = "dankMaterialShell";
-                version = pkgs.lib.removePrefix "v" (pkgs.lib.trim (builtins.readFile ./VERSION))
+                version = pkgs.lib.removePrefix "v" (pkgs.lib.trim (builtins.readFile ./quickshell/VERSION))
                     + "+date=" + mkDate (self.lastModifiedDate or "19700101")
                     + "_" + (self.shortRev or "dirty");
                 src = pkgs.lib.cleanSourceWith {
