@@ -10,14 +10,10 @@ DankModal {
 
     layerNamespace: "dms:power-menu"
 
-    property int selectedRow: 0
-    property int selectedCol: 0
-    property int selectedIndex: selectedRow * gridColumns + selectedCol
+    property int selectedIndex: 0
     property rect parentBounds: Qt.rect(0, 0, 0, 0)
     property var parentScreen: null
     property var visibleActions: []
-    property int gridColumns: 3
-    property int gridRows: 2
 
     signal powerActionRequested(string action, string title, string message)
     signal lockRequested
@@ -43,28 +39,6 @@ DankModal {
                                                return false
                                                return true
                                            })
-
-        const count = visibleActions.length
-        switch (count) {
-        case 0:
-            gridColumns = 1
-            gridRows = 1
-            break
-        case 1:
-        case 2:
-        case 3:
-            gridColumns = 1
-            gridRows = count
-            break
-        case 4:
-            gridColumns = 2
-            gridRows = 2
-            break
-        default:
-            gridColumns = 3
-            gridRows = Math.ceil(count / 3)
-            break
-        }
     }
 
     function getDefaultActionIndex() {
@@ -173,7 +147,7 @@ DankModal {
     }
 
     shouldBeVisible: false
-    width: Math.min(550, gridColumns * 180 + Theme.spacingS * (gridColumns - 1) + Theme.spacingL * 2)
+    width: 400
     height: contentLoader.item ? contentLoader.item.implicitHeight : 300
     enableShadow: true
     screen: parentScreen
@@ -189,30 +163,20 @@ DankModal {
     onBackgroundClicked: () => close()
     onOpened: () => {
                   updateVisibleActions()
-                  const defaultIndex = getDefaultActionIndex()
-                  selectedRow = Math.floor(defaultIndex / gridColumns)
-                  selectedCol = defaultIndex % gridColumns
+                  selectedIndex = getDefaultActionIndex()
                   Qt.callLater(() => modalFocusScope.forceActiveFocus())
               }
     Component.onCompleted: updateVisibleActions()
     modalFocusScope.Keys.onPressed: event => {
                                         switch (event.key) {
-                                            case Qt.Key_Left:
-                                            selectedCol = (selectedCol - 1 + gridColumns) % gridColumns
-                                            event.accepted = true
-                                            break
-                                            case Qt.Key_Right:
-                                            selectedCol = (selectedCol + 1) % gridColumns
-                                            event.accepted = true
-                                            break
                                             case Qt.Key_Up:
                                             case Qt.Key_Backtab:
-                                            selectedRow = (selectedRow - 1 + gridRows) % gridRows
+                                            selectedIndex = (selectedIndex - 1 + visibleActions.length) % visibleActions.length
                                             event.accepted = true
                                             break
                                             case Qt.Key_Down:
                                             case Qt.Key_Tab:
-                                            selectedRow = (selectedRow + 1) % gridRows
+                                            selectedIndex = (selectedIndex + 1) % visibleActions.length
                                             event.accepted = true
                                             break
                                             case Qt.Key_Return:
@@ -222,7 +186,7 @@ DankModal {
                                             break
                                             case Qt.Key_N:
                                             if (event.modifiers & Qt.ControlModifier) {
-                                                selectedCol = (selectedCol + 1) % gridColumns
+                                                selectedIndex = (selectedIndex + 1) % visibleActions.length
                                                 event.accepted = true
                                             }
                                             break
@@ -231,19 +195,19 @@ DankModal {
                                                 selectOption("poweroff")
                                                 event.accepted = true
                                             } else {
-                                                selectedCol = (selectedCol - 1 + gridColumns) % gridColumns
+                                                selectedIndex = (selectedIndex - 1 + visibleActions.length) % visibleActions.length
                                                 event.accepted = true
                                             }
                                             break
                                             case Qt.Key_J:
                                             if (event.modifiers & Qt.ControlModifier) {
-                                                selectedRow = (selectedRow + 1) % gridRows
+                                                selectedIndex = (selectedIndex + 1) % visibleActions.length
                                                 event.accepted = true
                                             }
                                             break
                                             case Qt.Key_K:
                                             if (event.modifiers & Qt.ControlModifier) {
-                                                selectedRow = (selectedRow - 1 + gridRows) % gridRows
+                                                selectedIndex = (selectedIndex - 1 + visibleActions.length) % visibleActions.length
                                                 event.accepted = true
                                             }
                                             break
@@ -277,14 +241,18 @@ DankModal {
     content: Component {
         Item {
             anchors.fill: parent
-            implicitHeight: buttonGrid.implicitHeight + Theme.spacingL * 2
+            implicitHeight: buttonColumn.implicitHeight + Theme.spacingL * 2
 
-            Grid {
-                id: buttonGrid
-                anchors.centerIn: parent
-                columns: root.gridColumns
-                columnSpacing: Theme.spacingS
-                rowSpacing: Theme.spacingS
+            Column {
+                id: buttonColumn
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: Theme.spacingL
+                    rightMargin: Theme.spacingL
+                    verticalCenter: parent.verticalCenter
+                }
+                spacing: Theme.spacingS
 
                 Repeater {
                     model: root.visibleActions
@@ -297,8 +265,8 @@ DankModal {
                         readonly property bool isSelected: root.selectedIndex === index
                         readonly property bool showWarning: modelData === "reboot" || modelData === "poweroff"
 
-                        width: (root.width - Theme.spacingL * 2 - Theme.spacingS * (root.gridColumns - 1)) / root.gridColumns
-                        height: 100
+                        width: parent.width
+                        height: 56
                         radius: Theme.cornerRadius
                         color: {
                             if (isSelected)
@@ -310,20 +278,26 @@ DankModal {
                         border.color: isSelected ? Theme.primary : "transparent"
                         border.width: isSelected ? 2 : 0
 
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: Theme.spacingS
+                        Row {
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                leftMargin: Theme.spacingM
+                                rightMargin: Theme.spacingM
+                                verticalCenter: parent.verticalCenter
+                            }
+                            spacing: Theme.spacingM
 
                             DankIcon {
                                 name: parent.parent.actionData.icon
-                                size: Theme.iconSize + 8
+                                size: Theme.iconSize + 4
                                 color: {
                                     if (parent.parent.showWarning && mouseArea.containsMouse) {
                                         return parent.parent.modelData === "poweroff" ? Theme.error : Theme.warning
                                     }
                                     return Theme.surfaceText
                                 }
-                                anchors.horizontalCenter: parent.horizontalCenter
+                                anchors.verticalCenter: parent.verticalCenter
                             }
 
                             StyledText {
@@ -336,23 +310,27 @@ DankModal {
                                     return Theme.surfaceText
                                 }
                                 font.weight: Font.Medium
-                                anchors.horizontalCenter: parent.horizontalCenter
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            width: 28
+                            height: 20
+                            radius: 4
+                            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
+                            anchors {
+                                right: parent.right
+                                rightMargin: Theme.spacingM
+                                verticalCenter: parent.verticalCenter
                             }
 
-                            Rectangle {
-                                width: 20
-                                height: 16
-                                radius: 4
-                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.1)
-                                anchors.horizontalCenter: parent.horizontalCenter
-
-                                StyledText {
-                                    text: parent.parent.parent.actionData.key
-                                    font.pixelSize: Theme.fontSizeSmall - 1
-                                    color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
-                                    font.weight: Font.Medium
-                                    anchors.centerIn: parent
-                                }
+                            StyledText {
+                                text: parent.parent.actionData.key
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.6)
+                                font.weight: Font.Medium
+                                anchors.centerIn: parent
                             }
                         }
 
@@ -362,8 +340,7 @@ DankModal {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
-                                root.selectedRow = Math.floor(index / root.gridColumns)
-                                root.selectedCol = index % root.gridColumns
+                                root.selectedIndex = index
                                 root.selectOption(modelData)
                             }
                         }
