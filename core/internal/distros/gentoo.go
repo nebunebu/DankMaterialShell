@@ -391,7 +391,7 @@ func (g *GentooDistribution) InstallPackages(ctx context.Context, dependencies [
 		return fmt.Errorf("failed to install prerequisites: %w", err)
 	}
 
-	systemPkgs, guruPkgs, manualPkgs := g.categorizePackages(dependencies, wm, reinstallFlags, disabledFlags)
+	systemPkgs, guruPkgs, manualPkgs, variantMap := g.categorizePackages(dependencies, wm, reinstallFlags, disabledFlags)
 
 	g.log(fmt.Sprintf("CATEGORIZED PACKAGES: system=%d, guru=%d, manual=%d", len(systemPkgs), len(guruPkgs), len(manualPkgs)))
 
@@ -447,7 +447,7 @@ func (g *GentooDistribution) InstallPackages(ctx context.Context, dependencies [
 			IsComplete: false,
 			LogOutput:  fmt.Sprintf("Building from source: %s", strings.Join(manualPkgs, ", ")),
 		}
-		if err := g.InstallManualPackages(ctx, manualPkgs, sudoPassword, progressChan); err != nil {
+		if err := g.InstallManualPackages(ctx, manualPkgs, variantMap, sudoPassword, progressChan); err != nil {
 			return fmt.Errorf("failed to install manual packages: %w", err)
 		}
 	}
@@ -471,7 +471,7 @@ func (g *GentooDistribution) InstallPackages(ctx context.Context, dependencies [
 	return nil
 }
 
-func (g *GentooDistribution) categorizePackages(dependencies []deps.Dependency, wm deps.WindowManager, reinstallFlags map[string]bool, disabledFlags map[string]bool) ([]PackageMapping, []PackageMapping, []string) {
+func (g *GentooDistribution) categorizePackages(dependencies []deps.Dependency, wm deps.WindowManager, reinstallFlags map[string]bool, disabledFlags map[string]bool) ([]PackageMapping, []PackageMapping, []string, map[string]deps.PackageVariant) {
 	systemPkgs := []PackageMapping{}
 	guruPkgs := []PackageMapping{}
 	manualPkgs := []string{}
@@ -508,7 +508,7 @@ func (g *GentooDistribution) categorizePackages(dependencies []deps.Dependency, 
 		}
 	}
 
-	return systemPkgs, guruPkgs, manualPkgs
+	return systemPkgs, guruPkgs, manualPkgs, variantMap
 }
 
 func (g *GentooDistribution) extractPackageNames(packages []PackageMapping) []string {
