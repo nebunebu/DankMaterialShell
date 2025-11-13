@@ -159,7 +159,7 @@ fi
 %files
 %license %{_builddir}/%{name}-%{version}/LICENSE
 %doc %{_builddir}/%{name}-%{version}/quickshell/README.md
-%doc %{_builddir}/%{name}-%{version}/quickshell/CONTRIBUTING.md
+%doc %{_builddir}/%{name}-%{version}/CONTRIBUTING.md
 %{_datadir}/quickshell/dms/
 %{_userunitdir}/dms.service
 
