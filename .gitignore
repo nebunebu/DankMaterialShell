@@ -137,5 +137,3 @@ go.work.sum
 # .vscode/
 
 bin/
-dankinstall
-/dms
