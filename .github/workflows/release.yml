@@ -129,7 +129,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Update VERSION and flake.nix
+      - name: Update VERSION
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -142,10 +142,7 @@ jobs:
           # Update VERSION file in quickshell/
           echo "${version}" > quickshell/VERSION
 
-          # Update version in core/flake.nix
-          sed -i "s/version = \"[^\"]*\"/version = \"$version_no_v\"/" core/flake.nix
-
-          git add quickshell/VERSION core/flake.nix
+          git add quickshell/VERSION
 
           if ! git diff --cached --quiet; then
             git commit -m "chore: bump version to $version"
