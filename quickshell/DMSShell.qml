@@ -578,6 +578,14 @@ Item {
         }
     }
 
+    Variants {
+        model: SettingsData.getFilteredScreens("osd")
+
+        delegate: PowerProfileOSD {
+            modelData: item
+        }
+    }
+
     LazyLoader {
         id: hyprlandOverviewLoader
         active: CompositorService.isHyprland

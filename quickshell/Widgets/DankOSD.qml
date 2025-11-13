@@ -27,6 +27,7 @@ PanelWindow {
     signal osdHidden
 
     function show() {
+        OSDManager.showOSD(root)
         closeTimer.stop()
         shouldBeVisible = true
         visible = true
