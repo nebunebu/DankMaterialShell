@@ -46,19 +46,19 @@ authentication, and dynamic theming.
 %install
 # Install greeter files to shared data location (from quickshell/ subdirectory)
 install -dm755 %{buildroot}%{_datadir}/quickshell/dms-greeter
-cp -r DankMaterialShell/quickshell/* %{buildroot}%{_datadir}/quickshell/dms-greeter/
+cp -r quickshell/* %{buildroot}%{_datadir}/quickshell/dms-greeter/
 
 # Install launcher script
-install -Dm755 DankMaterialShell/quickshell/Modules/Greetd/assets/dms-greeter %{buildroot}%{_bindir}/dms-greeter
+install -Dm755 quickshell/Modules/Greetd/assets/dms-greeter %{buildroot}%{_bindir}/dms-greeter
 
 # Install documentation
-install -Dm644 DankMaterialShell/quickshell/Modules/Greetd/README.md %{buildroot}%{_docdir}/dms-greeter/README.md
+install -Dm644 quickshell/Modules/Greetd/README.md %{buildroot}%{_docdir}/dms-greeter/README.md
 
 # Create cache directory for greeter data
-install -Dpm0644 DankMaterialShell/quickshell/systemd/tmpfiles-dms-greeter.conf %{buildroot}%{_tmpfilesdir}/dms-greeter.conf
+install -Dpm0644 quickshell/systemd/tmpfiles-dms-greeter.conf %{buildroot}%{_tmpfilesdir}/dms-greeter.conf
 
 # Install LICENSE file
-install -Dm644 DankMaterialShell/LICENSE %{buildroot}%{_docdir}/dms-greeter/LICENSE
+install -Dm644 LICENSE %{buildroot}%{_docdir}/dms-greeter/LICENSE
 
 # Create greeter home directory
 install -dm755 %{buildroot}%{_sharedstatedir}/greeter
