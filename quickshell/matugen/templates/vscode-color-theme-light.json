@@ -30,13 +30,13 @@
     "sideBarSectionHeader.background": "{{colors.background.light.hex}}",
     "sideBarSectionHeader.foreground": "{{colors.on_surface.light.hex}}",
 
-    "list.activeSelectionBackground": "{{colors.background.light.hex}}",
-    "list.activeSelectionForeground": "{{colors.on_surface.light.hex}}",
-    "list.inactiveSelectionBackground": "{{colors.background.light.hex}}",
+    "list.activeSelectionBackground": "{{colors.primary_container.light.hex}}",
+    "list.activeSelectionForeground": "{{colors.on_primary_container.light.hex}}",
+    "list.inactiveSelectionBackground": "{{colors.surface_container.light.hex}}",
     "list.inactiveSelectionForeground": "{{colors.on_surface.light.hex}}",
-    "list.hoverBackground": "{{colors.background.light.hex}}",
+    "list.hoverBackground": "{{colors.surface_container.light.hex}}",
     "list.hoverForeground": "{{colors.on_surface.light.hex}}",
-    "list.focusBackground": "{{colors.background.light.hex}}",
+    "list.focusBackground": "{{colors.surface_container_high.light.hex}}",
     "list.focusForeground": "{{colors.on_surface.light.hex}}",
     "list.highlightForeground": "{{colors.primary.light.hex}}",
 
@@ -78,7 +78,7 @@
 
     "quickInput.background": "{{colors.background.light.hex}}",
     "quickInput.foreground": "{{colors.on_surface.light.hex}}",
-    "quickInputList.focusBackground": "{{colors.background.light.hex}}",
+    "quickInputList.focusBackground": "{{colors.surface_container_high.light.hex}}",
     "quickInputList.focusForeground": "{{colors.on_surface.light.hex}}",
 
     "button.background": "{{colors.primary.light.hex}}",
@@ -112,7 +112,7 @@
     "editorWidget.border": "{{colors.outline.light.hex}}",
     "editorSuggestWidget.background": "{{colors.background.light.hex}}",
     "editorSuggestWidget.border": "{{colors.outline.light.hex}}",
-    "editorSuggestWidget.selectedBackground": "{{colors.background.light.hex}}",
+    "editorSuggestWidget.selectedBackground": "{{colors.surface_container_high.light.hex}}",
     "editorSuggestWidget.highlightForeground": "{{colors.primary.light.hex}}",
 
     "peekView.border": "{{colors.primary.light.hex}}",
@@ -146,10 +146,10 @@
     "merge.currentHeaderBackground": "{{colors.primary.light.hex}}40",
     "merge.incomingHeaderBackground": "{{colors.secondary.light.hex}}40",
 
-    "menubar.selectionBackground": "{{colors.background.light.hex}}",
+    "menubar.selectionBackground": "{{colors.surface_container.light.hex}}",
     "menu.background": "{{colors.background.light.hex}}",
     "menu.foreground": "{{colors.on_surface.light.hex}}",
-    "menu.selectionBackground": "{{colors.background.light.hex}}",
+    "menu.selectionBackground": "{{colors.surface_container_high.light.hex}}",
     "menu.selectionForeground": "{{colors.on_surface.light.hex}}",
 
     "debugToolBar.background": "{{colors.background.light.hex}}",
