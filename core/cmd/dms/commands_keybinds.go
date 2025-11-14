@@ -34,9 +34,7 @@ var keybindsShowCmd = &cobra.Command{
 }
 
 func init() {
-	keybindsShowCmd.Flags().String("hyprland-path", "$HOME/.config/hypr", "Path to Hyprland config directory")
-	keybindsShowCmd.Flags().String("mangowc-path", "$HOME/.config/mango", "Path to MangoWC config directory")
-	keybindsShowCmd.Flags().String("sway-path", "$HOME/.config/sway", "Path to Sway config directory")
+	keybindsShowCmd.Flags().String("path", "", "Override config path for the provider")
 
 	keybindsCmd.AddCommand(keybindsListCmd)
 	keybindsCmd.AddCommand(keybindsShowCmd)
@@ -89,25 +87,34 @@ func runKeybindsList(cmd *cobra.Command, args []string) {
 
 func runKeybindsShow(cmd *cobra.Command, args []string) {
 	providerName := args[0]
-
 	registry := keybinds.GetDefaultRegistry()
 
-	if providerName == "hyprland" {
-		hyprlandPath, _ := cmd.Flags().GetString("hyprland-path")
-		hyprlandProvider := providers.NewHyprlandProvider(hyprlandPath)
-		registry.Register(hyprlandProvider)
-	}
+	customPath, _ := cmd.Flags().GetString("path")
+	if customPath != "" {
+		var provider keybinds.Provider
+		switch providerName {
+		case "hyprland":
+			provider = providers.NewHyprlandProvider(customPath)
+		case "mangowc":
+			provider = providers.NewMangoWCProvider(customPath)
+		case "sway":
+			provider = providers.NewSwayProvider(customPath)
+		default:
+			log.Fatalf("Provider %s does not support custom path", providerName)
+		}
 
-	if providerName == "mangowc" {
-		mangowcPath, _ := cmd.Flags().GetString("mangowc-path")
-		mangowcProvider := providers.NewMangoWCProvider(mangowcPath)
-		registry.Register(mangowcProvider)
-	}
+		sheet, err := provider.GetCheatSheet()
+		if err != nil {
+			log.Fatalf("Error getting cheatsheet: %v", err)
+		}
 
-	if providerName == "sway" {
-		swayPath, _ := cmd.Flags().GetString("sway-path")
-		swayProvider := providers.NewSwayProvider(swayPath)
-		registry.Register(swayProvider)
+		output, err := json.MarshalIndent(sheet, "", "  ")
+		if err != nil {
+			log.Fatalf("Error generating JSON: %v", err)
+		}
+
+		fmt.Fprintln(os.Stdout, string(output))
+		return
 	}
 
 	provider, err := registry.Get(providerName)
