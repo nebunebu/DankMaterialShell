@@ -12,6 +12,7 @@ import (
 func NewManager(display *wlclient.Display) (*Manager, error) {
 	m := &Manager{
 		display:     display,
+		ctx:         display.Context(),
 		heads:       make(map[uint32]*headState),
 		modes:       make(map[uint32]*modeState),
 		cmdq:        make(chan cmd, 128),
@@ -85,7 +86,6 @@ func (m *Manager) waylandActor() {
 
 func (m *Manager) setupRegistry() error {
 	log.Info("WlrOutput: starting registry setup")
-	ctx := m.display.Context()
 
 	registry, err := m.display.GetRegistry()
 	if err != nil {
@@ -96,7 +96,7 @@ func (m *Manager) setupRegistry() error {
 	registry.SetGlobalHandler(func(e wlclient.RegistryGlobalEvent) {
 		if e.Interface == wlr_output_management.ZwlrOutputManagerV1InterfaceName {
 			log.Infof("WlrOutput: found %s", wlr_output_management.ZwlrOutputManagerV1InterfaceName)
-			manager := wlr_output_management.NewZwlrOutputManagerV1(ctx)
+			manager := wlr_output_management.NewZwlrOutputManagerV1(m.ctx)
 			version := e.Version
 			if version > 4 {
 				version = 4

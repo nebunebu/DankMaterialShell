@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/AvengeMedia/DankMaterialShell/core/internal/log"
+	"github.com/fsnotify/fsnotify"
 	evdev "github.com/holoplot/go-evdev"
 )
 
@@ -29,31 +30,57 @@ type EvdevDevice interface {
 }
 
 type Manager struct {
-	device      EvdevDevice
-	state       State
-	stateMutex  sync.RWMutex
-	subscribers map[string]chan State
-	subMutex    sync.RWMutex
-	closeChan   chan struct{}
-	closeOnce   sync.Once
+	devices        []EvdevDevice
+	devicesMutex   sync.RWMutex
+	monitoredPaths map[string]bool
+	state          State
+	stateMutex     sync.RWMutex
+	subscribers    map[string]chan State
+	subMutex       sync.RWMutex
+	closeChan      chan struct{}
+	closeOnce      sync.Once
+	watcher        *fsnotify.Watcher
 }
 
 func NewManager() (*Manager, error) {
-	device, err := findKeyboard()
+	devices, err := findKeyboards()
 	if err != nil {
-		return nil, fmt.Errorf("failed to find keyboard: %w", err)
+		return nil, fmt.Errorf("failed to find keyboards: %w", err)
 	}
 
-	initialCapsLock := readInitialCapsLockState(device)
+	initialCapsLock := readInitialCapsLockState(devices[0])
+
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		log.Warnf("Failed to create fsnotify watcher, hotplug detection disabled: %v", err)
+		watcher = nil
+	} else if err := watcher.Add("/dev/input"); err != nil {
+		log.Warnf("Failed to watch /dev/input, hotplug detection disabled: %v", err)
+		watcher.Close()
+		watcher = nil
+	}
+
+	monitoredPaths := make(map[string]bool)
+	for _, device := range devices {
+		monitoredPaths[device.Path()] = true
+	}
 
 	m := &Manager{
-		device:      device,
-		state:       State{Available: true, CapsLock: initialCapsLock},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        devices,
+		monitoredPaths: monitoredPaths,
+		state:          State{Available: true, CapsLock: initialCapsLock},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
+		watcher:        watcher,
 	}
 
-	go m.monitorCapsLock()
+	for i, device := range devices {
+		go m.monitorDevice(device, i)
+	}
+
+	if watcher != nil {
+		go m.watchForNewKeyboards()
+	}
 
 	return m, nil
 }
@@ -68,7 +95,7 @@ func readInitialCapsLockState(device EvdevDevice) bool {
 	return ledStates[ledCapslockKey]
 }
 
-func findKeyboard() (EvdevDevice, error) {
+func findKeyboards() ([]EvdevDevice, error) {
 	pattern := "/dev/input/event*"
 	matches, err := filepath.Glob(pattern)
 	if err != nil {
@@ -79,22 +106,28 @@ func findKeyboard() (EvdevDevice, error) {
 		return nil, fmt.Errorf("no input devices found")
 	}
 
+	var keyboards []EvdevDevice
 	for _, path := range matches {
 		device, err := evdev.Open(path)
 		if err != nil {
 			continue
 		}
 
-		if isKeyboard(device) {
-			deviceName, _ := device.Name()
-			log.Debugf("Found keyboard: %s at %s", deviceName, path)
-			return device, nil
+		if !isKeyboard(device) {
+			device.Close()
+			continue
 		}
 
-		device.Close()
+		deviceName, _ := device.Name()
+		log.Debugf("Found keyboard: %s at %s", deviceName, path)
+		keyboards = append(keyboards, device)
 	}
 
-	return nil, fmt.Errorf("no keyboard device found")
+	if len(keyboards) == 0 {
+		return nil, fmt.Errorf("no keyboard device found")
+	}
+
+	return keyboards, nil
 }
 
 func isKeyboard(device EvdevDevice) bool {
@@ -117,7 +150,85 @@ func isKeyboard(device EvdevDevice) bool {
 	}
 }
 
-func (m *Manager) monitorCapsLock() {
+func (m *Manager) watchForNewKeyboards() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Errorf("Panic in keyboard hotplug monitor: %v", r)
+		}
+	}()
+
+	for {
+		select {
+		case <-m.closeChan:
+			return
+		case event, ok := <-m.watcher.Events:
+			if !ok {
+				return
+			}
+
+			if !strings.HasPrefix(filepath.Base(event.Name), "event") {
+				continue
+			}
+
+			if event.Op&fsnotify.Create == fsnotify.Create {
+				time.Sleep(100 * time.Millisecond)
+
+				m.devicesMutex.Lock()
+				if m.monitoredPaths[event.Name] {
+					m.devicesMutex.Unlock()
+					continue
+				}
+
+				device, err := evdev.Open(event.Name)
+				if err != nil {
+					m.devicesMutex.Unlock()
+					continue
+				}
+
+				if !isKeyboard(device) {
+					device.Close()
+					m.devicesMutex.Unlock()
+					continue
+				}
+
+				deviceName, _ := device.Name()
+				log.Debugf("Hotplugged keyboard: %s at %s", deviceName, event.Name)
+
+				m.devices = append(m.devices, device)
+				m.monitoredPaths[event.Name] = true
+				deviceIndex := len(m.devices) - 1
+				m.devicesMutex.Unlock()
+
+				go m.monitorDevice(device, deviceIndex)
+			} else if event.Op&fsnotify.Remove == fsnotify.Remove {
+				m.devicesMutex.Lock()
+				if !m.monitoredPaths[event.Name] {
+					m.devicesMutex.Unlock()
+					continue
+				}
+
+				delete(m.monitoredPaths, event.Name)
+				for i, device := range m.devices {
+					if device != nil && device.Path() == event.Name {
+						log.Debugf("Keyboard removed: %s", event.Name)
+						device.Close()
+						m.devices[i] = nil
+						break
+					}
+				}
+				m.devicesMutex.Unlock()
+			}
+
+		case err, ok := <-m.watcher.Errors:
+			if !ok {
+				return
+			}
+			log.Warnf("Keyboard hotplug watcher error: %v", err)
+		}
+	}
+}
+
+func (m *Manager) monitorDevice(device EvdevDevice, deviceIndex int) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Errorf("Panic in evdev monitor: %v", r)
@@ -131,11 +242,12 @@ func (m *Manager) monitorCapsLock() {
 		default:
 		}
 
-		event, err := m.device.ReadOne()
+		event, err := device.ReadOne()
 		if err != nil {
-			if !isClosedError(err) {
-				log.Warnf("Failed to read evdev event: %v", err)
+			if isClosedError(err) {
+				return
 			}
+			log.Warnf("Failed to read evdev event: %v", err)
 			time.Sleep(100 * time.Millisecond)
 			continue
 		}
@@ -145,7 +257,11 @@ func (m *Manager) monitorCapsLock() {
 		}
 
 		if event.Type == evKeyType && event.Code == keyCapslockKey && event.Value == keyStateOn {
-			m.toggleCapsLock()
+			time.Sleep(50 * time.Millisecond)
+			m.readAndUpdateCapsLockState(deviceIndex)
+		} else if event.Type == evLedType && event.Code == ledCapslockKey {
+			capsLockState := event.Value == keyStateOn
+			m.updateCapsLockStateDirect(capsLockState)
 		}
 	}
 }
@@ -166,13 +282,37 @@ func isClosedError(err error) bool {
 	}
 }
 
-func (m *Manager) toggleCapsLock() {
+func (m *Manager) readAndUpdateCapsLockState(deviceIndex int) {
+	m.devicesMutex.RLock()
+	if deviceIndex >= len(m.devices) {
+		m.devicesMutex.RUnlock()
+		return
+	}
+	device := m.devices[deviceIndex]
+	m.devicesMutex.RUnlock()
+
+	ledStates, err := device.State(evLedType)
+	if err != nil {
+		log.Warnf("Failed to read LED state: %v", err)
+		return
+	}
+
+	capsLockState := ledStates[ledCapslockKey]
+	m.updateCapsLockStateDirect(capsLockState)
+}
+
+func (m *Manager) updateCapsLockStateDirect(capsLockState bool) {
 	m.stateMutex.Lock()
-	m.state.CapsLock = !m.state.CapsLock
+	if m.state.CapsLock == capsLockState {
+		m.stateMutex.Unlock()
+		return
+	}
+
+	m.state.CapsLock = capsLockState
 	newState := m.state
 	m.stateMutex.Unlock()
 
-	log.Debugf("Caps lock toggled: %v", newState.CapsLock)
+	log.Debugf("Caps lock state: %v", newState.CapsLock)
 	m.notifySubscribers(newState)
 }
 
@@ -195,10 +335,13 @@ func (m *Manager) Unsubscribe(id string) {
 	m.subMutex.Lock()
 	defer m.subMutex.Unlock()
 
-	if ch, ok := m.subscribers[id]; ok {
-		close(ch)
-		delete(m.subscribers, id)
+	ch, ok := m.subscribers[id]
+	if !ok {
+		return
 	}
+
+	close(ch)
+	delete(m.subscribers, id)
 }
 
 func (m *Manager) notifySubscribers(state State) {
@@ -217,11 +360,20 @@ func (m *Manager) Close() {
 	m.closeOnce.Do(func() {
 		close(m.closeChan)
 
-		if m.device != nil {
-			if err := m.device.Close(); err != nil && !isClosedError(err) {
+		if m.watcher != nil {
+			m.watcher.Close()
+		}
+
+		m.devicesMutex.Lock()
+		for _, device := range m.devices {
+			if device == nil {
+				continue
+			}
+			if err := device.Close(); err != nil && !isClosedError(err) {
 				log.Warnf("Error closing evdev device: %v", err)
 			}
 		}
+		m.devicesMutex.Unlock()
 
 		m.subMutex.Lock()
 		for id, ch := range m.subscribers {

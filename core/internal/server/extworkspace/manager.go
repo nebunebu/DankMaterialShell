@@ -12,6 +12,7 @@ import (
 func NewManager(display *wlclient.Display) (*Manager, error) {
 	m := &Manager{
 		display:     display,
+		ctx:         display.Context(),
 		outputs:     make(map[uint32]*wlclient.Output),
 		outputNames: make(map[uint32]string),
 		groups:      make(map[uint32]*workspaceGroupState),
@@ -62,7 +63,6 @@ func (m *Manager) waylandActor() {
 
 func (m *Manager) setupRegistry() error {
 	log.Info("ExtWorkspace: starting registry setup")
-	ctx := m.display.Context()
 
 	registry, err := m.display.GetRegistry()
 	if err != nil {
@@ -72,7 +72,7 @@ func (m *Manager) setupRegistry() error {
 
 	registry.SetGlobalHandler(func(e wlclient.RegistryGlobalEvent) {
 		if e.Interface == "wl_output" {
-			output := wlclient.NewOutput(ctx)
+			output := wlclient.NewOutput(m.ctx)
 			if err := registry.Bind(e.Name, e.Interface, 4, output); err == nil {
 				outputID := output.ID()
 
@@ -88,7 +88,7 @@ func (m *Manager) setupRegistry() error {
 
 		if e.Interface == ext_workspace.ExtWorkspaceManagerV1InterfaceName {
 			log.Infof("ExtWorkspace: found %s", ext_workspace.ExtWorkspaceManagerV1InterfaceName)
-			manager := ext_workspace.NewExtWorkspaceManagerV1(ctx)
+			manager := ext_workspace.NewExtWorkspaceManagerV1(m.ctx)
 			version := e.Version
 			if version > 1 {
 				version = 1

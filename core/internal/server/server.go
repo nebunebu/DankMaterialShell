@@ -1259,6 +1259,12 @@ func Start(printDocs bool) error {
 			fatalErrChan <- fmt.Errorf("WlrOutput fatal error: %w", err)
 		}()
 	}
+	if wlContext != nil {
+		go func() {
+			err := <-wlContext.FatalError()
+			fatalErrChan <- fmt.Errorf("Wayland context fatal error: %w", err)
+		}()
+	}
 
 	go func() {
 		if err := InitializeBrightnessManager(); err != nil {

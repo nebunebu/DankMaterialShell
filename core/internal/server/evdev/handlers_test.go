@@ -47,7 +47,7 @@ func TestHandleRequest(t *testing.T) {
 		mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 		m := &Manager{
-			device:      mockDevice,
+			devices:     []EvdevDevice{mockDevice},
 			state:       State{Available: true, CapsLock: true},
 			subscribers: make(map[string]chan State),
 			closeChan:   make(chan struct{}),
@@ -77,7 +77,7 @@ func TestHandleRequest(t *testing.T) {
 		mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 		m := &Manager{
-			device:      mockDevice,
+			devices:     []EvdevDevice{mockDevice},
 			state:       State{Available: true, CapsLock: false},
 			subscribers: make(map[string]chan State),
 			closeChan:   make(chan struct{}),
@@ -107,7 +107,7 @@ func TestHandleGetState(t *testing.T) {
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
+		devices:     []EvdevDevice{mockDevice},
 		state:       State{Available: true, CapsLock: false},
 		subscribers: make(map[string]chan State),
 		closeChan:   make(chan struct{}),

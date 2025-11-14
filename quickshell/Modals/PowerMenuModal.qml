@@ -193,12 +193,9 @@ DankModal {
             let targetX = parentBounds.x + (parentBounds.width - width) / 2
             let targetY = parentBounds.y + (parentBounds.height - height) / 2
 
-            const minX = margin
-            const maxX = screenW - width - margin
             const minY = SettingsData.dankBarPosition === SettingsData.Position.Top ? barExclusionZone + margin : margin
             const maxY = SettingsData.dankBarPosition === SettingsData.Position.Bottom ? screenH - height - barExclusionZone - margin : screenH - height - margin
 
-            targetX = Math.max(minX, Math.min(maxX, targetX))
             targetY = Math.max(minY, Math.min(maxY, targetY))
 
             return Qt.point(targetX, targetY)

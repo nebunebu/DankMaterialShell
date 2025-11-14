@@ -25,6 +25,7 @@ func NewManager(display *wlclient.Display, config Config) (*Manager, error) {
 	m := &Manager{
 		config:         config,
 		display:        display,
+		ctx:            display.Context(),
 		outputs:        make(map[uint32]*outputState),
 		cmdq:           make(chan cmd, 128),
 		stopChan:       make(chan struct{}),
@@ -148,7 +149,6 @@ func (m *Manager) setupDBusMonitor() error {
 
 func (m *Manager) setupRegistry() error {
 	log.Info("setupRegistry: starting registry setup")
-	ctx := m.display.Context()
 
 	registry, err := m.display.GetRegistry()
 	if err != nil {
@@ -165,7 +165,7 @@ func (m *Manager) setupRegistry() error {
 		switch e.Interface {
 		case wlr_gamma_control.ZwlrGammaControlManagerV1InterfaceName:
 			log.Infof("setupRegistry: found %s", wlr_gamma_control.ZwlrGammaControlManagerV1InterfaceName)
-			manager := wlr_gamma_control.NewZwlrGammaControlManagerV1(ctx)
+			manager := wlr_gamma_control.NewZwlrGammaControlManagerV1(m.ctx)
 			version := e.Version
 			if version > 1 {
 				version = 1
@@ -178,7 +178,7 @@ func (m *Manager) setupRegistry() error {
 			}
 		case "wl_output":
 			log.Debugf("Global event: found wl_output (name=%d)", e.Name)
-			output := wlclient.NewOutput(ctx)
+			output := wlclient.NewOutput(m.ctx)
 			version := e.Version
 			if version > 4 {
 				version = 4

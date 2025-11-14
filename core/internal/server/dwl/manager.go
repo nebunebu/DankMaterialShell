@@ -13,6 +13,7 @@ import (
 func NewManager(display *wlclient.Display) (*Manager, error) {
 	m := &Manager{
 		display:        display,
+		ctx:            display.Context(),
 		outputs:        make(map[uint32]*outputState),
 		cmdq:           make(chan cmd, 128),
 		outputSetupReq: make(chan uint32, 16),
@@ -86,7 +87,6 @@ func (m *Manager) waylandActor() {
 
 func (m *Manager) setupRegistry() error {
 	log.Info("DWL: starting registry setup")
-	ctx := m.display.Context()
 
 	registry, err := m.display.GetRegistry()
 	if err != nil {
@@ -102,7 +102,7 @@ func (m *Manager) setupRegistry() error {
 		switch e.Interface {
 		case dwl_ipc.ZdwlIpcManagerV2InterfaceName:
 			log.Infof("DWL: found %s", dwl_ipc.ZdwlIpcManagerV2InterfaceName)
-			manager := dwl_ipc.NewZdwlIpcManagerV2(ctx)
+			manager := dwl_ipc.NewZdwlIpcManagerV2(m.ctx)
 			version := e.Version
 			if version > 1 {
 				version = 1
@@ -128,7 +128,7 @@ func (m *Manager) setupRegistry() error {
 			}
 		case "wl_output":
 			log.Debugf("DWL: found wl_output (name=%d)", e.Name)
-			output := wlclient.NewOutput(ctx)
+			output := wlclient.NewOutput(m.ctx)
 
 			outState := &outputState{
 				registryName: e.Name,

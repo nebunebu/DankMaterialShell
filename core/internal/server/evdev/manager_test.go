@@ -16,7 +16,7 @@ func TestManager_Creation(t *testing.T) {
 		mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 		m := &Manager{
-			device:      mockDevice,
+			devices:     []EvdevDevice{mockDevice},
 			state:       State{Available: true, CapsLock: false},
 			subscribers: make(map[string]chan State),
 			closeChan:   make(chan struct{}),
@@ -32,7 +32,7 @@ func TestManager_Creation(t *testing.T) {
 		mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 		m := &Manager{
-			device:      mockDevice,
+			devices:     []EvdevDevice{mockDevice},
 			state:       State{Available: true, CapsLock: true},
 			subscribers: make(map[string]chan State),
 			closeChan:   make(chan struct{}),
@@ -49,10 +49,11 @@ func TestManager_GetState(t *testing.T) {
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	state := m.GetState()
@@ -65,10 +66,11 @@ func TestManager_Subscribe(t *testing.T) {
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	ch := m.Subscribe("test-client")
@@ -81,10 +83,11 @@ func TestManager_Unsubscribe(t *testing.T) {
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	ch := m.Subscribe("test-client")
@@ -101,28 +104,35 @@ func TestManager_Unsubscribe(t *testing.T) {
 	}
 }
 
-func TestManager_ToggleCapsLock(t *testing.T) {
+func TestManager_UpdateCapsLock(t *testing.T) {
 	mockDevice := mocks.NewMockEvdevDevice(t)
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	ch := m.Subscribe("test-client")
 
+	ledStateOn := evdev.StateMap{ledCapslockKey: true}
+	mockDevice.EXPECT().State(evdev.EvType(evLedType)).Return(ledStateOn, nil).Once()
+
 	go func() {
-		m.toggleCapsLock()
+		m.readAndUpdateCapsLockState(0)
 	}()
 
 	newState := <-ch
 	assert.True(t, newState.CapsLock)
 
+	ledStateOff := evdev.StateMap{ledCapslockKey: false}
+	mockDevice.EXPECT().State(evdev.EvType(evLedType)).Return(ledStateOff, nil).Once()
+
 	go func() {
-		m.toggleCapsLock()
+		m.readAndUpdateCapsLockState(0)
 	}()
 
 	newState = <-ch
@@ -135,10 +145,11 @@ func TestManager_Close(t *testing.T) {
 	mockDevice.EXPECT().ReadOne().Return(nil, errors.New("test")).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	ch1 := m.Subscribe("client1")
@@ -197,8 +208,8 @@ func TestIsKeyboard_ErrorHandling(t *testing.T) {
 	assert.False(t, result)
 }
 
-func TestManager_MonitorCapsLock(t *testing.T) {
-	t.Run("caps lock key press toggles state", func(t *testing.T) {
+func TestManager_MonitorDevice(t *testing.T) {
+	t.Run("caps lock key press updates state", func(t *testing.T) {
 		mockDevice := mocks.NewMockEvdevDevice(t)
 
 		capsLockEvent := &evdev.InputEvent{
@@ -207,12 +218,15 @@ func TestManager_MonitorCapsLock(t *testing.T) {
 			Value: keyStateOn,
 		}
 
+		ledState := evdev.StateMap{ledCapslockKey: true}
+
 		mockDevice.EXPECT().ReadOne().Return(capsLockEvent, nil).Once()
+		mockDevice.EXPECT().State(evdev.EvType(evLedType)).Return(ledState, nil).Once()
 		mockDevice.EXPECT().ReadOne().Return(nil, errors.New("stop")).Maybe()
 		mockDevice.EXPECT().Close().Return(nil).Maybe()
 
 		m := &Manager{
-			device:      mockDevice,
+			devices:     []EvdevDevice{mockDevice},
 			state:       State{Available: true, CapsLock: false},
 			subscribers: make(map[string]chan State),
 			closeChan:   make(chan struct{}),
@@ -220,7 +234,7 @@ func TestManager_MonitorCapsLock(t *testing.T) {
 
 		ch := m.Subscribe("test")
 
-		go m.monitorCapsLock()
+		go m.monitorDevice(mockDevice, 0)
 
 		state := <-ch
 		assert.True(t, state.CapsLock)
@@ -255,10 +269,11 @@ func TestNotifySubscribers(t *testing.T) {
 	mockDevice.EXPECT().Close().Return(nil).Maybe()
 
 	m := &Manager{
-		device:      mockDevice,
-		state:       State{Available: true, CapsLock: false},
-		subscribers: make(map[string]chan State),
-		closeChan:   make(chan struct{}),
+		devices:        []EvdevDevice{mockDevice},
+		monitoredPaths: make(map[string]bool),
+		state:          State{Available: true, CapsLock: false},
+		subscribers:    make(map[string]chan State),
+		closeChan:      make(chan struct{}),
 	}
 
 	ch1 := m.Subscribe("client1")

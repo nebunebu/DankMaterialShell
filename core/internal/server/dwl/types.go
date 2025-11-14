@@ -36,6 +36,7 @@ type cmd struct {
 
 type Manager struct {
 	display  *wlclient.Display
+	ctx      *wlclient.Context
 	registry *wlclient.Registry
 	manager  interface{}
 

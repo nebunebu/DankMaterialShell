@@ -44,6 +44,7 @@ type Manager struct {
 	stateMutex  sync.RWMutex
 
 	display             *wlclient.Display
+	ctx                 *wlclient.Context
 	registry            *wlclient.Registry
 	gammaControl        interface{}
 	availableOutputs    []*wlclient.Output

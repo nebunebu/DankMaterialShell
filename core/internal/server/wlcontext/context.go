@@ -10,11 +10,12 @@ import (
 )
 
 type SharedContext struct {
-	display  *wlclient.Display
-	stopChan chan struct{}
-	wg       sync.WaitGroup
-	mu       sync.Mutex
-	started  bool
+	display    *wlclient.Display
+	stopChan   chan struct{}
+	fatalError chan error
+	wg         sync.WaitGroup
+	mu         sync.Mutex
+	started    bool
 }
 
 func New() (*SharedContext, error) {
@@ -24,9 +25,10 @@ func New() (*SharedContext, error) {
 	}
 
 	sc := &SharedContext{
-		display:  display,
-		stopChan: make(chan struct{}),
-		started:  false,
+		display:    display,
+		stopChan:   make(chan struct{}),
+		fatalError: make(chan error, 1),
+		started:    false,
 	}
 
 	return sc, nil
@@ -49,8 +51,22 @@ func (sc *SharedContext) Display() *wlclient.Display {
 	return sc.display
 }
 
+func (sc *SharedContext) FatalError() <-chan error {
+	return sc.fatalError
+}
+
 func (sc *SharedContext) eventDispatcher() {
 	defer sc.wg.Done()
+	defer func() {
+		if r := recover(); r != nil {
+			err := fmt.Errorf("FATAL: Wayland event dispatcher panic: %v", r)
+			log.Error(err)
+			select {
+			case sc.fatalError <- err:
+			default:
+			}
+		}
+	}()
 	ctx := sc.display.Context()
 
 	for {
