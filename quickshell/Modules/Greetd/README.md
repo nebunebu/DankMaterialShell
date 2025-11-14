@@ -6,7 +6,7 @@ A greeter for [greetd](https://github.com/kennylevinsen/greetd) that follows the
 
 - **Multi user**: Login with any system user
 - **dms sync**: Sync settings with dms for consistent styling between shell and greeter
-- **niri or Hyprland**: Use either niri or Hyprland for the greeter's compositor.
+- **Multiple compositors**: Supports niri, Hyprland, Sway, or mangowc.
 - **Custom PAM**: Supports custom PAM configuration in `/etc/pam.d/dankshell`
 - **Session Memory**: Remembers last selected session and user
 
@@ -152,7 +152,7 @@ vt = 1
 
 [default_session]
 user = "greeter"
-# Change compositor to sway or hyprland if preferred
+# Change compositor to sway, hyprland, or mangowc if preferred
 command = "/usr/local/bin/dms-greeter --command niri"
 ```
 
@@ -200,6 +200,7 @@ The `dms-greeter` wrapper simplifies running the greeter with any compositor:
 dms-greeter --command niri
 dms-greeter --command hyprland
 dms-greeter --command sway
+dms-greeter --command mangowc
 dms-greeter --command niri -C /path/to/custom-niri.kdl
 ```
 
