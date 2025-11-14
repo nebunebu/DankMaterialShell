@@ -326,6 +326,25 @@ Item {
             return `KEYBINDS_TOGGLE_FAILED: ${provider}`
         }
 
+        function toggleWithPath(provider: string, path: string): string {
+            if (!provider) {
+                return "ERROR: No provider specified"
+            }
+
+            KeybindsService.loadProviderWithPath(provider, path)
+            root.hyprKeybindsModalLoader.active = true
+
+            if (root.hyprKeybindsModalLoader.item) {
+                if (root.hyprKeybindsModalLoader.item.shouldBeVisible) {
+                    root.hyprKeybindsModalLoader.item.close()
+                } else {
+                    root.hyprKeybindsModalLoader.item.open()
+                }
+                return `KEYBINDS_TOGGLE_SUCCESS: ${provider} (${path})`
+            }
+            return `KEYBINDS_TOGGLE_FAILED: ${provider}`
+        }
+
         function open(provider: string): string {
             if (!provider) {
                 return "ERROR: No provider specified"
@@ -337,6 +356,21 @@ Item {
             if (root.hyprKeybindsModalLoader.item) {
                 root.hyprKeybindsModalLoader.item.open()
                 return `KEYBINDS_OPEN_SUCCESS: ${provider}`
+            }
+            return `KEYBINDS_OPEN_FAILED: ${provider}`
+        }
+
+        function openWithPath(provider: string, path: string): string {
+            if (!provider) {
+                return "ERROR: No provider specified"
+            }
+
+            KeybindsService.loadProviderWithPath(provider, path)
+            root.hyprKeybindsModalLoader.active = true
+
+            if (root.hyprKeybindsModalLoader.item) {
+                root.hyprKeybindsModalLoader.item.open()
+                return `KEYBINDS_OPEN_SUCCESS: ${provider} (${path})`
             }
             return `KEYBINDS_OPEN_FAILED: ${provider}`
         }

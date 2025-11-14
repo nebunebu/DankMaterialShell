@@ -16,7 +16,15 @@ Singleton {
     Process {
         id: getKeybinds
         running: false
-        command: ["dms", "keybinds", "show", root.currentProvider]
+        command: {
+            let baseCmd = ["dms", "keybinds", "show"]
+            if (root.overridePath) {
+                baseCmd.push("--path")
+                baseCmd.push(root.overridePath)
+            }
+            baseCmd.push(root.currentProvider)
+            return baseCmd
+        }
 
         stdout: StdioCollector {
             onStreamFinished: {
@@ -44,8 +52,16 @@ Singleton {
         }
     }
 
+    property string overridePath: ""
+
     function loadProvider(provider) {
         root.currentProvider = provider
+        reload()
+    }
+
+    function loadProviderWithPath(provider, path) {
+        root.currentProvider = provider
+        root.overridePath = path
         reload()
     }
 
