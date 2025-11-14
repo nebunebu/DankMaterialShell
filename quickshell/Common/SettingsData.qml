@@ -228,6 +228,10 @@ Singleton {
     property bool loginctlLockIntegration: true
     property string launchPrefix: ""
     property var brightnessDevicePins: ({})
+    property var wifiNetworkPins: ({})
+    property var bluetoothDevicePins: ({})
+    property var audioInputDevicePins: ({})
+    property var audioOutputDevicePins: ({})
 
     property bool gtkThemingEnabled: false
     property bool qtThemingEnabled: false

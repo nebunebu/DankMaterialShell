@@ -145,6 +145,10 @@ var SPEC = {
     loginctlLockIntegration: { def: true },
     launchPrefix: { def: "" },
     brightnessDevicePins: { def: {} },
+    wifiNetworkPins: { def: {} },
+    bluetoothDevicePins: { def: {} },
+    audioInputDevicePins: { def: {} },
+    audioOutputDevicePins: { def: {} },
 
     gtkThemingEnabled: { def: false, onChange: "regenSystemThemes" },
     qtThemingEnabled: { def: false, onChange: "regenSystemThemes" },
