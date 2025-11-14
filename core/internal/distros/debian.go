@@ -209,7 +209,7 @@ func (d *DebianDistribution) InstallPrerequisites(ctx context.Context, sudoPassw
 	}
 
 	devToolsCmd := ExecSudoCommand(ctx, sudoPassword,
-		"apt-get install -y curl wget git cmake ninja-build pkg-config libxcb-cursor-dev libglib2.0-dev libpolkit-agent-1-dev libjpeg-dev")
+		"apt-get install -y curl wget git cmake ninja-build pkg-config libxcb-cursor-dev libglib2.0-dev libpolkit-agent-1-dev libjpeg-dev libpugixml-dev")
 	if err := d.runWithProgress(devToolsCmd, progressChan, PhasePrerequisites, 0.10, 0.12); err != nil {
 		return fmt.Errorf("failed to install development tools: %w", err)
 	}

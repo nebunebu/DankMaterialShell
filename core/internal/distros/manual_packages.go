@@ -502,6 +502,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 		"--no-warn-unused-cli",
 		"-DCMAKE_BUILD_TYPE:STRING=Release",
 		"-DCMAKE_INSTALL_PREFIX:PATH=/usr",
+		"-DBUILD_TESTING=off",
 		"-S", ".",
 		"-B", "./build")
 	configureUtilsCmd.Dir = hyprutilsDir
