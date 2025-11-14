@@ -486,7 +486,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 
 	progressChan <- InstallProgressMsg{
 		Phase:       PhaseSystemPackages,
-		Progress:    0.2,
+		Progress:    0.1,
 		Step:        "Cloning hyprpicker repository...",
 		IsComplete:  false,
 		CommandInfo: "git clone https://github.com/hyprwm/hyprpicker.git",
@@ -499,16 +499,39 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 
 	progressChan <- InstallProgressMsg{
 		Phase:       PhaseSystemPackages,
+		Progress:    0.3,
+		Step:        "Configuring hyprpicker build...",
+		IsComplete:  false,
+		CommandInfo: "cmake -B build -S . -DCMAKE_BUILD_TYPE=Release",
+	}
+
+	configureCmd := exec.CommandContext(ctx, "cmake",
+		"--no-warn-unused-cli",
+		"-DCMAKE_BUILD_TYPE:STRING=Release",
+		"-DCMAKE_INSTALL_PREFIX:PATH=/usr",
+		"-S", ".",
+		"-B", "./build")
+	configureCmd.Dir = tmpDir
+	configureCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
+
+	output, err := configureCmd.CombinedOutput()
+	if err != nil {
+		m.log(fmt.Sprintf("cmake configure failed. Output:\n%s", string(output)))
+		return fmt.Errorf("failed to configure hyprpicker: %w\nCMake output:\n%s", err, string(output))
+	}
+
+	progressChan <- InstallProgressMsg{
+		Phase:       PhaseSystemPackages,
 		Progress:    0.4,
 		Step:        "Building hyprpicker...",
 		IsComplete:  false,
-		CommandInfo: "make all",
+		CommandInfo: "cmake --build build --target hyprpicker",
 	}
 
-	buildCmd := exec.CommandContext(ctx, "make", "all")
+	buildCmd := exec.CommandContext(ctx, "cmake", "--build", "./build", "--config", "Release", "--target", "hyprpicker")
 	buildCmd.Dir = tmpDir
 	buildCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
-	if err := buildCmd.Run(); err != nil {
+	if err := m.runWithProgressStep(buildCmd, progressChan, PhaseSystemPackages, 0.4, 0.8, "Building hyprpicker..."); err != nil {
 		return fmt.Errorf("failed to build hyprpicker: %w", err)
 	}
 
@@ -518,10 +541,10 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 		Step:        "Installing hyprpicker...",
 		IsComplete:  false,
 		NeedsSudo:   true,
-		CommandInfo: "sudo make install",
+		CommandInfo: "sudo cmake --install build",
 	}
 
-	installCmd := ExecSudoCommand(ctx, sudoPassword, "make install")
+	installCmd := ExecSudoCommand(ctx, sudoPassword, "cmake --install ./build")
 	installCmd.Dir = tmpDir
 	if err := installCmd.Run(); err != nil {
 		return fmt.Errorf("failed to install hyprpicker: %w", err)
