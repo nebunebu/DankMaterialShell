@@ -240,8 +240,8 @@ func SetupParentDirectoryACLs(logFunc func(string), sudoPassword string) error {
 			}
 		}
 
-		// Set ACL to allow greeter user execute (traverse) permission
-		if err := runSudoCmd(sudoPassword, "setfacl", "-m", "u:greeter:x", dir.path); err != nil {
+		// Set ACL to allow greeter user read+execute permission (for session discovery)
+		if err := runSudoCmd(sudoPassword, "setfacl", "-m", "u:greeter:rx", dir.path); err != nil {
 			logFunc(fmt.Sprintf("⚠ Warning: Failed to set ACL on %s: %v", dir.desc, err))
 			logFunc(fmt.Sprintf("  You may need to run manually: setfacl -m u:greeter:x %s", dir.path))
 			continue
