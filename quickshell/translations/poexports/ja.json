@@ -302,6 +302,9 @@
   "Capacity": {
     "Capacity": "容量"
   },
+  "Caps Lock Indicator": {
+    "Caps Lock Indicator": ""
+  },
   "Center Section": {
     "Center Section": "センターセクション"
   },
@@ -1780,6 +1783,9 @@
   },
   "Shows current workspace and allows switching": {
     "Shows current workspace and allows switching": "現在のワークスペースを表示、切り替えを可能に"
+  },
+  "Shows when caps lock is active": {
+    "Shows when caps lock is active": ""
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "マイク、カメラ、または画面共有がアクティブなときに表示"

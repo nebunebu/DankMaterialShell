@@ -302,6 +302,9 @@
   "Capacity": {
     "Capacity": "Pojemność"
   },
+  "Caps Lock Indicator": {
+    "Caps Lock Indicator": ""
+  },
   "Center Section": {
     "Center Section": "Sekcja środkowa"
   },
@@ -1780,6 +1783,9 @@
   },
   "Shows current workspace and allows switching": {
     "Shows current workspace and allows switching": "Pokazuje bieżący obszar roboczy i pozwala na przełączanie"
+  },
+  "Shows when caps lock is active": {
+    "Shows when caps lock is active": ""
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "Pokazuje, gdy mikrofon, kamera lub udostępnianie ekranu są aktywne"

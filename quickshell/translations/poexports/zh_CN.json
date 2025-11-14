@@ -302,6 +302,9 @@
   "Capacity": {
     "Capacity": "电池容量"
   },
+  "Caps Lock Indicator": {
+    "Caps Lock Indicator": ""
+  },
   "Center Section": {
     "Center Section": "中间区域"
   },
@@ -1780,6 +1783,9 @@
   },
   "Shows current workspace and allows switching": {
     "Shows current workspace and allows switching": "显示当前工作区并支持快速切换"
+  },
+  "Shows when caps lock is active": {
+    "Shows when caps lock is active": ""
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "显示麦克风、摄像头或屏幕共享的使用状态"

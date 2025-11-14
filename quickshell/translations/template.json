@@ -707,6 +707,13 @@
     "comment": ""
   },
   {
+    "term": "Caps Lock Indicator",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Center Section",
     "translation": "",
     "context": "",
@@ -4145,6 +4152,13 @@
   },
   {
     "term": "Shows current workspace and allows switching",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Shows when caps lock is active",
     "translation": "",
     "context": "",
     "reference": "",

@@ -34,9 +34,11 @@ Item {
         })
     }
     readonly property var mainBarItems: allTrayItems.filter(item => !SessionData.isHiddenTrayId(item?.id || ""))
+    readonly property var hiddenBarItems: allTrayItems.filter(item => SessionData.isHiddenTrayId(item?.id || ""))
+    readonly property bool hasHiddenItems: allTrayItems.length > mainBarItems.length
     readonly property int calculatedSize: {
         if (allTrayItems.length === 0) return 0
-        const itemCount = mainBarItems.length + 1
+        const itemCount = mainBarItems.length + (hasHiddenItems ? 1 : 0)
         return itemCount * 24 + horizontalPadding * 2
     }
     readonly property real visualWidth: isVertical ? widgetThickness : calculatedSize
@@ -179,6 +181,7 @@ Item {
             Item {
                 width: 24
                 height: root.barThickness
+                visible: root.hasHiddenItems
 
                 Rectangle {
                     id: caretButton
@@ -311,6 +314,7 @@ Item {
             Item {
                 width: root.barThickness
                 height: 24
+                visible: root.hasHiddenItems
 
                 Rectangle {
                     id: caretButtonVert
@@ -418,14 +422,14 @@ Item {
             id: menuContainer
 
             readonly property real rawWidth: {
-                const itemCount = root.allTrayItems.length
+                const itemCount = root.hiddenBarItems.length
                 const cols = Math.min(5, itemCount)
                 const itemSize = 28
                 const spacing = 2
                 return cols * itemSize + (cols - 1) * spacing + Theme.spacingS * 2
             }
             readonly property real rawHeight: {
-                const itemCount = root.allTrayItems.length
+                const itemCount = root.hiddenBarItems.length
                 const cols = Math.min(5, itemCount)
                 const rows = Math.ceil(itemCount / cols)
                 const itemSize = 28
@@ -532,12 +536,12 @@ Item {
             Grid {
                 id: menuGrid
                 anchors.centerIn: parent
-                columns: Math.min(5, root.allTrayItems.length)
+                columns: Math.min(5, root.hiddenBarItems.length)
                 spacing: 2
                 rowSpacing: 2
 
                 Repeater {
-                    model: root.allTrayItems
+                    model: root.hiddenBarItems
 
                     delegate: Rectangle {
                         property var trayItem: modelData
@@ -913,53 +917,28 @@ Item {
                         Rectangle {
                             visible: entryStack.count === 0
                             width: parent.width
-                            height: 24
-                            color: "transparent"
-
-                            StyledText {
-                                anchors.centerIn: parent
-                                text: menuRoot.trayItem?.id || "Unknown"
-                                font.pixelSize: Theme.fontSizeSmall
-                                color: Theme.surfaceTextMedium
-                                elide: Text.ElideMiddle
-                                width: parent.width - Theme.spacingS * 2
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                        }
-
-                        Rectangle {
-                            visible: entryStack.count === 0
-                            width: parent.width
-                            height: 1
-                            color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.2)
-                        }
-
-                        Rectangle {
-                            visible: entryStack.count === 0
-                            width: parent.width
                             height: 28
                             radius: 0
                             color: visibilityToggleArea.containsMouse ? Theme.primaryHover : Theme.withAlpha(Theme.surfaceContainer, 0)
 
-                            Row {
+                            StyledText {
                                 anchors.left: parent.left
                                 anchors.leftMargin: Theme.spacingS
                                 anchors.verticalCenter: parent.verticalCenter
-                                spacing: Theme.spacingXS
+                                text: menuRoot.trayItem?.id || "Unknown"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceTextMedium
+                                elide: Text.ElideMiddle
+                                width: parent.width - Theme.spacingS * 2 - 24
+                            }
 
-                                DankIcon {
-                                    name: SessionData.isHiddenTrayId(menuRoot.trayItem?.id || "") ? "visibility" : "visibility_off"
-                                    size: 16
-                                    color: Theme.surfaceText
-                                    anchors.verticalCenter: parent.verticalCenter
-                                }
-
-                                StyledText {
-                                    text: SessionData.isHiddenTrayId(menuRoot.trayItem?.id || "") ? "Show in Tray" : "Hide from Tray"
-                                    font.pixelSize: Theme.fontSizeSmall
-                                    color: Theme.surfaceText
-                                    anchors.verticalCenter: parent.verticalCenter
-                                }
+                            DankIcon {
+                                anchors.right: parent.right
+                                anchors.rightMargin: Theme.spacingS
+                                anchors.verticalCenter: parent.verticalCenter
+                                name: SessionData.isHiddenTrayId(menuRoot.trayItem?.id || "") ? "visibility" : "visibility_off"
+                                size: 16
+                                color: Theme.surfaceText
                             }
 
                             MouseArea {
