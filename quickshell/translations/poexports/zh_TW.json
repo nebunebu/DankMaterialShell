@@ -623,6 +623,9 @@
   "Display currently focused application title": {
     "Display currently focused application title": "顯示目前焦點應用程式的標題"
   },
+  "Display power menu actions in a grid instead of a list": {
+    "Display power menu actions in a grid instead of a list": ""
+  },
   "Display settings for ": {
     "Display settings for ": "顯示設定適用於"
   },
@@ -2029,6 +2032,9 @@
   },
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "使用華氏度代替攝氏度來表示溫度"
+  },
+  "Use Grid Layout": {
+    "Use Grid Layout": ""
   },
   "Use IP Location": {
     "Use IP Location": "使用 IP 位置"

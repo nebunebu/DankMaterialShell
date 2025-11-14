@@ -117,6 +117,20 @@ Singleton {
         }
     }
 
+    Process {
+        id: writeAlttabProcess
+        property string alttabContent: ""
+        property string alttabPath: ""
+
+        onExited: exitCode => {
+            if (exitCode === 0) {
+                console.info("NiriService: Generated alttab config at", alttabPath)
+                return
+            }
+            console.warn("NiriService: Failed to write alttab config, exit code:", exitCode)
+        }
+    }
+
     DankSocket {
         id: eventStreamSocket
         path: root.socketPath
@@ -936,14 +950,27 @@ window-rule {
     draw-border-with-background false
 }`
 
+        const alttabContent = `recent-windows {
+    highlight {
+        corner-radius ${cornerRadius}
+    }
+}`
+
         const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
         const niriDmsDir = configDir + "/niri/dms"
         const configPath = niriDmsDir + "/layout.kdl"
+        const alttabPath = niriDmsDir + "/alttab.kdl"
 
         writeConfigProcess.configContent = configContent
         writeConfigProcess.configPath = configPath
         writeConfigProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cat > "${configPath}" << 'EOF'\n${configContent}\nEOF`]
         writeConfigProcess.running = true
+
+        writeAlttabProcess.alttabContent = alttabContent
+        writeAlttabProcess.alttabPath = alttabPath
+        writeAlttabProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cat > "${alttabPath}" << 'EOF'\n${alttabContent}\nEOF`]
+        writeAlttabProcess.running = true
+
         configGenerationPending = false
     }
 

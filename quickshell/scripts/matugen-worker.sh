@@ -283,13 +283,18 @@ EOF
     gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-${mode}" >/dev/null 2>&1 || true
   fi
 
+  COLOR_EXTRACT_MODE="$mode"
+  if [[ "$TERMINALS_ALWAYS_DARK" == "true" ]]; then
+    COLOR_EXTRACT_MODE="dark"
+  fi
+
   if [[ "$MATUGEN_VERSION" == "2" ]]; then
-    PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
-    SURFACE=$(echo "$JSON" | sed -n "s/.*\"$mode\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    PRIMARY=$(echo "$JSON" | sed -n "s/.*\"$COLOR_EXTRACT_MODE\":{[^}]*\"primary\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    SURFACE=$(echo "$JSON" | sed -n "s/.*\"$COLOR_EXTRACT_MODE\":{[^}]*\"surface\":\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   else
     JSON_FLAT=$(echo "$JSON" | tr -d '\n')
-    PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
-    SURFACE=$(echo "$JSON_FLAT" | sed -n "s/.*\"surface\" *: *{ *[^}]*\"$mode\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    PRIMARY=$(echo "$JSON_FLAT" | sed -n "s/.*\"primary\" *: *{ *[^}]*\"$COLOR_EXTRACT_MODE\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
+    SURFACE=$(echo "$JSON_FLAT" | sed -n "s/.*\"surface\" *: *{ *[^}]*\"$COLOR_EXTRACT_MODE\" *: *\"\\(#[0-9a-fA-F]\\{6\\}\\)\".*/\\1/p")
   fi
 
   if [[ -z "$PRIMARY" ]]; then

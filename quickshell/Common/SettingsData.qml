@@ -806,6 +806,10 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
         saveSettings()
     }
 
+    function toggleShowDock() {
+        setShowDock(!showDock)
+    }
+
     function getPluginSetting(pluginId, key, defaultValue) {
         if (!pluginSettings[pluginId]) {
             return defaultValue
@@ -928,12 +932,14 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
 
     IpcHandler {
         function reveal(): string {
-            root.setDankBarVisible(true)
+            root.dankBarVisible = true
+            root.saveSettings()
             return "BAR_SHOW_SUCCESS"
         }
 
         function hide(): string {
-            root.setDankBarVisible(false)
+            root.dankBarVisible = false
+            root.saveSettings()
             return "BAR_HIDE_SUCCESS"
         }
 
@@ -947,5 +953,28 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
         }
 
         target: "bar"
+    }
+
+    IpcHandler {
+        function reveal(): string {
+            root.setShowDock(true)
+            return "DOCK_SHOW_SUCCESS"
+        }
+
+        function hide(): string {
+            root.setShowDock(false)
+            return "DOCK_HIDE_SUCCESS"
+        }
+
+        function toggle(): string {
+            root.toggleShowDock()
+            return root.showDock ? "DOCK_SHOW_SUCCESS" : "DOCK_HIDE_SUCCESS"
+        }
+
+        function status(): string {
+            return root.showDock ? "visible" : "hidden"
+        }
+
+        target: "dock"
     }
 }

@@ -1456,6 +1456,13 @@
     "comment": ""
   },
   {
+    "term": "Display power menu actions in a grid instead of a list",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Display settings for ",
     "translation": "",
     "context": "",
@@ -2094,13 +2101,6 @@
   },
   {
     "term": "Health",
-    "translation": "",
-    "context": "",
-    "reference": "",
-    "comment": ""
-  },
-  {
-    "term": "Height to Edge Gap (Exclusive Zone)",
     "translation": "",
     "context": "",
     "reference": "",
@@ -4712,6 +4712,13 @@
   },
   {
     "term": "Use Custom Command",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Use Grid Layout",
     "translation": "",
     "context": "",
     "reference": "",

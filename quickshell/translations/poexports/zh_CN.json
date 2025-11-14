@@ -207,7 +207,7 @@
     "Available": "可用"
   },
   "Available Layouts": {
-    "Available Layouts": ""
+    "Available Layouts": "可用布局"
   },
   "Available Plugins": {
     "Available Plugins": "可用插件"
@@ -303,13 +303,13 @@
     "Capacity": "电池容量"
   },
   "Caps Lock Indicator": {
-    "Caps Lock Indicator": ""
+    "Caps Lock Indicator": "大小写指示灯"
   },
   "Center Section": {
     "Center Section": "中间区域"
   },
   "Center Tiling": {
-    "Center Tiling": ""
+    "Center Tiling": "中心平铺"
   },
   "Changes:": {
     "Changes:": "更改:"
@@ -522,7 +522,7 @@
     "DMS_SOCKET not available": "DMS_SOCKET 不可用"
   },
   "DWL service not available": {
-    "DWL service not available": ""
+    "DWL service not available": "DWL服务不可用"
   },
   "Daily at:": {
     "Daily at:": "在每日："
@@ -558,7 +558,7 @@
     "Day Temperature": "日间色温"
   },
   "Deck": {
-    "Deck": ""
+    "Deck": "Deck"
   },
   "Default": {
     "Default": "默认"
@@ -615,13 +615,16 @@
     "Display all priorities over fullscreen apps": "应用全屏时仍显示所有优先级的通知"
   },
   "Display and switch DWL layouts": {
-    "Display and switch DWL layouts": ""
+    "Display and switch DWL layouts": "显示与切换DWL布局"
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "在工作区指示器中显示应用程序图标"
   },
   "Display currently focused application title": {
     "Display currently focused application title": "显示当前聚焦应用的标题"
+  },
+  "Display power menu actions in a grid instead of a list": {
+    "Display power menu actions in a grid instead of a list": ""
   },
   "Display settings for ": {
     "Display settings for ": "显示设置 "
@@ -834,7 +837,7 @@
     "Force Kill Process": "强制结束进程"
   },
   "Force terminal applications to always use dark color schemes": {
-    "Force terminal applications to always use dark color schemes": ""
+    "Force terminal applications to always use dark color schemes": "强制终端应用总使用暗色"
   },
   "Forget Device": {
     "Forget Device": "取消配对"
@@ -885,7 +888,7 @@
     "Graphics": "图形"
   },
   "Grid": {
-    "Grid": ""
+    "Grid": "网格"
   },
   "Group by App": {
     "Group by App": "按应用分组"
@@ -1032,7 +1035,7 @@
     "Launcher Button Logo": "启动器按钮 Logo"
   },
   "Layout": {
-    "Layout": ""
+    "Layout": "布局"
   },
   "Left": {
     "Left": "左"
@@ -1173,7 +1176,7 @@
     "Monitor whose wallpaper drives dynamic theming colors": "监视使用动态主题色的壁纸"
   },
   "Monocle": {
-    "Monocle": ""
+    "Monocle": "单页"
   },
   "Monospace Font": {
     "Monospace Font": "等宽字体"
@@ -1554,7 +1557,7 @@
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "关机、重启、挂起、休眠和注销前请求确认"
   },
   "Requires DWL compositor": {
-    "Requires DWL compositor": ""
+    "Requires DWL compositor": "需要DWL合成器"
   },
   "Reset": {
     "Reset": "重置"
@@ -1587,10 +1590,10 @@
     "Right Section": "右侧区域"
   },
   "Right Tiling": {
-    "Right Tiling": ""
+    "Right Tiling": "右侧平铺"
   },
   "Right-click bar widget to cycle": {
-    "Right-click bar widget to cycle": ""
+    "Right-click bar widget to cycle": "点击bar上小部件以轮换"
   },
   "Run User Templates": {
     "Run User Templates": "运行用户模板"
@@ -1626,7 +1629,7 @@
     "Science": "科学"
   },
   "Scrolling": {
-    "Scrolling": ""
+    "Scrolling": "滚动"
   },
   "Search file contents": {
     "Search file contents": "检索文件内容"
@@ -1785,7 +1788,7 @@
     "Shows current workspace and allows switching": "显示当前工作区并支持快速切换"
   },
   "Shows when caps lock is active": {
-    "Shows when caps lock is active": ""
+    "Shows when caps lock is active": "大写锁定时显示"
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "显示麦克风、摄像头或屏幕共享的使用状态"
@@ -1914,7 +1917,7 @@
     "Terminal custom additional parameters": "终端自定义附加参数"
   },
   "Terminals - Always use Dark Theme": {
-    "Terminals - Always use Dark Theme": ""
+    "Terminals - Always use Dark Theme": "终端总使用暗色主题"
   },
   "Text": {
     "Text": "文本"
@@ -1947,7 +1950,7 @@
     "This will permanently delete all clipboard history.": "此操作会清空剪贴板历史，且无法恢复。"
   },
   "Tiling": {
-    "Tiling": ""
+    "Tiling": "平铺"
   },
   "Time & Weather": {
     "Time & Weather": "时间与天气"
@@ -2030,14 +2033,17 @@
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "使用华氏度显示温度"
   },
+  "Use Grid Layout": {
+    "Use Grid Layout": ""
+  },
   "Use IP Location": {
     "Use IP Location": "使用 IP 定位"
   },
   "Use Imperial Units": {
-    "Use Imperial Units": ""
+    "Use Imperial Units": "使用英制单位"
   },
   "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
-    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": "使用英制单位（°F、mph、inHg）而非公制（°C、km/h、hPa）"
   },
   "Use Monospace Font": {
     "Use Monospace Font": "使用等宽字体"
@@ -2088,16 +2094,16 @@
     "VRR: ": "可变刷新率: "
   },
   "Vertical Deck": {
-    "Vertical Deck": ""
+    "Vertical Deck": "垂直Deck"
   },
   "Vertical Grid": {
-    "Vertical Grid": ""
+    "Vertical Grid": "垂直网格"
   },
   "Vertical Scrolling": {
-    "Vertical Scrolling": ""
+    "Vertical Scrolling": "垂直滚动"
   },
   "Vertical Tiling": {
-    "Vertical Tiling": ""
+    "Vertical Tiling": "垂直平铺"
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "充满活力的调色板，有着俏皮的饱和度。"

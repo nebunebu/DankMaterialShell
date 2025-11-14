@@ -108,8 +108,8 @@ Variants {
 
     property real animationHeadroom: Math.ceil(SettingsData.dockIconSize * 0.35)
 
-    implicitWidth: isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
-    implicitHeight: !isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockBottomGap + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
+    implicitWidth: isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
+    implicitHeight: !isVertical ? (px(effectiveBarHeight + SettingsData.dockSpacing + SettingsData.dockMargin + SettingsData.dockIconSize * 0.3) + animationHeadroom) : 0
 
     Item {
         id: maskItem

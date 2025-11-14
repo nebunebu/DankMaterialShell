@@ -416,11 +416,30 @@ Item {
                         }
 
                         StyledText {
+                            id: iconSizeText
                             text: I18n.tr("Icon Size")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                             anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Item {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - iconSizeText.width - resetIconSizeBtn.width - Theme.spacingM * 2
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        DankActionButton {
+                            id: resetIconSizeBtn
+                            buttonSize: 20
+                            iconName: "refresh"
+                            iconSize: 12
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                            iconColor: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked: {
+                                SettingsData.set("dockIconSize", 48)
+                            }
                         }
                     }
 
@@ -482,11 +501,47 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Padding")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Padding")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - paddingText.implicitWidth - resetPaddingBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: paddingText
+                                    visible: false
+                                    text: I18n.tr("Padding")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetPaddingBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.set("dockSpacing", 8)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
@@ -500,7 +555,7 @@ Item {
                             wheelEnabled: false
                             thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                             onSliderValueChanged: newValue => {
-                                                      SettingsData.set("dockSpacing", 
+                                                      SettingsData.set("dockSpacing",
                                                           newValue)
                                                   }
                         }
@@ -510,11 +565,47 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Height to Edge Gap (Exclusive Zone)")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Exclusive Zone Offset")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - exclusiveZoneText.implicitWidth - resetExclusiveZoneBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: exclusiveZoneText
+                                    visible: false
+                                    text: I18n.tr("Exclusive Zone Offset")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetExclusiveZoneBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.set("dockBottomGap", 0)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
@@ -538,11 +629,47 @@ Item {
                         width: parent.width
                         spacing: Theme.spacingS
 
-                        StyledText {
-                            text: I18n.tr("Margin")
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.surfaceText
-                            font.weight: Font.Medium
+                        Row {
+                            width: parent.width
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Margin")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - marginText.implicitWidth - resetMarginBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: marginText
+                                    visible: false
+                                    text: I18n.tr("Margin")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetMarginBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.set("dockMargin", 0)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
                         }
 
                         DankSlider {
@@ -592,11 +719,30 @@ Item {
                         }
 
                         StyledText {
+                            id: transparencyText
                             text: I18n.tr("Dock Transparency")
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                             anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Item {
+                            width: parent.width - Theme.iconSize - Theme.spacingM - transparencyText.width - resetTransparencyBtn.width - Theme.spacingM * 2
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        DankActionButton {
+                            id: resetTransparencyBtn
+                            buttonSize: 20
+                            iconName: "refresh"
+                            iconSize: 12
+                            backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                            iconColor: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked: {
+                                SettingsData.set("dockTransparency", 0.85)
+                            }
                         }
                     }
 
@@ -611,7 +757,7 @@ Item {
                         wheelEnabled: false
                         thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
                         onSliderValueChanged: newValue => {
-                                                  SettingsData.set("dockTransparency", 
+                                                  SettingsData.set("dockTransparency",
                                                       newValue / 100)
                                               }
                     }

@@ -623,6 +623,9 @@
   "Display currently focused application title": {
     "Display currently focused application title": "Wyświetlaj tytuł aktywnej aplikacji"
   },
+  "Display power menu actions in a grid instead of a list": {
+    "Display power menu actions in a grid instead of a list": ""
+  },
   "Display settings for ": {
     "Display settings for ": "Ustawienia wyświetlania dla "
   },
@@ -2029,6 +2032,9 @@
   },
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "Użyj Fahrenheita zamiast Celsjusza dla temperatury"
+  },
+  "Use Grid Layout": {
+    "Use Grid Layout": ""
   },
   "Use IP Location": {
     "Use IP Location": "Użyj lokalizacji IP"

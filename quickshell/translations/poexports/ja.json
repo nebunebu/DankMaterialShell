@@ -207,7 +207,7 @@
     "Available": "利用可能"
   },
   "Available Layouts": {
-    "Available Layouts": ""
+    "Available Layouts": "利用可能なレイアウト"
   },
   "Available Plugins": {
     "Available Plugins": "利用可能なプラグイン"
@@ -309,7 +309,7 @@
     "Center Section": "センターセクション"
   },
   "Center Tiling": {
-    "Center Tiling": ""
+    "Center Tiling": "中央タイルリング"
   },
   "Changes:": {
     "Changes:": "変更:"
@@ -522,7 +522,7 @@
     "DMS_SOCKET not available": "DMS_SOCKETが利用できません"
   },
   "DWL service not available": {
-    "DWL service not available": ""
+    "DWL service not available": "DWLサービスが利用できません"
   },
   "Daily at:": {
     "Daily at:": "毎日："
@@ -558,7 +558,7 @@
     "Day Temperature": "昼間の温度"
   },
   "Deck": {
-    "Deck": ""
+    "Deck": "デッキ"
   },
   "Default": {
     "Default": "デフォルト"
@@ -615,13 +615,16 @@
     "Display all priorities over fullscreen apps": "フルスクリーンアプリよりもすべての優先度を表示する"
   },
   "Display and switch DWL layouts": {
-    "Display and switch DWL layouts": ""
+    "Display and switch DWL layouts": "DWL レイアウトの表示と切り替え"
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "ワークスペース インジケーターにアプリのアイコンを表示"
   },
   "Display currently focused application title": {
     "Display currently focused application title": "現在フォーカスされているアプリケーションのタイトルを表示"
+  },
+  "Display power menu actions in a grid instead of a list": {
+    "Display power menu actions in a grid instead of a list": ""
   },
   "Display settings for ": {
     "Display settings for ": "以下の設定を表示 "
@@ -834,7 +837,7 @@
     "Force Kill Process": "プロセスを強制終了"
   },
   "Force terminal applications to always use dark color schemes": {
-    "Force terminal applications to always use dark color schemes": ""
+    "Force terminal applications to always use dark color schemes": "端末アプリで常に暗い配色を使用するように強制する"
   },
   "Forget Device": {
     "Forget Device": "デバイスを忘れる"
@@ -885,7 +888,7 @@
     "Graphics": "グラフィック"
   },
   "Grid": {
-    "Grid": ""
+    "Grid": "グリッド"
   },
   "Group by App": {
     "Group by App": "アプリ別にグループ化"
@@ -1032,7 +1035,7 @@
     "Launcher Button Logo": "ランチャーのボタンロゴ"
   },
   "Layout": {
-    "Layout": ""
+    "Layout": "レイアウト"
   },
   "Left": {
     "Left": "左"
@@ -1173,7 +1176,7 @@
     "Monitor whose wallpaper drives dynamic theming colors": "ダイナミックテーマの色を駆動する壁紙をモニター"
   },
   "Monocle": {
-    "Monocle": ""
+    "Monocle": "モノクル"
   },
   "Monospace Font": {
     "Monospace Font": "等幅フォント"
@@ -1554,7 +1557,7 @@
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "電源オフ、再起動、一時停止、休止状態、ログアウトアクションの確認を要求"
   },
   "Requires DWL compositor": {
-    "Requires DWL compositor": ""
+    "Requires DWL compositor": "DWLコンポジターが必要"
   },
   "Reset": {
     "Reset": "リセット"
@@ -1587,10 +1590,10 @@
     "Right Section": "右セクション"
   },
   "Right Tiling": {
-    "Right Tiling": ""
+    "Right Tiling": "右タイリング"
   },
   "Right-click bar widget to cycle": {
-    "Right-click bar widget to cycle": ""
+    "Right-click bar widget to cycle": "バーウィジェットを右クリックして循環"
   },
   "Run User Templates": {
     "Run User Templates": "ユーザーのテンプレを実行"
@@ -1626,7 +1629,7 @@
     "Science": "科学"
   },
   "Scrolling": {
-    "Scrolling": ""
+    "Scrolling": "スクロール"
   },
   "Search file contents": {
     "Search file contents": "ファイルの内容を検索"
@@ -1947,7 +1950,7 @@
     "This will permanently delete all clipboard history.": "これはすべてのクリップボード履歴を完全に削除します。"
   },
   "Tiling": {
-    "Tiling": ""
+    "Tiling": "タイリング"
   },
   "Time & Weather": {
     "Time & Weather": "時間および天気"
@@ -2030,6 +2033,9 @@
   "Use Fahrenheit instead of Celsius for temperature": {
     "Use Fahrenheit instead of Celsius for temperature": "温度は摂氏ではなく華氏を使用"
   },
+  "Use Grid Layout": {
+    "Use Grid Layout": ""
+  },
   "Use IP Location": {
     "Use IP Location": "IP ロケーションの使用"
   },
@@ -2088,16 +2094,16 @@
     "VRR: ": "VRR: "
   },
   "Vertical Deck": {
-    "Vertical Deck": ""
+    "Vertical Deck": "垂直デッキ"
   },
   "Vertical Grid": {
-    "Vertical Grid": ""
+    "Vertical Grid": "垂直グリッド"
   },
   "Vertical Scrolling": {
-    "Vertical Scrolling": ""
+    "Vertical Scrolling": "垂直スクロール"
   },
   "Vertical Tiling": {
-    "Vertical Tiling": ""
+    "Vertical Tiling": "垂直タイリング"
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "遊び心のある彩度の鮮やかなパレット。"
