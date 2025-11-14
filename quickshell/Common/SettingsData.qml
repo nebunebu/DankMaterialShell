@@ -253,6 +253,7 @@ Singleton {
 
     property bool notificationOverlayEnabled: false
     property bool dankBarAutoHide: false
+    property int dankBarAutoHideDelay: 250
     property bool dankBarOpenOnOverview: false
     property bool dankBarVisible: true
     property int overviewRows: 2
@@ -263,6 +264,8 @@ Singleton {
     property real dankBarInnerPadding: 4
     property int dankBarPosition: SettingsData.Position.Top
     property bool dankBarIsVertical: dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right
+
+    onDankBarAutoHideDelayChanged: saveSettings()
 
     property bool dankBarSquareCorners: false
     property bool dankBarNoBackground: false

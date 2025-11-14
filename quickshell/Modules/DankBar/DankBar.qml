@@ -399,7 +399,7 @@ Item {
 
                 Timer {
                     id: revealHold
-                    interval: 250
+                    interval: SettingsData.dankBarAutoHideDelay
                     repeat: false
                     onTriggered: topBarCore.revealSticky = false
                 }

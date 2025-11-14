@@ -857,9 +857,89 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             checked: SettingsData.dankBarAutoHide
                             onToggled: toggled => {
-                                           return SettingsData.set("dankBarAutoHide", 
+                                           return SettingsData.set("dankBarAutoHide",
                                                toggled)
                                        }
+                        }
+                    }
+
+                    Column {
+                        width: parent.width
+                        spacing: Theme.spacingS
+                        visible: SettingsData.dankBarAutoHide
+                        leftPadding: Theme.spacingM
+
+                        Rectangle {
+                            width: parent.width - parent.leftPadding
+                            height: 1
+                            color: Theme.outline
+                            opacity: 0.2
+                        }
+
+                        Row {
+                            width: parent.width - parent.leftPadding
+                            spacing: Theme.spacingS
+
+                            StyledText {
+                                text: I18n.tr("Hide Delay (ms)")
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.surfaceText
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Item {
+                                width: parent.width - hideDelayText.implicitWidth - resetHideDelayBtn.width - Theme.spacingS - Theme.spacingM
+                                height: 1
+
+                                StyledText {
+                                    id: hideDelayText
+                                    visible: false
+                                    text: I18n.tr("Hide Delay (ms)")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                            }
+
+                            DankActionButton {
+                                id: resetHideDelayBtn
+                                buttonSize: 20
+                                iconName: "refresh"
+                                iconSize: 12
+                                backgroundColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                                iconColor: Theme.surfaceText
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    SettingsData.set("dankBarAutoHideDelay", 250)
+                                }
+                            }
+
+                            Item {
+                                width: Theme.spacingS
+                                height: 1
+                            }
+                        }
+
+                        DankSlider {
+                            id: hideDelaySlider
+                            width: parent.width - parent.leftPadding
+                            height: 24
+                            value: SettingsData.dankBarAutoHideDelay
+                            minimum: 0
+                            maximum: 2000
+                            unit: "ms"
+                            showValue: true
+                            wheelEnabled: false
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                            onSliderValueChanged: newValue => {
+                                SettingsData.set("dankBarAutoHideDelay", newValue)
+                            }
+
+                            Binding {
+                                target: hideDelaySlider
+                                property: "value"
+                                value: SettingsData.dankBarAutoHideDelay
+                                restoreMode: Binding.RestoreBinding
+                            }
                         }
                     }
 

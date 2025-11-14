@@ -170,6 +170,7 @@ var SPEC = {
 
     notificationOverlayEnabled: { def: false },
     dankBarAutoHide: { def: false, migrate: ["topBarAutoHide"] },
+    dankBarAutoHideDelay: { def: 250 },
     dankBarOpenOnOverview: { def: false, migrate: ["topBarOpenOnOverview"] },
     dankBarVisible: { def: true, migrate: ["topBarVisible"] },
     overviewRows: { def: 2, persist: false },
