@@ -1063,14 +1063,35 @@ Item {
 
     Process {
         id: sessionListProc
-        command: ["find"]
-            .concat("/usr/share/wayland-sessions")
-            .concat("/usr/share/xsessions")
-            .concat("/usr/local/share/wayland-sessions")
-            .concat("/usr/local/share/xsessions")
-            .concat(xdgDataDirs.split(":").map(d => d + "/wayland-sessions"))
-            .concat(xdgDataDirs.split(":").map(d => d + "/xsessions"))
-            .concat(["-name", "*.desktop", "-type", "f", "-follow"])
+        property string homeDir: Quickshell.env("HOME") || ""
+        property string xdgDirs: xdgDataDirs || ""
+        command: {
+            var paths = [
+                "/usr/share/wayland-sessions",
+                "/usr/share/xsessions", 
+                "/usr/local/share/wayland-sessions",
+                "/usr/local/share/xsessions"
+            ]
+            if (homeDir) {
+                paths.push(homeDir + "/.local/share/wayland-sessions")
+                paths.push(homeDir + "/.local/share/xsessions")
+            }
+            // Add XDG_DATA_DIRS paths
+            if (xdgDirs) {
+                xdgDirs.split(":").forEach(function(dir) {
+                    if (dir) {
+                        paths.push(dir + "/wayland-sessions")
+                        paths.push(dir + "/xsessions")
+                    }
+                })
+            }
+            // 1. Explicit system/user paths 
+            var explicitFind = "find " + paths.join(" ") + " -maxdepth 1 -name '*.desktop' -type f 2>/dev/null"
+            // 2. Scan all /home user directories for local session files
+            var homeScan = "find /home -maxdepth 4 \\( -path '*/wayland-sessions/*.desktop' -o -path '*/xsessions/*.desktop' \\) -type f 2>/dev/null"
+            var findCmd = "(" + explicitFind + "; " + homeScan + ") | sort -u"
+            return ["sh", "-c", findCmd]
+        }
         running: false
 
         stdout: SplitParser {
