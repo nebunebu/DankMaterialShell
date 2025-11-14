@@ -300,6 +300,7 @@ Singleton {
     property bool powerActionConfirm: true
     property var powerMenuActions: ["reboot", "logout", "poweroff", "lock", "suspend", "restart"]
     property string powerMenuDefaultAction: "logout"
+    property bool powerMenuGridLayout: false
     property string customPowerActionLock: ""
     property string customPowerActionLogout: ""
     property string customPowerActionSuspend: ""

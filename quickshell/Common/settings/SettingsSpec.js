@@ -211,6 +211,7 @@ var SPEC = {
     powerActionConfirm: { def: true },
     powerMenuActions: { def: ["reboot", "logout", "poweroff", "lock", "suspend", "restart"] },
     powerMenuDefaultAction: { def: "logout" },
+    powerMenuGridLayout: { def: false },
     customPowerActionLock: { def: "" },
     customPowerActionLogout: { def: "" },
     customPowerActionSuspend: { def: "" },

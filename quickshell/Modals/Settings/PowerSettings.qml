@@ -367,6 +367,14 @@ Item {
                         wrapMode: Text.Wrap
                     }
 
+                    DankToggle {
+                        width: parent.width
+                        text: I18n.tr("Use Grid Layout")
+                        description: I18n.tr("Display power menu actions in a grid instead of a list")
+                        checked: SettingsData.powerMenuGridLayout
+                        onToggled: checked => SettingsData.set("powerMenuGridLayout", checked)
+                    }
+
                     DankDropdown {
                         id: defaultActionDropdown
                         width: parent.width
