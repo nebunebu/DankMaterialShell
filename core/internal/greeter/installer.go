@@ -227,6 +227,7 @@ func SetupParentDirectoryACLs(logFunc func(string), sudoPassword string) error {
 		{filepath.Join(homeDir, ".local"), ".local directory"},
 		{filepath.Join(homeDir, ".cache"), ".cache directory"},
 		{filepath.Join(homeDir, ".local", "state"), ".local/state directory"},
+		{filepath.Join(homeDir, ".local", "share"), ".local/share directory"},
 	}
 
 	logFunc("\nSetting up parent directory ACLs for greeter user access...")
@@ -287,6 +288,8 @@ func SetupDMSGroup(logFunc func(string), sudoPassword string) error {
 		{filepath.Join(homeDir, ".local", "state", "DankMaterialShell"), "DankMaterialShell state"},
 		{filepath.Join(homeDir, ".cache", "quickshell"), "quickshell cache"},
 		{filepath.Join(homeDir, ".config", "quickshell"), "quickshell config"},
+		{filepath.Join(homeDir, ".local", "share", "wayland-sessions"), "wayland sessions"},
+		{filepath.Join(homeDir, ".local", "share", "xsessions"), "xsessions"},
 	}
 
 	for _, dir := range configDirs {
