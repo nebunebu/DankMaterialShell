@@ -174,29 +174,6 @@ DankPopout {
                 }
             }
 
-            Rectangle {
-                anchors.fill: parent
-                color: Qt.rgba(Theme.surfaceTint.r, Theme.surfaceTint.g, Theme.surfaceTint.b, 0.04)
-                radius: parent.radius
-
-                SequentialAnimation on opacity {
-                    running: root.shouldBeVisible
-                    loops: Animation.Infinite
-
-                    NumberAnimation {
-                        to: 0.08
-                        duration: Theme.extraLongDuration
-                        easing.type: Theme.standardEasing
-                    }
-
-                    NumberAnimation {
-                        to: 0.02
-                        duration: Theme.extraLongDuration
-                        easing.type: Theme.standardEasing
-                    }
-                }
-            }
-
             Column {
                 id: contentColumn
                 anchors.left: parent.left
