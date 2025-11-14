@@ -165,7 +165,7 @@ func (f *FedoraDistribution) GetPackageMappingWithVariants(wm deps.WindowManager
 		packages["jq"] = PackageMapping{Name: "jq", Repository: RepoTypeSystem}
 	case deps.WindowManagerNiri:
 		packages["niri"] = f.getNiriMapping(variants["niri"])
-		packages["xwayland-satellite"] = PackageMapping{Name: "xwayland-satellite", Repository: RepoTypeCOPR, RepoURL: "yalter/niri"}
+		packages["xwayland-satellite"] = PackageMapping{Name: "xwayland-satellite", Repository: RepoTypeSystem}
 	}
 
 	return packages
@@ -203,7 +203,7 @@ func (f *FedoraDistribution) getNiriMapping(variant deps.PackageVariant) Package
 	if variant == deps.VariantGit {
 		return PackageMapping{Name: "niri", Repository: RepoTypeCOPR, RepoURL: "yalter/niri-git"}
 	}
-	return PackageMapping{Name: "niri", Repository: RepoTypeCOPR, RepoURL: "yalter/niri"}
+	return PackageMapping{Name: "niri", Repository: RepoTypeSystem}
 }
 
 func (f *FedoraDistribution) detectXwaylandSatellite() deps.Dependency {
