@@ -205,7 +205,7 @@ QtObject {
             }
 
             const pluginComponent = PluginService.pluginWidgetComponents[plugin.id]
-            if (!pluginComponent) {
+            if (!pluginComponent || typeof pluginComponent.createObject !== 'function') {
                 continue
             }
 

@@ -184,9 +184,24 @@ DankModal {
     positioning: parentBounds.width > 0 ? "custom" : "center"
     customPosition: {
         if (parentBounds.width > 0) {
-            const centerX = parentBounds.x + (parentBounds.width - width) / 2
-            const centerY = parentBounds.y + (parentBounds.height - height) / 2
-            return Qt.point(centerX, centerY)
+            const effectiveBarThickness = Math.max(26 + SettingsData.dankBarInnerPadding * 0.6 + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
+            const barExclusionZone = effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap
+            const screenW = parentScreen?.width ?? 1920
+            const screenH = parentScreen?.height ?? 1080
+            const margin = Theme.spacingL
+
+            let targetX = parentBounds.x + (parentBounds.width - width) / 2
+            let targetY = parentBounds.y + (parentBounds.height - height) / 2
+
+            const minX = margin
+            const maxX = screenW - width - margin
+            const minY = SettingsData.dankBarPosition === SettingsData.Position.Top ? barExclusionZone + margin : margin
+            const maxY = SettingsData.dankBarPosition === SettingsData.Position.Bottom ? screenH - height - barExclusionZone - margin : screenH - height - margin
+
+            targetX = Math.max(minX, Math.min(maxX, targetX))
+            targetY = Math.max(minY, Math.min(maxY, targetY))
+
+            return Qt.point(targetX, targetY)
         }
         return Qt.point(0, 0)
     }
