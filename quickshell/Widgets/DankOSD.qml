@@ -75,7 +75,15 @@ PanelWindow {
     readonly property real alignedWidth: Theme.px(osdWidth, dpr)
     readonly property real alignedHeight: Theme.px(osdHeight, dpr)
     readonly property real alignedX: Theme.snap((screenWidth - alignedWidth) / 2, dpr)
-    readonly property real alignedY: Theme.snap(screenHeight - alignedHeight - Theme.spacingM, dpr)
+    readonly property real barOffsetWhenBottom: {
+        if (SettingsData.dankBarPosition === SettingsData.Position.Bottom && SettingsData.dankBarVisible) {
+            const widgetThickness = Math.max(20, 26 + SettingsData.dankBarInnerPadding * 0.6)
+            const effectiveBarThickness = Math.max(widgetThickness + SettingsData.dankBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.dankBarInnerPadding))
+            return effectiveBarThickness + SettingsData.dankBarSpacing + SettingsData.dankBarBottomGap
+        }
+        return 0
+    }
+    readonly property real alignedY: Theme.snap(screenHeight - alignedHeight - Theme.spacingM - barOffsetWhenBottom, dpr)
 
     anchors {
         top: true
