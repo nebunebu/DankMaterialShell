@@ -108,6 +108,6 @@ Card {
 
     SystemClock {
         id: systemClock
-        precision: SystemClock.Seconds
+        precision: SettingsData.showSeconds ? SystemClock.Seconds : SystemClock.Minutes
     }
 }
