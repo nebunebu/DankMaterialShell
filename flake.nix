@@ -84,16 +84,16 @@
         homeModules.dankMaterialShell.default = {pkgs, ...}: let
             dmsPkgs = buildDmsPkgs pkgs;
         in {
-            imports = [./nix/default.nix];
+            imports = [./distro/nix/default.nix];
             _module.args.dmsPkgs = dmsPkgs;
         };
 
-        homeModules.dankMaterialShell.niri = import ./nix/niri.nix;
+        homeModules.dankMaterialShell.niri = import ./distro/nix/niri.nix;
 
         nixosModules.greeter = {pkgs, ...}: let
             dmsPkgs = buildDmsPkgs pkgs;
         in {
-            imports = [./nix/greeter.nix];
+            imports = [./distro/nix/greeter.nix];
             _module.args.dmsPkgs = dmsPkgs;
         };
     };
