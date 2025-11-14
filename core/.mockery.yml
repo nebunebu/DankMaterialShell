@@ -40,3 +40,9 @@ packages:
       outpkg: mocks_cups
     interfaces:
       CUPSClientInterface:
+  github.com/AvengeMedia/DankMaterialShell/core/internal/server/evdev:
+    config:
+      dir: "internal/mocks/evdev"
+      outpkg: mocks_evdev
+    interfaces:
+      EvdevDevice:
