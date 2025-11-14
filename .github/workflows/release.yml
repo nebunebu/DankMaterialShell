@@ -294,6 +294,11 @@ jobs:
               fi
             done
 
+            # Copy docs directory
+            if [ -d "docs" ]; then
+              cp -r docs _temp_full/
+            fi
+
             # Create installation guide
             cat > _temp_full/INSTALL.md << 'EOFINSTALL'
           # DankMaterialShell Installation
