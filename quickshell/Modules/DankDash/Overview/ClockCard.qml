@@ -9,7 +9,7 @@ Card {
 
     Column {
         anchors.centerIn: parent
-        spacing: Theme.spacingS
+        spacing: 0
 
         Column {
             spacing: -8
@@ -76,31 +76,26 @@ Card {
                     horizontalAlignment: Text.AlignHCenter
                 }
             }
+        }
 
-            Row {
-                visible: SettingsData.showSeconds
-                spacing: 0
-                anchors.horizontalCenter: parent.horizontalCenter
+        Row {
+            visible: SettingsData.showSeconds
+            spacing: 0
+            anchors.horizontalCenter: parent.horizontalCenter
 
-                StyledText {
-                    text: String(systemClock?.date?.getSeconds()).padStart(2, '0').charAt(0)
-                    font.pixelSize: 48
-                    color: Theme.primary
-                    font.weight: Font.Medium
-                    width: 28
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                StyledText {
-                    text: String(systemClock?.date?.getSeconds()).padStart(2, '0').charAt(1)
-                    font.pixelSize: 48
-                    color: Theme.primary
-                    font.weight: Font.Medium
-                    width: 28
-                    horizontalAlignment: Text.AlignHCenter
-                }
+            StyledText {
+                text: String(systemClock?.date?.getSeconds()).padStart(2, '0')
+                font.pixelSize: 24
+                color: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.7)
+                font.weight: Font.Medium
+                horizontalAlignment: Text.AlignHCenter
             }
+        }
 
+        Item {
+            width: 1
+            height: Theme.spacingXS
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         StyledText {
