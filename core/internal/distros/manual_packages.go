@@ -478,6 +478,94 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 		return fmt.Errorf("failed to create cache directory: %w", err)
 	}
 
+	// Install hyprutils first
+	progressChan <- InstallProgressMsg{
+		Phase:       PhaseSystemPackages,
+		Progress:    0.05,
+		Step:        "Building hyprutils dependency...",
+		IsComplete:  false,
+		CommandInfo: "git clone https://github.com/hyprwm/hyprutils.git",
+	}
+
+	hyprutilsDir := filepath.Join(cacheDir, "hyprutils-build")
+	if err := os.MkdirAll(hyprutilsDir, 0755); err != nil {
+		return fmt.Errorf("failed to create hyprutils directory: %w", err)
+	}
+	defer os.RemoveAll(hyprutilsDir)
+
+	cloneUtilsCmd := exec.CommandContext(ctx, "git", "clone", "https://github.com/hyprwm/hyprutils.git", hyprutilsDir)
+	if err := cloneUtilsCmd.Run(); err != nil {
+		return fmt.Errorf("failed to clone hyprutils: %w", err)
+	}
+
+	configureUtilsCmd := exec.CommandContext(ctx, "cmake",
+		"--no-warn-unused-cli",
+		"-DCMAKE_BUILD_TYPE:STRING=Release",
+		"-DCMAKE_INSTALL_PREFIX:PATH=/usr",
+		"-S", ".",
+		"-B", "./build")
+	configureUtilsCmd.Dir = hyprutilsDir
+	configureUtilsCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
+	if err := m.runWithProgressStep(configureUtilsCmd, progressChan, PhaseSystemPackages, 0.05, 0.1, "Configuring hyprutils..."); err != nil {
+		return fmt.Errorf("failed to configure hyprutils: %w", err)
+	}
+
+	buildUtilsCmd := exec.CommandContext(ctx, "cmake", "--build", "./build", "--config", "Release", "--target", "all")
+	buildUtilsCmd.Dir = hyprutilsDir
+	buildUtilsCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
+	if err := m.runWithProgressStep(buildUtilsCmd, progressChan, PhaseSystemPackages, 0.1, 0.2, "Building hyprutils..."); err != nil {
+		return fmt.Errorf("failed to build hyprutils: %w", err)
+	}
+
+	installUtilsCmd := ExecSudoCommand(ctx, sudoPassword, "cmake --install ./build")
+	installUtilsCmd.Dir = hyprutilsDir
+	if err := installUtilsCmd.Run(); err != nil {
+		return fmt.Errorf("failed to install hyprutils: %w", err)
+	}
+
+	// Install hyprwayland-scanner
+	progressChan <- InstallProgressMsg{
+		Phase:       PhaseSystemPackages,
+		Progress:    0.2,
+		Step:        "Building hyprwayland-scanner dependency...",
+		IsComplete:  false,
+		CommandInfo: "git clone https://github.com/hyprwm/hyprwayland-scanner.git",
+	}
+
+	scannerDir := filepath.Join(cacheDir, "hyprwayland-scanner-build")
+	if err := os.MkdirAll(scannerDir, 0755); err != nil {
+		return fmt.Errorf("failed to create scanner directory: %w", err)
+	}
+	defer os.RemoveAll(scannerDir)
+
+	cloneScannerCmd := exec.CommandContext(ctx, "git", "clone", "https://github.com/hyprwm/hyprwayland-scanner.git", scannerDir)
+	if err := cloneScannerCmd.Run(); err != nil {
+		return fmt.Errorf("failed to clone hyprwayland-scanner: %w", err)
+	}
+
+	configureScannerCmd := exec.CommandContext(ctx, "cmake",
+		"-DCMAKE_INSTALL_PREFIX=/usr",
+		"-B", "build")
+	configureScannerCmd.Dir = scannerDir
+	configureScannerCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
+	if err := m.runWithProgressStep(configureScannerCmd, progressChan, PhaseSystemPackages, 0.2, 0.25, "Configuring hyprwayland-scanner..."); err != nil {
+		return fmt.Errorf("failed to configure hyprwayland-scanner: %w", err)
+	}
+
+	buildScannerCmd := exec.CommandContext(ctx, "cmake", "--build", "build", "-j")
+	buildScannerCmd.Dir = scannerDir
+	buildScannerCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
+	if err := m.runWithProgressStep(buildScannerCmd, progressChan, PhaseSystemPackages, 0.25, 0.35, "Building hyprwayland-scanner..."); err != nil {
+		return fmt.Errorf("failed to build hyprwayland-scanner: %w", err)
+	}
+
+	installScannerCmd := ExecSudoCommand(ctx, sudoPassword, "cmake --install build")
+	installScannerCmd.Dir = scannerDir
+	if err := installScannerCmd.Run(); err != nil {
+		return fmt.Errorf("failed to install hyprwayland-scanner: %w", err)
+	}
+
+	// Now build hyprpicker
 	tmpDir := filepath.Join(cacheDir, "hyprpicker-build")
 	if err := os.MkdirAll(tmpDir, 0755); err != nil {
 		return fmt.Errorf("failed to create temp directory: %w", err)
@@ -486,7 +574,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 
 	progressChan <- InstallProgressMsg{
 		Phase:       PhaseSystemPackages,
-		Progress:    0.1,
+		Progress:    0.35,
 		Step:        "Cloning hyprpicker repository...",
 		IsComplete:  false,
 		CommandInfo: "git clone https://github.com/hyprwm/hyprpicker.git",
@@ -499,7 +587,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 
 	progressChan <- InstallProgressMsg{
 		Phase:       PhaseSystemPackages,
-		Progress:    0.3,
+		Progress:    0.45,
 		Step:        "Configuring hyprpicker build...",
 		IsComplete:  false,
 		CommandInfo: "cmake -B build -S . -DCMAKE_BUILD_TYPE=Release",
@@ -522,7 +610,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 
 	progressChan <- InstallProgressMsg{
 		Phase:       PhaseSystemPackages,
-		Progress:    0.4,
+		Progress:    0.55,
 		Step:        "Building hyprpicker...",
 		IsComplete:  false,
 		CommandInfo: "cmake --build build --target hyprpicker",
@@ -531,7 +619,7 @@ func (m *ManualPackageInstaller) installHyprpicker(ctx context.Context, sudoPass
 	buildCmd := exec.CommandContext(ctx, "cmake", "--build", "./build", "--config", "Release", "--target", "hyprpicker")
 	buildCmd.Dir = tmpDir
 	buildCmd.Env = append(os.Environ(), "TMPDIR="+cacheDir)
-	if err := m.runWithProgressStep(buildCmd, progressChan, PhaseSystemPackages, 0.4, 0.8, "Building hyprpicker..."); err != nil {
+	if err := m.runWithProgressStep(buildCmd, progressChan, PhaseSystemPackages, 0.55, 0.8, "Building hyprpicker..."); err != nil {
 		return fmt.Errorf("failed to build hyprpicker: %w", err)
 	}
 
