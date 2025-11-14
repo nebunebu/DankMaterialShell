@@ -242,7 +242,7 @@
   {
     "term": "Audio Codec",
     "context": "Audio Codec",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:501",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:570",
     "comment": ""
   },
   {
@@ -254,7 +254,7 @@
   {
     "term": "Audio Devices",
     "context": "Audio Devices",
-    "reference": "Modules/ControlCenter/Details/AudioOutputDetail.qml:33",
+    "reference": "Modules/ControlCenter/Details/AudioOutputDetail.qml:35",
     "comment": ""
   },
   {
@@ -470,7 +470,7 @@
   {
     "term": "Bluetooth Settings",
     "context": "Bluetooth Settings",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:69",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:71",
     "comment": ""
   },
   {
@@ -1016,7 +1016,7 @@
   {
     "term": "DEMO MODE - Click anywhere to exit",
     "context": "DEMO MODE - Click anywhere to exit",
-    "reference": "Modules/Lock/LockScreenContent.qml:747",
+    "reference": "Modules/Lock/LockScreenContent.qml:777",
     "comment": ""
   },
   {
@@ -1028,7 +1028,7 @@
   {
     "term": "DMS out of date",
     "context": "DMS out of date",
-    "reference": "Services/DMSService.qml:301",
+    "reference": "Services/DMSService.qml:304",
     "comment": ""
   },
   {
@@ -1172,7 +1172,7 @@
   {
     "term": "Disable Autoconnect",
     "context": "Disable Autoconnect",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:625",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:696",
     "comment": ""
   },
   {
@@ -1352,7 +1352,7 @@
   {
     "term": "Enable Autoconnect",
     "context": "Enable Autoconnect",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:625",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:696",
     "comment": ""
   },
   {
@@ -1376,7 +1376,7 @@
   {
     "term": "Enable WiFi",
     "context": "Enable WiFi",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:177",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:181",
     "comment": ""
   },
   {
@@ -1556,7 +1556,7 @@
   {
     "term": "Failed to remove device",
     "context": "Failed to remove device",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:548",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:617",
     "comment": ""
   },
   {
@@ -1670,13 +1670,13 @@
   {
     "term": "Forget Device",
     "context": "Forget Device",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:526",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:595",
     "comment": ""
   },
   {
     "term": "Forget Network",
     "context": "Forget Network",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:648",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:719",
     "comment": ""
   },
   {
@@ -1928,7 +1928,7 @@
   {
     "term": "Input Devices",
     "context": "Input Devices",
-    "reference": "Modules/ControlCenter/Details/AudioInputDetail.qml:33",
+    "reference": "Modules/ControlCenter/Details/AudioInputDetail.qml:35",
     "comment": ""
   },
   {
@@ -2402,7 +2402,7 @@
   {
     "term": "Network Info",
     "context": "Network Info",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:345, Modules/ControlCenter/Details/NetworkDetail.qml:602",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:349, Modules/ControlCenter/Details/NetworkDetail.qml:673",
     "comment": ""
   },
   {
@@ -2414,7 +2414,7 @@
   {
     "term": "Network Settings",
     "context": "Network Settings",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:68",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:70",
     "comment": ""
   },
   {
@@ -2474,7 +2474,7 @@
   {
     "term": "No Bluetooth adapter found",
     "context": "No Bluetooth adapter found",
-    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:450",
+    "reference": "Modules/ControlCenter/Details/BluetoothDetail.qml:519",
     "comment": ""
   },
   {
@@ -3902,7 +3902,7 @@
   {
     "term": "To update, run the following command:",
     "context": "To update, run the following command:",
-    "reference": "Services/DMSService.qml:301",
+    "reference": "Services/DMSService.qml:304",
     "comment": ""
   },
   {
@@ -4274,7 +4274,7 @@
   {
     "term": "WiFi is off",
     "context": "WiFi is off",
-    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:159",
+    "reference": "Modules/ControlCenter/Details/NetworkDetail.qml:163",
     "comment": ""
   },
   {
