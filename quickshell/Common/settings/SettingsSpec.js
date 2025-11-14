@@ -47,6 +47,7 @@ var SPEC = {
     showNotificationButton: { def: true },
     showBattery: { def: true },
     showControlCenterButton: { def: true },
+    showCapsLockIndicator: { def: true },
 
     controlCenterShowNetworkIcon: { def: true },
     controlCenterShowBluetoothIcon: { def: true },

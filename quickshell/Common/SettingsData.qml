@@ -95,6 +95,7 @@ Singleton {
     property bool showNotificationButton: true
     property bool showBattery: true
     property bool showControlCenterButton: true
+    property bool showCapsLockIndicator: true
 
     property bool controlCenterShowNetworkIcon: true
     property bool controlCenterShowBluetoothIcon: true
@@ -775,6 +776,7 @@ rm -rf '${home}'/.cache/icon-cache '${home}'/.cache/thumbnails 2>/dev/null || tr
         showNotificationButton = true
         showBattery = true
         showControlCenterButton = true
+        showCapsLockIndicator = true
         saveSettings()
     }
 
