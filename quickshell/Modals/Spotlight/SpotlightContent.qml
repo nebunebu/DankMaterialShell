@@ -154,7 +154,7 @@ Item {
         id: appLauncher
 
         viewMode: SettingsData.spotlightModalViewMode
-        gridColumns: 4
+        gridColumns: SettingsData.appLauncherGridColumns
         onAppLaunched: () => {
                            if (parentModal)
                            parentModal.hide()

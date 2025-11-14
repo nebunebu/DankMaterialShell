@@ -58,7 +58,7 @@ DankPopout {
         id: appLauncher
 
         viewMode: SettingsData.appLauncherViewMode
-        gridColumns: 4
+        gridColumns: SettingsData.appLauncherGridColumns
         onAppLaunched: appDrawerPopout.close()
         onViewModeSelected: function (mode) {
             SettingsData.set("appLauncherViewMode", mode)
@@ -419,7 +419,7 @@ DankPopout {
                             id: appGrid
 
                             property int currentIndex: appLauncher.selectedIndex
-                            property int columns: 4
+                            property int columns: appLauncher.gridColumns
                             property bool adaptiveColumns: false
                             property int minCellWidth: 120
                             property int maxCellWidth: 160

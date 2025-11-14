@@ -161,6 +161,7 @@ Singleton {
     property string appLauncherViewMode: "list"
     property string spotlightModalViewMode: "list"
     property bool sortAppsAlphabetically: false
+    property int appLauncherGridColumns: 4
 
     property string weatherLocation: "New York, NY"
     property string weatherCoordinates: "40.7128,-74.0060"

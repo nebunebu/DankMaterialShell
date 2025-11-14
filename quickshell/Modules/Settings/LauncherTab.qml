@@ -526,6 +526,74 @@ Item {
 
             StyledRect {
                 width: parent.width
+                height: gridColumnsSection.implicitHeight + Theme.spacingL * 2
+                radius: Theme.cornerRadius
+                color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
+                                      Theme.outline.b, 0.2)
+                border.width: 0
+
+                Column {
+                    id: gridColumnsSection
+
+                    anchors.fill: parent
+                    anchors.margins: Theme.spacingL
+                    spacing: Theme.spacingM
+
+                    Row {
+                        width: parent.width
+                        spacing: Theme.spacingM
+
+                        DankIcon {
+                            name: "grid_view"
+                            size: Theme.iconSize
+                            color: Theme.primary
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        StyledText {
+                            text: I18n.tr("Grid Columns")
+                            font.pixelSize: Theme.fontSizeLarge
+                            font.weight: Font.Medium
+                            color: Theme.surfaceText
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    StyledText {
+                        width: parent.width
+                        text: I18n.tr("Adjust the number of columns in grid view mode.")
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.surfaceVariantText
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Column {
+                        width: 120
+                        spacing: Theme.spacingS
+                        anchors.horizontalCenter: parent.horizontalCenter
+
+                        DankSlider {
+                            width: 100
+                            height: 20
+                            minimum: 2
+                            maximum: 8
+                            value: SettingsData.appLauncherGridColumns
+                            unit: ""
+                            showValue: true
+                            wheelEnabled: false
+                            thumbOutlineColor: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            onSliderValueChanged: newValue => {
+                                SettingsData.set("appLauncherGridColumns", newValue)
+                            }
+                        }
+                    }
+                }
+            }
+
+            StyledRect {
+                width: parent.width
                 height: recentlyUsedSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)

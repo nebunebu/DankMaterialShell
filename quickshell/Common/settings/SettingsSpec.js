@@ -90,6 +90,7 @@ var SPEC = {
     appLauncherViewMode: { def: "list" },
     spotlightModalViewMode: { def: "list" },
     sortAppsAlphabetically: { def: false },
+    appLauncherGridColumns: { def: 4 },
 
     weatherLocation: { def: "New York, NY" },
     weatherCoordinates: { def: "40.7128,-74.0060" },
