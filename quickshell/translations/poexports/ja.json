@@ -56,6 +56,9 @@
   "Add a VPN in NetworkManager": {
     "Add a VPN in NetworkManager": "NetworkManagerでVPNを追加"
   },
+  "Adjust the number of columns in grid view mode.": {
+    "Adjust the number of columns in grid view mode.": ""
+  },
   "All": {
     "All": "全て"
   },
@@ -70,6 +73,9 @@
   },
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "常に OSD パーセンテージを表示"
+  },
+  "Always on icons": {
+    "Always on icons": ""
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "使用可能なワークスペースが少ない場合でも、常に最低 3 つを表示"
@@ -296,6 +302,9 @@
   "CUPS Missing Filter Warning": {
     "CUPS Missing Filter Warning": "CUPS の欠落フィルターの警告"
   },
+  "Camera": {
+    "Camera": ""
+  },
   "Cancel": {
     "Cancel": "キャンセル"
   },
@@ -303,7 +312,7 @@
     "Capacity": "容量"
   },
   "Caps Lock Indicator": {
-    "Caps Lock Indicator": ""
+    "Caps Lock Indicator": "Caps Lock インジケーター"
   },
   "Center Section": {
     "Center Section": "センターセクション"
@@ -624,7 +633,7 @@
     "Display currently focused application title": "現在フォーカスされているアプリケーションのタイトルを表示"
   },
   "Display power menu actions in a grid instead of a list": {
-    "Display power menu actions in a grid instead of a list": ""
+    "Display power menu actions in a grid instead of a list": "電源メニューのアクションをリストではなくグリッドに表示"
   },
   "Display settings for ": {
     "Display settings for ": "以下の設定を表示 "
@@ -837,7 +846,7 @@
     "Force Kill Process": "プロセスを強制終了"
   },
   "Force terminal applications to always use dark color schemes": {
-    "Force terminal applications to always use dark color schemes": "端末アプリで常に暗い配色を使用するように強制する"
+    "Force terminal applications to always use dark color schemes": "端末アプリで常に暗い配色を強制使用"
   },
   "Forget Device": {
     "Forget Device": "デバイスを忘れる"
@@ -890,6 +899,9 @@
   "Grid": {
     "Grid": "グリッド"
   },
+  "Grid Columns": {
+    "Grid Columns": ""
+  },
   "Group by App": {
     "Group by App": "アプリ別にグループ化"
   },
@@ -910,6 +922,9 @@
   },
   "Hibernate": {
     "Hibernate": "休止状態"
+  },
+  "Hide Delay (ms)": {
+    "Hide Delay (ms)": ""
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "使用していないときはドックを非表示にし、ドックエリアの近くにホバーすると表示されます"
@@ -1156,6 +1171,9 @@
   },
   "Memory usage indicator": {
     "Memory usage indicator": "メモリ使用率インジケーター"
+  },
+  "Microphone": {
+    "Microphone": ""
   },
   "Minimal palette built around a single hue.": {
     "Minimal palette built around a single hue.": "単一の色相を中心に構築された最小限のパレット。"
@@ -1628,6 +1646,9 @@
   "Science": {
     "Science": "科学"
   },
+  "Screen sharing": {
+    "Screen sharing": ""
+  },
   "Scrolling": {
     "Scrolling": "スクロール"
   },
@@ -1788,7 +1809,7 @@
     "Shows current workspace and allows switching": "現在のワークスペースを表示、切り替えを可能に"
   },
   "Shows when caps lock is active": {
-    "Shows when caps lock is active": ""
+    "Shows when caps lock is active": "Caps Lock がアクティブなときに表示"
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "マイク、カメラ、または画面共有がアクティブなときに表示"
@@ -1917,7 +1938,7 @@
     "Terminal custom additional parameters": "端末のカスタム追加パラメーター"
   },
   "Terminals - Always use Dark Theme": {
-    "Terminals - Always use Dark Theme": ""
+    "Terminals - Always use Dark Theme": "端末 - 常にダークテーマを使用"
   },
   "Text": {
     "Text": "テキスト"
@@ -2034,16 +2055,16 @@
     "Use Fahrenheit instead of Celsius for temperature": "温度は摂氏ではなく華氏を使用"
   },
   "Use Grid Layout": {
-    "Use Grid Layout": ""
+    "Use Grid Layout": "グリッドレイアウトを使用"
   },
   "Use IP Location": {
     "Use IP Location": "IP ロケーションの使用"
   },
   "Use Imperial Units": {
-    "Use Imperial Units": ""
+    "Use Imperial Units": "インペリアル単位を使用"
   },
   "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
-    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": "メートル法(°C、km / h、hPa)の代わりにインペリアル単位(°F、mph、inHg)を使用"
   },
   "Use Monospace Font": {
     "Use Monospace Font": "等幅フォントを使用"

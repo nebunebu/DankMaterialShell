@@ -88,6 +88,8 @@ BasePill {
         return activeWindow && activeWindow.title
     }
 
+    width: hasWindowsOnCurrentWorkspace ? (isVerticalOrientation ? barThickness : visualWidth) : 0
+    height: hasWindowsOnCurrentWorkspace ? (isVerticalOrientation ? visualHeight : barThickness) : 0
     visible: hasWindowsOnCurrentWorkspace
 
     content: Component {

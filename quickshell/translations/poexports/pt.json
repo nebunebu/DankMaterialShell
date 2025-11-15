@@ -56,6 +56,9 @@
   "Add a VPN in NetworkManager": {
     "Add a VPN in NetworkManager": "Adicionar um VPN ao NetworkManager"
   },
+  "Adjust the number of columns in grid view mode.": {
+    "Adjust the number of columns in grid view mode.": ""
+  },
   "All": {
     "All": "Todos"
   },
@@ -70,6 +73,9 @@
   },
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "Sempre mostrar porcetagem no OSD"
+  },
+  "Always on icons": {
+    "Always on icons": ""
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "Sempre mostrar o mínimo de 3 áreas de trabalho, mesmo se menos estiverem disponíveis"
@@ -295,6 +301,9 @@
   },
   "CUPS Missing Filter Warning": {
     "CUPS Missing Filter Warning": ""
+  },
+  "Camera": {
+    "Camera": ""
   },
   "Cancel": {
     "Cancel": "Cancelar"
@@ -890,6 +899,9 @@
   "Grid": {
     "Grid": ""
   },
+  "Grid Columns": {
+    "Grid Columns": ""
+  },
   "Group by App": {
     "Group by App": "Agrupar por App"
   },
@@ -910,6 +922,9 @@
   },
   "Hibernate": {
     "Hibernate": "Hibernar"
+  },
+  "Hide Delay (ms)": {
+    "Hide Delay (ms)": ""
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "Esconder a dock quando não usada e mostrar ao passar o mouse próximo da área"
@@ -1156,6 +1171,9 @@
   },
   "Memory usage indicator": {
     "Memory usage indicator": "Indicador de uso de memória"
+  },
+  "Microphone": {
+    "Microphone": ""
   },
   "Minimal palette built around a single hue.": {
     "Minimal palette built around a single hue.": "Paleta mínima construída ao redor de um único tom."
@@ -1627,6 +1645,9 @@
   },
   "Science": {
     "Science": "Ciência"
+  },
+  "Screen sharing": {
+    "Screen sharing": ""
   },
   "Scrolling": {
     "Scrolling": ""

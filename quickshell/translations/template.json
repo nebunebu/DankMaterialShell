@@ -133,6 +133,13 @@
     "comment": ""
   },
   {
+    "term": "Adjust the number of columns in grid view mode.",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "All",
     "translation": "",
     "context": "",
@@ -162,6 +169,13 @@
   },
   {
     "term": "Always Show OSD Percentage",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Always on icons",
     "translation": "",
     "context": "",
     "reference": "",
@@ -687,6 +701,13 @@
   },
   {
     "term": "CUPS Missing Filter Warning",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Camera",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2079,6 +2100,13 @@
     "comment": ""
   },
   {
+    "term": "Grid Columns",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
     "term": "Group by App",
     "translation": "",
     "context": "",
@@ -2115,6 +2143,13 @@
   },
   {
     "term": "Hibernate",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Hide Delay (ms)",
     "translation": "",
     "context": "",
     "reference": "",
@@ -2689,6 +2724,13 @@
   },
   {
     "term": "Memory usage indicator",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Microphone",
     "translation": "",
     "context": "",
     "reference": "",
@@ -3781,6 +3823,13 @@
   },
   {
     "term": "Science",
+    "translation": "",
+    "context": "",
+    "reference": "",
+    "comment": ""
+  },
+  {
+    "term": "Screen sharing",
     "translation": "",
     "context": "",
     "reference": "",

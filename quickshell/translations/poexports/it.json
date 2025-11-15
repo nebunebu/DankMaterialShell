@@ -56,6 +56,9 @@
   "Add a VPN in NetworkManager": {
     "Add a VPN in NetworkManager": "Aggiungi una VPN in NetworkManager"
   },
+  "Adjust the number of columns in grid view mode.": {
+    "Adjust the number of columns in grid view mode.": ""
+  },
   "All": {
     "All": "Tutto"
   },
@@ -70,6 +73,9 @@
   },
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "Visualizza sempre percentuale OSD"
+  },
+  "Always on icons": {
+    "Always on icons": ""
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "Visualizza sempre un minimo di 3 workspaces, anche se ne sono visibili meno"
@@ -207,7 +213,7 @@
     "Available": "Disponibile"
   },
   "Available Layouts": {
-    "Available Layouts": ""
+    "Available Layouts": "Layouts Disponibili"
   },
   "Available Plugins": {
     "Available Plugins": "Plugins Disponibili"
@@ -296,6 +302,9 @@
   "CUPS Missing Filter Warning": {
     "CUPS Missing Filter Warning": "Avviso Filtro Mancante CUPS"
   },
+  "Camera": {
+    "Camera": ""
+  },
   "Cancel": {
     "Cancel": "Annulla"
   },
@@ -303,16 +312,16 @@
     "Capacity": "Capacità"
   },
   "Caps Lock Indicator": {
-    "Caps Lock Indicator": ""
+    "Caps Lock Indicator": "Indicatore Maiuscolo"
   },
   "Center Section": {
     "Center Section": "Sezione Centrale"
   },
   "Center Tiling": {
-    "Center Tiling": ""
+    "Center Tiling": "Tiling Centrale"
   },
   "Changes:": {
-    "Changes:": ""
+    "Changes:": "Modifiche:"
   },
   "Check for system updates": {
     "Check for system updates": "Controlla aggiornamenti di sistema"
@@ -411,7 +420,7 @@
     "Confirm": "Conferma"
   },
   "Confirm Display Changes": {
-    "Confirm Display Changes": ""
+    "Confirm Display Changes": "Conferma Modifiche Display"
   },
   "Confirm passkey for ": {
     "Confirm passkey for ": "Conferma passkey per"
@@ -507,7 +516,7 @@
     "Customizable empty space": "Spazio vuoto personalizzabile"
   },
   "Customize which actions appear in the power menu": {
-    "Customize which actions appear in the power menu": ""
+    "Customize which actions appear in the power menu": "Personalizza quale azione visualizzare nel menù alimentazione"
   },
   "DEMO MODE - Click anywhere to exit": {
     "DEMO MODE - Click anywhere to exit": "DEMO MODE - Clicca ovunque per uscire"
@@ -522,7 +531,7 @@
     "DMS_SOCKET not available": "DMS_SOCKET non disponibile"
   },
   "DWL service not available": {
-    "DWL service not available": ""
+    "DWL service not available": "Servizio DWL non disponibile"
   },
   "Daily at:": {
     "Daily at:": "Giornalmente alle:"
@@ -558,13 +567,13 @@
     "Day Temperature": "Temperatura Giorno"
   },
   "Deck": {
-    "Deck": ""
+    "Deck": "Deck"
   },
   "Default": {
     "Default": "Predefinito"
   },
   "Default selected action": {
-    "Default selected action": ""
+    "Default selected action": "Azione selezionata di default"
   },
   "Defaults": {
     "Defaults": "Predefiniti"
@@ -591,7 +600,7 @@
     "Disable Autoconnect": "Disabilita connessione automatica"
   },
   "Disabled": {
-    "Disabled": ""
+    "Disabled": "Disabilitato"
   },
   "Disconnect": {
     "Disconnect": "Disconnetti"
@@ -615,7 +624,7 @@
     "Display all priorities over fullscreen apps": "Visualizza tutte le priorità sulle apps a schermo pieno"
   },
   "Display and switch DWL layouts": {
-    "Display and switch DWL layouts": ""
+    "Display and switch DWL layouts": "Visualizza e cambia i layouts DWL"
   },
   "Display application icons in workspace indicators": {
     "Display application icons in workspace indicators": "Mostra icone applicazioni negli indicatori dei workspaces"
@@ -624,10 +633,10 @@
     "Display currently focused application title": "Mostra il titolo delle applicazioni attualmente in focus"
   },
   "Display power menu actions in a grid instead of a list": {
-    "Display power menu actions in a grid instead of a list": ""
+    "Display power menu actions in a grid instead of a list": "Visualizza le azioni di alimentazioni in griglia invece di una lista"
   },
   "Display settings for ": {
-    "Display settings for ": ""
+    "Display settings for ": "Impostazioni display per "
   },
   "Display volume and brightness percentage values by default in OSD popups": {
     "Display volume and brightness percentage values by default in OSD popups": "Mostra di default la percentuale volume e luminosità nei popups OSD"
@@ -705,7 +714,7 @@
     "Enable loginctl lock integration": "Abilita l'integrazione lock loginctl"
   },
   "Enabled": {
-    "Enabled": ""
+    "Enabled": "Abilitato"
   },
   "End": {
     "End": "Fine"
@@ -837,7 +846,7 @@
     "Force Kill Process": "Forza Chiusura Processo"
   },
   "Force terminal applications to always use dark color schemes": {
-    "Force terminal applications to always use dark color schemes": ""
+    "Force terminal applications to always use dark color schemes": "Forza applicazioni da terminale ad usare schemi di colori scuri"
   },
   "Forget Device": {
     "Forget Device": "Dimentica Dispositivo"
@@ -888,7 +897,10 @@
     "Graphics": "Grafica"
   },
   "Grid": {
-    "Grid": ""
+    "Grid": "Griglia"
+  },
+  "Grid Columns": {
+    "Grid Columns": ""
   },
   "Group by App": {
     "Group by App": "Raggruppa per App"
@@ -910,6 +922,9 @@
   },
   "Hibernate": {
     "Hibernate": "Iberna"
+  },
+  "Hide Delay (ms)": {
+    "Hide Delay (ms)": ""
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "Nascondi la dock quando "
@@ -966,7 +981,7 @@
     "Individual Batteries": "Batterie Individuali"
   },
   "Inhibit idle timeout when audio or video is playing": {
-    "Inhibit idle timeout when audio or video is playing": ""
+    "Inhibit idle timeout when audio or video is playing": "Impedisci tempo inattività quando audio o video sono in riproduzione"
   },
   "Input Devices": {
     "Input Devices": "Dispositivi Input"
@@ -993,7 +1008,7 @@
     "Jobs: ": "Lavori:"
   },
   "Keep Changes": {
-    "Keep Changes": ""
+    "Keep Changes": "Conserva Modifiche"
   },
   "Keyboard Layout Name": {
     "Keyboard Layout Name": "Nome Layout Tastiera"
@@ -1035,7 +1050,7 @@
     "Launcher Button Logo": "Logo Bottone Avviatore"
   },
   "Layout": {
-    "Layout": ""
+    "Layout": "Layout"
   },
   "Left": {
     "Left": "Sinistra"
@@ -1059,7 +1074,7 @@
     "Location Search": "Ricerca Posizione"
   },
   "Lock": {
-    "Lock": ""
+    "Lock": "Blocca"
   },
   "Lock Screen": {
     "Lock Screen": "Blocca Schermo"
@@ -1157,6 +1172,9 @@
   "Memory usage indicator": {
     "Memory usage indicator": "Indicatore uso memoria"
   },
+  "Microphone": {
+    "Microphone": ""
+  },
   "Minimal palette built around a single hue.": {
     "Minimal palette built around a single hue.": "Tavolozza minima costruita attorno a una singola tonalità."
   },
@@ -1167,7 +1185,7 @@
     "Mode:": "Modalità:"
   },
   "Mode: ": {
-    "Mode: ": ""
+    "Mode: ": "Modalità:"
   },
   "Monitor Selection:": {
     "Monitor Selection:": "Selezione Monitor:"
@@ -1176,7 +1194,7 @@
     "Monitor whose wallpaper drives dynamic theming colors": "Monitor con lo sfondo che genera il tema di colori dinamico"
   },
   "Monocle": {
-    "Monocle": ""
+    "Monocle": "Monocle"
   },
   "Monospace Font": {
     "Monospace Font": "Font Monospace"
@@ -1332,7 +1350,7 @@
     "Only adjust gamma based on time or location rules.": "Regolare gamma solo in base alle regole di tempo o di posizione."
   },
   "Only visible if hibernate is supported by your system": {
-    "Only visible if hibernate is supported by your system": ""
+    "Only visible if hibernate is supported by your system": "Visibile solo se ibernazione è supportata dal tuo sistema"
   },
   "Opacity": {
     "Opacity": "Opacità"
@@ -1455,7 +1473,7 @@
     "Position": "Posizione"
   },
   "Position: ": {
-    "Position: ": ""
+    "Position: ": "Posizione"
   },
   "Power & Security": {
     "Power & Security": "Alimentazione & Sicurezza"
@@ -1464,7 +1482,7 @@
     "Power Action Confirmation": "Conferma Azioni Alimentazione"
   },
   "Power Menu Customization": {
-    "Power Menu Customization": ""
+    "Power Menu Customization": "Personalizzazione Menù Alimentazione"
   },
   "Power Off": {
     "Power Off": "Spegni"
@@ -1479,7 +1497,7 @@
     "Pressure": "Pressione"
   },
   "Prevent idle for media": {
-    "Prevent idle for media": ""
+    "Prevent idle for media": "Previeni sospensione per media"
   },
   "Prevent screen timeout": {
     "Prevent screen timeout": "Previeni timeout schermo"
@@ -1557,7 +1575,7 @@
     "Request confirmation on power off, restart, suspend, hibernate and logout actions": "Richiedi conferma alle azioni di spegnimento, riavvio, sospensione, hibernazione e logout"
   },
   "Requires DWL compositor": {
-    "Requires DWL compositor": ""
+    "Requires DWL compositor": "Richiede compositor DWL"
   },
   "Reset": {
     "Reset": "Resetta"
@@ -1566,22 +1584,22 @@
     "Resources": "Risorse"
   },
   "Restart": {
-    "Restart": ""
+    "Restart": "Riavvia"
   },
   "Restart DMS": {
-    "Restart DMS": ""
+    "Restart DMS": "Riavvia DMS"
   },
   "Restart the DankMaterialShell": {
-    "Restart the DankMaterialShell": ""
+    "Restart the DankMaterialShell": "Riavvia la DankMaterialShell"
   },
   "Resume": {
     "Resume": "Riprendi"
   },
   "Revert": {
-    "Revert": ""
+    "Revert": "Ripristina"
   },
   "Reverting in:": {
-    "Reverting in:": ""
+    "Reverting in:": "Ripristina in:"
   },
   "Right": {
     "Right": "Destra"
@@ -1590,10 +1608,10 @@
     "Right Section": "Sezione Destra"
   },
   "Right Tiling": {
-    "Right Tiling": ""
+    "Right Tiling": "Tiling Destro"
   },
   "Right-click bar widget to cycle": {
-    "Right-click bar widget to cycle": ""
+    "Right-click bar widget to cycle": "Click destro sulla barra per scorrimento"
   },
   "Run User Templates": {
     "Run User Templates": "Esegui Templates Utente"
@@ -1628,8 +1646,11 @@
   "Science": {
     "Science": "Scienza"
   },
+  "Screen sharing": {
+    "Screen sharing": ""
+  },
   "Scrolling": {
-    "Scrolling": ""
+    "Scrolling": "Scorrimento"
   },
   "Search file contents": {
     "Search file contents": "Cerca il contenuto dei files"
@@ -1713,31 +1734,31 @@
     "Show Dock": "Mostra Dock"
   },
   "Show Hibernate": {
-    "Show Hibernate": ""
+    "Show Hibernate": "Mostra Idernazione"
   },
   "Show Line Numbers": {
     "Show Line Numbers": "Mostra Numero Righe"
   },
   "Show Lock": {
-    "Show Lock": ""
+    "Show Lock": "Mostra Blocco"
   },
   "Show Log Out": {
-    "Show Log Out": ""
+    "Show Log Out": "Mostra Log Out"
   },
   "Show Power Actions": {
     "Show Power Actions": "Mostra Azioni Alimentazione"
   },
   "Show Power Off": {
-    "Show Power Off": ""
+    "Show Power Off": "Mostra Spegni"
   },
   "Show Reboot": {
-    "Show Reboot": ""
+    "Show Reboot": "Mosta Riavvia"
   },
   "Show Restart DMS": {
-    "Show Restart DMS": ""
+    "Show Restart DMS": "Mostra Riavvia DMS"
   },
   "Show Suspend": {
-    "Show Suspend": ""
+    "Show Suspend": "Mostra Sospendi"
   },
   "Show Workspace Apps": {
     "Show Workspace Apps": "Mostra Apps Workspace"
@@ -1788,7 +1809,7 @@
     "Shows current workspace and allows switching": "Mostra workspace corrente e permette cambio"
   },
   "Shows when caps lock is active": {
-    "Shows when caps lock is active": ""
+    "Shows when caps lock is active": "Indica quando il maiuscolo è attivo"
   },
   "Shows when microphone, camera, or screen sharing is active": {
     "Shows when microphone, camera, or screen sharing is active": "Mostra quando microfono, videocamera, o condivisione schermo sono attivi"
@@ -1917,7 +1938,7 @@
     "Terminal custom additional parameters": "Parametri aggiuntivi personalizzati terminale"
   },
   "Terminals - Always use Dark Theme": {
-    "Terminals - Always use Dark Theme": ""
+    "Terminals - Always use Dark Theme": "Terminali - Usa sempre Tema Scuro"
   },
   "Text": {
     "Text": "Testo"
@@ -1950,7 +1971,7 @@
     "This will permanently delete all clipboard history.": "La tua cronologia della clipboard verrà cancellata definitivamente"
   },
   "Tiling": {
-    "Tiling": ""
+    "Tiling": "Tiling"
   },
   "Time & Weather": {
     "Time & Weather": "Orario & Meteo"
@@ -2034,16 +2055,16 @@
     "Use Fahrenheit instead of Celsius for temperature": "Usa Fahrenheit invece di Celsius per la temperatura"
   },
   "Use Grid Layout": {
-    "Use Grid Layout": ""
+    "Use Grid Layout": "Usa Layout Griglia"
   },
   "Use IP Location": {
     "Use IP Location": "Usa Posizione IP"
   },
   "Use Imperial Units": {
-    "Use Imperial Units": ""
+    "Use Imperial Units": "Usa Unità Imperiali"
   },
   "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": {
-    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": ""
+    "Use Imperial units (°F, mph, inHg) instead of Metric (°C, km/h, hPa)": "Usa unità Imperiali (°F, mph, inHg) invece delle Metriche (°C, km/h, hPa) "
   },
   "Use Monospace Font": {
     "Use Monospace Font": "Usa Font Monospace"
@@ -2091,19 +2112,19 @@
     "VPN status and quick connect": "Stato VPN e connessione veloce"
   },
   "VRR: ": {
-    "VRR: ": ""
+    "VRR: ": "VRR:"
   },
   "Vertical Deck": {
-    "Vertical Deck": ""
+    "Vertical Deck": "Deck Verticale"
   },
   "Vertical Grid": {
-    "Vertical Grid": ""
+    "Vertical Grid": "Griglia Verticale"
   },
   "Vertical Scrolling": {
-    "Vertical Scrolling": ""
+    "Vertical Scrolling": "Scorrimento Verticale"
   },
   "Vertical Tiling": {
-    "Vertical Tiling": ""
+    "Vertical Tiling": "Tiling Verticale"
   },
   "Vibrant palette with playful saturation.": {
     "Vibrant palette with playful saturation.": "Tavolozza vibrate con saturazione giocosa"

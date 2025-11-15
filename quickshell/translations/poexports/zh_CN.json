@@ -56,6 +56,9 @@
   "Add a VPN in NetworkManager": {
     "Add a VPN in NetworkManager": "在 NetworkManager 中添加 VPN"
   },
+  "Adjust the number of columns in grid view mode.": {
+    "Adjust the number of columns in grid view mode.": ""
+  },
   "All": {
     "All": "全部"
   },
@@ -70,6 +73,9 @@
   },
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "始终显示 OSD 百分比"
+  },
+  "Always on icons": {
+    "Always on icons": ""
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "即使不足也总是显示至少三个工作区"
@@ -295,6 +301,9 @@
   },
   "CUPS Missing Filter Warning": {
     "CUPS Missing Filter Warning": "CUPS 警告：缺少打印过滤器"
+  },
+  "Camera": {
+    "Camera": ""
   },
   "Cancel": {
     "Cancel": "取消"
@@ -624,7 +633,7 @@
     "Display currently focused application title": "显示当前聚焦应用的标题"
   },
   "Display power menu actions in a grid instead of a list": {
-    "Display power menu actions in a grid instead of a list": ""
+    "Display power menu actions in a grid instead of a list": "通过网格而非列表显示电源菜单"
   },
   "Display settings for ": {
     "Display settings for ": "显示设置 "
@@ -890,6 +899,9 @@
   "Grid": {
     "Grid": "网格"
   },
+  "Grid Columns": {
+    "Grid Columns": ""
+  },
   "Group by App": {
     "Group by App": "按应用分组"
   },
@@ -910,6 +922,9 @@
   },
   "Hibernate": {
     "Hibernate": "休眠"
+  },
+  "Hide Delay (ms)": {
+    "Hide Delay (ms)": ""
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "在未使用时隐藏程序坞，鼠标悬停到程序坞区域时显示"
@@ -1156,6 +1171,9 @@
   },
   "Memory usage indicator": {
     "Memory usage indicator": "内存占用情况"
+  },
+  "Microphone": {
+    "Microphone": ""
   },
   "Minimal palette built around a single hue.": {
     "Minimal palette built around a single hue.": "围绕单一色调构建的简约配色。"
@@ -1628,6 +1646,9 @@
   "Science": {
     "Science": "科学"
   },
+  "Screen sharing": {
+    "Screen sharing": ""
+  },
   "Scrolling": {
     "Scrolling": "滚动"
   },
@@ -2034,7 +2055,7 @@
     "Use Fahrenheit instead of Celsius for temperature": "使用华氏度显示温度"
   },
   "Use Grid Layout": {
-    "Use Grid Layout": ""
+    "Use Grid Layout": "使用网格布局"
   },
   "Use IP Location": {
     "Use IP Location": "使用 IP 定位"

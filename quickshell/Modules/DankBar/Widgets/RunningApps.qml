@@ -91,8 +91,8 @@ Item {
         }
     }
 
-    width: isVertical ? barThickness : calculatedSize
-    height: isVertical ? calculatedSize : barThickness
+    width: windowCount > 0 ? (isVertical ? barThickness : calculatedSize) : 0
+    height: windowCount > 0 ? (isVertical ? calculatedSize : barThickness) : 0
     visible: windowCount > 0
 
 

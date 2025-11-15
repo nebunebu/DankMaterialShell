@@ -56,6 +56,9 @@
   "Add a VPN in NetworkManager": {
     "Add a VPN in NetworkManager": "新增VPN至網路管理器"
   },
+  "Adjust the number of columns in grid view mode.": {
+    "Adjust the number of columns in grid view mode.": ""
+  },
   "All": {
     "All": "所有"
   },
@@ -70,6 +73,9 @@
   },
   "Always Show OSD Percentage": {
     "Always Show OSD Percentage": "OSD 始終顯示百分比"
+  },
+  "Always on icons": {
+    "Always on icons": ""
   },
   "Always show a minimum of 3 workspaces, even if fewer are available": {
     "Always show a minimum of 3 workspaces, even if fewer are available": "始終顯示至少 3 個工作區，即使可用的工作區較少"
@@ -295,6 +301,9 @@
   },
   "CUPS Missing Filter Warning": {
     "CUPS Missing Filter Warning": "CUPS 缺少過濾器警告"
+  },
+  "Camera": {
+    "Camera": ""
   },
   "Cancel": {
     "Cancel": "取消"
@@ -890,6 +899,9 @@
   "Grid": {
     "Grid": "網格"
   },
+  "Grid Columns": {
+    "Grid Columns": ""
+  },
   "Group by App": {
     "Group by App": "App 分組"
   },
@@ -910,6 +922,9 @@
   },
   "Hibernate": {
     "Hibernate": "休眠"
+  },
+  "Hide Delay (ms)": {
+    "Hide Delay (ms)": ""
   },
   "Hide the dock when not in use and reveal it when hovering near the dock area": {
     "Hide the dock when not in use and reveal it when hovering near the dock area": "不使用時隱藏 Dock，並在 Dock 區域附近懸停時顯示 Dock"
@@ -1156,6 +1171,9 @@
   },
   "Memory usage indicator": {
     "Memory usage indicator": "記憶體使用率指示器"
+  },
+  "Microphone": {
+    "Microphone": ""
   },
   "Minimal palette built around a single hue.": {
     "Minimal palette built around a single hue.": "圍繞單一色調構建的最小調色板。"
@@ -1627,6 +1645,9 @@
   },
   "Science": {
     "Science": "科學"
+  },
+  "Screen sharing": {
+    "Screen sharing": ""
   },
   "Scrolling": {
     "Scrolling": "滾動"
