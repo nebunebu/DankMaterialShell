@@ -52,6 +52,12 @@ var SPEC = {
     controlCenterShowNetworkIcon: { def: true },
     controlCenterShowBluetoothIcon: { def: true },
     controlCenterShowAudioIcon: { def: true },
+
+    showPrivacyButton: { def: true },
+    privacyShowMicIcon: { def: false },
+    privacyShowCameraIcon: { def: false },
+    privacyShowScreenShareIcon: { def: false },
+
     controlCenterWidgets: { def: [
         { id: "volumeSlider", enabled: true, width: 50 },
         { id: "brightnessSlider", enabled: true, width: 50 },

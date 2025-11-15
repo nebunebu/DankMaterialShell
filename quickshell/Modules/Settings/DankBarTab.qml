@@ -526,6 +526,16 @@ Item {
         }
     }
 
+    function handlePrivacySettingChanged(sectionId, widgetIndex, settingName, value) {
+        if (settingName === "showMicIcon") {
+            SettingsData.set("privacyShowMicIcon", value)
+        } else if (settingName === "showCameraIcon") {
+            SettingsData.set("privacyShowCameraIcon", value)
+        } else if (settingName === "showScreenSharingIcon") {
+            SettingsData.set("privacyShowScreenShareIcon", value)
+        }
+    }
+
     function handleMinimumWidthChanged(sectionId, widgetIndex, enabled) {
         var widgets = []
         if (sectionId === "left")
@@ -2028,6 +2038,9 @@ Item {
                         onControlCenterSettingChanged: (sectionId, widgetIndex, settingName, value) => {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
+                        onPrivacySettingChanged: (sectionId, widgetIndex, settingName, value) => {
+                                                           handlePrivacySettingChanged(sectionId, widgetIndex, settingName, value)
+                                                       }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
                                                    dankBarTab.handleGpuSelectionChanged(
                                                        sectionId, widgetIndex,
@@ -2111,6 +2124,9 @@ Item {
                         onControlCenterSettingChanged: (sectionId, widgetIndex, settingName, value) => {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
+                        onPrivacySettingChanged: (sectionId, widgetIndex, settingName, value) => {
+                                                           handlePrivacySettingChanged(sectionId, widgetIndex, settingName, value)
+                                                       }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
                                                    dankBarTab.handleGpuSelectionChanged(
                                                        sectionId, widgetIndex,
@@ -2193,6 +2209,9 @@ Item {
                                               }
                         onControlCenterSettingChanged: (sectionId, widgetIndex, settingName, value) => {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
+                                                       }
+                        onPrivacySettingChanged: (sectionId, widgetIndex, settingName, value) => {
+                                                           handlePrivacySettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
                                                    dankBarTab.handleGpuSelectionChanged(

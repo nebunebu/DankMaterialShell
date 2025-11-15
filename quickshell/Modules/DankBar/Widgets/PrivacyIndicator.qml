@@ -14,9 +14,14 @@ Item {
     property var parentScreen: null
     property real widgetThickness: 30
     property real barThickness: 48
+
+    property bool showMicIcon: SettingsData.privacyShowMicIcon
+    property bool showCameraIcon: SettingsData.privacyShowCameraIcon
+    property bool showScreenSharingIcon: SettingsData.privacyShowScreenShareIcon
+
     readonly property real horizontalPadding: SettingsData.dankBarNoBackground ? 2 : Theme.spacingS
-    readonly property bool hasActivePrivacy: PrivacyService.anyPrivacyActive
-    readonly property int activeCount: PrivacyService.microphoneActive + PrivacyService.cameraActive + PrivacyService.screensharingActive
+    readonly property bool hasActivePrivacy: showMicIcon || showCameraIcon || showScreenSharingIcon || PrivacyService.anyPrivacyActive
+    readonly property int activeCount: ( showMicIcon ? 1 : PrivacyService.microphoneActive) + (showCameraIcon ? 1 : PrivacyService.cameraActive) + (showScreenSharingIcon ? 1 : PrivacyService.screensharingActive)
     readonly property real contentWidth: hasActivePrivacy ? (activeCount * 18 + (activeCount - 1) * Theme.spacingXS) : 0
     readonly property real contentHeight: hasActivePrivacy ? (activeCount * 18 + (activeCount - 1) * Theme.spacingXS) : 0
     readonly property real visualWidth: isVertical ? widgetThickness : (hasActivePrivacy ? (contentWidth + horizontalPadding * 2) : 0)
@@ -117,7 +122,7 @@ Item {
             Item {
                 width: 18
                 height: 18
-                visible: PrivacyService.microphoneActive
+                visible: showMicIcon || PrivacyService.microphoneActive
                 anchors.verticalCenter: parent.verticalCenter
 
                 DankIcon {
@@ -128,7 +133,7 @@ Item {
                         return "mic"
                     }
                     size: Theme.iconSizeSmall
-                    color: Theme.error
+                    color: PrivacyService.microphoneActive ? Theme.error : Theme.surfaceText
                     filled: true
                     anchors.centerIn: parent
                 }
@@ -137,13 +142,13 @@ Item {
             Item {
                 width: 18
                 height: 18
-                visible: PrivacyService.cameraActive
+                visible: showCameraIcon || PrivacyService.cameraActive
                 anchors.verticalCenter: parent.verticalCenter
 
                 DankIcon {
                     name: "camera_video"
                     size: Theme.iconSizeSmall
-                    color: Theme.surfaceText
+                    color: PrivacyService.cameraActive ? Theme.error : Theme.surfaceText
                     filled: true
                     anchors.centerIn: parent
                 }
@@ -157,19 +162,20 @@ Item {
                     anchors.top: parent.top
                     anchors.rightMargin: -2
                     anchors.topMargin: -1
+                    visible: PrivacyService.cameraActive
                 }
             }
 
             Item {
                 width: 18
                 height: 18
-                visible: PrivacyService.screensharingActive
+                visible: showScreenSharingIcon || PrivacyService.screensharingActive
                 anchors.verticalCenter: parent.verticalCenter
 
                 DankIcon {
                     name: "screen_share"
                     size: Theme.iconSizeSmall
-                    color: Theme.warning
+                    color: PrivacyService.screensharingActive ? Theme.warning : Theme.surfaceText
                     filled: true
                     anchors.centerIn: parent
                 }
